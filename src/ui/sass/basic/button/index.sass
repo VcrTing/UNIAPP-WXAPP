@@ -1,0 +1,36 @@
+@use '../__conf' as *
+@use '../../app/view' as *
+    
+._btn
+    transition: all .12s ease-in-out
+    display: inline-block
+    text-align: center
+    user-select: none
+    @extend .bd
+    cursor: pointer
+    box-sizing: border-box
+
+.btn
+    @extend ._btn
+    &, uni-button, button, .materiai-button-hui-inner
+        outline: none !important
+
+.btn-rnd
+    &, uni-button, .materiai-button-hui
+        border-radius: 10rem
+
+//
+.pi-btn
+    padding-left: $pi-btn
+.pr-btn
+    padding-right: $pi-btn
+
+.px-btn
+    @extend .pi-btn
+    @extend .pr-btn
+
+// 正常
+.mh-btn
+    min-height: $h-btn
+.mh-btn-x1
+    min-height: $h-btn-x1

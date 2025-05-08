@@ -1,0 +1,97 @@
+// 正常
+$inp-pchd: #828282
+$inp-pchd-hv: #727272
+$inp-pchd-fcs: #727272
+
+.inp-pchd, .c-inp-pchd
+    color: $inp-pchd
+.inp-pchd-hv, .c-inp-pchd-hv
+    color: $inp-pchd-hv
+.inp-pchd-fcs, .c-inp-pchd-fcs
+    color: $inp-pchd-fcs
+
+$inp-bc: #c9c9c9
+$inp-bc-hv: #595959
+$inp-bc-fcs: #595959
+
+.inp-bc
+    border-color: $inp-bc
+.inp-bc-hv
+    border-color: $inp-bc-hv
+.inp-bc-fcs
+    border-color: $inp-bc-fcs
+
+.fx-hv-bc-inp:hover
+    @extend .inp-bc-hv
+.fx-fcs-bc-inp
+    &:active, &:focus, &:focus-visible
+        @extend .inp-bc-fcs
+
+$inp-tit: #0e0e0e
+$inp-tit-hv: #0e0e0e
+$inp-tit-fcs: #0e0e0e
+.inp-tit
+    color: $inp-tit
+.inp-tit-hv
+    color: $inp-tit-hv
+.inp-tit-fcs
+    color: $inp-tit-fcs
+
+// =================================================================================
+// SEC
+$inp-pchd-sec: #949494
+$inp-pchd-sec-hv: #7c7c7c
+$inp-pchd-sec-fcs: #7c7c7c
+
+.inp-pchd-sec, .c-inp-pchd-sec
+    color: $inp-pchd-sec
+.inp-pchd-sec-hv, .c-inp-pchd-sec-hv
+    color: $inp-pchd-sec-hv
+.inp-pchd-sec-fcs, .c-inp-pchd-sec-fcs
+    color: $inp-pchd-sec-fcs
+
+$inp-bc-sec: #c9c9c9
+$inp-bc-sec-hv: #595959
+$inp-bc-sec-fcs: #595959
+
+.inp-bc-sec
+    border-color: $inp-bc-sec
+.inp-bc-sec-hv
+    border-color: $inp-bc-sec-hv
+.inp-bc-sec-fcs
+    border-color: $inp-bc-sec-fcs
+// FX
+.fx-hv-bc-sec-inp:hover
+    @extend .inp-bc-sec-hv
+.fx-fcs-bc-sec-inp
+    &:active, &:focus, &:focus-visible
+        @extend .inp-bc-sec-fcs
+
+$inp-tit-sec: #0e0e0e
+$inp-tit-sec-hv: #0e0e0e
+$inp-tit-sec-fcs: #0e0e0e
+.inp-tit-sec
+    color: $inp-tit-sec
+.inp-tit-sec-hv
+    color: $inp-tit-sec-hv
+.inp-tit-sec-fcs
+    color: $inp-tit-sec-fcs
+
+$inp-sdo-sec: transparent
+$inp-sdo-sec-hv: rgba(0, 0, 0, 0.3)
+$inp-sdo-sec-fcs: rgba(0, 0, 0, 0.2)
+.inp-sdo-sec
+    box-shadow: 0px 0px 0.4rem -0.08rem $inp-sdo-sec
+.inp-sdo-sec-hv
+    box-shadow: 0px 0px 0.4rem -0.08rem $inp-sdo-sec-hv
+.inp-sdo-sec-fcs
+    box-shadow: 0px 0px 0.4rem -0.08rem $inp-sdo-sec-fcs
+// FX
+.fx-hv-sdo-sec-inp:hover
+    @extend .inp-sdo-sec-hv
+.fx-fcs-sdo-sec-inp
+    &:active, &:focus, &:focus-visible
+        @extend .inp-sdo-sec-fcs
+.fx-aii-sdo-sec-inp
+    @extend .fx-hv-sdo-sec-inp
+    @extend .fx-fcs-sdo-sec-inp

@@ -1,0 +1,43 @@
+@use '../../app/__conf' as *
+@use '../ani/__conf' as *
+@use '../../app/box' as *
+
+$ds-con-x: 1rem
+$ds-con-y: 0.82rem
+
+.bg-con
+    background-color: $bg-con
+
+.pi-con
+    padding-left: $ds-con-x
+.pr-con
+    padding-right: $ds-con-x
+.pt-con
+    padding-top: $ds-con-y
+.pb-con
+    padding-bottom: $ds-con-y
+
+.px-con
+    padding-left: $ds-con-x
+    padding-right: $ds-con-x
+.py-con
+    padding-top: $ds-con-y
+    padding-bottom: $ds-con-y
+
+.con
+    @extend .px-con
+    @extend .py-con
+    @extend .bg-con
+    @extend .bd
+    @extend .br
+    @extend .ts
+
+.fx-con-hv
+    &:hover 
+        border-color: transparent
+.fx-con-fcs
+    &:active, &:focus, &:focus-visible
+        border-color: #d8dadd
+.fx-con-aii
+    @extend .fx-con-hv
+    @extend .fx-con-fcs

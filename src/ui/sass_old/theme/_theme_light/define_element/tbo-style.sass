@@ -1,0 +1,23 @@
+
+
+$tbo-bc: #d9cfca
+$tbo-bc-hv: #cfc2bc
+$tbo-bc-fcs: #c6b9b2
+
+.tbo-bc
+    border-color: $tbo-bc
+.tbo-bc-hv
+    border-color: $tbo-bc-hv
+.tbo-bc-fcs
+    border-color: $tbo-bc-fcs
+
+
+.fx-hv-bc-tbo:hover
+    @extend .tbo-bc-hv
+.fx-fcs-bc-tbo
+    &:active, &:focus, &:focus-visible
+        @extend .tbo-bc-fcs
+        
+.fx-aii-bc-tbo
+    @extend .fx-hv-bc-tbo
+    @extend .fx-fcs-bc-tbo

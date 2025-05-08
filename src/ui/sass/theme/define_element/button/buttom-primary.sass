@@ -1,0 +1,56 @@
+
+@use '../__conf' as *
+@use '../../../app/view/__conf' as *
+@use '../../primary' as *
+
+.c-btn-tit
+    color: $btn-tit
+.fx-hv-btn-tit:hover
+    color: $btn-tit
+.fx-fcs-btn-tit
+    &:active, &:focus, &:focus-visible
+        color: $btn-tit
+
+.fx-aii-btn-tit
+    @extend .fx-hv-btn-tit
+    @extend .fx-fcs-btn-tit
+
+//    
+.fx-aii-btn-pri
+    @extend .fx-fcs-shd-pri
+    @extend .fx-hv-bg-pri
+    @extend .fx-fcs-bg-pri
+
+.btn-pri
+    @extend .fx-aii-btn-tit
+    @extend .c-btn-tit
+    @extend .bg-pri
+    @extend .fx-aii-btn-pri
+
+//    
+.fx-aii-btn-pri-out
+    // @extend .fx-aii-btn-tit
+    background: $bg-con
+    @extend .fx-fcs-shd-pri
+    //@extend .fx-hv-bg-pri
+    //@extend .fx-fcs-bg-pri
+
+.btn-pri-out
+    color: $pri
+    @extend .bd-pri
+    @extend .fx-aii-btn-pri-out
+
+//
+.fx-aii-btn-pri-iht
+    @extend .fx-hv-bd-pri
+    @extend .fx-fcs-bd-pri
+    @extend .fx-hv-bg-pri-iht
+    @extend .fx-fcs-bg-pri-iht
+    @extend .fx-fcs-shd-pri-iht
+
+.btn-pri-iht
+    color: $pri
+    background: $pri-iht
+    border-color: $pri-iht
+    @extend .fx-hv-c-pri
+    @extend .fx-aii-btn-pri-iht

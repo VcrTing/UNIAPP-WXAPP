@@ -1,0 +1,57 @@
+
+
+.trangie
+    width: 0.6em
+    height: 0.6em
+    z-index: 99
+    position: relative
+    display: inline-block
+    background: transparent
+    &:hover
+        transform: scale(1.2)
+
+    .div
+        position: absolute
+        top: 50%
+        left: 50%
+        z-index: 101
+        display: inline-block
+        width: 0
+        height: 0
+        border: 0.34em solid transparent
+
+    .trangie-up
+        transform: translate(-50%, -25%)
+    .trangie-down
+        transform: translate(-50%, -75%)
+
+
+$trangie-die: rgba(0, 0, 0, 0.18)
+$trangie-die-hv: rgba(0, 0, 0, 0.20) // rgba(0, 0, 0, 0.32)
+
+.trangie
+    .trangie-up
+        border-top-color: $trangie-die
+    .trangie-up:hover
+        border-top-color: $trangie-die-hv
+    .trangie-down
+        border-bottom-color: $trangie-die
+    .trangie-down:hover
+        border-bottom-color: $trangie-die-hv
+
+$trangie-iive: rgba(0, 0, 0, 0.32)
+$trangie-iive-hv: rgba(0, 0, 0, 0.36)
+
+.trangie-iive
+    .trangie-up
+        border-top-color: $trangie-iive
+    .trangie-up:hover
+        border-top-color: $trangie-iive-hv
+    .trangie-down
+        border-bottom-color: $trangie-iive
+    .trangie-down:hover
+        border-bottom-color: $trangie-iive-hv
+
+.trangie-group
+    .trangie
+        display: block

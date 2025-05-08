@@ -1,0 +1,37 @@
+
+.ui-dropdown
+    position: relative
+    .ui-dropdown-con
+        box-sizing: border-box
+        position: absolute
+        overflow: hidden
+        z-index: 62
+        top: 100%
+        right: 0
+        left: 0
+        margin-left: -0.5rem
+        margin-right: -0.5rem
+
+        .ui-dropdown-con-inner
+            overflow: hidden
+            width: 100%
+            @extend .bg-con
+            @extend .bxs-b
+            @extend .br
+    &:hover, &:active, &:focus, &:focus-visible
+        .ui-dropdown-con
+            padding-left: 0.5rem
+            padding-right: 0.5rem
+            padding-top: 0.38rem
+            padding-bottom: 1rem
+            max-height: 40rem
+
+.ui-dropdown-die
+    .ui-dropdown-con
+        padding: 0rem !important
+        max-height: 0rem !important
+
+.ui-dropdown
+    .ui-dropdown-con
+        padding: 0rem
+        max-height: 0rem

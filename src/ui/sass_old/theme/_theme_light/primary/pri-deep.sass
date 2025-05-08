@@ -1,0 +1,18 @@
+
+@use './__conf' as *
+
+.bg-pri-deep
+    background: $pri-deep
+.bg-pri-deep-hv
+    background: $pri-deep-hv
+.bg-pri-deep-fcs
+    background: $pri-deep-fcs
+
+.fx-hv-bg-pri-deep:hover
+    @extend .bg-pri-deep-hv
+.fx-fcs-bg-pri-deep:active, .fx-fcs-pri:focus, .fx-fcs-pri:focus-visible
+    @extend .bg-pri-deep-fcs
+.fx-hv-c-pri-deep:hover
+    @extend .pri
+
+

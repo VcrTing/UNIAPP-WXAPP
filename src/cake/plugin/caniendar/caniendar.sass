@@ -1,0 +1,102 @@
+
+
+$cai-fs: 1rem
+$cai-fs-s: 0.92rem
+
+.__cd_fx-s, .__cd_fx-c
+    display: flex
+    flex-wrap: wrap
+.__cd_fx-s
+    align-items: flex-start
+    justify-content: space-between
+.__cd_fx-c
+    align-items: center
+    justify-content: center
+
+.__cd_fx-1
+    flex: 1
+
+.__cd-row
+    .__div
+        width: 14.285%
+.__cd-row-x2
+    .__div
+        width: 25%
+
+.__cd_btn
+    &:hover
+        background: #f6f6f7
+    &:focus
+        // background: #f2f2f3
+        // box-shadow: 0px 0px 0px 3px rgba(47, 47, 48, 0.08)
+
+.__cd-br
+    border-radius: 0.76rem
+.__cd-br-s
+    border-radius: 0.16rem
+.__cd-py
+    padding-top: 0.76em
+    padding-bottom: 0.76em
+
+.__cd-mh
+    min-height: 2.4em
+
+.__cd-i
+    color: #c2c2c2
+    min-width: 2.2em
+    min-height: 2.2em
+    @extend .__cd_fx-c
+.__cd-i
+    &:hover,
+    &:focus, &:focus-visible, &:active
+        color: #9e9e9e
+
+.__cd-btn
+    padding-top: 0.58em
+    padding-bottom: 0.58em
+    width: 100%
+    border: none
+    background: none
+    border-radius: 3px
+    transition: all .122s ease-in-out
+
+.caiendar-item, .caiendar-item-week, .caiendar-item-mon
+    text-align: center
+    border: 0.076rem solid transparent
+
+.caiendar-item
+    width: 100%
+    @extend .__cd-br
+
+.caiendar-item-week
+    @extend .__cd-btn
+    font-size: $cai-fs-s
+    padding-top: 0.58em
+    padding-bottom: 0.76em
+
+.caiendar-item-head, .caiender-item-taii
+    cursor: default
+    transition: all .032s ease-in-out
+
+$cai-iive-wht: #fff
+
+$cai-iive: #11b4b4
+$cai-iive-hv: #11b4b4
+$cai-iive-fcs: #10adad
+
+$cai-iive-bc: #10adad
+
+.caiendar-item-iive
+    background: $cai-iive
+    color: $cai-iive-wht !important
+    &:hover
+        background: $cai-iive-hv
+    &:focus, &:focus-visible, &:active
+        background: $cai-iive-fcs
+        border-color: $cai-iive-bc
+        // box-shadow: 0px 0px 0px 0.28rem $cai-iive-shd
+    
+
+$cai-sus: #bfbfbf
+.caiendar-item-sus
+    color: $cai-sus

@@ -1,0 +1,38 @@
+
+
+.inp
+    @extend .inp-tit
+    @extend .ts
+    @extend .inp-bc
+    @extend .fx-hv-bc-inp
+    @extend .fx-fcs-bc-inp
+
+    .uni-input-placeholder
+        @extend .c-inp-pchd
+        font-size: $fs-inp-pchd
+    &:hover
+        @extend .inp-tit-hv
+        .uni-input-placeholder
+            @extend .c-inp-pchd-hv
+    &:active, &:focus, &:focus-visible
+        @extend .inp-tit-fcs
+        .uni-input-placeholder
+            @extend .c-inp-pchd-hv
+
+.inp-pure
+    background: $bg-con
+    border-color: transparent
+
+.o-input-err
+    .inp
+        border-color: $err
+        .uni-input-placeholder
+            @extend .c-inp-pchd
+        &:hover
+            .uni-input-placeholder
+                @extend .c-inp-pchd-hv
+        &:active, &:focus, &:focus-visible
+            .uni-input-placeholder
+                @extend .c-inp-pchd-hv
+
+@import ./slc

@@ -1,0 +1,47 @@
+
+$succ: #4bbe2e
+$succ-hv: #47b82b
+$succ-fcs: #43b228
+
+.c-succ
+    color: $succ
+.c-succ-hv
+    color: $succ-hv
+.c-succ-fcs
+    color: $succ-fcs
+
+.fx-hv-c-succ:hover
+    @extend .c-succ-hv
+.fx-fcs-c-succ
+    &:active, &:focus, &:focus-visible
+        @extend .c-succ-fcs
+
+.succ
+    color: $succ
+    @extend .fx-hv-c-succ
+    @extend .fx-fcs-c-succ
+
+$succ-bg: #e9f7e5
+$succ-bg-hv: #e2f2de
+$succ-bg-fcs: #deeeda
+
+.bg-succ
+    background-color: $succ-bg
+.bg-succ-hv
+    background-color: $succ-bg-hv
+.bg-succ-fcs
+    background-color: $succ-bg-fcs
+
+.fx-hv-bg-succ:hover
+    @extend .bg-succ-hv
+.fx-fcs-bg-succ
+    &:active, &:focus, &:focus-visible
+        @extend .bg-succ-fcs
+
+.fx-aii-bg-succ
+    @extend .fx-hv-bg-succ
+    @extend .fx-fcs-bg-succ
+
+$succ-sdo: #36493624
+.succ-sdo
+    box-shadow: 0px 0.2rem 0.72rem 0px $succ-sdo

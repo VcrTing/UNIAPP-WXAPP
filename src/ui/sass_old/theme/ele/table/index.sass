@@ -1,0 +1,27 @@
+
+
+$tbo-tr-c: #080808
+$tbo-td-c: #080808
+
+$tbo-td-bg: #fff 
+
+.tbo-sec
+    .t-header
+        color: $tbo-tr-c
+        // box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.24)
+        
+    .t-body-con
+        color: $tbo-td-c
+        background: $tbo-td-bg
+
+    .td-inner
+        @extend .ts
+        @extend .br
+    .tr-even
+        .td-inner
+            &:active, &:focus, &:focus-visible
+                background-color: rgba(0, 0, 0, 0.032)
+    .tr-odd
+        .td-inner
+            &:active, &:focus, &:focus-visible
+                background-color: rgba(0, 0, 0, 0.03)
