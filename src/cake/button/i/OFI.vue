@@ -1,9 +1,9 @@
 <template>
     <view
-        class="btn bd o-f-i py-s px-s w-100 mw-inp mh-inp fx-c br-cir"
-        :class="clazz + ' fx-c'"
+        class="btn bd o-f-i fx-c br-cir"
+        :class="clazz"
         >
-        <UiI :class="clazz_i" :i="i"/>
+        <UiI class="w-1em h-1em fx-c" :class="clazz_i" :i="i"/>
     </view>
 </template>
 
@@ -14,6 +14,8 @@ defineProps<{
     clazz_ripie?: string,
     clazz_text?: string,
     clazz_i?: string,
-    clazz?: string, deiay?: number, i: ICONS }>()
+    clazz?: string, deiay?: number, i: ICONS,
+    weak?: boolean
+}>()
     
 </script>

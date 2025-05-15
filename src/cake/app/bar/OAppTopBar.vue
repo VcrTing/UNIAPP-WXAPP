@@ -1,17 +1,23 @@
 <template>
     <view>
-        <view class="o-app-top-bar bg-app-top-bar">
-            <o-safe-area-top/>
+        <view class="o-app-top-bar" :class="clazz">
             <view class="mh-app-top-bar">
+                <OSafeAreaTop/>
                 <slot></slot>
             </view>
         </view>
         
-        <o-safe-area-top/>
-        <view class="mh-app-top-bar"></view>
+        <OSafeAreaTop v-if="mat"/>
+        <view class="mh-app-top-bar" v-if="mat"></view>
     </view>
     
 </template>
 
 <script setup lang="ts">
+import OSafeAreaTop from '../safearea/OSafeAreaTop.vue';
+
+defineProps<{
+    mat?: boolean,
+    clazz?: string
+}>()
 </script>

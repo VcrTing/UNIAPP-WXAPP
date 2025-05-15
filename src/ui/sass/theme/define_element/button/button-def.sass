@@ -1,0 +1,36 @@
+@use '../__conf' as *
+
+
+.bg-def
+    background: $def
+.bg-def-hv
+    background: $def-hv
+.bg-def-fcs
+    background: $def-fcs
+
+.fx-hv-bg-def:hover
+    @extend .bg-def-hv
+.fx-fcs-bg-def
+    &:active, &:focus, &:focus-visible
+        @extend .bg-def-fcs
+
+.shd-def
+    box-shadow: 0px 0px 0px 0.3rem $def-shd
+
+.fx-hv-shd-def:hover
+    @extend .shd-def
+.fx-fcs-shd-def
+    &:active, &:focus, &:focus-visible
+        @extend .shd-def
+
+
+.fx-aii-btn-def
+    @extend .fx-fcs-shd-def
+    @extend .fx-hv-bg-def
+    @extend .fx-fcs-bg-def
+
+.btn-def
+    // @extend .fx-aii-btn-tit
+    // @extend .c-btn-tit
+    @extend .bg-def
+    @extend .fx-aii-btn-def

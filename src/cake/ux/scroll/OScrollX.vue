@@ -5,7 +5,7 @@
         <slot></slot>
     </view>
     -->
-    <scroll-view scroll-x="true" show-scrollbar="false">
+    <scroll-view scroll-x="true" show-scrollbar="false" :class="clazz" class="ws-n">
         <slot></slot>
     </scroll-view>
 </template>

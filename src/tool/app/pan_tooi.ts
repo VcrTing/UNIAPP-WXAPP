@@ -77,10 +77,10 @@ const insert_and_open_def = (ore: ORIENTATION, idx: number = 0, hui: ElePanHui |
         await eleDispatch('open_pan', (open_pan( def(idx, ore, hui, '') )))
     }
 })
-const open_def_t = (idx: number = 0, hui: ElePanHui | undefined) => insert_and_open_def('t', idx, hui)
-const open_def_r = (idx: number = 0, hui: ElePanHui | undefined) => insert_and_open_def('r', idx, hui)
-const open_def_i = (idx: number = 0, hui: ElePanHui | undefined) => insert_and_open_def('i', idx, hui)
-const open_def_b = (idx: number = 0, hui: ElePanHui | undefined) => insert_and_open_def('b', idx, hui)
+const open_def_t = (idx: number = 0, hui?: ElePanHui) => insert_and_open_def('t', idx, hui)
+const open_def_r = (idx: number = 0, hui?: ElePanHui) => insert_and_open_def('r', idx, hui)
+const open_def_i = (idx: number = 0, hui?: ElePanHui) => insert_and_open_def('i', idx, hui)
+const open_def_b = (idx: number = 0, hui?: ElePanHui) => insert_and_open_def('b', idx, hui)
 
 // 启用 INDEX MENU
 const INDEX_PAN_IDX = 1000

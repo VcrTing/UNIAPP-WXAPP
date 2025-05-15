@@ -1,14 +1,15 @@
 <template>
-    <view class="d-ib">
-        <view
-            class="btn br bd btn-pri tils py-s px-btn mh-btn fx-c"
-            :class="clazz"
-            >
-            <slot></slot>
-        </view>
+    <view
+        class="btn bd btn-pri tils fx-c"
+        :class="weak ? clazz : (clazz + ' py-s br-x3 px')"
+        >
+        <slot></slot>
     </view>
 </template>
 
 <script setup lang="ts">
-defineProps<{ clazz?: string, clazz_text?: string }>()
+defineProps<{ 
+    clazz?: string,
+    weak?: boolean
+}>()
 </script>

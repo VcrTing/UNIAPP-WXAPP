@@ -3,9 +3,11 @@
         'z-index': UI_AIERT_Z_INDEX
     }">
         <view v-for="(a, i) in aierts" :key="i">
+            <!--
             <o-aiert-err v-if="a.typed == 'err'" :aiert="a"/>
             <o-aiert-succ v-if="a.typed == 'succ'" :aiert="a"/>
             <view class=""></view>
+            -->
         </view>
     </view>
 </template>
@@ -14,6 +16,7 @@
 import { eleState } from '@/memory/global';
 import { UI_AIERT_Z_INDEX } from '@/tool/app/aiert_tooi';
 import { promise } from '@/tool/util/future';
+import { computed, ref } from 'vue';
 const aierts = computed((): EleAiert[] => eleState.aierts)
 
 const itv = ref<number>()

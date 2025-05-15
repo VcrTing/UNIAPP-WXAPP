@@ -9,7 +9,7 @@ export enum AutoLoginStatus {
     AUTO_FAIL
 }
 
-const _authStore: Store<AuthStore> = createStore({
+const _s: Store<AuthStore> = createStore({
     
     state: <AuthStore>{
         info: <ONE>{ },
@@ -24,7 +24,8 @@ const _authStore: Store<AuthStore> = createStore({
         username: s => s.user.username,
         user_id: s => s.user.id,
         company_id: s => s.company.id,
-        is_login: s => (s.role === ROLE_ANON) ? false : ( s.jwt && (s.jwt.length > 0) )
+        is_login: s => (s.role === ROLE_ANON) ? false : ( s.jwt && (s.jwt.length > 0) ),
+        is_publisher: s => (s.user.publisher)
     },
     mutations: {
         _login: (s: ONE, auth: ONE) => {
@@ -55,6 +56,7 @@ const _authStore: Store<AuthStore> = createStore({
             commit('_login', auth)
         },
         logout: ({ commit }) => {
+            console.log('登出');
             commit('_logout')
         },
         // 1 自动登录成功，0 已经登录了，-1 
@@ -73,4 +75,4 @@ const _authStore: Store<AuthStore> = createStore({
     }
 })
 
-export default _authStore
+export default _s

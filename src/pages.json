@@ -1,38 +1,40 @@
 {
 	"pages": [ 
-		{
-			"path": "pages/index/index",
-			"style": {
+		{ "path": "pages/index/index", "style": {
 				"navigationStyle": "custom",
-				"navigationBarTitleText": "首页"
-			}
-		},
-		{
-			"path": "pages/report/report",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "报表"
-			}
-		},
-		{
-			"path": "pages/form/form",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "表单"
-			}
-		},
-		{
-			"path": "pages/user/user",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "用户"
-			}
-		},
+				"navigationBarTitleText": "首页" } },
 
+		{ "path": "pages/auth/login/login", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "登录" } },
+
+		{ "path": "pages/order/order", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "订单" } },
+
+		{ "path": "pages/publish/publish", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "发布" } },
 		
+		{ "path": "pages/user/user", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "用户" } },
+
 		{ "path": "pages/ui/ui/ui", "style": {
 				"navigationStyle": "custom",
-				"navigationBarTitleText": "用户" } }
+				"navigationBarTitleText": "UI" } },
+
+				
+		{ "path": "pages/activity/detail/ActivityDetail", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "活动详情" } },
+		{ "path": "pages/activity/order/ActivityOrder", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "订单信息" } },
+
+		{ "path": "pages/publish/plus/PublishPlus", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "新增活动" } }
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -48,12 +50,12 @@
 				"text": "首页"
 			},
 			{
-				"pagePath": "pages/report/report",
-				"text": "报表"
+				"pagePath": "pages/order/order",
+				"text": "订单"
 			},
 			{
-				"pagePath": "pages/form/form",
-				"text": "表单"
+				"pagePath": "pages/publish/publish",
+				"text": "发布"
 			},
 			{
 				"pagePath": "pages/user/user",

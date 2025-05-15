@@ -1,24 +1,15 @@
 <template>
-    <material-button 
-        class=""
-        :class="clazz"
-        :clazz_hui="clazz_hui"
-        :clazz_ripie="clazz_ripie"
-
-        :clazz_outter="'w-100 zi-x3 '"
-        :clazz_inner="clazz_inner + ' w-100 '"
-        @touch="emt('touch')"
+    <view
+        class="btn bd fx-c"
+        :class="weak ? clazz : (clazz + ' py-s br-x3 px')"
         >
         <slot></slot>
-    </material-button>
+    </view>
 </template>
 
 <script setup lang="ts">
 defineProps<{ 
-    clazz?: string, 
-    clazz_hui?: string,
-    clazz_ripie?: string, 
-    clazz_inner?: string 
+    clazz?: string,
+    weak?: boolean
 }>()
-const emt = defineEmits([ 'touch' ])
 </script>

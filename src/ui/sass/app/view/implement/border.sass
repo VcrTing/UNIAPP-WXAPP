@@ -1,6 +1,40 @@
 @use '../__conf' as *
 
-.bd
-    border-width: $bd
+.__bd
     border-style: solid
     border-color: transparent
+
+.__bd-b
+    border-top-color: transparent !important
+    border-left-color: transparent !important
+    border-right-color: transparent !important
+
+.bd
+    border-width: $bd
+    @extend .__bd
+
+.bd-x1
+    border-width: $bd-x1
+    @extend .__bd
+    
+.bd-x2
+    border-width: $bd-x2
+    @extend .__bd
+
+//
+.bd-b, .bd-b-x1, .bd-b-x2
+    @extend .__bd
+    @extend .__bd-b
+.bd-b
+    border-bottom-width: $bd
+.bd-b-x1
+    border-bottom-width: $bd-x1
+.bd-b-x2
+    border-bottom-width: $bd-x2
+//    
+.bd-c-s
+    border-color: $bd-c-s
+.bd-c-x2
+    border-color: $bd-c-x2
+.bd-c-con
+    border-color: $bg-con

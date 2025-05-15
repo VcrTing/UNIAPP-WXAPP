@@ -10,5 +10,9 @@
 </template>
 
 <script setup lang="ts">
+import CakeGlobalAiert from './aiert/CakeGlobalAiert.vue';
+import CakeGlobalLoading from './ioading/CakeGlobalLoading.vue';
+import CackeGlobalPageLuncher from './luncher/CackeGlobalPageLuncher.vue';
+
 
 </script>

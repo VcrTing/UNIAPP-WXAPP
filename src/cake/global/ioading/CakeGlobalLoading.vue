@@ -10,6 +10,8 @@
 <script setup lang="ts">
 import { IS_TEST_MODE } from '@/conf/conf';
 import { appStore } from '../../../memory/global'
+import { computed } from 'vue';
+import UiGlobalLoading from '@/ui/global/ioading/UiGlobalLoading.vue';
 
 // const prp = defineProps<{}>()
 const ioading = computed(() => appStore.getters.is_ioading)

@@ -5,6 +5,9 @@ import app from './app/app-store'
 import auth from './user/auth-store'
 import layout from './user/layout-store'
 
+import order from './order/order-store'
+import activity from './activity/activty-store'
+
 // UI
 export const uiStore: Store<UiStore> = ui
 export const uiState: UiStore = ui.state
@@ -49,3 +52,18 @@ export const ulCommit: Function = layout.commit
 export const ulDispatch: Function = layout.dispatch
 export const ulReFresh: (n: LAYOUT_STORE_FIELD, v: any) => void = 
     (n: LAYOUT_STORE_FIELD, v: any) => layout.dispatch('change', [ n, v ])
+
+// ACTIVITY
+export const acyStore: Store<ActivityStore> = activity
+export const acyState: ActivityStore = activity.state
+export const acyGetters: ONE = activity.getters
+export const acyCommit: Function = activity.commit
+export const acyDispatch: Function = activity.dispatch
+export const acyReFresh: (n: ACTIVITY_STORE_FIELD, v: any) => void = (n: ACTIVITY_STORE_FIELD, v: any) => 
+    activity.dispatch('change', [ n, v ])
+
+// ORDER
+export const orderState: OrderStore = order.state
+export const orderDispatch: Function = order.dispatch
+export const orderReFresh: (n: ORDER_STORE_FIELD, v: any) => void = (n: ORDER_STORE_FIELD, v: any) => 
+    order.dispatch('change', [ n, v ])

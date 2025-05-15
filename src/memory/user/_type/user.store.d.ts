@@ -16,7 +16,10 @@ interface AuthGetters {
     username: string,
     is_login: boolean,
 
+    is_publisher: boolean,
+
     user_id: string,
-    company_id: string
+    company_id: string,
+
 }
 

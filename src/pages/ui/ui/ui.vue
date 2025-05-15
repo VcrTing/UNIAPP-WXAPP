@@ -2,7 +2,16 @@
     <view>
         <view class="px">
             <view class="pb">
-                <view class="h5">HEADER</view>
+                <view>
+                    <view class="h1 d-ib">HEADER</view>
+                    <view class="h2 d-ib">HEADER</view>
+                    <view class="h3 d-ib">HEADER</view>
+                    <view class="h4 d-ib">HEADER</view>
+                    <view class="h5 d-ib">HEADER</view>
+                    <view class="h6 d-ib">HEADER</view>
+                    <view class="h7 d-ib">HEADER</view>
+                </view>
+                
                 <view class="header bb-s">HEADER</view>
                 <view class="header">HEADER</view>
                 <view class="header fw-800">HEADER. NOW FONT SIZE: {{ uiState.root_font_size_coefficient }}</view>

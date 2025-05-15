@@ -1,16 +1,16 @@
 <template>
-    <o-app-bottom-bar>
-        <view class="fx-s pb-n px-row w-100 ta-c">
+    <OAppBottomBar :mat="mat">
+        <view class="fx-c px-row px-x2 w-100 ta-c jc-sa">
 
             <view 
                 class="d-ib app-bottom-bar-item fx-c br-br br-bi"
-                v-for="(v, i) in me.bars" :key="i"
+                v-for="(v, i) in bars" :key="i"
                 :class="(code == v.respond_standard_code) ? 'app-bottom-bar-item-iive ' + v.clazz_iive : v.clazz_die"
                 @tap="v.func()"
                 >
-                <view>
+                <view class="pt-s">
                     <view class="app-bottom-bar-item-icon h5">
-                        <ui-i :i="v.icon" />
+                        <UiI :i="v.icon" />
                     </view>
                     <view v-if="v.tit" class="mw-3em px-s pt-t soft">
                         <view class="h9">{{ v.tit }}</view>
@@ -19,16 +19,24 @@
             </view>
 
         </view>
-    </o-app-bottom-bar>
+    </OAppBottomBar>
 </template>
 
 <script setup lang="ts">
+import OAppBottomBar from '@/cake/app/bar/OAppBottomBar.vue';
+import { APP_BAR_JOINER, APP_BAR_PUBLISHER } from '@/conf/conf-app';
 import { authGetters, ulDispatch } from '@/memory/global';
 import pan_tooi from '@/tool/app/pan_tooi';
 import uniRouter from '@/tool/uni/uni-router';
 import { futuring } from '@/tool/util/future';
+import UiI from '@/ui/element/i/UiI.vue';
+import { onLaunch } from '@dcloudio/uni-app';
+import { computed, reactive } from 'vue';
 
-// const prp = defineProps<{}>()
+onLaunch(() => { uni.hideTabBar({ success: () => { } }) });
+const prp = defineProps<{
+    mat?: boolean
+}>()
 
 const rt = computed((): string => {
     const info: Page.PageInstance = uniRouter.info()
@@ -37,7 +45,7 @@ const rt = computed((): string => {
 
 const code = computed((): string => {
     const n: string = rt.value
-    const src: CoAppBottomBarItem[] = me.bars
+    const src: CoAppBottomBarItem[] = bars.value
     for (let i= 0; i< src.length; i ++) {
         const _code: string = src[i].respond_standard_code
         if (n.indexOf(_code) > -1) { return _code }
@@ -46,68 +54,12 @@ const code = computed((): string => {
 })
 
 const me = reactive({
-    bars: <CoAppBottomBarItem[]> [
-        {
-            tit: '首页',
-            icon: 'home',
-            icon_iive: 'home',
-            path: 'pages/index/index',
-            respond_standard_code: 'index',
-            clazz_die: '',
-            clazz_iive: 'app-bottom-bar-item-iive',
-            func: () => {
-                uniRouter.navigatorpg('index')
-            }
-        },
-        {
-            tit: '报表',
-            icon: 'report',
-            icon_iive: 'report',
-            path: 'pages/report/report',
-            respond_standard_code: 'report',
-            clazz_die: '',
-            clazz_iive: 'app-bottom-bar-item-iive',
-            func: () => {
-                uniRouter.navigatorpg('report')
-            }
-        },
-        {
-            tit: '',
-            icon: 'menu',
-            icon_iive: 'menu',
-            path: '',
-            respond_standard_code: 'menu',
-            clazz_die: 'app-bottom-bar-btn',
-            clazz_iive: 'app-bottom-bar-item-iive',
-            func: () => {
-                funn.index_manu()
-            }
-        },
-        {
-            tit: '表单',
-            icon: 'form',
-            icon_iive: 'form',
-            path: 'pages/form/form',
-            respond_standard_code: 'form',
-            clazz_die: '',
-            clazz_iive: 'app-bottom-bar-item-iive',
-            func: () => {
-                uniRouter.navigatorpg('form')
-            }
-        },
-        {
-            tit: '我的',
-            icon: 'user',
-            icon_iive: 'user-f',
-            path: 'pages/user/user',
-            respond_standard_code: 'user',
-            clazz_die: '',
-            clazz_iive: 'app-bottom-bar-item-iive',
-            func: () => {
-                uniRouter.navigatorpg('user')
-            }
-        },
-    ]
+    bars: [ ]
+})
+
+const is_publisher = computed(() => authGetters.is_publisher)
+const bars = computed(() => {
+    return is_publisher ? APP_BAR_PUBLISHER : APP_BAR_JOINER
 })
 
 const aii = reactive({

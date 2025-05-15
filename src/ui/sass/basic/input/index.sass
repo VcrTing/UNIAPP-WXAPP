@@ -1,0 +1,22 @@
+
+@use '../../app/view/__conf' as *
+
+@use './inp-size'
+@use './inp-i'
+@use './slc'
+
+.inp
+    user-select: none
+    border: $bd solid transparent
+
+$fs-inp-pchd: 0.92em
+
+// DS
+$ds-inp: 1.62rem
+.pi-inp
+    padding-left: $ds-inp
+.pr-inp
+    padding-right: $ds-inp
+.px-inp
+    @extend .pi-inp
+    @extend .pr-inp

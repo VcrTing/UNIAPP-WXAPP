@@ -1,10 +1,15 @@
 <template>
-    <o-app-top-bar>
+    <OAppTopBar :clazz="clazz" :mat="mat">
         <slot></slot>
-    </o-app-top-bar>
+    </OAppTopBar>
 </template>
 
 <script setup lang="ts">
-// const prp = defineProps<{}>()
+import OAppTopBar from '@/cake/app/bar/OAppTopBar.vue';
+
+defineProps<{
+    mat?: boolean,
+    clazz?: string
+}>()
 
 </script>

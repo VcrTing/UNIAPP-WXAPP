@@ -1,0 +1,26 @@
+<template>
+    <view class="fx-s">
+        <view class="w-25">
+            <OButtonDef clazz="mh-btn" @tap="emt('cancle')">
+                返回
+            </OButtonDef>
+        </view>
+        <view class="pi-row fx-1">
+            <OButton clazz="mh-btn" @tap="emt('submit')">
+                {{ tit ? tit : '提交结果' }}
+            </OButton>
+        </view>
+    </view>
+</template>
+
+<script setup lang="ts">
+import OButton from '@/cake/button/OButton.vue';
+import OButtonDef from '@/cake/button/OButtonDef.vue';
+
+const prp = defineProps<{
+    tit?: string
+}>()
+
+const emt = defineEmits([ 'submit', 'cancle' ])
+
+</script>

@@ -5,13 +5,15 @@
 import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
 import { init_global_data } from "./tool/uni/uni-global";
 import { nextTick } from "vue";
+import { must_login } from "./tool/view/app_init";
 
 // 装 全局变量
-onLaunch(() => { uni.hideTabBar({ success: () => console.log('TABBAR HIDE SUCC.') }) });
-onShow(() => { uni.hideTabBar({ success: () => console.log('TABBAR HIDE SUCC.') }) });
+onLaunch(() => { uni.hideTabBar({ success: () => { } }) });
+onShow(() => { uni.hideTabBar({ success: () => { } }) });
 onHide(() => { });
 
 nextTick(init_global_data)
+nextTick(must_login)
 </script>
 
 <style lang="sass">
@@ -47,8 +49,8 @@ scroll-view, .uni-scroll-view, .uni-scroll-view-content
     background: transparent
 
 // 重绘 uni 样式
-view, text, button
-  font-size: 1em
+.uni-app--showtabbar uni-page-wrapper::after
+  display: none !important
 
 uni-tabbar
     display: none !important

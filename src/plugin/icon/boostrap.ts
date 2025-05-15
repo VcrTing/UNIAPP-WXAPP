@@ -21,10 +21,20 @@ export const booticon_styles: ONE = {
     },
     'err': {
         'font-size': '1.06em'
+    },
+    'bag-add': {
+        'font-size': '1.06em'
+    },
+    'addr': {
+        'font-size': '1.09em'
+    },
+    '+': {
+        'font-size': '1.17em'
     }
 }
 
 export const booticon = <ONE> {
+    '+': 'bi bi-plus-lg',
     'x': 'bi bi-x',
     'i': 'bi bi-chevron-left',
     'r': 'bi bi-chevron-right',
@@ -32,7 +42,16 @@ export const booticon = <ONE> {
     'a-r': 'bi bi-arrow-right',
     'f-i': 'bi bi-chevron-double-left',
     'f-r': 'bi bi-chevron-double-right',
+
+    'b': 'bi bi-chevron-down',
     
+    'time': 'bi bi-clock',
+    'addr': 'bi bi-geo-alt',
+    'boy': 'bi bi-gender-male',
+    'girl': 'bi bi-gender-demale',
+
+    'bag-add': 'bi bi-bag-plus',
+
     'menu': 'bi bi-list',
     'search': 'bi bi-search',
 

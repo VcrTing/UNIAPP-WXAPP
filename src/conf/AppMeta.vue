@@ -1,5 +1,5 @@
 <template>
-	<view class="o-root">
+	<view class="o-root w-100 h-100">
 		<slot></slot>
 	</view>
 </template>

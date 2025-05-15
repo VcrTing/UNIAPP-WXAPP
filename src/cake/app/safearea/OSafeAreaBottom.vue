@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import { appState } from '@/memory/global';
+import { computed, ref } from 'vue';
 
 const iive = ref(true)
 const has_document = computed(() => appState.document)

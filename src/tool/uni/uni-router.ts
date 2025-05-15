@@ -77,6 +77,10 @@ class Router {
         const route = routes[ routes.length - 1 ]
         return route ? route : { }
     }
+
+    goui() {
+        this.gopg('ui')
+    }
 }
 
 export default new Router();

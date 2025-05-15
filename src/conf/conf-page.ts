@@ -9,9 +9,16 @@ export const PAGES: ONE = {
     'login': 'pages/auth/login/login',
     'login_succ': index,
     'user': 'pages/user/user',
-    'form': 'pages/form/form',
-    'report': 'pages/report/report',
-    'sales_order': 'pages/business/report/sale/sales_order'
+    'order': 'pages/order/order',
+    'publish': 'pages/publish/publish',
+
+    'publish_plus': 'pages/publish/plus/PublishPlus',
+
+    'activity_order': 'pages/activity/order/ActivityOrder',
+    'activity_detail': 'pages/activity/detail/ActivityDetail',
+    // 'form': 'pages/form/form',
+    // 'report': 'pages/report/report',
+    // 'sales_order': 'pages/business/report/sale/sales_order'
 }
 
 // 白名单 页面
@@ -24,3 +31,5 @@ export const PAGE_WHITE_LIST = [
 export const PAGE_NAVIGATION: string[] = [
     
 ]
+
+// 
