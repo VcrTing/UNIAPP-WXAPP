@@ -1,7 +1,7 @@
 <template>
     <view
-        class="btn bd fx-c"
-        :class="weak ? clazz : (clazz + ' py-s br-x3 px')"
+        class=""
+        :class="clazz"
         >
         <slot></slot>
     </view>

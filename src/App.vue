@@ -35,7 +35,7 @@ page, uni-page-body
       border-radius: 10px
       background: transparent
   
-page, uni-page-body, view, text, button, uni-input, uni-button, input, scroll-view
+page, uni-page-body, view, text, button, uni-input, uni-textarea, uni-button, input, scroll-view
   box-sizing: border-box
   outline: none !important
   
@@ -53,9 +53,12 @@ scroll-view, .uni-scroll-view, .uni-scroll-view-content
   display: none !important
 
 uni-tabbar
-    display: none !important
+  display: none !important
 
-uni-input
+uni-textarea
+  width: 100%
+
+uni-input, uni-textarea
   font-size: 1em
   &, &:hover, &:active, &:focus, &:focus-visible
     outline: none

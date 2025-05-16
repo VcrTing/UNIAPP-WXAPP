@@ -1,7 +1,7 @@
 <template>
     <view>
         <view class="py-x3"></view>
-        <view class="py-x1"></view>
+        <view class="py-x2"></view>
         <view class="fx-i px-row">
             <view class="fx-i">
                 <view >

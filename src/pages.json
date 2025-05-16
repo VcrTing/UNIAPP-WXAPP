@@ -34,7 +34,26 @@
 
 		{ "path": "pages/publish/plus/PublishPlus", "style": {
 				"navigationStyle": "custom",
-				"navigationBarTitleText": "新增活动" } }
+				"navigationBarTitleText": "新增活动" } },
+		{ "path": "pages/user/info/UserInfo", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "编辑个人资料" } },
+		{ "path": "pages/user/manager/UserManagerTags", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "标签管理" } },
+				
+		{ "path": "pages/index/search/IndexSearch", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "搜索" } },
+		{ "path": "pages/index/filter/IndexFilter", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "过滤展示" } },
+		{ "path": "pages/index/recommend/IndexRecommend", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "推荐" } },
+		{ "path": "pages/order/working/OrderWorking", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "订单进行中" } }
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

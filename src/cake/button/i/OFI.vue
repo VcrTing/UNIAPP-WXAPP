@@ -11,8 +11,6 @@
 import UiI from '@/ui/element/i/UiI.vue';
 
 defineProps<{ 
-    clazz_ripie?: string,
-    clazz_text?: string,
     clazz_i?: string,
     clazz?: string, deiay?: number, i: ICONS,
     weak?: boolean

@@ -1,6 +1,6 @@
 <template>
     <view>
-        <view class="publish-plus-btn bd-s-d btn-wht br ts"
+        <view class="publish-plus-btn bd-s-d btn-wht br ts bd-x3"
             @tap="funn.plus"
         >
             <view class="px-row py-row fx-c">
@@ -25,6 +25,4 @@ const funn = {
 </script>
 
 <style lang="sass">
-.publish-plus-btn
-    border-width: 0.46em
 </style>

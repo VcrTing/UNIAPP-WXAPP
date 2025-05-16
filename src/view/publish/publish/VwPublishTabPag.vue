@@ -11,18 +11,32 @@
             </view>
         </view>
         <view class="zi-t bd-b w-100 bd-c-s tsf-y-100-r"></view>
+        <view>
+            <view v-if="aii.iive == 0" class="py-row">
+                <VwPptPagWorking/>
+            </view>
+            <view v-if="aii.iive == 1" class="py-row">
+                <VwPptPagWorking/>
+            </view>
+            <view v-if="aii.iive == 2" class="py-row">
+                <VwPptPagHistory/>
+            </view>
+        </view>
     </view>
 </template>
 
 <script setup lang="ts">
 import { reactive } from 'vue';
+import VwPptPagHistory from './pag/VwPptPagHistory.vue';
+import VwPptPagWorking from './pag/VwPptPagWorking.vue';
 
 // const prp = defineProps<{}>()
 
 const aii = reactive({
     iive: 0,
     tabs: [
-        { tit: '进行中', v: 1 },
+        { tit: '进行中', v: 0 },
+        { tit: '待上架', v: 1 },
         { tit: '历史活动', v: 2 },
     ]
 })

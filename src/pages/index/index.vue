@@ -34,7 +34,9 @@ const funn = {
 		appCommit('change', [ 'ioading', v == 0 ? -1 : 0 ])
 	},
 	goUi: () => uniRouter.gopg('ui'),
-	search: () => { }
+	search: () => { 
+		uniRouter.gopg('index_search')
+	}
 }
 </script>
 

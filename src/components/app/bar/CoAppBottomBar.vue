@@ -59,7 +59,7 @@ const me = reactive({
 
 const is_publisher = computed(() => authGetters.is_publisher)
 const bars = computed(() => {
-    return is_publisher ? APP_BAR_PUBLISHER : APP_BAR_JOINER
+    return is_publisher.value ? APP_BAR_PUBLISHER : APP_BAR_JOINER
 })
 
 const aii = reactive({

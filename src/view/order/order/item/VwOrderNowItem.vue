@@ -13,10 +13,10 @@
                     <view class="pt">
                         <view class="fx-i">
                             <view>
-                                <image class="w-7em h-4em br-s" mode="aspectFill" :src="one.banner"/>
+                                <image class="w-8em h-4em br-it-s br-ib-s" mode="aspectFill" :src="one.banner"/>
                             </view>
-                            <view class="pi">
-                                导航位置
+                            <view class="">
+                                <image class="w-6em h-4em br-rt-s br-rb-s" mode="aspectFill" :src="mock_orders.mapimg"/>
                             </view>
                         </view>
                     </view>
@@ -25,7 +25,7 @@
                         <view class="fx-r">
                             <!--<OButtonDef :weak="true" clazz="br"><UiI class="h5" :i="'x'"/></OButtonDef>-->
                             <view class="px-s"></view>
-                            <OButton clazz="fs-s">查看详情</OButton>
+                            <OButton @tap="funn.detail" clazz="fs-s">查看详情</OButton>
                         </view>
                     </view>
                 </view>
@@ -39,6 +39,8 @@ import OButton from '@/cake/button/OButton.vue';
 import OButtonDef from '@/cake/button/OButtonDef.vue';
 import OButtonIht from '@/cake/button/OButtonIht.vue';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
+import mock_orders from '@/server/mock/order/mock_orders';
+import uniRouter from '@/tool/uni/uni-router';
 import { must_one } from '@/tool/util/valued';
 import UiI from '@/ui/element/i/UiI.vue';
 import { computed } from 'vue';
@@ -49,4 +51,10 @@ const prp = defineProps<{
 
 const one = computed((): ONE => must_one(prp.v.one))
 const pusher = computed((): ONE => must_one(one.value.publisher))
+
+const funn = {
+    detail: () => {
+        uniRouter.gopg('order_working')
+    }
+}
 </script>

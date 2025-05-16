@@ -3,15 +3,15 @@
     <PageLayout>
         <CoAppTopBackBar :clazz="'bg-pag-pri'" @back="uniRouter.back" :mat="true">
             返回
-            <template #tit><view class="h5 ta-c">新增活动</view></template>
+            <template #tit><view class="header ta-c">新增活动</view></template>
         </CoAppTopBackBar>
         <view class="px-row">
-            填写基本资料
             <VwPubPlusTopForm ref="top"/>
-            
-            <view>确定时间地点</view>
-            <view>上传 Banner</view>
-            <view>新增套餐描述</view>
+            <view class="py-s"></view>
+            <VwPubPlusAddrForm ref="addr"/>
+            <view class="py-s"></view>
+            <VwPubPlusMoneyForm ref="money"/>
+            <view class="py-x2"></view>
         </view>
         <CoAppBomCarBar>
             <view class="px-row pt-s">
@@ -22,17 +22,20 @@
 </template>
 
 <script setup lang="ts">
-import OButton from '@/cake/button/OButton.vue';
 import CoAppBomCarBar from '@/components/app/bar/bom/CoAppBomCarBar.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import CoBomBtnGroup from '@/components/element/button/CoBomBtnGroup.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { orderDispatch, orderState, uiState } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';
+import VwPubPlusAddrForm from '@/view/publish/plus/VwPubPlusAddrForm.vue';
+import VwPubPlusMoneyForm from '@/view/publish/plus/VwPubPlusMoneyForm.vue';
 import VwPubPlusTopForm from '@/view/publish/plus/VwPubPlusTopForm.vue';
 import { ref } from 'vue';
 
 const top = ref()
+const addr = ref()
+const money = ref()
 
 const funn = {
     submit: () => {

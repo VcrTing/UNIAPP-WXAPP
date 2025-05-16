@@ -45,6 +45,8 @@ export const booticon = <ONE> {
 
     'b': 'bi bi-chevron-down',
     
+    'edit': 'bi bi-pencil-square',
+
     'time': 'bi bi-clock',
     'addr': 'bi bi-geo-alt',
     'boy': 'bi bi-gender-male',

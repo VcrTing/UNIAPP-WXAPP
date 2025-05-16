@@ -61,6 +61,7 @@ export default {
         },
         
     ],
+    mapimg: 'https://img0.baidu.com/it/u=1547550957,1686383075&fm=253&fmt=auto&app=138&f=JPEG?w=715&h=482',
     content: [
         { txt: '20 基础报名费' },
         { txt: '300 基础报名费 + 制服诱惑' },

@@ -12,10 +12,18 @@ export const PAGES: ONE = {
     'order': 'pages/order/order',
     'publish': 'pages/publish/publish',
 
+    'user_info': 'pages/user/info/UserInfo',
+    'index_search': 'pages/index/search/IndexSearch',
+
     'publish_plus': 'pages/publish/plus/PublishPlus',
+    
+    'manager_tags': 'pages/user/manager/UserManagerTags',
+
+    'order_working': 'pages/order/working/OrderWorking',
 
     'activity_order': 'pages/activity/order/ActivityOrder',
     'activity_detail': 'pages/activity/detail/ActivityDetail',
+    
     // 'form': 'pages/form/form',
     // 'report': 'pages/report/report',
     // 'sales_order': 'pages/business/report/sale/sales_order'

@@ -53,6 +53,7 @@ const _s: Store<AuthStore> = createStore({
          */
         login: ({ commit }, auth: ONE) => {
             storage.set('auth', auth)
+            console.log('auth =', auth)
             commit('_login', auth)
         },
         logout: ({ commit }) => {
