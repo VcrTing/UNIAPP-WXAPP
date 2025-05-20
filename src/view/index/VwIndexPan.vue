@@ -72,7 +72,7 @@ const menus = computed(() => {
 })
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 
 
 .pag-index-cont

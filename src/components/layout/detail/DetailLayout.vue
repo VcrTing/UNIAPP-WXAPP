@@ -14,12 +14,14 @@
                     <slot name="top"></slot>
 				</view>
 			</view>
-			<view class="layout-detail-con ps-a b-0 i-0 w-100 zi"
+			<view class="layout-detail-con ps-a b-0 i-0 w-100 zi-n"
 				:style="{
 					height: conh
 				}"
 			>
-				<view class="layout-detail-con-inner br-it br-rt h-100 bg-con">
+				<view class="layout-detail-con-inner br-it br-rt h-100 ps-r zi-n"
+					:class="clazz_con ? clazz_con : 'bg-con'"
+				>
                     <slot name="con"></slot>
 				</view>
 			</view>
@@ -36,7 +38,8 @@ import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
 import { computed } from 'vue';
 
 const prp = defineProps<{
-	h?: number
+	h?: number,
+	clazz_con?: string
 }>()
 
 const __def = 61.8;

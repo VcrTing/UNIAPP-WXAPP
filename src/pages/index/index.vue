@@ -1,7 +1,7 @@
 <template>
 	<page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
 	<PageLayout>
-		<CoAppTopBar>
+		<CoAppTopBar :clazz="''">
 			<view class="">
 				<OFI @tap="funn.search" :i="'search'" :clazz="'d-ib px-row pt'"/>
 				<!--
@@ -40,8 +40,8 @@ const funn = {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @use '../../ui/sass/theme/primary' as *
 page, uni-page-body
-	// background: $pri-pag-bg
+	background: $pri-pag-bg
 </style>

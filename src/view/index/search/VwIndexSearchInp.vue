@@ -3,7 +3,7 @@
         <view class="py-x2"></view>
         <view class="py">
             <view>
-                <CoSearchInput class="bg-con br-x3" :i="'search'" :ir="'x'"
+                <CoSearchInput class="bg-con br-rnd" :i="'search'" :ir="'x'"
                     :def="form.search" 
                     @result="(v) => form.search = v"
                     @tapi="funn.submit" @tapr="funn.submit"

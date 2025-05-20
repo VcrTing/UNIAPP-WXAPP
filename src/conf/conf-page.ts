@@ -13,11 +13,16 @@ export const PAGES: ONE = {
     'publish': 'pages/publish/publish',
 
     'user_info': 'pages/user/info/UserInfo',
+    'user_gallery': 'pages/user/media/UserGallery',
+
+    'auth_intor': 'pages/auth/intor/AuthIntor',
     'index_search': 'pages/index/search/IndexSearch',
+    'auth_security': 'pages/auth/intor/AuthSecurity',
 
     'publish_plus': 'pages/publish/plus/PublishPlus',
     
     'manager_tags': 'pages/user/manager/UserManagerTags',
+    'user_mainpage': 'pages/user/mainpage/UserMainPage',
 
     'order_working': 'pages/order/working/OrderWorking',
 

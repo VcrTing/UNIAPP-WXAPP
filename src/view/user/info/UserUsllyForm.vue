@@ -1,7 +1,7 @@
 <template>
     <view class="px-row">
         <view class="pb">
-            <ODiv class="bg-con mh-btn tils fx-c btn br-x3">
+            <ODiv class="bg-con mh-btn tils fx-c btn br-rnd">
                 <view>
                     <UiI :i="''"/>
                 </view>

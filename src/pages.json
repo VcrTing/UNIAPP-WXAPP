@@ -19,6 +19,13 @@
 		{ "path": "pages/user/user", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "用户" } },
+				
+		{ "path": "pages/auth/intor/AuthIntor", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "发起者登录" } },
+		{ "path": "pages/auth/intor/AuthSecurity", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "安全与协议" } },
 
 		{ "path": "pages/ui/ui/ui", "style": {
 				"navigationStyle": "custom",
@@ -41,6 +48,12 @@
 		{ "path": "pages/user/manager/UserManagerTags", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "标签管理" } },
+		{ "path": "pages/user/mainpage/UserMainPage", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "个人主页" } },
+		{ "path": "pages/user/media/UserGallery", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "个人相册" } },
 				
 		{ "path": "pages/index/search/IndexSearch", "style": {
 				"navigationStyle": "custom",

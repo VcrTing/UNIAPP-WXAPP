@@ -16,9 +16,9 @@
                 <VwPptPagWorking/>
             </view>
             <view v-if="aii.iive == 1" class="py-row">
-                <VwPptPagWorking/>
+                <VwPptPagWarehouse/>
             </view>
-            <view v-if="aii.iive == 2" class="py-row">
+            <view v-if="aii.iive == 2">
                 <VwPptPagHistory/>
             </view>
         </view>
@@ -29,6 +29,7 @@
 import { reactive } from 'vue';
 import VwPptPagHistory from './pag/VwPptPagHistory.vue';
 import VwPptPagWorking from './pag/VwPptPagWorking.vue';
+import VwPptPagWarehouse from './pag/VwPptPagWarehouse.vue';
 
 // const prp = defineProps<{}>()
 
@@ -36,7 +37,7 @@ const aii = reactive({
     iive: 0,
     tabs: [
         { tit: '进行中', v: 0 },
-        { tit: '待上架', v: 1 },
+        { tit: '活动仓库', v: 1 },
         { tit: '历史活动', v: 2 },
     ]
 })

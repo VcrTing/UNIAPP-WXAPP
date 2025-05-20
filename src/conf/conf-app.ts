@@ -5,6 +5,7 @@ export const UX_DOUBLE_TOUCH_JUDGE_TIME = 300
 export const APP_GENERATE_DETAIL = {
     logo: '../../../static/logo.png',
     desc: '找派对 上约盼',
+    name: '约盼',
     desc_auth: '上约盼 找派对'
 }
 

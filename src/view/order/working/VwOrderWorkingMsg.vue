@@ -1,30 +1,53 @@
 <template>
-    <view>
-        <CoMoActivityMoneyItem :item="assistant">
-            <view @tap="funn.change">
-                <OFI class="px-row py br-cir" :i="'b'"/>
-            </view>
-        </CoMoActivityMoneyItem>
+    <view class="">
+        <view class="bg-con br-bi br-br pr-row pt-row">
+            <CoMoOrderMsgItem :clazz_r="'py'">
+                <template #i>活动标签</template>
+                <template #r>
+                    <view class="w-100 fx-i">
+                        <OButtonDef :weak="true" clazz="fs-n br-s px-s mr">黑丝</OButtonDef>
+                        <OButtonDef :weak="true" clazz="fs-n br-s px-s mr">JK</OButtonDef>
+                        <OButtonDef :weak="true" clazz="fs-n br-s px-s mr">约会</OButtonDef>
+                        <OButtonDef :weak="true" clazz="fs-n br-s px-s">台球助教</OButtonDef>
+                    </view>
+                </template>
+            </CoMoOrderMsgItem>
+            <CoMoOrderMsgItem :clazz_r="'py'">
+                <template #i>发布者</template>
+                <template #r>
+                    <view class="w-100 fx-i">
+                        <CkAvatar clazz="w-2em h-2em" :src="publisher.avatar"/>
+                        <!--
+                        <view class="px">
+                            {{ publisher.name }}
+                        </view>-->
+                    </view>
+                </template>
+            </CoMoOrderMsgItem>
+            <CoMoOrderMsgItem :clazz_r="'py'">
+                <template #i>付款金额</template>
+                <template #r>
+                    <view class="fw-550 money">￥&nbsp;<text class="fw-800 h7">700.00</text></view>
+                </template>
+            </CoMoOrderMsgItem>
+        </view>
     </view>
 </template>
 
 <script setup lang="ts">
-import OFI from '@/cake/button/i/OFI.vue';
-import CoMoActivityMoneyItem from '@/components/modules/activity/CoMoActivityMoneyItem.vue';
 import { must_one } from '@/tool/util/valued';
 import { computed } from 'vue';
+import CoMoOrderMsgItem from '@/components/modules/order/CoMoOrderMsgItem.vue';
+import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
+import ODiv from '@/cake/button/div/ODiv.vue';
+import OButtonDef from '@/cake/button/OButtonDef.vue';
 
 const prp = defineProps<{
-    item: ONE
+    item?: ONE
 }>()
 
 const one = computed(() => must_one<ONE>(prp.item).one || { })
 const msg = computed(() => must_one<ONE>(prp.item).msg || { })
+const publisher = computed(() => must_one<ONE>(one.value).publisher || { })
 const assistant = computed(() => must_one<ONE>(prp.item).assistant || { })
-
-const funn = {
-    change: () => {
-
-    }
-}
 </script>

@@ -31,7 +31,7 @@ const aii = reactive({
 })
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @use '../../ui/sass/theme/primary' as *
 page, uni-page-body
 	background: $pri-pag-bg

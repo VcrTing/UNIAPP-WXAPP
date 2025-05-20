@@ -9,15 +9,14 @@
             <VwUserManagerTags/>
             <view class="mh-8em"></view>
         </view>
-        <view class="abs-i b-0 px-row pb-x3" @tap="uniRouter.back">
-            <OFI clazz="bg-con w-2em h-2em h5" :i="'i'"/>
-        </view>
+        <CoBomBackBtn/>
     </PageLayout>
 </template>
 
 <script setup lang="ts">
 import OFI from '@/cake/button/i/OFI.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
+import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { orderDispatch, orderState, uiState } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';
@@ -32,7 +31,7 @@ const funn = {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @use '../../../ui/sass/theme/primary' as *
 page, uni-page-body
 	background: $pri-pag-bg

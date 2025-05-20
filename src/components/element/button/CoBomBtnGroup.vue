@@ -1,7 +1,7 @@
 <template>
     <view class="fx-s">
         <view class="w-25">
-            <OButtonDef clazz="mh-btn" @tap="emt('cancle')">
+            <OButtonDef clazz="mh-btn w-100" @tap="emt('cancle')">
                 返回
             </OButtonDef>
         </view>

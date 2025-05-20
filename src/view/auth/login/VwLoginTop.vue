@@ -3,7 +3,7 @@
         <view class="pt-x3"></view>
         <view class="fx-c px py">
             <view class="mxw-12em">
-                <CoLogo :clazz="'w-5em h-5em br-x3'"/>
+                <CoLogo :clazz="'h7 w-5em h-5em br-x2'"/>
             </view>
         </view>
         <view class="fx-c pt-x1">

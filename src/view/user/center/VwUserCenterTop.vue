@@ -11,7 +11,7 @@
                 <view class="fx-1 pi-x2 c-fff">
                     <view class="h5 b pt-s">{{ user.username }}</view>
                     <view class="pt-s">
-                        社交账号: 2782721850
+                        社交账号: 2782721850，企鹅
                     </view>
                 </view>
             </view>

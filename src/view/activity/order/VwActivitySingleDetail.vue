@@ -4,26 +4,26 @@
             项目信息&nbsp;
         </view>
         <view class="py">
-            <VwAomItem>
+            <CoMoOrderMsgItem>
                 <template #i>主理人</template>
                 <template #r>
                     <CkAvatar clazz="h7 w-2em h-2em" :src="publisher.avatar"/>
                 </template>
-            </VwAomItem>
-            <VwAomItem :clazz_r="'py'">
+            </CoMoOrderMsgItem>
+            <CoMoOrderMsgItem :clazz_r="'py'">
                 <template #i>活动名</template>
                 <template #r>
                     {{ one.title }}
                 </template>
-            </VwAomItem>
-            <VwAomItem :clazz_r="'py'">
+            </CoMoOrderMsgItem>
+            <CoMoOrderMsgItem :clazz_r="'py'">
                 <template #i>活动时间</template>
                 <template #r>{{ timed.startText }}</template>
-            </VwAomItem>
-            <VwAomItem :clazz_r="'py'">
+            </CoMoOrderMsgItem>
+            <CoMoOrderMsgItem :clazz_r="'py'">
                 <template #i>活动地点</template>
                 <template #r>{{ addr.address }}</template>
-            </VwAomItem>
+            </CoMoOrderMsgItem>
         </view>
     </view>
 </template>
@@ -32,7 +32,7 @@
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import { must_one } from '@/tool/util/valued';
 import { computed } from 'vue';
-import VwAomItem from './component/VwAomItem.vue';
+import CoMoOrderMsgItem from '@/components/modules/order/CoMoOrderMsgItem.vue';
 
 // const prp = defineProps<{}>()
 

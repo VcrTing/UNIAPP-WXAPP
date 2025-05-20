@@ -4,7 +4,15 @@
         <CoAppTopBackBar @back="funn.back" :mat="true"></CoAppTopBackBar>
         <view>
             <VwOrderWorkingTop :item="orders[0]"/>
-            <VwOrderWorkingMsg :item="orders[0]"/>
+            <view class="order-woring-msg ps-r zi">
+                <VwOrderWorkingMsg class="px-row pb-row" :item="orders[0]"/>
+                <VwOrderWorkingAddr class="px-row" :item="orders[0]" />
+                <view class="px-row py-row">
+                    <OButton clazz="mh-btn" @tap="uniRouter.back">
+                        确认及返回
+                    </OButton>
+                </view>
+            </view>
         </view>
     </PageLayout>
 </template>
@@ -12,6 +20,7 @@
 <script setup lang="ts">
 import OSafeAreaBottom from '@/cake/app/safearea/OSafeAreaBottom.vue';
 import OButton from '@/cake/button/OButton.vue';
+import OButtonOut from '@/cake/button/OButtonOut.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import DetailLayout from '@/components/layout/detail/DetailLayout.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
@@ -19,6 +28,7 @@ import { acyState, authState, orderReFresh, orderState, uiState } from '@/memory
 import pan_tooi from '@/tool/app/pan_tooi';
 import uniRouter from '@/tool/uni/uni-router';
 import { must_arr } from '@/tool/util/valued';
+import VwOrderWorkingAddr from '@/view/order/working/VwOrderWorkingAddr.vue';
 import VwOrderWorkingMsg from '@/view/order/working/VwOrderWorkingMsg.vue';
 import VwOrderWorkingTop from '@/view/order/working/VwOrderWorkingTop.vue';
 import { computed, reactive } from 'vue';
@@ -45,8 +55,10 @@ const funn = {
 }
 </script>
 
-<style lang="sass">
-@use '../../../ui/sass/theme/primary' as *
+<style lang="sass" scoped>
+@use '../../../ui/sass/theme/primary' as *;
+
 page, uni-page-body
 	background: $pri-pag-bg
+
 </style>

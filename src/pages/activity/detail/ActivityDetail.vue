@@ -3,7 +3,7 @@
     <PageLayout>
         <DetailLayout :h="68">
             <template #bg>
-                <view class="h-42">
+                <view class="h-42vh">
                     <image mode="aspectFill" class="uni-img w-100 h-100" :src="view.banner"/>
                 </view>
             </template>
@@ -24,10 +24,11 @@
                 </view>
             </template>
             <template #bom>
-                <view class="fx-s px-row pb-row">
-                    <OButton clazz="w-100" @tap="funn.join"><view class="py-t">立即加入</view></OButton>
+                <view class="px-row w-100">
+                    <OButtonDef v-if="is_publisher" clazz="w-100 mh-btn" @tap="uniRouter.back">返回</OButtonDef>
+                    <CoBomBtnGroup :tit="'立即加入'" v-else @submit="funn.join" @cancle="uniRouter.back"></CoBomBtnGroup>
+                    <OSafeAreaBottom/>
                 </view>
-                <OSafeAreaBottom/>
             </template>
         </DetailLayout>
 
@@ -40,10 +41,12 @@
 <script setup lang="ts">
 import OSafeAreaBottom from '@/cake/app/safearea/OSafeAreaBottom.vue';
 import OButton from '@/cake/button/OButton.vue';
+import OButtonDef from '@/cake/button/OButtonDef.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
+import CoBomBtnGroup from '@/components/element/button/CoBomBtnGroup.vue';
 import DetailLayout from '@/components/layout/detail/DetailLayout.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
-import { acyState, authState, orderReFresh, uiState } from '@/memory/global';
+import { acyState, authGetters, authState, orderReFresh, uiState } from '@/memory/global';
 import pan_tooi from '@/tool/app/pan_tooi';
 import uniRouter from '@/tool/uni/uni-router';
 import VwAdPricePan from '@/view/activity/detail/pan/VwAdPricePan.vue';
@@ -59,6 +62,8 @@ const user = computed(() => authState.user)
 const aii = reactive({
     price_pan_idx: 11, hui: <ElePanHui>{ opacity: 0.4 }
 })
+
+const is_publisher = computed(() => authGetters.is_publisher)
 
 const funn = {
     submit: (src: ONE) => {

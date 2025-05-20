@@ -1,0 +1,56 @@
+
+@use '../__conf' as *
+
+.c-err
+    color: $err
+.c-err-hv
+    color: $err-hv
+.c-err-fcs
+    color: $err-fcs
+
+.fx-hv-c-err:hover
+    @extend .c-err-hv
+.fx-fcs-c-err
+    &:active, &:focus, &:focus-visible
+        @extend .c-err-fcs
+
+.err
+    color: $err
+    @extend .fx-hv-c-err
+    @extend .fx-fcs-c-err
+
+.bg-err
+    background-color: $err-bg
+.bg-err-hv
+    background-color: $err-bg-hv
+.bg-err-fcs
+    background-color: $err-bg-fcs
+
+.fx-hv-bg-err:hover
+    @extend .bg-err-hv
+.fx-fcs-bg-err
+    &:active, &:focus, &:focus-visible
+        @extend .bg-err-fcs
+
+.fx-aii-bg-err
+    @extend .fx-hv-bg-err
+    @extend .fx-fcs-bg-err
+
+
+.err-tih
+    color: $err-tih
+    &:hover
+        color: $err-tih-hv
+    &:active, &:focus, &:focus-visible
+        color: $err-tih-fcs
+        
+
+.err-i
+    color: $err-i
+    &:hover
+        color: $err-i-hv
+    &:active, &:focus, &:focus-visible
+        color: $err-i-fcs
+
+.err-sdo
+    box-shadow: 0px 0.2rem 0.72rem 0px $err-sdo
