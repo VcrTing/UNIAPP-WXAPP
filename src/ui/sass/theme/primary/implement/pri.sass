@@ -1,7 +1,7 @@
 
 @use '../__conf' as *
 
-.pri, .c-pri
+.c-pri
     color: $pri 
 
 .fx-hv-c-pri:hover
@@ -9,6 +9,14 @@
 .fx-fcs-c-pri
     &:active, &:focus, &:focus-visible
         @extend .c-pri
+
+.pri
+    color: $pri
+    &:hover
+        color: $pri-hv
+    &:active, &:focus, &:focus-visible
+        color: $pri-fcs
+
 
 .bd-pri
     border-color: $pri

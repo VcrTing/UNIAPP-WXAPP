@@ -1,9 +1,9 @@
 <template>
     <OAppTopBar :clazz="clazz" :mat="mat">
         <view class="w-100 fx-s">
-            <view class="fx-i w-25">
+            <view class="fx-i w-25" @tap="emt('back')">
                 <view>
-                    <OFI @tap="emt('back')" :clazz="'px-n py-n'" :class="clazz_i" :i="'i'"/>
+                    <OFI :clazz="'px-n py-n'" :class="clazz_i" :i="'i'"/>
                 </view>
                 <slot></slot>
             </view>

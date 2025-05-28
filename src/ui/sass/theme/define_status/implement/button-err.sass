@@ -1,0 +1,15 @@
+@use '../__conf' as *
+@use './err'
+
+.btn-err
+    @extend .err
+    @extend .bg-err
+    @extend .fx-aii-bg-err
+
+.dot-err
+    background: $err-dot
+    color: #fff
+    border-radius: 100%
+    &:hover, 
+    &:active, &:focus, &:focus-visible
+        box-shadow: 0px 0rem 0rem 0.3rem $err-shd

@@ -3,13 +3,16 @@
 	<PageLayout>
 		<CoAppTopBar :clazz="''">
 			<view class="">
-				<OFI @tap="funn.search" :i="'search'" :clazz="'d-ib px-row pt'"/>
+				<OFI @tap="funn.search" :i="'search'" :clazz="'d-ib px-row pt c-fff'"/>
 				<!--
 				<CoIndexLogoTxt/>
 				-->
 			</view>
 		</CoAppTopBar>
-		<view>
+		<view class="ps-r zi-0">
+			<VwIndexTop/>
+			<OSafeAreaTop/>
+			<view class="mh-app-top-bar"></view>
 			<VwIndexPan/>
 		</view>
 		<!---->
@@ -18,15 +21,15 @@
 </template>
 
 <script setup lang="ts">
+import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
 import OFI from '@/cake/button/i/OFI.vue';
 import CoAppBottomBar from '@/components/app/bar/CoAppBottomBar.vue';
 import CoAppTopBar from '@/components/app/bar/CoAppTopBar.vue';
-import CoIndexLogoTxt from '@/components/genra/logo/CoIndexLogoTxt.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { appCommit, appState, uiState } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';
-import UiI from '@/ui/element/i/UiI.vue';
 import VwIndexPan from '@/view/index/VwIndexPan.vue';
+import VwIndexTop from '@/view/index/VwIndexTop.vue';
 
 const funn = {
 	changeLoading: () => {
@@ -40,8 +43,8 @@ const funn = {
 }
 </script>
 
-<style lang="sass" scoped>
-@use '../../ui/sass/theme/primary' as *
+<style lang="sass">
+@use '../../ui/sass/theme/primary/__conf' as *
 page, uni-page-body
 	background: $pri-pag-bg
 </style>

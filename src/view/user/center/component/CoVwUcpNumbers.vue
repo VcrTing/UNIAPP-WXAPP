@@ -2,7 +2,7 @@
     <view>
         <view v-if="is_publisher" class="fx-i">
             <CoMoUserNumberShow :num="0" class="px-row" :class="clazz">
-                成单数
+                参与数
             </CoMoUserNumberShow>
             <CoMoUserNumberShow :num="0" class="px-row" :class="clazz">
                 粉丝数
@@ -13,13 +13,13 @@
         </view>
         <view v-else  class="fx-i">
             <CoMoUserNumberShow :num="0" class="px-row" :class="clazz">
-                成单数
+                参与数
             </CoMoUserNumberShow>
             <CoMoUserNumberShow :num="0" class="px-row" :class="clazz">
-                妹子数
+                收藏数
             </CoMoUserNumberShow>
             <CoMoUserNumberShow :num="0" class="px-row" :class="clazz">
-                付出金额
+                账户余额
             </CoMoUserNumberShow>
         </view>
     </view>

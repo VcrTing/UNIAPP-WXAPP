@@ -8,6 +8,10 @@
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "登录" } },
 
+		{ "path": "pages/interact/interaction", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "互动" } },
+
 		{ "path": "pages/order/order", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "订单" } },
@@ -15,21 +19,31 @@
 		{ "path": "pages/publish/publish", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "发布" } },
+				
+		{ "path": "pages/msg/msg", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "消息" } },
 		
 		{ "path": "pages/user/user", "style": {
 				"navigationStyle": "custom",
-				"navigationBarTitleText": "用户" } },
+				"navigationBarTitleText": "我的" } },
 				
 		{ "path": "pages/auth/intor/AuthIntor", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "发起者登录" } },
-		{ "path": "pages/auth/intor/AuthSecurity", "style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "安全与协议" } },
 
 		{ "path": "pages/ui/ui/ui", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "UI" } },
+		{ "path": "pages/common/choose/AnyChoose", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "用户选择" } },
+		{ "path": "pages/common/security/AuthSecurity", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "安全与协议" } },
+		{ "path": "pages/common/manager/UserManager", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "信息管理" } },
 
 				
 		{ "path": "pages/activity/detail/ActivityDetail", "style": {
@@ -45,9 +59,7 @@
 		{ "path": "pages/user/info/UserInfo", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "编辑个人资料" } },
-		{ "path": "pages/user/manager/UserManagerTags", "style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "标签管理" } },
+				
 		{ "path": "pages/user/mainpage/UserMainPage", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "个人主页" } },
@@ -66,7 +78,14 @@
 				"navigationBarTitleText": "推荐" } },
 		{ "path": "pages/order/working/OrderWorking", "style": {
 				"navigationStyle": "custom",
-				"navigationBarTitleText": "订单进行中" } }
+				"navigationBarTitleText": "订单进行中" } },
+				
+		{ "path": "pages/interact/detail/InteractionDetail", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "邀请详情" } },
+		{ "path": "pages/interact/plus/InteractionPlus", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "发起详情" } }
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -82,12 +101,12 @@
 				"text": "首页"
 			},
 			{
-				"pagePath": "pages/order/order",
-				"text": "订单"
-			},
-			{
 				"pagePath": "pages/publish/publish",
 				"text": "发布"
+			},
+			{
+				"pagePath": "pages/msg/msg",
+				"text": "消息"
 			},
 			{
 				"pagePath": "pages/user/user",

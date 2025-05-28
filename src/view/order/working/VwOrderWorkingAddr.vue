@@ -4,8 +4,7 @@
             <view class="fx-i py-row px-row">
                 <view class="">
                     <UiI :i="'time'" class="d-ib"/>
-                    <view class="d-ib pi-s">{{ one.timed.start }}</view>
-                    <view class="d-ib pi">{{ one.timed.startText }}</view>
+                    <view class="d-ib pi">周六 05-23 12:12</view>
                 </view>
             </view>
             <view class="fx-c py fx-b">

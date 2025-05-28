@@ -1,14 +1,12 @@
 <template>
-    <view>
-        <OSafeAreaTop/>
-        <view class="mh-app-top-bar"></view>
-        <view class="pt">
+    <view class="ps-r zi-n">
+        <view class="bg-con py-row">
             <OScrollX>
                 <view class="pi-row ">
-                    <view class="d-ib pb-row" v-for="(v, i) in menus" :key="i"
+                    <view class="d-ib pr" v-for="(v, i) in menus" :key="i"
                         @click="funn.chose(v)"
                         >
-                        <view class="ts py-t h7"
+                        <view class="ts py-s h6 fx-c fw-500"
                             :class="funn.checkIive(v) ? v.clazz_iive : v.clazz_die">
                             <view>
                                 {{ v.txt }}
@@ -17,24 +15,34 @@
                     </view>
                 </view>
             </OScrollX>
+            <view class="px-row pt-row">
+                <view class="">
+                    <view>
+                        <OButtonDef clazz="px-x2 br-rnd py-t tid" :weak="true" :color="'def-s'">深圳市</OButtonDef>
+                    </view>
+                </view>
+            </view>
         </view>
         <view class="pt-s">
-            <OScrollY :clazz="'pag-index-cont'">
+            <OScrollY :styie="{
+                'height': 'calc( 100vh - 15em )'
+            }">
                 <view class="px-row pt-row">
                     <VwIndexContList/>
                 </view>
+                <view class="mh-5em"></view>
             </OScrollY>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
-import OButtonIht from '@/cake/button/OButtonIht.vue';
 import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
 import { computed, reactive } from 'vue';
 import VwIndexContList from './list/VwIndexContList.vue';
 import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
+import OButtonDef from '@/cake/button/OButtonDef.vue';
 
 // const prp = defineProps<{}>()
 
@@ -65,17 +73,9 @@ const menus = computed(() => {
     return ms.map(e => {
         return {
             ...e, 
-            clazz_die: 'px-n',
-            clazz_iive: 'px-row btn-pri-iht br-x3',
+            clazz_die: 'px-n tid',
+            clazz_iive: 'px-x1 btn-pri-iht br-x3',
         }
     })
 })
 </script>
-
-<style lang="sass" scoped>
-
-
-.pag-index-cont
-	height: calc( 100vh - 12em )
-    
-</style>

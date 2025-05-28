@@ -3,7 +3,7 @@
     <image mode="aspectFit" class="ui-i" 
         :src="iconnoir(i)"
     ></image>-->
-    <view class="ui-i">
+    <view class="ui-i" :class="clazz">
         <text class="ui-i-inner" :class="booticon[i]" :style="booticon_styles[i] ? booticon_styles[i] : {}"></text>
     </view>
 </template>
@@ -15,6 +15,7 @@
 import { booticon } from '@/plugin/icon/boostrap';
 import { booticon_styles } from '@/plugin/icon/boostrap';
 defineProps<{
-    i: ICONS | string
+    i: ICONS | string,
+    clazz?: string
 }>()
 </script>

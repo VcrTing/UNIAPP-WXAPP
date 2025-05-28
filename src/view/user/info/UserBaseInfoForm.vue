@@ -18,7 +18,7 @@
                     <OTextarea class="pt-t" :def="form.description" @result="(v) => form.name = v" 
                         :pchd="'请输入个人简介'"/>
                 </CkInpItem>
-                <CkInpItem :clazz_tit="'w-6em'" :tit="'年龄'">
+                <CkInpItem v-if="is_publisher" :clazz_tit="'w-6em'" :tit="'年龄'">
                     <OInput :def="form.name" @result="(v) => form.name = v" 
                         class="" :pchd="'请输入年龄'"/>
                 </CkInpItem>
@@ -36,7 +36,7 @@ import OInput from '@/cake/input/inp/OInput.vue';
 import OTextarea from '@/cake/input/textarea/OTextarea.vue';
 import CkInpItem from '@/cake/input/wrapper/CkInpItem.vue';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
-import { authState } from '@/memory/global';
+import { authGetters, authState } from '@/memory/global';
 import { computed, reactive } from 'vue';
 
 // const prp = defineProps<{}>()
@@ -44,6 +44,7 @@ const form = reactive({
     name: '', description: '', contact: ''
 })
 
+const is_publisher = computed(() => authGetters.is_publisher)
 const user = computed(() => authState.user)
 </script>
 

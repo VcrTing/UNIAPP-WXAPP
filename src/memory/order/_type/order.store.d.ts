@@ -1,7 +1,7 @@
 
 interface OrderItem {
-    one: ONE,
-    assistant: ONE
+    one: ONE | null,
+    assistant: ONE | null
 }
 
 interface OrderStore {

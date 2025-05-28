@@ -8,7 +8,7 @@
 import uniRouter from '@/tool/uni/uni-router';
 
 // const prp = defineProps<{}>()
-defineProps<{
+const prp = defineProps<{
     src?: string
     clazz?: string,
     not_mainpage?: boolean
@@ -16,7 +16,12 @@ defineProps<{
 
 const funn = {
     tomainpage: () => {
-        uniRouter.gopg('user_mainpage')
+        if (prp.not_mainpage) {
+
+        }
+        else {
+            uniRouter.gopg('user_mainpage')
+        }
     }
 }
 </script>

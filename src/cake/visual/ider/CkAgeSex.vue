@@ -1,6 +1,6 @@
 <template>
     <view>
-        <CkSex :sex="sex ? sex : 1"/>
+        <CkSex :sex="sex ? sex : 0"/>
         <view class="d-ib">
             {{ age }}
         </view>
@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import CkSex from './CkSex.vue';
+import CkSex from '@/cake/visual/ider/CkSex.vue';
 const prp = defineProps<{
     age?: number,
     sex?: number

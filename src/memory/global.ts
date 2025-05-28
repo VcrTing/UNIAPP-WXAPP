@@ -34,7 +34,8 @@ export const authCommit: Function = auth.commit
 export const authDispatch: Function = auth.dispatch
 export const authReFresh: (n: AUTH_STORE_FIELD, v: any) => void = 
     (n: AUTH_STORE_FIELD, v: any) => auth.dispatch('change', [ n, v ])
-    
+export const needLogin = async (): Promise<boolean> => await auth.dispatch('need_login')
+
 // ELE
 export const eleStore: Store<EleStore> = ele
 export const eleState: EleStore = ele.state

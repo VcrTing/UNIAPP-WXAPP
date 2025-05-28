@@ -41,14 +41,18 @@ import { authGetters } from '@/memory/global';
 import { computed, reactive } from 'vue';
 import CoEmpty from '@/components/genra/empty/CoEmpty.vue';
 import CoHeaderTabItem from '@/components/element/tabs/CoHeaderTabItem.vue';
+import VwUmpPubGallery from './publisher/VwUmpPubGallery.vue';
 
-// const prp = defineProps<{}>()
+const prp = defineProps<{
+    user: ONE
+}>()
 
 const aii = reactive({
     iive: 0,
 })
 
-const is_publisher = computed(() => authGetters.is_publisher)
+const is_publisher = computed(() => prp.user.publisher)
+
 const tabs = computed((): MANY => {
     if (is_publisher.value) {
         return [

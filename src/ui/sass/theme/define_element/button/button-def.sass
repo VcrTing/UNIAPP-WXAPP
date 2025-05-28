@@ -1,8 +1,9 @@
 @use '../__conf' as *
 
-
 .bg-def
     background: $def
+.bg-def-imp
+    background: $def !important
 .bg-def-hv
     background: $def-hv
 .bg-def-fcs
@@ -23,7 +24,6 @@
     &:active, &:focus, &:focus-visible
         @extend .shd-def
 
-
 .fx-aii-btn-def
     @extend .fx-fcs-shd-def
     @extend .fx-hv-bg-def
@@ -36,7 +36,5 @@
         border-color: $def-fcs
 
 .btn-def
-    // @extend .fx-aii-btn-tit
-    // @extend .c-btn-tit
     @extend .bg-def
     @extend .fx-aii-btn-def

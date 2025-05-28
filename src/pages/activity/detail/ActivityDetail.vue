@@ -12,19 +12,27 @@
             </template>
             <template #con>
                 <view class="px-row pb-col">
-                    <VwActivityDetailPublisher :one="view"/>
+                    <VwActivityDetailTitle :one="view"/>
                 </view>
-                <view class="pt-s bg-hui"></view>
                 <view class="px-row">
                     <VwActivityDetailAddrTime :one="view"/>
+                </view>
+                <view class="pt-s bg-hui"></view>
+                <view class="px-row pb-col">
+                    <VwActivityDetailPublisher :one="view"/>
                 </view>
                 <view class="pt-s bg-hui"></view>
                 <view class="px-row">
                     <VwActivityDetailContent :one="view"/>
                 </view>
+                <view class="">
+                    <VwActivityDetailGallery :one="view"/>
+                </view>
+                <CkSpace :h="2"/>
+                <view class="mh-app-bottom-bar"></view>
             </template>
             <template #bom>
-                <view class="px-row w-100">
+                <view class="px-row w-100 bg-con pt-s">
                     <OButtonDef v-if="is_publisher" clazz="w-100 mh-btn" @tap="uniRouter.back">返回</OButtonDef>
                     <CoBomBtnGroup :tit="'立即加入'" v-else @submit="funn.join" @cancle="uniRouter.back"></CoBomBtnGroup>
                     <OSafeAreaBottom/>
@@ -42,6 +50,7 @@
 import OSafeAreaBottom from '@/cake/app/safearea/OSafeAreaBottom.vue';
 import OButton from '@/cake/button/OButton.vue';
 import OButtonDef from '@/cake/button/OButtonDef.vue';
+import CkSpace from '@/cake/content/CkSpace.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import CoBomBtnGroup from '@/components/element/button/CoBomBtnGroup.vue';
 import DetailLayout from '@/components/layout/detail/DetailLayout.vue';
@@ -52,8 +61,10 @@ import uniRouter from '@/tool/uni/uni-router';
 import VwAdPricePan from '@/view/activity/detail/pan/VwAdPricePan.vue';
 import VwActivityDetailAddrTime from '@/view/activity/detail/VwActivityDetailAddrTime.vue';
 import VwActivityDetailContent from '@/view/activity/detail/VwActivityDetailContent.vue';
+import VwActivityDetailGallery from '@/view/activity/detail/VwActivityDetailGallery.vue';
 import VwActivityDetailPublisher from '@/view/activity/detail/VwActivityDetailPublisher.vue';
-import { computed, reactive } from 'vue';
+import VwActivityDetailTitle from '@/view/activity/detail/VwActivityDetailTitle.vue';
+import { computed, nextTick, onMounted, reactive } from 'vue';
 
 // const prp = defineProps<{}>()
 const view = computed(() => acyState.view)
@@ -84,6 +95,14 @@ const funn = {
     },
     back: () => {
         uniRouter.back()
+    },
+    init: () => {
     }
 }
+
+onMounted(() => {
+    pan_tooi.close_pan(aii.price_pan_idx)
+})
+
+nextTick(funn.init)
 </script>

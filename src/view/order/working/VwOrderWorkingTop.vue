@@ -34,7 +34,7 @@ const prp = defineProps<{
     item: OrderItem
 }>()
 
-const one = computed(() => must_one<ONE>(prp.item).one || { })
+const one = computed(() => must_one<ONE>(prp.item).one || mock_orders.items[0])
 const tags = computed(() => must_arr(one.value.tags))
 const publisher = computed(() => must_one<ONE>(one.value).publisher || { })
 </script>

@@ -1,15 +1,15 @@
 
 interface AuthStore {
     info: ONE,
-    user: ONE,
+    user: User,
     auth: ONE,
     jwt: string,
     role: ROLES,
-    company: ONE,
+    loginhouse: AuthLoginHouse
 }
 type AUTH_STORE_FIELD = 
     'info' | 'user' | 'auth' |
-    'jwt' | 'role' | 'company'
+    'jwt' | 'role' | 'needlogin'
 
 interface AuthGetters {
     jwt: string,
@@ -23,3 +23,9 @@ interface AuthGetters {
 
 }
 
+interface AuthLoginHouse {
+    pan_idx: number
+    pan_hui: ElePanHui
+    pan_iive: number
+    iive: boolean
+}

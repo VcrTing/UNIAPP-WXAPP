@@ -1,15 +1,20 @@
 <template>
-    <view
-        class="btn bd btn-pri-out tils fx-c"
-        :class="weak ? clazz : (clazz + ' py-s br-rnd px')"
-        >
+    <view class="btn bd tils fx-c" :class="cls">
         <slot></slot>
     </view>
 </template>
 
 <script setup lang="ts">
-defineProps<{ 
+import { computed } from 'vue';
+
+const prp = defineProps<{ 
     clazz?: string,
-    weak?: boolean
+    weak?: boolean,
+    color?: O_BUTTON_COLOR
 }>()
+
+const cls = computed(() => {
+    const cor = 'btn-' + (prp.color ? prp.color : 'pri') + '-out'
+    return cor + ' ' + prp.clazz + ' ' + (prp.weak ? '' : ' py-s br-rnd px')
+})
 </script>

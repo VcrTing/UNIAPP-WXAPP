@@ -19,7 +19,7 @@
 					height: conh
 				}"
 			>
-				<view class="layout-detail-con-inner br-it br-rt h-100 ps-r zi-n"
+				<view class="layout-detail-con-inner h-100 ps-r zi-n"
 					:class="clazz_con ? clazz_con : 'bg-con'"
 				>
                     <slot name="con"></slot>

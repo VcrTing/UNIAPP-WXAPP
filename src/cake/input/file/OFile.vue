@@ -1,8 +1,6 @@
 <template>
     <view>
-        <ODashBtn clazz="w-5em h-5em">
-            <slot></slot>
-        </ODashBtn>
+        <slot></slot>
     </view>
 </template>
 

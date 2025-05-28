@@ -1,5 +1,5 @@
 <template>
-    <view>
+    <view class="w-100">
         <view class="o-input" :class="err ? 'o-input-err' : ''">
 
             <view v-if="tit" class="pr-inp pb-s soft">
@@ -13,7 +13,7 @@
 
             <view class="inp-outter">
                 <textarea auto-height maxlength="600"
-                    class="inp py-s px-inp br tils mh-inp " 
+                    class="inp py-s px-inp br tils mh-inp w-100" 
                     :class="clazz_input"
                     :type="typ ? typ : 'text'"
 

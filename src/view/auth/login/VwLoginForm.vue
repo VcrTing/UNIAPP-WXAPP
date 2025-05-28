@@ -37,10 +37,10 @@ const aii = reactive({
 const funn = {
     look: (i: number) => {
         if (i == 1) {
-            storage.set('SECURITY_KEY', 1)
+            storage.set('PAGE_SECURITY_KEY', 1)
         }
         else if (i == 0) {
-            storage.set('SECURITY_KEY', 0)
+            storage.set('PAGE_SECURITY_KEY', 0)
         }
         uniRouter.gopg('auth_security')
     },

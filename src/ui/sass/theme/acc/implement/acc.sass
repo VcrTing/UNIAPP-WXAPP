@@ -1,0 +1,48 @@
+
+@use '../__conf' as *
+
+.acc, .c-acc
+    color: $acc 
+
+.fx-hv-c-acc:hover
+    @extend .c-acc
+.fx-fcs-c-acc
+    &:active, &:focus, &:focus-visible
+        @extend .c-acc
+
+.bd-acc
+    border-color: $acc
+
+.fx-hv-bd-acc:hover
+    @extend .bd-acc
+.fx-fcs-bd-acc
+    &:active, &:focus, &:focus-visible
+        @extend .bd-acc
+
+//
+.bg-acc
+    background: $acc
+.bg-acc-hv
+    background: $acc-hv
+.bg-acc-fcs
+    background: $acc-fcs
+
+//
+.fx-hv-bg-acc:hover
+    @extend .bg-acc-hv
+.fx-fcs-bg-acc
+    &:active, &:focus, &:focus-visible
+        @extend .bg-acc-fcs
+
+.shd-acc
+    box-shadow: 0px 0px 0px 0.3rem $acc-shd
+
+.fx-hv-shd-acc:hover
+    @extend .shd-acc
+.fx-fcs-shd-acc
+    &:active, &:focus, &:focus-visible
+        @extend .shd-acc
+
+//
+.bg-acc-shd
+    background-color: $acc-shd

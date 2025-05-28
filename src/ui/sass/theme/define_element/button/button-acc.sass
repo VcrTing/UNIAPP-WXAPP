@@ -1,0 +1,29 @@
+
+@use '../../../app/view/__conf' as *
+@use '../../acc' as *
+@use './__button-tit' as *
+
+//    
+.fx-aii-btn-acc
+    @extend .fx-fcs-shd-acc
+    @extend .fx-hv-bg-acc
+    @extend .fx-fcs-bg-acc
+
+.btn-acc
+    @extend .fx-aii-btn-tit
+    @extend .c-btn-tit
+    @extend .bg-acc
+    @extend .fx-aii-btn-acc
+
+//    
+.fx-aii-btn-acc-out
+    // @extend .fx-aii-btn-tit
+    background: $bg-con
+    @extend .fx-fcs-shd-acc
+    //@extend .fx-hv-bg-acc
+    //@extend .fx-fcs-bg-acc
+
+.btn-acc-out
+    color: $acc
+    @extend .bd-acc
+    @extend .fx-aii-btn-acc-out

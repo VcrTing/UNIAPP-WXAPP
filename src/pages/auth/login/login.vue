@@ -18,7 +18,7 @@ import VwLoginTop from '@/view/auth/login/VwLoginTop.vue';
 
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 @use '../../../ui/sass/app/view/__conf' as *
 page, uni-page-body
 	background: $bg-pag

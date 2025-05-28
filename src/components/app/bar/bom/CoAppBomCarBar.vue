@@ -1,5 +1,5 @@
 <template>
-    <OAppBottomBar :class="clazz" :mat="mat">
+    <OAppBottomBar :clazz="clazz" :mat="mat">
         <slot></slot>
     </OAppBottomBar>
 </template>

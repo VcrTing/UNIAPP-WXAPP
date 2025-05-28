@@ -6,8 +6,8 @@
             </OButtonDef>
         </view>
         <view class="pi-row fx-1">
-            <OButton clazz="mh-btn" @tap="emt('submit')">
-                {{ tit ? tit : '提交结果' }}
+            <OButton :ioading="ioading" clazz="mh-btn" @tap="emt('submit')">
+                {{ tit ? tit : '提交' }}
             </OButton>
         </view>
     </view>
@@ -18,7 +18,8 @@ import OButton from '@/cake/button/OButton.vue';
 import OButtonDef from '@/cake/button/OButtonDef.vue';
 
 const prp = defineProps<{
-    tit?: string
+    tit?: string,
+    ioading?: boolean
 }>()
 
 const emt = defineEmits([ 'submit', 'cancle' ])

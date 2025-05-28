@@ -46,7 +46,7 @@ export default {
             user: {
                 username: '赣州偷白丝', sex: 1, publisher: false,
                 age: 27, description: '我喜欢白丝',
-                avatar: 'https://img1.baidu.com/it/u=1375575021,2646597801&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500',
+                avatar: 'https://pic.rmb.bdstatic.com/bjh/240722/d6266cd069b7c1bb6a64ce9f52f21c196045.png@h_1280',
                 background: 'https://img0.baidu.com/it/u=504475772,1940661508&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=1422'
             },
             token: 'aaa',

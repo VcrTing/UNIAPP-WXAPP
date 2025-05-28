@@ -14,10 +14,11 @@
             </template>
             <template #con>
                 <VwUmpNumberMsg class="bg-con br-it br-rt"/>
-                <VwUserMainPageCon/>
+                <VwUserMainPageCon :user="user"/>
             </template>
             <template #bom>
-                <CoBomBackBtn/>
+                <CoBomBackBtn :clazz="'btn-wht-s'"/>
+                <CoBomCenterBtn @go="funn.hudong" :clazz="'mh-btn btn-wht-s'">发起与她的互动</CoBomCenterBtn>
             </template>
         </DetailLayout>
     </PageLayout>
@@ -28,9 +29,11 @@ import OSafeAreaBottom from '@/cake/app/safearea/OSafeAreaBottom.vue';
 import OButton from '@/cake/button/OButton.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
+import CoBomCenterBtn from '@/components/element/button/CoBomCenterBtn.vue';
 import DetailLayout from '@/components/layout/detail/DetailLayout.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
-import { acyState, authState, orderReFresh, uiState } from '@/memory/global';
+import { acyState, authGetters, authState, orderReFresh, uiState } from '@/memory/global';
+import mock_user from '@/server/mock/user/mock_user';
 import pan_tooi from '@/tool/app/pan_tooi';
 import uniRouter from '@/tool/uni/uni-router';
 import VwUmpNumberMsg from '@/view/user/mainpage/cont/VwUmpNumberMsg.vue';
@@ -39,13 +42,22 @@ import VwUserMainPageTop from '@/view/user/mainpage/VwUserMainPageTop.vue';
 import { computed, reactive } from 'vue';
 
 // const prp = defineProps<{}>()
-const user = computed(() => authState.user)
+const user = computed(() => {
+    const isp = authGetters.is_publisher
+    if (isp) {
+        return mock_user.boy.user
+    }
+    return mock_user.girl.user
+})
 
 const aii = reactive({
     price_pan_idx: 11, hui: <ElePanHui>{ opacity: 0.4 }
 })
 
 const funn = {
+    hudong: () => {
+
+    },
     back: () => {
         uniRouter.back()
     }

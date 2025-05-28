@@ -27,8 +27,8 @@ const funn = {
 }
 </script>
  
-<style lang="sass" scoped>
-@use '../../../ui/sass/theme/primary' as *
+<style lang="sass">
+@use '../../../ui/sass/theme/primary/__conf' as *
 page, uni-page-body
 	background: $pri-pag-bg
 </style>

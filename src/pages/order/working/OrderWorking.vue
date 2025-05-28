@@ -25,6 +25,7 @@ import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import DetailLayout from '@/components/layout/detail/DetailLayout.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { acyState, authState, orderReFresh, orderState, uiState } from '@/memory/global';
+import mock_orders from '@/server/mock/order/mock_orders';
 import pan_tooi from '@/tool/app/pan_tooi';
 import uniRouter from '@/tool/uni/uni-router';
 import { must_arr } from '@/tool/util/valued';
@@ -41,8 +42,18 @@ const aii = reactive({
     price_pan_idx: 11, hui: <ElePanHui>{ opacity: 0.4 }
 })
 
-const orders = computed(() => {
-    return must_arr(orderState.orders_of_iive) || [ ]
+const orders = computed((): OrderItem[] => {
+    let res: OrderItem[] = must_arr(orderState.orders_of_iive) || <OrderItem[]>[ ]
+    if (res) {
+        return res;
+    }
+    else {
+        res = <OrderItem[]>[
+            { one: mock_orders.items[0], assistant: { } }
+        ]
+    }
+    console.log('res =', res)
+    return res;
 })
 
 const funn = {
@@ -55,8 +66,8 @@ const funn = {
 }
 </script>
 
-<style lang="sass" scoped>
-@use '../../../ui/sass/theme/primary' as *;
+<style lang="sass">
+@use '../../../ui/sass/theme/primary/__conf' as *;
 
 page, uni-page-body
 	background: $pri-pag-bg

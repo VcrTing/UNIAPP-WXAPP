@@ -1,5 +1,6 @@
 
-import { ROLE_ANON, ROLE_AUTH } from '@/conf/conf-role';
+import { ROLE_ANON, ROLE_AUTH, USER_DEF } from '@/conf/conf-role';
+import pan_tooi from '@/tool/app/pan_tooi';
 import { storage } from '@/tool/web/storage';
 import { Store, createStore } from 'vuex';
 
@@ -9,39 +10,52 @@ export enum AutoLoginStatus {
     AUTO_FAIL
 }
 
+const islogin = (s: ONE): boolean => {
+    return (s.role === ROLE_ANON) ? false : ( s.jwt && (s.jwt.length > 0) )
+}
+
 const _s: Store<AuthStore> = createStore({
     
     state: <AuthStore>{
         info: <ONE>{ },
-        user: <ONE>{ },
+        user: <User>USER_DEF,
         auth: <ONE>{ },
         jwt: '',
         role: ROLE_ANON,
-        company: <ONE>{ },
+
+        loginhouse: {
+            pan_idx: 1000,
+            pan_hui: { opacity: 0.4 },
+            iive: true
+        }
     },
     getters: {
         jwt: s => s.jwt,
-        username: s => s.user.username,
+        username: s => s.user.nickname,
         user_id: s => s.user.id,
         company_id: s => s.company.id,
-        is_login: s => (s.role === ROLE_ANON) ? false : ( s.jwt && (s.jwt.length > 0) ),
+        is_login: s => islogin(s),
         is_publisher: s => (s.user.publisher)
     },
     mutations: {
         _login: (s: ONE, auth: ONE) => {
             storage.set('jwt', auth.token)
-            s.company = auth.company 
             s.user = auth.user 
             s.jwt = auth.token 
             s.role = ROLE_AUTH
+
+            s.loginhouse.iive = false
         },
         _logout: (s: ONE) => {
             storage.remove('jwt')
             s.company = { }
-            s.user = { }
+            s.user = USER_DEF
             s.auth = { }
             s.role = ROLE_ANON
-        }
+
+            s.loginhouse.iive = true
+        },
+        
     },
 
     actions: {
@@ -57,7 +71,6 @@ const _s: Store<AuthStore> = createStore({
             commit('_login', auth)
         },
         logout: ({ commit }) => {
-            console.log('登出');
             commit('_logout')
         },
         // 1 自动登录成功，0 已经登录了，-1 
@@ -71,8 +84,18 @@ const _s: Store<AuthStore> = createStore({
                 return AutoLoginStatus.AUTO_FAIL
             }
             return AutoLoginStatus.ALREADY_LOGIN
+        },
+        
+        // 先判断是否需要登录, true = 需要
+        need_login: ({ state }): boolean => {
+            const _lg = islogin(state)
+            if (!_lg) {
+                const hs = state.loginhouse
+                if (hs.iive) pan_tooi.open_def_b(hs.pan_idx, hs.pan_hui);
+                return true
+            }   
+            return false
         }
-       
     }
 })
 

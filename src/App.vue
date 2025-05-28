@@ -13,7 +13,7 @@ onShow(() => { uni.hideTabBar({ success: () => { } }) });
 onHide(() => { });
 
 nextTick(init_global_data)
-nextTick(must_login)
+// nextTick(must_login)
 </script>
 
 <style lang="sass">

@@ -1,7 +1,55 @@
 <template>
     <view>
-        <view v-for="(v, i) in aii.items" :key="i" class="br pb-row">
-            <view class="fx-s fx-t br ps-r zi-m"  @tap="funn.detail(v)">
+        <view v-for="(v, i) in aii.items" :key="i" class="br pb-row w-100">
+            <CoMoIndexActivityItem :v="v" :meizi="aii.meizi"/>
+        </view>
+    </view>
+</template>
+
+<script setup lang="ts">
+import OButton from '@/cake/button/OButton.vue';
+import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
+import CkSex from '@/cake/visual/ider/CkSex.vue';
+import CoMoIndexActivityItem from '@/components/modules/index/CoMoIndexActivityItem.vue';
+import { acyReFresh, authGetters } from '@/memory/global';
+import mock_orders from '@/server/mock/order/mock_orders';
+import mock_meizi from '@/server/mock/user/mock_meizi';
+import mock_user from '@/server/mock/user/mock_user';
+import uniRouter from '@/tool/uni/uni-router';
+import { must_arr } from '@/tool/util/valued';
+import { computed, reactive } from 'vue';
+
+// const prp = defineProps<{}>()
+
+const aii = reactive({
+    items: mock_orders.items,
+    meizi: mock_meizi.items
+})
+
+
+const funn = {
+    detail: (v: ONE) => {
+        acyReFresh('view', v);
+        uniRouter.gopg('activity_detail');
+    }
+}
+
+
+const is_publisher = computed(() => authGetters.is_publisher)
+</script>
+
+<style lang="sass" scoped>
+.index-item-card
+    box-shadow: 0em 0.2em 1.4em 0em rgba(0, 0, 0, 0.06)
+
+.a
+    // background: rgba(255, 255, 255, 0.4)
+    backdrop-filter: blur(4px)
+    -webkit-backdrop-filter: blur(4px)
+
+</style>
+
+                <!--
                 <view class="py-s abs-i zi-s a br-rt br-it">
                     <view class="fx-s">
                         <view class="br-rnd fx-i pi-row">
@@ -10,10 +58,6 @@
                                 <view class="fs-n">{{ v.publisher.name }}</view>
                             </view>
                         </view>
-                        <!--
-                        <view class="pt-s pr-s">
-                            <OButton :weak="true" clazz="fs-n px br-x3 py-t">参加</OButton>
-                        </view>-->
                     </view>
                 </view>
                 <view class="abs-r t-0 zi" v-if="!is_publisher">
@@ -30,47 +74,7 @@
                         <view class="pt-s">{{ v.description }}</view>
                     </view>
                 </view>
-            </view>
-        </view>
-    </view>
-</template>
-
-<script setup lang="ts">
-import OButton from '@/cake/button/OButton.vue';
-import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
-import { acyReFresh, authGetters } from '@/memory/global';
-import mock_orders from '@/server/mock/order/mock_orders';
-import uniRouter from '@/tool/uni/uni-router';
-import { computed, reactive } from 'vue';
-
-// const prp = defineProps<{}>()
-
-const aii = reactive({
-    items: mock_orders.items
-})
-
-const funn = {
-    detail: (v: ONE) => {
-        acyReFresh('view', v);
-        uniRouter.gopg('activity_detail');
-    }
-}
-
-
-const is_publisher = computed(() => authGetters.is_publisher)
-</script>
-
-<style lang="sass">
-.index-item-card
-    box-shadow: 0em 0.2em 1.4em 0em rgba(0, 0, 0, 0.06)
-
-.a
-    // background: rgba(255, 255, 255, 0.4)
-    backdrop-filter: blur(4px)
-    -webkit-backdrop-filter: blur(4px)
-
-</style>
-
+                -->
 
             <!--
             <view class="bg-con index-item-card br-x1 px-col py">

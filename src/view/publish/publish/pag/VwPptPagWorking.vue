@@ -5,8 +5,9 @@
                 <CoMoPublishViewItem :v="v">
                     <view>&nbsp;</view>
                     <view class="pr-row pt">
-                        <view v-for="(m, n) in v.boys" :key="n">
-                            <CkAvatar clazz="w-2em h-2em" :src="m.user.avatar"/>
+                        <view class="fx-r tis fs-s">
+                            <UiI :i="'lock'"/>
+                            <text class="pi-s">私密</text>
                         </view>
                     </view>
                 </CoMoPublishViewItem>

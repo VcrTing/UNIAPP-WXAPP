@@ -41,6 +41,7 @@ import CoMoOrderMsgItem from '@/components/modules/order/CoMoOrderMsgItem.vue';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import ODiv from '@/cake/button/div/ODiv.vue';
 import OButtonDef from '@/cake/button/OButtonDef.vue';
+import mock_meizi from '@/server/mock/user/mock_meizi';
 
 const prp = defineProps<{
     item?: ONE
@@ -48,6 +49,6 @@ const prp = defineProps<{
 
 const one = computed(() => must_one<ONE>(prp.item).one || { })
 const msg = computed(() => must_one<ONE>(prp.item).msg || { })
-const publisher = computed(() => must_one<ONE>(one.value).publisher || { })
+const publisher = computed(() => must_one<ONE>(one.value).publisher || mock_meizi.items[0])
 const assistant = computed(() => must_one<ONE>(prp.item).assistant || { })
 </script>

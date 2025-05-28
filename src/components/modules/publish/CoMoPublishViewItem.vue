@@ -1,5 +1,5 @@
 <template>
-    <ODiv class="card fx-s o-h">
+    <view class="card fx-s o-h">
         <image class="w-5em h-5em" mode="aspectFill" :src="v.banner.src"/>
         <view class="fx-1 px-row">
             <view>{{ v.title }}</view>
@@ -29,11 +29,10 @@
                 </view>
             </slot>
         </view>
-    </ODiv>
+    </view>
 </template>
 
 <script setup lang="ts">
-import ODiv from '@/cake/button/div/ODiv.vue';
 import OButtonDef from '@/cake/button/OButtonDef.vue';
 import UiI from '@/ui/element/i/UiI.vue';
 

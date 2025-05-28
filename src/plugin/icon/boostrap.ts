@@ -16,6 +16,9 @@ export const booticon_styles: ONE = {
     'form': {
         'font-size': '0.93em'
     },
+    'doing': {
+        'font-size': '0.97em'
+    },
     'report': {
         'font-size': '0.98em'
     },
@@ -27,6 +30,9 @@ export const booticon_styles: ONE = {
     },
     'addr': {
         'font-size': '1.09em'
+    },
+    'user-add': {
+        'font-size': '1.19em'
     },
     '+': {
         'font-size': '1.17em'
@@ -44,10 +50,21 @@ export const booticon = <ONE> {
     'f-r': 'bi bi-chevron-double-right',
 
     'b': 'bi bi-chevron-down',
+    'c-b': 'bi bi-caret-down-fill',
+
+    'trash': 'bi bi-trash3',
+
+    'grid': 'bi bi-grid',
+    'doing': 'bi bi-calendar3-week',
     
     'edit': 'bi bi-pencil-square',
+    'lock': 'bi bi-lock-fill',
 
     'images': 'bi bi-images',
+    'alexa': 'bi bi-alexa',
+
+    'msg': 'bi bi-chat-square-dots',
+    'bank-card': 'bi bi-credit-card',
 
     'time': 'bi bi-clock',
     'addr': 'bi bi-geo-alt',
@@ -61,6 +78,7 @@ export const booticon = <ONE> {
 
     'user': 'bi bi-person', // person
     'user-f': 'bi bi-person-fill',
+    'user-add': 'bi bi-person-add',
 
     'home': 'bi bi-shop-window', // house-door
     'form': 'bi bi-table', // stickies
@@ -76,6 +94,5 @@ export const booticon = <ONE> {
     'err': 'bi bi-exclamation-triangle',
     'war': 'bi bi-exclamation-circle',
 
-    'lock': 'bi bi-lock',
     'account': 'bi bi-person-circle'
 }
