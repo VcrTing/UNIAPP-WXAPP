@@ -79,5 +79,6 @@ export default {
     ],
     banner: {
         src: 'https://q9.itc.cn/images01/20250509/8d9e7fe30ed0466d856c7c4fd8181ffb.jpeg'
-    }
+    },
+    assistant: { price: 20, name: '豪华套餐一', description: '基础 + 制服诱惑' }
 }

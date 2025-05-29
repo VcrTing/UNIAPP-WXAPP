@@ -1,11 +1,11 @@
 <template>
-    <view class="">
+    <view class="bg-con py-col">
         <OScrollY 
             :styie="{
-                'height': 'calc(100vh - 18em)'
+                'height': 'calc(100vh - 28em)'
             }"
         >
-            <view class="card py-col">
+            <view class="">
                 <view v-for="(v, i) in meizi" :key="i">
                     <ODiv :clazz="((i == aii.i) ? 'btn-def' : '') + ' px-row py-col'"
                         @tap="funn.chose(v, i)">

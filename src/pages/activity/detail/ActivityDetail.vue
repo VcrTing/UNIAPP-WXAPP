@@ -19,7 +19,10 @@
                 </view>
                 <view class="pt-s bg-hui"></view>
                 <view class="px-row pb-col">
+                    <!--
                     <VwActivityDetailPublisher :one="view"/>
+                    -->
+                    <VwActivityDetailJoiner :one="view"/>
                 </view>
                 <view class="pt-s bg-hui"></view>
                 <view class="px-row">
@@ -40,9 +43,11 @@
             </template>
         </DetailLayout>
 
+        <!--
         <VwAdPricePan
             @submit="funn.submit"
             :one="view" :idx="aii.price_pan_idx"/>
+            -->
     </PageLayout>
 </template>
 
@@ -56,12 +61,14 @@ import CoBomBtnGroup from '@/components/element/button/CoBomBtnGroup.vue';
 import DetailLayout from '@/components/layout/detail/DetailLayout.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { acyState, authGetters, authState, orderReFresh, uiState } from '@/memory/global';
+import mock_orders from '@/server/mock/order/mock_orders';
 import pan_tooi from '@/tool/app/pan_tooi';
 import uniRouter from '@/tool/uni/uni-router';
 import VwAdPricePan from '@/view/activity/detail/pan/VwAdPricePan.vue';
 import VwActivityDetailAddrTime from '@/view/activity/detail/VwActivityDetailAddrTime.vue';
 import VwActivityDetailContent from '@/view/activity/detail/VwActivityDetailContent.vue';
 import VwActivityDetailGallery from '@/view/activity/detail/VwActivityDetailGallery.vue';
+import VwActivityDetailJoiner from '@/view/activity/detail/VwActivityDetailJoiner.vue';
 import VwActivityDetailPublisher from '@/view/activity/detail/VwActivityDetailPublisher.vue';
 import VwActivityDetailTitle from '@/view/activity/detail/VwActivityDetailTitle.vue';
 import { computed, nextTick, onMounted, reactive } from 'vue';
@@ -91,7 +98,10 @@ const funn = {
         orderReFresh('order_of_place', order); uniRouter.gopg('activity_order')
     },
     join: () => {
-        pan_tooi.open_def_b(aii.price_pan_idx, aii.hui)
+        funn.submit({
+            assistant: mock_orders.assistant
+        })
+        // pan_tooi.open_def_b(aii.price_pan_idx, aii.hui)
     },
     back: () => {
         uniRouter.back()

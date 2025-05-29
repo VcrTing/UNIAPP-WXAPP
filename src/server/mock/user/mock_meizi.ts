@@ -7,7 +7,8 @@ export default {
             usely: [
                 { txt: 'JK', id: '1' },
                 { txt: '技术一流', id: '2' }
-            ],
+            ], 
+            agree: true,
         },
         {
             name: '龙华馨妍 - 06在校兼职', sex: 0,
@@ -36,5 +37,24 @@ export default {
                 { txt: '身材好', id: '3' }
             ],
         },
-    ]
+        {
+            name: '南山冰儿07校兼', sex: 0,
+            avatar: 'https://img1.baidu.com/it/u=2085454392,2336955881&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500',
+            usely: [
+                { txt: 'JK', id: '1' },
+                { txt: '大长腿', id: '2' },
+                { txt: '身材好', id: '3' }
+            ],
+        },
+        {
+            name: '南山冰儿07校兼', sex: 0,
+            avatar: 'https://img1.baidu.com/it/u=2085454392,2336955881&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500',
+            usely: [
+                { txt: 'JK', id: '1' },
+                { txt: '大长腿', id: '2' },
+                { txt: '身材好', id: '3' }
+            ],
+        },
+    ],
+    background: 'https://img2.baidu.com/it/u=2633010137,1769504041&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=1083'
 }

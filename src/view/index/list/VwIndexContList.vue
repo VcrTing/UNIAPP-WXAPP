@@ -1,7 +1,7 @@
 <template>
     <view>
         <view v-for="(v, i) in aii.items" :key="i" class="br pb-row w-100">
-            <CoMoIndexActivityItem :v="v" :meizi="aii.meizi"/>
+            <CoMoIndexActivityItem @detail="funn.detail" :v="v" :meizi="aii.meizi"/>
         </view>
     </view>
 </template>

@@ -31,10 +31,16 @@ export const booticon_styles: ONE = {
     'addr': {
         'font-size': '1.09em'
     },
+    'more': {
+        'font-size': '1.09em'
+    },
     'user-add': {
         'font-size': '1.19em'
     },
     '+': {
+        'font-size': '1.17em'
+    },
+    'check': {
         'font-size': '1.17em'
     }
 }
@@ -53,12 +59,15 @@ export const booticon = <ONE> {
     'c-b': 'bi bi-caret-down-fill',
 
     'trash': 'bi bi-trash3',
+    'more' : 'bi bi-three-dots',
 
     'grid': 'bi bi-grid',
     'doing': 'bi bi-calendar3-week',
     
     'edit': 'bi bi-pencil-square',
     'lock': 'bi bi-lock-fill',
+    'love': 'bi bi-heart',
+    'love-f': 'bi bi-heart-fill',
 
     'images': 'bi bi-images',
     'alexa': 'bi bi-alexa',
@@ -94,5 +103,7 @@ export const booticon = <ONE> {
     'err': 'bi bi-exclamation-triangle',
     'war': 'bi bi-exclamation-circle',
 
-    'account': 'bi bi-person-circle'
+    'account': 'bi bi-person-circle',
+
+    'check': 'bi bi-check2-square'
 }

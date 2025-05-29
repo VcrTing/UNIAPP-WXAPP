@@ -2,18 +2,26 @@
     <view class="">
         <CoMoOrderMsgItem :clazz_r="'py'">
             <template #i>下单日期</template>
-            <template #r>{{ msg.createTime }}&nbsp;</template>
+            <template #r>&nbsp;2025-12-12 23:24</template>
         </CoMoOrderMsgItem>
         <CoMoOrderMsgItem :clazz_r="'py'">
-            <template #i>代金券</template>
-            <template #r>无&nbsp;</template>
+            <template #i>代金金额</template>
+            <template #r><text class="h6 err">&nbsp;0</text></template>
         </CoMoOrderMsgItem>
+        <CoMoOrderMsgItem :clazz_r="'py'">
+            <template #i>支付方式</template>
+            <template #r>
+                <view><text class="h8">微信支付</text></view>
+            </template>
+        </CoMoOrderMsgItem>
+        <!--
         <CoMoOrderMsgItem :clazz_r="'py'">
             <template #i>付款金额</template>
             <template #r>
-                <view class="fw-550 money">￥&nbsp;<text class="fw-800 h7">990.00</text></view>
+                <view class="fw-550 err">￥&nbsp;<text class="fw-550 h7">69.00</text></view>
             </template>
         </CoMoOrderMsgItem>
+        -->
     </view>
 </template>
 

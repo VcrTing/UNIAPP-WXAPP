@@ -32,14 +32,14 @@ import uniRouter from '@/tool/uni/uni-router';
 import CoVwUcpNumbers from '../component/CoVwUcpNumbers.vue';
 import { storage } from '@/tool/web/storage';
 import CkAgeSex from '@/cake/visual/ider/CkAgeSex.vue';
+import appRouter from '@/tool/uni/app-router';
 
 // const prp = defineProps<{}>()
 const is_publisher = computed(() => authGetters.is_publisher)
 
 const funn = {
     managerTags: () => {
-        storage.set('PAGE_MANAGER_KEY', 1)
-        uniRouter.gopg('manager')
+        appRouter.manager_tags()
     },
     edit: () => {
         uniRouter.gopg('user_info')

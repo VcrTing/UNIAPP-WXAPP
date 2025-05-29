@@ -1,9 +1,8 @@
 <template>
-    <view class="fx-s fx-t">
-        <view v-if="tit" class="w-5em py-t" :class="clazz_tit">
-            <view class="inp py-s br mh-inp">
-                <text v-if="prp.require">*</text>
-                <text v-else class="pr-t">&nbsp;</text>
+    <view class="fx-s">
+        <view v-if="tit" class="w-6em py-t" :class="clazz_tit">
+            <view class="inp py-s br mh-inp fx-i ps-r zi-t">
+                <view v-if="prp.require">*</view>
                 {{tit}}
             </view>
         </view>

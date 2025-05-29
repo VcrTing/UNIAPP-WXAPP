@@ -10,16 +10,16 @@ const PAGE_KEY = {
 
     },
     'choose': { key: 'PAGE_CHOOSE_KEY',
-        pag: {
-            '1': '',
-            '2': ''
-        }
+        
     },
     'order': { key: 'PAGE_ORDER_KEY',
-        pag: {
-            '1': '',
-            '2': ''
-        }
+        
+    },
+    'msginfo': { key: 'PAGE_MSGINFO_KEY',
+        
+    },
+    'pay_succ': { key: 'PAGE_PAYSUCC_KEY',
+        
     }
 }
 
@@ -43,6 +43,7 @@ export const PAGES: ONE = {
     'index_search': 'pages/index/search/IndexSearch',
 
     'publish_plus': 'pages/publish/plus/PublishPlus',
+    'publish_edit': 'pages/publish/plus/PublishEdit',
     
     'user_mainpage': 'pages/user/mainpage/UserMainPage',
 
@@ -53,12 +54,15 @@ export const PAGES: ONE = {
     
     'interaction_plus': 'pages/interact/plus/InteractionPlus',
     'interaction_detail': 'pages/interact/detail/InteractionDetail',
+    
     // 'form': 'pages/form/form',
     // 'report': 'pages/report/report',
     // 'sales_order': 'pages/business/report/sale/sales_order'
-    
+
+    'msginfo': 'pages/common/msginfo/MsgInfo',
     'choose': 'pages/common/choose/AnyChoose',
     'manager': 'pages/common/manager/UserManager',
+    'pay_succ': 'pages/common/success/PaymentSuccess',
     'auth_security': 'pages/common/security/AuthSecurity',
 }
 

@@ -18,7 +18,7 @@
             <view class="px-row pt-row">
                 <view class="">
                     <view>
-                        <OButtonDef clazz="px-x2 br-rnd py-t tid" :weak="true" :color="'def-s'">深圳市</OButtonDef>
+                        <OButtonDef @tap="funn.switchLocation" clazz="px-x2 br-rnd py-t tid" :weak="true" :color="'def-s'">深圳市</OButtonDef>
                     </view>
                 </view>
             </view>
@@ -33,6 +33,7 @@
                 <view class="mh-5em"></view>
             </OScrollY>
         </view>
+        <VwIndexLocationPan :idx="aii.pan_location_idx"/>
     </view>
 </template>
 
@@ -43,11 +44,13 @@ import VwIndexContList from './list/VwIndexContList.vue';
 import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import OButtonDef from '@/cake/button/OButtonDef.vue';
+import VwIndexLocationPan from './pan/VwIndexLocationPan.vue';
+import pan_tooi from '@/tool/app/pan_tooi';
 
 // const prp = defineProps<{}>()
 
 const aii = reactive({
-    active: '',
+    active: '', pan_location_idx: 2, pan_hui: <ElePanHui>{ opacity: 0.4 },
     menu: [
         { txt: '推荐', v: '' },
         { txt: '丝袜诱惑', v: '丝袜诱惑' },
@@ -65,6 +68,9 @@ const funn = {
     checkIive: (one: ONE) => {
         const v = one.v
         return aii.active === v
+    },
+    switchLocation: () => {
+        pan_tooi.open_def_t(aii.pan_location_idx, aii.pan_hui)
     }
 }
 

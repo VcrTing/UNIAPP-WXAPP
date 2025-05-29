@@ -10,8 +10,8 @@
 					<radio class="" :value="'true'" :checked="aii.agree" />
                     <view>
                         <text>已同意并阅读</text>
-                        <text class="pri" @tap="funn.look(1)">《{{ APP_GENERATE_DETAIL.name }}服务协议》</text>
-                        <text class="pri" @tap="funn.look(0)">《隐私政策》</text>
+                        <text class="pri" @tap="appRouter.security_fwxy">《{{ APP_GENERATE_DETAIL.name }}服务协议》</text>
+                        <text class="pri" @tap="appRouter.security_ys">《隐私政策》</text>
                     </view>
                 </view>
             </view>
@@ -25,6 +25,7 @@ import OButtonDef from '@/cake/button/OButtonDef.vue';
 import { APP_GENERATE_DETAIL } from '@/conf/conf-app';
 import { authDispatch } from '@/memory/global';
 import mock_user from '@/server/mock/user/mock_user';
+import appRouter from '@/tool/uni/app-router';
 import uniRouter from '@/tool/uni/uni-router';
 import { storage } from '@/tool/web/storage';
 import { reactive } from 'vue';
@@ -35,15 +36,6 @@ const aii = reactive({
 })
 
 const funn = {
-    look: (i: number) => {
-        if (i == 1) {
-            storage.set('PAGE_SECURITY_KEY', 1)
-        }
-        else if (i == 0) {
-            storage.set('PAGE_SECURITY_KEY', 0)
-        }
-        uniRouter.gopg('auth_security')
-    },
     login: (i: number) => {
         authDispatch('login', (i == 1) ? mock_user.boy : mock_user.girl)
         // 

@@ -2,7 +2,7 @@
 	<page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
 	<PageLayout>
 		<CoAppTopBar :clazz="''">
-			<view class="">
+			<view class="ps-r zi-t">
 				<OFI @tap="funn.search" :i="'search'" :clazz="'d-ib px-row pt c-fff'"/>
 				<!--
 				<CoIndexLogoTxt/>

@@ -46,7 +46,7 @@
                 <view class="fx-s">
                     <view class="fx-i fx-1">
                         <view class="fx-i">
-                            <view v-for="(v, i) in meizi" :key="i">
+                            <view v-for="(v, i) in [meizi[2], meizi[3]]" :key="i">
                                 <CkAvatar clazz="w-2em h-2em" :src="v.avatar"/>
                             </view>
                         </view>
@@ -55,7 +55,7 @@
                         </view>
                     </view>
                     <view>
-                        <OButton @tap="emt('detail', v)" :clazz="'fw-550 mw-5em mh-btn'">上车</OButton>
+                        <OButton :weak="true" @tap="emt('detail', v)" :clazz="'fw-550 mw-5em mh-btn br-rnd'">上车</OButton>
                     </view>
                 </view>
             </view>

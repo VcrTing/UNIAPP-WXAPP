@@ -13,6 +13,14 @@
             <VwUserManagerAddr/>
             <view class="mh-8em"></view>
         </view>
+        <view v-if="code == 3">
+            <VwUserManagerLove />
+            <view class="mh-8em"></view>
+        </view>
+        <view v-if="code == 4">
+            <VwUserManagerPays />
+            <view class="mh-8em"></view>
+        </view>
         <CoBomBackBtn/>
     </PageLayout>
 </template>
@@ -26,6 +34,8 @@ import { orderDispatch, orderState, uiState } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';
 import { storage } from '@/tool/web/storage';
 import VwUserManagerAddr from '@/view/user/manager/addr/VwUserManagerAddr.vue';
+import VwUserManagerLove from '@/view/user/manager/love/VwUserManagerLove.vue';
+import VwUserManagerPays from '@/view/user/manager/pays/VwUserManagerPays.vue';
 import VwUserManagerTags from '@/view/user/manager/tags/VwUserManagerTags.vue';
 import { computed, ref } from 'vue';
 
@@ -36,12 +46,10 @@ const code = computed(() => {
 
 const tit = computed(() => {
     const v = code.value;
-    if (v == 1) {
-        return '标签管理';
-    }
-    else if (v == 2) {
-        return '地址管理';
-    }
+    if (v == 1) { return '标签管理'; }
+    else if (v == 2) { return '地址管理'; }
+    else if (v == 3) { return '我的收藏'; }
+    else if (v == 4) { return '金额记录'; }
     return '标签管理';
 })
 

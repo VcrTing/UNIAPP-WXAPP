@@ -56,6 +56,10 @@
 		{ "path": "pages/publish/plus/PublishPlus", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "新增活动" } },
+		{ "path": "pages/publish/plus/PublishEdit", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "修改活动" } },
+				
 		{ "path": "pages/user/info/UserInfo", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "编辑个人资料" } },
@@ -76,10 +80,17 @@
 		{ "path": "pages/index/recommend/IndexRecommend", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "推荐" } },
+		{ "path": "pages/common/msginfo/MsgInfo", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "消息详情" } },
+		{ "path": "pages/common/success/PaymentSuccess", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "付款成功" } },
+
 		{ "path": "pages/order/working/OrderWorking", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "订单进行中" } },
-				
+
 		{ "path": "pages/interact/detail/InteractionDetail", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "邀请详情" } },

@@ -14,6 +14,7 @@
 <script setup lang="ts">
 import ODiv from '@/cake/button/div/ODiv.vue';
 import { authGetters } from '@/memory/global';
+import appRouter from '@/tool/uni/app-router';
 import uniRouter from '@/tool/uni/uni-router';
 import { storage } from '@/tool/web/storage';
 import UiI from '@/ui/element/i/UiI.vue';
@@ -26,8 +27,7 @@ const is_publisher = computed(() => authGetters.is_publisher)
 
 const funn = {
     editaddr: () => {
-        storage.set('PAGE_MANAGER_KEY', 2)
-        uniRouter.gopg('manager')
+        appRouter.manager_addr()
     }
 }
 </script>

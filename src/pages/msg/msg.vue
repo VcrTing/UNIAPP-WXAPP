@@ -1,15 +1,25 @@
 <template>
 	<page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
     <PageLayout>
-		<CoAppTopBar :clazz="'bg-pag-pri pb'" :mat="true">
+		<CoAppTopBar :clazz="'pb'" :mat="true">
 			<view class="pi-row pt">
-                <view class="h4 bb">消息</view>
+                <view >
+                    <text class="h4 fw-550">消息</text>
+                    <view class="px">
+                        <UiI :i="''"/>
+                    </view>
+                </view>
 			</view>
 		</CoAppTopBar>
         <view class="pt-row">
-			<view>
-                消息
+			<view class="px-row">
+                <VwMsgTop/>
+                <VwMsgSystem/>
 			</view>
+            <view class="pt-s bg-pag-pri"></view>
+            <view class="px-row">
+                <VwMsgTaiks/>
+            </view>
             <view class="mh-app-bottom-bar"></view>
         </view>
         <CoAppBottomBar/>
@@ -22,8 +32,12 @@ import CoAppTopBar from '@/components/app/bar/CoAppTopBar.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { uiState } from '@/memory/global';
 import mock_orders from '@/server/mock/order/mock_orders';
+import UiI from '@/ui/element/i/UiI.vue';
 import VwInteractionCon from '@/view/interact/interaction/VwInteractionCon.vue';
 import VwInteractionTop from '@/view/interact/interaction/VwInteractionTop.vue';
+import VwMsgSystem from '@/view/msg/msg/VwMsgSystem.vue';
+import VwMsgTaiks from '@/view/msg/msg/VwMsgTaiks.vue';
+import VwMsgTop from '@/view/msg/msg/VwMsgTop.vue';
 import { reactive } from 'vue';
 // const prp = defineProps<{}>()
 
@@ -33,8 +47,9 @@ const aii = reactive({
 })
 </script>
 
-<style lang="sass">
-@use '../../ui/sass/theme/primary/__conf' as *
+<style lang="sass" scoped>
+@use '../../ui/sass/theme/__page_conf' as *
 page, pages, uni-page-body
-	background: $pri-pag-bg
+    background: $bg-iht
+    
 </style>

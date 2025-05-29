@@ -11,7 +11,9 @@ const _eleStore: Store<EleStore> = createStore({
         mods: [ ],
 
         pans: <ElePan[]>[ ],
-        aierts: <EleAiert[]>[]
+        aierts: <EleAiert[]>[ ],
+
+        gallery: <EleGallery[]>[ ]
     },
     getters: {
 
@@ -46,6 +48,12 @@ const _eleStore: Store<EleStore> = createStore({
         open_aiert: ({ state }, aiert: EleAiert) => {
             console.log('预计弹出 =', aiert)
             state.aierts.push(aiert)
+        },
+
+        // into gallery
+        open_gallery: ({ state }, gallery: EleGallery[]) => {
+            console.log('打开相册 gallery =', gallery)
+            state.gallery = gallery
         }
     }
 })

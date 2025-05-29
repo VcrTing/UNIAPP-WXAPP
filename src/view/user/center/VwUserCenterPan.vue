@@ -4,19 +4,7 @@
             <VwUcpNumberMsg/>
 
             <view class="py-row"></view>
-            <!--
-            <view v-if="is_publisher">
-                <view class="px-row pt">
-                    操作栏
-                </view>
-                <view class="px-row py-x1">
-                    <CoMoUserOptionGo :i="'images'" :tit="'个人相册'"/>
-                    <view class="pt"></view>
-                    <CoMoUserOptionGo :i="'addr'" :tit="'活动打卡'"/>
-                    <view class="pt"></view>
-                    <CoMoUserOptionGo @tap="funn.logout" :i="'i'" :tit="'退出登录'"/>
-                </view>
-            </view>-->
+
             <view class="px-row pt-x1">
                 <view class="br bg-def-s fx-s">
                     <view class="ps-r zi-t">
@@ -27,34 +15,12 @@
                             </view>
                         </view>
                     </view>
-                    <CoMoUserOptionBtn :i="'user-add'" :tit="'我的邀请'"  @tap="funn.history"/>
-                    <CoMoUserOptionBtn :i="'bank-card'" :tit="'支付记录'"  @tap="funn.history"/>
-                    <CoMoUserOptionBtn :i="'grid'" :tit="'历史活动'"  @tap="funn.togallery"/>
+                    <CoMoUserOptionBtn :i="'grid'" :tit="'历史活动'"  @tap="funn.history"/>
+                    <CoMoUserOptionBtn :i="'love'" :tit="'我的收藏'"  @tap="funn.love"/>
+                    <CoMoUserOptionBtn :i="'bank-card'" :tit="'金额记录'"  @tap="funn.pays"/>
                 </view>
             </view>
 
-            <!--
-            <view class="pb-row pt-x2">
-                <view>
-                    <CoMoUserAdvSwipper/>
-                </view>
-            </view>
-            -->
-            <!--
-            <view class="py-row px-row">
-                <view>
-                    <view>
-                        <VwUcpMyLove/>
-                    </view>
-                </view>
-            </view>
-            -->
-            <!--
-            <view class="pt-col pb"></view>
-            <view>
-                <VwUcpMyLove/>
-            </view>
-            -->
             <view class="pt-x2">
                         
                 <view class="pt-s bg-con">
@@ -86,18 +52,12 @@ import { computed, reactive } from 'vue';
 import VwUcpNumberMsg from './center/VwUcpNumberMsg.vue';
 import { authDispatch, authGetters } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';
-import UiI from '@/ui/element/i/UiI.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
-import CoMoUserOptionGo from '@/components/modules/user/CoMoUserOptionGo.vue';
 import CoMoUserOptionBtn from '@/components/modules/user/CoMoUserOptionBtn.vue';
-import VwUcpRecommend from './center/VwUcpRecommend.vue';
-import VwUcpMyLove from './center/VwUcpMyLove.vue';
-import CoMoUserAdvSwipper from '@/components/modules/user/CoMoUserAdvSwipper.vue';
-import { storage } from '@/tool/web/storage';
 import VwUcpGallery from './center/VwUcpGallery.vue';
 import CoHeaderTabItem from '@/components/element/tabs/CoHeaderTabItem.vue';
 import CoEmpty from '@/components/genra/empty/CoEmpty.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
+import appRouter from '@/tool/uni/app-router';
 
 const aii = reactive({
     iive: 0,
@@ -115,16 +75,13 @@ const tabs = computed((): MANY => {
 
 const funn = {
     aiijoin: () => {
-        storage.set('PAGE_ORDER_KEY', 0)
-        uniRouter.gopg('order')
+        appRouter.order_my_join()
     },
     working: () => {
-        storage.set('PAGE_ORDER_KEY', 1)
-        uniRouter.gopg('order')
+        appRouter.order_my_working()
     },
     history: () => {
-        storage.set('PAGE_ORDER_KEY', 2)
-        uniRouter.gopg('order')
+        appRouter.order_my_history()
     },
     togallery: () => {
         // uniRouter.gopg('user_gallery')
@@ -135,10 +92,51 @@ const funn = {
     logout: () => {
         authDispatch('logout');
         uniRouter.launchpg('login')
+    },
+    love: () => {
+        appRouter.manager_love()
+    },
+    pays: () => {
+        appRouter.manger_pays()
     }
 }
 </script>
+            <!--
+            <view v-if="is_publisher">
+                <view class="px-row pt">
+                    操作栏
+                </view>
+                <view class="px-row py-x1">
+                    <CoMoUserOptionGo :i="'images'" :tit="'个人相册'"/>
+                    <view class="pt"></view>
+                    <CoMoUserOptionGo :i="'addr'" :tit="'活动打卡'"/>
+                    <view class="pt"></view>
+                    <CoMoUserOptionGo @tap="funn.logout" :i="'i'" :tit="'退出登录'"/>
+                </view>
+            </view>-->
 
+            <!--
+            <view class="pb-row pt-x2">
+                <view>
+                    <CoMoUserAdvSwipper/>
+                </view>
+            </view>
+            -->
+            <!--
+            <view class="py-row px-row">
+                <view>
+                    <view>
+                        <VwUcpMyLove/>
+                    </view>
+                </view>
+            </view>
+            -->
+            <!--
+            <view class="pt-col pb"></view>
+            <view>
+                <VwUcpMyLove/>
+            </view>
+            -->
 
             <!--
             <view class="fx-s">

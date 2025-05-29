@@ -1,10 +1,10 @@
 <template>
     <view>
         <view class="fx-i">
-            <view class="w-25 ta-r pr tis">
+            <view class="w-25 pr h7">
                 <slot name="i"></slot>
             </view>
-            <view class="pi-s fx-1" :class="clazz_r">
+            <view class="pi-s fx-1 ta-r" :class="clazz_r">
                 <slot name="r"></slot>
             </view>
         </view>

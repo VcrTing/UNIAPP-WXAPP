@@ -53,18 +53,26 @@ interface EleAiert {
 interface EleStore {
     
     // 遮罩层 > 0 代表启动，< 1 代表关闭
-    hui: number,
+    hui: number
     // 遮罩层的 z-index，默认值 = 300
-    hui_z_index: number,
+    hui_z_index: number
 
     // 模态框 > 0 代表启动，且 启动哪个，使用序号标明启动哪个
-    mods: [ ],
+    mods: [ ]
     
     // 多方位 弹出页，数组里面的弹框，全部展示
-    pans: ElePan[ ],
+    pans: ElePan[ ]
 
     // 顶部 错误弹出
     aierts: EleAiert[ ]
+
+    gallery: EleGallery[]
+}
+
+interface EleGallery {
+    id: string,
+    src: string,
+    __show: boolean
 }
 
 type ELE_STORE_FIELD = 

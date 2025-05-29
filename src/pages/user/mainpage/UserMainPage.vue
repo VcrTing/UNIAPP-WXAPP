@@ -18,7 +18,12 @@
             </template>
             <template #bom>
                 <CoBomBackBtn :clazz="'btn-wht-s'"/>
-                <CoBomCenterBtn @go="funn.hudong" :clazz="'mh-btn btn-wht-s'">发起与她的互动</CoBomCenterBtn>
+                <CoBomCenterBtn @go="funn.hudong" :clazz="'mh-btn btn-wht-s'">
+                    <view class="fx-c">
+                        <UiI i="love"/>
+                        <text>加入收藏夹</text>
+                    </view>
+                </CoBomCenterBtn>
             </template>
         </DetailLayout>
     </PageLayout>
@@ -36,6 +41,7 @@ import { acyState, authGetters, authState, orderReFresh, uiState } from '@/memor
 import mock_user from '@/server/mock/user/mock_user';
 import pan_tooi from '@/tool/app/pan_tooi';
 import uniRouter from '@/tool/uni/uni-router';
+import UiI from '@/ui/element/i/UiI.vue';
 import VwUmpNumberMsg from '@/view/user/mainpage/cont/VwUmpNumberMsg.vue';
 import VwUserMainPageCon from '@/view/user/mainpage/VwUserMainPageCon.vue';
 import VwUserMainPageTop from '@/view/user/mainpage/VwUserMainPageTop.vue';

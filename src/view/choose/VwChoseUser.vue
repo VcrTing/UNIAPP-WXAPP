@@ -1,8 +1,12 @@
 <template>
     <view class="">
-        <view class="px-row">
-            <VwChoseUserTop/>
+        <view class="">
+            <view class="px-row">
+                <VwChoseUserTop/>
+            </view>
             <VwChoseUserCon/>
+            <view class="py"></view>
+            <VwChoseUserCollection/>
         </view>
         
         <CoBomCenterBtn @go="funn.submit" :clazz="'mh-btn w-9em'">确认选择</CoBomCenterBtn>
@@ -15,6 +19,7 @@ import VwChoseUserTop from './user/VwChoseUserTop.vue';
 import VwChoseUserCon from './user/VwChoseUserCon.vue';
 import uniRouter from '@/tool/uni/uni-router';
 import OButtonWht from '@/cake/button/OButtonWht.vue';
+import VwChoseUserCollection from './user/VwChoseUserCollection.vue';
 
 // const prp = defineProps<{}>()
 const funn = {

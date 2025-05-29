@@ -5,7 +5,7 @@
             <view class="py-row"></view>
         </view>
 
-        <CoBomCenterBtn @go="funn.submit" :clazz="'mh-btn w-9em'" :color="'pri'">确认选择</CoBomCenterBtn>
+        <CoBomCenterBtn @go="funn.submit" :clazz="'mh-btn w-382'" :color="'pri'">确认选择</CoBomCenterBtn>
     </view>
 </template>
 

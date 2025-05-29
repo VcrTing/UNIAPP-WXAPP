@@ -34,6 +34,7 @@ import OButtonDef from '@/cake/button/OButtonDef.vue';
 import OInput from '@/cake/input/inp/OInput.vue';
 import CkInpItem from '@/cake/input/wrapper/CkInpItem.vue';
 import mock_meizi from '@/server/mock/user/mock_meizi';
+import appRouter from '@/tool/uni/app-router';
 import uniRouter from '@/tool/uni/uni-router';
 import { storage } from '@/tool/web/storage';
 import UiI from '@/ui/element/i/UiI.vue';
@@ -50,8 +51,7 @@ const form = reactive({
 
 const funn = {
     addtag: () => {
-        storage.set('PAGE_CHOOSE_KEY', 2)
-        uniRouter.gopg('choose')
+        appRouter.chose_tags()
     }
 }
 

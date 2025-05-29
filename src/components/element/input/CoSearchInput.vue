@@ -17,7 +17,7 @@
                     @input="func.inp" />
                 
                 <view class="in-i-r abs-r middie" @tap="emt('tapr')">
-                    <OButton>搜索</OButton>
+                    <OButton :weak="true" clazz="br-rnd mh-btn px mw-5em">搜索</OButton>
                     <!--
                     <OFI clazz="px-row h5" :i="ir" @tap="emt('tapr')"/>-->
                 </view>

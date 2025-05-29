@@ -1,17 +1,6 @@
 <template>
     <view class="">
-        <view class="card py-col">
-            <view class="pi-col">
-                <CkInpItem :tit="'活动类型'">
-                    <view class="fx-r mh-inp pr-inp">
-                        <OButton :color="form.typed == 0 ? 'def' : 'wht'" 
-                            clazz="fs-s py-t br-s px" :weak="true">大众活动</OButton>
-                        <view class="px"></view>
-                        <OButton :color="form.typed == 1 ? 'def' : 'wht'" 
-                            clazz="fs-s py-t br-s px" :weak="true">非公开活动</OButton>
-                    </view>
-                </CkInpItem>
-            </view>
+        <view class="bg-con py-col">
             <!--
             <CkInpItem class="pt" :tit="'人数'">
                 <OInput :def="form.minute" @result="(v) => form.minute = v" :pchd="'请输入最大可参与人数'"/>
@@ -27,16 +16,20 @@
                 <OInput :def="form.address" @result="(v) => form.address = v" :pchd="'活动碰面地点，可选择常用地址'"/>
             </CkInpItem>
             -->
-            <view class="pi-col">
-                <CkInpItem class="pt" :tit="'开始时间'" :require="true">
+            <view class="pi-inp">
+                <CkInpItem class="" :tit="'开始时间'">
                     <OInput :def="form.timed" @tap="funn.pan_for_form('time')" 
                         @result="(v) => form.timed = v" :pchd="'挑选开始时间'" :clazz_input="'ta-r'"/>
                 </CkInpItem>
-                <CkInpItem :tit="'活动标签'" :require="true">
-                    <view class="mh-inp pb-s pt-n pr-inp fx-r">
-                        <OButtonDef :weak="true" clazz="fs-n tid d-ib px-s br-s mr">黑丝</OButtonDef>
-                        <OButtonDef :weak="true" clazz="fs-n tid d-ib px-s br-s mr">JK</OButtonDef>
-                        <OButtonDef :weak="true" clazz="fs-n tid d-ib px-s br-s">约会</OButtonDef>
+            </view>
+            <view class="pi-inp">
+                <CkInpItem :tit="'活动类型'">
+                    <view class="fx-r mh-inp pr-inp">
+                        <OButton :color="form.typed == 0 ? 'def' : 'wht'" 
+                            clazz="fs-s py-t br-s px" :weak="true">大众活动</OButton>
+                        <view class="px"></view>
+                        <OButton :color="form.typed == 1 ? 'def' : 'wht'" 
+                            clazz="fs-s py-t br-s px" :weak="true">非公开活动</OButton>
                     </view>
                 </CkInpItem>
             </view>

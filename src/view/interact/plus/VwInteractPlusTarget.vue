@@ -29,6 +29,7 @@ import OButtonDef from '@/cake/button/OButtonDef.vue';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import CoMoUserInfo from '@/components/modules/user/CoMoUserInfo.vue';
 import mock_meizi from '@/server/mock/user/mock_meizi';
+import appRouter from '@/tool/uni/app-router';
 import uniRouter from '@/tool/uni/uni-router';
 import { storage } from '@/tool/web/storage';
 import UiI from '@/ui/element/i/UiI.vue';
@@ -41,8 +42,7 @@ const mezi = computed(() => {
 
 const funn = {
     addgirl: () => {
-        storage.set('PAGE_CHOOSE_KEY', 1)
-        uniRouter.gopg('choose')
+        appRouter.chose_girl()
     }
 }
 </script>
