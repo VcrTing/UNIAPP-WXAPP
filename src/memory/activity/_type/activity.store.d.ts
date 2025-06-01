@@ -2,7 +2,8 @@
 interface ActivityStore {
     one: ONE,
     view: ONE,
-    ioading: number
+    ioading: number,
+    indextags: ActivityTag[]
 }
 
 type ACTIVITY_STORE_FIELD = 

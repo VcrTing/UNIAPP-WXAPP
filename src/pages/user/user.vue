@@ -1,21 +1,19 @@
 <template>
 	<page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
 	<PageLayout>
-		<UserCenterLayout :h="66.2">
+		<UserCenterLayout :h="72.8" :clazz_con="'bg-con'">
 			<template #bg>
-				<image mode="aceptFit" class="uni-img w-100 h-100"
-					:src="user.background"/>
+				<CoImg :src="user.background" clazz="h-100"/>
 			</template>
 			<template #top>
 				<VwUserCenterTop/>
 			</template>
 			<template #con>
 				<VwUserCenterPan/>
+				<CoMoAuthLoginModal ref="mod"/>
 			</template>
 		</UserCenterLayout>
 		<CoAppBottomBar :mat="false"/>
-		
-		<CoMoAuthLoginModal ref="mod"/>
 	</PageLayout>
 </template>
 
@@ -29,6 +27,7 @@ import UserCenterLayout from '@/components/layout/detail/UserCenterLayout.vue';
 import { computed, reactive, ref } from 'vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import CoMoAuthLoginModal from '@/components/modules/auth/CoMoAuthLoginModal.vue';
+import CoImg from '@/components/media/img/CoImg.vue';
 
 const user = computed(() => authState.user)
 

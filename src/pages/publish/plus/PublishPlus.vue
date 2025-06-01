@@ -24,7 +24,7 @@
             </view>
             <CkSpace :h="12"/>
         </view>
-        <CoAppBomCarBar :clazz="'bg-def-imp'">
+        <CoAppBomCarBar :clazz="'bg-pag-pri'">
             <view class="px-row pt-x1 pb">
                 <CoBomBtnGroup @submit="funn.submit" @cancle="uniRouter.back"></CoBomBtnGroup>
             </view>

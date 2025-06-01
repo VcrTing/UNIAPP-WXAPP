@@ -1,5 +1,5 @@
 <template>
-    <view class="fx-s">
+    <view class="fx-s" :class="clazz">
         <view v-if="tit" class="w-6em py-t" :class="clazz_tit">
             <view class="inp py-s br mh-inp fx-i ps-r zi-t">
                 <view v-if="prp.require">*</view>
@@ -16,6 +16,7 @@
 const prp = defineProps<{
     tit?: string,
     require?: boolean | undefined,
+    clazz?: string,
     clazz_tit?: string
 }>()
 

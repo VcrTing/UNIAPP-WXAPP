@@ -14,14 +14,13 @@
             </view>
             <view class="pt-s px-col">
                 <view class="fx-i">
-                    <CkAvatar clazz="w-2em h-2em h8" :src="v.publisher.avatar"/>
+                    <CkAvatar clazz="w-2em h-2em fs-w" :src="v.publisher.avatar"/>
                     <view class="pi-s">
                         <view class="d-ib">{{ v.publisher.name }}</view>
                         <view class="d-ib pi-t">
                             <CkSex :sex="v.publisher.sex"/>
                         </view>
-                        <view class="d-ib pri pi-row h8">
-                            <text class="pr">#&nbsp;服务好</text>
+                        <view class="d-ib pri pi-row fs-w">
                             <text class="pr">#&nbsp;十单十成</text>
                         </view>
                     </view>

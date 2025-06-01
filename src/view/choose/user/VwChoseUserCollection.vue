@@ -7,7 +7,7 @@
         <OScrollX>
             <view class="fx-i">
                 <view class="w-6em" v-for="(v, i) in meizi" :key="i">
-                    <view class="px-s py-s br fx-aii-btn-def w-6em">
+                    <view class="px-row-s py-s br fx-aii-btn-def w-6em">
                         <CoMoActivityJoinerBlock :v="v"/>   
                     </view>
                 </view>

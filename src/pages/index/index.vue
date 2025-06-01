@@ -30,6 +30,7 @@ import { appCommit, appState, uiState } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';
 import VwIndexPan from '@/view/index/VwIndexPan.vue';
 import VwIndexTop from '@/view/index/VwIndexTop.vue';
+import { reactive } from 'vue';
 
 const funn = {
 	changeLoading: () => {
@@ -37,9 +38,7 @@ const funn = {
 		appCommit('change', [ 'ioading', v == 0 ? -1 : 0 ])
 	},
 	goUi: () => uniRouter.gopg('ui'),
-	search: () => { 
-		uniRouter.gopg('index_search')
-	}
+	search: () => { uniRouter.gopg('index_search') }
 }
 </script>
 

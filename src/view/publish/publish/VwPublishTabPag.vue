@@ -1,7 +1,16 @@
 <template>
     <view>
         <view class="bg-con">
-            <CoHeaderTabs :tabs="aii.tabs" @change="(i) => aii.iive = i"/>
+            <CoHeaderTabs :tabs="aii.tabs" @change="(i) => aii.iive = i">
+                <!--
+                <view class="px-row">
+                    <view class="fs-s">
+                        <UiI i="trash" clazz="d-ib"/>
+                        <text>回收站</text>
+                    </view>
+                </view>
+                -->
+            </CoHeaderTabs>
         </view>
         <view>
             <view v-if="aii.iive == 0" class="py-row">
@@ -23,6 +32,7 @@ import VwPptPagHistory from './pag/VwPptPagHistory.vue';
 import VwPptPagWorking from './pag/VwPptPagWorking.vue';
 import VwPptPagWarehouse from './pag/VwPptPagWarehouse.vue';
 import CoHeaderTabs from '@/components/element/tabs/CoHeaderTabs.vue';
+import UiI from '@/ui/element/i/UiI.vue';
 
 // const prp = defineProps<{}>()
 

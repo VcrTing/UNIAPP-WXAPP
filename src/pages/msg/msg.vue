@@ -2,7 +2,7 @@
 	<page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
     <PageLayout>
 		<CoAppTopBar :clazz="'pb'" :mat="true">
-			<view class="pi-row pt">
+			<view class="pi-row py-s">
                 <view >
                     <text class="h4 fw-550">消息</text>
                     <view class="px">
@@ -11,7 +11,7 @@
                 </view>
 			</view>
 		</CoAppTopBar>
-        <view class="pt-row">
+        <view class="">
 			<view class="px-row">
                 <VwMsgTop/>
                 <VwMsgSystem/>

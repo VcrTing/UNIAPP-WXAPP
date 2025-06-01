@@ -1,5 +1,6 @@
 import { promise } from "../util/future";
 
+
 // 设置 全局 数据
 export const init_global_data = () => promise(() => {
   const data: ONE = {
@@ -15,3 +16,7 @@ export const init_global_data = () => promise(() => {
     console.log('弹出全局变量失效错误')
   }
 })
+
+export const tipsucc = (title: string = '操作成功。') => {
+  uni.showToast({ title, icon: 'none' })
+}

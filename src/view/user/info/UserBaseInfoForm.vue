@@ -9,23 +9,24 @@
                     <CkAvatar clazz="w-8em h-8em bg-con bd-x2 br-cir" :src="user.avatar"/>
                 </view>
             </view>
-            <view class="card user-info-card pt-x2">
+            <view class="card user-info-card pt-x2 pb">
                 <CkInpItem class="pt pb-s" :tit="''">
                     <OInput :def="form.name" @result="(v) => form.name = v" 
                         class="h7" :pchd="'请输入名字'"/>
                 </CkInpItem>
-                <CkInpItem :clazz_tit="'w-6em'" class="pt" :tit="'简介'">
-                    <OTextarea class="pt-t" :def="form.description" @result="(v) => form.name = v" 
-                        :pchd="'请输入个人简介'"/>
-                </CkInpItem>
-                <CkInpItem v-if="is_publisher" :clazz_tit="'w-6em'" :tit="'年龄'">
-                    <OInput :def="form.name" @result="(v) => form.name = v" 
-                        class="" :pchd="'请输入年龄'"/>
-                </CkInpItem>
-                <CkInpItem :clazz_tit="'w-6em'" :tit="'社交账号'">
-                    <OInput :def="form.contact" @result="(v) => form.contact = v" 
-                        class="" :pchd="'请输入社交账号，附带App名称'"/>
-                </CkInpItem>
+                <view>
+                    <view class="pt fx-s fx-t">
+                        <view class="pi-inp mw-6em py-s">
+                            <text class="">个人简介</text>
+                        </view>
+                        <OTextarea :def="form.description" @result="(v) => form.name = v" 
+                            :pchd="'请输入个人简介'"/>
+                    </view>
+                    <CkInpItem :clazz_tit="'pi-inp'" :tit="'社交账号'">
+                        <OInput :def="form.contact" @result="(v) => form.contact = v" 
+                            class="" :pchd="'请输入社交账号，附带App名称'"/>
+                    </CkInpItem>
+                </view>
             </view>
         </view>
     </view>

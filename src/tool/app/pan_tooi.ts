@@ -43,7 +43,7 @@ const def = (idx: number, orientation: ORIENTATION, hui: ElePanHui | undefined, 
 const open_pan = (pan: ElePan | undefined): ElePan | undefined => {
     if (pan) { 
         pan.iive = true; pan.show = true; 
-        console.log('OPEN PAN =', pan); console.log('ORIGIN PANS =', eleState.pans) 
+        // console.log('OPEN PAN =', pan); console.log('ORIGIN PANS =', eleState.pans) 
     } return pan
 }
 
@@ -61,7 +61,7 @@ const close = (pan: ElePan) => {
     pan.show = false; 
     timeout(async () => {
         pan.iive = false; 
-        console.log('DIE PAN =', pan)
+        // console.log('DIE PAN =', pan)
         // 这里由于并发问题，可能出现 过度监听 state.pans 的问题
         await eleDispatch('kiii_pan', pan)
     }, UI_PAN_DIE_ANI_TIME)

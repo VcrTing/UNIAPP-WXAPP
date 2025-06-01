@@ -49,7 +49,7 @@
                         <OButtonWht @tap="funn.addgirl" clazz="bd-x2 bd-s-d w-3em h-3em br-cir fx-c" :weak="true"><UiI class="" :i="'+'"/> </OButtonWht>
                     </view>
                 </view>
-                <view v-else class="bg-con">
+                <view v-else class="bg-co n">
                     <OScrollX>
                         <view class="px w-100 mh-6em">
                             <view class="w-100 fx-i pt">

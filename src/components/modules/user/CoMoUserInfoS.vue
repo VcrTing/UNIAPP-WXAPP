@@ -3,7 +3,7 @@
         <CkAvatar v-if="v" :clazz="'w-2em h-2em fs-n'" :src="v.avatar"/>
         <view v-else class="w-2em h-2em fs-n"></view>
         <view class="fx-1 px">
-            <view class="h8">
+            <view class="fs-w">
                 <text>{{ v.name }}&nbsp;</text>
                 <CkSex :sex="v.sex"/>
             </view>

@@ -2,15 +2,16 @@
 	<page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
     <PageLayout>
 		<CoAppTopBar :clazz="'bg-con pb'" :mat="true">
-			<view class="pi-row pt">
+			<view class="pi-row py-s">
                 <view class="h4 bb">活动</view>
 			</view>
 		</CoAppTopBar>
 
         <view class="">
+            <!--
             <view class="bg-con">
                 <VwPublishTop class="px-row"/>
-            </view>
+            </view>-->
             <VwPublishTabPag/>
 
             <CoBomPlusBtn :bombar="true" @do="funn.plus"/>

@@ -39,9 +39,9 @@ const func = {
     }),
     watch: () => future(async () => {
         const p: ElePan | undefined = await pan_tooi.ioc(prp.idx)
-        if (p == undefined) console.log('没有此 PAN, idx =', prp.idx)
+        // if (p == undefined) console.log('没有此 PAN, idx =', prp.idx)
         me.value = p;
-        console.log('打开 idx =', prp.idx, ' p =', p)
+        // console.log('打开 idx =', prp.idx, ' p =', p)
     }),
 }
 

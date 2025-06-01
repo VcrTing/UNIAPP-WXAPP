@@ -5,7 +5,7 @@
 import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
 import { init_global_data } from "./tool/uni/uni-global";
 import { nextTick } from "vue";
-import { must_login } from "./tool/view/app_init";
+import { for_app_loading } from "./conf/__for_index/for_app_loading";
 
 // 装 全局变量
 onLaunch(() => { uni.hideTabBar({ success: () => { } }) });
@@ -13,7 +13,7 @@ onShow(() => { uni.hideTabBar({ success: () => { } }) });
 onHide(() => { });
 
 nextTick(init_global_data)
-// nextTick(must_login)
+nextTick(for_app_loading)
 </script>
 
 <style lang="sass">

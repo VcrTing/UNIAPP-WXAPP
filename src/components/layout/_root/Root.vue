@@ -8,7 +8,8 @@ import AppMeta from '@/conf/AppMeta.vue';
     <AppMeta>
         <!-- 内容 -->
         <slot></slot>
-        <!-- 全局 -->
+        <!-- 全局
         <CakeGlobal/>
+        -->
     </AppMeta>
 </template>

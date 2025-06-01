@@ -1,7 +1,6 @@
 <template>
     <view>
-        <view class="py-x3"></view>
-        <view class="py-x2"></view>
+        <view class="mh-app-top-bar"></view>
         <view class="fx-i px-row">
             <view class="fx-i">
                 <view >
@@ -9,8 +8,8 @@
                         :clazz="'w-7em h-7em'" :src="user.avatar"/>
                 </view>
                 <view class="fx-1 pi-x2 c-fff">
-                    <view @tap="funn.ck_name" class="h5 b pt-s">{{ user.nickname }}</view>
-                    <view @tap="funn.ck_name" class="pt-s">
+                    <view @tap="funn.ck_name" class="h5 b pt-n">{{ user.nickname }}</view>
+                    <view @tap="funn.ck_name" class="pt">
                         社交账号:&nbsp;{{ user.socialAccount }}
                     </view>
                 </view>
@@ -20,6 +19,7 @@
 </template>
 
 <script setup lang="ts">
+import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import { authCommit, authState, needLogin } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';

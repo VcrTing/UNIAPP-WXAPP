@@ -17,12 +17,13 @@ const islogin = (s: ONE): boolean => {
 const _s: Store<AuthStore> = createStore({
     
     state: <AuthStore>{
+        phone: '',
         info: <ONE>{ },
         user: <User>USER_DEF,
         auth: <ONE>{ },
         jwt: '',
         role: ROLE_ANON,
-
+        num: 0,
         loginhouse: {
             pan_idx: 1000,
             pan_hui: { opacity: 0.4 },
@@ -31,13 +32,18 @@ const _s: Store<AuthStore> = createStore({
     },
     getters: {
         jwt: s => s.jwt,
+        __fresh: s => s.num,
         username: s => s.user.nickname,
+        phone: s => s.phone,
         user_id: s => s.user.id,
         company_id: s => s.company.id,
         is_login: s => islogin(s),
         is_publisher: s => (s.user.publisher)
     },
     mutations: {
+        _num: (s: ONE) => {
+            s.num = s.num + 1
+        },
         _login: (s: ONE, auth: ONE) => {
             storage.set('jwt', auth.token)
             s.user = auth.user 
@@ -55,7 +61,6 @@ const _s: Store<AuthStore> = createStore({
 
             s.loginhouse.iive = true
         },
-        
     },
 
     actions: {
@@ -87,15 +92,18 @@ const _s: Store<AuthStore> = createStore({
         },
         
         // 先判断是否需要登录, true = 需要
-        need_login: ({ state }): boolean => {
+        need_login: ({ state, commit }): boolean => {
             const _lg = islogin(state)
             if (!_lg) {
-                const hs = state.loginhouse
+                const hs = state.loginhouse;
+                commit('_num')
                 if (hs.iive) pan_tooi.open_def_b(hs.pan_idx, hs.pan_hui);
                 return true
             }   
             return false
-        }
+        },
+
+        // 
     }
 })
 

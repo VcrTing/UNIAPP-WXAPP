@@ -1,8 +1,8 @@
 <template>
-    <view class="pr-row">
-        <view class="fx-s pb">
-            <CoVwUcpNumbers :is_publisher="is_publisher"/>
-            <OButtonDef @click="funn.edit" :weak="true" :clazz="'py px-row br-s'"><view>编辑个人资料</view></OButtonDef>
+    <view class="">
+        <view class="fx-s bg-con-fer bf pr-row">
+            <CoMoUcpNumbers />
+            <OButtonDef @click="funn.edit" :weak="true" :clazz="'py px br-s'"><view>编辑个人资料</view></OButtonDef>
         </view>
         <view class="pt-x2 pi-row">
             <view class="fx-i">
@@ -29,13 +29,10 @@ import OButtonDef from '@/cake/button/OButtonDef.vue';
 import { authGetters, authState } from '@/memory/global';
 import { computed } from 'vue';
 import uniRouter from '@/tool/uni/uni-router';
-import CoVwUcpNumbers from '../component/CoVwUcpNumbers.vue';
+import CoMoUcpNumbers from '../component/CoMoUcpNumbers.vue';
 import { storage } from '@/tool/web/storage';
 import CkAgeSex from '@/cake/visual/ider/CkAgeSex.vue';
 import appRouter from '@/tool/uni/app-router';
-
-// const prp = defineProps<{}>()
-const is_publisher = computed(() => authGetters.is_publisher)
 
 const funn = {
     managerTags: () => {

@@ -29,7 +29,7 @@
             <CoMoOrderMsgItem :clazz_r="'py'">
                 <template #i>活动时间</template>
                 <template #r>
-                    <text class="h8">{{ timed.startText }}</text>
+                    <text class="fs-w">{{ timed.startText }}</text>
                 </template>
             </CoMoOrderMsgItem>
             <!--

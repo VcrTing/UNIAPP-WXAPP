@@ -14,22 +14,23 @@ const ser_err_txt = (origin: string = ''): string => {
 }
 
 // 雪莲花 后端返回 格式
-const ser_result = (src: Object = { }) : NET_RES => {
+const ser_result = (src: Object = { }) : NET_RES | null => {
     // console.log('后端返回 = ', src)
 
     const _dt = src as HttpResultBackend;
-    const code: number = _dt.code
-    const result: ONE | MANY | null = _dt.result
+    const code: number = _dt.statusCode
+    const result: NET_RES = _dt.data
 
     // 安全返回
-    if (_dt.code < _HTTP_CODE_SAFE && result) {
-        return { result } as HttpResult
+    if (_dt.statusCode < _HTTP_CODE_SAFE && result) {
+        return result; // { result } as HttpResult
     } 
 
+    return null
     // 非安全返回
-    if (!result) return '[' + code + '] 返回结果为 NULL，MSG = ' + _dt.message
+    // if (!result) return '[' + code + '] 返回结果为 NULL，MSG = ' + _dt.message
     // 错误
-    return '[' + code + '] ' + ( _dt.message ? ser_err_txt( _dt.message ) : 'WEB后端 网络请求 未返回任何错误信息。' )
+    // return '[' + code + '] ' + ( _dt.message ? ser_err_txt( _dt.message ) : 'WEB后端 网络请求 未返回任何错误信息。' )
 }
 
 // 要不返回 string 错误信息，
@@ -39,10 +40,13 @@ const ser_result = (src: Object = { }) : NET_RES => {
 export const netser_succ = (src: ONE): NET_RES => {
 
     const code: number = src.statusCode ? src.statusCode : 404
-    const data: string | AnyObject | ArrayBuffer | undefined = src.data ? src.data : undefined
-
+    const data: NET_RES = src.data ? src.data : undefined
+    //
+    console.log('请求 SUCCESS =', src)
+    console.log('src.data =', data)
+    return data
     // console.log('data type =', (typeof data), (data instanceof String), (data instanceof ArrayBuffer))
-
+    /*
     // 安全返回
     if (code < _HTTP_CODE_SAFE) {
 
@@ -74,12 +78,13 @@ export const netser_succ = (src: ONE): NET_RES => {
     }
     // 无捕捉异常
     return '[500][SUCC_CALLBACK] 返回未处理 / 捕捉到网络请求的，未知类型错误！！！'
+    */
 }
 
 // 处理失败
-export const netser_err = (err: ONE): NET_RES => {
+export const netser_err = (err: ONE): string => {
     console.log('Uni.Promise 出错 = ', err)
-
+    /*
     if (err) {
         const uniErr: UniAppHttpError = err as UniAppHttpError
         return uniErr.errMsg ? ser_err_txt( uniErr.errMsg ) : 'UNI_APP 网络请求 未返回任何错误信息。'
@@ -87,6 +92,7 @@ export const netser_err = (err: ONE): NET_RES => {
     else {
         console.log('捕捉到网络请求的，未知类型错误！！！')
     }
+    */
     // 未处理
     return '[500][ERR_CALLBACK] 返回未处理 / 捕捉到网络请求的，未知类型错误！！！'
 }

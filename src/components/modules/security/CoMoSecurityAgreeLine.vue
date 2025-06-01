@@ -1,5 +1,5 @@
 <template>
-    <view class="py btn-def px br">
+    <view class="py btn-def px" :class="clazz">
         <view class="fx-i fx-t">
             <view class="px">
                 <radio class="" :value="'true'" :checked="aii.agree" />
@@ -13,7 +13,8 @@
 
 <script setup lang="ts">
 const prp = defineProps<{
-    aii: ONE
+    aii: ONE,
+    clazz?: string
 }>()
 
 </script>

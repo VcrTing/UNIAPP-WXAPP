@@ -8,15 +8,11 @@
 
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
-import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
-import CkSex from '@/cake/visual/ider/CkSex.vue';
 import CoMoIndexActivityItem from '@/components/modules/index/CoMoIndexActivityItem.vue';
 import { acyReFresh, authGetters } from '@/memory/global';
 import mock_orders from '@/server/mock/order/mock_orders';
 import mock_meizi from '@/server/mock/user/mock_meizi';
-import mock_user from '@/server/mock/user/mock_user';
 import uniRouter from '@/tool/uni/uni-router';
-import { must_arr } from '@/tool/util/valued';
 import { computed, reactive } from 'vue';
 
 // const prp = defineProps<{}>()
@@ -79,7 +75,7 @@ const is_publisher = computed(() => authGetters.is_publisher)
             <!--
             <view class="bg-con index-item-card br-x1 px-col py">
                 <view class="fx-s fx-t">
-                    <view class="h8">
+                    <view class="fs-w">
                         <CkAvatar :clazz="'w-4em h-4em'" :src="v.publisher.avatar"/>
                     </view>
                     <view class="fx-1 pi">

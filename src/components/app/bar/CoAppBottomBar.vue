@@ -10,10 +10,10 @@
                 >
                 <view class="pt-s">
                     <view class="app-bottom-bar-item-icon h5">
-                        <UiI :i="v.icon" />
+                        <UiI clazz="" :i="v.icon" />
                     </view>
                     <view v-if="v.tit" class="mw-3em px-s pt-t soft">
-                        <view class="h9">{{ v.tit }}</view>
+                        <view class="fs-s app-bottom-bar-item-txt">{{ v.tit }}</view>
                     </view>
                 </view>
             </view>

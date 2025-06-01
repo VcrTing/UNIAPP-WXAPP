@@ -1,16 +1,12 @@
 import { authGetters, authState } from "@/memory/global"
 import { IS_NET_LOG, IS_TEST_MODE } from "./conf"
-import { NET_ENDPOINTS_COMPANY, NET_ENDPOINTS_MASTER } from "./conf-endpoints"
+import { NET_ENDPOINTS_MASTER } from "./conf-endpoints"
 
 // 全局 主响应 URI
-export const NET_URI_MASTER = IS_TEST_MODE ? 'http://127.0.0.1:8081' : ''
-// 全局 公司响应 URI
-export const NET_URI_COMPANY = IS_TEST_MODE ? 'http://127.0.0.1:8081' : ''
+export const NET_URI_MASTER = IS_TEST_MODE ? 'http://localhost:1337' : ''
 
 // 全局 主响应 的 API
-export const NET_URI_MASTER_API = IS_TEST_MODE ? 'jeecg-boot' : 'jeecg-boot'
-// 全局 公司响应 的 API
-export const NET_URI_COMPANY_API = IS_TEST_MODE ? 'jeecg-boot' : 'jeecg-boot'
+export const NET_URI_MASTER_API = IS_TEST_MODE ? 'api' : 'api'
 
 // GET 超时时间
 export const NET_TIMEOUT_GET = 1000 * 30
@@ -33,12 +29,10 @@ export const NET_FUNCTION_GET_JWT = (): string => {
 
 // 数据来源
 export const MASTER: string = 'MASTER'
-export const COMPANY: string = 'COMPANY'
 
 // 网站的 endpoint，key 名字和 上面的要对应
 export const NET_ENDPOINTS = <ONEO>{
-    'MASTER': NET_ENDPOINTS_MASTER,
-    'COMPANY': NET_ENDPOINTS_COMPANY
+    'MASTER': NET_ENDPOINTS_MASTER
 }
 
 /**

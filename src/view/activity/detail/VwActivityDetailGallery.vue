@@ -6,7 +6,7 @@
         <view class="pb-col pt-x2 px-row">
             <text class="sus">详情图片</text>
         </view>
-        <view>
+        <view class="pt-col">
             <view v-for="(v, i) in gallery" :key="i">
                 <image class="w-100 h-25vh" mode="aspectFill" :src="v.src"/>
             </view>

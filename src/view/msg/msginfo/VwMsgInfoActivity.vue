@@ -1,8 +1,8 @@
 <template>
     <view>
         <view class="fx-i">
-            <OButtonDef :weak="true" class="px py-s tiw">未读</OButtonDef>
-            <OButtonDef :weak="true" class="px py-s sus">已读</OButtonDef>
+            <OButtonDef :weak="true" class="px-row py-s tiw">未读</OButtonDef>
+            <OButtonDef :weak="true" class="px-row py-s sus">已读</OButtonDef>
         </view>
         <view class="">
         <OScrollY :styie="{

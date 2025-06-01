@@ -11,7 +11,7 @@
         <CoMoOrderMsgItem :clazz_r="'py'">
             <template #i>支付方式</template>
             <template #r>
-                <view><text class="h8">微信支付</text></view>
+                <view><text class="fs-w">微信支付</text></view>
             </template>
         </CoMoOrderMsgItem>
         <!--

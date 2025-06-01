@@ -1,4 +1,3 @@
-import { ROLE_AUTH } from "./conf-role"
 
 // 是否 打开 网络请求的 打印
 export const IS_NET_LOG = true 
@@ -13,10 +12,10 @@ export const IS_TEST_MODE = true
 export const TEST_LOGIN_USER: ONE = {
     'ADMIN': <ONE>{
         username: 'qiong',
-        password: 'ZT123zlt_'
+        password: 'ZT123zlt'
     },
     'AUTH': <ONE>{
         username: 'qiong2',
-        password: 'ZT123zlt_'
+        password: 'ZT123zlt'
     }
 }

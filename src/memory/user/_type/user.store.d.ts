@@ -1,21 +1,23 @@
 
 interface AuthStore {
-    info: ONE,
-    user: User,
-    auth: ONE,
-    jwt: string,
-    role: ROLES,
+    phone: string
+    info: ONE
+    user: User
+    auth: ONE
+    jwt: string
+    role: ROLES
+    num: number
     loginhouse: AuthLoginHouse
 }
 type AUTH_STORE_FIELD = 
-    'info' | 'user' | 'auth' |
+    'info' | 'user' | 'auth' | 'num' |
     'jwt' | 'role' | 'needlogin'
 
 interface AuthGetters {
     jwt: string,
     username: string,
     is_login: boolean,
-
+    __fresh: number,
     is_publisher: boolean,
 
     user_id: string,

@@ -3,18 +3,25 @@ interface UniAppHttpError {
     errMsg: string
 }
 
-interface HttpResultBackend {
-    code: number,
-    message: string,
-    result: null | ONE | MANY,
-    // timestamp: number
-    // success: boolean
+interface UniappHttpResult {
+    data: HttpResult
+    errMsg: string
+    statusCode: number
 }
 
 interface HttpResult {
-    result: ONE | MANY
+    data: ONE | MANY
+    meta: HttpResultPagination
 }
 
+interface HttpResultPagination {
+    page: number
+    pageSize: number
+    pageCount: number
+    total: number
+}
+
+type HttpResultBackend = UniappHttpResult
 
 type NET_RES = HttpResult | string
 

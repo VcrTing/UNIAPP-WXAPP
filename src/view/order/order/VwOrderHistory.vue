@@ -14,7 +14,7 @@
                     <view class="pb-row px-col">
                         <view class="fx-s">
                             <CoMoUserInfoS :v="v.publisher"/>
-                            <view class="h8">
+                            <view class="fs-w">
                                 <OButtonIht :weak="true" clazz="fs-s px-s py-t">
                                     已完成
                                 </OButtonIht>

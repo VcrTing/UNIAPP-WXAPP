@@ -1,4 +1,6 @@
 
+@use '../../sass/theme/define_txt/__conf' as *
+
 @keyframes o_ing
     0%
         transform: rotate(0deg)
@@ -21,10 +23,21 @@
     .o-ing-in
         width: 100%
         height: 100%
-        border: 0.17em solid #fff
+        border: 0.17em solid transparent
         // border-top-color: transparent !important
-        border-right-color: transparent !important 
-        border-bottom-color: transparent !important
         border-radius: 100%
 
         animation: o_ing 1s linear infinite
+
+
+.o-ing-wht
+    .o-ing-in
+        border-color: #fff
+.o-ing-tit
+    .o-ing-in
+        border-color: $tit
+
+.o-ing-wht, .o-ing-tit
+    .o-ing-in
+        border-right-color: transparent !important 
+        border-bottom-color: transparent !important

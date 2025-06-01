@@ -1,12 +1,11 @@
 <template>
-    <view v-show="iive" class="o-safe-area-top"></view>
-    <view v-if="!has_document" class="py"></view>
+    <view class="o-safe-area-top" :style="styie"></view>
 </template>
 
 <script setup lang="ts">
-import { appState } from '@/memory/global';
-import { computed, ref } from 'vue';
+import { get_safe_area_top_h } from '@/tool/uni/uni-app';
 
-const iive = ref(true)
-const has_document = computed(() => appState.document)
+const styie = {
+    'height': get_safe_area_top_h() + 'px'
+}
 </script>

@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { uiDispatch } from '@/memory/global';
-import { timeout } from '@/tool/util/future';
+import { future, promising, timeout } from '@/tool/util/future';
 
 const func = {
 	isPc: (w: number = 0) => (w > 1099),
@@ -14,7 +14,7 @@ const func = {
 	isPhone: (w: number = 0) => (w <= 699),
 }
 
-const init = async () => {
+const init = () => future(async () => {
 
 	let s: number = 16
 	const info: ONE = await uni.getSystemInfo()
@@ -66,9 +66,9 @@ const init = async () => {
 
 	timeout(() => {
 
-		console.log("根节点，字体 = " + s + "px")
+		// console.log("根节点，字体 = " + s + "px")
 	})
-}
+})
 
 init()
 </script>

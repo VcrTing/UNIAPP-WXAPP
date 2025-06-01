@@ -1,6 +1,6 @@
 <template>
     <view>
-        <view class="pb-x3 pt-x2">
+        <view class="pb-x1 pt-x1">
             <view class="fx-s">
                 <view class="w-30 fx-c">
                     <CoMoMsgMainItem :tit="'活动消息'" @tap="appRouter.msg_activity">

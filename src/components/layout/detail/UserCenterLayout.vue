@@ -19,7 +19,7 @@
 					height: conh
 				}"
 			>
-				<view class="br-it br-rt h-100 bg-con">
+				<view class="br-it br-rt h-100" :class="clazz_con">
                     <slot name="con"></slot>
 				</view>
 			</view>
@@ -32,7 +32,8 @@ import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
 import { computed } from 'vue';
 
 const prp = defineProps<{
-	h?: number
+	h?: number,
+	clazz_con?: string
 }>()
 
 const __def = 61.8;

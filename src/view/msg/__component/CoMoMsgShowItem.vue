@@ -9,7 +9,7 @@
             </view>
         </view>
         <view class="tiw pt-t eiies">
-            <text class="h8">{{ msg }}</text>
+            <text class="fs-w">{{ msg }}</text>
         </view>
     </view>
 </template>

@@ -1,7 +1,8 @@
 <template>
-        <view :style="{
-            'height': h + 'em'
-        }"></view>
+    <view :style="{
+        'background-color': 'transparent',
+        'height': h + 'em'
+    }"></view>
 </template>
 
 <script setup lang="ts">

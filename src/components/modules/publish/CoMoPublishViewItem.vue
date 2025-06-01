@@ -1,7 +1,7 @@
 <template>
     <view class="card fx-s o-h">
         <image class="w-5em h-5em" mode="aspectFill" :src="v.banner.src"/>
-        <view class="fx-1 px-row">
+        <view class="fx-1 px">
             <view>{{ v.title }}</view>
             <view class="fx-s pt">
                 <view class="fx-1">
@@ -17,7 +17,7 @@
             <OButtonDef :weak="true" clazz="fs-s px-s br-s">已完成</OButtonDef>
             -->
             <slot>
-                <view class="pr-row pi-s">
+                <view class="pr pi-s">
                     <view class="pb">&nbsp;</view>
                     <view v-if="v.status == 2" class="money fx-r">
                         <UiI class="fs-s" :i="'+'"/>
