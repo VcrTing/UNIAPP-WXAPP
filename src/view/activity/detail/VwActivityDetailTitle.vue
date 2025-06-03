@@ -20,7 +20,7 @@
 import UiI from '@/ui/element/i/UiI.vue';
 
 const prp = defineProps<{
-    one: ONE
+    one: Activity
 }>()
 
 </script>

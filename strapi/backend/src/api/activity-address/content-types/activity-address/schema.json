@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "activity_addresses",
+  "info": {
+    "singularName": "activity-address",
+    "pluralName": "activity-addresses",
+    "displayName": "ActivityAddress"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "country": {
+      "type": "string"
+    },
+    "province": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "longitude": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "string"
+    },
+    "isDefault": {
+      "type": "integer",
+      "default": 0
+    },
+    "activities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::activity.activity",
+      "mappedBy": "activity_address"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "activity_addresses"
+    },
+    "addressSystem": {
+      "type": "string"
+    }
+  }
+}

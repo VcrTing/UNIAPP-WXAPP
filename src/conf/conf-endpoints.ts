@@ -20,6 +20,7 @@ const NET_ENDPOINT_USER = <ONE>{
 const NET_ENDPOINT_ACTIVITY = <ONE> {
     'activity': 'activities',
     'activity-tags': 'activity-tags',
+    'activity-address': 'activity-addresses',
 }
 
 export const NET_ENDPOINTS_MASTER = <ONE> {

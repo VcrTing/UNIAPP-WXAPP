@@ -1,0 +1,136 @@
+{
+  "kind": "collectionType",
+  "collectionName": "up_users",
+  "info": {
+    "name": "user",
+    "description": "",
+    "singularName": "user",
+    "pluralName": "users",
+    "displayName": "User"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "username": {
+      "type": "string",
+      "minLength": 3,
+      "unique": true,
+      "configurable": false,
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "minLength": 6,
+      "configurable": false,
+      "required": true
+    },
+    "provider": {
+      "type": "string",
+      "configurable": false
+    },
+    "password": {
+      "type": "password",
+      "minLength": 6,
+      "configurable": false,
+      "private": true,
+      "searchable": false
+    },
+    "resetPasswordToken": {
+      "type": "string",
+      "configurable": false,
+      "private": true,
+      "searchable": false
+    },
+    "confirmationToken": {
+      "type": "string",
+      "configurable": false,
+      "private": true,
+      "searchable": false
+    },
+    "confirmed": {
+      "type": "boolean",
+      "default": false,
+      "configurable": false
+    },
+    "blocked": {
+      "type": "boolean",
+      "default": false,
+      "configurable": false
+    },
+    "role": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.role",
+      "inversedBy": "users",
+      "configurable": false
+    },
+    "nickname": {
+      "type": "string"
+    },
+    "avatar": {
+      "type": "text"
+    },
+    "sex": {
+      "type": "integer"
+    },
+    "introduction": {
+      "type": "text"
+    },
+    "age": {
+      "type": "integer"
+    },
+    "background": {
+      "type": "text"
+    },
+    "socialAccount": {
+      "type": "string"
+    },
+    "createTime": {
+      "type": "datetime"
+    },
+    "openid": {
+      "type": "string"
+    },
+    "unionid": {
+      "type": "string"
+    },
+    "activity_tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::activity-tag.activity-tag",
+      "mappedBy": "user"
+    },
+    "avatarDefault": {
+      "type": "text"
+    },
+    "activity_medias": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::activity-media.activity-media",
+      "mappedBy": "user"
+    },
+    "activities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::activity.activity",
+      "mappedBy": "publisher"
+    },
+    "activity_addresses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::activity-address.activity-address",
+      "mappedBy": "user"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "activity_registrations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::activity-registration.activity-registration",
+      "mappedBy": "users"
+    }
+  }
+}

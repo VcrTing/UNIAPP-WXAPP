@@ -1,6 +1,6 @@
 <template>
     <view>
-        <view v-for="(v, i) in aii.items" :key="i" class="br pb-row w-100">
+        <view v-for="(v, i) in activities" :key="i" class="br pb-row w-100">
             <CoMoIndexActivityItem @detail="funn.detail" :v="v" :meizi="aii.meizi"/>
         </view>
     </view>
@@ -15,23 +15,22 @@ import mock_meizi from '@/server/mock/user/mock_meizi';
 import uniRouter from '@/tool/uni/uni-router';
 import { computed, reactive } from 'vue';
 
-// const prp = defineProps<{}>()
+const prp = defineProps<{
+    activities: Activity[]
+}>()
 
 const aii = reactive({
     items: mock_orders.items,
     meizi: mock_meizi.items
 })
 
-
 const funn = {
-    detail: (v: ONE) => {
+    detail: (v: Activity) => {
         acyReFresh('view', v);
         uniRouter.gopg('activity_detail');
     }
 }
 
-
-const is_publisher = computed(() => authGetters.is_publisher)
 </script>
 
 <style lang="sass" scoped>

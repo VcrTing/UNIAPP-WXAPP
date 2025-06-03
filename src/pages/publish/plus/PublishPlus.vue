@@ -59,7 +59,13 @@ const funn = {
     look: (v: number) => {
 
     },
+    collection: () => {
+        const tf = top.value.v()
+        const ad = addr.value.v()
+        console.log('收集数据 =', tf, ad)
+    },
     submit: () => {
+        funn.collection()
         // uniRouter.navigatorpg('publish')
     }
 }

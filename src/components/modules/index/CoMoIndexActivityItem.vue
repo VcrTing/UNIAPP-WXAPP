@@ -5,10 +5,10 @@
                 <view class="fw-600 h5 hih tils-x1">{{ v.title }}</view>
             </view>
             <view class="pt-s">
-                <view class="fx-i">
+                <view class="fx-i" v-if="v.publisher">
                     <CkAvatar clazz="w-2em h-2em fs-w" :src="v.publisher.avatar"/>
                     <view class="pi-s">
-                        <view class="d-ib">{{ v.publisher.name }}</view>
+                        <view class="d-ib">{{ v.publisher.nickname }}</view>
                         <view class="d-ib pi-t">
                             <CkSex :sex="v.publisher.sex"/>
                         </view>
@@ -22,27 +22,30 @@
                 <view class="pt-s">
                     <OButton clazz="d-ib fs-s" :weak="true">报名中</OButton>
                     <view class="d-ib px-s fs-n">
-                        周五 05.23 20:30 |
+                        <text>{{ activity_tool.gettime(v) }}</text>
+                        <text class="pi-t">|</text>
                     </view>
                     <view class="d-ib fs-n">
-                        20.6km 深圳湾体育中心
+                        <text>{{ activity_tool.getfar(v) }}</text>
+                        
+                        <text class="eiies pi-t">{{ activity_tool.getaddress(v) }}</text>
                     </view>
                 </view>
             </view>
             <view>
-                <view class="br o-h fx-s" v-if="v.gallery ">
-                    <view class="w-33" v-for="(m, n) in v.gallery" :key="n">
-                        <CoImg :clazz="'h-14vh'" :src="m.src"/>
-                    </view>
+                <view class="br o-h" v-if="gallerylen == 1">
+                    <CoImg :clazz="'h-14vh'" :src="gallery[0].url"/>
                 </view>
-                <view class="br o-h" v-else>
-                    <CoImg :clazz="'h-14vh'" :src="v.banner"/>
+                <view class="br o-h fx-s" v-else-if="gallerylen >= 2">
+                    <view class="w-33" v-for="(m, n) in gallery" :key="n">
+                        <CoImg :clazz="'h-14vh'" :src="m.url"/>
+                    </view>
                 </view>
             </view>
             <view class="pt-x1">
                 <view class="fx-s">
                     <view class="fx-i fx-1">
-                        <CoViAvatarTogether :w="2" :items="meizi"/>
+                        <CoViAvatarTogether :w="2" v-if="v.publisher" :items="[ v.publisher ]"/>
                         <view class="pi-s tid"><text class="fs-n">11人已上车</text></view>
                     </view>
                     <view>
@@ -60,11 +63,21 @@ import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import CkSex from '@/cake/visual/ider/CkSex.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
 import CoViAvatarTogether from '@/components/visual/imgs/CoViAvatarTogether.vue';
+import activity_tool from '@/tool/modules/activity_tool';
+import { computed } from 'vue';
 
 const prp = defineProps<{
-    v: ONE,
+    v: Activity,
     meizi: MANY
 }>()
+
+const gallery = computed((): ActivityMedia[] => {
+    return activity_tool.getindex_banner(prp.v)
+})
+
+const gallerylen = computed((): number => gallery.value.length)
+
+const address = computed((): ActivityAddress => (prp.v.activity_address || { }))
 
 const emt = defineEmits([ 'detail' ])
 </script>

@@ -3,25 +3,26 @@
         <view class="">
             <view class="fx-i">
                 <view class="btn-def py px-row" v-for="(v, i) in tabs" :key="i"
-                    @tap="aii.i = i"
-                ><text :class="(aii.i == i) ? '' : 'sus'">{{ v.tit }}</text></view>
+                    @tap="aii.i = v.v"
+                ><text :class="(aii.i == v.v) ? '' : 'sus'">{{ v.name }}</text></view>
             </view>
         </view>
         <view class="px-row py-s">
             <view v-if="aii.i == 0">
-                <view class="pb-row" v-for="(v, i) in aii.items" :key="i">
-                    <CoMoPublishViewItem :v="v" @tap="funn.edit(v)">
-                        <view>&nbsp;</view>
-                        <view class="pr pt">
-                            <view>
-                                <view class="err fx-r fx-b">
-                                    <text class="pr-t">待审核</text>
-                                    <!--<UiI :i="'b'"/>-->
+                <CoViDataLoading :ioading="ioading" :items="data">
+                    <view class="pb-row" v-for="(v, i) in data" :key="i">
+                        <CoMoPublishViewItem :v="v" @tap="funn.edit(v)">
+                            <view class="pt-s">&nbsp;</view>
+                            <view class="pr pt">
+                                <view class="fx-r tis fs-s btn-err px-t">
+                                    <text class="pi-s">
+                                        待完善
+                                    </text>
                                 </view>
                             </view>
-                        </view>
-                    </CoMoPublishViewItem>
-                </view>
+                        </CoMoPublishViewItem>
+                    </view>
+                </CoViDataLoading>
             </view>
             <view v-else>
                 
@@ -32,19 +33,24 @@
 
 <script setup lang="ts">
 import CoMoPublishViewItem from '@/components/modules/publish/CoMoPublishViewItem.vue';
-import mock_publish from '@/server/mock/publish/mock_publish';
+import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
+import { DATA_ACTIVITY_REVIEW, DATA_ACTIVITY_REVIEW_DEF } from '@/conf/conf-datas';
 import uniRouter from '@/tool/uni/uni-router';
 import { promise } from '@/tool/util/future';
-import { reactive } from 'vue';
+import { must_arr } from '@/tool/util/valued';
+import { computed, reactive } from 'vue';
 
-// const prp = defineProps<{}>()
-const tabs = [
-    { tit: '待审核', },
-    { tit: '未通过', },
-]
+const prp = defineProps<{
+    items: Activity[], ioading: boolean
+}>()
 
 const aii = reactive({
-    items: mock_publish.now, i: 0
+    i: DATA_ACTIVITY_REVIEW_DEF.v
+})
+
+// 公开与非公开过滤
+const data = computed((): Activity[] => {
+    return must_arr(prp.items).filter(e => true)
 })
 
 const funn = {
@@ -55,4 +61,6 @@ const funn = {
         aii.i = 0
     })
 }
+
+const tabs = DATA_ACTIVITY_REVIEW
 </script>

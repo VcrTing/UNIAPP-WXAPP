@@ -26,6 +26,7 @@ import pan_tooi from '@/tool/app/pan_tooi';
 import CoMoAddressSwitchContent from '@/components/modules/address/CoMoAddressSwitchContent.vue';
 import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
 import { must_one } from '@/tool/util/valued';
+import { pageIndexCommit } from '@/memory/page';
 
 const prp = defineProps<{
     idx: number
@@ -43,8 +44,8 @@ const funn = {
     close: () => { pan_tooi.close_pan(prp.idx) },
 
     submit: () => {
-        const v: ONE = must_one(loc.value.v())
-        console.log('切换城市 =', v)
+        const v: Conf.City = must_one(loc.value.v())
+        pageIndexCommit('change', [ 'city', v ])
         funn.close()
     },
 }

@@ -20,7 +20,7 @@ import { arrimit } from '@/tool/util/iodash';
 import { computed, reactive } from 'vue';
 
 const prp = defineProps<{
-    items: MANY,
+    items: User[],
     limit?: number,
     w?: number,
     clazz_avatar?: string

@@ -18,7 +18,7 @@ export const ROLES_AUTHS: string[] = [
 
 // 基础角色
 export const USER_DEF = <User>{
-    id: '0',
+    id: 1,
     nickname: '未登录用户',
     avatar: 'https://img2.baidu.com/it/u=465760855,3158087440&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
     background: 'https://img1.baidu.com/it/u=467309576,3460257531&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=1084', 

@@ -3,7 +3,7 @@
         <view class="px-row">
             <view><text class="header-s">当前城市</text></view>
             <view class="py">
-                <OButtonDef :weak="true" clazz="mw-6em py-s">{{ aii.iive.txt }}</OButtonDef>
+                <OButtonDef :weak="true" clazz="mw-6em py-s">{{ city.name }}</OButtonDef>
             </view>
         </view>
         <view class="px-row pt-x2">
@@ -14,7 +14,7 @@
                 >
                     <OButton :color="isiive(v) ? 'def' : 'wht'" :weak="true" 
                         clazz="mw-6em py-s w-100">
-                        {{ v.txt }}
+                        {{ v.name }}
                     </OButton>
                 </view>
             </view>
@@ -25,30 +25,32 @@
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
 import OButtonDef from '@/cake/button/OButtonDef.vue';
-import OInput from '@/cake/input/inp/OInput.vue';
+import { DATA_CITY_DEF, DATA_CITYS } from '@/conf/conf-datas';
+import { pageIndexState } from '@/memory/page';
+import { promise } from '@/tool/util/future';
 import { must_one } from '@/tool/util/valued';
-import { reactive } from 'vue';
+import { computed, nextTick, reactive, watch } from 'vue';
 
-// const prp = defineProps<{}>()
-
-const aii = reactive({
-    iive: { txt: '深圳', id: 1 },
-    citys: [
-        { txt: '深圳', id: 1 },
-        { txt: '赣州', id: 2 },
-        { txt: '珠海', id: 3 },
-    ]
+const city = computed(() => {
+    return pageIndexState.city
 })
 
-const isiive = (v: ONE) => {
+const aii = reactive({
+    iive: DATA_CITY_DEF,
+    citys: DATA_CITYS
+})
+
+const isiive = (v: Conf.City) => {
     const __id = v.id;
-    const id = must_one<ONE>(aii.iive).id
+    const id = must_one<Conf.City>(aii.iive).id
     return __id == id
 }
 
-const funn = {
-    v: () => { return aii.iive }
-}
+const funn = { 
+    init: promise(() => {
+        aii.iive = city.value
+    }),
+    v: () => { return aii.iive } }
 
 defineExpose(funn)
 </script>

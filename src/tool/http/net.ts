@@ -112,7 +112,7 @@ class Net extends NeTooi {
         // 请求 配置
         const __config: UniApp.RequestOptions = this._config_get(__url, params ? params : { }, this.jwt(), false);
         if (this.is_log) {
-            // console.log("GET", __url, __config)
+            console.log("GET", __url, __config)
         }
         // 返回
         return this.adapter(__config);

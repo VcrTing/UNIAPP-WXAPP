@@ -21,63 +21,82 @@
             </view>
             <view class="bg-con">
                 <CkInpItem class="pt-x2 pb" :tit="''">
-                    <OInput :def="aii.form.name" @result="(v) => aii.form.name = v" 
+                    <OInput :def="form.title" @result="(v) => form.title = v" 
                         class="h6" :pchd="'请输入活动标题'"/>
                 </CkInpItem>
-                <view class="pi-inp py">
-                    <view class="pb-s"><text>标签</text></view>
-                    <view class="mh-inp pb-s pt-n">
-                        <OButtonDef :weak="true" clazz="fs-n tid d-ib px br-s mr">黑丝</OButtonDef>
-                        <OButtonDef :weak="true" clazz="fs-n tid d-ib px br-s mr">JK</OButtonDef>
-                        <OButtonDef :weak="true" clazz="fs-n tid d-ib px br-s">约会</OButtonDef>
+                <view class="pt pb">
+                    <view class="pi-inp pb">
+                        <text>标签</text>
+                        <text class="fs-s pi tis">({{ taglen }}/{{ form.taglimit }})</text>
+                    </view>
+                    <view class="mh-inp " :class="taglen ? 'pi-inp' : ''">
+                        
+                        <OScrollX>
+                            <view class="" >
+                                <view class="d-ib pr" v-for="(v, i) in form.tags" :key="i">
+                                    <OButtonDef :weak="true" clazz="fs-n tid pi br-s">
+                                        <text>{{ v.name }}</text>
+                                        <OButtonDef @tap="funn.trashTag(v)">
+                                            <UiI clazz="d-ib fs-s" i="trash"/>
+                                        </OButtonDef>
+                                    </OButtonDef>
+                                </view>
+                                <view v-if="taglen < form.taglimit" class="d-ib px-inp" @tap="funn.ediTag">
+                                    <view class="btn-def w-2em fx-c h-2em br-cir"><UiI i="+"/></view>
+                                </view>
+                            </view>
+                        </OScrollX>
                     </view>
                 </view>
             </view>
-            <!--<view class="header-s py">基本资料</view>
-            <CkInpItem class="pt" :tit="''">
-                <OFile class="px-x2">
-                    <OButtonDef clazz="w-333 h-12vh fx-c br-s" :weak="true">
-                        <view class="fs-n tiw">
-                            <UiI :clazz="'d-ib'" :i="'+'"/>
-                            <text class="px-s">添加优质</text>
-                            <view>图片更吸引人</view>
-                        </view>
-                    </OButtonDef>
-                </OFile>
-            </CkInpItem>-->
-            <!--
-            <CkInpItem class="pt" :tit="''">
-                <OTextarea class="pt-t" :def="aii.form.description" @result="(v) => aii.form.name = v" 
-                    :pchd="'请输入活动描述'"/>
-            </CkInpItem>
-            -->
+            <VwPpFormTagChoisePagePan :idx="pan_tag.idx" :form="form"/>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
 import OInput from '@/cake/input/inp/OInput.vue';
-import OTextarea from '@/cake/input/textarea/OTextarea.vue';
-import { reactive } from 'vue';
-import CoVwPpFormItem from '../component/CoVwPpFormItem.vue';
-import OFile from '@/cake/input/file/OFile.vue';
+import { computed, reactive } from 'vue';
 import UiI from '@/ui/element/i/UiI.vue';
 import OButtonDef from '@/cake/button/OButtonDef.vue';
 import CkInpItem from '@/cake/input/wrapper/CkInpItem.vue';
-import ODashBtn from '@/cake/content/ODashBtn.vue';
 import mock_orders from '@/server/mock/order/mock_orders';
 import CoImg from '@/components/media/img/CoImg.vue';
+import { arrfind, arrfindi } from '@/tool/util/iodash';
+import { must_arr } from '@/tool/util/valued';
+import VwPpFormTagChoisePagePan from './pan/VwPpFormTagChoisePagePan.vue';
+import pan_tooi from '@/tool/app/pan_tooi';
+import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
 
 // const prp = defineProps<{}>()
-const aii = reactive({
-    form: {
-        name: '', description: ''
-    }
+const form = reactive({
+    title: '', tags: <ActivityTag[]>[ ], taglimit: 3
 })
 
-const funn = {
+const taglen = computed(() => must_arr(form.tags).length)
 
+const emt = defineEmits([ 'refresh' ])
+
+const funn = {
+    trashTag: (v: ActivityTag) => {
+        const i = arrfindi(form.tags, v.id, 'id')
+        // console.log('删掉 =', i)
+        form.tags.splice(i, 1)
+    },
+    ediTag: () => {
+        pan_tooi.open_def_r(pan_tag.idx)
+    },
+    v: () => {
+        return form
+    }
+}
+
+const func = {
+    refresh: () => emt('refresh')
 }
 
 defineExpose(funn)
+
+const pan_tag = { idx: 41, hui: <ElePanHui> { opacity: 0.1 } }
+
 </script>

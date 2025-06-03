@@ -20,3 +20,7 @@ export const init_global_data = () => promise(() => {
 export const tipsucc = (title: string = '操作成功。') => {
   uni.showToast({ title, icon: 'none' })
 }
+
+export const tipwarn = (title: string = '警告') => {
+  uni.showToast({ title, icon: 'none' })
+}

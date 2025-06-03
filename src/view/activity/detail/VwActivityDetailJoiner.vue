@@ -54,7 +54,7 @@ import UiI from '@/ui/element/i/UiI.vue';
 import { computed } from 'vue';
 
 const prp = defineProps<{
-    one: ONE
+    one: Activity
 }>()
 
 const members = computed((): MANY => {

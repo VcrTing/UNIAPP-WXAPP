@@ -4,16 +4,27 @@
             <view class="fx-r py-s">
                 <view class="fx-r fx-aii-btn-def" @tap="funn.openfilter">
                     <text class="pr-s py-row pi-x1 tit">
-                        {{ aii.range[aii.value].text }}
+                        {{ tab['name'] }}
                     </text>
                     <OFI clazz="pr-row py-row" :i="'b'"/>
                 </view>
             </view>
         </view>
-        <view class="px-row">
-            <view class="pb-row" v-for="(v, i) in aii.items" :key="i">
-                <CoMoPublishViewItem :v="v"/>
-            </view>
+        <view class="px-row py-s">
+            <CoViDataLoading :ioading="aii.ioading" :items="aii.items">
+                <view class="pb-row" v-for="(v, i) in aii.items" :key="i">
+                    <CoMoPublishViewItem :v="v">
+                        <view class="pt-s">&nbsp;</view>
+                        <view class="pr pt">
+                            <view class="fx-r tis fs-s btn-err px-t">
+                                <text class="pi-s">
+                                    {{ activity_tool.getstatus(v) }}
+                                </text>
+                            </view>
+                        </view>
+                    </CoMoPublishViewItem>
+                </view>
+            </CoViDataLoading>
         </view>
 
         <OPan :idx="pan.idx">
@@ -23,12 +34,12 @@
                 </view>
                 <view class="px-row">
                     <view>
-                        <view class="py-s" v-for="(v, i) in aii.range" :key="i"
+                        <view class="py-s" v-for="(v, i) in tabs" :key="i"
                             @tap="funn.changefilter(v, i)"
                         >
                             <view class="py px ta-c fx-aii-btn-def br-1"
-                                :class="aii.value == i ? 'bg-def' : ''"
-                            >{{ v.text }}</view>
+                                :class="aii.i == v.v ? 'bg-def' : ''"
+                            >{{ v.name }}</view>
                         </view>
                     </view>
                 </view>
@@ -44,32 +55,51 @@ import OButtonDef from '@/cake/button/OButtonDef.vue';
 import OPan from '@/cake/pan/OPan.vue';
 import OPanInnerY from '@/cake/pan/OPanInnerY.vue';
 import CoMoPublishViewItem from '@/components/modules/publish/CoMoPublishViewItem.vue';
+import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
+import { DATA_ACTIVITY_STATUS, DATA_ACTIVITY_STATUS_DEF } from '@/conf/conf-datas';
 import mock_publish from '@/server/mock/publish/mock_publish';
+import server_publish from '@/server/publish/server_publish';
 import pan_tooi from '@/tool/app/pan_tooi';
+import net_tool from '@/tool/http/net_tool';
+import activity_tool from '@/tool/modules/activity_tool';
+import { future, timeout } from '@/tool/util/future';
+import { arrfind } from '@/tool/util/iodash';
 import UiI from '@/ui/element/i/UiI.vue';
-import { reactive } from 'vue';
+import { computed, nextTick, reactive } from 'vue';
 
 const pan = { idx: 20, hui: <ElePanHui>{ opacity: 0 } }
+const tabs = DATA_ACTIVITY_STATUS
 
 // const prp = defineProps<{}>()
 const aii = reactive({
-    items: mock_publish.history,
-    
-    range: [
-        { value: 0, text: "全部" },
-        { value: 2, text: "已完成" },
-        { value: 1, text: "已取消" },
-    ],
-    value: 0,
+    items: <Activity[]>[ ], ioading: false,
+    i: DATA_ACTIVITY_STATUS_DEF.v,
+    param: { }, pager: net_tool.generate_pagination(20)
+})
+
+const tab = computed((): Conf.Tab => {
+    return arrfind<Conf.Tab>(tabs, aii.i, 'v')
 })
 
 const funn = {
     changefilter: (v: ONE, i: number) => {
-        aii.value = i;
+        aii.i = v.v;
         pan_tooi.close_pan(pan.idx)
     },
     openfilter: () => {
-        pan_tooi.open_def_b(pan.idx)
+        console.log('打开')
+        pan_tooi.open_def_b(pan.idx, pan.hui)
     }
 }
+
+const func = {
+    init: () => future(async () => {
+        aii.ioading = true
+        const dts: Activity[] = await server_publish.history(aii.param)
+        aii.items = dts
+        timeout(() => aii.ioading = false)
+    })
+}
+
+nextTick(func.init)
 </script>

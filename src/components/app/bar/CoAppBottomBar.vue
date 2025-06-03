@@ -24,17 +24,14 @@
 
 <script setup lang="ts">
 import OAppBottomBar from '@/cake/app/bar/OAppBottomBar.vue';
-import { APP_BAR_JOINER, APP_BAR_PUBLISHER } from '@/conf/conf-app';
-import { authGetters, ulDispatch } from '@/memory/global';
-import pan_tooi from '@/tool/app/pan_tooi';
+import { APP_BAR_JOINER } from '@/conf/conf-app';
 import uniRouter from '@/tool/uni/uni-router';
-import { futuring } from '@/tool/util/future';
 import UiI from '@/ui/element/i/UiI.vue';
 import { onLaunch } from '@dcloudio/uni-app';
 import { computed, reactive } from 'vue';
 
 onLaunch(() => { uni.hideTabBar({ success: () => { } }) });
-const prp = defineProps<{
+defineProps<{
     mat?: boolean
 }>()
 
@@ -53,29 +50,8 @@ const code = computed((): string => {
     return ''
 })
 
-const me = reactive({
-    bars: [ ]
-})
-
-const is_publisher = computed(() => authGetters.is_publisher)
 const bars = computed(() => {
-    return is_publisher.value ? APP_BAR_PUBLISHER : APP_BAR_JOINER
+    return APP_BAR_JOINER
 })
 
-const aii = reactive({
-    ioading: false
-})
-
-const funn = {
-    // 打开首页 MENU
-    index_manu: () => futuring(aii, async () => {
-        if (authGetters.is_login) {
-            ulDispatch('init_menus')
-            pan_tooi.open_index_menu() 
-        }
-        else {
-            console.log('没登录，不给打开 INDEX MENU')
-        }
-    }),
-}
 </script>

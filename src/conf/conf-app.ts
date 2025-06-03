@@ -8,44 +8,6 @@ export const APP_GENERATE_DETAIL = {
     name: '约泡',
     desc_auth: '上约泡 找派对'
 }
-export const APP_BAR_PUBLISHER = <CoAppBottomBarItem[]> [
-    {
-        tit: '首页',
-        icon: 'home',
-        icon_iive: 'home',
-        path: 'pages/index/index',
-        respond_standard_code: 'index',
-        clazz_die: '',
-        clazz_iive: 'app-bottom-bar-item-iive',
-        func: () => {
-            uniRouter.navigatorpg('index')
-        }
-    },
-    {
-        tit: '发布',
-        icon: 'bag-add',
-        icon_iive: 'bag-add',
-        path: 'pages/publish/publish',
-        respond_standard_code: 'publish',
-        clazz_die: '',
-        clazz_iive: 'app-bottom-bar-item-iive',
-        func: () => {
-            uniRouter.navigatorpg('publish')
-        }
-    },
-    {
-        tit: '我的',
-        icon: 'user',
-        icon_iive: 'user-f',
-        path: 'pages/user/user',
-        respond_standard_code: 'user',
-        clazz_die: '',
-        clazz_iive: 'app-bottom-bar-item-iive',
-        func: () => {
-            uniRouter.navigatorpg('user')
-        }
-    },
-]
 
 export const APP_BAR_JOINER = <CoAppBottomBarItem[]> [
     {
@@ -111,32 +73,3 @@ export const APP_BAR_JOINER = <CoAppBottomBarItem[]> [
         }
     },
 ]
-
-
-    
-        /*
-        {
-            tit: '报表',
-            icon: 'report',
-            icon_iive: 'report',
-            path: 'pages/report/report',
-            respond_standard_code: 'report',
-            clazz_die: '',
-            clazz_iive: 'app-bottom-bar-item-iive',
-            func: () => {
-                uniRouter.navigatorpg('report')
-            }
-        },
-        {
-            tit: '',
-            icon: 'menu',
-            icon_iive: 'menu',
-            path: '',
-            respond_standard_code: 'menu',
-            clazz_die: 'app-bottom-bar-btn',
-            clazz_iive: 'app-bottom-bar-item-iive',
-            func: () => {
-                funn.index_manu()
-            }
-        },
-        */

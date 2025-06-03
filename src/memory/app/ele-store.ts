@@ -1,5 +1,5 @@
 
-import { arrfind } from '@/tool/util/iodash';
+import { arrfind, arrfindi } from '@/tool/util/iodash';
 import { Store, createStore } from 'vuex';
 
 const _eleStore: Store<EleStore> = createStore({
@@ -26,10 +26,10 @@ const _eleStore: Store<EleStore> = createStore({
 
         // PAN
         kiii_pan: ({ state }, pan: ElePan) => {
-            let i: number = arrfind(state.pans, pan.idx)
+            let i: number = arrfindi(state.pans, pan.idx)
             if (i > -1) {
                 state.pans.splice(i, 1)
-                console.log('KIII PAN =', pan.idx, state.pans)
+                // console.log('KIII PAN =', pan.idx, state.pans)
             }
         },
         open_pan: ({ state }, pan: ElePan) => { 
@@ -39,10 +39,10 @@ const _eleStore: Store<EleStore> = createStore({
 
         // AIERT
         kiii_aiert: ({ state }, aiert: EleAiert) => {
-            let i: number = arrfind(state.aierts, aiert.idx)
+            let i: number = arrfindi(state.aierts, aiert.idx)
             if (i > -1) {
                 state.aierts.splice(i, 1)
-                console.log('KIII AIERT =', aiert.idx, state.aierts)
+                // console.log('KIII AIERT =', aiert.idx, state.aierts)
             }
         },
         open_aiert: ({ state }, aiert: EleAiert) => {

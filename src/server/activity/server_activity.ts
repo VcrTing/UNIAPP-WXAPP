@@ -1,15 +1,30 @@
-import aiert_tooi from "@/tool/app/aiert_tooi"
+import { authGetters } from "@/memory/global"
 import http from "@/tool/http/http"
+import net_tool from "@/tool/http/net_tool"
 import { is_arr, is_str } from "@/tool/util/typed"
 
-const index = async (param: ONE = { }): ONE_PROMISE => {
-    const src: NET_RES = await http.master.get('activity', null, param)
-    console.log('src =', src)
-    // if (is_str(src)) return aiert_tooi.err_r_one(src)
+// http://localhost:1337/api/activities?populate[publisher][fields]=*&filters[activity_tags][name][$eq]=原味
+
+const relations = [ 'activity_address', 'activity_medias', 'publisher', 'activity_tags' ]
+
+const fetching = async (param: ONE, pager: Pager): Promise<Activity[]> => {
+    const __pm: ONE = net_tool.build_strapi_param(param, pager, relations)
+    const src: NET_RES = await http.master.get('activity', null, __pm)
     const res: ONE | MANY = (src as HttpResult).data
-    return is_arr(res) ? { } : (res as ONE)
+    return is_arr(res) ? (res as Activity[]) : [ ]
+}
+
+const index = async (param: ONE, pager: Pager): Promise<Activity[]> => {
+    return await fetching(param, pager)
+}
+
+const index_recommond = async (param: ONE, pager: Pager): Promise<Activity[]> => {
+    // 开启推荐
+    param['filters[isRecommended][$eq]'] = 1 // [ 'activity_address', 'activity_medias', 'publisher' ]
+    return await index(param, pager)
 }
 
 export default {
-    index
+    index,
+    index_recommond
 }

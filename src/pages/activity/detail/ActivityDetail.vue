@@ -3,9 +3,7 @@
     <PageLayout>
         <DetailLayout :h="68">
             <template #bg>
-                <view class="h-42vh">
-                    <image mode="aspectFill" class="uni-img w-100 h-100" :src="view.banner"/>
-                </view>
+                <VwActivityDetailBanner :one="view" :h="'34vh'"/>
             </template>
             <template #top>
                 <CoAppTopBackBar @back="funn.back" :clazz_i="'c-fff'"></CoAppTopBackBar>
@@ -63,18 +61,17 @@ import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { acyState, authGetters, authState, orderReFresh, uiState } from '@/memory/global';
 import mock_orders from '@/server/mock/order/mock_orders';
 import pan_tooi from '@/tool/app/pan_tooi';
+import activity_tool from '@/tool/modules/activity_tool';
 import uniRouter from '@/tool/uni/uni-router';
-import VwAdPricePan from '@/view/activity/detail/pan/VwAdPricePan.vue';
 import VwActivityDetailAddrTime from '@/view/activity/detail/VwActivityDetailAddrTime.vue';
+import VwActivityDetailBanner from '@/view/activity/detail/VwActivityDetailBanner.vue';
 import VwActivityDetailContent from '@/view/activity/detail/VwActivityDetailContent.vue';
 import VwActivityDetailGallery from '@/view/activity/detail/VwActivityDetailGallery.vue';
 import VwActivityDetailJoiner from '@/view/activity/detail/VwActivityDetailJoiner.vue';
-import VwActivityDetailPublisher from '@/view/activity/detail/VwActivityDetailPublisher.vue';
 import VwActivityDetailTitle from '@/view/activity/detail/VwActivityDetailTitle.vue';
 import { computed, nextTick, onMounted, reactive } from 'vue';
 
-// const prp = defineProps<{}>()
-const view = computed(() => acyState.view)
+const view = computed((): Activity => acyState.view)
 const user = computed(() => authState.user)
 
 const aii = reactive({

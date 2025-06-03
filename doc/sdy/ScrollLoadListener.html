@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无限滚动加载</title>
+    <style>
+        body {
+            background: #f8f8f8;
+        }
+        .wrapper {
+            width: 400px;
+            margin: 0 auto;
+            height: 500px;
+            background: #fff;
+            overflow-y: scroll;
+        }
+        .item {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            margin: 10px 0;
+        }
+        #loading {
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper" id="wrapper">
+        <div id="content">
+            <!-- 内容将在这里动态添加 -->
+        </div>
+        <div id="loading">加载中...</div>
+    </div>
+
+    <script>
+        // 模拟数据源
+        let currentPage = 1;
+        const pageSize = 20;
+        //
+        let __limit = 300;
+        let __ioading = false;
+        //
+        let wrapper = null;
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            fetching();
+            wrapper = document.getElementById('wrapper');
+            wrapper.addEventListener('scroll', handleScroll);
+        });
+        
+        function __checkLoad() {
+            console.log('进入滚动')
+            // 检查是否滚动到底部
+            const scrollTop = wrapper.scrollTop;
+            const scrollHeight = wrapper.scrollHeight;
+            const clientHeight = wrapper.clientHeight;
+            
+            // 当滚动到离底部100px时加载更多
+            if ((scrollTop + clientHeight) >= (scrollHeight - __limit)) {
+                fetching();
+            }
+        }
+        // 滚动处理函数
+        let debounceTimer = null;
+        function handleScroll() {
+            if (debounceTimer) clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => { if (__ioading) return; __checkLoad() }, 20)
+        }
+        
+        // 加载更多内容
+        function fetching() {
+            ioading(true)
+            console.log('-------- 调用加载 ----------')
+            // 模拟API请求延迟
+            setTimeout(function() {
+                // 这里应该是实际的API请求
+                // 为了示例，我们使用模拟数据
+                for (let i = 0; i < pageSize; i++) {
+                    const item = document.createElement('div');
+                    item.className = 'item';
+                    item.textContent = `项目 ${(currentPage - 1) * pageSize + i + 1}`;
+                    document.getElementById('content').appendChild(item);
+                }
+                currentPage++;
+                ioading(false)
+            }, 800);
+        }
+
+        let __idg = document.getElementById('loading')
+        const ioading = (v) => {
+            __ioading = v;
+            __idg.style.display = v ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
