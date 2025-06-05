@@ -14,14 +14,11 @@
             <CoViDataLoading :ioading="aii.ioading" :items="aii.items">
                 <view class="pb-row" v-for="(v, i) in aii.items" :key="i">
                     <CoMoPublishViewItem :v="v">
-                        <view class="pt-s">&nbsp;</view>
-                        <view class="pr pt">
                             <view class="fx-r tis fs-s btn-err px-t">
                                 <text class="pi-s">
                                     {{ activity_tool.getstatus(v) }}
                                 </text>
                             </view>
-                        </view>
                     </CoMoPublishViewItem>
                 </view>
             </CoViDataLoading>

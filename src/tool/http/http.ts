@@ -1,15 +1,18 @@
-import { MASTER, NET_ENDPOINTS, NET_FUNCTION_GET_JWT, NET_IS_LOG, NET_TIMEOUT_GET, NET_TIMEOUT_POS } from "@/conf/conf-net";
-import { NET_URI_MASTER, NET_URI_MASTER_API } from "@/conf/conf-net";
+import { FILE, MASTER, NET, NET_ENDPOINTS, NET_FUNCTION_GET_JWT, } from "@/conf/conf-net";
 import Net from "./net";
 
 // 主数据源
-const master = new Net(
-    NET_URI_MASTER + '/' + NET_URI_MASTER_API, 
+export const master = new Net(
+    NET.MASTER.URI + '/' + NET.MASTER.API, 
     NET_ENDPOINTS[ MASTER ], 
     NET_FUNCTION_GET_JWT,
-    NET_TIMEOUT_GET, NET_TIMEOUT_POS, NET_IS_LOG
+    NET.MASTER.TIMEOUT_GET, NET.MASTER.TIMEOUT_POS, NET.MASTER.IS_LOG
 );
 
-export default {
-    master
-}
+// 文件上传
+export const file = new Net(
+    NET.FILE.URI + '/' + NET.FILE.API, 
+    NET_ENDPOINTS[ FILE ], 
+    NET_FUNCTION_GET_JWT,
+    NET.FILE.TIMEOUT_GET, NET.FILE.TIMEOUT_POS, NET.FILE.IS_LOG
+);

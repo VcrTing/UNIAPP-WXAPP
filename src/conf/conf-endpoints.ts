@@ -29,3 +29,8 @@ export const NET_ENDPOINTS_MASTER = <ONE> {
     ...NET_ENDPOINT_USER,
     ...NET_ENDPOINT_ACTIVITY
 }
+
+
+export const NET_ENDPOINT_FILE = <ONE> {
+    'upload': 'upload'
+}

@@ -23,17 +23,20 @@
     "orderId": {
       "type": "string"
     },
-    "users": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "activity_registrations"
-    },
     "activity": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::activity.activity",
       "inversedBy": "activity_registrations"
+    },
+    "num": {
+      "type": "integer"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "activity_registration"
     }
   }
 }

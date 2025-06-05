@@ -6,7 +6,7 @@
                 :class="aii.iive == i ? 'bd-b-x2 bd-c-x2' : 'sus'"
             >
                 <view class="px-row py fx-c">
-                    <view class="h6 fw-550">{{ v.tit }}</view>
+                    <view class="h6 fw-550">{{ v.name }}</view>
                 </view>
             </view>
         </view>

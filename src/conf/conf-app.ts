@@ -1,13 +1,16 @@
+import pan_tooi from "@/tool/app/pan_tooi"
 import uniRouter from "@/tool/uni/uni-router"
 
 export const UX_DOUBLE_TOUCH_JUDGE_TIME = 300
 
 export const APP_GENERATE_DETAIL = {
     logo: '../../../static/logo.png',
-    desc: '找派对 上约泡',
-    name: '约泡',
-    desc_auth: '上约泡 找派对'
+    desc: '找派对 上同趣圈',
+    name: '同趣圈',
+    desc_auth: '上同趣圈 找派对'
 }
+
+export const app_confirm = () => pan_tooi.open_def_b(1001, { opacity: 0.4 })
 
 export const APP_BAR_JOINER = <CoAppBottomBarItem[]> [
     {

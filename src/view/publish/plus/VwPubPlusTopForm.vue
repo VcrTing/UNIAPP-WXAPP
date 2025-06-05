@@ -1,23 +1,31 @@
 <template>
-    <view class="">
-        <view class="">
+    <view class="bg-con">
+        <view class="pt-x2">
             <!--<view class="header-s py">基本资料</view>-->
-            <view class="fx-i">
-                <view class="w-80 h-16vh fx-c ps-r zi-t">
-                    <CoImg clazz="h-100" :v="mock_orders.banner"/>
-                    <view class="abs-b r-0">
-                        <view class="px py bg-028">
-                            <UiI i='trash' clazz="c-fff"/>
+            <view class="">
+                <OScrollX>
+                    <view class="d-ib pi-inp"></view>
+                    <view class="w-28 h-12vh d-ib">
+                        <view class="w-100 h-12vh fx-c ps-r zi-t">
+                            <CoImg clazz="h-100 w-100 br" :v="mock_orders.banner"/>
+                            <view class="abs-b r-0">
+                                <view class="px-s py-s bg-028 br-ti br-br">
+                                    <UiI i='trash' clazz="c-fff op-618"/>
+                                </view>
+                            </view>
                         </view>
                     </view>
-                </view>
-                <OButtonDef clazz="w-333 h-12vh fx-c br-s" :weak="true">
-                    <view class="fs-n tiw">
-                        <UiI :clazz="'d-ib'" :i="'+'"/>
-                        <text class="px-s">添加优质</text>
-                        <view>图片更吸引人</view>
+                    <view class="px-s d-ib"></view>
+                    <view class="w-28 h-12vh br-s d-ib ps-r zi-t">
+                        <OButtonDef clazz="h-100 fx-c abs-b i-0 w-100 br" :weak="true" @tap="funn.choseImg">
+                            <view class="fs-n tiw">
+                                <UiI :clazz="'d-ib'" :i="'+'"/>
+                                <text class="px-s">添加优质</text>
+                                <view>图片更吸引人</view>
+                            </view>
+                        </OButtonDef>
                     </view>
-                </OButtonDef>
+                </OScrollX>
             </view>
             <view class="bg-con">
                 <CkInpItem class="pt-x2 pb" :tit="''">
@@ -26,7 +34,7 @@
                 </CkInpItem>
                 <view class="pt pb">
                     <view class="pi-inp pb">
-                        <text>标签</text>
+                        <text>活动标签</text>
                         <text class="fs-s pi tis">({{ taglen }}/{{ form.taglimit }})</text>
                     </view>
                     <view class="mh-inp " :class="taglen ? 'pi-inp' : ''">
@@ -63,14 +71,20 @@ import CkInpItem from '@/cake/input/wrapper/CkInpItem.vue';
 import mock_orders from '@/server/mock/order/mock_orders';
 import CoImg from '@/components/media/img/CoImg.vue';
 import { arrfind, arrfindi } from '@/tool/util/iodash';
-import { must_arr } from '@/tool/util/valued';
+import { is_nice_arr, must_arr } from '@/tool/util/valued';
 import VwPpFormTagChoisePagePan from './pan/VwPpFormTagChoisePagePan.vue';
 import pan_tooi from '@/tool/app/pan_tooi';
 import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
+import { open_choise_img } from '@/tool/uni/uni-app';
+import server_upload_media from '@/server/media/server_upload_media';
+import { tipwarn } from '@/tool/uni/uni-global';
 
 // const prp = defineProps<{}>()
 const form = reactive({
-    title: '', tags: <ActivityTag[]>[ ], taglimit: 3
+    title: '', tags: <ActivityTag[]>[ ], taglimit: 3,
+    __banner: [
+        { url: 'https://img0.baidu.com/it/u=4007537519,3388078189&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=1050' }
+    ]
 })
 
 const taglen = computed(() => must_arr(form.tags).length)
@@ -86,9 +100,33 @@ const funn = {
     ediTag: () => {
         pan_tooi.open_def_r(pan_tag.idx)
     },
-    v: () => {
-        return form
-    }
+    choseImg: async () => {
+        const res = await open_choise_img()
+        // console.log('chooseIMG RES =', res)
+        // const ph: string = JSON.stringify(res.tempFilePaths)
+        const fs: File[] = must_arr(res.tempFiles);
+        // console.log(fs)
+        await server_upload_media.upload(fs)
+    },
+    vid: () => {
+        if (!is_nice_arr(form.__banner)) {
+            tipwarn('请至少上传一张活动宣传图。')
+            return false
+        }
+        if (form.tags.length == 0) {
+            tipwarn('活动标签为空，请至少选择一个标签。')
+            return false
+        }
+        if (!form.title || form.title.length < 3) {
+            tipwarn('活动标题至少大于4个字符。')
+            return false
+        }
+        return true
+    },
+    v: (): ONE | null => {
+        if (funn.vid()) { return form }
+        return null
+    },
 }
 
 const func = {

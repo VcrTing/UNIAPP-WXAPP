@@ -14,8 +14,9 @@ class NeTooi {
     _uri(api: string, endpoint: string, suffix: string | null = ''): string { return api + '/' + endpoint + (suffix ?  '/' + suffix : '') }
 
     _headers (jwt: string | null, isF: boolean = false): ONE { 
+        const boundary = '----WebKitFormBoundary' + Math.random().toString(16).substring(2);
         const res = <ONE>{ 
-            'Content-Type': isF ? 'multipart/form-data' : 'application/json' 
+            'Content-Type': isF ? `multipart/form-data; boundary=${boundary}` : 'application/json' 
         }
         if (jwt) { 
             res['Authorization'] = 'Bearer ' + jwt 
@@ -118,11 +119,11 @@ class Net extends NeTooi {
         return this.adapter(__config);
     }
 
-    pos (url_name: string, url_suffix: string | null, data: ONE | null): NET_RES_PROMISE {
+    pos (url_name: string, url_suffix: string | null, data: ONE | null, is_file: boolean = false): NET_RES_PROMISE {
         // 请求 URL
         const __url: string = this.build_url(url_name, url_suffix)
         // 请求 配置
-        const __config: UniApp.RequestOptions = this._config_pos(__url, data, this.jwt(), false)
+        const __config: UniApp.RequestOptions = this._config_pos(__url, data, this.jwt(), is_file)
         if (this.is_log) {
             console.log("POST", __url, __config)
         }
@@ -131,10 +132,11 @@ class Net extends NeTooi {
     }
 
     put (url_name: string, url_suffix: string | null, data: ONE | null): NET_RES_PROMISE {
+        console.log('url_suffix =', url_suffix)
         // 请求 URL
         const __url: string = this.build_url(url_name, url_suffix)
         // 请求 配置
-        const __config: UniApp.RequestOptions = this._config_pos(__url, data, this.jwt(), false)
+        const __config: UniApp.RequestOptions = this._config_put(__url, data, this.jwt(), false)
         if (this.is_log) {
             console.log("PUT", __url, __config)
         }
@@ -149,6 +151,18 @@ class Net extends NeTooi {
         const __config: UniApp.RequestOptions = this._config_pos(__url, data, this.jwt(), false)
         if (this.is_log) {
             console.log("DELETE", __url, __config)
+        }
+        // 返回
+        return this.adapter(__config);
+    }
+    
+    uio (url_name: string, url_suffix: string | null, data: FormData): NET_RES_PROMISE {
+        // 请求 URL
+        const __url: string = this.build_url(url_name, url_suffix)
+        // 请求 配置
+        const __config: UniApp.RequestOptions = this._config_pos(__url, data, this.jwt(), true)
+        if (this.is_log) {
+            console.log("UPLOAD", __url, __config)
         }
         // 返回
         return this.adapter(__config);

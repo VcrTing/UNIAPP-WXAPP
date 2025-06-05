@@ -23,6 +23,12 @@ interface Activity {
 
     typed: number
     createdAt: string
+    
+    address: string
+    city: string
+    area: string
+    latitude: string
+    longitude: string
 }
 
 interface ActivityTag {

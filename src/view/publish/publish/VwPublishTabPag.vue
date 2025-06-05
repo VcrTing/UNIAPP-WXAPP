@@ -1,16 +1,21 @@
 <template>
     <view>
         <view class="bg-con">
-            <CoHeaderTabs :tabs="aii.tabs" @change="(i) => aii.iive = i">
-                <!--
-                <view class="px-row">
-                    <view class="fs-s">
-                        <UiI i="trash" clazz="d-ib"/>
-                        <text>回收站</text>
+            <view class="fx-s zi-s">
+                <view class="fx-i fx-1">
+                    <view class="py-s" v-for="(v, i) in aii.tabs" :key="i"
+                        @tap="funn.swicthTab(i)"
+                        :class="aii.iive == i ? 'bd-b-x2 bd-c-x2' : 'sus'"
+                    >
+                        <view class="px-row py fx-c">
+                            <view class="h6 fw-550">{{ v.name }}</view>
+                        </view>
                     </view>
                 </view>
-                -->
-            </CoHeaderTabs>
+                <view class="">
+                </view>
+            </view>
+            <view class="zi-t bd-b w-100 bd-c-s "></view>
         </view>
         <view>
             <view v-if="aii.iive == 0" class="py-row">
@@ -27,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive, ref, watch } from 'vue';
 import VwPptPagHistory from './pag/VwPptPagHistory.vue';
 import VwPptPagWorking from './pag/VwPptPagWorking.vue';
 import VwPptPagWarehouse from './pag/VwPptPagWarehouse.vue';
@@ -38,14 +43,17 @@ import server_activity from '@/server/activity/server_activity';
 import net_tool from '@/tool/http/net_tool';
 import server_publish from '@/server/publish/server_publish';
 
-// const prp = defineProps<{}>()
+const prp = defineProps<{
+    // code: number
+    route: PUBLISH_PAGE_ROUTE
+}>()
 
 const aii = reactive({
-    iive: 0, ioading: false,
+    iive: prp.route.pag || 0, ioading: false,
     tabs: [
-        { tit: '上架中', v: 0 },
-        { tit: '待发布', v: 1 },
-        { tit: '历史活动', v: 2 },
+        { name: '上架中', v: 0 },
+        { name: '待发布', v: 1 },
+        { name: '历史活动', v: 2 },
     ],
     param: { }, pager: net_tool.generate_pagination(200)
 })
@@ -63,8 +71,13 @@ const funn = {
     freshWaiting: () => future(async () => {
         const dts: Activity[] = await server_publish.waiting({ })
         waiting.value = dts
-    })
+    }),
+    swicthTab: (i: number) => {
+        aii.iive = i
+    }
 }
+
+defineExpose(funn)
 
 const func = {
     init: () => future(async () => {

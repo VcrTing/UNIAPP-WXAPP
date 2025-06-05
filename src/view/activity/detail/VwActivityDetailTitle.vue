@@ -6,7 +6,13 @@
             </view>
         </view>
         <view class="pt">
-            <view class="d-ib">
+            <view v-if="issm" class="d-ib">
+                <view class="btn-pink fx-c py-t pi-s pr-t br-s">
+                    <UiI clazz="fs-n" :i="'lock'"/>
+                    <view class="fs-s fw-800">非公开类型活动</view>
+                </view>
+            </view>
+            <view class="d-ib" v-else>
                 <view class="btn-blue fx-c py-t pi-s pr-t br-s">
                     <view class="fs-s fw-800">自动退</view>
                     <UiI clazz="fs-n" :i="'r'"/>
@@ -17,10 +23,13 @@
 </template>
 
 <script setup lang="ts">
+import activity_tool from '@/tool/modules/activity_tool';
 import UiI from '@/ui/element/i/UiI.vue';
+import { computed } from 'vue';
 
 const prp = defineProps<{
-    one: Activity
+    one: Activity, issm: boolean
 }>()
+
 
 </script>

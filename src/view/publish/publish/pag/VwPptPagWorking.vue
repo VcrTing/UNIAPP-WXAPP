@@ -10,7 +10,7 @@
         <view class="px-row py-s">
             <CoViDataLoading :ioading="ioading" :items="data">
                 <view class="pb-row" v-for="(v, i) in data" :key="i">
-                    <CoMoPublishWorkingItem :v="v" @tap="funn.edit(v)">
+                    <CoMoPublishWorkingItem :v="v" @tap="funn.view(v)">
                         <view>&nbsp;</view>
                         <view class="pr pt">
                             <view class="fx-r tis fs-s">
@@ -28,8 +28,9 @@
 <script setup lang="ts">
 import CoMoPublishWorkingItem from '@/components/modules/publish/CoMoPublishWorkingItem.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
-import { DATA_ACTIVITY_TYPED, DATA_ACTIVITY_TYPED_DEF } from '@/conf/conf-datas';
+import { DATA_ACTIVITY_TYPED, DATA_ACTIVITY_TYPED_GK } from '@/conf/conf-datas';
 import mock_publish from '@/server/mock/publish/mock_publish';
+import appRouter from '@/tool/uni/app-router';
 import uniRouter from '@/tool/uni/uni-router';
 import { must_arr } from '@/tool/util/valued';
 import UiI from '@/ui/element/i/UiI.vue';
@@ -41,7 +42,7 @@ const prp = defineProps<{
 }>()
 
 const aii = reactive({
-    i: DATA_ACTIVITY_TYPED_DEF.v
+    i: DATA_ACTIVITY_TYPED_GK.v
 })
 
 // 公开与非公开过滤
@@ -50,6 +51,7 @@ const data = computed((): Activity[] => {
 })
 
 const funn = {
+    view: (v: Activity) => appRouter.activity_detail(v),
     edit: (v: ONE) => {
         uniRouter.gopg('publish_edit')
     },

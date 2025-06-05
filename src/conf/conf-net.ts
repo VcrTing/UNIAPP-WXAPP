@@ -1,17 +1,43 @@
 import { authGetters, authState } from "@/memory/global"
-import { IS_NET_LOG, IS_TEST_MODE } from "./conf"
-import { NET_ENDPOINTS_MASTER } from "./conf-endpoints"
+import { IS_NET_LOG, is_strapi_mode, IS_TEST_MODE } from "./conf"
+import { NET_ENDPOINT_FILE, NET_ENDPOINTS_MASTER } from "./conf-endpoints"
 
+
+// 数据来源
+export const MASTER: string = 'MASTER'
+// 数据来源
+export const FILE: string = 'FILE'
+
+// 全局配置
+export const NET = {
+    MASTER: {
+        URI: is_strapi_mode() ? 'http://localhost:1337' : '',
+        API: is_strapi_mode() ? 'api' : 'api',
+        TIMEOUT_GET: 1000 * 30,
+        TIMEOUT_POS: 1000 * 30,
+        IS_LOG: true
+    },
+    FILE: {
+        URI: is_strapi_mode() ? 'http://localhost:1337' : '',
+        API: is_strapi_mode() ? 'api' : 'api',
+        TIMEOUT_GET: 1000 * 30,
+        TIMEOUT_POS: 1000 * 30,
+        IS_LOG: true
+    }
+}
+
+/*
 // 全局 主响应 URI
-export const NET_URI_MASTER = IS_TEST_MODE ? 'http://localhost:1337' : ''
+export const NET_URI_MASTER = is_strapi_mode() ? 'http://localhost:1337' : ''
 
 // 全局 主响应 的 API
-export const NET_URI_MASTER_API = IS_TEST_MODE ? 'api' : 'api'
+export const NET_URI_MASTER_API = is_strapi_mode() ? 'api' : 'api'
 
 // GET 超时时间
 export const NET_TIMEOUT_GET = 1000 * 30
 // POST 超时时间
 export const NET_TIMEOUT_POS = 1000 * 30
+*/
 
 // 打印 网络连接
 export const NET_IS_LOG = IS_NET_LOG
@@ -26,13 +52,10 @@ export const NET_FUNCTION_GET_JWT = (): string => {
 /**
  * 网络 LINK 合集 ====================================================================================================
  */
-
-// 数据来源
-export const MASTER: string = 'MASTER'
-
 // 网站的 endpoint，key 名字和 上面的要对应
 export const NET_ENDPOINTS = <ONEO>{
-    'MASTER': NET_ENDPOINTS_MASTER
+    'MASTER': NET_ENDPOINTS_MASTER,
+    'FILE': NET_ENDPOINT_FILE
 }
 
 /**

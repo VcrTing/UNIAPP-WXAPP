@@ -385,10 +385,6 @@ export interface ApiActivityAddressActivityAddress
     draftAndPublish: true;
   };
   attributes: {
-    activities: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::activity.activity'
-    >;
     address: Schema.Attribute.String;
     addressSystem: Schema.Attribute.String;
     city: Schema.Attribute.String;
@@ -417,6 +413,50 @@ export interface ApiActivityAddressActivityAddress
   };
 }
 
+export interface ApiActivityInviteActivityInvite
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'activity_invites';
+  info: {
+    displayName: 'ActivityInvite';
+    pluralName: 'activity-invites';
+    singularName: 'activity-invite';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    activity: Schema.Attribute.Relation<'manyToOne', 'api::activity.activity'>;
+    agreeStatus: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    invite_user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::activity-invite.activity-invite'
+    > &
+      Schema.Attribute.Private;
+    moneyStatus: Schema.Attribute.Integer;
+    publiser: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    read_num: Schema.Attribute.Integer;
+    refuseComment: Schema.Attribute.String;
+    refuseTime: Schema.Attribute.DateTime;
+    rewardNum: Schema.Attribute.Integer;
+    totalMoney: Schema.Attribute.Decimal;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiActivityMediaActivityMedia
   extends Struct.CollectionTypeSchema {
   collectionName: 'activity_medias';
@@ -442,6 +482,7 @@ export interface ApiActivityMediaActivityMedia
       'api::activity-media.activity-media'
     > &
       Schema.Attribute.Private;
+    media: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     meidaType: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     publishedAt: Schema.Attribute.DateTime;
     sortOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
@@ -480,6 +521,7 @@ export interface ApiActivityRegistrationActivityRegistration
       'api::activity-registration.activity-registration'
     > &
       Schema.Attribute.Private;
+    num: Schema.Attribute.Integer;
     orderId: Schema.Attribute.String;
     paymentStatus: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
@@ -487,8 +529,8 @@ export interface ApiActivityRegistrationActivityRegistration
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    users: Schema.Attribute.Relation<
-      'manyToMany',
+    user: Schema.Attribute.Relation<
+      'oneToOne',
       'plugin::users-permissions.user'
     >;
   };
@@ -542,9 +584,9 @@ export interface ApiActivityActivity extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    activity_address: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::activity-address.activity-address'
+    activity_invites: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::activity-invite.activity-invite'
     >;
     activity_medias: Schema.Attribute.Relation<
       'oneToMany',
@@ -558,6 +600,9 @@ export interface ApiActivityActivity extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::activity-tag.activity-tag'
     >;
+    address: Schema.Attribute.String;
+    area: Schema.Attribute.String;
+    city: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -567,12 +612,14 @@ export interface ApiActivityActivity extends Struct.CollectionTypeSchema {
     fee: Schema.Attribute.Decimal;
     introduction: Schema.Attribute.Text;
     isRecommended: Schema.Attribute.Integer;
+    latitude: Schema.Attribute.Decimal;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::activity.activity'
     > &
       Schema.Attribute.Private;
+    longitude: Schema.Attribute.Decimal;
     participantLimit: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     publisher: Schema.Attribute.Relation<
@@ -1057,12 +1104,20 @@ export interface PluginUsersPermissionsUser
       'oneToMany',
       'api::activity-address.activity-address'
     >;
+    activity_invite_publishers: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::activity-invite.activity-invite'
+    >;
+    activity_invites: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::activity-invite.activity-invite'
+    >;
     activity_medias: Schema.Attribute.Relation<
       'oneToMany',
       'api::activity-media.activity-media'
     >;
-    activity_registrations: Schema.Attribute.Relation<
-      'manyToMany',
+    activity_registration: Schema.Attribute.Relation<
+      'oneToOne',
       'api::activity-registration.activity-registration'
     >;
     activity_tags: Schema.Attribute.Relation<
@@ -1133,6 +1188,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::activity-address.activity-address': ApiActivityAddressActivityAddress;
+      'api::activity-invite.activity-invite': ApiActivityInviteActivityInvite;
       'api::activity-media.activity-media': ApiActivityMediaActivityMedia;
       'api::activity-registration.activity-registration': ApiActivityRegistrationActivityRegistration;
       'api::activity-tag.activity-tag': ApiActivityTagActivityTag;

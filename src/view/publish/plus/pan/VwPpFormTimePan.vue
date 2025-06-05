@@ -4,24 +4,55 @@
             <OPanInnerY :h="'46.8vh'" :idx="idx" :orientation="'b'">
                 <template #top>
                     <view class="fx-s">
-                        <OButtonWht @tap="funn.close" clazz=""><view class="pr py">取消</view></OButtonWht>
-                        <view class="py"><text class="h7 fw-550">活动时间</text></view>
-                        <OButtonWht @tap="funn.next"><view class="pi py pri">确定</view></OButtonWht>
+                        <OButtonWht @tap="funn.last" clazz="w-30 fx-i tis">
+                            <view class="tis">
+                                <text v-if="aii.next == 0">关闭</text>
+                                <view class="fx-r" v-if="aii.next == 1">
+                                    <UiI i="i"/>
+                                    <text>返回</text>
+                                </view>
+                            </view>
+                        </OButtonWht>
+                        <view class="py w-40 ta-c">
+                            <text class="h7 fw-550">
+                                <text>{{ aii.next == 0 ? '开始时间' : '结束时间'  }}</text>
+                            </text>
+                        </view>
+                        <OButtonWht @tap="funn.next" clazz="w-30">
+                            <view class="fx-r py pri" v-if="aii.next == 0">
+                                <text>下一步</text>
+                                <UiI i="a-r"/>
+                            </view>
+                            <view class="pi py pri ta-r" v-else>确定</view>
+                        </OButtonWht>
                     </view>
                 </template>
                 <view>
                     <CkSpace :h="3"/>
                     <view class="pt-col">
-                        <CoDatePicker :def="aii.dt" v-if="aii.next == 0"/>
-                        <CoTimePicker :def="aii.tim" v-else/>
+                        <CoActivityTimePicker :form="start" v-if="aii.next == 0"/>
+                        <CoActivityTimePicker :form="end" v-else/>
                     </view>
                 </view>
+                <!--
+                <template #bom>
+                    <view class="px-row">
+                        <OButton color="wht">
+                            <view class="tis" v-if="aii.next == 0">
+                                <text>下一步</text>
+                            </view>
+                            <view class="pi py pri ta-r" v-else>确定</view>
+                        </OButton>
+                    </view>
+                </template>
+                -->
             </OPanInnerY>
         </OPan>
     </view>
 </template>
 
 <script setup lang="ts">
+import UiI from '@/ui/element/i/UiI.vue';
 import OButtonWht from '@/cake/button/OButtonWht.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import OPan from '@/cake/pan/OPan.vue';
@@ -29,18 +60,22 @@ import OPanInnerY from '@/cake/pan/OPanInnerY.vue';
 import { storage } from '@/tool/web/storage';
 import { computed, nextTick, onMounted, reactive } from 'vue';
 import CoDatePicker from '@/components/form/picker/CoDatePicker.vue';
-import CoTimePicker from '@/components/form/picker/CoTimePicker.vue';
+import CoActivityTimePicker from '@/components/form/picker/CoActivityTimePicker.vue';
 import { timeout } from '@/tool/util/future';
 import pan_tooi from '@/tool/app/pan_tooi';
+import times from '@/tool/web/times';
+import { tipwarn } from '@/tool/uni/uni-global';
+import OButton from '@/cake/button/OButton.vue';
 
 const prp = defineProps<{
-    idx: number
+    idx: number,
+    start: Co.TimePieckerForm,
+    end: Co.TimePieckerForm
 }>()
 
 const aii = reactive({
     choses: [ ], chose: { },
     next: 0,
-    dt: '2025-12-12', tim: '23:23'
 })
 
 const emt = defineEmits([ 'result', 'x' ])
@@ -54,11 +89,32 @@ const funn = {
             funn.submit()
         }
     },
-    v: () => (''),
-    reset: () => { },
+    vid: () => {
+        const s: Co.TimePieckerForm = prp.start
+        const st: any = times.build(s.year, s.month, s.day, s.hour, s.minute)
+        const e: Co.TimePieckerForm = prp.end
+        const ed: any = times.build(e.year, e.month, e.day, e.hour, e.minute)
+        if (times.bigger(st, ed)) {
+            tipwarn('开始时间大于结束时间！！！')
+            return false
+        }
+        else {
+            
+        }
+        return true
+    },
     submit: () => {
-        emt('result', funn.v())
-        timeout(() => funn.reset())
+        if (funn.vid()) {
+            pan_tooi.close_pan(prp.idx)
+        }
+    },
+    last: () => {
+        if (aii.next == 0) {
+            funn.close()
+        }
+        else {
+            aii.next = 0
+        }
     },
     close: () => {
         pan_tooi.close_pan(prp.idx)
@@ -67,10 +123,6 @@ const funn = {
         aii.next = 0
     },
 }
-
-const code = computed(() => {
-    return storage.get('publish_plus_pan_content_code') || 0
-})
 
 onMounted(funn.init)
 </script>

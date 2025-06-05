@@ -1,4 +1,4 @@
-import { must_arr } from "./valued";
+import { has_v, must_arr, must_one } from "./valued";
 
 export const arrhas = (arr: ANYS, v: SN = ''): boolean => (arr.indexOf(v) > -1);
 
@@ -29,6 +29,10 @@ export const arrimit = <T>(src: MANY, imit: number): T => {
         }
     }
     return (res as T)
+}
+
+export const arrgotv = (src: MANY, k: string = 'id') => {
+    return must_arr(src).map((e: ONE) => e[k]) //.filter(v => has_v(v))
 }
 
 export const arrsort = <T>(src: T, k: string, ahead_small: boolean = false) => {

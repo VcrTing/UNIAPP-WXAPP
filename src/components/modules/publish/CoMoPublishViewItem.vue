@@ -8,11 +8,21 @@
                 <text class="h9 ls">{{ v.title }}</text>
             </view>
             <view class="fx-s pt">
-                <view class="fx-1">
+                <view class="fx-1 fx-i">
                     <view class="fx-i">
-                        <UiI class="fs-s" :i="'time'"/>
-                        <view class="fs-n pi-s tis">{{ v.createdAt }}</view>
+                        <UiI class="fs-n" i='time'/>
+                        <view class="fs-n pi-s tis">{{ times.fmt(v.createdAt) }}</view>
                     </view>
+                    <view class="px-s"></view>
+                    <view class="fx-r tis fs-s">
+                        <!--<UiI i='lock'/>-->
+                        <text class="pi-s">
+                            {{  }}
+                        </text>
+                    </view>
+                </view>
+                <view>
+                    <slot></slot>
                 </view>
             </view>
         </view>
@@ -20,7 +30,6 @@
             <!--
             <OButtonDef :weak="true" clazz="fs-s px-s br-s">已完成</OButtonDef>
             -->
-            <slot>
                 <!--
                 <view class="pr pi-s">
                     <view class="pb">&nbsp;</view>
@@ -33,17 +42,17 @@
                     </view>
                 </view>
                 -->
-            </slot>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
-import OButtonDef from '@/cake/button/OButtonDef.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
+import { DATA_ACTIVITY_BANNER_DEF } from '@/conf/conf-datas';
 import activity_tool from '@/tool/modules/activity_tool';
+import { must_one } from '@/tool/util/valued';
+import times from '@/tool/web/times';
 import UiI from '@/ui/element/i/UiI.vue';
-import { computed } from 'vue';
 
 const prp = defineProps<{
     v: Activity
@@ -51,8 +60,8 @@ const prp = defineProps<{
 
 const funn = {
     get_banner_src: (v: Activity): string => {
-        const one: ActivityMedia = activity_tool.getbanner(v)[0];
-        return one.url
+        const one: ActivityMedia = must_one(activity_tool.getbanner(v)[0]);
+        return one.url || DATA_ACTIVITY_BANNER_DEF.url
     }
 }
 

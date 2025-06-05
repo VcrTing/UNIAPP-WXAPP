@@ -3,7 +3,7 @@
         <view class="py-col">
             <view class="py-col">
                 <view class="fx-i">
-                    <view v-for="(v, i) in aii.tabs" :key="i">
+                    <view v-for="(v, i) in tabs" :key="i">
                         <view class="pi-inp" @tap="aii.iive = i">
                             <view :class="aii.iive == i ? 'tiw' : 'sus'">{{ v.tit }}</view>
                         </view>
@@ -11,7 +11,7 @@
                 </view>
             </view>
             <view class="pt-col">
-                <view class="" v-if="aii.iive == 0">
+                <view class="" v-if="form.typed == DATA_ACTIVITY_TYPED_SM.v">
                     <view class="pb" v-for="(v, i) in mezi" :key="i">
                         <view class="px-inp py-s">
                             <CoMoUserInfoItem :v="v" :clazz="'btn-wht btn-rnd'"
@@ -79,8 +79,12 @@ import VwPubEditPanInviteYou from './pan/VwPubEditPanInviteYou.vue';
 import pan_tooi from '@/tool/app/pan_tooi';
 import CoMoActivityJoinerBlock from '@/components/modules/activity/CoMoActivityJoinerBlock.vue';
 import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
+import { DATA_ACTIVITY_TYPED_GK, DATA_ACTIVITY_TYPED_SM } from '@/conf/conf-datas';
 
-// const prp = defineProps<{}>()
+const prp = defineProps<{
+    form: ONE
+}>()
+
 const mezi = computed(() => {
     return [ mock_meizi.items[0], mock_meizi.items[1] ]
 })
@@ -93,6 +97,13 @@ const aii = reactive({
         { tit: '参与者' }
     ], 
     iive: 0, pan_invite_idx: 1, pan_hui: <ElePanHui>{ opacity: 0.4 }
+})
+
+const tabs = computed(() => {
+    const td = prp.form.typed;
+    return td == DATA_ACTIVITY_TYPED_GK.v ? 
+        [ { tit: '参与者' } ] : 
+        [ { tit: '邀请对象' } ]
 })
 
 const funn = {

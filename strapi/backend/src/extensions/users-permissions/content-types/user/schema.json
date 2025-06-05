@@ -126,11 +126,23 @@
     "phone": {
       "type": "string"
     },
-    "activity_registrations": {
+    "activity_registration": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "oneToOne",
       "target": "api::activity-registration.activity-registration",
-      "mappedBy": "users"
+      "inversedBy": "user"
+    },
+    "activity_invite_publishers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::activity-invite.activity-invite",
+      "mappedBy": "publiser"
+    },
+    "activity_invites": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::activity-invite.activity-invite",
+      "mappedBy": "invite_user"
     }
   }
 }

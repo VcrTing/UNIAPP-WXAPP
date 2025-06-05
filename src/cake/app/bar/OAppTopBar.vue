@@ -8,7 +8,7 @@
         </view>
         
         <OSafeAreaTop v-if="mat"/>
-        <view class="mh-app-top-bar" v-if="mat"></view>
+        <view class="py-n" v-if="mat">&nbsp;</view>
     </view>
     
 </template>

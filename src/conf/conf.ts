@@ -19,3 +19,10 @@ export const TEST_LOGIN_USER: ONE = {
         password: 'ZT123zlt'
     }
 }
+
+export const K_STRAPI = 'strapi'
+
+// 后端连接模式
+export const CONF_NET_CONNECTION_MODE = K_STRAPI
+
+export const is_strapi_mode = () => (CONF_NET_CONNECTION_MODE == K_STRAPI)

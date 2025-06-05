@@ -19,10 +19,18 @@
                     </view>
                 </view>
                 <view v-else class="op-0 pb">
-                    <OButtonWht :clazz="'fx-c btn-rnd'" :weak="true">
-                        <view class="pi-row pr-s">&nbsp;</view>
-                        <OFI clazz="fx-aii-btn-def w-2em h-2em" :i="'x'"/>
-                    </OButtonWht>
+                    <view class="d-ib pi pb w-100">
+                        <view class="btn-wht w-100 br px-col py-col" :weak="true">
+                            <view class="ta-i py h8 fw-550">
+                                <text>&nbsp;</text>
+                            </view>
+                            <view class="fx-s pb">
+                                <view class="">&nbsp;</view>
+                                <view class="tis">
+                                </view>
+                            </view>
+                        </view>
+                    </view>
                 </view>
             </OScrollX>
         </view>

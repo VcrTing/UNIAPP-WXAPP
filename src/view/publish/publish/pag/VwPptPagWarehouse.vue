@@ -8,24 +8,32 @@
             </view>
         </view>
         <view class="px-row py-s">
+            <!-- 待完善 -->
             <view v-if="aii.i == 0">
                 <CoViDataLoading :ioading="ioading" :items="data">
                     <view class="pb-row" v-for="(v, i) in data" :key="i">
                         <CoMoPublishViewItem :v="v" @tap="funn.edit(v)">
-                            <view class="pt-s">&nbsp;</view>
-                            <view class="pr pt">
-                                <view class="fx-r tis fs-s btn-err px-t">
-                                    <text class="pi-s">
-                                        待完善
-                                    </text>
-                                </view>
+                            <view class="fx-r tis fs-s btn-err px-t">
+                                <text class="pi-s">
+                                    待完善
+                                </text>
                             </view>
                         </CoMoPublishViewItem>
                     </view>
                 </CoViDataLoading>
             </view>
-            <view v-else>
-                
+            <view v-else-if="aii.i == 1">
+                <CoViDataLoading :ioading="ioading" :items="data">
+                    <view class="pb-row" v-for="(v, i) in data" :key="i">
+                        <CoMoPublishViewItem :v="v" @tap="funn.edit(v)">
+                            <view class="fx-r tis fs-s btn-err px-t">
+                                <text class="pi-s">
+                                    审核中，预计30分钟
+                                </text>
+                            </view>
+                        </CoMoPublishViewItem>
+                    </view>
+                </CoViDataLoading>
             </view>
         </view>
     </view>
@@ -35,6 +43,7 @@
 import CoMoPublishViewItem from '@/components/modules/publish/CoMoPublishViewItem.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
 import { DATA_ACTIVITY_REVIEW, DATA_ACTIVITY_REVIEW_DEF } from '@/conf/conf-datas';
+import { pagePublishDispatch } from '@/memory/page';
 import uniRouter from '@/tool/uni/uni-router';
 import { promise } from '@/tool/util/future';
 import { must_arr } from '@/tool/util/valued';
@@ -48,13 +57,22 @@ const aii = reactive({
     i: DATA_ACTIVITY_REVIEW_DEF.v
 })
 
-// 公开与非公开过滤
-const data = computed((): Activity[] => {
-    return must_arr(prp.items).filter(e => true)
-})
+// 待完善
+const data = computed((): Activity[] => func.filter(aii.i))
+
+const func = {
+    filter: (v: number) => {
+        return must_arr(prp.items).filter(e => {
+            const cd: number = e['dataStatus'];
+            if (cd == v) { return true }
+            return false
+        })
+    }
+}
 
 const funn = {
-    edit: (v: ONE) => {
+    edit: async (v: ONE) => {
+        await pagePublishDispatch('change', [ 'edit', v ])
         uniRouter.gopg('publish_edit')
     },
     init: () => promise(() => {

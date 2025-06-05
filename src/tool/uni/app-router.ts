@@ -1,5 +1,8 @@
+import { pagePublishDispatch } from "@/memory/page"
+import { future } from "../util/future"
 import { storage } from "../web/storage"
 import uniRouter from "./uni-router"
+import { acyDispatch } from "@/memory/global"
 
 export default {
     index: () => {
@@ -85,5 +88,17 @@ export default {
     manger_pays: () => {
         storage.set('PAGE_MANAGER_KEY', 4)
         uniRouter.gopg('manager')
-    }
+    },
+
+    // 跳转 publish waiting
+    publish_waiting: () => future(async () => {
+        storage.set('PAGE_PUBLISH_TAB_CODE', '1_0')
+        await pagePublishDispatch('refresh')
+        uniRouter.navigatorpg('publish')
+    }),
+    // 跳转到活动详情
+    activity_detail: (v: Activity) => future(async () => {
+        await acyDispatch('change', [ 'view', v ])
+        uniRouter.gopg('activity_detail')
+    })
 }

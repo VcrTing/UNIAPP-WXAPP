@@ -11,4 +11,8 @@ namespace Page {
         page_index_data_options: Page.IndexPageDataActivityOptions
     }
 
+    interface PublishPageStore {
+        num: number
+        edit: ONE
+    }
 }

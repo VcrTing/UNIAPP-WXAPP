@@ -20,7 +20,7 @@
             </view>
             <view class="py">
                 <view class="pt-s">
-                    <OButton clazz="d-ib fs-s" :weak="true">报名中</OButton>
+                    <OButton clazz="d-ib fs-s br-1" :weak="true">报名中</OButton>
                     <view class="d-ib px-s fs-n">
                         <text>{{ activity_tool.gettime(v) }}</text>
                         <text class="pi-t">|</text>
@@ -28,7 +28,7 @@
                     <view class="d-ib fs-n">
                         <text>{{ activity_tool.getfar(v) }}</text>
                         
-                        <text class="eiies pi-t">{{ activity_tool.getaddress(v) }}</text>
+                        <text class="eiies pi-t">{{ activity_tool.getindex_address(v) }}</text>
                     </view>
                 </view>
             </view>
@@ -46,7 +46,10 @@
                 <view class="fx-s">
                     <view class="fx-i fx-1">
                         <CoViAvatarTogether :w="2" v-if="v.publisher" :items="[ v.publisher ]"/>
-                        <view class="pi-s tid"><text class="fs-n">11人已上车</text></view>
+                        <view class="pi-s tid">
+                            <text>{{ activity_tool.getjoiner_len(v) }}</text>
+                            <text class="fs-n">人已上车</text>
+                        </view>
                     </view>
                     <view>
                         <OButton :weak="true" @tap="emt('detail', v)" :clazz="'fw-550 mw-5em py-s br-rnd'">上车</OButton>

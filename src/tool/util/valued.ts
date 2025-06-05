@@ -22,3 +22,45 @@ export const must_one = <T>(src?: ONE): T => {
     if (src instanceof Array) return <T>{ }
     for (const k in src) { return src as T } return <T>{ }
 }
+
+export const must_int = (src: any) => {
+    if (src == null || src == undefined) return 0;
+    try {
+        if (src === true) { return 1 }
+        else if (src === false) { return 0 }
+        return Number.parseInt(src)
+    }
+    catch(e) {
+        return 0
+    }
+}
+
+export const positive = (v: number, def: number = 0) => (v < 0 ? def : v)
+
+export const has_v = (v: any) => (v != null && v != undefined && v == '')
+
+export const formfii = (form: ONE, data: ONE | null) => {
+    if (form && data) {
+        for (let k in form) {
+            const v = data[ k ]
+            if (v != null || v != undefined) {
+                form[k] = v
+            }
+        }
+    }
+}
+
+export const deepcopy = (src: any) => JSON.parse(JSON.stringify(src))
+
+export const formfiimit = (form: ONE, data: ONE, fileds: string[]) => {
+    for (let k in data) {
+        fileds.map((__k) => {
+            if (__k == k) {
+                const v = data[ k ]
+                if (v != null || v != undefined) {
+                    form[k] = v
+                }
+            }
+        })
+    }
+}

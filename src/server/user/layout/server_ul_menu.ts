@@ -1,5 +1,5 @@
 import aiert_tooi from "@/tool/app/aiert_tooi"
-import http from "@/tool/http/http"
+import { master } from "@/tool/http/http"
 import { is_arr, is_str } from "@/tool/util/typed"
 
 const menus = async (username: string = ''): ONE_PROMISE => {
@@ -7,7 +7,7 @@ const menus = async (username: string = ''): ONE_PROMISE => {
         return aiert_tooi.err_r_one('用户名为空，没有用户的登录信息') 
     }
 
-    const src: NET_RES = await http.master.get('user_layout_menu', username, {  })
+    const src: NET_RES = await master.get('user_layout_menu', username, {  })
     if (is_str(src)) return aiert_tooi.err_r_one(src) 
 
     const res: ONE | MANY = (src as HttpResult).result
