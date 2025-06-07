@@ -60,7 +60,12 @@ const funn = {
     },
     init: () => {
         uniDom.run_get_rect(this, prp.options.domid, (rct: ONE) => {
-            h.value = rct.height
+            try {
+                h.value = rct.height
+            } 
+            catch(e) {
+
+            }
         })
     }
 }

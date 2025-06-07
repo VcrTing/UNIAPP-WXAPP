@@ -11,7 +11,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "meidaType": {
+    "mediaType": {
       "type": "integer",
       "default": 0
     },

@@ -31,7 +31,7 @@ import { authGetters } from "@/memory/global"
     const build_edit_data = (src: ONE) => {
         
         const tgsid = arrgotv(src.tags)
-        const userid: number = authGetters.userid
+        const userid: string = authGetters.userid
 
         let res: ONE = { }
         formfiimit(res, src, [ 

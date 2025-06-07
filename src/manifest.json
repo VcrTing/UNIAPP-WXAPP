@@ -1,5 +1,5 @@
 {
-    "name" : "同趣圈",
+    "name" : "甜水",
     "appid" : "__UNI__150C09F",
     "description" : "",
     "versionName" : "1.0.0",
@@ -50,7 +50,7 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "wxcd649aea6ef1f333",
+        "appid" : "wxd57cad570de63615",
         "setting" : {
             "urlCheck" : false
         },

@@ -5,17 +5,16 @@
             <view class="">
                 <OScrollX>
                     <view class="d-ib pi-inp"></view>
-                    <view class="w-28 h-12vh d-ib">
-                        <view class="w-100 h-12vh fx-c ps-r zi-t">
-                            <CoImg clazz="h-100 w-100 br" :v="mock_orders.banner"/>
+                    <view class="w-28 h-12vh d-ib ps-r zi-t mr" v-for="(v, i) in aii.paths" :key="i">
+                        <view class="w-100 h-12vh fx-c abs-b i-0">
+                            <CoImg clazz="h-100 w-100 br" :src="v"/>
                             <view class="abs-b r-0">
-                                <view class="px-s py-s bg-028 br-ti br-br">
+                                <view @tap="funn.trashImg(v)" class="px-s py-s bg-028 br-ti br-br">
                                     <UiI i='trash' clazz="c-fff op-618"/>
                                 </view>
                             </view>
                         </view>
                     </view>
-                    <view class="px-s d-ib"></view>
                     <view class="w-28 h-12vh br-s d-ib ps-r zi-t">
                         <OButtonDef clazz="h-100 fx-c abs-b i-0 w-100 br" :weak="true" @tap="funn.choseImg">
                             <view class="fs-n tiw">
@@ -75,21 +74,27 @@ import { is_nice_arr, must_arr } from '@/tool/util/valued';
 import VwPpFormTagChoisePagePan from './pan/VwPpFormTagChoisePagePan.vue';
 import pan_tooi from '@/tool/app/pan_tooi';
 import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
-import { open_choise_img } from '@/tool/uni/uni-app';
+import { open_choise_img, upload_file } from '@/tool/uni/uni-app';
 import server_upload_media from '@/server/media/server_upload_media';
-import { tipwarn } from '@/tool/uni/uni-global';
+import { tipsucc, tipwarn } from '@/tool/uni/uni-global';
+import { __net_file_url, NET_ENDPOINT_FILE } from '@/conf/conf-endpoints';
+import media_tool from '@/tool/modules/media_tool';
 
 // const prp = defineProps<{}>()
 const form = reactive({
     title: '', tags: <ActivityTag[]>[ ], taglimit: 3,
-    __banner: [
-        { url: 'https://img0.baidu.com/it/u=4007537519,3388078189&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=1050' }
-    ]
+    __banner: <ActivityMedia[]>[ ]
 })
 
 const taglen = computed(() => must_arr(form.tags).length)
 
 const emt = defineEmits([ 'refresh' ])
+
+const aii = reactive({
+    paths: <string[]>[ ],
+    files: <MANY>[ ],
+    success: <Form.UploadImages>[ ], imit: 6
+})
 
 const funn = {
     trashTag: (v: ActivityTag) => {
@@ -100,15 +105,44 @@ const funn = {
     ediTag: () => {
         pan_tooi.open_def_r(pan_tag.idx)
     },
+    trashImg: (path: string) => {
+        console.log(aii.success, path)
+
+        const i = arrfindi(aii.success, path, 'path')
+        console.log('i =', i)
+
+        aii.success[i].__iive = false
+        const j = aii.paths.indexOf(path)
+        if (j >= 0) {
+            aii.paths.splice(j, 1)
+        }
+    },
+
     choseImg: async () => {
-        const res = await open_choise_img()
-        // console.log('chooseIMG RES =', res)
-        // const ph: string = JSON.stringify(res.tempFilePaths)
-        const fs: File[] = must_arr(res.tempFiles);
-        // console.log(fs)
-        await server_upload_media.upload(fs)
+        const chose = await open_choise_img()
+        const ps: string[] = must_arr(chose.tempFilePaths)
+        const fs: File[] = must_arr(chose.tempFiles)
+        aii.files.push(...fs)
+        if (aii.paths.length > aii.imit) {
+            tipwarn('图片上传数量，已达最大限度。')
+            return
+        }
+        aii.paths.push(...ps)
+        const data = { isGallery: 0 }
+        // const details: Form.UploadImage[] = [ ]
+        for (let j= 0; j< ps.length; j++ ) {
+            const p = ps[j]
+            const res: ActivityMedia = await server_upload_media.activity(p, data);
+            const op: Form.UploadImage = media_tool.generate_upload_img(p, fs[j], res)
+            // details.push(op); 
+            aii.success.push(op);
+        }
+        tipsucc('文件上传成功。')
     },
     vid: () => {
+        const iives = aii.success.filter(f => f.__iive);
+        form.__banner = iives.map((e) => (e.data as ActivityMedia))
+
         if (!is_nice_arr(form.__banner)) {
             tipwarn('请至少上传一张活动宣传图。')
             return false
@@ -124,7 +158,9 @@ const funn = {
         return true
     },
     v: (): ONE | null => {
-        if (funn.vid()) { return form }
+        if (funn.vid()) { 
+            return form 
+        }
         return null
     },
 }

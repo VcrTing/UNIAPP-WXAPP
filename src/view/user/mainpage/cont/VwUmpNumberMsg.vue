@@ -1,7 +1,7 @@
 <template>
     <view class="py-row">
         <view class="fx-c">
-            <CoVwUcpNumbers :clazz="'px-x1'" :is_publisher="is_publisher"/>
+            <CoMoUcpNumbers :clazz="'px-x1'" :is_publisher="is_publisher"/>
         </view>
         <view class="pt-x2 px-row">
             <view class="fx-c pt-col">
@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import CoVwUcpNumbers from '../../center/component/CoVwUcpNumbers.vue';
+import CoMoUcpNumbers from '../../center/component/CoMoUcpNumbers.vue';
 import { authGetters } from '@/memory/global';
 import OButtonDef from '@/cake/button/OButtonDef.vue';
 

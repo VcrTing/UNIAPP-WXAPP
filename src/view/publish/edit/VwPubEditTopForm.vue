@@ -5,17 +5,16 @@
             
                 <OScrollX>
                     <view class="d-ib pi-inp"></view>
-                    <view class="w-28 h-12vh d-ib">
-                        <view class="w-100 h-12vh fx-c ps-r zi-t">
-                            <CoImg clazz="h-100 w-100 br" :v="mock_orders.banner"/>
-                            <view class="abs-b r-0" v-if="canedit">
+                    <view class="w-28 h-12vh d-ib mr ps-r zi-t" v-for="(v, i) in aii.images" :key="i">
+                        <view class="w-100 h-12vh fx-c abs-b i-0">
+                            <CoImg clazz="h-100 w-100 br" :src="v"/>
+                            <view class="abs-b r-0 zi-n" v-if="canedit">
                                 <view class="px-s py-s bg-028 br-ti br-br">
                                     <UiI i='trash' clazz="c-fff op-618"/>
                                 </view>
                             </view>
                         </view>
                     </view>
-                    <view class="px-s d-ib"></view>
                     <view v-if="canedit"
                         class="w-28 h-12vh br-s d-ib ps-r zi-t">
                         <OButtonDef clazz="h-100 fx-c abs-b i-0 w-100 br" :weak="true" @tap="funn.choseImg">
@@ -76,17 +75,27 @@ import { arrfindi } from '@/tool/util/iodash';
 import pan_tooi from '@/tool/app/pan_tooi';
 import VwPpFormTagChoisePagePan from '../plus/pan/VwPpFormTagChoisePagePan.vue';
 import { tipwarn } from '@/tool/uni/uni-global';
+import { open_choise_img } from '@/tool/uni/uni-app';
+import { future } from '@/tool/util/future';
 
 const prp = defineProps<{
-    form: ONE, canedit: boolean
+    form: ONE, canedit: boolean,
 }>()
 
 const taglen = computed(() => must_arr(prp.form.tags).length)
 
-const funn = {
-    choseImg: () => {
+const aii = reactive({
+    images: <string[]>[ ],
+    choise: <MANY>[ ]
+})
 
-    },
+const funn = {
+    choseImg: () => future(async () => {
+        const res = await open_choise_img(3)
+        console.log('res =', res)
+        aii.choise = must_arr(res.tempFiles)
+        aii.images = must_arr(res.tempFilePaths)
+    }),
     trashTag: (v: ActivityTag) => {
         const i = arrfindi(prp.form.tags, v.id, 'id')
         prp.form.tags.splice(i, 1)

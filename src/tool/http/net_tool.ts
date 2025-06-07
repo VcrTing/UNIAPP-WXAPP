@@ -25,8 +25,8 @@ const build_param = (param: ONE, pager: Pager, relations: string[]): ONE => {
 // 规定为我的
 const limit_mine = (param: ONE, relation_name: string = 'user') => {
     if (is_strapi_mode()) {
-        const id: number = authGetters.userid || 0
-        param['filters[' + relation_name + '][id][$eq]'] = id
+        const id: string = authGetters.userid || ''
+        param['filters[' + relation_name + '][documentId][$eq]'] = id
     }
     else {
 
@@ -43,9 +43,15 @@ const build_data = (data: ONE) => {
     return data
 }
 
+// 解析返回结果
+const data = <T>(src: NET_RES) => {
+    return (src as HttpResult).data as T
+}
+
 export default {
     generate_pagination,
     build_param,
     limit_mine,
-    build_data
+    build_data,
+    data
 }

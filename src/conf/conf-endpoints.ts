@@ -4,6 +4,8 @@
  * master ====================================================================================================
  */
 
+import { NET } from "./conf-net"
+
 // 登录认证
 const NET_ENDPOINT_AUTH = <ONE> {
     'login': 'app/auth/login' // 'sys/login'
@@ -20,6 +22,7 @@ const NET_ENDPOINT_USER = <ONE>{
 const NET_ENDPOINT_ACTIVITY = <ONE> {
     'activity': 'activities',
     'activity-tags': 'activity-tags',
+    'activity-media': 'activity-medias',
     'activity-address': 'activity-addresses',
 }
 
@@ -32,5 +35,11 @@ export const NET_ENDPOINTS_MASTER = <ONE> {
 
 
 export const NET_ENDPOINT_FILE = <ONE> {
-    'upload': 'upload'
+    'upload': 'upload',
+    'activity': 'activity-medias/upload/one'
+}
+
+export const __net_file_url = (k: string) => {
+    const ink: string = NET_ENDPOINT_FILE[k]
+    return NET.FILE.URI + '/' + NET.FILE.API + '/' + ink
 }

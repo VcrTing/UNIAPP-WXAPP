@@ -85,8 +85,8 @@ const aii = reactive({
 
 const is_publisher = computed((): boolean => {
     const puber: User = must_one(view.value.publisher)
-    const uid: number = authGetters.userid
-    return (puber.id === uid);
+    const uid: string = authGetters.userid
+    return (puber.documentId === uid);
 })
 
 const issm = computed((): boolean => activity_tool.istyped_sm(view.value))

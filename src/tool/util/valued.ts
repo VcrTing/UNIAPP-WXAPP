@@ -16,7 +16,11 @@ export const cnv_str_bool = (str: string | undefined = undefined): boolean => {
 
 export const cnv_bool_str = (bool: boolean = false): string => bool ? 'true' : 'false'
 
-export const must_arr = (src: any) => ( src && (src instanceof Array) ) ? src : [ ]
+export const must_arr = (src: any) => {
+    if (src && (src instanceof Array)) return src;
+    if (is_nice_one(src)) return [ src ];
+    return src ? [ src ] : [ ]
+}
 export const must_one = <T>(src?: ONE): T => {
     if (!src) return <T>{ }
     if (src instanceof Array) return <T>{ }

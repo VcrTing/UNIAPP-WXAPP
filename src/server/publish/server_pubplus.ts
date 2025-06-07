@@ -20,6 +20,14 @@ const edit = async (form: ONE, origin: ONE): Promise<Activity> => {
     return !is_arr(res) ? (res as Activity) : <Activity>{ }
 } 
 
+const plus_media = async (media: ActivityMedia): Promise<ActivityMedia> => {
+    const __pm: ONE = net_tool.build_data(media)
+    const src: NET_RES = await master.pos('activity-media', null, __pm)
+    const res: ONE | MANY = (src as HttpResult).data
+    return !is_arr(res) ? (res as ActivityMedia) : <ActivityMedia>{ }
+}
+
 export default {
-    plus, edit
+    plus, edit,
+    plus_media
 }

@@ -50,6 +50,7 @@ import times from '@/tool/web/times';
 import { DATA_ACTIVITY_TYPED, DATA_ACTIVITY_TYPED_GK } from '@/conf/conf-datas';
 import mock_orders from '@/server/mock/order/mock_orders';
 import CoImg from '@/components/media/img/CoImg.vue';
+import { open_choise_addr } from '@/tool/uni/uni-app';
 
 const prp = defineProps<{
     form: ONE, canedit: boolean
@@ -78,10 +79,11 @@ const funn = {
         if (!prp.canedit) return;
         prp.form.typed = v
     },
-    openAddr: () => {
+    openAddr: async () => {
         if (!prp.canedit) return;
 
         console.log('打开地址选择器')
+        await open_choise_addr()
         // pan_tooi.open_def_r(pan_addr.idx, pan_addr.hui)
     }
 }

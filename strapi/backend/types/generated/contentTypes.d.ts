@@ -385,6 +385,10 @@ export interface ApiActivityAddressActivityAddress
     draftAndPublish: true;
   };
   attributes: {
+    activities: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::activity.activity'
+    >;
     address: Schema.Attribute.String;
     addressSystem: Schema.Attribute.String;
     city: Schema.Attribute.String;
@@ -483,7 +487,7 @@ export interface ApiActivityMediaActivityMedia
     > &
       Schema.Attribute.Private;
     media: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    meidaType: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    mediaType: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     publishedAt: Schema.Attribute.DateTime;
     sortOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
     updatedAt: Schema.Attribute.DateTime;
@@ -584,6 +588,10 @@ export interface ApiActivityActivity extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    activity_address: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::activity-address.activity-address'
+    >;
     activity_invites: Schema.Attribute.Relation<
       'oneToMany',
       'api::activity-invite.activity-invite'

@@ -28,7 +28,7 @@
                 </CkInpItem>
             </view>
             <view v-if="form.typed == DATA_ACTIVITY_TYPED_SM.v" class="py px-inp">
-                <view class="pi card tid fs-s">
+                <view class="pi card tid fs-n">
                     <view>非公开类型活动，是指不会被展示在首页、不会被他人搜索到的，只属于个人的活动。</view>
                     <view>不过，您可以主动邀请别人，来参与您发布后的活动。</view>
                 </view>
@@ -52,7 +52,8 @@ import pan_tooi from '@/tool/app/pan_tooi';
 import CoImg from '@/components/media/img/CoImg.vue';
 import mock_orders from '@/server/mock/order/mock_orders';
 import { is_nice_arr } from '@/tool/util/valued';
-import { tipwarn } from '@/tool/uni/uni-global';
+import { tipsucc, tipwarn } from '@/tool/uni/uni-global';
+import { open_choise_addr } from '@/tool/uni/uni-app';
 // const prp = defineProps<{}>()
 
 const form = reactive({
@@ -68,8 +69,17 @@ const pan_addr = { idx: 31, hui: <ElePanHui>{ opacity: 0.4 } }
 
 const funn = {
     
-    open_addr: () => {
-        pan_tooi.open_def_r(pan_addr.idx, pan_addr.hui)
+    open_addr: async () => {
+        console.log('打开地址选择器')
+        const res = await open_choise_addr()
+        
+        tipsucc('1. 选择地址成功')
+
+        const latitude = res.latitude;
+        const longitude = res.longitude;
+
+        console.log('location res =', res)
+        // pan_tooi.open_def_r(pan_addr.idx, pan_addr.hui)
     },
 
     vid: () => {

@@ -18,7 +18,7 @@ export const NET = {
         IS_LOG: true
     },
     FILE: {
-        URI: is_strapi_mode() ? 'http://localhost:1337' : '',
+        URI: is_strapi_mode() ? 'http://localhost:8888' : '',
         API: is_strapi_mode() ? 'api' : 'api',
         TIMEOUT_GET: 1000 * 30,
         TIMEOUT_POS: 1000 * 30,

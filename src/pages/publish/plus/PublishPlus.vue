@@ -12,7 +12,7 @@
             <view class="py-s"></view>
             
             <view class="">
-                <CoMoSecurityAgreeLine ref="agree"/>
+                <CoMoSecurityAgreeLine :canedit="true" ref="agree"/>
             </view>
             <CkSpace :h="12"/>
         </view>
@@ -35,6 +35,7 @@ import { APP_GENERATE_DETAIL } from '@/conf/conf-app';
 import { authGetters, orderDispatch, orderState, uiState } from '@/memory/global';
 import server_pubplus from '@/server/publish/server_pubplus';
 import pan_tooi from '@/tool/app/pan_tooi';
+import media_tool from '@/tool/modules/media_tool';
 import appRouter from '@/tool/uni/app-router';
 import { tipwarn } from '@/tool/uni/uni-global';
 import uniRouter from '@/tool/uni/uni-router';
@@ -62,14 +63,14 @@ const funn = {
         }
     },
     buildform: (src: ONE = { }) => {
-        const tgsid = arrgotv(src.tags)
-        const userid: number = authGetters.userid
+        const tgsid = arrgotv(src.tags, 'documentId')
+        const userid: string = authGetters.userid
         const res = <ONE>{
             title: src.title,
             activity_tags: tgsid,
             typed: src.typed, 
-            publisher: userid, dataStatus: 1,
-            activity_address: must_one<ActivityAddress>(src.addrdata).id
+            publisher: userid, dataStatus: 0,
+            activity_address: must_one<ActivityAddress>(src.addrdata).documentId
         }
         return res
     },
@@ -81,13 +82,21 @@ const funn = {
     },
     submit: () => future(async () => {
         const src = funn.collection()
+        console.log('src =', src)
         if (src) {
             if (!agree.value.v()) return;
             const fom = funn.buildform(src)
             // console.log('form =', fom)
             const res = await server_pubplus.plus(fom)
-            if (res && res.id) {
-                funn.success()
+            const acvdocid = must_one<Activity>(res).documentId || undefined
+            if (acvdocid) {
+                const linkms: ActivityMedia[ ] = src.__banner
+                for (let j= 0; j< linkms.length; j++ ) {
+                    const ms: ActivityMedia = media_tool.build_activity_plus_data(linkms[j], acvdocid);
+                    const __res: ActivityMedia = await server_pubplus.plus_media(ms)
+                    console.log('连接结果 =', __res)
+                }
+                // funn.success()
             }
             // console.log('res =', res)
             // uniRouter.navigatorpg('publish')

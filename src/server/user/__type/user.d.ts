@@ -1,6 +1,6 @@
 
 interface User {
-    id: number
+    documentId: string
     background: string
     avatar: string
     nickname: string

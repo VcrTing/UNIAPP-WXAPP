@@ -20,8 +20,6 @@ nextTick(for_app_loading)
 @use './ui/sass/app/font/__conf' as *
 @use './ui/sass/app/media-screen.sass' as *
 
-@import './plugin/icon/bootstrap/bootstrap_icon.css'
-
 // 全局样式定义
 page, uni-page-body 
   height: 100%

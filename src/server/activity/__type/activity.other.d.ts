@@ -1,12 +1,15 @@
 
 interface ActivityMedia {
-    id: number
+    documentId: string
     url: string
+    urlSmall: string
+    activity: string | number
     isGallery: 0 | 1
+    mediaType: number
 }
 
 interface ActivityAddress {
-    id: number,
+    documentId: string
     address: string
     city: string
     latitude: string

@@ -9,3 +9,6 @@ export function createApp() {
 }
 
 import "./ui/index.sass"
+
+// import "./plugin/icon/iconfont/iconfont.css"
+import "./plugin/icon/bootstrap/bootstrap_icon.css"

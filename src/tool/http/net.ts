@@ -14,9 +14,10 @@ class NeTooi {
     _uri(api: string, endpoint: string, suffix: string | null = ''): string { return api + '/' + endpoint + (suffix ?  '/' + suffix : '') }
 
     _headers (jwt: string | null, isF: boolean = false): ONE { 
-        const boundary = '----WebKitFormBoundary' + Math.random().toString(16).substring(2);
+        // const boundary = '----WebKitFormBoundary' + Math.random().toString(16).substring(2);
+        // ; boundary=${boundary}
         const res = <ONE>{ 
-            'Content-Type': isF ? `multipart/form-data; boundary=${boundary}` : 'application/json' 
+            'Content-Type': isF ? `multipart/form-data` : 'application/json' 
         }
         if (jwt) { 
             res['Authorization'] = 'Bearer ' + jwt 

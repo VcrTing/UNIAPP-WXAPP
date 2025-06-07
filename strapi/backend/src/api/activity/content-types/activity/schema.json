@@ -98,6 +98,12 @@
       "relation": "oneToMany",
       "target": "api::activity-invite.activity-invite",
       "mappedBy": "activity"
+    },
+    "activity_address": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::activity-address.activity-address",
+      "inversedBy": "activities"
     }
   }
 }

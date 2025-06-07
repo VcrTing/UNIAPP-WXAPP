@@ -1,6 +1,7 @@
 
 interface Activity {
-    id: number
+    documentId: string
+    
     title: string
     startTime: string
     endTime: string
@@ -32,9 +33,11 @@ interface Activity {
 }
 
 interface ActivityTag {
-    id: number
+    documentId: string
     name: string 
     handsome: number
+    
+    documentId: string
 
     __clazz_die: string
     __clazz_iive: string

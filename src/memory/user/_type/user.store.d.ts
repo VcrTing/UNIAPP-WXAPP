@@ -20,7 +20,7 @@ interface AuthGetters {
     __fresh: number,
     is_publisher: boolean,
 
-    userid: number,
+    userid: string,
     company_id: string,
 
 }

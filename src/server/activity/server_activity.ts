@@ -11,7 +11,7 @@ const relations = [ 'activity_medias', 'publisher', 'activity_tags' ]
 const fetching = async (param: ONE, pager: Pager): Promise<Activity[]> => {
     const __pm: ONE = net_tool.build_param(param, pager, relations)
     const src: NET_RES = await master.get('activity', null, __pm)
-    const res: ONE | MANY = (src as HttpResult).data
+    const res: ONE | MANY = net_tool.data(src)
     return is_arr(res) ? (res as Activity[]) : [ ]
 }
 
