@@ -41,8 +41,8 @@ const aii = reactive({
 })
 
 const isiive = (v: Conf.City) => {
-    const __id = v.id;
-    const id = must_one<Conf.City>(aii.iive).id
+    const __id = v.documentId;
+    const id = must_one<Conf.City>(aii.iive).documentId
     return __id == id
 }
 

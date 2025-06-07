@@ -3,7 +3,7 @@
         <view class="bg-con py-col">
             <view class="pi-inp">
                 <CkInpItem :tit="'活动地址'">
-                    <view v-if="form.addrdata.id" class="ta-r pr-inp fx-r" @tap="funn.open_addr">
+                    <view v-if="form.addrdata.documentId" class="ta-r pr-inp fx-r" @tap="funn.open_addr">
                         <view>{{ form.addrdata.address }}</view>
                         <view class="pi-s fs-n">
                             <CoImg clazz="w-2em h-2em br-cir" :src="mock_orders.mapimg"/>

@@ -58,7 +58,7 @@ const scrolloptions = computed((): OScrollOptions => {
 
 const got = {
     getoption: () => {
-        const tagid: number = aii.tag.id
+        const tagid: string = aii.tag.documentId
         const options: Page.IndexPageDataActivityOptions = pageoptions.value
         let option: Page.IndexDataActivityOption | null = options[ tagid ]
 
@@ -78,13 +78,12 @@ const got = {
         const res = <ONE>{
             
         }
-        const tagid: number = must_one<ActivityTag>(option.tag).id
-        if (tagid == 0) {
+        const tagid: string = must_one<ActivityTag>(option.tag).documentId
+        if (tagid) {
 
+            res['filters[activity_tags][documentId][$eq]'] = tagid
         }
         else {
-
-            res['filters[activity_tags][id][$eq]'] = tagid
         }
         //
         return res;
@@ -101,9 +100,9 @@ const funn = {
         aii.ioading = true
 
         let option: Page.IndexDataActivityOption = got.getoption()
-        const tagid: number = must_one<ActivityTag>(option.tag).id
+        const tagid: string = must_one<ActivityTag>(option.tag).documentId
 
-        if (tagid == deftag.id) {
+        if (tagid == deftag.documentId) {
             await func.loadindex()
         }
         else {
@@ -128,10 +127,10 @@ const func = {
         // 取交集
         const join: Activity[] = [ ]
         if (is_nice_arr(cache)) {
-            const __ids: number[ ] = origin.map(e => e.id)
+            const __ids: string[ ] = origin.map(e => e.documentId)
             for (let j= 0; j< cache.length; j++ ) {
                 const __v: Activity = cache[ j ];
-                const idx = __ids.indexOf(__v.id)
+                const idx = __ids.indexOf(__v.documentId)
                 if (idx < 0) {
                     join.push(__v)
                 }

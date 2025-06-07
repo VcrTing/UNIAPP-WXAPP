@@ -74,7 +74,7 @@ const tags = computed(() => {
 })
 
 const funn = {
-    where: (v: ActivityTag): number => arrfindi(choises.value || [], v.id, 'id'),
+    where: (v: ActivityTag): number => arrfindi(choises.value || [], v.documentId, 'documentId'),
     has: (v: ActivityTag) => {
         return funn.where(v) >= 0
     },

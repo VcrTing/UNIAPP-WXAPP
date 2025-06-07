@@ -131,7 +131,7 @@ const func = {
         const src: ONE = funn.buildform(form);
         src['dataStatus'] = 1
         const res: ONE = await server_pubplus.edit(src, edit.value)
-        if (res.id) {
+        if (res.documentId) {
             appRouter.publish_waiting()
         }
     }),
@@ -140,7 +140,7 @@ const func = {
     },
     init: () => promise(() => {
         const v: ONE = must_one(edit.value)
-        if (v.id) {
+        if (v.documentId) {
             funn.reset(v)
         }
         else {

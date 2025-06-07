@@ -1,7 +1,7 @@
 
 namespace Conf {
     interface City {
-        id: number
+        documentId: string
         name: string
         longitude: number
         latitude: number
@@ -12,7 +12,6 @@ namespace Conf {
     interface Tab {
         name: string
         v: number
-        id?: number
     }
 
     type Tabs = Tab[]

@@ -98,7 +98,7 @@ const aii = reactive({
 
 const funn = {
     trashTag: (v: ActivityTag) => {
-        const i = arrfindi(form.tags, v.id, 'id')
+        const i = arrfindi(form.tags, v.documentId, 'documentId')
         // console.log('删掉 =', i)
         form.tags.splice(i, 1)
     },

@@ -2,7 +2,7 @@
     <view>
         <view class="py-row">
             <OScrollX>
-                <view class="ts softer pr-row" v-if="choises && choises.id">
+                <view class="ts softer pr-row" v-if="choises && choises.documentId">
                     <view class="d-ib pi pb w-100">
                         <view class="btn-wht w-100 br px-col py-col" :weak="true">
                             <view class="ta-i py h8 fw-550">
@@ -105,8 +105,8 @@ const tags = computed(() => {
 
 const funn = {
     has: (v: ActivityAddress) => {
-        const id: number = choises.value.id || -1;
-        return v.id == id
+        const documentId: string = choises.value.documentId || '';
+        return v.documentId == documentId
     },
     chose: (v: ActivityAddress) => {
         prp.form.addrdata = v;

@@ -85,25 +85,35 @@ const prp = defineProps<{
 const taglen = computed(() => must_arr(prp.form.tags).length)
 
 const aii = reactive({
-    images: <string[]>[ ],
-    choise: <MANY>[ ]
+    paths: <string[]>[ ],
+    files: <MANY>[ ],
+    success: <Form.UploadImages>[ ], imit: 6
+    
 })
 
 const funn = {
     choseImg: () => future(async () => {
-        const res = await open_choise_img(3)
-        console.log('res =', res)
-        aii.choise = must_arr(res.tempFiles)
-        aii.images = must_arr(res.tempFilePaths)
+        const chose = await open_choise_img()
+        const ps: string[] = must_arr(chose.tempFilePaths)
+        const fs: File[] = must_arr(chose.tempFiles)
+        aii.files.push(...fs)
+        if (aii.paths.length > aii.imit) {
+            tipwarn('图片上传数量，已达最大限度。')
+            return
+        }
+        aii.paths.push(...ps)
+        const data = { isGallery: 0 }
     }),
     trashTag: (v: ActivityTag) => {
-        const i = arrfindi(prp.form.tags, v.id, 'id')
+        const i = arrfindi(prp.form.tags, v.documentId, 'documentId')
         prp.form.tags.splice(i, 1)
     },
     ediTag: () => {
         pan_tooi.open_def_r(pan_tag.idx)
     },
+    iocImag: () => {
 
+    },
     vid: () => {
     }
 }

@@ -42,7 +42,7 @@ import VwIndexLocationPan from '../pan/VwIndexLocationPan.vue';
 import OButtonDef from '@/cake/button/OButtonDef.vue';
 
 const prp = defineProps<{
-    def?: number
+    def?: string
 }>()
 
 const pan = { idx: 2, hui: <ElePanHui>{ opacity: 0.4 } }
@@ -50,7 +50,7 @@ const pan = { idx: 2, hui: <ElePanHui>{ opacity: 0.4 } }
 const deftag: ActivityTag = def_ativity.tags.index
 
 const aii = reactive({
-    active: 0, tag: null
+    active: '', tag: null
 })
 
 const emt = defineEmits([ 'result' ])
@@ -66,25 +66,25 @@ const func = {
 }
 
 const funn = {
-    ioc: (tar: number): ActivityTag => {
+    ioc: (tar: string): ActivityTag => {
         const src = menus.value
         let res: ActivityTag = deftag
         src.map(e => {
-            if (e['id'] == tar) {
+            if (e['documentId'] == tar) {
                 res = e;
             }
         })
         return res;
     },
     chose: (one: ActivityTag) => {
-        aii.active = one.id
+        aii.active = one.documentId
     },
     checkIive: (one: ActivityTag) => {
-        const v = one.id
+        const v = one.documentId
         return aii.active === v
     },
     init: () => promise(() => {
-        const __def = prp.def || deftag.id;
+        const __def = prp.def || deftag.documentId;
         if (aii.active !== __def) {
             aii.active = __def;
         }
