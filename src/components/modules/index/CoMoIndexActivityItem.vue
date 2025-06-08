@@ -33,10 +33,18 @@
                 </view>
             </view>
             <view>
-                <view class="br o-h" v-if="gallerylen == 1">
-                    <CoImg :clazz="'h-14vh'" :src="gallery[0].url"/>
+                <view class="" v-if="gallerylen == 1">
+                    <CoImg :clazz="'h-14vh br o-h'" :src="gallery[0].url"/>
                 </view>
-                <view class="br o-h fx-s" v-else-if="gallerylen >= 2">
+                <view class="fx-i" v-else-if="gallerylen == 2">
+                    <view class="w-44">
+                        <CoImg :clazz="'h-14vh br-ti br-bi'" :src="gallery[0].url"/>
+                    </view>
+                    <view class="w-44">
+                        <CoImg :clazz="'h-14vh br-tr br-br'" :src="gallery[1].url"/>
+                    </view>
+                </view>
+                <view class="br o-h fx-s" v-else-if="gallerylen > 2">
                     <view class="w-33" v-for="(m, n) in gallery" :key="n">
                         <CoImg :clazz="'h-14vh'" :src="m.url"/>
                     </view>

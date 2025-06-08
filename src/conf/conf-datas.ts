@@ -1,9 +1,9 @@
 
-export const DATA_CITY_DEF = <Conf.City>{ name: '深圳', id: 1 }
+export const DATA_CITY_DEF = <Conf.City>{ name: '深圳', documentId: '' }
 export const DATA_CITYS = <Conf.Citys>[
     DATA_CITY_DEF,
-    { name: '赣州', id: 2 },
-    { name: '珠海', id: 3 },
+    { name: '赣州', documentId: '' },
+    { name: '珠海', documentId: '' },
 ]
 
 // 活动类型
@@ -37,6 +37,16 @@ export const DATA_IS_RECOMMEND = 1
 
 // 标签最大个数
 export const DATA_ACTIVITY_TAG_LIMIT = 3
+
+// 默认活动人数限制
+export const DATA_ACTIVITY_JOINER_LIMIT = 20
+
+export const DATA_ACTIVITY_MEDIA = {
+    BANNER_LESS: 1,
+    BANNER_LIMIT: 6,
+    GALLERY_LESS: 1,
+    GALLERY_LIMIT: 10
+}
 
 // 默认活动 BANNER
 export const DATA_ACTIVITY_BANNER_DEF = { url: 'https://img0.baidu.com/it/u=1944742839,3466909988&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=750' }

@@ -477,6 +477,7 @@ export interface ApiActivityMediaActivityMedia
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    h: Schema.Attribute.Decimal;
     isFrezz: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     isGallery: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     isSex: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
@@ -499,6 +500,7 @@ export interface ApiActivityMediaActivityMedia
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    w: Schema.Attribute.Decimal;
   };
 }
 

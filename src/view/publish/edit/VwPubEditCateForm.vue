@@ -28,20 +28,25 @@
                 </view>
             </CkInpItem>
             <CkInpItem v-if="form.typed == DATA_ACTIVITY_TYPED_GK.v" :tit="'报名费用'" :clazz_tit="'tid'">
-                <input class="inp-app ta-r" v-if="canedit" v-model="form.fee" type="number" placeholder="每位参与者支付的报名费用"/>
+                <input class="inp-app ta-r" v-if="canedit" v-model="form.fee" type="number" placeholder="每位参与者的报名费用(￥)"/>
                 <view class="ta-r pr-inp" v-else>{{form.fee}}</view>
+            </CkInpItem>
+            <CkInpItem v-if="form.typed == DATA_ACTIVITY_TYPED_GK.v" :tit="'人数限制'" :clazz_tit="'tid'">
+                <input class="inp-app ta-r" v-if="canedit" v-model="form.participantLimit" type="number" placeholder="每位参与者支付的报名费用"/>
+                <view class="ta-r pr-inp" v-else>{{form.participantLimit}}</view>
             </CkInpItem>
         </view>
 
         <VwPpFormTimePan 
             :start="form.__start" :end="form.__end"
             :idx="pan_time.idx"/>
+            
+        <VwPpFormAddrChoisePagePan :idx="pan_addr.idx" :form="form"/>
     </view>
 </template>
 
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
-import OInput from '@/cake/input/inp/OInput.vue';
 import CkInpItem from '@/cake/input/wrapper/CkInpItem.vue';
 import { computed, reactive } from 'vue';
 import VwPpFormTimePan from '../plus/pan/VwPpFormTimePan.vue';
@@ -50,7 +55,7 @@ import times from '@/tool/web/times';
 import { DATA_ACTIVITY_TYPED, DATA_ACTIVITY_TYPED_GK } from '@/conf/conf-datas';
 import mock_orders from '@/server/mock/order/mock_orders';
 import CoImg from '@/components/media/img/CoImg.vue';
-import { open_choise_addr } from '@/tool/uni/uni-app';
+import VwPpFormAddrChoisePagePan from '../plus/pan/VwPpFormAddrChoisePagePan.vue';
 
 const prp = defineProps<{
     form: ONE, canedit: boolean
@@ -81,15 +86,16 @@ const funn = {
     },
     openAddr: async () => {
         if (!prp.canedit) return;
-
+        /*
         console.log('打开地址选择器')
         await open_choise_addr()
-        // pan_tooi.open_def_r(pan_addr.idx, pan_addr.hui)
+        */
+        pan_tooi.open_def_r(pan_addr.idx, pan_addr.hui)
     }
 }
 
 const pan_time = { idx: 11, hui: <ElePanHui> { opacity: 0.1 } }
-
+const pan_addr = { idx: 12, hui: <ElePanHui>{ opacity: 0.4 } }
 
 // const start = reactive(<Co.TimePieckerForm>{ year: 0, month: 0, day: 0, hour: 0, minute: 0 })
 // const end = reactive(<Co.TimePieckerForm>{ year: 0, month: 0, day: 0, hour: 0, minute: 0 })

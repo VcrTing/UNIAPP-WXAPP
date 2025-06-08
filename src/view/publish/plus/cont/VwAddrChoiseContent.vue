@@ -70,19 +70,12 @@
 </template>
 
 <script setup lang="ts">
-import ODiv from '@/cake/button/div/ODiv.vue';
-import OFI from '@/cake/button/i/OFI.vue';
 import OButtonIht from '@/cake/button/OButtonIht.vue';
-import OButtonWht from '@/cake/button/OButtonWht.vue';
 import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
 import server_address from '@/server/activity/server_address';
-import server_tags from '@/server/activity/server_tags';
-import mock_tags from '@/server/mock/publish/mock_tags';
-import { tipwarn } from '@/tool/uni/uni-global';
 import { future, timeout } from '@/tool/util/future';
-import { arrfindi } from '@/tool/util/iodash';
 import { must_one } from '@/tool/util/valued';
 import UiI from '@/ui/element/i/UiI.vue';
 import { computed, nextTick, reactive } from 'vue';
@@ -111,16 +104,16 @@ const funn = {
     chose: (v: ActivityAddress) => {
         prp.form.addrdata = v;
         console.log(prp.form)
+        prp.form.address = v.address
     },
     kiii: (v: ActivityAddress) => {
         prp.form.addrdata = { }
+        prp.form.address = ''
     }
 }
 
 const func = {
-    submit: () => {
-        console.log('')
-    },
+    
     init: () => future(async () => {
         aii.ioading = true
         const dts: ActivityAddress[] = await server_address.mine()

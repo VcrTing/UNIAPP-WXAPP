@@ -3,8 +3,8 @@ namespace Conf {
     interface City {
         documentId: string
         name: string
-        longitude: number
-        latitude: number
+        longitude?: number
+        latitude?: number
     }
 
     type Citys = City[]

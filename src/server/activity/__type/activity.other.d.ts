@@ -6,6 +6,8 @@ interface ActivityMedia {
     activity: string | number
     isGallery: 0 | 1
     mediaType: number
+    w: number
+    h: number
 }
 
 interface ActivityAddress {

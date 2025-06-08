@@ -91,15 +91,14 @@ const taglen = computed(() => must_arr(form.tags).length)
 const emt = defineEmits([ 'refresh' ])
 
 const aii = reactive({
-    paths: <string[]>[ ],
-    files: <MANY>[ ],
+    paths: <string[]>[ ], data: { isGallery: 0 },
+    files: <MANY>[ ], 
     success: <Form.UploadImages>[ ], imit: 6
 })
 
 const funn = {
     trashTag: (v: ActivityTag) => {
         const i = arrfindi(form.tags, v.documentId, 'documentId')
-        // console.log('删掉 =', i)
         form.tags.splice(i, 1)
     },
     ediTag: () => {
@@ -128,11 +127,9 @@ const funn = {
             return
         }
         aii.paths.push(...ps)
-        const data = { isGallery: 0 }
-        // const details: Form.UploadImage[] = [ ]
         for (let j= 0; j< ps.length; j++ ) {
             const p = ps[j]
-            const res: ActivityMedia = await server_upload_media.activity(p, data);
+            const res: ActivityMedia = await server_upload_media.activity(p, aii.data);
             const op: Form.UploadImage = media_tool.generate_upload_img(p, fs[j], res)
             // details.push(op); 
             aii.success.push(op);

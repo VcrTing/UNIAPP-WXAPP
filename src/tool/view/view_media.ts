@@ -11,3 +11,7 @@ export const getgallery = (v: ONE, def: MANY, k: string = 'gallery'): MANY => {
     } 
     return def
 }
+
+export const hbyshow = (w: number, h: number) => {
+    
+}

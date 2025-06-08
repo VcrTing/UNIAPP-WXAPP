@@ -8,7 +8,7 @@
         </view>
         <view class="pt-x1">
             <view v-for="(v, i) in gallery" :key="i">
-                <CoImg :src="v.url"/>
+                <image class="w-100" :src="v.url" mode="aspectFit"/>
             </view>
         </view>
     </view>

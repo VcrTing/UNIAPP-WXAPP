@@ -70,16 +70,15 @@ const pan_addr = { idx: 31, hui: <ElePanHui>{ opacity: 0.4 } }
 const funn = {
     
     open_addr: async () => {
+        /*
         console.log('打开地址选择器')
         const res = await open_choise_addr()
-        
         tipsucc('1. 选择地址成功')
-
         const latitude = res.latitude;
         const longitude = res.longitude;
-
         console.log('location res =', res)
-        // pan_tooi.open_def_r(pan_addr.idx, pan_addr.hui)
+        */
+        pan_tooi.open_def_r(pan_addr.idx, pan_addr.hui)
     },
 
     vid: () => {

@@ -3,20 +3,20 @@
     <PageLayout>
         <CoAppTopBackBar :clazz="'pb-s bg-con'" @back="uniRouter.back" :mat="true">
             <template #tit><view class="header ta-c">
-                <text v-if="canedit">修改活动</text>
+                <text v-if="canedit">修改</text>
                 <text v-else>无法修改</text>
             </view></template>
         </CoAppTopBackBar>
         <view>
             <VwPubEditTopMsg />
-            <view><VwPubEditTopForm ref="top" :form="form" :canedit="canedit"/></view>
+            <view><VwPubEditTopForm ref="top" :documentId="documentId" :form="form" :canedit="canedit"/></view>
             <view class="py-s"></view>
             <view>
                 <VwPubEditCateForm ref="cate" :form="form" :canedit="canedit"/>
             </view>
             <view class="py-s"></view>
             
-            <view><VwPubEditGallery  ref="gallery" :form="form" :canedit="canedit"/></view>
+            <view><VwPubEditGallery  ref="gallery" :documentId="documentId" :form="form" :canedit="canedit"/></view>
             <view class="py-s"></view>
             <view><VwPubEditStatus :aii="aii" :form="form" :canedit="canedit"/></view>
 
@@ -40,26 +40,22 @@ import OButton from '@/cake/button/OButton.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import CoAppBomFuncBar from '@/components/app/bar/bom/CoAppBomFuncBar.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
-import CoBomBtnGroup from '@/components/element/button/CoBomBtnGroup.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoMoSecurityAgreeLine from '@/components/modules/security/CoMoSecurityAgreeLine.vue';
-import { APP_GENERATE_DETAIL } from '@/conf/conf-app';
-import { DATA_ACTIVITY_TAG_LIMIT, DATA_ACTIVITY_TYPED_GK, DATA_ACTIVITY_TYPED_SM } from '@/conf/conf-datas';
+import { DATA_ACTIVITY_JOINER_LIMIT, DATA_ACTIVITY_MEDIA, DATA_ACTIVITY_TAG_LIMIT, DATA_ACTIVITY_TYPED_GK, DATA_ACTIVITY_TYPED_SM } from '@/conf/conf-datas';
 import { authGetters, orderDispatch, orderState, uiState } from '@/memory/global';
 import { pagePublishState } from '@/memory/page';
-import server_publish from '@/server/publish/server_publish';
 import server_pubplus from '@/server/publish/server_pubplus';
 import activity_tool from '@/tool/modules/activity_tool';
+import media_tool from '@/tool/modules/media_tool';
 import appRouter from '@/tool/uni/app-router';
 import { tipwarn } from '@/tool/uni/uni-global';
 import uniRouter from '@/tool/uni/uni-router';
 import { future, promise } from '@/tool/util/future';
-import { arrgotv } from '@/tool/util/iodash';
 import { deepcopy, formfii, is_nice_arr, must_one } from '@/tool/util/valued';
 import times from '@/tool/web/times';
 import VwPubEditCateForm from '@/view/publish/edit/VwPubEditCateForm.vue';
 import VwPubEditGallery from '@/view/publish/edit/VwPubEditGallery.vue';
-import VwPubEditJoiner from '@/view/publish/edit/VwPubEditJoiner.vue';
 import VwPubEditStatus from '@/view/publish/edit/VwPubEditStatus.vue';
 import VwPubEditTopForm from '@/view/publish/edit/VwPubEditTopForm.vue';
 import VwPubEditTopMsg from '@/view/publish/edit/VwPubEditTopMsg.vue';
@@ -71,11 +67,12 @@ const gallery = ref()
 
 const agree = ref()
 
-const aii = reactive({ ioading: false })
+const aii = reactive({ ioading: false, 
+    imit_banner: DATA_ACTIVITY_MEDIA.BANNER_LESS, imit_gallery: DATA_ACTIVITY_MEDIA.GALLERY_LESS })
 
 const funn = {
     // 入口时重置表单
-    reset: (src: ONE | null = null) => {
+    reset: (src: Activity) => {
         console.log('执行值替换 src =', src)
         if (src) {
             formfii(form, src);
@@ -83,11 +80,19 @@ const funn = {
             form.__start = times.generate_picker_data(src.startTime)
             form.__end = times.generate_picker_data(src.endTime)
             form.tags = src.activity_tags
+            form.banner = media_tool.convert_upload_imgs(activity_tool.getbanner(src))
+            form.gallery = media_tool.convert_upload_imgs(activity_tool.getgallery(src))
         }
     },
     // 收集数据
     collection: () => {
-        const src = form
+        const src = form;
+
+        const bns: Form.UploadImages = top.value.vimg()
+        if (bns.length < aii.imit_banner) {
+            tipwarn('必须要有 ' + aii.imit_banner + ' 张吸引人的宣传图。')
+            return false
+        }
 
         if (!src.title || src.title.length < 4) {
             tipwarn('请输入4个字以上的活动标题。')
@@ -111,6 +116,12 @@ const funn = {
             return false
         }
 
+        const gss: Form.UploadImages = gallery.value.vimg()
+        if (gss.length < aii.imit_gallery) {
+            tipwarn('请尝试上传 ' + aii.imit_gallery + ' 张相册图片，以作详情展示，提升吸引力。')
+            return false
+        }
+
         return true
         
     },
@@ -119,13 +130,17 @@ const funn = {
         const res: ONE = deepcopy(src)
         res['startTime'] = times.build_of_form(form.__start)
         res['endTime'] = times.build_of_form(form.__end)
+        /*
+        res['activity_medias'] = media_tool.group_medias_ids(media_tool.group_publish_medias(
+            top.value.vimg(), gallery.value.vimg()
+        ))
+        */
         return activity_tool.build_edit_data(res)
     }
 }
 
 const func = {
     submit: () => future(async () => {
-        console.log('数据 =', form)
         if (!funn.collection()) return;
         if (!agree.value.v()) return;
         const src: ONE = funn.buildform(form);
@@ -139,7 +154,8 @@ const func = {
         uniRouter.back()
     },
     init: () => promise(() => {
-        const v: ONE = must_one(edit.value)
+        const v: Activity = must_one(edit.value)
+        console.log('进来 =', v)
         if (v.documentId) {
             funn.reset(v)
         }
@@ -150,16 +166,17 @@ const func = {
 }
 
 const form = reactive({
-    title: '', typed: DATA_ACTIVITY_TYPED_GK.v,
-    tags: [ ], taglimit: DATA_ACTIVITY_TAG_LIMIT, fee: null, introduction: '',
+    title: '', typed: DATA_ACTIVITY_TYPED_GK.v, addrdata: null,
+    tags: <ActivityTag[]>[ ], taglimit: DATA_ACTIVITY_TAG_LIMIT, fee: null, introduction: '',
     longitude: null, latitude: null, address: null, city: null, area: null,
-    endJoinTime: '2025-12-12 12:12',
+    endJoinTime: new Date(), participantLimit: DATA_ACTIVITY_JOINER_LIMIT,
     __start: <Co.TimePieckerForm>{ year: 0, month: 0, day: 0, hour: 0, minute: 0 },
     __end: <Co.TimePieckerForm>{ year: 0, month: 0, day: 0, hour: 0, minute: 0 },
-    banner: <ActivityMedia[]>[ ], gallery: <ActivityMedia[]>[ ]
+    banner: <Form.UploadImages>[ ], gallery: <Form.UploadImages>[ ]
 })
 
 const edit = computed(() => (pagePublishState.edit))
+const documentId = computed((): string => edit.value.documentId)
 
 const canedit = computed((): boolean => {
     const sts: number = edit.value.dataStatus

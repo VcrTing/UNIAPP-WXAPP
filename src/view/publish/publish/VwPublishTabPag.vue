@@ -74,6 +74,9 @@ const funn = {
     }),
     swicthTab: (i: number) => {
         aii.iive = i
+        if (i == 1) {
+            funn.freshWaiting()
+        }
     }
 }
 

@@ -31,7 +31,7 @@ export const arrimit = <T>(src: MANY, imit: number): T => {
     return (res as T)
 }
 
-export const arrgotv = (src: MANY, k: string = 'id') => {
+export const arrgotv = (src: MANY, k: string = 'documentId') => {
     return must_arr(src).map((e: ONE) => e[k]) //.filter(v => has_v(v))
 }
 

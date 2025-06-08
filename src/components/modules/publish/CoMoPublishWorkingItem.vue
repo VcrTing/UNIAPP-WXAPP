@@ -4,12 +4,12 @@
             <CoImg clazz="h-100" :src="funn.get_banner_src(v)"/>
         </view>
         <view class="fx-1 px">
-            <view>{{ v.title }}</view>
+            <view class="h9">{{ v.title }}</view>
             <view class="fx-s pt">
                 <view class="fx-1">
                     <view class="fx-i">
                         <UiI class="fs-s" :i="'time'"/>
-                        <view class="fs-n pi-s tis">{{ v.createdAt }}</view>
+                        <view class="fs-n pi-s tis">{{ activity_tool.gettime(v) }}&nbsp;开始</view>
                     </view>
                 </view>
             </view>

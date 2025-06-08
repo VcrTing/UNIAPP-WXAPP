@@ -1,4 +1,4 @@
-import { DATA_ACTIVITY_STATUS, DATA_ACTIVITY_TYPED_SM } from "@/conf/conf-datas"
+import { DATA_ACTIVITY_JOINER_LIMIT, DATA_ACTIVITY_STATUS, DATA_ACTIVITY_TYPED_SM } from "@/conf/conf-datas"
 import { arrfind, arrgotv, arrimit } from "../util/iodash"
 import { deepcopy, formfiimit, must_arr, must_int, must_one, positive } from "../util/valued"
 import { authGetters } from "@/memory/global"
@@ -31,16 +31,23 @@ import { authGetters } from "@/memory/global"
     const build_edit_data = (src: ONE) => {
         
         const tgsid = arrgotv(src.tags)
+        const typed: number = src.typed
         const userid: string = authGetters.userid
 
         let res: ONE = { }
         formfiimit(res, src, [ 
             'title', 'fee', 'introduction', 'typed',
             'address', 'city', 'area', 'latitude', 'longitude',
-            'startTime', 'endTime' // participantLimit
+            'startTime', 'endTime', 'participantLimit',
+            // 'activity_medias'
         ])
         res['publisher'] = userid
         res['activity_tags'] = tgsid
+
+        // 私密活动
+        if (typed == DATA_ACTIVITY_TYPED_SM.v) {
+            res['participantLimit'] = DATA_ACTIVITY_JOINER_LIMIT
+        }
         return res
     }
 
@@ -56,18 +63,19 @@ export default {
 
     getbanner: (v: Activity): ActivityMedia[] => {
         const mds: ActivityMedia[ ] = must_arr(v.activity_medias)
-        const banners: ActivityMedia[ ] = mds.filter(e => e.isGallery)
-        return must_arr(banners)
+        const res: ActivityMedia[ ] = mds.filter(e => !e.isGallery)
+        return must_arr(res)
     },
     getgallery: (v: Activity): ActivityMedia[] => {
-        const src: ActivityMedia[] = v.activity_medias
-        return src || []
+        const mds: ActivityMedia[ ] = must_arr(v.activity_medias)
+        const res: ActivityMedia[ ] = mds.filter(e => e.isGallery)
+        return must_arr(res)
     },
     getindex_banner: (v: Activity): ActivityMedia[] => {
         const mds: ActivityMedia[ ] = must_arr(v.activity_medias)
         //
-        const banners: ActivityMedia[ ] = mds.filter(e => e.isGallery)
-        const gallery: ActivityMedia[ ] = mds.filter(e => !e.isGallery)
+        const banners: ActivityMedia[ ] = mds.filter(e => !e.isGallery)
+        const gallery: ActivityMedia[ ] = mds.filter(e => e.isGallery)
         return arrimit([ ...banners, ...gallery ], 3)
     },
     getweek, gettime_start, gettime_end,

@@ -3,7 +3,7 @@ namespace Form {
     
     interface UploadImage {
         path: string
-        file: File
+        file: File | null
         link: string
         data: ONE
         __iive: boolean

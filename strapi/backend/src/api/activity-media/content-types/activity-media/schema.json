@@ -58,6 +58,12 @@
         "videos",
         "audios"
       ]
+    },
+    "w": {
+      "type": "decimal"
+    },
+    "h": {
+      "type": "decimal"
     }
   }
 }

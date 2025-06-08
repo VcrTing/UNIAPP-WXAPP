@@ -9,6 +9,9 @@ interface UiStore {
 
     // 根节点 字体大小 系数，影响 rem 单位，影响 distance 边距 的浮动
     root_font_size_coefficient: number
+
+    w: number
+    h: number
 }
 
 type UI_STORE_FIELD = 

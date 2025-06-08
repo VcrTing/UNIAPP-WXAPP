@@ -2,7 +2,6 @@
     <page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
     <PageLayout>
         <CoAppTopBackBar :clazz="'bg-con pb-s'" @back="uniRouter.back" :mat="true">
-            返回
             <template #tit><view class="header ta-c">新增活动</view></template>
         </CoAppTopBackBar>
         <view class="">
@@ -18,7 +17,7 @@
         </view>
         <CoAppBomCarBar :clazz="'bg-pag-pri'">
             <view class="px-row pt-x1 pb">
-                <CoBomBtnGroup @submit="funn.submit" @cancle="funn.backwaiting()"></CoBomBtnGroup>
+                <CoBomBtnGroup @submit="funn.submit" @cancle="uniRouter.back"></CoBomBtnGroup>
             </view>
         </CoAppBomCarBar>
     </PageLayout>
