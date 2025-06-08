@@ -28,7 +28,7 @@
             <CoAppBomFuncBar :clazz="'bg-pag-pri'">
                 <view class="py px-row">
                     <OButton v-if="canedit" clazz="" @tap="func.submit"><view class="py-t">提交审核</view></OButton>
-                    <OButton v-else color="def" @tap="appRouter.publish_waiting()"><view class="py-t">返回</view></OButton>
+                    <OButton v-else color="def" @tap="appRouter.publish_waiting()"><view class="py-t tis">返回</view></OButton>
                 </view>
             </CoAppBomFuncBar>
         </view>
