@@ -1,9 +1,17 @@
 import { is_strapi_mode } from "@/conf/conf"
 import strapi_param_tool from "../strapi/strapi_param_tool"
 import { authGetters } from "@/memory/global"
+import { is_nice_arr, is_nice_one, must_arr, must_one } from "../util/valued"
 
 
 const PAGER_SIZE_DEF = 10
+
+// 生成返回结果
+const generate_http_result = (data: any, code: number, message: string) => {
+    return <HttpResult>{
+        code, message, data
+    }
+}
 
 // 生成分页
 const generate_pagination = (pageSize: number = PAGER_SIZE_DEF): Pager => {
@@ -48,10 +56,20 @@ const data = <T>(src: NET_RES) => {
     return (src as HttpResult).data as T
 }
 
+
+const many = <T>(src: ONE | MANY | undefined): T[] => {
+    return is_nice_arr(src) ? (must_arr(src) as T[]) : <T[]>[]
+}
+const one = <T>(src: ONE | MANY | undefined): T => {
+    return is_nice_one(src) ? (must_one(src)) : <T>{ }
+}
+
 export default {
+    generate_http_result,
     generate_pagination,
     build_param,
     limit_mine,
     build_data,
-    data
+    data,
+    one, many
 }

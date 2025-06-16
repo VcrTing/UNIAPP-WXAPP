@@ -24,3 +24,12 @@ export const tipsucc = (title: string = '操作成功。') => {
 export const tipwarn = (title: string = '警告') => {
   uni.showToast({ title, icon: 'none' })
 }
+
+export const tiperr = (title: string = '错误') => {
+  uni.showToast({ title, icon: 'none', duration: 3400 })
+}
+
+export const netip = <T>(src: NET_RES, def: T): T => {
+  tiperr(src + '')
+  return def
+}

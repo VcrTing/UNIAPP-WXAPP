@@ -15,6 +15,6 @@ public class ActivityMediaForm {
     List<MultipartFile> files;
     MultipartFile file;
     Integer isGallery;
-    Long activityId;
+    Long connectionDocumentId;
     // Map<String, Object> formData;
 }

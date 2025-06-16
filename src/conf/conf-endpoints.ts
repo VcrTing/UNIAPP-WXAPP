@@ -16,7 +16,7 @@ const NET_ENDPOINT_TEST = <ONE> {
 }
 // 用户
 const NET_ENDPOINT_USER = <ONE>{
-    'user_layout_menu': 'app/user/layout/menu'
+    'user': 'users'
 }
 // 活动
 const NET_ENDPOINT_ACTIVITY = <ONE> {
@@ -36,7 +36,7 @@ export const NET_ENDPOINTS_MASTER = <ONE> {
 
 export const NET_ENDPOINT_FILE = <ONE> {
     'upload': 'upload',
-    'activity': 'activity-medias/upload/one'
+    'any': 'medias/upload/one'
 }
 
 export const __net_file_url = (k: string) => {

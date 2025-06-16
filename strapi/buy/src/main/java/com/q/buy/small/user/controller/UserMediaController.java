@@ -1,4 +1,4 @@
-package com.q.buy.small.activity.controller;
+package com.q.buy.small.user.controller;
 
 
 import com.q.buy.conf.NetConfig;
@@ -10,17 +10,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.List;
 
 @Slf4j
 @RestController
 @RequestMapping(NetConfig.API_LINK + "activity-medias")
-public class ActivityMediaController {
+public class UserMediaController {
     @Autowired
     ActivityMediaServiceImpl activityMediaService;
 

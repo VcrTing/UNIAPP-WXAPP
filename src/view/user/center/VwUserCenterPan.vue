@@ -2,11 +2,12 @@
     <view>
         <view class="pt-row">
             <VwUcpNumberMsg/>
-
             <view class="py-row"></view>
+            <!-- -->
             <view class="px-row pt-x1"><CoMoUcpGoBtns/></view>
             <!-- -->
             <view class="pt-x2">
+                <!--
                 <view class="pt-s bg-con-fer-s bf">
                     <view class="fx-i zi-s">
                         <CoHeaderTabItem class="w-333" 
@@ -26,6 +27,7 @@
                         <CkSpace :h="5"/>
                     </view>
                 </view>
+                -->
             </view>
         </view>
     </view>

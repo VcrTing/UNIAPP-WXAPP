@@ -6,11 +6,11 @@
             </view>
             <view class="pt-s">
                 <view class="fx-i" v-if="v.publisher">
-                    <CkAvatar clazz="w-2em h-2em fs-w" :src="v.publisher.avatar"/>
+                    <CkAvatar clazz="w-2em h-2em fs-w" :src="v.publisher.avatarUrl"/>
                     <view class="pi-s">
-                        <view class="d-ib">{{ v.publisher.nickname }}</view>
+                        <view class="d-ib">{{ v.publisher.nickName }}</view>
                         <view class="d-ib pi-t">
-                            <CkSex :sex="v.publisher.sex"/>
+                            <CkSex :sex="v.publisher.gender"/>
                         </view>
                         <view class="d-ib pri pi fs-w">
                             <text class="pr">#&nbsp;十单十成</text>

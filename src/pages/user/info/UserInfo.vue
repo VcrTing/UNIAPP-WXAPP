@@ -6,9 +6,9 @@
             <template #tit><view class="header ta-c">修改个人资料</view></template>
         </CoAppTopBackBar>
         <view>
-            <UserBaseInfoForm/>
+            <UserBaseInfoForm :form="form"/>
             <view class="pt-row"></view>
-            <UserUsllyForm/>
+            <UserUsllyForm :form="form"/>
         </view>
         <!--
         <CoAppBomCarBar>
@@ -23,28 +23,40 @@
 </template>
 
 <script setup lang="ts">
-import OButtonI from '@/cake/button/i/OButtonI.vue';
 import OFI from '@/cake/button/i/OFI.vue';
-import CoAppBomCarBar from '@/components/app/bar/bom/CoAppBomCarBar.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
-import CoBomBtnGroup from '@/components/element/button/CoBomBtnGroup.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
-import { orderDispatch, orderState, uiState } from '@/memory/global';
+import { authState, orderDispatch, orderState, uiState } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';
+import { future, promise } from '@/tool/util/future';
+import { formfii, formfiimit } from '@/tool/util/valued';
 import UserBaseInfoForm from '@/view/user/info/UserBaseInfoForm.vue';
 import UserUsllyForm from '@/view/user/info/UserUsllyForm.vue';
-import { ref } from 'vue';
+import { computed, nextTick, reactive, ref } from 'vue';
 
 const top = ref()
 const addr = ref()
 const money = ref()
 
+const form = reactive({
+    nickName: '', introduction: '', socialAccount: '', age: 18,
+    avatarUrl: '', __avatarUrl: { },
+    background: '', __background: { },
+})
+
+const user = computed((): User => authState.user)
+
 const funn = {
     submit: () => {
         
         // uniRouter.navigatorpg('publish')
-    }
+    },
+    init: () => promise(() => {
+        formfii(form, user.value)
+    })
 }
+
+nextTick(funn.init)
 </script>
 
 <style lang="sass">

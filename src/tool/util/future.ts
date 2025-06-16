@@ -10,7 +10,8 @@ export const future = async <T> (call: () => T | undefined): Promise<T | undefin
 
 export const timeout = <T> (call: () => T | null, haomiao: number = 0): number | undefined => call ? setTimeout(call, haomiao ? haomiao : 0) : undefined
 
-const REACTION_TIME: number = 198
+const REACTION_TIME: number = 7
+
 
 export const promising = <T> (
         aii: ONE,
@@ -42,9 +43,35 @@ export const futuring = async <T> (
                 if (aii.ioading) { resolve(undefined); return }
                 else {
                     aii.ioading = true
-                    res = await call(); 
-                    timeout(() => aii.ioading = false, REACTION_TIME)
+                    try {
+                        res = await call(); 
+                    }
+                    catch (err) {  }
+                    finally {
+                        timeout(() => aii.ioading = false, REACTION_TIME)
+                    }
                 }
             }
             resolve(res ? res : undefined)
         })
+
+export const deloop = (fn: Function, delay: number): () => null => {
+    let isActive = true;
+
+    function execute() {
+        if (!isActive) return;
+
+        try {
+            fn();
+        } catch (error) {
+            console.error('执行出错:', error);
+        }
+
+        if (isActive) {
+            setTimeout(execute, delay);
+        }
+    }
+
+    execute();
+    return () => { isActive = false; };
+}

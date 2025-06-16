@@ -5,12 +5,12 @@
             <view class="fx-i">
                 <view >
                     <CkAvatar @tap="funn.ck_avatar" :not_mainpage="true"
-                        :clazz="'w-7em h-7em'" :src="user.avatar"/>
+                        :clazz="'w-7em h-7em'" :src="user.avatarUrl"/>
                 </view>
                 <view class="fx-1 pi-x2 c-fff">
-                    <view @tap="funn.ck_name" class="h5 b pt-n">{{ user.nickname }}</view>
+                    <view @tap="funn.ck_name" class="h5 b pt-n">{{ user.nickName }}&nbsp;</view>
                     <view @tap="funn.ck_name" class="pt">
-                        社交账号:&nbsp;{{ user.socialAccount }}
+                        社交账号:&nbsp;&nbsp;{{ user.socialAccount }}
                     </view>
                 </view>
             </view>
@@ -27,7 +27,7 @@ import { computed } from 'vue';
 
 // const prp = defineProps<{}>()
 
-const user = computed(() => authState.user)
+const user = computed((): User => authState.user)
 
 const funn = {
     ck_avatar: async () => {

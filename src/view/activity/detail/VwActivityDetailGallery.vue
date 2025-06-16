@@ -8,7 +8,7 @@
         </view>
         <view class="pt-x1">
             <view v-for="(v, i) in gallery" :key="i">
-                <image class="w-100" :src="v.url" mode="aspectFit"/>
+                <image class="w-100 h-28vh" :src="v.url" mode="aspectFill"/>
             </view>
         </view>
     </view>

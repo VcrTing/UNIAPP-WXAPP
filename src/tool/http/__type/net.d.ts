@@ -11,6 +11,8 @@ interface UniappHttpResult {
 
 interface HttpResult {
     data: ONE | MANY
+    code?: number
+    message?: string
     meta: HttpResultPagination
 }
 

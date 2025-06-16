@@ -1135,8 +1135,8 @@ export interface PluginUsersPermissionsUser
       'api::activity-tag.activity-tag'
     >;
     age: Schema.Attribute.Integer;
-    avatar: Schema.Attribute.Text;
     avatarDefault: Schema.Attribute.Text;
+    avatarUrl: Schema.Attribute.Text;
     background: Schema.Attribute.Text;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
@@ -1150,6 +1150,7 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    gender: Schema.Attribute.Integer;
     introduction: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -1157,7 +1158,7 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Private;
-    nickname: Schema.Attribute.String;
+    nickName: Schema.Attribute.String;
     openid: Schema.Attribute.String;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
@@ -1172,7 +1173,6 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    sex: Schema.Attribute.Integer;
     socialAccount: Schema.Attribute.String;
     unionid: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;

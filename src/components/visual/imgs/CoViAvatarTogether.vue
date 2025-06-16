@@ -6,7 +6,7 @@
             <image class="mxw-12em uni-img br-cir" 
                 :style="style_avatar"
                 mode="aspectFill"
-                :src="v.avatar"/>
+                :src="v.avatarUrl"/>
         </view>
     </view>
 </template>
@@ -36,7 +36,7 @@ const style_avatar = computed(() => {
     }
 })
 
-const data = computed(() => {
+const data = computed((): User[] => {
     return arrimit(prp.items, prp.limit || 3)
 })
 

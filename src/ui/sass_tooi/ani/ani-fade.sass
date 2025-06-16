@@ -39,10 +39,19 @@
 // 从上到下
 .ani-fade-b
     animation: ani_fade_b $duration_x2 $ttf
-
 @keyframes ani_fade_b
     0%
         opacity: 0
+        transform: translate3d(0, 1em, 0)
+    100%
+        opacity: 1
+        transform: translate3d(0, 0, 0)
+
+.ani-fade-b-s
+    animation: ani_fade_b_s $duration-s $ttf
+@keyframes ani_fade_b_s
+    0%
+        opacity: 0.4
         transform: translate3d(0, 1em, 0)
     100%
         opacity: 1

@@ -7,6 +7,7 @@ interface AuthStore {
     jwt: string
     role: ROLES
     num: number
+    __ioading: boolean
     loginhouse: AuthLoginHouse
 }
 type AUTH_STORE_FIELD = 

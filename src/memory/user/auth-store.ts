@@ -1,5 +1,6 @@
 
 import { ROLE_ANON, ROLE_AUTH, USER_DEF } from '@/conf/conf-role';
+import server_me from '@/server/user/server_me';
 import pan_tooi from '@/tool/app/pan_tooi';
 import { storage } from '@/tool/web/storage';
 import { Store, createStore } from 'vuex';
@@ -24,6 +25,7 @@ const _s: Store<AuthStore> = createStore({
         jwt: '',
         role: ROLE_ANON,
         num: 0,
+        __ioading: false,
         loginhouse: {
             pan_idx: 1000,
             pan_hui: { opacity: 0.4 },
@@ -41,6 +43,7 @@ const _s: Store<AuthStore> = createStore({
         is_publisher: s => (s.user.publisher)
     },
     mutations: {
+        __change: (s: ONE, v: ANYS) => s[ v[0] ] = v[1],
         _num: (s: ONE) => {
             s.num = s.num + 1
         },
@@ -103,7 +106,23 @@ const _s: Store<AuthStore> = createStore({
             return false
         },
 
-        // 
+        // 更新
+        refresh_info: async ({ state, commit }): Promise<User> => {
+            if (state.__ioading) return state.user;
+            commit('__change', [ '__ioading', true ])
+            try {
+                const u: User = await server_me.one(state.user.id)
+                // console.log('AU__________ =', u)
+                if (u && u.id) {
+                    // console.log('刷新用户数据 =', u)
+                    commit('__change', [ 'user', u ])
+                }
+            }
+            finally {
+                commit('__change', [ '__ioading', false ])
+            }
+            return state.user;
+        }
     }
 })
 

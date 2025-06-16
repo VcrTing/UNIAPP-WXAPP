@@ -1,11 +1,15 @@
 
 interface User {
+    id: number
     documentId: string
     background: string
-    avatar: string
-    nickname: string
+    avatarUrl: string
+    nickName: string
     phone: string
-    sex: number
+    gender: number
     age: number
     introduction: string
+    socialAccount: string
 }
+
+type UserMedia = ActivityMedia
