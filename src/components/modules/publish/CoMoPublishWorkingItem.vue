@@ -7,13 +7,13 @@
         </view>
         <view class="">
             <view class="row fx-i br" v-if="activity_tool.getindex_banner(v).length >= 3">
-                <view class="w-333 h-12vh d-ib" v-for="(m, n) in activity_tool.getindex_banner(v)" :key="n">
-                    <CoImg clazz="h-100" :src="m.url"/>
+                <view class="w-333 h-12vh d-ib o-h" v-for="(m, n) in activity_tool.getindex_banner(v)" :key="n">
+                    <CoImg clazz="h-100 ani-scaie-aii ts" :src="m.url"/>
                 </view>
             </view>
             <view class="row fx-i br" v-if="activity_tool.getindex_banner(v).length <= 2">
-                <view class="w-44 h-12vh d-ib" v-for="(m, n) in activity_tool.getindex_banner(v)" :key="n">
-                    <CoImg clazz="h-100" :src="m.url"/>
+                <view class="w-44 h-12vh d-ib o-h" v-for="(m, n) in activity_tool.getindex_banner(v)" :key="n">
+                    <CoImg clazz="h-100 ani-scaie-aii ts" :src="m.url"/>
                 </view>
             </view>
         </view>
@@ -51,7 +51,7 @@
             </view>
         </view>
         <view class="py-col">
-            <view class="btn-wht pt-col br-rnd mb-s py-s d-ib">
+            <view class="btn-wht pt-col br-rnd mb-s py-s d-ib ani-scaie-aii">
                 <view class="fx-i px-x1 tid">
                     <UiI i="addr" clazz="fs-w"/>
                     <text class="fs-s pi-s">{{ activity_tool.getfar(v) }}</text>
@@ -63,7 +63,7 @@
                 </view>
                 -->
             </view>
-            <view class="btn-wht pt-col br-rnd py-s d-ib">
+            <view class="btn-wht pt-col br-rnd py-s d-ib ani-scaie-aii">
                 <view class="fx-i px-x1 tid">
                     <UiI i="time" clazz="fs-w"/>
                     <text class="fs-s px-s">{{ activity_tool.gettime(v) }}</text>

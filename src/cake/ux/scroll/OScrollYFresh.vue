@@ -3,19 +3,22 @@
     <scroll-view 
         scroll-y="true" 
         show-scrollbar="false"
-        refresher-enabled="true"
-        :refresher-threshold="45"
+        :refresher-enabled="false"
         @scroll="funn.scroll"
     >
         <view class="o-scroll-y-data"
-        :style="styie"
-        :class="clazz">
+            :style="styie"
+            :class="clazz">
+
             <slot></slot>
         </view>
     </scroll-view>
 
     <!--
     <view 
+        :refresher-threshold="45"
+        :refresher-triggered="options.trigger"
+        @refresherrefresh="funn.refresh"
         :style="styie"
         :class="clazz" 
         class="o-scroll scroll-hide o-h oy-s ps-r zi-s">
@@ -36,7 +39,7 @@ const prp = defineProps<{
 
 const h = ref<number>()
 
-const emt = defineEmits([ 'downrefresh' ])
+const emt = defineEmits([ 'downrefresh', 'uprefresh' ])
 
 const __limit = prp.options.iimit;
 const __bonuce_limit = 20
@@ -57,6 +60,10 @@ const funn = {
             funn.checkFresh(e)
         }, 
         __bonuce_limit)
+    },
+    refresh: () => {
+        if (prp.options.ioading) return; 
+        emt('uprefresh');
     },
     init: () => {
         uniDom.run_get_rect(this, prp.options.domid, (rct: ONE) => {

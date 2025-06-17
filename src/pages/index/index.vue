@@ -33,11 +33,13 @@ import VwIndexTop from '@/view/index/VwIndexTop.vue';
 import { reactive } from 'vue';
 
 const funn = {
+	/*
 	changeLoading: () => {
 		const v = appState.ioading
 		appCommit('change', [ 'ioading', v == 0 ? -1 : 0 ])
 	},
 	goUi: () => uniRouter.gopg('ui'),
+	*/
 	search: () => { uniRouter.gopg('index_search') }
 }
 </script>

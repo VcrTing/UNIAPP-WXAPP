@@ -3,22 +3,42 @@
         <view class="bg-con py">
             <VwIndexContTop @result="funn.switchTag"/>
         </view>
-        <view class="pt-row">
+        <view class="">
             <OScrollYFresh id="index_scroll"
                 :options="scrolloptions"
                 :styie="{ 'height': 'calc( 100vh - 17em )' }"
                 @downrefresh="funn.next"
+                @uprefresh="funn.initing"
                 >
+                <view class="pt-row"></view>
                 <view class="px-row">
-                    <view v-if="aii.ioading">
+                    <view v-if="index.ioading">
                         <CkDataIoading :h="12"/>
                     </view>
                     <view v-else>
-                        <VwIndexContList :activities="aii.activities"/>
+                        <view v-if="aii.activities && aii.activities.length > 0">
+                            <VwIndexContList :activities="aii.activities"/>
+                        </view>
+                        <view v-else>
+                            <view class="h-80vh">
+                                <CoEmpty/>
+                            </view>
+                        </view>
                     </view>
                 </view>
-                <view class="mh-5em"></view>
+                <CkSpace :h="3"/>
+                <view class=" w-100" v-if="index.end">
+                    <view class="py-row px-row fx-aii-btn-def fx-c">
+                        <view class="fs-n cos">到底了，暂无更多数据。</view>
+                    </view>
+                </view>
+                <CkSpace :h="1"/>
             </OScrollYFresh>
+            <view class="abs-b i-0 w-100" v-if="index.ioading">
+                <view class="ani-fade-b">
+                    <CkDataIoading :h="1"/>
+                </view>
+            </view>
         </view>
     </view>
 </template>
@@ -27,20 +47,22 @@
 import { computed, onMounted, reactive } from 'vue';
 import VwIndexContList from './content/VwIndexContList.vue';
 import VwIndexContTop from './content/VwIndexContTop.vue';
-import { future, promise } from '@/tool/util/future';
+import { future, futuring, promise } from '@/tool/util/future';
 import server_activity from '@/server/activity/server_activity';
 import CkDataIoading from '@/cake/content/ioading/CkDataIoading.vue';
 import OScrollYFresh from '@/cake/ux/scroll/OScrollYFresh.vue';
 import net_tool from '@/tool/http/net_tool';
-import { is_nice_arr, must_one } from '@/tool/util/valued';
-import { pageIndexCommit, pageIndexDispatch, pageIndexState } from '@/memory/page';
+import { pageIndexDispatch, pageIndexState } from '@/memory/page';
 import def_ativity from '@/server/__def/def_ativity';
+import CkSpace from '@/cake/content/CkSpace.vue';
+import CoEmpty from '@/components/genra/empty/CoEmpty.vue';
 
 // const prp = defineProps<{}>()
 
 const aii = reactive({
-    tag: <ActivityTag> { }, ioading: false, 
-    activities: <Activity[]>[ ]
+    tag: <ActivityTag> { }, ioading: false,
+    activities: <Activity[]>[ ],
+    pager: net_tool.generate_pagination()
 })
 
 const pageoptions = computed((): Page.IndexPageDataActivityOptions => pageIndexState.page_index_data_options)
@@ -51,12 +73,112 @@ const scrolloptions = computed((): OScrollOptions => {
     return {
         domid: 'index_scroll',
         iimit: 10,
-        ioading: aii.ioading
+        trigger: index.trigger,
+        ioading: index.ioading
     }
 })
 
-
 const got = {
+    buildparam: () => {
+        const res = <ONE>{
+            
+        }
+        //
+        const tagid: string = aii.tag.documentId // must_one<ActivityTag>(option.tag).documentId
+        if (tagid) {
+            res['filters[activity_tags][documentId][$eq]'] = tagid
+        }
+        else {
+
+        }
+        //
+        return res;
+    }
+}
+
+const deftag = def_ativity.tags.index
+
+
+const funn = {
+    next: () => futuring(aii, async () => {
+        if (index.end) {
+            console.log('到底啦。')
+            return
+        }
+        aii.pager.page += 1
+        const param: ONE = got.buildparam()
+        const src: Activity[] = await server_activity.index_recommond(param, aii.pager)
+        if (src && src.length > 0) {
+            aii.activities.push(...src)
+            index.end = false
+        }
+        else {
+            index.end = true
+        }
+    }),
+
+    initing: () => future(async () => {
+        index.end = false
+        console.log('你好 UP', index.trigger)
+        await funn.fetching()
+        index.trigger = false
+    }),
+
+    fetching: () => futuring(index, async () => {
+        aii.pager.page = 1
+        const param: ONE = got.buildparam()
+        const src: Activity[] = await server_activity.index_recommond(param, aii.pager)
+        aii.activities = src
+    }),
+
+    switchTag: (tag: ActivityTag) => {
+        aii.tag = tag;
+        funn.fetching()
+    },
+
+}
+
+const index = reactive({
+    ioading: false, end: false, trigger: false
+})
+
+const func = {
+    reset: () => {
+        index.end = false; aii.pager.page = 1
+    },
+    loadindex: async () => {
+        const cache: Activity[] = await pageIndexDispatch('get_index_activities')
+        if (cache && cache.length) {
+            aii.activities = cache
+        }
+    },
+    init: () => futuring(index, async () => {
+        func.reset()
+        await func.loadindex()
+    })
+}
+
+onMounted(func.init)
+        /*
+        const origin: Activity[] = aii.activities || [];
+        // 取交集
+        const join: Activity[] = [ ]
+        if (is_nice_arr(cache)) {
+            const __ids: string[ ] = origin.map(e => e.documentId)
+            // 拿出缓存里的
+            for (let j= 0; j< cache.length; j++ ) {
+                const __v: Activity = cache[ j ];
+                const idx = __ids.indexOf(__v.documentId)
+                if (idx < 0) {
+                    join.push(__v)
+                }
+            }
+        }
+        // 赋值
+        aii.activities = [ ...join, ...origin ]
+        */
+/*
+
     getoption: () => {
         const tagid: string = aii.tag.documentId
         const options: Page.IndexPageDataActivityOptions = pageoptions.value
@@ -74,75 +196,6 @@ const got = {
 
         return option
     },
-    buildparam: (option: Page.IndexDataActivityOption) => {
-        const res = <ONE>{
-            
-        }
-        const tagid: string = must_one<ActivityTag>(option.tag).documentId
-        if (tagid) {
 
-            res['filters[activity_tags][documentId][$eq]'] = tagid
-        }
-        else {
-        }
-        //
-        return res;
-    }
-}
-
-const deftag = def_ativity.tags.index
-
-const funn = {
-
-
-    next: () => funn.fetching(),
-    fetching: () => future(async () => {
-        aii.ioading = true
-
-        let option: Page.IndexDataActivityOption = got.getoption()
-        const tagid: string = must_one<ActivityTag>(option.tag).documentId
-
-        if (tagid == deftag.documentId) {
-            await func.loadindex()
-        }
-        else {
-            const param: ONE = got.buildparam(option)
-            const src: Activity[] = await server_activity.index(param, option.pager)
-            aii.activities = src
-        }
-        aii.ioading = false
-    }),
-
-    switchTag: (tag: ActivityTag) => {
-        aii.tag = tag;
-        funn.fetching()
-    },
-
-}
-
-const func = {
-    loadindex: async () => {
-        const cache: Activity[] = await pageIndexDispatch('get_index_activities')
-        const origin: Activity[] = aii.activities || [];
-        // 取交集
-        const join: Activity[] = [ ]
-        if (is_nice_arr(cache)) {
-            const __ids: string[ ] = origin.map(e => e.documentId)
-            for (let j= 0; j< cache.length; j++ ) {
-                const __v: Activity = cache[ j ];
-                const idx = __ids.indexOf(__v.documentId)
-                if (idx < 0) {
-                    join.push(__v)
-                }
-            }
-        }
-        // 赋值
-        aii.activities = [ ...join, ...origin ]
-    },
-    init: () => future(async () => {
-        await func.loadindex()
-    })
-}
-
-onMounted(func.init)
+*/
 </script>

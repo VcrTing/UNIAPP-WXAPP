@@ -1,4 +1,4 @@
-c:
+d:
 
 cd D:\CODE\UNI_APP\self\strapi\backend
 

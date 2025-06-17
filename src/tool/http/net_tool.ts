@@ -16,7 +16,7 @@ const generate_http_result = (data: any, code: number, message: string) => {
 // 生成分页
 const generate_pagination = (pageSize: number = PAGER_SIZE_DEF): Pager => {
     return <Pager>{
-        page: 1, pageSize
+        page: 1, pageSize, total: 999
     }
 }
 

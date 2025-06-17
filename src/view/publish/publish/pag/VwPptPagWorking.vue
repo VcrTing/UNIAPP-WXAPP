@@ -10,7 +10,7 @@
         <view class="px-row py-s ani-fade-b">
             <CoViDataLoading :ioading="ioading" :items="data">
                 <view class="pb-row" v-for="(v, i) in data" :key="i">
-                    <CoMoPublishWorkingItem :v="v" @tap="funn.view(v)">
+                    <CoMoPublishWorkingItem :v="v" @view="funn.view(v)">
                         <view>&nbsp;</view>
                         <view class="pr pt">
                             <!--

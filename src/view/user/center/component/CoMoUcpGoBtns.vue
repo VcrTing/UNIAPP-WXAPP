@@ -2,16 +2,16 @@
     
     <view class="br bg-def-s fx-s">
         <view class="ps-r zi-t">
-            <CoMoUserOptionBtn :i="'doing'" :tit="'进行中'"  @tap="funn.working"/>
+            <CoMoUserOptionBtn :i="'doing'" :tit="'我的参与'"  @tap="funn.working"/>
             <view class="abs-r t-0 pr-s pt">
                 <view class="dot-err">
                     <text class="fs-s w-1em h-1em fx-c">1</text>
                 </view>
             </view>
         </view>
-        <CoMoUserOptionBtn :i="'grid'" :tit="'历史活动'"  @tap="funn.history"/>
+        <CoMoUserOptionBtn :i="'grid'" :tit="'参与历史'"  @tap="funn.history"/>
         <CoMoUserOptionBtn :i="'love'" :tit="'我的收藏'"  @tap="funn.love"/>
-        <CoMoUserOptionBtn :i="'bank-card'" :tit="'金额记录'"  @tap="funn.pays"/>
+        <CoMoUserOptionBtn :i="'bank-card'" :tit="'交易记录'"  @tap="funn.pays"/>
     </view>
 </template>
 
