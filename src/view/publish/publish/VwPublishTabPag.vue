@@ -3,16 +3,17 @@
         <view class="bg-con">
             <view class="fx-s zi-s">
                 <view class="fx-i fx-1">
-                    <view class="py-s" v-for="(v, i) in aii.tabs" :key="i"
+                    <view class="py-s ts bd-b-x2 fx-aii-btn-def" v-for="(v, i) in aii.tabs" :key="i"
                         @tap="funn.swicthTab(i)"
-                        :class="aii.iive == i ? 'bd-b-x2 bd-c-x2' : 'sus'"
+                        :class="aii.iive == i ? ' bd-c-x2' : 'sus'"
                     >
-                        <view class="px-row py fx-c">
+                        <view class="px-row py fx-c softer">
                             <view class="h6 fw-550">{{ v.name }}</view>
                         </view>
                     </view>
                 </view>
                 <view class="">
+                    <!-- -->
                 </view>
             </view>
             <view class="zi-t bd-b w-100 bd-c-s "></view>

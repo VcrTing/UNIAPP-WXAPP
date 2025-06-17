@@ -3,14 +3,15 @@
         <view class="mh-app-top-bar"></view>
         <view class="fx-i px-row">
             <view class="fx-i">
-                <view >
+                <view class="w-7em h-7em bd-x2 bd-c-wht-s br-cir o-h">
                     <CkAvatar @tap="funn.ck_avatar" :not_mainpage="true"
-                        :clazz="'w-7em h-7em'" :src="user.avatarUrl"/>
+                        :clazz="'w-100 h-100 ani-scaie-aii'" :src="user.avatarUrl"/>
                 </view>
                 <view class="fx-1 pi-x2 c-fff">
                     <view @tap="funn.ck_name" class="h5 b pt-n">{{ user.nickName }}&nbsp;</view>
                     <view @tap="funn.ck_name" class="pt">
-                        社交账号:&nbsp;&nbsp;{{ user.socialAccount }}
+                        <text v-if="user.introduction">{{ user.introduction }}</text>
+                        <text v-else>这个用户还没有个人简介。</text>
                     </view>
                 </view>
             </view>

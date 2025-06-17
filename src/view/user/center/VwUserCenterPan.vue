@@ -1,12 +1,14 @@
 <template>
     <view>
-        <view class="pt-row">
+        <view class="">
             <VwUcpNumberMsg/>
             <view class="py-row"></view>
             <!-- -->
             <view class="px-row pt-x1"><CoMoUcpGoBtns/></view>
             <!-- -->
             <view class="pt-x2">
+                <view class="py"></view>
+                <CoMoUserAdvSwipper/>
                 <!--
                 <view class="pt-s bg-con-fer-s bf">
                     <view class="fx-i zi-s">
@@ -42,6 +44,7 @@ import CoEmpty from '@/components/genra/empty/CoEmpty.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import CoMoUcpGoBtns from './component/CoMoUcpGoBtns.vue';
 import VwUcpPubMineActivity from './center/VwUcpPubMineActivity.vue';
+import CoMoUserAdvSwipper from '@/components/modules/user/CoMoUserAdvSwipper.vue';
 
 const aii = reactive({
     iive: 0,

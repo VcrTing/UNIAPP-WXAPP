@@ -1,8 +1,8 @@
 <template>
     <view>
         <view class="">
-            <view class="fx-i">
-                <view class="btn-def py px-row" v-for="(v, i) in tabs" :key="i"
+            <view class="fx-i softer">
+                <view class="btn-def py px-row ts" v-for="(v, i) in tabs" :key="i"
                     @tap="aii.i = v.v"
                 ><text :class="(aii.i == v.v) ? '' : 'sus'">{{ v.name }}</text></view>
             </view>
@@ -11,7 +11,7 @@
             <!-- 待完善 -->
             <view v-if="aii.i == 0">
                 <CoViDataLoading :ioading="ioading" :items="data">
-                    <view class="pb-row" v-for="(v, i) in data" :key="i">
+                    <view class="pb-row softer" v-for="(v, i) in data" :key="i">
                         <CoMoPublishViewItem :v="v" @tap="funn.edit(v)">
                             <view class="fx-r tis fs-s btn-err px-t">
                                 <text class="pi-s">
@@ -24,7 +24,7 @@
             </view>
             <view v-else-if="aii.i == 1">
                 <CoViDataLoading :ioading="ioading" :items="data">
-                    <view class="pb-row" v-for="(v, i) in data" :key="i">
+                    <view class="pb-row softer" v-for="(v, i) in data" :key="i">
                         <CoMoPublishViewItem :v="v" @tap="funn.edit(v)">
                             <view class="fx-r tis fs-s btn-err px-t">
                                 <text class="pi-s">

@@ -6,14 +6,31 @@
                 <view>编辑个人资料</view>
             </OButtonDef>
         </view>
-        <view class="pt-x2 pi-row">
-            <view class="">
-                <OButtonDef :weak="true" clazz="br-t">
-                    <CkAgeSex :age="user.age" :sex="user.gender" />
-                </OButtonDef>
-                <view class="pt tid fs-n">
-                    <text v-if="user.introduction">{{ user.introduction }}</text>
-                    <text v-else>还有个人简介。</text>
+        <view class="pt">
+            <view class="pt">
+                <view class="pi-row py">
+                    <OButtonDef :weak="true" clazz="br-t ani-scaie-aii">
+                        <CkSex :sex="user.gender" />
+                        <text class="fs-n pi-s">{{ user_tool.getgender(user) }}</text>
+                    </OButtonDef>
+                    <view class="d-ib px-s"></view>
+                    <OButtonDef :weak="true" clazz="br-t ani-scaie-aii">
+                        <text>{{ user.age }}</text>
+                        <text class="fs-n pi-s">岁</text>
+                    </OButtonDef>
+                </view>
+                <view class="tid fs-n fx-aii-btn-def px-row py">
+                    <view class="d-ib">
+                        <text>社交账号:&nbsp;&nbsp;</text>
+                        <text v-if="user.socialAccount">{{ user.socialAccount }}</text>
+                        <text v-else>这个用户还没有社交账号。</text>
+                    </view>
+                    <!--
+                    <view class="d-ib">
+                        <text v-if="user.introduction">{{ user.introduction }}</text>
+                        <text v-else>这个用户还没有个人简介。</text>
+                    </view>
+                    -->
                 </view>
             </view>
             <!--
@@ -40,6 +57,8 @@ import CkAgeSex from '@/cake/visual/ider/CkAgeSex.vue';
 import appRouter from '@/tool/uni/app-router';
 import { future, futuring, promise } from '@/tool/util/future';
 import { open_of_net } from '@/server/__func/open_of_net';
+import CkSex from '@/cake/visual/ider/CkSex.vue';
+import user_tool from '@/tool/modules/user_tool';
 
 const user = computed((): User => authState.user)
 

@@ -16,15 +16,14 @@
                 <CoBomBtnGroup @submit="funn.submit" @cancle="uniRouter.back"></CoBomBtnGroup>
             </view>
         </CoAppBomCarBar>-->
-        <view class="abs-i b-0 px-row pb-x3" @tap="uniRouter.back">
-            <OFI clazz="bg-con w-2em h-2em h5" :i="'i'"/>
-        </view>
+        <CoBomBackBtn :clazz="'btn-wht-s'" @tap="uniRouter.back"/>
     </PageLayout>
 </template>
 
 <script setup lang="ts">
 import OFI from '@/cake/button/i/OFI.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
+import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { authState, orderDispatch, orderState, uiState } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';

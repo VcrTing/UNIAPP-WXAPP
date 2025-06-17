@@ -17,7 +17,7 @@
                 <VwUserMainPageCon :user="user"/>
             </template>
             <template #bom>
-                <CoBomBackBtn :clazz="'btn-wht-s'"/>
+                <CoBomBackBtn :clazz="'btn-wht-s'" @tap="uniRouter.back"/>
                 <CoBomCenterBtn @go="funn.hudong" :clazz="'mh-btn btn-wht-s'">
                     <view class="fx-c">
                         <UiI i="love"/>

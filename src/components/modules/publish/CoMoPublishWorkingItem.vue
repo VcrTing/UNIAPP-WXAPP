@@ -1,24 +1,96 @@
 <template>
-    <view class="card fx-s o-h">
-        <view class="w-5em h-5em">
-            <CoImg clazz="h-100" :src="funn.get_banner_src(v)"/>
+    <view class="o-h">
+        <view class="br-ti br-tr o-h bg-con">
+            <view class="px-x1 ls-x2 py">
+                <text class="h7">{{ v.title }}</text>
+            </view>
         </view>
-        <view class="fx-1 px">
-            <view class="h9">{{ v.title }}</view>
-            <view class="fx-s pt">
-                <view class="fx-1">
-                    <view class="fx-i">
-                        <UiI class="fs-s" :i="'time'"/>
-                        <view class="fs-n pi-s tis">{{ activity_tool.gettime(v) }}&nbsp;开始</view>
+        <view class="">
+            <view class="row fx-i br" v-if="activity_tool.getindex_banner(v).length >= 3">
+                <view class="w-333 h-12vh d-ib" v-for="(m, n) in activity_tool.getindex_banner(v)" :key="n">
+                    <CoImg clazz="h-100" :src="m.url"/>
+                </view>
+            </view>
+            <view class="row fx-i br" v-if="activity_tool.getindex_banner(v).length <= 2">
+                <view class="w-44 h-12vh d-ib" v-for="(m, n) in activity_tool.getindex_banner(v)" :key="n">
+                    <CoImg clazz="h-100" :src="m.url"/>
+                </view>
+            </view>
+        </view>
+        <view class="bg-con py br-bi br-br px-x1" @tap="emt('view')">
+            <view class="fx-s">
+                <view class="row">
+                    <view class="px-s d-ib" v-for="(m, n) in v.activity_tags" :key="n">
+                        <view class="btn-def br-s">
+                            <view class="fs-s px py-t tid">{{ m.name }}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="" v-if="activity_tool.istyped_sm(v)">
+                    <view class="fx-r tis fs-s">
+                        <UiI :i="'lock'"/>
+                        <text class="pi-s">私密</text>
+                    </view>
+                </view>
+            </view>
+            <view class="fx-r">
+                <view class="d-ib" v-if="!activity_tool.istyped_sm(v)">
+                    <view class="">
+                        <view class="d-ib">
+                            <text class="fs-n">限制</text>
+                            <text class="px-s">{{ activity_tool.getjoin_limit(v) }}</text>
+                            <text class="fs-n">人</text>
+                        </view>
+                        <view class="d-ib">
+                            <text class="fs-n">，每人</text>
+                            <text class="px-s">{{ v.fee }}</text>
+                            <text class="fs-n">元</text>
+                        </view>
                     </view>
                 </view>
             </view>
         </view>
-        <view>
-            <!--
-            <OButtonDef :weak="true" clazz="fs-s px-s br-s">已完成</OButtonDef>
-            -->
-            <slot>
+        <view class="py-col">
+            <view class="btn-wht pt-col br-rnd mb-s py-s d-ib">
+                <view class="fx-i px-x1 tid">
+                    <UiI i="addr" clazz="fs-w"/>
+                    <text class="fs-s pi-s">{{ activity_tool.getfar(v) }}</text>
+                    <text class="fs-s pi-s">{{ activity_tool.getaddress(v) }}</text>
+                </view>
+                <!--
+                <view class="ps-r zi-t">
+                    <CoImg clazz="w-2em h-2em fs-s br-cir abs-c zi-s r-0" :src="mock_orders.mapimg"/>
+                </view>
+                -->
+            </view>
+            <view class="btn-wht pt-col br-rnd py-s d-ib">
+                <view class="fx-i px-x1 tid">
+                    <UiI i="time" clazz="fs-w"/>
+                    <text class="fs-s px-s">{{ activity_tool.gettime(v) }}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<script setup lang="ts">
+import OButtonDef from '@/cake/button/OButtonDef.vue';
+import CoImg from '@/components/media/img/CoImg.vue';
+import mock_activity from '@/server/mock/activity/mock_activity';
+import mock_orders from '@/server/mock/order/mock_orders';
+import mock_publish from '@/server/mock/publish/mock_publish';
+import mock_user from '@/server/mock/user/mock_user';
+import activity_tool from '@/tool/modules/activity_tool';
+import UiI from '@/ui/element/i/UiI.vue';
+import { computed } from 'vue';
+
+const prp = defineProps<{
+    v: Activity
+}>()
+
+const emt = defineEmits([ 'view' ])
+</script>
+
                 <!--
                 <view class="pr pi-s">
                     <view class="pb">&nbsp;</view>
@@ -31,28 +103,3 @@
                     </view>
                 </view>
                 -->
-            </slot>
-        </view>
-    </view>
-</template>
-
-<script setup lang="ts">
-import OButtonDef from '@/cake/button/OButtonDef.vue';
-import CoImg from '@/components/media/img/CoImg.vue';
-import activity_tool from '@/tool/modules/activity_tool';
-import UiI from '@/ui/element/i/UiI.vue';
-import { computed } from 'vue';
-
-const prp = defineProps<{
-    v: Activity
-}>()
-
-const funn = {
-    get_banner_src: (v: Activity): string => {
-        const one: ActivityMedia = activity_tool.getbanner(v)[0];
-        console.log('one =', one)
-        return one.url
-    }
-}
-
-</script>

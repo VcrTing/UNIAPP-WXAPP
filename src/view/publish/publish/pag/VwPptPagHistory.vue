@@ -1,8 +1,8 @@
 <template>
     <view>
         <view>
-            <view class="fx-r py-s">
-                <view class="fx-r fx-aii-btn-def" @tap="funn.openfilter">
+            <view class="fx-r py-s softer">
+                <view class="fx-r fx-aii-btn-def ts" @tap="funn.openfilter">
                     <text class="pr-s py-row pi-x1 tit">
                         {{ tab['name'] }}
                     </text>
@@ -12,7 +12,7 @@
         </view>
         <view class="px-row py-s">
             <CoViDataLoading :ioading="aii.ioading" :items="aii.items">
-                <view class="pb-row" v-for="(v, i) in aii.items" :key="i">
+                <view class="pb-row softer" v-for="(v, i) in aii.items" :key="i">
                     <CoMoPublishViewItem :v="v">
                             <view class="fx-r tis fs-s btn-err px-t">
                                 <text class="pi-s">
@@ -31,7 +31,7 @@
                 </view>
                 <view class="px-row">
                     <view>
-                        <view class="py-s" v-for="(v, i) in tabs" :key="i"
+                        <view class="py-s softer" v-for="(v, i) in tabs" :key="i"
                             @tap="funn.changefilter(v, i)"
                         >
                             <view class="py px ta-c fx-aii-btn-def br-1"

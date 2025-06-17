@@ -1,7 +1,7 @@
 <template>
     <view>
         <view class="zi-t ps-r">
-            <image class="w-100 user-info-backimg" mode="aspectFill" :src="form.background"/>
+            <image class="w-100 user-info-backimg ani-scaie-aii" mode="aspectFill" :src="form.background"/>
             <view class="abs-r t-0 zi-s">
                 <view class="">
                     <OButton @tap="funn.change_background" color="bck" clazz="px-row py br-t" :weak="true">
@@ -27,7 +27,7 @@
                 </view>
             </view>
             <view class="card user-info-card pt-x2 pb">
-                <view class="pt-col">
+                <view class="pt-x2">
                     <CkInpItem class="pt pb-s" :tit="'个人昵称'">
                         <input class="inp-app h7" v-model="form.nickName" placeholder="请输入昵称" />
                     </CkInpItem>
