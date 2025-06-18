@@ -37,7 +37,7 @@ const _s: Store<AuthStore> = createStore({
         __fresh: s => s.num,
         username: s => s.user.nickname,
         phone: s => s.phone,
-        userid: s => s.user.documentId,
+        userid: s => s.user.id,
         company_id: s => s.company.id,
         is_login: s => islogin(s),
         is_publisher: s => (s.user.publisher)
@@ -101,6 +101,7 @@ const _s: Store<AuthStore> = createStore({
                 const hs = state.loginhouse;
                 commit('_num')
                 if (hs.iive) pan_tooi.open_def_b(hs.pan_idx, hs.pan_hui);
+                console.log('打开登录 PAN')
                 return true
             }   
             return false
@@ -114,6 +115,9 @@ const _s: Store<AuthStore> = createStore({
                 const u: User = await server_me.one(state.user.id)
                 // console.log('AU__________ =', u)
                 if (u && u.id) {
+                    commit('_login', {
+                        user: u, token: u.documentId
+                    })
                     // console.log('刷新用户数据 =', u)
                     commit('__change', [ 'user', u ])
                 }

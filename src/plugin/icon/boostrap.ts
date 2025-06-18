@@ -42,6 +42,9 @@ export const booticon_styles: ONE = {
     },
     'check': {
         'font-size': '1.17em'
+    },
+    'share': {
+        'font-size': '1.17em'
     }
 }
 
@@ -105,5 +108,6 @@ export const booticon = <ONE> {
 
     'account': 'bi bi-person-circle',
 
-    'check': 'bi bi-check2-square'
+    'check': 'bi bi-check2-square',
+    'share': 'bi bi-cursor'
 }

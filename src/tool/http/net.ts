@@ -20,8 +20,8 @@ class NeTooi {
             'Content-Type': isF ? `multipart/form-data` : 'application/json' 
         }
         if (jwt) { 
-            res['Authorization'] = 'Bearer ' + jwt 
-            res['X-Access-Token'] = jwt
+            // res['Authorization'] = 'Bearer ' + jwt 
+            // res['X-Access-Token'] = jwt
             // res['VcrTing-Token'] = jwt
             // res['Access-Control-Request-Headers'] = jwt
         } 

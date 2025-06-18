@@ -21,7 +21,6 @@
 </template>
 
 <script setup lang="ts">
-import OFI from '@/cake/button/i/OFI.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
@@ -32,10 +31,6 @@ import { formfii, formfiimit } from '@/tool/util/valued';
 import UserBaseInfoForm from '@/view/user/info/UserBaseInfoForm.vue';
 import UserUsllyForm from '@/view/user/info/UserUsllyForm.vue';
 import { computed, nextTick, reactive, ref } from 'vue';
-
-const top = ref()
-const addr = ref()
-const money = ref()
 
 const form = reactive({
     nickName: '', introduction: '', socialAccount: '', age: 18,

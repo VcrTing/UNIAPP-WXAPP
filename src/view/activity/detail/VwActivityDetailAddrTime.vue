@@ -1,29 +1,33 @@
 <template>
     <view>
-        <view class="fx-s pt">
-            <view class="fx-1 fx-i fx-t">
-                <UiI class="h6" :i="'time'"/>
-                <view class="pi-x1 fx-1">
-                    <view class="pb-x1 fx-i">
-                        <text class="fs-n">{{ activity_tool.getweek(one) }}</text>
-                        <text class="pi-s">{{ activity_tool.gettime_start(one) }}</text>
-                        <text class="px-s">-</text>
-                        <text>{{ activity_tool.gettime_end(one) }}</text>
+        <view class="px-row fx-aii-btn-def">
+            <view class="fx-s pt px-col">
+                <view class="fx-1 fx-i fx-t">
+                    <UiI class="h6" :i="'time'"/>
+                    <view class="pi-x1 fx-1">
+                        <view class="pb-x1 fx-i">
+                            <text class="fs-n">{{ activity_tool.getweek(one) }}</text>
+                            <text class="pi-s">{{ activity_tool.gettime_start(one) }}</text>
+                            <text class="px-s">-</text>
+                            <text>{{ activity_tool.gettime_end(one) }}</text>
+                        </view>
                     </view>
                 </view>
             </view>
         </view>
         <view class="h-1 bg-hr"></view>
-        <view class="fx-s pb-n pt-s">
-            <view class="fx-1 fx-i">
-                <UiI class="h6" :i="'addr'"/>
-                <view class="pi-x1 d-ib">
-                    <text>{{ activity_tool.getfar(one) }}</text>
-                    <text class="pi-s">{{ activity_tool.getaddress(one) }}</text>
+        <view class="px-row fx-aii-btn-def">
+            <view class="fx-s pb-n pt-s px-col">
+                <view class="fx-1 fx-i">
+                    <UiI class="h6" :i="'addr'"/>
+                    <view class="pi-x1 d-ib">
+                        <text>{{ activity_tool.getfar(one) }}</text>
+                        <text class="pi-s">{{ activity_tool.getaddress(one) }}</text>
+                    </view>
                 </view>
-            </view>
-            <view class="pt-s fs-s">
-                <image class="w-3em h-3em br-cir" mode="aspectFill" :src="mock_orders.mapimg"/>
+                <view class="pt-s fs-s">
+                    <image class="w-3em h-3em br-cir" mode="aspectFill" :src="mock_orders.mapimg"/>
+                </view>
             </view>
         </view>
     </view>

@@ -13,8 +13,6 @@ import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { uiState } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';
-import { storage } from '@/tool/web/storage';
-import { computed } from 'vue';
 
 // const prp = defineProps<{}>()
 

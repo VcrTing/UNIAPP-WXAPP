@@ -20,6 +20,7 @@ const NET_ENDPOINT_USER = <ONE>{
 }
 // 活动
 const NET_ENDPOINT_ACTIVITY = <ONE> {
+    'join': 'activity-registrations',
     'activity': 'activities',
     'activity-tags': 'activity-tags',
     'activity-media': 'activity-medias',

@@ -19,7 +19,6 @@
 import OPan from '@/cake/pan/OPan.vue';
 import OPanInnerY from '@/cake/pan/OPanInnerY.vue';
 import { authDispatch, authGetters, authState } from '@/memory/global';
-import pan_tooi from '@/tool/app/pan_tooi';
 import uniSmall from '@/tool/uni/uni-small';
 import { promise } from '@/tool/util/future';
 import VwLoginModCon from '@/view/auth/content/VwLoginModCon.vue';
@@ -27,13 +26,10 @@ import { computed, onMounted, reactive, watch } from 'vue';
 import VwLoginModInit from '@/view/auth/content/VwLoginModInit.vue';
 import VwLoginModLogined from '@/view/auth/content/VwLoginModLogined.vue';
 import mock_login from '@/server/mock/mock_login';
-import { tipsucc } from '@/tool/uni/uni-global';
-
 
 const aii = reactive({
     hasinfo: false, next: 0, phone: ''
 })
-
 
 watch(() => authGetters.__fresh, () => {
     console.log('refresh')
@@ -60,6 +56,7 @@ const funn = {
         }
         else {
             const mk = mock_login.gettoken()
+            console.log('执行自动登录。')
             if (mk) {
                 common.tokensucc(mk.code)
             }

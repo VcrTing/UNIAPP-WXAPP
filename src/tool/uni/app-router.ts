@@ -11,7 +11,7 @@ export default {
     // 订单支付成功
     order_succ: () => {
         storage.set('PAGE_PAYSUCC_KEY', 0)
-        uniRouter.gopg('pay_succ')
+        uniRouter.redpg('pay_succ')
     },
     // 选择女孩
     chose_girl: () => {

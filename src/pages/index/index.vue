@@ -26,22 +26,21 @@ import OFI from '@/cake/button/i/OFI.vue';
 import CoAppBottomBar from '@/components/app/bar/CoAppBottomBar.vue';
 import CoAppTopBar from '@/components/app/bar/CoAppTopBar.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
-import { appCommit, appState, uiState } from '@/memory/global';
+import { for_user_joing } from '@/conf/__for_index/for_user_loging';
+import { uiState } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';
+import { promise, timeout } from '@/tool/util/future';
 import VwIndexPan from '@/view/index/VwIndexPan.vue';
 import VwIndexTop from '@/view/index/VwIndexTop.vue';
-import { reactive } from 'vue';
-
+import { nextTick } from 'vue';
+//
 const funn = {
-	/*
-	changeLoading: () => {
-		const v = appState.ioading
-		appCommit('change', [ 'ioading', v == 0 ? -1 : 0 ])
-	},
-	goUi: () => uniRouter.gopg('ui'),
-	*/
-	search: () => { uniRouter.gopg('index_search') }
+	search: () => { uniRouter.gopg('index_search') },
+	init: () => promise(() => {
+        timeout(() => { for_user_joing() }, 600)
+	})
 }
+nextTick(funn.init)
 </script>
 
 <style lang="sass">

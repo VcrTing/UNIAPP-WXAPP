@@ -24,8 +24,8 @@ import { authGetters } from "@/memory/global"
         return v.participantLimit
     }
     const getjoiner_len = (v: Activity): number => {
-        // const jos: User[] = v;
-        return 2
+        const jos: ONE[] = v.activity_registrations || [];
+        return jos ? jos.length : 0
     }
 
     const build_edit_data = (src: ONE) => {

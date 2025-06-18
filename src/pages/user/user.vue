@@ -10,7 +10,6 @@
 			</template>
 			<template #con>
 				<VwUserCenterPan/>
-				<CoMoAuthLoginModal ref="mod"/>
 			</template>
 		</UserCenterLayout>
 		<CoAppBottomBar :mat="false"/>
@@ -24,15 +23,16 @@ import VwUserCenterPan from '@/view/user/center/VwUserCenterPan.vue';
 import VwUserCenterTop from '@/view/user/center/VwUserCenterTop.vue';
 import { authState, uiState } from '@/memory/global';
 import UserCenterLayout from '@/components/layout/detail/UserCenterLayout.vue';
-import { computed, reactive, ref } from 'vue';
-import CkSpace from '@/cake/content/CkSpace.vue';
-import CoMoAuthLoginModal from '@/components/modules/auth/CoMoAuthLoginModal.vue';
+import { computed, nextTick, reactive, ref } from 'vue';
 import CoImg from '@/components/media/img/CoImg.vue';
-
+import { promise, timeout } from '@/tool/util/future';
+import { for_user_joing } from '@/conf/__for_index/for_user_loging';
+//
 const user = computed(() => authState.user)
-
-const aii = reactive({
-	
-})
-
+const funn = {
+	init: () => promise(() => {
+        timeout(() => { for_user_joing() }, 600)
+	})
+}
+nextTick(funn.init)
 </script>

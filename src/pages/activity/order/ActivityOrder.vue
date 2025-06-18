@@ -8,30 +8,20 @@
         <CoAppTopBar :mat="true">
             返回
         </CoAppTopBar>-->
-        <view class="px-row pt">
-            <view class="card pr-x2 pi-x2 pt-x2 pb ts">
-                <view>
-                    <VwActivitySingleDetail :item="order_of_place"/>
-                </view>
-            </view>
-            <!--
-            <view class="pt"></view>
-            <view>
-                <VwActivityOrderAssistant :item="order_of_place"/>
-            </view>-->
-            <view class="pt"></view>
-            <view class="card pr-x2 pi-x2 pt-x2 pb ts">
-                <view class="header-s pb">订单信息</view>
-                <view>
-                    <VwActivityOrderMsg :item="order_of_place"/>
+        <view class="pt">
+            <view class="px-row">
+                <CoMoOrderPayingItem :v="order_of_place.one">
+                </CoMoOrderPayingItem>
+                <view class="pt"></view>
+                <view class="card pt-x2 pb ts">
+                    <view class="header-s pb px-x1">订单信息</view>
+                    <view>
+                        <VwActivityOrderMsg :item="order_of_place"/>
+                    </view>
                 </view>
             </view>
             <view class="py-row">
-                <CoMoSecurityAgreeLine :aii="aii">
-                    <text class="tit">表示您已经同意并且阅读平台</text>
-                    <text class="pri" @tap="funn.look(1)">《免责申明》</text>
-                    <text class="pri" @tap="funn.look(0)"></text>
-                </CoMoSecurityAgreeLine>
+                <CoMoSecurityAgreeLine :canedit="true" ref="agree"/>
             </view>
             <CkSpace :h="8"/>
         </view>
@@ -49,46 +39,61 @@
 </template>
 
 <script setup lang="ts">
-// 5月13日：改动新薏的出货单打印功能，实现聂张帆的样衣借出记录的改动，
-import OFI from '@/cake/button/i/OFI.vue';
 import OButton from '@/cake/button/OButton.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import CoAppBomFuncBar from '@/components/app/bar/bom/CoAppBomFuncBar.vue';
-import CoAppTopBar from '@/components/app/bar/CoAppTopBar.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
+import CoMoOrderPayingItem from '@/components/modules/activity/order/CoMoOrderPayingItem.vue';
 import CoMoSecurityAgreeLine from '@/components/modules/security/CoMoSecurityAgreeLine.vue';
-import { orderDispatch, orderState, uiState } from '@/memory/global';
+import { for_user_joing } from '@/conf/__for_index/for_user_loging';
+import { authState, orderDispatch, orderState, uiState } from '@/memory/global';
+import server_joining from '@/server/activity/server_joining';
+import join_tool from '@/tool/modules/join_tool';
 import appRouter from '@/tool/uni/app-router';
+import { tipsucc } from '@/tool/uni/uni-global';
 import uniRouter from '@/tool/uni/uni-router';
-import { must_one } from '@/tool/util/valued';
-import VwActivityOrderAssistant from '@/view/activity/order/VwActivityOrderAssistant.vue';
+import { futuring, promise } from '@/tool/util/future';
 import VwActivityOrderMsg from '@/view/activity/order/VwActivityOrderMsg.vue';
-import VwActivitySingleDetail from '@/view/activity/order/VwActivitySingleDetail.vue';
-import { computed, reactive } from 'vue';
+import { computed, nextTick, reactive } from 'vue';
 
 // const prp = defineProps<{}>()
 
-const order_of_place = computed(() => {
+const order_of_place = computed((): OrderItem => {
     return orderState.order_of_place
 })
 
-const assistant = computed(() => must_one<ONE>(order_of_place.value).assistant || { })
-
 const aii = reactive({
-    agree: false
+    agree: false, ioading: false,
 })
 
 const funn = {
     look: (v: number) => {
 
     },
-    submit: () => {
-        console.log('加入订单 =', order_of_place.value)
-        // orderDispatch('place_an_order', order_of_place.value)
-        appRouter.order_succ()
-    }
+    succ: () => {
+        try {
+            tipsucc('加入该活动成功。');
+            appRouter.order_succ()
+        }
+        finally { for_user_joing() }
+    },
+    submit: () => futuring(aii, async () => {
+        const o: OrderItem = order_of_place.value
+        const form: ONE = join_tool.build_plus_form(o.one, o.joiner);
+        const src: ActivityJoin = await server_joining.join(form)
+        if (src.documentId) { funn.succ() }
+    }),
+    init: () => promise(() => {
+        const o: OrderItem = order_of_place.value
+        const a: Activity = o.one || { }
+        if (!a.documentId) {
+            uniRouter.back()
+        }
+    })
 }
+
+nextTick(funn.init)
 </script>
 
 <style lang="sass">
@@ -97,3 +102,15 @@ const funn = {
 page, uni-page-body
 	background: $pri-pag-bg
 </style>
+
+
+            <!--
+            <view class="card pr-x2 pi-x2 pt-x2 pb ts">
+                <view>
+                    <VwActivitySingleDetail :item="order_of_place"/>
+                </view>
+            </view>
+            <view class="pt"></view>
+            <view>
+                <VwActivityOrderAssistant :item="order_of_place"/>
+            </view>-->

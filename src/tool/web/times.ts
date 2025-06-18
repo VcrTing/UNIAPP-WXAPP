@@ -20,8 +20,8 @@ const is_ieap_year = (y: number): boolean => ( ((y % 4 == 0) && (y % 100 != 0)) 
 
 const __FMT = 'YYYY-MM-DD'
 const __FMT_S = 'YYYY-MM-DD HH:mm'
-const fmt = (v: any, f: string = __FMT) => dayjs(v).format(f)
-const fmts = (v: any, f: string = __FMT_S) => dayjs(v).format(f)
+const fmt = (v: any, f: string = __FMT): string => dayjs(v ? v : new Date()).format(f)
+const fmts = (v: any, f: string = __FMT_S): string => dayjs(v ? v : new Date()).format(f)
 const fii = (h: number) => { 
     if (!h) return '00';
     h = Number.parseInt(h + '')
@@ -48,10 +48,10 @@ const build_of_form = (form: ONE) => {
     return str + ' ' + tim
 }
 
-const bigger = (src: string, tar: string) => {
+const bigger = (src: string, tar?: string): boolean => {
     // const st = dayjs('2025-12-12 12:12')
     // const ed = dayjs('2025-12-12 12:13'); // dayjs().add(-1, 'day')
-    return dayjs(src).isAfter(dayjs(tar))
+    return dayjs(src).isAfter(dayjs(tar ? tar : new Date()))
 }
 
 const defyear = (v: number) => {
@@ -85,7 +85,7 @@ const generate_picker_data = (v: string | null): Co.TimePieckerForm => {
 
 
 export default {
-    fmt, fii,
+    fmt, fii, fmts,
     add, serh, build, bigger,
     group_date,
     ioc_week_name,

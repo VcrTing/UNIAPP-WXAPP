@@ -30,8 +30,6 @@
 </template>
 
 <script setup lang="ts">
-import OSafeAreaBottom from '@/cake/app/safearea/OSafeAreaBottom.vue';
-import OButton from '@/cake/button/OButton.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
 import CoBomCenterBtn from '@/components/element/button/CoBomCenterBtn.vue';
@@ -39,7 +37,6 @@ import DetailLayout from '@/components/layout/detail/DetailLayout.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { acyState, authGetters, authState, orderReFresh, uiState } from '@/memory/global';
 import mock_user from '@/server/mock/user/mock_user';
-import pan_tooi from '@/tool/app/pan_tooi';
 import uniRouter from '@/tool/uni/uni-router';
 import UiI from '@/ui/element/i/UiI.vue';
 import VwUmpNumberMsg from '@/view/user/mainpage/cont/VwUmpNumberMsg.vue';

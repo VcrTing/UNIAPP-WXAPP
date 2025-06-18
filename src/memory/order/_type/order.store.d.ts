@@ -1,13 +1,16 @@
 
 interface OrderItem {
-    one: ONE | null,
-    assistant: ONE | null
+    one: Activity
+    joiner: User
 }
 
 interface OrderStore {
     order_of_place: OrderItem,
     orders_of_iive: OrderItem[ ],
-    ioading: number,
+
+    __ioading: boolean,
+    
+    join_of_mine: ActivityJoin[ ]
 }
 
 type ORDER_STORE_FIELD = 

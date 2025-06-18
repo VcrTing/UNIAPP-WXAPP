@@ -1,31 +1,35 @@
 <template>
-    <view class="pt-s">
-        
-        <view class="fx-s pt pb">
-            <view class="fx-i">
-                <view class="">
-                    <text class="fw-500">参与者&nbsp;</text>
+    <view class="" v-if="joiners && joiners.length > 0">
+        <view class="pt-s bg-hui"></view>
+        <view class="px-row">
+            <view class="pt-s px-col">
+                <view class="fx-s pt pb">
+                    <view class="fx-i">
+                        <view class="">
+                            <text class="fw-500">参与者&nbsp;</text>
+                        </view>
+                        <view class="sus fs-n">
+                            <text>.&nbsp;{{ activity_tool.getjoiner_len(one) }}</text>
+                            <text>人一起</text>
+                        </view>
+                    </view>
+                    <view class="fx-1 ta-r">
+                        <view class="pri fs-n">
+                            <text>仅剩</text>
+                            <text>{{ activity_tool.getjoin_remaining(one) }}</text>
+                            <text>个名额</text>
+                            <UiI clazz="d-ib" :i="'r'"/>
+                        </view>
+                    </view>
                 </view>
-                <view class="sus fs-n">
-                    <text>.&nbsp;{{ activity_tool.getjoiner_len(one) }}</text>
-                    <text>人一起</text>
+                <view class="pb-col pt">
+                    <view class="fx-i pt-s">
+                        <view class="w-20" v-for="(v, i) in members" :key="i">
+                            <CoMoActivityJoinerBlock :v="v"/>
+                        </view>
+                        <CoMoActivityJoinerBlockMore v-if="last" :user="last" clazz="w-20"/>
+                    </view>
                 </view>
-            </view>
-            <view class="fx-1 ta-r">
-                <view class="pri fs-n">
-                    <text>仅剩</text>
-                    <text>{{ activity_tool.getjoin_remaining(one) }}</text>
-                    <text>个名额</text>
-                    <UiI clazz="d-ib" :i="'r'"/>
-                </view>
-            </view>
-        </view>
-        <view class="pb-col pt">
-            <view class="fx-i pt-s">
-                <view class="w-20" v-for="(v, i) in members" :key="i">
-                    <CoMoActivityJoinerBlock :v="v"/>
-                </view>
-                <CoMoActivityJoinerBlockMore v-if="last" :user="last" clazz="w-20"/>
             </view>
         </view>
     </view>
@@ -46,8 +50,10 @@ const prp = defineProps<{
     one: Activity
 }>()
 
+const joiners = computed((): MANY => prp.one.activity_registrations || [ ])
+
 const members = computed((): MANY => {
-    const src = mock_meizi.items
+    const src = joiners.value; // mock_meizi.items
     if (src && src.length >= 5) {
         return must_arr([
             src[0], src[1], src[2], src[3]
@@ -57,7 +63,7 @@ const members = computed((): MANY => {
 })
 
 const last = computed((): ONE | null => {
-    const src = mock_meizi.items
+    const src = joiners.value
     if (src && src.length >= 5) {
         // const res = src.splice(4, 5)
         return src[4]

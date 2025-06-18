@@ -16,9 +16,11 @@ export const ROLES_AUTHS: string[] = [
     ROLE_ADMIN
 ]
 
+
+
 // 基础角色
 export const USER_DEF = <User>{
-    id: 1,
+    id: 2,
     documentId: 'b2zdp5c17dem6rvmj8qo0m3u',
     nickName: '未登录用户',
     avatarUrl: 'https://img2.baidu.com/it/u=465760855,3158087440&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',

@@ -20,3 +20,14 @@ interface ActivityAddress {
     country: string
     addressSystem: string
 }
+
+interface ActivityJoin { // ActivityRegistration
+    id: number
+    documentId: string
+    registrationTime: string
+    paymentStatus: number
+    activity: Activity
+    user: User
+    num: string
+    feeAmount: number
+}

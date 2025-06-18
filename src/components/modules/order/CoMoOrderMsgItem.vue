@@ -1,6 +1,6 @@
 <template>
     <view>
-        <view class="fx-i">
+        <view class="fx-i fx-aii-btn-def  px-x1">
             <view class="w-25 pr h7">
                 <slot name="i"></slot>
             </view>

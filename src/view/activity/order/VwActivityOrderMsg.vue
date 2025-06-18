@@ -1,20 +1,37 @@
 <template>
-    <view class="">
+    <view class="pt-s">
         <CoMoOrderMsgItem :clazz_r="'py'">
             <template #i>下单日期</template>
-            <template #r>&nbsp;2025-12-12 23:24</template>
+            <template #r>&nbsp;{{ times.fmts(null) }}</template>
+        </CoMoOrderMsgItem>
+        <CoMoOrderMsgItem :clazz_r="'py'">
+            <template #i>付款金额</template>
+            <template #r>
+                <view class="h8 err fx-r">&nbsp;
+                    <text>￥</text>
+                    <text class="h6 fw-550 pi-t">{{ one.fee }}</text>
+                    <!--
+                    <text class="pi" v-if="one.fee <= 0">免费</text>
+                    -->
+                </view>
+            </template>
         </CoMoOrderMsgItem>
         <CoMoOrderMsgItem :clazz_r="'py'">
             <template #i>代金金额</template>
-            <template #r><text class="h6 err">&nbsp;0</text></template>
+            <template #r>
+                <view class="h9 tis fx-r">&nbsp;
+                    <text>￥</text>
+                    <text class="h7 fw-550 pi-t">0</text>
+                </view>
+            </template>
         </CoMoOrderMsgItem>
+        <!--
         <CoMoOrderMsgItem :clazz_r="'py'">
             <template #i>支付方式</template>
             <template #r>
                 <view><text class="fs-w">微信支付</text></view>
             </template>
         </CoMoOrderMsgItem>
-        <!--
         <CoMoOrderMsgItem :clazz_r="'py'">
             <template #i>付款金额</template>
             <template #r>
@@ -29,12 +46,11 @@
 import { must_one } from '@/tool/util/valued';
 import { computed } from 'vue';
 import CoMoOrderMsgItem from '@/components/modules/order/CoMoOrderMsgItem.vue';
+import times from '@/tool/web/times';
 
 const prp = defineProps<{
-    item?: ONE
+    item: OrderItem
 }>()
 
-const one = computed(() => must_one<ONE>(prp.item).one || { })
-const msg = computed(() => must_one<ONE>(prp.item).msg || { })
-const assistant = computed(() => must_one<ONE>(prp.item).assistant || { })
+const one = computed((): Activity => must_one<OrderItem>(prp.item).one)
 </script>
