@@ -17,7 +17,7 @@ const _s: Store<OrderStore> = createStore({
         __ioading: false,
     },
     getters: {
-        
+
     },
     mutations: {
         __place_order: (s: OrderStore, order: OrderItem) => {
@@ -55,7 +55,7 @@ const _s: Store<OrderStore> = createStore({
                 commit('__change', [ '__ioading', false ])
             }
             return state.join_of_mine;
-        }
+        },
     }
 })
 

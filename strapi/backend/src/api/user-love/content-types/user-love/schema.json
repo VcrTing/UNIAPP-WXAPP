@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_loves",
+  "info": {
+    "singularName": "user-love",
+    "pluralName": "user-loves",
+    "displayName": "UserLove"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "love": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "dataStatus": {
+      "type": "integer",
+      "default": 1
+    },
+    "loveId": {
+      "type": "string"
+    },
+    "whoId": {
+      "type": "string"
+    }
+  }
+}

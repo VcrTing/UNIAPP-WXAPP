@@ -13,3 +13,13 @@ interface User {
 }
 
 type UserMedia = ActivityMedia
+
+
+interface UserLove {
+    id: number
+    documentId: string
+    loveId: string
+    whoId: string
+    love: User 
+    dataStatus: number
+}

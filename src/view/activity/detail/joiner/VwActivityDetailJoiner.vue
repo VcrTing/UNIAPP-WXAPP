@@ -1,10 +1,10 @@
 <template>
-    <view class="" v-if="joiners && joiners.length > 0">
+    <view class="">
         <view class="pt-s bg-hui"></view>
         <view class="px-row">
-            <view class="pt-s px-col">
+            <view class="pt-s">
                 <view class="fx-s pt pb">
-                    <view class="fx-i">
+                    <view class="fx-i pi-col">
                         <view class="">
                             <text class="fw-500">参与者&nbsp;</text>
                         </view>
@@ -23,10 +23,12 @@
                     </view>
                 </view>
                 <view class="pb-col pt">
-                    <view class="fx-i pt-s">
+                    <view class="fx-i">
                         <view class="w-20" v-for="(v, i) in members" :key="i">
-                            <CoMoActivityJoinerBlock :v="v"/>
-                        </view>
+                            <view class="fx-aii-btn-def pt-s br-s">
+                                <CoMoActivityJoinerBlock :v="v"/>
+                            </view>
+                        </view> 
                         <CoMoActivityJoinerBlockMore v-if="last" :user="last" clazz="w-20"/>
                     </view>
                 </view>
@@ -36,10 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
-import CkSex from '@/cake/visual/ider/CkSex.vue';
 import CoMoActivityJoinerBlock from '@/components/modules/activity/CoMoActivityJoinerBlock.vue';
-import mock_meizi from '@/server/mock/user/mock_meizi';
 import activity_tool from '@/tool/modules/activity_tool';
 import { must_arr, must_one } from '@/tool/util/valued';
 import UiI from '@/ui/element/i/UiI.vue';
@@ -47,26 +46,26 @@ import { computed } from 'vue';
 import CoMoActivityJoinerBlockMore from '../component/CoMoActivityJoinerBlockMore.vue';
 
 const prp = defineProps<{
-    one: Activity
+    one: Activity, joiners: ActivityJoin[]
 }>()
 
-const joiners = computed((): MANY => prp.one.activity_registrations || [ ])
-
-const members = computed((): MANY => {
-    const src = joiners.value; // mock_meizi.items
+const members = computed((): User[] => {
+    let src = prp.joiners; // mock_meizi.items
     if (src && src.length >= 5) {
-        return must_arr([
+        src = must_arr([
             src[0], src[1], src[2], src[3]
         ])
     }
-    return src
+    return src.map((e: ActivityJoin) => {
+        return e.user
+    })
 })
 
-const last = computed((): ONE | null => {
-    const src = joiners.value
+const last = computed((): User | null => {
+    let src = prp.joiners
     if (src && src.length >= 5) {
-        // const res = src.splice(4, 5)
-        return src[4]
+        const res: ActivityJoin = src[4];
+        return res.user ? res.user : null
     }
     return null
 })

@@ -1,27 +1,46 @@
 <template>
     <view class="py-row">
         <view class="fx-c">
-            <CoMoUcpNumbers :clazz="'px-x1'" :is_publisher="is_publisher"/>
+            <CoMoUserNumberShow :num="data.numPublish"  clazz="px-row py-row br px-x1">
+                发布数
+            </CoMoUserNumberShow>
+            <CoMoUserNumberShow :num="data.numJoin"  clazz="px-row py-row br px-x1">
+                参与数
+            </CoMoUserNumberShow>
+            <CoMoUserNumberShow :num="data.numFans"  clazz="px-row py-row br px-x1">
+                粉丝数
+            </CoMoUserNumberShow>
         </view>
         <view class="pt-x2 px-row">
-            <view class="fx-c pt-col">
-                <OButtonDef :weak="true" clazz="px-s br-t fs-n mr">黑丝</OButtonDef>
-                <OButtonDef :weak="true" clazz="px-s br-t fs-n mr">JK</OButtonDef>
-                <OButtonDef :weak="true" clazz="px-s br-t fs-n mr">丝袜诱惑</OButtonDef>
-                <OButtonDef :weak="true" clazz="px-s br-t fs-n mr">Lolita</OButtonDef>
-                <OButtonDef :weak="true" clazz="px-s br-t fs-n mr">内射</OButtonDef>
-            </view>
+            <OScrollX>
+                <view class="fx-c pt-col">
+                    <view class="d-ib" v-for="(v, i) in tags" :key="i">
+                        <OButton color="def" :weak="true" clazz="px-s br-t fs-n mr">{{ v.name }}</OButton>
+                    </view>
+                </view>
+            </OScrollX>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import CoMoUcpNumbers from '../../center/component/CoMoUcpNumbers.vue';
-import { authGetters } from '@/memory/global';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
+import CoMoUserNumberShow from '@/components/modules/user/CoMoUserNumberShow.vue';
+import { arrimit } from '@/tool/util/iodash';
+import { must_arr } from '@/tool/util/valued';
+import OButton from '@/cake/button/OButton.vue';
+import { pageIndexState } from '@/memory/page';
+import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
 
-// const prp = defineProps<{}>()
-const is_publisher = computed(() => authGetters.is_publisher)
+const prp = defineProps<{
+    data: UserMainPage
+}>()
+
+const tags = computed((): ActivityTag[] => {
+    let src: ActivityTag[] = must_arr(prp.data.tags)
+    src = src.length <= 0 ? pageIndexState.indextags : src
+    return arrimit(src, 5)
+})
+// const is_publisher = computed(() => authGetters.is_publisher)
 
 </script>

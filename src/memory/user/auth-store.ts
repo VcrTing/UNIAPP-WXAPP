@@ -1,6 +1,7 @@
 
 import { ROLE_ANON, ROLE_AUTH, USER_DEF } from '@/conf/conf-role';
 import server_me from '@/server/user/server_me';
+import server_user from '@/server/user/user/server_user';
 import pan_tooi from '@/tool/app/pan_tooi';
 import { storage } from '@/tool/web/storage';
 import { Store, createStore } from 'vuex';
@@ -13,6 +14,21 @@ export enum AutoLoginStatus {
 
 const islogin = (s: ONE): boolean => {
     return (s.role === ROLE_ANON) ? false : ( s.jwt && (s.jwt.length > 0) )
+}
+
+const locking = async <T>(state: ONE, commit: Function, def: T, func: Function): Promise<T> => {
+    if (state.__ioading) return def;
+    commit('__change', [ '__ioading', true ])
+    try {
+        const s: T = await func()
+        if (s) {
+            return s
+        }
+    }
+    finally {
+        commit('__change', [ '__ioading', false ])
+    }
+    return def;
 }
 
 const _s: Store<AuthStore> = createStore({
@@ -30,7 +46,8 @@ const _s: Store<AuthStore> = createStore({
             pan_idx: 1000,
             pan_hui: { opacity: 0.4 },
             iive: true
-        }
+        },
+        mainpage: <UserMainPage>{ }
     },
     getters: {
         jwt: s => s.jwt,
@@ -109,23 +126,28 @@ const _s: Store<AuthStore> = createStore({
 
         // 更新
         refresh_info: async ({ state, commit }): Promise<User> => {
-            if (state.__ioading) return state.user;
-            commit('__change', [ '__ioading', true ])
-            try {
+            return await locking(state, commit, state.user, async () => {
                 const u: User = await server_me.one(state.user.id)
-                // console.log('AU__________ =', u)
                 if (u && u.id) {
-                    commit('_login', {
-                        user: u, token: u.documentId
-                    })
+                    commit('_login', { user: u, token: u.documentId })
                     // console.log('刷新用户数据 =', u)
                     commit('__change', [ 'user', u ])
+                    return u;
                 }
-            }
-            finally {
-                commit('__change', [ '__ioading', false ])
-            }
-            return state.user;
+                return null
+            })
+        },
+
+        // 获取用户主页信息
+        fetch_mainpage: async ({ state, commit }): Promise<UserMainPage> => {
+            return await locking(state, commit, state.mainpage, async () => {
+                const u: UserMainPage = await server_user.mainpage('')
+                if (u && u.user) {
+                    commit('__change', [ 'mainpage', u ])
+                    return u;
+                }
+                return null
+            })
         }
     }
 })

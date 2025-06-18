@@ -37,6 +37,17 @@
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
       "mappedBy": "activity_registration"
+    },
+    "overStatus": {
+      "type": "integer",
+      "default": 0
+    },
+    "sickDetail": {
+      "type": "text"
+    },
+    "safeStatus": {
+      "type": "integer",
+      "default": 1
     }
   }
 }

@@ -4,8 +4,11 @@
         <DetailLayout :h="68" :clazz_con="'bg-pag-pri'">
             <template #bg>
                 <view class="h-100">
+                    <CoImg :src="user.background" clazz="h-100"/>
+                    <!--
                     <image mode="aspectFill" class="uni-img w-100 h-100" 
                         :src="user.background"/>
+                    -->
                 </view>
             </template>
             <template #top>
@@ -13,12 +16,12 @@
                 <VwUserMainPageTop :user="user"/>
             </template>
             <template #con>
-                <VwUmpNumberMsg class="bg-con br-it br-rt"/>
-                <VwUserMainPageCon :user="user"/>
+                <VwUmpNumberMsg class="bg-con br-it br-rt" :data="usermainpage"/>
+                <VwUserMainPageCon :user="user" :data="usermainpage"/>
             </template>
             <template #bom>
                 <CoBomBackBtn :clazz="'btn-wht-s'" @tap="uniRouter.back"/>
-                <CoBomCenterBtn @go="funn.hudong" :clazz="'mh-btn btn-wht-s'">
+                <CoBomCenterBtn @go="funn.love" :clazz="'mh-btn btn-wht-s'">
                     <view class="fx-c">
                         <UiI i="love"/>
                         <text>加入收藏夹</text>
@@ -35,6 +38,7 @@ import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
 import CoBomCenterBtn from '@/components/element/button/CoBomCenterBtn.vue';
 import DetailLayout from '@/components/layout/detail/DetailLayout.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
+import CoImg from '@/components/media/img/CoImg.vue';
 import { acyState, authGetters, authState, orderReFresh, uiState } from '@/memory/global';
 import mock_user from '@/server/mock/user/mock_user';
 import uniRouter from '@/tool/uni/uni-router';
@@ -46,19 +50,24 @@ import { computed, reactive } from 'vue';
 
 // const prp = defineProps<{}>()
 const user = computed(() => {
-    const isp = authGetters.is_publisher
-    if (isp) {
-        return mock_user.boy.user
-    }
-    return mock_user.girl.user
+    const ump: UserMainPage = usermainpage.value
+    const user: User = ump.user
+    if (user && user.id) { return user } return authState.user
 })
+
+const usermainpage = computed((): UserMainPage => {
+    return authState.mainpage
+}) 
 
 const aii = reactive({
     price_pan_idx: 11, hui: <ElePanHui>{ opacity: 0.4 }
 })
 
 const funn = {
-    hudong: () => {
+    init: () => {
+
+    },
+    love: () => {
 
     },
     back: () => {

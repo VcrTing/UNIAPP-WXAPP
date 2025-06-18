@@ -16,7 +16,7 @@ interface Activity {
     isRecommended: number
     dataStatus: number
     //
-    activity_registrations: MANY
+    activity_registrations: ActivityJoin[]
     activity_address: ActivityAddress
     activity_medias: ActivityMedia[]
     activity_tags: ActivityTag[]

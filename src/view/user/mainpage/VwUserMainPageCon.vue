@@ -12,7 +12,7 @@
         <view>
             <view v-if="is_publisher">
                 <view v-if="aii.iive == 0" class="pb-row">
-                    <VwUmpPubGallery />
+                    <VwUmpPubGallery :medias="data.activityMedias"/>
                 </view>
                 <view v-if="aii.iive == 1" class="py-row">
                     <CoEmpty/>
@@ -44,7 +44,7 @@ import CoHeaderTabItem from '@/components/element/tabs/CoHeaderTabItem.vue';
 import VwUmpPubGallery from './publisher/VwUmpPubGallery.vue';
 
 const prp = defineProps<{
-    user: ONE
+    user: ONE, data: UserMainPage
 }>()
 
 const aii = reactive({
@@ -54,6 +54,11 @@ const aii = reactive({
 const is_publisher = computed(() => prp.user.publisher)
 
 const tabs = computed((): MANY => {
+    return [
+        { tit: '个人相册', v: 0 },
+        // { tit: '她的发布', v: 1 },
+        // { tit: '历史活动', v: 2 },
+    ]
     if (is_publisher.value) {
         return [
             { tit: '个人相册', v: 0 },

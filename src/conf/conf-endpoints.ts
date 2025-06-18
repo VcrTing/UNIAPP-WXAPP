@@ -16,7 +16,8 @@ const NET_ENDPOINT_TEST = <ONE> {
 }
 // 用户
 const NET_ENDPOINT_USER = <ONE>{
-    'user': 'users'
+    'user': 'users',
+    'love': 'user-loves'
 }
 // 活动
 const NET_ENDPOINT_ACTIVITY = <ONE> {

@@ -9,6 +9,8 @@ interface AuthStore {
     num: number
     __ioading: boolean
     loginhouse: AuthLoginHouse
+
+    mainpage: UserMainPage
 }
 type AUTH_STORE_FIELD = 
     'info' | 'user' | 'auth' | 'num' |

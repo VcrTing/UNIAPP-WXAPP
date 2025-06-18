@@ -109,5 +109,6 @@ export const booticon = <ONE> {
     'account': 'bi bi-person-circle',
 
     'check': 'bi bi-check2-square',
-    'share': 'bi bi-cursor'
+    'share': 'bi bi-cursor',
+    'scan': 'bi bi-upc-scan'
 }

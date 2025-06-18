@@ -4,26 +4,26 @@
         <CoAppTopBar clazz="bg-con" :mat="true">
             <view class="fx-i">
                 <view v-for="(v, i) in aii.tabs" :key="i" class="pb-s ts">
-                    <OButtonIht v-if="aii.iive == i" :clazz="'mx ts'">
-                        <text class="h7 fw-550">{{ v.tit }}</text>
+                    <OButtonIht v-if="aii.iive == v.v" :clazz="'mx ts'">
+                        <text class="h7 fw-550">{{ v.name }}</text>
                     </OButtonIht>
-                    <view @tap="aii.iive = i" class="ts px-row py-s fx-aii-btn-def tid btn-rnd" v-else>{{ v.tit }}</view>
+                    <view @tap="aii.iive = v.v" class="ts px-row py-s fx-aii-btn-def tid btn-rnd" v-else>{{ v.name }}</view>
                 </view>
             </view>
         </CoAppTopBar>
         <view class="">
-            <view>
-                <view>
-                    <OButtonDef>
-                        <text class="fs-n pr-t">深圳</text>
-                        <UiI clazz="fs-s d-ib" :i="'b'"/>
-                    </OButtonDef>
+            <view class="pt-s">
+                <view class="px-row py-row fx-aii-btn-def">
+                    <view class="tis fs-n ta-r">
+                        <text class="pr-s">{{ len }}</text>
+                        <text>条参与记录</text>
+                    </view>
                 </view>
             </view>
             <OScrollY :styie="{
                 'height': 'calc(100vh - 8em)'
             }">
-                <VwOrderNow v-if="aii.iive == 1"/>
+                <VwOrderNow v-if="aii.iive == 1" :joins="joins" :activities="aii.activities"/>
                 <VwOrderFail v-else-if="aii.iive == 2"/>
                 <VwOrderHistory v-else/>
             </OScrollY>
@@ -34,44 +34,59 @@
 </template>
 
 <script setup lang="ts">
-import OButton from '@/cake/button/OButton.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
 import OButtonIht from '@/cake/button/OButtonIht.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
-import CoAppBottomBar from '@/components/app/bar/CoAppBottomBar.vue';
 import CoAppTopBar from '@/components/app/bar/CoAppTopBar.vue';
-import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
-import { uiState } from '@/memory/global';
-import mock_orders from '@/server/mock/order/mock_orders';
+import { for_user_joing } from '@/conf/__for_index/for_user_loging';
+import { orderState, uiState } from '@/memory/global';
+import server_activity from '@/server/activity/server_activity';
+import { futuring, promise } from '@/tool/util/future';
+import { is_nice_arr, must_arr } from '@/tool/util/valued';
 import { storage } from '@/tool/web/storage';
-import UiI from '@/ui/element/i/UiI.vue';
-import VwOrderAll from '@/view/order/aii/VwOrderAll.vue';
 import VwOrderFail from '@/view/order/order/VwOrderFail.vue';
 import VwOrderHistory from '@/view/order/order/VwOrderHistory.vue';
 import VwOrderNow from '@/view/order/order/VwOrderNow.vue';
-import { computed, onMounted, reactive } from 'vue';
-// const prp = defineProps<{}>()
-
-const code = computed(() => {
-    return storage.get('PAGE_ORDER_KEY') || 0
-})
+import { computed, nextTick, reactive } from 'vue';
+//
+const code = computed(() => { return storage.get('PAGE_ORDER_KEY') || 0 })
+//
+const joins = computed((): ActivityJoin[] => orderState.join_of_mine)
+const len = computed((): number => must_arr(joins.value).length)
 
 const aii = reactive(<ONE>{
-    doing: mock_orders.items[0],
-    items: mock_orders.items,
+    ioading: false,
     iive: 0,
     tabs: [
-        { tit: '全部' },
-        { tit: '进行中' },
-        { tit: '已退出' },
-    ]
+        { name: '全部', v: 0 },
+        { name: '进行中', v: 1 },
+        { name: '已结束', v: 2 },
+    ],
+    activities: [ ]
 })
 
-onMounted(() => {
-    aii.iive = code.value
-})
+const funn = {
+    fiii_orders: () => futuring(aii, async () => {
+        const jss: ActivityJoin[] = joins.value || <ActivityJoin[]>[ ]
+        const ids: string[] = jss.map((e: ActivityJoin) => { 
+            const act: Activity = e.activity || { }
+            return act.documentId;
+        })
+        const orders: Activity[] = await server_activity.byids(ids)
+        if (is_nice_arr(orders)) {
+            aii.activities = orders;
+            console.log('补充的 活动 =', orders)
+        }
+    }),
+    init: () => promise(() => {
+        aii.iive = code.value;
+        for_user_joing()
+        funn.fiii_orders()
+    })
+}
+
+nextTick(funn.init)
 </script>
 
 <style lang="sass">
@@ -79,3 +94,12 @@ onMounted(() => {
 page, uni-page-body
 	background: $pri-pag-bg
 </style>
+
+                <!--
+                <view>
+                    <OButtonDef>
+                        <text class="fs-n pr-t">深圳</text>
+                        <UiI clazz="fs-s d-ib" :i="'b'"/>
+                    </OButtonDef>
+                </view>
+                -->

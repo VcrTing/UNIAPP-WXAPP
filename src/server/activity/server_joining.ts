@@ -13,7 +13,7 @@ const join = async (form: ONE): Promise<ActivityJoin> => {
     return net_tool.one<ActivityJoin>(res)
 }
 
-const relations: string[] = [ 'activity' ]
+const relations: string[] = [ 'activity', 'user' ]
 
 const fetching = async (param: ONE, pager: Pager): Promise<ActivityJoin[]> => {
     const __pm: ONE = net_tool.build_param(param, pager, relations)
@@ -32,7 +32,16 @@ const join_of_mine = async (): Promise<ActivityJoin[]> => {
     return await fetching(__pm, net_tool.generate_pagination(999))
 }
 
+const join_of_activity = async (actid: string): Promise<ActivityJoin[]> => {
+    // const userid: string = authGetters.userid;
+    const __pm: ONE = { }
+    __pm['filters[activity][documentId][$eq]'] = actid
+    __pm['filters[safeStatus][$eq]'] = 1
+    return await fetching(__pm, net_tool.generate_pagination(99))
+}
+
 export default {
     join,
-    join_of_mine
+    join_of_mine,
+    join_of_activity
 }

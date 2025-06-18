@@ -529,9 +529,12 @@ export interface ApiActivityRegistrationActivityRegistration
       Schema.Attribute.Private;
     num: Schema.Attribute.Integer;
     orderId: Schema.Attribute.String;
+    overStatus: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     paymentStatus: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     registrationTime: Schema.Attribute.DateTime;
+    safeStatus: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
+    sickDetail: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -646,6 +649,40 @@ export interface ApiActivityActivity extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     viewCount: Schema.Attribute.Integer;
+  };
+}
+
+export interface ApiUserLoveUserLove extends Struct.CollectionTypeSchema {
+  collectionName: 'user_loves';
+  info: {
+    displayName: 'UserLove';
+    pluralName: 'user-loves';
+    singularName: 'user-love';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dataStatus: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-love.user-love'
+    > &
+      Schema.Attribute.Private;
+    love: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    loveId: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    whoId: Schema.Attribute.String;
   };
 }
 
@@ -1203,6 +1240,7 @@ declare module '@strapi/strapi' {
       'api::activity-registration.activity-registration': ApiActivityRegistrationActivityRegistration;
       'api::activity-tag.activity-tag': ApiActivityTagActivityTag;
       'api::activity.activity': ApiActivityActivity;
+      'api::user-love.user-love': ApiUserLoveUserLove;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

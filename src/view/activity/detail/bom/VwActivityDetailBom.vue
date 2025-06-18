@@ -16,7 +16,7 @@
                 </view>
             </view>
             <view class="px-row w-618">
-                <OButton v-if="isjoin"
+                <OButton v-if="isjoin" clazz="btn-app"
                     color="def" @tap="uniRouter.back"
                 >
                     <text>您已经报名</text>

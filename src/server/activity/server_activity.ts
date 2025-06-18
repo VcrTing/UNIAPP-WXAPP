@@ -8,7 +8,7 @@ import { is_arr, is_str } from "@/tool/util/typed"
 
 // http://localhost:1337/api/activities?populate[publisher][fields]=*&filters[activity_tags][name][$eq]=原味
 
-const relations = [ 'activity_medias', 'publisher', 'activity_tags' ]
+const relations = [ 'activity_medias', 'publisher', 'activity_tags', 'activity_registrations' ]
 
 const fetching = async (param: ONE, pager: Pager): Promise<Activity[]> => {
     const __pm: ONE = net_tool.build_param(param, pager, relations)
@@ -30,7 +30,19 @@ const index_recommond = async (param: ONE, pager: Pager): Promise<Activity[]> =>
     return await index(param, pager)
 }
 
+// 根据ids
+const byids = async (ids: string[]): Promise<Activity[]> => {
+    const param: ONE = { }
+    // ID = 这些
+    strapi_param_tool.build_filter_in(param, 'documentId', ids || [ ])
+    // 状态已审核
+    strapi_param_tool.build_filter_in(param, 'dataStatus', [ 2 ])
+    // 返回
+    return await fetching(param, net_tool.generate_pagination(999))
+}
+
 export default {
+    byids,
     index,
     index_recommond
 }

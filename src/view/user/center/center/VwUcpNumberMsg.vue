@@ -13,7 +13,7 @@
                         <CkSex :sex="user.gender" />
                         <text class="fs-n pi-s">{{ user_tool.getgender(user) }}</text>
                     </OButtonDef>
-                    <view class="d-ib px-s"></view>
+                    <view class="d-ib px-n"></view>
                     <OButtonDef :weak="true" clazz="br-t ani-scaie-aii">
                         <text>{{ user.age }}</text>
                         <text class="fs-n pi-s">岁</text>

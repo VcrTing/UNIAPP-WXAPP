@@ -14,11 +14,13 @@
                         <view class="d-ib pi">
                             <CkAgeSex :sex="publisher.gender" :age="publisher.age"/>
                         </view>
+                        <!--
                         <view class="d-ib pi">
                             <view class="d-ib pri fs-w">
                                 <text class="pr">#&nbsp;<text class="fs-n">十单十成</text></text>
                             </view>
                         </view>
+                        -->
                     </view>
                     <view class="pt-s fx-i">
                         <view class="pr-x2">

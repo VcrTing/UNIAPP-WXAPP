@@ -8,7 +8,7 @@
                 收藏数
             </CoMoUserNumberShow>
             <CoMoUserNumberShow :num="0"  clazz="px-row py-row br-bi br-br" :class="clazz">
-                账户余额
+                发布数
             </CoMoUserNumberShow>
         </view>
     </view>

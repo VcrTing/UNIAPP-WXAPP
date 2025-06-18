@@ -2,6 +2,7 @@ import { DATA_ACTIVITY_JOINER_LIMIT, DATA_ACTIVITY_STATUS, DATA_ACTIVITY_TYPED_S
 import { arrfind, arrgotv, arrimit } from "../util/iodash"
 import { deepcopy, formfiimit, must_arr, must_int, must_one, positive } from "../util/valued"
 import { authGetters } from "@/memory/global"
+import times from "../web/times"
 
     // 0-待完善, 1-审核中, 2-已发布, 3-已取消, 4-已结束, 5-已下架
 
@@ -11,10 +12,16 @@ import { authGetters } from "@/memory/global"
     }
     const gettime_start = (v: Activity): string => {
         const st: string = v.startTime || ''
-        return '05.23 20:30'
+        return times.fmt(st, 'MM.DD HH:mm')
+    }
+    const gettime_start_iong = (v: Activity): string => {
+        const st: string = v.startTime || ''
+        return times.fmts(st)
     }
     const gettime_end = (v: Activity): string => {
-        const st: string = v.endTime || ''
+        const st: string = v.startTime || ''
+        const ed: string = v.endTime || ''
+        
         return '22:30'
     }
     const getfar = (v: Activity): string => {
@@ -79,10 +86,11 @@ export default {
         return arrimit([ ...banners, ...gallery ], 3)
     },
     getweek, gettime_start, gettime_end,
+    gettime_start_iong,
 
     gettime: (v: Activity): string => {
         const st: string = v.startTime || ''
-        return getweek(v) + ' ' + gettime_start(v)
+        return getweek(v) + ' ' + gettime_start(v) + ' - ' + gettime_end(v)
     },
 
     getfar,

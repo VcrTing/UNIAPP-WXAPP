@@ -18,7 +18,8 @@
                 <VwActivityDetailAddrTime :one="view"/>
 
                 <view v-if="issm" class="px-col"><VwActivityDetailInvite :one="view"/> </view>
-                <view v-else class="px-col"><VwActivityDetailJoiner :one="view"/></view>
+                <view v-else><VwActivityDetailJoiner :one="view" :joiners="aii.joiners"
+                    v-if="aii.joiners && aii.joiners.length > 0"/></view>
                 
                 <view class="pt-s bg-hui"></view>
                 <VwActivityDetailPublisher :one="view"/>
@@ -65,10 +66,15 @@ import VwActivityDetailBom from '@/view/activity/detail/bom/VwActivityDetailBom.
 import VwActivityDetailPublisher from '@/view/activity/detail/publisher/VwActivityDetailPublisher.vue';
 import appRouter from '@/tool/uni/app-router';
 import join_tool from '@/tool/modules/join_tool';
+import { futuring, promise } from '@/tool/util/future';
+import server_user from '@/server/user/user/server_user';
+import server_joining from '@/server/activity/server_joining';
 
 const view = computed((): Activity => acyState.view)
 const user = computed(() => authState.user)
 const joins = computed((): ActivityJoin[] => orderState.join_of_mine)
+
+const joiners = computed((): ActivityJoin[] => view.value.activity_registrations || [ ])
 
 const isjoin = computed((): boolean => join_tool.judge_is_join(joins.value, view.value))
 
@@ -77,16 +83,26 @@ watch(() => view.value, (n, o) => {
 })
 
 const aii = reactive({
+    ioading: false, joiners: <ActivityJoin[]>[ ], 
     price_pan_idx: 11, hui: <ElePanHui>{ opacity: 0.4 }
 })
 
 const issm = computed((): boolean => activity_tool.istyped_sm(view.value))
 
 const funn = {
+    ioad_joiners: () => futuring(aii, async () => {
+        const actid: string = view.value.documentId || ''
+        if (actid) {
+            const joiners: ActivityJoin[] = await server_joining.join_of_activity(actid)
+            console.log('joiners =', joiners)
+            aii.joiners = joiners
+        }
+    }),
+
     back: () => {
         uniRouter.back()
     },
-    init: () => {
+    init: () => promise(() => {
         const src = view.value || { }
         // console.log('SRC =', src)
         if (!src) {
@@ -95,7 +111,8 @@ const funn = {
         if (!src.documentId) {
             appRouter.index()
         }
-    }
+        funn.ioad_joiners()
+    })
 }
 
 onMounted(() => {

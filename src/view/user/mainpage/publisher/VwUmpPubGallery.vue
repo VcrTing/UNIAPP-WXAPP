@@ -1,27 +1,30 @@
 <template>
     <view>
-        <view class="w-333 h-14vh d-ib" v-for="(v, i) in gallery" :key="i">
-            <view class="w-100 h-100" @tap="funn.view(v)">
-                <image class="w-100 h-100" mode="aspectFill" :src="v.small.src"/>
+        <view class="w-333 d-ib" v-for="(v, i) in gallery" :key="i">
+            <view class="w-100 h-14vh" @tap="funn.view(v)">
+                <CoImg clazz="h-100" :src="v.urlSmall"/>
             </view>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
-import ODiv from '@/cake/button/div/ODiv.vue';
-import mock_user from '@/server/mock/user/mock_user';
+import CoImg from '@/components/media/img/CoImg.vue';
+import { must_arr } from '@/tool/util/valued';
 import { computed } from 'vue';
 
-// const prp = defineProps<{}>()
+const prp = defineProps<{
+    medias: ActivityMedia[]
+}>()
+
 const gallery = computed(() => {
-    return mock_user.gallery
+    const src: ActivityMedia[] = must_arr(prp.medias)
+    return src
 })
 
 const funn = {
     view: (v: ONE) => {
         const many = gallery.value
-        
     }
 }
 </script>
