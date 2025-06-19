@@ -1,9 +1,10 @@
 import { appState, eleDispatch, eleState, uiState } from "@/memory/global"
 import { future, promise, timeout } from "../util/future"
-import { is_nice_one } from "../util/valued"
+import { is_nice_one, must_one } from "../util/valued"
 
 const UI_PAN_Z_INDEX = 300
 const UI_PAN_HUI_OPACITY = 0.4
+const UI_PAN_HUI_CAN_CLOSE = true
 
 const hui_already = (): boolean => (eleState.hui > 0)
 
@@ -20,7 +21,7 @@ const grow_z_index = (idx: number) => {
     return Math.floor( UI_PAN_Z_INDEX + (src * 2) + (sq * 2) )
 }
 
-const hui_is_hui = (hui: ElePanHui | undefined) => is_nice_one(hui)
+const hui_is_hui = (hui: ElePanHui | undefined) => must_one<ElePanHui>(hui).kiii ? false : true
 
 const def = (idx: number, orientation: ORIENTATION, hui: ElePanHui | undefined, clazz: string): ElePan => ({
     iive: true,
@@ -34,6 +35,7 @@ const def = (idx: number, orientation: ORIENTATION, hui: ElePanHui | undefined, 
 
     hui: hui_is_hui(hui) ? ( hui_already() ? 0 : 1 ) : 0, 
     hui_opacity: hui ? hui.opacity : UI_PAN_HUI_OPACITY, 
+    hui_can_close: hui ? (hui.close === false ? false : UI_PAN_HUI_CAN_CLOSE) : UI_PAN_HUI_CAN_CLOSE, 
 
     path: '', 
 

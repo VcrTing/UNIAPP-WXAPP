@@ -18,7 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import OButtonWht from '@/cake/button/OButtonWht.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import OPan from '@/cake/pan/OPan.vue';
 import OPanInnerY from '@/cake/pan/OPanInnerY.vue';
@@ -30,16 +29,13 @@ import { must_one } from '@/tool/util/valued';
 import { pageIndexCommit } from '@/memory/page';
 import OButton from '@/cake/button/OButton.vue';
 
-const prp = defineProps<{
-    idx: number
-}>()
+const prp = defineProps<{ idx: number }>()
 
 const aii = reactive({
     
 })
 
 const loc = ref()
-
 const emt = defineEmits([ 'result', 'x' ])
 
 const funn = {

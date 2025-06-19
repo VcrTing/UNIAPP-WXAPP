@@ -17,11 +17,12 @@
 
 //    
 .fx-aii-btn-pri-out
-    // @extend .fx-aii-btn-tit
     background: $bg-con
     @extend .fx-fcs-shd-pri
-    //@extend .fx-hv-bg-pri
-    //@extend .fx-fcs-bg-pri
+    &:hover
+        background: $bg-con
+    &:active, &:focus, &:focus-visible
+        background: $bg-con
 
 .btn-pri-out
     color: $pri

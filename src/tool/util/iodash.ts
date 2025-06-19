@@ -14,6 +14,24 @@ export const arrfindi = <T>(arr: T[], tar: number | string, k: string = 'idx'): 
 }
 export const arrfind = <T>(arr: T[], tar: number | string, k: string = 'idx'): T => (arr[ arrfindi(arr, tar, k) ])
 
+export const arrsaixuan = <T extends ONE>(datas: T[], exits: T[], k: string = 'id') => {
+    const res: T[] = [ ]
+    let __has = false
+    for (let j= 0; j< datas.length; j++ ) {
+        const __v: string = datas[j][ k ]
+        exits.map((e: ONE) => {
+            if (__v === e[k]) {
+                __has = true
+            }
+        })
+        if (!__has) {
+            res.push(datas[j])
+        }
+        __has = false
+    }
+    return res
+}
+
 export const onecopy = (target: ONE, source: ONE): ONE => {
 	for (const k in source) { target[ k ] = source[ k ] }
     return target

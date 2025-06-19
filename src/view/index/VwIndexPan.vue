@@ -1,6 +1,6 @@
 <template>
     <view class="ps-r zi-n">
-        <view class="bg-con py">
+        <view class="bg-con pt">
             <VwIndexContTop @result="funn.switchTag"/>
         </view>
         <view class="">

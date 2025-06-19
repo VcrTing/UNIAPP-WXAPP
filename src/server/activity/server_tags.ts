@@ -13,12 +13,16 @@ const fetching = async (param: ONE = { }): Promise<ActivityTag[]> => {
 
 // 为首页
 const index = async (param: ONE = { }): Promise<ActivityTag[]> => {
+    param['filters[indexLevel][$gt]'] = 500
+    param['filters[isMain][$eq]'] = 1
+    param['filters[dataStatus][$eq]'] = 1
     return await fetching(param)
 }
 
 // 全部
-const all = async (): Promise<ActivityTag[]> => {
-    return await fetching({ })
+const all = async (param: ONE = { }): Promise<ActivityTag[]> => {
+    param['filters[dataStatus][$eq]'] = 1
+    return await fetching(param)
 }
 
 export default {
