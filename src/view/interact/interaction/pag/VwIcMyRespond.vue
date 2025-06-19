@@ -5,7 +5,7 @@
         >
             <view class="fx-s fx-t">
                 <view class="pr-row">
-                    <CkAvatar clazz="w-3em h-3em" :src="v.to.avatar"/>
+                    <CkAvatar clazz="w-3em h-3em" :id="0" :src="v.to.avatar"/>
                 </view>
                 <view class="fx-1">
                     <view class="card px-col pt pb-s">

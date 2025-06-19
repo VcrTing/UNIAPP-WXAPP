@@ -4,7 +4,7 @@
         <view class="fx-i px-row softer">
             <view class="fx-i">
                 <view class="w-7em h-7em bd-x2 bd-c-wht-s br-cir o-h">
-                    <CkAvatar @tap="funn.ck_avatar" :not_mainpage="true"
+                    <CkAvatar @tap="funn.ck_avatar" :not_mainpage="true" :id="user.id"
                         :clazz="'w-100 h-100 ani-scaie-aii'" :src="user.avatarUrl"/>
                 </view>
                 <view class="fx-1 pi-x2 c-fff">

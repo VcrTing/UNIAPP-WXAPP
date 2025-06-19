@@ -10,7 +10,7 @@
             <view class="fx-s">
                 <view class="w-25">
                     <view>
-                        <CkAvatar clazz="w-2em h-2em" :src="publisher.avatar"/>
+                        <CkAvatar clazz="w-2em h-2em" :id="publisher.id" :src="publisher.avatar"/>
                     </view>
                 </view>
             </view>

@@ -2,7 +2,7 @@
     <view>
         <view class="fx-c">
             <view class="ta-c">
-                <CkAvatar :not_mainpage="true"
+                <CkAvatar :not_mainpage="true" :id="user.id"
                     :src="user.avatarUrl" clazz="w-6em h-6em"
                     />
                 <view class="pt-x1">

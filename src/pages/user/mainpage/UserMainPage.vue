@@ -3,26 +3,28 @@
     <PageLayout>
         <UserDetailLayout :h="68" :clazz_con="'bg-pag-pri br-tr br-ti'">
             <template #bg>
-                <view class="h-100">
+                <view class="h-100" v-if="user">
                     <CoImg :src="user.background" clazz="h-100"/>
                 </view>
             </template>
             <template #top>
                 <CoAppTopBackBar :mat="true" @back="funn.back" :clazz_i="'c-fff'"></CoAppTopBackBar>
-                <VwUserMainPageTop :user="user"/>
+                <VwUserMainPageTop v-if="user" :user="user"/>
             </template>
             <template #con>
                 <VwUmpNumberMsg class="bg-con br-it br-rt" :data="usermainpage"/>
-                <VwUserMainPageCon :user="user" :data="usermainpage"/>
+                <VwUserMainPageCon v-if="user" :user="user" :data="usermainpage"/>
             </template>
             <template #bom>
                 <CoBomBackBtn :clazz="'btn-wht-s'" @tap="uniRouter.back"/>
+                <!--
                 <CoBomCenterBtn @go="funn.love" :clazz="'mh-btn btn-wht-s'">
                     <view class="fx-c">
                         <UiI i="love"/>
                         <text>加入收藏夹</text>
                     </view>
                 </CoBomCenterBtn>
+                -->
             </template>
         </UserDetailLayout>
     </PageLayout>
@@ -40,6 +42,7 @@ import CoImg from '@/components/media/img/CoImg.vue';
 import { acyState, authGetters, authState, orderReFresh, uiState } from '@/memory/global';
 import mock_user from '@/server/mock/user/mock_user';
 import uniRouter from '@/tool/uni/uni-router';
+import { must_arr, must_one } from '@/tool/util/valued';
 import UiI from '@/ui/element/i/UiI.vue';
 import VwUmpNumberMsg from '@/view/user/mainpage/cont/VwUmpNumberMsg.vue';
 import VwUserMainPageCon from '@/view/user/mainpage/VwUserMainPageCon.vue';
@@ -47,14 +50,16 @@ import VwUserMainPageTop from '@/view/user/mainpage/VwUserMainPageTop.vue';
 import { computed, reactive } from 'vue';
 
 // const prp = defineProps<{}>()
-const user = computed(() => {
+const user = computed((): User | undefined => {
     const ump: UserMainPage = usermainpage.value
     const user: User = ump.user
-    if (user && user.id) { return user } return authState.user
+    if (user && user.id) { return user } 
+    else { uniRouter.back() }
 })
 
 const usermainpage = computed((): UserMainPage => {
-    return authState.mainpage
+    const srcs: UserMainPage = must_one<UserMainPage>(authState.mainpage_of_view)
+    return srcs
 }) 
 
 const aii = reactive({

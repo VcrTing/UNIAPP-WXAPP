@@ -6,7 +6,7 @@
             </view>
             <view class="pt-s" v-if="v.publisher">
                 <view class="fx-i">
-                    <CkAvatar clazz="w-2em h-2em fs-w" :src="v.publisher.avatarUrl"/>
+                    <CkAvatar clazz="w-2em h-2em fs-w" :id="v.publisher.id" :src="v.publisher.avatarUrl"/>
                     <view class="pi-s">
                         <view class="d-ib">{{ v.publisher.nickName }}</view>
                         <view class="d-ib pi-t">

@@ -11,7 +11,7 @@
                 <view class="fx-s py fx-t">
                     <view class="pr">
                         <view>
-                            <CkAvatar clazz="w-3em h-3em h9" :src="funn.meizi(0).avatar"/>
+                            <CkAvatar clazz="w-3em h-3em h9" :id="0" :src="funn.meizi(0).avatar"/>
                         </view>
                     </view>
                     <view class="fx-1">

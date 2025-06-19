@@ -47,16 +47,12 @@
 </template>
 
 <script setup lang="ts">
-import OButtonDef from '@/cake/button/OButtonDef.vue';
 import { authDispatch, authGetters, authState } from '@/memory/global';
 import { computed, reactive } from 'vue';
 import uniRouter from '@/tool/uni/uni-router';
 import CoMoUcpNumbers from '../component/CoMoUcpNumbers.vue';
-import { storage } from '@/tool/web/storage';
-import CkAgeSex from '@/cake/visual/ider/CkAgeSex.vue';
 import appRouter from '@/tool/uni/app-router';
 import { future, futuring, promise } from '@/tool/util/future';
-import { open_of_net } from '@/server/__func/open_of_net';
 import CkSex from '@/cake/visual/ider/CkSex.vue';
 import user_tool from '@/tool/modules/user_tool';
 import OButton from '@/cake/button/OButton.vue';

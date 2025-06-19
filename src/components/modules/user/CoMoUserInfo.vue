@@ -1,7 +1,7 @@
 <template>
     <view class="fx-i">
         <view :class="clazz">
-            <CkAvatar v-if="v" :clazz="'w-3em h-3em'" :src="v.avatar"/>
+            <CkAvatar v-if="v" :clazz="'w-3em h-3em'" :id="v.id" :src="v.avatar"/>
             <view v-else class="w-3em h-3em"></view>
         </view>
         <view class="fx-1 px">

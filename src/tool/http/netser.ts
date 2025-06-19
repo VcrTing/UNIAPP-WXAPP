@@ -8,10 +8,19 @@ import { must_int } from "../util/valued";
 const __HTTP_CODE_SAFE: number = 399
 
 // 响应式 网络 错误
-const ser_err_txt = (origin: string = ''): string => {
-    let res = NET_ERRORS_TXT[ origin.toString().trim() ]
-    // if (origin == 'Internal Server Error') goLogin()
-    if (origin) return res ? res : origin
+const ser_err_txt = (origin: ONE | string = ''): string => {
+    let res = ''
+    if (is_str(origin)) {
+        res = NET_ERRORS_TXT[ origin.toString().trim() ]
+        // if (origin == 'Internal Server Error') goLogin()
+        if (origin) return res ? res : origin.toString()
+    }
+    else {
+        const o: ONE = origin as ONE
+        if (o.message) {
+            return o.message
+        }
+    }
     return res ? res : '网络连接错误，属于未捕捉到的异常。'
 }
 

@@ -3,7 +3,7 @@
         <view class="">
             <view class="py">
                 <view class="fx-c">
-                    <CkAvatar clazz="w-6em h-6em" :src="user.avatar"/>
+                    <CkAvatar clazz="w-6em h-6em" :id="user.id" :src="user.avatarUrl"/>
                 </view>
             </view>
             <view class="pt">

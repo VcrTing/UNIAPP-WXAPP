@@ -14,7 +14,7 @@
                         <view class="fx-r">
                             <ODiv clazz="err bg-err fs-s px-s py-t br-s">等待回应</ODiv>
                             <view class="pi-s"></view>
-                            <CkAvatar clazz="w-2em h-2em" :src="v.to.avatar"/>
+                            <CkAvatar clazz="w-2em h-2em" :id="0" :src="v.to.avatar"/>
                         </view>
                     </view>
                 </view>

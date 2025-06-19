@@ -34,7 +34,7 @@ const build_param = (param: ONE, pager: Pager, relations: string[]): ONE => {
 const limit_mine = (param: ONE, relation_name: string = 'user') => {
     if (is_strapi_mode()) {
         const id: string = authGetters.userid || ''
-        param['filters[' + relation_name + '][documentId][$eq]'] = id
+        param['filters[' + relation_name + '][id][$eq]'] = id
     }
     else {
 

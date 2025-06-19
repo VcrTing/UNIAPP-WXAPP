@@ -11,10 +11,12 @@ interface AuthStore {
     loginhouse: AuthLoginHouse
 
     mainpage: UserMainPage
+    mainpages: UserMainPage[]
+    mainpage_of_view: UserMainPage
 }
 type AUTH_STORE_FIELD = 
     'info' | 'user' | 'auth' | 'num' |
-    'jwt' | 'role' | 'needlogin'
+    'jwt' | 'role' | 'needlogin' | 'mainpage' | 'mainpage'
 
 interface AuthGetters {
     jwt: string,

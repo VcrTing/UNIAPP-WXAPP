@@ -3,7 +3,7 @@
         <view class="fx-c">
             <view class="br-cir ps-r">
                 <view class="w-3em h-3em br-cir">
-                    <CkAvatar :src="user.avatarUrl" clazz="w-100 h-100"/>
+                    <CkAvatar :src="user.avatarUrl" :id="v.id" clazz="w-100 h-100"/>
                 </view>
                 <view class="abs-r b-0 w-3em h-3em br-cir">
                     <view class="w-100 h-100 bg-028 br-cir fx-c">

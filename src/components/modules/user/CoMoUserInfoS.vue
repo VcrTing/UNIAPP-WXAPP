@@ -1,6 +1,6 @@
 <template>
     <view class="fx-i">
-        <CkAvatar v-if="v" :clazz="'w-2em h-2em fs-n'" :src="v.avatar"/>
+        <CkAvatar v-if="v" :clazz="'w-2em h-2em fs-n'" :id="v.id" :src="v.avatar"/>
         <view v-else class="w-2em h-2em fs-n"></view>
         <view class="fx-1 px">
             <view class="fs-w">

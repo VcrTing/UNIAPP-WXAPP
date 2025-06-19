@@ -8,7 +8,7 @@
             <view>
                 <view class="d-ib px-row-s" v-for="(v, i) in aii.items" :key="i">
                     <view>
-                        <CkAvatar :src="v.avatar" :clazz="'w-3em h-3em'"/>
+                        <CkAvatar :src="v.avatar" :id="0" :clazz="'w-3em h-3em'"/>
                     </view>
                 </view>
             </view>

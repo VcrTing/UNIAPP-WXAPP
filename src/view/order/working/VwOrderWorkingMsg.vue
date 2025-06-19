@@ -16,7 +16,7 @@
                 <template #i>发布者</template>
                 <template #r>
                     <view class="w-100 fx-i">
-                        <CkAvatar clazz="w-2em h-2em" :src="publisher.avatar"/>
+                        <CkAvatar clazz="w-2em h-2em" :id="publisher.id" :src="publisher.avatar"/>
                         <!--
                         <view class="px">
                             {{ publisher.name }}

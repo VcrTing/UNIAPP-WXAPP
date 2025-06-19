@@ -2,7 +2,7 @@
     <view>
         <view class="w-333 d-ib" v-for="(v, i) in gallery" :key="i">
             <view class="w-100 h-14vh" @tap="funn.view(v)">
-                <CoImg clazz="h-100" :src="v.urlSmall"/>
+                <CoImg clazz="h-100" :src="v.urlSmall || v.url"/>
             </view>
         </view>
     </view>

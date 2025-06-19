@@ -104,6 +104,9 @@
       "relation": "manyToOne",
       "target": "api::activity-address.activity-address",
       "inversedBy": "activities"
+    },
+    "search": {
+      "type": "text"
     }
   }
 }

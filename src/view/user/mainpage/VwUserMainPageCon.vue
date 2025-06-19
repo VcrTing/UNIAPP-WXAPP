@@ -10,7 +10,7 @@
             <view class="zi-t bd-b w-100 bd-c-s"></view>
         </view>
         <view>
-            <view v-if="is_publisher">
+            <view>
                 <view v-if="aii.iive == 0" class="pb-row">
                     <VwUmpPubGallery :medias="data.activityMedias"/>
                 </view>
@@ -21,6 +21,7 @@
                     <CoEmpty/>
                 </view>
             </view>
+            <!--
             <view v-else>
                 <view v-if="aii.iive == 0" class="py-row">
                     <CoEmpty/>
@@ -32,6 +33,7 @@
                     <CoEmpty/>
                 </view>
             </view>
+            -->
         </view>
     </view>
 </template>
@@ -51,7 +53,7 @@ const aii = reactive({
     iive: 0,
 })
 
-const is_publisher = computed(() => prp.user.publisher)
+// const is_publisher = computed(() => prp.user.publisher)
 
 const tabs = computed((): MANY => {
     return [

@@ -560,10 +560,14 @@ export interface ApiActivityTagActivityTag extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::activity.activity'
     >;
+    cover: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    dataStatus: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
     handsome: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
+    indexLevel: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
+    isMain: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -572,6 +576,7 @@ export interface ApiActivityTagActivityTag extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    search: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -641,6 +646,7 @@ export interface ApiActivityActivity extends Struct.CollectionTypeSchema {
     >;
     reviewComment: Schema.Attribute.Text;
     reviewStatus: Schema.Attribute.Integer;
+    search: Schema.Attribute.Text;
     shareCount: Schema.Attribute.Integer;
     startTime: Schema.Attribute.DateTime;
     title: Schema.Attribute.String;
@@ -683,6 +689,45 @@ export interface ApiUserLoveUserLove extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     whoId: Schema.Attribute.String;
+  };
+}
+
+export interface ApiUserStatisticUserStatistic
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'user_statistics';
+  info: {
+    displayName: 'UserStatistic';
+    pluralName: 'user-statistics';
+    singularName: 'user-statistic';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-statistic.user-statistic'
+    > &
+      Schema.Attribute.Private;
+    numFansTotal: Schema.Attribute.Integer;
+    numJoin: Schema.Attribute.Integer;
+    numJoinPay: Schema.Attribute.Decimal;
+    numLoveTotal: Schema.Attribute.Integer;
+    numMemberTotal: Schema.Attribute.Integer;
+    numPublish: Schema.Attribute.Integer;
+    numPublishMoneyGet: Schema.Attribute.Decimal;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -1215,6 +1260,10 @@ export interface PluginUsersPermissionsUser
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    user_statistic: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::user-statistic.user-statistic'
+    >;
     username: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
@@ -1241,6 +1290,7 @@ declare module '@strapi/strapi' {
       'api::activity-tag.activity-tag': ApiActivityTagActivityTag;
       'api::activity.activity': ApiActivityActivity;
       'api::user-love.user-love': ApiUserLoveUserLove;
+      'api::user-statistic.user-statistic': ApiUserStatisticUserStatistic;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

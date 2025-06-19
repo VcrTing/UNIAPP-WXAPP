@@ -29,6 +29,24 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "activity_tags"
+    },
+    "indexLevel": {
+      "type": "integer",
+      "default": 1
+    },
+    "search": {
+      "type": "text"
+    },
+    "cover": {
+      "type": "text"
+    },
+    "dataStatus": {
+      "type": "integer",
+      "default": 1
+    },
+    "isMain": {
+      "type": "integer",
+      "default": 0
     }
   }
 }

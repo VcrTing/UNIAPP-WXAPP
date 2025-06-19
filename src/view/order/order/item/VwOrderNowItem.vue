@@ -1,7 +1,7 @@
 <template>
     <view>
         <view class="fx-s fx-t">
-            <CkAvatar clazz="w-3em h-3em" :src="pusher.avatar"/>
+            <CkAvatar clazz="w-3em h-3em" :id="pusher.id" :src="pusher.avatarUrl"/>
             <view class="fx-1 pi-row">
                 <view class="bg-con br px-row py-row">
                     <view class="fx-s">

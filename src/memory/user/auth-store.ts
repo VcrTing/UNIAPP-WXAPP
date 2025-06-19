@@ -3,6 +3,8 @@ import { ROLE_ANON, ROLE_AUTH, USER_DEF } from '@/conf/conf-role';
 import server_me from '@/server/user/server_me';
 import server_user from '@/server/user/user/server_user';
 import pan_tooi from '@/tool/app/pan_tooi';
+import { arrfindi } from '@/tool/util/iodash';
+import { is_nice_arr } from '@/tool/util/valued';
 import { storage } from '@/tool/web/storage';
 import { Store, createStore } from 'vuex';
 
@@ -47,7 +49,9 @@ const _s: Store<AuthStore> = createStore({
             pan_hui: { opacity: 0.4 },
             iive: true
         },
-        mainpage: <UserMainPage>{ }
+        mainpage: <UserMainPage>{ },
+        mainpages: <UserMainPage[]>[ ],
+        mainpage_of_view: <UserMainPage>{ }
     },
     getters: {
         jwt: s => s.jwt,
@@ -138,16 +142,37 @@ const _s: Store<AuthStore> = createStore({
             })
         },
 
-        // 获取用户主页信息
-        fetch_mainpage: async ({ state, commit }): Promise<UserMainPage> => {
+        // 获取我的主页信息
+        refresh_mainpage: async ({ state, commit }): Promise<UserMainPage> => {
             return await locking(state, commit, state.mainpage, async () => {
-                const u: UserMainPage = await server_user.mainpage('')
-                if (u && u.user) {
+                const u: UserMainPage = await server_user.mymainpage()
+                console.log('刷新我的主页数据 =', u)
+                if (u && u.documentId) {
                     commit('__change', [ 'mainpage', u ])
                     return u;
                 }
                 return null
             })
+        },
+
+        // 获取某人的主页信息
+        fetch_someone_mainpag: async ({ state, commit }, { userid }): Promise<UserMainPage> => {
+            const srcs: UserMainPage[] = state.mainpages || []
+            console.log('userid =', userid, ' srcs =', srcs)
+            const iii: number = arrfindi(srcs, userid, 'id')
+            if (iii < 0) {
+                const u: UserMainPage = await server_user.mainpage(userid)
+                console.log('获取某人主页 =', u)
+                srcs.push(u);
+                commit('__change', [ 'mainpages', srcs ]);
+                commit('__change', [ 'mainpage_of_view', u ]);
+                return u;
+            }
+            else {
+                commit('__change', [ 'mainpage_of_view', srcs[ iii ] ]);
+                return srcs[ iii ]
+            }
+            return <UserMainPage>{ }
         }
     }
 })

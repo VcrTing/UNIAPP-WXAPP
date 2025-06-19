@@ -6,7 +6,7 @@
             </view>
             <view class="fx-i pt-col pb-col fx-aii-btn-def px-row">
                 <view class="pi-col">
-                    <CkAvatar :clazz="'w-3em h-3em'" :src="publisher.avatarUrl"/>
+                    <CkAvatar :clazz="'w-3em h-3em'" :id="publisher.id" :src="publisher.avatarUrl"/>
                 </view>
                 <view class="fx-1 pi-x1">
                     <view class="h9">

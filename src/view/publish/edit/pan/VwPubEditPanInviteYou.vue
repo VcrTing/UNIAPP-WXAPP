@@ -13,7 +13,7 @@
                             </view>
                             <view class="abs-b i-0 px-row py-row">
                                 <view class="fx-i bg-con h-3em br-rnd">
-                                    <CkAvatar clazz="w-3em h-3em" :src="meizi.avatar"/>
+                                    <CkAvatar clazz="w-3em h-3em" :id="0" :src="meizi.avatar"/>
                                     <view class="px">
                                         {{ meizi.name }}
                                     </view>

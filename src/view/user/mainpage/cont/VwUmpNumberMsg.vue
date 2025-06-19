@@ -1,14 +1,14 @@
 <template>
     <view class="py-row">
         <view class="fx-c">
-            <CoMoUserNumberShow :num="data.numPublish"  clazz="px-row py-row br px-x1">
-                发布数
-            </CoMoUserNumberShow>
-            <CoMoUserNumberShow :num="data.numJoin"  clazz="px-row py-row br px-x1">
+            <CoMoUserNumberShow :num="must_int(data.numJoin)"  clazz="px-row py-row br px-x1">
                 参与数
             </CoMoUserNumberShow>
-            <CoMoUserNumberShow :num="data.numFans"  clazz="px-row py-row br px-x1">
-                粉丝数
+            <CoMoUserNumberShow :num="must_int(data.numPublish)"  clazz="px-row py-row br px-x1">
+                发布数
+            </CoMoUserNumberShow>
+            <CoMoUserNumberShow :num="must_int(data.numMemberTotal)"  clazz="px-row py-row br px-x1">
+                会员数
             </CoMoUserNumberShow>
         </view>
         <view class="pt-x2 px-row">
@@ -27,7 +27,7 @@
 import { computed } from 'vue';
 import CoMoUserNumberShow from '@/components/modules/user/CoMoUserNumberShow.vue';
 import { arrimit } from '@/tool/util/iodash';
-import { must_arr } from '@/tool/util/valued';
+import { must_arr, must_int } from '@/tool/util/valued';
 import OButton from '@/cake/button/OButton.vue';
 import { pageIndexState } from '@/memory/page';
 import OScrollX from '@/cake/ux/scroll/OScrollX.vue';

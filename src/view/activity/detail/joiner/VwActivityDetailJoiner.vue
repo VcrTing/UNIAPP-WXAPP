@@ -1,9 +1,9 @@
 <template>
     <view class="">
         <view class="pt-s bg-hui"></view>
-        <view class="px-row">
-            <view class="pt-s">
-                <view class="fx-s pt pb">
+        <view class="">
+            <view class="">
+                <view class="fx-s pt-x1 pb fx-aii-btn-def px-row">
                     <view class="fx-i pi-col">
                         <view class="">
                             <text class="fw-500">参与者&nbsp;</text>
@@ -22,10 +22,10 @@
                         </view>
                     </view>
                 </view>
-                <view class="pb-col pt">
+                <view class="pb-col px-row">
                     <view class="fx-i">
                         <view class="w-20" v-for="(v, i) in members" :key="i">
-                            <view class="fx-aii-btn-def pt-s br-s">
+                            <view class="fx-aii-btn-def pt br-s">
                                 <CoMoActivityJoinerBlock :v="v"/>
                             </view>
                         </view> 
