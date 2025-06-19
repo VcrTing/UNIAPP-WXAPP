@@ -1,5 +1,5 @@
 <template>
-    <image class="mxw-12em uni-img br-cir" :class="clazz"
+    <image class="mxw-12em uni-img br-cir ani-scaie-aii" :class="clazz"
         mode="aspectFit" @tap="funn.tomainpage"
         :src="src"/>
 </template>

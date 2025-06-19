@@ -3,7 +3,7 @@
 	<PageLayout>
 		<CoAppTopBar :clazz="''">
 			<view class="ps-r zi-t">
-				<OFI @tap="funn.search" :i="'search'" :clazz="'d-ib px-row pt c-fff'"/>
+				<OFI @tap="funn.search" :i="'search'" :clazz="'d-ib px-row py-row c-fff fx-aii-btn-wht ani-scaie-aii'"/>
 				<!--
 				<CoIndexLogoTxt/>
 				-->

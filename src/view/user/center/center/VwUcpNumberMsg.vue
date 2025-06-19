@@ -1,25 +1,25 @@
 <template>
     <view class="">
-        <view class="fx-s bg-con-fer bf pr-row">
+        <view class="fx-s bg-con-fer bf pr-row br-it br-rt">
             <CoMoUcpNumbers />
-            <OButtonDef @click="funn.edit" :weak="true" :clazz="'py px br-s'">
-                <view>编辑个人资料</view>
-            </OButtonDef>
+            <OButton color="def" @click="funn.edit" :weak="true" :clazz="'py px br-s'">
+                <view class="tid">编辑个人资料</view>
+            </OButton>
         </view>
         <view class="pt">
             <view class="pt">
-                <view class="pi-row py">
-                    <OButtonDef :weak="true" clazz="br-t ani-scaie-aii">
+                <view class="pi-row py fx-i">
+                    <OButton color="def" :weak="true" clazz="br-t ani-scaie-aii tid">
                         <CkSex :sex="user.gender" />
                         <text class="fs-n pi-s">{{ user_tool.getgender(user) }}</text>
-                    </OButtonDef>
+                    </OButton>
                     <view class="d-ib px-n"></view>
-                    <OButtonDef :weak="true" clazz="br-t ani-scaie-aii">
+                    <OButton color="def" :weak="true" clazz="br-t ani-scaie-aii tid">
                         <text>{{ user.age }}</text>
                         <text class="fs-n pi-s">岁</text>
-                    </OButtonDef>
+                    </OButton>
                 </view>
-                <view class="tid fs-n fx-aii-btn-def px-row py">
+                <view class="tid fs-n fx-aii-btn-def px-row py bg-con-fer bf">
                     <view class="d-ib">
                         <text>社交账号:&nbsp;&nbsp;</text>
                         <text v-if="user.socialAccount">{{ user.socialAccount }}</text>
@@ -59,6 +59,7 @@ import { future, futuring, promise } from '@/tool/util/future';
 import { open_of_net } from '@/server/__func/open_of_net';
 import CkSex from '@/cake/visual/ider/CkSex.vue';
 import user_tool from '@/tool/modules/user_tool';
+import OButton from '@/cake/button/OButton.vue';
 
 const user = computed((): User => authState.user)
 

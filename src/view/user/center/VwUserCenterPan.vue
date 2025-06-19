@@ -4,9 +4,9 @@
             <VwUcpNumberMsg/>
             <view class="py-row"></view>
             <!-- -->
-            <view class="px-row pt-x1"><CoMoUcpGoBtns/></view>
+            <view class="px-row pt-x1 softer"><CoMoUcpGoBtns/></view>
             <!-- -->
-            <view class="pt-x2">
+            <view class="pt-x2 softer">
                 <view class="py"></view>
                 <CoMoUserAdvSwipper/>
                 <!--

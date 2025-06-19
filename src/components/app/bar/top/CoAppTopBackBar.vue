@@ -3,7 +3,7 @@
         <view class="w-100 fx-s">
             <view class="fx-i w-25" @tap="emt('back')">
                 <view>
-                    <OFI :clazz="'px-n py-n'" :class="clazz_i" :i="'i'"/>
+                    <OFI :clazz="'w-2em h-2em fx-aii-btn-wht'" :class="clazz_i" :i="'i'"/>
                 </view>
                 <slot></slot>
             </view>

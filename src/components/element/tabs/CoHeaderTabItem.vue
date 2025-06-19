@@ -1,5 +1,5 @@
 <template>
-    <view class="py-s"
+    <view class="py-s fx-aii-btn-def br-tr br-ti"
         :class="iive ? 'bd-b-x2 bd-c-x2' : 'sus'"
     >
         <view class="px py fx-c">

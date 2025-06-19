@@ -11,22 +11,23 @@
 .fx-fcs-shd-wht:active, .fx-fcs-shd-wht:focus, .fx-fcs-shd-wht:focus-visible
     @extend .shd-wht
 
+.fx-aii-btn-wht
+    @extend .fx-hv-shd-wht
+    @extend .fx-fcs-shd-wht
+    &:hover
+        background: $btn-wht-hv
+    &:active, &:focus, &:focus-visible
+        background: $btn-wht-hv
+
 .btn-wht
     border-color: #fff
     background: transparent
     background: #fff
-    @extend .fx-hv-shd-wht
-    @extend .fx-fcs-shd-wht
-
+    @extend .fx-aii-btn-wht
 .btn-wht-s
     background: rgba(255, 255, 255, 0.4)
     backdrop-filter: blur(3px)
-    &:hover
-        background: $btn-wht-hv
-    &:active, &:focus, &:focus-visible
-        background: $btn-wht-shd
-    @extend .fx-hv-shd-wht
-    @extend .fx-fcs-shd-wht
+    @extend .fx-aii-btn-wht
 
 
         

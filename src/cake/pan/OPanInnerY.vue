@@ -23,7 +23,7 @@
         
         <view class="abs-bi w-100 zi-x1 soft">
             <slot name="bom"></slot>
-            <OSafeAreaBottom/>
+            <OSafeAreaBottom v-if="(orientation !== 't')"/>
         </view>
 
         <view v-if="close" class="abs-b i-0 w-100 pan-close soft">

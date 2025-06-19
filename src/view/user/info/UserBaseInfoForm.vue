@@ -4,9 +4,9 @@
             <image class="w-100 user-info-backimg ani-scaie-aii" mode="aspectFill" :src="form.background"/>
             <view class="abs-r t-0 zi-s">
                 <view class="">
-                    <OButton @tap="funn.change_background" color="bck" clazz="px-row py br-t" :weak="true">
+                    <OButton @tap="funn.change_background" color="bck" clazz="px-row py br-1" :weak="true">
                         <UiI i="edit"/>
-                        <text>修改背景</text>
+                        <text class="pi-t">修改背景</text>
                     </OButton>
                 </view>
             </view>

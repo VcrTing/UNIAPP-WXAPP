@@ -1,16 +1,17 @@
 <template>
     <view>
         <OPan :idx="idx">
-            <OPanInnerY :h="'38.2vh'" :idx="idx" :orientation="'t'">
+            <OPanInnerY :h="'42vh'" :idx="idx" :orientation="'t'">
                 <template #bom>
-                    <view class="fx-s bg-con">
-                        <OButtonWht @tap="funn.close" clazz=""><view class="pr">取消</view></OButtonWht>
+                    <view class="fx-s bg-con br-br br-bi o-h">
+                        <OButton color="wht" clazz="px-row py" :weak="true" @tap="funn.close"><view class="">取消</view></OButton>
                         <view class="py"><text class="h7 fw-550"></text></view>
-                        <OButtonWht @tap="funn.submit"><view class="pi pri">确定</view></OButtonWht>
+                        <OButton color="wht" clazz="px-row py" :weak="true" @tap="funn.submit"><view class="pri">确定</view></OButton>
                     </view>
                 </template>
                 <OSafeAreaTop/>
                 <CoMoAddressSwitchContent ref="loc"/>
+                <CkSpace :h="2"/>
             </OPanInnerY>
         </OPan>
     </view>
@@ -27,6 +28,7 @@ import CoMoAddressSwitchContent from '@/components/modules/address/CoMoAddressSw
 import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
 import { must_one } from '@/tool/util/valued';
 import { pageIndexCommit } from '@/memory/page';
+import OButton from '@/cake/button/OButton.vue';
 
 const prp = defineProps<{
     idx: number

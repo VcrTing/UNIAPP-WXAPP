@@ -1,14 +1,10 @@
 <template>
     <page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
     <PageLayout>
-        <DetailLayout :h="68" :clazz_con="'bg-pag-pri'">
+        <UserDetailLayout :h="68" :clazz_con="'bg-pag-pri br-tr br-ti'">
             <template #bg>
                 <view class="h-100">
                     <CoImg :src="user.background" clazz="h-100"/>
-                    <!--
-                    <image mode="aspectFill" class="uni-img w-100 h-100" 
-                        :src="user.background"/>
-                    -->
                 </view>
             </template>
             <template #top>
@@ -28,7 +24,7 @@
                     </view>
                 </CoBomCenterBtn>
             </template>
-        </DetailLayout>
+        </UserDetailLayout>
     </PageLayout>
 </template>
 
@@ -37,6 +33,8 @@ import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
 import CoBomCenterBtn from '@/components/element/button/CoBomCenterBtn.vue';
 import DetailLayout from '@/components/layout/detail/DetailLayout.vue';
+import UserCenterLayout from '@/components/layout/detail/UserCenterLayout.vue';
+import UserDetailLayout from '@/components/layout/detail/UserDetailLayout.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
 import { acyState, authGetters, authState, orderReFresh, uiState } from '@/memory/global';
