@@ -1,14 +1,15 @@
 import { DATA_ACTIVITY_JOINER_LIMIT, DATA_ACTIVITY_STATUS, DATA_ACTIVITY_TYPED_SM } from "@/conf/conf-datas"
 import { arrfind, arrgotv, arrimit } from "../util/iodash"
-import { deepcopy, formfiimit, must_arr, must_int, must_one, positive } from "../util/valued"
+import { deepcopy, formfiimit, group_search_txt, must_arr, must_int, must_one, positive } from "../util/valued"
 import { authGetters } from "@/memory/global"
 import times from "../web/times"
+import address_tool from "./address_tool"
 
     // 0-待完善, 1-审核中, 2-已发布, 3-已取消, 4-已结束, 5-已下架
 
     const getweek = (v: Activity): string => {
         const st: string = v.startTime || ''
-        return '周五'
+        return times.weakcn(st)
     }
     const gettime_start = (v: Activity): string => {
         const st: string = v.startTime || ''
@@ -24,8 +25,21 @@ import times from "../web/times"
         
         return '22:30'
     }
+    const getstarttime_remaining = (v: Activity): string => {
+        const minutes: number = times.remaining(null, v.startTime)
+        if (minutes > 360) {
+            let h: number = minutes / 60;
+            return Math.floor(h ? h : 6 ) + ' 小时'
+        }
+        return minutes + ' 分钟'
+    }
     const getfar = (v: Activity): string => {
-        return '13.3km'
+        let addr: ActivityAddress | Activity = must_one(v.activity_address)
+        if (!addr.documentId) {
+            addr = v
+        }
+        const __km = address_tool.cpu_km_for_user(v)
+        return __km
     }
     const getjoin_limit = (v: Activity): number => {
         return v.participantLimit
@@ -58,8 +72,28 @@ import times from "../web/times"
         return res
     }
 
+    // 构建搜索
+    const group_search_field = (
+        activity: Activity | ONE,
+        addr: ActivityAddress,
+        tags: ActivityTag[]
+    ) => {
+        let s: string = '_'
+        s += (group_search_txt(activity.title))
+        s += (group_search_txt(addr.address))
+        s += (group_search_txt(addr.city))
+        s += (group_search_txt(addr.area))
+        must_arr(tags).map((e: ActivityTag) => {
+            const __s: string = e.search || ''
+            s += (group_search_txt(__s))
+            return e;
+        })
+        return s
+    }
+
 export default {
     build_edit_data,
+    group_search_field,
 
     getjoin_limit, getjoiner_len,
     getjoin_remaining: (v: Activity): number => {
@@ -92,8 +126,12 @@ export default {
         const st: string = v.startTime || ''
         return getweek(v) + ' ' + gettime_start(v) + ' - ' + gettime_end(v)
     },
+    gettime_short: (v: Activity): string => {
+        const st: string = v.startTime || ''
+        return getweek(v) + ' ' + times.fmt(st, 'HH 点')
+    },
 
-    getfar,
+    getfar, getstarttime_remaining,
 
     getindex_address: (v: Activity): string => {
         // const ad: ActivityAddress = v.activity_address || { }
@@ -116,5 +154,8 @@ export default {
     istyped_sm: (v: Activity): boolean => {
         const tpd: number = must_int(v.typed)
         return tpd === DATA_ACTIVITY_TYPED_SM.v
+    },
+    isstarted: (v: Activity): boolean => {
+        return v.startTime ? !times.bigger(v.startTime) : false
     }
 }

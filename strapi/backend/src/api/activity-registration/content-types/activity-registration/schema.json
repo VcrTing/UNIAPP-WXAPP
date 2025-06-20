@@ -48,6 +48,33 @@
     "safeStatus": {
       "type": "integer",
       "default": 1
+    },
+    "consumeCode": {
+      "type": "string"
+    },
+    "consumeStatus": {
+      "type": "integer"
+    },
+    "consumeNum": {
+      "type": "integer"
+    },
+    "consumePrice": {
+      "type": "decimal"
+    },
+    "consumeTime": {
+      "type": "datetime"
+    },
+    "refundStatus": {
+      "type": "integer"
+    },
+    "refundPrice": {
+      "type": "decimal"
+    },
+    "refundTime": {
+      "type": "datetime"
+    },
+    "refundRemark": {
+      "type": "string"
     }
   }
 }

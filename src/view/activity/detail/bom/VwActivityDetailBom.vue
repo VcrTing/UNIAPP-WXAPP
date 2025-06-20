@@ -29,7 +29,7 @@
                         <text class="h7 fw-550">{{ one.fee }}</text>
                         <text>元，</text>
                     </text>
-                    <text>立即加入</text>
+                    <text>上车</text>
                 </OButton>
             </view>
         </view>

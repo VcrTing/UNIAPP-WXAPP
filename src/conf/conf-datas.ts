@@ -49,4 +49,6 @@ export const DATA_ACTIVITY_MEDIA = {
 }
 
 // 默认活动 BANNER
-export const DATA_ACTIVITY_BANNER_DEF = { url: 'https://img0.baidu.com/it/u=1944742839,3466909988&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=750' }
+export const DATA_ACTIVITY_BANNER_DEF = { 
+    url: 'https://img0.baidu.com/it/u=1944742839,3466909988&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=750' 
+}

@@ -10,7 +10,7 @@
             </view>
         </view>
         <CoMoUserOptionBtn :i="'grid'" :tit="'参与历史'"  @tap="funn.history"/>
-        <CoMoUserOptionBtn :i="'love'" :tit="'我的收藏'"  @tap="funn.love"/>
+        <CoMoUserOptionBtn :i="'love'" :tit="'我的关注'"  @tap="funn.love"/>
         <CoMoUserOptionBtn :i="'bank-card'" :tit="'交易记录'"  @tap="funn.pays"/>
     </view>
 </template>

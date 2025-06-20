@@ -1,11 +1,26 @@
 import aiert_tooi from "@/tool/app/aiert_tooi"
 import { is_str } from "@/tool/util/typed"
 import { master } from "@/tool/http/http"
+import server_user from "../user/user/server_user"
 
+/*
 const login = async (data: ONE): ONE_PROMISE => {
     const res: NET_RES = await master.pos('login', null, data)
     if (is_str(res)) return aiert_tooi.err_r_one(res)
     return {} // (res as HttpResult).result
+}
+    */
+
+const login = async (phonedata: AppPhoneWX): Promise<AppAuth | null> => {
+    const user: User = await server_user.byphone(phonedata.phoneNumber)
+    if (user && user.id) {
+        return {
+            token: user.documentId,
+            user,
+            phonedata
+        }
+    }
+    return null
 }
 
 const test_tmieout = async () => {

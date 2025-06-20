@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_preference_tags",
+  "info": {
+    "singularName": "user-preference-tag",
+    "pluralName": "user-preference-tags",
+    "displayName": "UserPreferenceTag"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "activity_tag": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::activity-tag.activity-tag"
+    },
+    "numLook": {
+      "type": "integer"
+    },
+    "numJoin": {
+      "type": "integer"
+    },
+    "numSearch": {
+      "type": "integer"
+    },
+    "numUpdated": {
+      "type": "integer"
+    },
+    "userId": {
+      "type": "biginteger"
+    },
+    "userDocumentId": {
+      "type": "string"
+    },
+    "tagDocumentId": {
+      "type": "string"
+    }
+  }
+}

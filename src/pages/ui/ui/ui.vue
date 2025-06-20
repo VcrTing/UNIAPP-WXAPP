@@ -24,8 +24,15 @@
                 <view class="header fw-800"> H12. NOW FONT SIZE: {{ uiState.root_font_size_coefficient }}</view>
             </view>
             <view>
-                <OButton @tap="funn.changeLoading">OButton Primary 点击改 LOADING: {{ appState.ioading }}</OButton>
-                <OButtonIht @tap="">OButton Primary Iht</OButtonIht>
+                <OButton @tap="funn.changeLoading">改 LOADING: {{ appState.ioading }}</OButton>
+                <OButton color="pri-iht">LOADING: {{ appState.ioading }}</OButton>
+                <OButton color="pri-out">LOADING: {{ appState.ioading }}</OButton>
+                <OButton color="def">LOADING: {{ appState.ioading }}</OButton>
+                <OButton color="wht">LOADING: {{ appState.ioading }}</OButton>
+                <OButton color="err">LOADING: {{ appState.ioading }}</OButton>
+                <OButton color="bck">LOADING: {{ appState.ioading }}</OButton>
+                <OButton color="acc">LOADING: {{ appState.ioading }}</OButton>
+                <OButton color="sec">LOADING: {{ appState.ioading }}</OButton>
             </view>
             <view class="py"></view>
             <view>

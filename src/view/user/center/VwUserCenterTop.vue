@@ -20,10 +20,8 @@
 </template>
 
 <script setup lang="ts">
-import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
-import { authCommit, authState, needLogin } from '@/memory/global';
-import uniRouter from '@/tool/uni/uni-router';
+import { authCommit, authDispatch, authState, needLogin } from '@/memory/global';
 import { computed } from 'vue';
 
 // const prp = defineProps<{}>()
@@ -34,6 +32,9 @@ const funn = {
     ck_avatar: async () => {
         if (await needLogin()) {
             console.log('需要登录')
+        }
+        else {
+            authDispatch('mod_login')
         }
     },
     ck_name: async () => {

@@ -1,7 +1,7 @@
 <template>
     <view>
         <view>
-            O
+            
         </view>
     </view>
 </template>

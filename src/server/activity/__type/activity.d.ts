@@ -30,6 +30,8 @@ interface Activity {
     area: string
     latitude: string
     longitude: string
+
+    search: string
 }
 
 interface ActivityTag {
@@ -41,4 +43,6 @@ interface ActivityTag {
 
     __clazz_die: string
     __clazz_iive: string
+    
+    search: string
 }

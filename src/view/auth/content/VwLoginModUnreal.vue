@@ -19,13 +19,13 @@
                 </view>
                 <view class="pt">
                     <OButton color="pri-out" clazz="btn-app" @tap="switchUser(2)">
-                        <view class="">切换“龙华馨妍”</view>
+                        <view class="">切换“龙华馨妍 - 06在校兼职”</view>
                     </OButton>
                 </view>
             </view>
             <view>
                 <view class="pt-x2">
-                    <OButton color="def" clazz="btn-app" @tap="emt('next')">
+                    <OButton color="def" clazz="btn-app" @tap="emt('next', unreal)">
                         <view class="">下一步</view>
                     </OButton>
                 </view>

@@ -28,6 +28,10 @@ const fii = (h: number) => {
     if (h < 10) return '0' + h; return h }
 const add = (v: any, num: number) => dayjs(v).add(num, 'day')
 
+const weakcn = (src: string) => {
+    return '周' + ioc_week_name(dayjs(src ? src : new Date()).day())
+}
+
 const serh = (hour: number) => {
     if (hour <= 0) return 1;
     return hour;
@@ -82,9 +86,21 @@ const generate_picker_data = (v: string | null): Co.TimePieckerForm => {
     return <Co.TimePieckerForm>{ year: d.year(), month: d.month() + 1, day: d.date(), hour: d.hour(), minute: d.minute() }
 }
 
+const remaining = (origin: string | null = null, tar: string | null = null) => {
+    const target = dayjs(origin ? origin : new Date());
+    const too = dayjs(tar ? tar : new Date())
+    // if (!target.isValid() || !too.isValid()) return 100
+    // 计算剩余分钟数
+    // console.log('origin =', fmts(target))
+    // console.log('tar =', fmts(tar))
+    const minutes = too.diff(target, 'minute');
+    // console.log('minutes =', minutes)
+    return minutes > 0 ? minutes : 0;
+}
 
 
 export default {
+    weakcn,
     fmt, fii, fmts,
     add, serh, build, bigger,
     group_date,
@@ -92,5 +108,6 @@ export default {
     is_ieap_year,
     defyear, defmonth, defday,
     generate_picker_data,
-    build_of_form
+    build_of_form,
+    remaining
 }

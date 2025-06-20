@@ -1,9 +1,10 @@
 
 interface AuthStore {
-    phone: string
+    phonedata: AppPhoneWX
+    __unreal: AppPhoneWX
     info: ONE
     user: User
-    auth: ONE
+    auth: AppAuth
     jwt: string
     role: ROLES
     num: number

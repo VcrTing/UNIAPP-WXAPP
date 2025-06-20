@@ -5,6 +5,7 @@ import net_tool from "@/tool/http/net_tool"
 import strapi_param_tool from "@/tool/strapi/strapi_param_tool"
 import { netip } from "@/tool/uni/uni-global"
 import { is_arr, is_str } from "@/tool/util/typed"
+import { must_arr, must_one } from "@/tool/util/valued"
 
 // http://localhost:1337/api/activities?populate[publisher][fields]=*&filters[activity_tags][name][$eq]=原味
 
@@ -41,7 +42,25 @@ const byids = async (ids: string[]): Promise<Activity[]> => {
     return await fetching(param, net_tool.generate_pagination(999))
 }
 
+// 搜寻单个
+const byid = async (docid: string): Promise<Activity> => {
+    const __ids: string[] = [ ]
+    __ids.push( docid )
+    const src: Activity[] = must_arr(await byids(__ids))
+    return must_one(src[0])
+}
+
+// 我的
+const mine_history = async (): Promise<Activity[]> => {
+    const param: ONE = { }
+    net_tool.limit_mine(param)
+    const us: Activity[] = await fetching(param, net_tool.generate_pagination())
+    return us
+}
+
 export default {
+    mine_history,
+    byid,
     byids,
     index,
     index_recommond

@@ -22,4 +22,5 @@ interface UserLove {
     whoId: string
     love: User 
     dataStatus: number
+    __love: boolean
 }

@@ -3,23 +3,16 @@
     <PageLayout>
         <CoAppTopBar clazz="bg-con" :mat="true">
             <view class="fx-i">
-                <view v-for="(v, i) in aii.tabs" :key="i" class="pb-s ts">
-                    <OButtonIht v-if="aii.iive == v.v" :clazz="'mx ts'">
-                        <text class="h7 fw-550">{{ v.name }}</text>
-                    </OButtonIht>
-                    <view @tap="aii.iive = v.v" class="ts px-row py-s fx-aii-btn-def tid btn-rnd" v-else>{{ v.name }}</view>
+                <view v-for="(v, i) in aii.tabs" :key="i" class="ts">
+                    <OButton :color="(aii.iive == v.v) ? 'pri-iht' : 'wht'" :weak="true" v-if="aii.iive == v.v" 
+                        :clazz="'ts py px-row'">
+                        <text class="fw-550">{{ v.name }}</text>
+                    </OButton>
+                    <view @tap="aii.iive = v.v" class="ts py px-row fx-aii-btn-pri-iht tid" v-else>{{ v.name }}</view>
                 </view>
             </view>
         </CoAppTopBar>
         <view class="">
-            <view class="pt-s">
-                <view class="px-row py-row fx-aii-btn-def">
-                    <view class="tis fs-n ta-r">
-                        <text class="pr-s">{{ len }}</text>
-                        <text>条参与记录</text>
-                    </view>
-                </view>
-            </view>
             <OScrollY :styie="{
                 'height': 'calc(100vh - 8em)'
             }">
@@ -34,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import OButtonIht from '@/cake/button/OButtonIht.vue';
+import OButton from '@/cake/button/OButton.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import CoAppTopBar from '@/components/app/bar/CoAppTopBar.vue';
 import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
@@ -53,7 +46,7 @@ import { computed, nextTick, reactive } from 'vue';
 const code = computed(() => { return storage.get('PAGE_ORDER_KEY') || 0 })
 //
 const joins = computed((): ActivityJoin[] => orderState.join_of_mine)
-const len = computed((): number => must_arr(joins.value).length)
+// const len = computed((): number => must_arr(joins.value).length)
 
 const aii = reactive(<ONE>{
     ioading: false,
@@ -61,7 +54,7 @@ const aii = reactive(<ONE>{
     tabs: [
         { name: '全部', v: 0 },
         { name: '进行中', v: 1 },
-        { name: '已结束', v: 2 },
+        // { name: '已结束', v: 2 },
     ],
     activities: [ ]
 })

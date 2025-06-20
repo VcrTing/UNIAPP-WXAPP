@@ -391,6 +391,7 @@ export interface ApiActivityAddressActivityAddress
     >;
     address: Schema.Attribute.String;
     addressSystem: Schema.Attribute.String;
+    area: Schema.Attribute.String;
     city: Schema.Attribute.String;
     country: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
@@ -407,6 +408,7 @@ export interface ApiActivityAddressActivityAddress
     longitude: Schema.Attribute.String;
     province: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    remark: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -517,6 +519,11 @@ export interface ApiActivityRegistrationActivityRegistration
   };
   attributes: {
     activity: Schema.Attribute.Relation<'manyToOne', 'api::activity.activity'>;
+    consumeCode: Schema.Attribute.String;
+    consumeNum: Schema.Attribute.Integer;
+    consumePrice: Schema.Attribute.Decimal;
+    consumeStatus: Schema.Attribute.Integer;
+    consumeTime: Schema.Attribute.DateTime;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -532,6 +539,10 @@ export interface ApiActivityRegistrationActivityRegistration
     overStatus: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     paymentStatus: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
+    refundPrice: Schema.Attribute.Decimal;
+    refundRemark: Schema.Attribute.String;
+    refundStatus: Schema.Attribute.Integer;
+    refundTime: Schema.Attribute.DateTime;
     registrationTime: Schema.Attribute.DateTime;
     safeStatus: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
     sickDetail: Schema.Attribute.Text;
@@ -689,6 +700,45 @@ export interface ApiUserLoveUserLove extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     whoId: Schema.Attribute.String;
+  };
+}
+
+export interface ApiUserPreferenceTagUserPreferenceTag
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'user_preference_tags';
+  info: {
+    displayName: 'UserPreferenceTag';
+    pluralName: 'user-preference-tags';
+    singularName: 'user-preference-tag';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    activity_tag: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::activity-tag.activity-tag'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-preference-tag.user-preference-tag'
+    > &
+      Schema.Attribute.Private;
+    numJoin: Schema.Attribute.Integer;
+    numLook: Schema.Attribute.Integer;
+    numSearch: Schema.Attribute.Integer;
+    numUpdated: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    tagDocumentId: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    userDocumentId: Schema.Attribute.String;
+    userId: Schema.Attribute.BigInteger;
   };
 }
 
@@ -1290,6 +1340,7 @@ declare module '@strapi/strapi' {
       'api::activity-tag.activity-tag': ApiActivityTagActivityTag;
       'api::activity.activity': ApiActivityActivity;
       'api::user-love.user-love': ApiUserLoveUserLove;
+      'api::user-preference-tag.user-preference-tag': ApiUserPreferenceTagUserPreferenceTag;
       'api::user-statistic.user-statistic': ApiUserStatisticUserStatistic;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

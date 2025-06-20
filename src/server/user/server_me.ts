@@ -13,8 +13,8 @@ const fetching = async (param: ONE, pager: Pager): Promise<User[]> => {
     return net_tool.many<User>(src as ONE)
 }
 
-const one = async (id: string): Promise<User> => {
-    const src: NET_RES = await master.get('user', id, { })
+const one = async (id: string | number): Promise<User> => {
+    const src: NET_RES = await master.get('user', id + '', { })
     // const res: ONE | MANY = (src as HttpResult).data
     return net_tool.one<User>(src as ONE)
 }

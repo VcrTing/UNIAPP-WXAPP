@@ -34,6 +34,7 @@ import { APP_GENERATE_DETAIL } from '@/conf/conf-app';
 import { authGetters, orderDispatch, orderState, uiState } from '@/memory/global';
 import server_pubplus from '@/server/publish/server_pubplus';
 import pan_tooi from '@/tool/app/pan_tooi';
+import activity_tool from '@/tool/modules/activity_tool';
 import media_tool from '@/tool/modules/media_tool';
 import appRouter from '@/tool/uni/app-router';
 import { tipwarn } from '@/tool/uni/uni-global';
@@ -64,13 +65,16 @@ const funn = {
     buildform: (src: ONE = { }) => {
         const tgsid = arrgotv(src.tags, 'documentId')
         const userid: string = authGetters.userid
+        const addr: ActivityAddress = must_one<ActivityAddress>(src.addrdata)
         const res = <ONE>{
             title: src.title,
             activity_tags: tgsid,
             typed: src.typed, 
             publisher: userid, dataStatus: 0,
-            activity_address: must_one<ActivityAddress>(src.addrdata).documentId
+            activity_address: addr.documentId,
         }
+        // 构建搜索
+        res['search'] = activity_tool.group_search_field(res, addr, src.tags)
         return res
     },
     backwaiting: () => {

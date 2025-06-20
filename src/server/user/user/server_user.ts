@@ -8,13 +8,23 @@ import { netip } from "@/tool/uni/uni-global"
 import { is_arr, is_str } from "@/tool/util/typed"
 import server_user_statistic from "./server_user_statistic"
 import User from "@/pages/user/user.vue"
+import { must_arr, must_one } from "@/tool/util/valued"
 
 const relations = <string[]>[  ]
 
 const fetching = async (param: ONE, pager: Pager): Promise<User[]> => {
     const __pm: ONE = net_tool.build_param(param, pager, relations)
     const src: NET_RES = await master.get('user', null, __pm)
-    return net_tool.many<User>(src as ONE)
+    // if (is_str(src)) return netip(src, [ ]);
+    // const res: ONE | MANY = (src as HttpResult).data
+    return must_arr(src)
+}
+
+const byphone = async (phone: string): Promise<User> => {
+    const param: ONE = { }
+    strapi_param_tool.__eq(param, 'phone', phone)
+    const src: User[] = await fetching(param, net_tool.generate_pagination())
+    return must_one(src[0])
 }
 
 const byids = async (ids: string[]): Promise<User[]> => {
@@ -57,6 +67,7 @@ const mainpage = async (userid: string): Promise<UserMainPage> => {
 }
 
 export default {
+    byphone,
     byids,
     mainpage,
     mymainpage

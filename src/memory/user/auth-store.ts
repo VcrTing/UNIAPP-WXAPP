@@ -1,10 +1,11 @@
 
-import { ROLE_ANON, ROLE_AUTH, USER_DEF } from '@/conf/conf-role';
+import { for_user_loging } from '@/conf/__for_index/for_user_loging';
+import { ROLE_ANON, ROLE_AUTH, USER_DEF, USER_TEST } from '@/conf/conf-role';
 import server_me from '@/server/user/server_me';
 import server_user from '@/server/user/user/server_user';
 import pan_tooi from '@/tool/app/pan_tooi';
 import { arrfindi } from '@/tool/util/iodash';
-import { is_nice_arr } from '@/tool/util/valued';
+import { is_nice_arr, is_nice_sn } from '@/tool/util/valued';
 import { storage } from '@/tool/web/storage';
 import { Store, createStore } from 'vuex';
 
@@ -15,7 +16,9 @@ export enum AutoLoginStatus {
 }
 
 const islogin = (s: ONE): boolean => {
-    return (s.role === ROLE_ANON) ? false : ( s.jwt && (s.jwt.length > 0) )
+    // const auth: AppAuth = s.auth || { }
+    // const p: string = (auth.phonedata || { }).phoneNumber || ''
+    return (s.role !== ROLE_ANON)
 }
 
 const locking = async <T>(state: ONE, commit: Function, def: T, func: Function): Promise<T> => {
@@ -36,11 +39,15 @@ const locking = async <T>(state: ONE, commit: Function, def: T, func: Function):
 const _s: Store<AuthStore> = createStore({
     
     state: <AuthStore>{
-        phone: '',
+        phonedata: <AppPhoneWX>{ },
+        __unreal: USER_TEST[0],
         info: <ONE>{ },
         user: <User>USER_DEF,
         auth: <ONE>{ },
-        addr: <UserAddress>{ iive: false },
+        addr: <UserAddress>{ 
+            iive: true,
+            longitude: 114.0305, latitude: 22.6171
+        },
         jwt: '',
         role: ROLE_ANON,
         num: 0,
@@ -76,17 +83,17 @@ const _s: Store<AuthStore> = createStore({
         },
         _login: (s: ONE, auth: ONE) => {
             storage.set('jwt', auth.token)
+            s.auth = auth
             s.user = auth.user 
             s.jwt = auth.token 
             s.role = ROLE_AUTH
-
             s.loginhouse.iive = false
         },
         _logout: (s: ONE) => {
             storage.remove('jwt')
-            s.company = { }
-            s.user = USER_DEF
             s.auth = { }
+            s.user = USER_DEF
+            s.jwt = ''
             s.role = ROLE_ANON
 
             s.loginhouse.iive = true
@@ -100,25 +107,35 @@ const _s: Store<AuthStore> = createStore({
         /**
          * 
          */
-        login: ({ commit }, auth: ONE) => {
+        login: ({ commit }, auth: AppAuth) => {
             storage.set('auth', auth)
-            console.log('auth =', auth)
+            // console.log('LOGIN AUTH =', auth)
             commit('_login', auth)
         },
         logout: ({ commit }) => {
             commit('_logout')
         },
+        // 0 加载虚幻号码
+
         // 1 自动登录成功，0 已经登录了，-1 
         auto_login: ({ getters, commit }): AutoLoginStatus => {
             if (!getters.is_login) {
-                const auth: ONE | undefined = storage.get('auth')
+                const auth: AppAuth | undefined = storage.get('auth')
+                console.log('=== 自动登录成功 ===', auth)
                 if (auth) {
                     commit('_login', auth); 
+                    for_user_loging()
                     return AutoLoginStatus.AUTO_SUCCESS
                 } 
                 return AutoLoginStatus.AUTO_FAIL
             }
             return AutoLoginStatus.ALREADY_LOGIN
+        },
+
+        // 打开登录 MODAL
+        mod_login: ({ state }) => {
+            const hs = state.loginhouse;
+            pan_tooi.open_def_b(hs.pan_idx, hs.pan_hui)
         },
         
         // 先判断是否需要登录, true = 需要
@@ -128,7 +145,6 @@ const _s: Store<AuthStore> = createStore({
                 const hs = state.loginhouse;
                 commit('_num')
                 if (hs.iive) pan_tooi.open_def_b(hs.pan_idx, hs.pan_hui);
-                console.log('打开登录 PAN')
                 return true
             }   
             return false
@@ -137,12 +153,15 @@ const _s: Store<AuthStore> = createStore({
         // 更新
         refresh_info: async ({ state, commit }): Promise<User> => {
             return await locking(state, commit, state.user, async () => {
-                const u: User = await server_me.one(state.user.id)
-                if (u && u.id) {
-                    commit('_login', { user: u, token: u.documentId })
-                    // console.log('刷新用户数据 =', u)
-                    commit('__change', [ 'user', u ])
-                    return u;
+                const uid: number = state.user.id;
+                if (uid) {
+                    const u: User = await server_me.one(uid)
+                    if (u && u.id) {
+                        commit('_login', { user: u, token: u.documentId })
+                        // console.log('刷新用户数据 =', u)
+                        commit('__change', [ 'user', u ])
+                        return u;
+                    }
                 }
                 return null
             })

@@ -1,12 +1,14 @@
 <template>
     <view class="px-row">
         <view class="py">
+            <!--
             <OButton @tap="funn.editaddr" clazz="btn-app" color="wht">
                 <view>
                     <UiI :i="'edit'"/>
                 </view>
                 <view class="pi-s">管理常用地址信息</view>
             </OButton>
+            -->
         </view>
     </view>
 </template>

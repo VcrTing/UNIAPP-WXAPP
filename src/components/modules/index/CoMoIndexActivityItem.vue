@@ -21,9 +21,9 @@
             <view class="py">
                 <view class="pt-s">
                     <OButton clazz="d-ib fs-s br-1" :weak="true"><text class="fs-s">报名中</text></OButton>
-                    <view class="d-ib px-s fs-n">
-                        <CkSimpleTag>{{ activity_tool.getweek(v) }}&nbsp;{{ activity_tool.gettime_start(v) }}</CkSimpleTag>
-                        <text class="pi-s">|</text>
+                    <view class="d-ib px-t fs-n">
+                        <CkSimpleTag><text class="">{{ activity_tool.getweek(v) }}</text>&nbsp;{{ activity_tool.gettime_start(v) }}</CkSimpleTag>
+                        <text class="pi-t">|</text>
                     </view>
                     <view class="d-ib fs-n">
                         <CkSimpleTag>{{ activity_tool.getfar(v) }}</CkSimpleTag>
@@ -87,7 +87,7 @@ import { computed } from 'vue';
 
 const prp = defineProps<{
     v: Activity,
-    meizi: MANY
+    joins?: ActivityJoin[ ]
 }>()
 
 const gallery = computed((): ActivityMedia[] => {
@@ -95,8 +95,6 @@ const gallery = computed((): ActivityMedia[] => {
 })
 
 const gallerylen = computed((): number => gallery.value.length)
-
-const address = computed((): ActivityAddress => (prp.v.activity_address || { }))
 
 const emt = defineEmits([ 'detail' ])
 </script>

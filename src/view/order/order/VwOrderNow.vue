@@ -1,33 +1,40 @@
 <template>
     <view>
-        
+        <view class="">
+            <view class="px-row py-row fx-aii-btn-def">
+                <view class="tis fs-n ta-r pt">
+                    <text class="pr-s">{{ must_arr(joins).length }}</text>
+                    <text>条参与记录</text>
+                </view>
+            </view>
+        </view>
         <view>
         <view class="">
             <!-- -->
             <view v-for="(v, i) in joins" :key="i"
-                class="pb-x1 px-row"
+                class="pb-x1"
             >
-                <CoMoOrderWorkingItem :v="funn.ioc(v)"/>
-                <view>
-                    <view class="card py-col">
-                        <view class="px-x1 py"><text class="header-s">订单明细</text></view>
+                <CoMoOrderWorkingItem :v="funn.ioc(v)" @view="funn.view"/>
+                <view class="px-row">
+                    <view class="card o-h">
+                        <view class="px-x1 pb pt-x1 fx-aii-btn-def"><text class="header-s">订单明细</text></view>
                         <view class="">
                             <view>
-                                <CoMoOrderMsgItem :clazz="'py-s'">
+                                <CoMoOrderMsgItem :clazz="'py-n'">
                                     <template #i>报名时间</template>
                                     <template #r><view class="">{{ times.fmts(v.registrationTime) }}</view></template>
                                 </CoMoOrderMsgItem>
-                                <CoMoOrderMsgItem :clazz="'py-s'">
+                                <CoMoOrderMsgItem :clazz="'py-n'">
                                     <template #i>付款金额</template>
                                     <template #r><CoMoney>{{ v.feeAmount }}</CoMoney></template>
                                 </CoMoOrderMsgItem>
-                                <CoMoOrderMsgItem :clazz="'py-s'">
+                                <CoMoOrderMsgItem :clazz="'py-n'">
                                     <template #i>订购票数</template>
                                     <template #r><view class="h7">{{ v.num }}</view></template>
                                 </CoMoOrderMsgItem>
                             </view>
                         </view>
-                        <view class="pt pb-s">
+                        <view class="pt pb-s fx-aii-btn-def">
                             <view class="fx-s px-x1">
                                 <view></view>
                                 <OButton color="pri-iht" :weak="true" clazz="px py-s br-s">
@@ -50,29 +57,19 @@ import OButton from '@/cake/button/OButton.vue';
 import CoMoOrderMsgItem from '@/components/modules/order/CoMoOrderMsgItem.vue';
 import CoMoOrderWorkingItem from '@/components/modules/order/CoMoOrderWorkingItem.vue';
 import CoMoney from '@/components/visual/money/CoMoney.vue';
-import activity_tool from '@/tool/modules/activity_tool';
+import { acyReFresh } from '@/memory/global';
+import { open_of_net } from '@/server/__func/open_of_net';
+import { tiperr, tipwarn } from '@/tool/uni/uni-global';
 import uniRouter from '@/tool/uni/uni-router';
+import { future, futuring } from '@/tool/util/future';
 import { arrfindi } from '@/tool/util/iodash';
-import { must_one } from '@/tool/util/valued';
+import { must_arr, must_one } from '@/tool/util/valued';
 import times from '@/tool/web/times';
 import UiI from '@/ui/element/i/UiI.vue';
-
 const prp = defineProps<{
     joins: ActivityJoin[ ],
     activities: Activity[ ]
 }>()
-
-/*
-const datas = computed((): MANY => {
-    const src = mock_orders.items || [ ]
-    if (src && src.length) {
-        return [ src[1] ]
-    }
-    return src;
-})
-
-const meizi = mock_meizi.items
-*/
 
 const funn = {
     ioc: (v: ActivityJoin): Activity => {
@@ -90,20 +87,16 @@ const funn = {
     },
     code: () => {
         
-    }
+    },
+    view: (v: Activity) => future(async () => {
+        const res: Activity = await open_of_net('activity', v.documentId)
+        if (res && res.documentId) {
+            acyReFresh('view', res);
+            uniRouter.gopg('activity_detail');
+        }
+        else {
+            tipwarn('查询数据失败，可能是网络波动。')
+        }
+    })
 }
 </script>
-
-            <!--
-            <view class="pt-s px-col">
-                <view class="fx-s">
-                    <view class="fx-i fx-1 money fw-700">
-                        <text class="h5">3.00&nbsp;&nbsp;</text>
-                        <text>元 报名费</text>
-                    </view>
-                    <view>
-                        <OButtonOut @tap="funn.detail(v)" :clazz="'fw-550 mw-5em mh-btn'">详情</OButtonOut>
-                    </view>
-                </view>
-            </view>
-            -->

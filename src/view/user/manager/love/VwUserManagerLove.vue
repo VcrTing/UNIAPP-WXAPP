@@ -1,23 +1,24 @@
 <template>
-    <view class="pt-s">
+    <view class="pt">
         <view class="bg-con">
             <view class="py">
-                <view class="" v-for="(v, i) in meizis" :key="i">
+            <CoViDataLoading :ioading="aii.ioading" :items="aii.loves">
+                <view class="" v-for="(v, i) in aii.loves" :key="i">
                     <view class="fx-aii-btn-def px-row py">
                         <view class="fx-s">
                             <view class="fx-1">
-                                <CoMoUserInfo :v="v" :clazz="'h6 pr-s'"/>
+                                <CoMoUserInfo :v="v.love" :clazz="'h4 pr-s'"/>
                             </view>
-                            <view v-if="aii.i == 0">
-                                <OButtonDef @tap="funn.loveyou(v)" :weak="true" clazz="py-s px-col br-s">
+                            <view v-if="v.__love">
+                                <OButton color="def" @tap="funn.losslove(v)" :weak="true" clazz="py-s px-col br-s">
                                     <view class="fx-c">
                                         <!--<UiI i="love"/>-->
                                         <text>已关注</text>
                                     </view>
-                                </OButtonDef>
+                                </OButton>
                             </view>
-                            <view v-else-if="aii.i == 1">
-                                <OButton color="err" @tap="funn.focusyou(v)" :weak="true" clazz="py-s px-col br-s">
+                            <view v-else>
+                                <OButton color="err" @tap="funn.loveyou(v)" :weak="true" clazz="py-s px-col br-s">
                                     <view class="fx-c">
                                         <UiI i="love"/>
                                         <text>关注</text>
@@ -27,6 +28,8 @@
                         </view>
                     </view>
                 </view>
+            </CoViDataLoading>
+                
             </view>
         </view>
     </view>
@@ -36,26 +39,37 @@
 import OButton from '@/cake/button/OButton.vue';
 import OButtonDef from '@/cake/button/OButtonDef.vue';
 import CoMoUserInfo from '@/components/modules/user/CoMoUserInfo.vue';
+import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
 import mock_meizi from '@/server/mock/user/mock_meizi';
+import server_love from '@/server/user/love/server_love';
+import { future, futuring, promise } from '@/tool/util/future';
 import UiI from '@/ui/element/i/UiI.vue';
-import { reactive } from 'vue';
-
-// const prp = defineProps<{}>()
-
-const meizis = [
-    ...mock_meizi.items, ...mock_meizi.items, ...mock_meizi.items
-]
+import { nextTick, reactive } from 'vue';
 
 const aii = reactive({
-    i: 0
+    i: 0, ioading: false, loves: <UserLove[]>[ ]
 })
 
 const funn = {
-    focusyou: (v: ONE) => {
-        aii.i = 0
-    },
-    loveyou: (v: ONE) => {
-        aii.i = 1
-    }
+    losslove: (v: UserLove) => future(async () => {
+        const src: UserLove = await server_love.losslove(v)
+        if (src && src.id) { v.__love = false }
+    }),
+    loveyou: (v: UserLove) => future(async () => {
+        const src: UserLove = await server_love.focuslove(v.loveId)
+        if (src && src.id) { v.__love = true }
+    }),
+
+    fetch: () => futuring(aii, async () => {
+        const us: UserLove[] = await server_love.myloves()
+        if (us) {
+            aii.loves = us.map(e => { (e.__love = true); return e})
+        }
+    }),
+    init: () => promise(() => {
+        funn.fetch()
+    })
 }
+
+nextTick(funn.init)
 </script>

@@ -1,5 +1,6 @@
 
 interface ActivityMedia {
+    id: number
     documentId: string
     url: string
     urlSmall: string
@@ -11,6 +12,7 @@ interface ActivityMedia {
 }
 
 interface ActivityAddress {
+    id: number
     documentId: string
     address: string
     city: string
@@ -32,4 +34,15 @@ interface ActivityJoin { // ActivityRegistration
     user: User
     num: string
     feeAmount: number
+
+    refundStatus: number
+    refundPrice: number
+    refundTime: string
+    refundRemark: string
+
+    consumePrice: string
+    consumeNum: number
+    consumeCode: string
+    consumeTime: string
+    consumeStatus: number
 }

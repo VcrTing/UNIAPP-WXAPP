@@ -1,26 +1,34 @@
 <template>
-    <view class="w-100">
+    <view class="w-100 ">
+        <view class="px-row py-row abs-i t-0 zi-s" @tap="emt('back')">
+            <view class="pri">
+                <UiI i="a-i" clazz="d-ib"/>
+                <text class="pi-s">返回</text>
+            </view>
+        </view>
         <view class="">
-            <view class="py">
+            <view class="pb pt-s">
                 <view class="fx-c">
                     <CkAvatar clazz="w-6em h-6em" :id="user.id" :src="user.avatarUrl"/>
                 </view>
             </view>
             <view class="pt">
-                <OButtonWht clazz="w-100">
-                    <view class="h-5vh fx-c">
-                        <text class="fw-700 h3 ls tis">
-                            <text>
-                                +86
+                <OButton color="wht" clazz="">
+                    <view class="fx-c mh-btn">
+                        <text class="fw-700 h3 ls cos">
+                            <text class="pr">
+                                +{{ phonedata.countryCode }}
                             </text>
-                            <text>13576639986</text>
+                            <text>{{ phonedata.phoneNumber }}</text>
                         </text>
                     </view>
-                </OButtonWht>
+                </OButton>
             </view>
-            <view class="py-s"></view>
+            <view class="pt-s"></view>
             <OButton @tap="funn.login(1)" :ioading="aii.ioading"
-                :clazz="'h-5vh fw-550 ls-x2'">立即登录</OButton>
+                :clazz="'h-5vh fw-550 ls-x2'">
+                立即登录
+            </OButton>
             <view class="pt-s"></view>
             <view class="py abs-b w-100 bg-con">
                 <view class="fx-c fs-s tis">
@@ -40,43 +48,41 @@
 <script setup lang="ts">
 import OSafeAreaBottom from '@/cake/app/safearea/OSafeAreaBottom.vue';
 import OButton from '@/cake/button/OButton.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
-import OButtonWht from '@/cake/button/OButtonWht.vue';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import { APP_GENERATE_DETAIL } from '@/conf/conf-app';
 import { authDispatch, authState } from '@/memory/global';
-import mock_user from '@/server/mock/user/mock_user';
+import server_auth from '@/server/auth/server_auth';
 import appRouter from '@/tool/uni/app-router';
-import uniRouter from '@/tool/uni/uni-router';
-import { storage } from '@/tool/web/storage';
+import { tipwarn } from '@/tool/uni/uni-global';
+import { futuring } from '@/tool/util/future';
+import UiI from '@/ui/element/i/UiI.vue';
 import { computed, reactive } from 'vue';
 
-// const prp = defineProps<{}>()
+const prp = defineProps<{
+    user: User
+}>()
+
 const aii = reactive({
     agree: 'true', ioading: false
 })
 
-const user = computed(() => authState.user)
+const phonedata = computed((): AppPhoneWX => {
+    return authState.phonedata
+})
+
+const emt = defineEmits([ 'back' ])
 
 const funn = {
-    
-    login: (i: number) => {
-        aii.ioading = true
-        setTimeout(() => {
-            authDispatch('login', (i == 1) ? mock_user.boy : mock_user.girl);
-            aii.ioading = false
-        }, 3000)
-        
-        /*
-        if (i == 0) {
-            uniRouter.gopg('auth_intor')
+    login: (i: number) => futuring(aii, async () => {
+        const p: string = phonedata.value.phoneNumber
+        if (p) {
+            const auth: AppAuth | null = await server_auth.login(phonedata.value)
+            authDispatch('login', auth)
         }
         else {
-            uniRouter.navigatorpg('user')
+            tipwarn('未获取到电话号码。')
         }
-        */
-        
-    }
+    })
 }
 
 </script>

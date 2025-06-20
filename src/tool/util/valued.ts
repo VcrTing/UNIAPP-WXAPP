@@ -87,3 +87,17 @@ export const formvtostr = (form: ONE, ks: string[] = [ 'longitude', 'latitude' ]
     }
     return form
 }
+
+export const is_cn = (src: string = '') => {
+    return /[\u4e00-\u9fa5]/.test(src);
+}
+
+export const group_search_txt = (src: string = '', chr: string = '_') => {
+    let res = src + chr
+    // 非中文
+    if (!is_cn(src)) {
+        res += (src.toUpperCase() + chr)
+        res += (src.toLowerCase() + chr)
+    }
+    return res
+}

@@ -7,14 +7,13 @@
 
 <script setup lang="ts">
 import { authDispatch } from '@/memory/global';
-import server_user from '@/server/user/user/server_user';
 import uniRouter from '@/tool/uni/uni-router';
-import { future, futuring, promise } from '@/tool/util/future';
+import { future } from '@/tool/util/future';
 
 // const prp = defineProps<{}>()
 const prp = defineProps<{
     src: string,
-    id: number,
+    id: number | string | undefined,
     clazz?: string,
     not_mainpage?: boolean
 }>()

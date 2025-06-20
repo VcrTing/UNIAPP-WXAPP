@@ -48,7 +48,7 @@ const tit = computed(() => {
     const v = code.value;
     if (v == 1) { return '标签管理'; }
     else if (v == 2) { return '地址管理'; }
-    else if (v == 3) { return '我的收藏'; }
+    else if (v == 3) { return '我的关注'; }
     else if (v == 4) { return '金额记录'; }
     return '标签管理';
 })

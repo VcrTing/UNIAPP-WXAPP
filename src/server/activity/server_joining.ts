@@ -40,8 +40,17 @@ const join_of_activity = async (actid: string): Promise<ActivityJoin[]> => {
     return await fetching(__pm, net_tool.generate_pagination(99))
 }
 
+// 参与历史
+const join_history = async (): Promise<ActivityJoin[]> => {
+    const __pm: ONE = { }
+    __pm['filters[user][$eq]'] = authGetters.userid
+    // __pm['filters[safeStatus][$eq]'] = 1
+    return await fetching(__pm, net_tool.generate_pagination(999))
+}
+
 export default {
     join,
+    join_history,
     join_of_mine,
     join_of_activity
 }
