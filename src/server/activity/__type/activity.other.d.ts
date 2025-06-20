@@ -14,10 +14,12 @@ interface ActivityAddress {
     documentId: string
     address: string
     city: string
-    latitude: string
-    longitude: string
+    area: string
+    latitude: number
+    longitude: number
     province: string
     country: string
+    remark: string
     addressSystem: string
 }
 

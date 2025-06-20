@@ -10,12 +10,14 @@ interface AuthStore {
     __ioading: boolean
     loginhouse: AuthLoginHouse
 
+    addr: UserAddress
+
     mainpage: UserMainPage
     mainpages: UserMainPage[]
     mainpage_of_view: UserMainPage
 }
 type AUTH_STORE_FIELD = 
-    'info' | 'user' | 'auth' | 'num' |
+    'info' | 'user' | 'auth' | 'num' | 'addr' |
     'jwt' | 'role' | 'needlogin' | 'mainpage' | 'mainpage'
 
 interface AuthGetters {
@@ -28,6 +30,7 @@ interface AuthGetters {
     userid: string,
     company_id: string,
 
+    addr: UserAddress | null
 }
 
 interface AuthLoginHouse {

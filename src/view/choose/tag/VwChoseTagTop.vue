@@ -26,13 +26,13 @@
                 }"
             >
                 <view class="card py-col">
-                    <view v-for="(v, i) in tags" :key="i">
-                        <ODiv :clazz="(funn.has(i) ? 'btn-def' : '') + ' px-x2 py-col br-rnd'"
+                    <view v-for="(v, i) in tags" :key="i" class="">
+                        <view :clazz="(funn.has(i) ? 'btn-def' : '') + ' px-x2 py-col br-rnd'"
                             @tap="funn.chose(v, i)">
                             <view>
                                 {{ v.tit }}
                             </view>
-                        </ODiv>
+                        </view>
                     </view>
                 </view>
             </OScrollY>

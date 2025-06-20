@@ -25,6 +25,8 @@ const judge_is_join = (joins: ActivityJoin[], activity: Activity) => {
     return true
 }
 
+
+
 export default {
     build_plus_form,
     judge_is_join

@@ -40,6 +40,7 @@ const _s: Store<AuthStore> = createStore({
         info: <ONE>{ },
         user: <User>USER_DEF,
         auth: <ONE>{ },
+        addr: <UserAddress>{ iive: false },
         jwt: '',
         role: ROLE_ANON,
         num: 0,
@@ -61,7 +62,12 @@ const _s: Store<AuthStore> = createStore({
         userid: s => s.user.id,
         company_id: s => s.company.id,
         is_login: s => islogin(s),
-        is_publisher: s => (s.user.publisher)
+        is_publisher: s => (s.user.publisher),
+        addr: s => {
+            const d: UserAddress = s.addr || { }
+            if (d && d.iive) return d
+            return null
+        }
     },
     mutations: {
         __change: (s: ONE, v: ANYS) => s[ v[0] ] = v[1],

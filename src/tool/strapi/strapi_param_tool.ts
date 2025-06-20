@@ -23,6 +23,10 @@ const app_pager_to_strapi_pager = (pager: Pager) => {
 }
 
 // {}, filters[id][$in], [ 0, 1 ]
+const __eq = (target: ONE , key: string, v: string | number ) => {
+    const __K: string = 'filters[' + key + '][$eq]'
+    target[ __K ] = v
+}
 const build_filter_in = (target: ONE , key_prefix: string, ins: any[] ) => {
     const __K: string = 'filters[' + key_prefix + '][$in]'
     ins.map((e, i) => {
@@ -33,6 +37,7 @@ const build_filter_in = (target: ONE , key_prefix: string, ins: any[] ) => {
 }
 
 export default {
+    __eq,
     build_filter_in,
     build_param_pager,
     build_param

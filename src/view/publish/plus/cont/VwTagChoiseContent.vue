@@ -19,7 +19,7 @@
             </OScrollX>
         </view>
         <view class="px-row">
-            <view class="card pa-card">
+            <view class="card px-x1 py">
                 <OScrollY 
                     :styie="{
                         'height': 'calc(100vh - 18em)'
@@ -27,13 +27,14 @@
                 >
                     <view class="py-col">
                         <CoViDataLoading :ioading="aii.ioading" :items="aii.items">
-                            <view class="pb-s" v-for="(v, i) in tags" :key="i">
-                                <ODiv :clazz="(funn.has(v) ? 'btn-def' : '') + ' px-x2 py-col br-rnd'"
-                                    @tap="funn.chose(v, i)">
-                                    <view>
+                            <view class="row">
+                                <view class="pb w-333 d-ib px-s" v-for="(v, i) in tags" :key="i"
+                                    @tap="funn.chose(v, i)"
+                                >
+                                    <CkDefTag :iive="funn.has(v)" :clazz_iive="'btn-pri-out'">
                                         {{ v.name }}
-                                    </view>
-                                </ODiv>
+                                    </CkDefTag>
+                                </view>
                             </view>
                         </CoViDataLoading>
                     </view>
@@ -49,11 +50,12 @@ import OFI from '@/cake/button/i/OFI.vue';
 import OButtonWht from '@/cake/button/OButtonWht.vue';
 import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
+import CkDefTag from '@/cake/visual/tag/CkDefTag.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
 import server_tags from '@/server/activity/server_tags';
 import { tipwarn } from '@/tool/uni/uni-global';
 import { future, timeout } from '@/tool/util/future';
-import { arrfindi } from '@/tool/util/iodash';
+import { arrfindi, arrsort } from '@/tool/util/iodash';
 import { must_one } from '@/tool/util/valued';
 import { computed, nextTick, reactive } from 'vue';
 
@@ -106,7 +108,7 @@ const func = {
     init: () => future(async () => {
         aii.ioading = true
         const dts: ActivityTag[] = await server_tags.all()
-        aii.items = dts
+        aii.items = arrsort(dts, 'indexLevel')
         timeout(() => aii.ioading = false)
     })
 }

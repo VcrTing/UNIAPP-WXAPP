@@ -1,7 +1,7 @@
 <template>
     <view class="">
         <view class="bg-con py-col">
-            <view class="pi-inp">
+            <view class="">
                 <CkInpItem :tit="'活动地址'">
                     <view v-if="form.addrdata.documentId" class="ta-r pr-inp fx-r" @tap="funn.open_addr">
                         <view>{{ form.addrdata.address }}</view>
@@ -15,7 +15,7 @@
                         :value="form.addrdata.address" />
                 </CkInpItem>
             </view>
-            <view class="pi-inp">
+            <view class="">
                 <CkInpItem :tit="'活动类型'">
                     <view class="fx-r mh-inp pr-inp">
                         <view v-for="(v, i) in typed" :key="i"

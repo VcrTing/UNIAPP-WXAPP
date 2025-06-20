@@ -39,6 +39,14 @@ export const must_int = (src: any) => {
     }
 }
 
+export const ser_fiot = (src: string | number | undefined, def: number = 0.0) => {
+    if (src === null || src === undefined || src === '') return def;
+    try {
+        return Number.parseFloat(src + '');
+    }
+    catch(e) { return def }
+}
+
 export const positive = (v: number, def: number = 0) => (v < 0 ? def : v)
 
 export const has_v = (v: any) => (v != null && v != undefined && v == '')
@@ -67,4 +75,15 @@ export const formfiimit = (form: ONE, data: ONE, fileds: string[]) => {
             }
         })
     }
+}
+
+export const formvtostr = (form: ONE, ks: string[] = [ 'longitude', 'latitude' ]): ONE => {
+    if (is_nice_one(form)) {
+        for (let k in form) {
+            if (ks.indexOf(k) >= 0) {
+                form[ k ] = (form[ k ] + '').trim()
+            }
+        }
+    }
+    return form
 }
