@@ -21,7 +21,7 @@
             <VwUserManagerPays />
             <view class="mh-8em"></view>
         </view>
-        <CoBomBackBtn/>
+        <CoBomBackBtn :clazz="'btn-wht-s'" @tap="uniRouter.back"/>
     </PageLayout>
 </template>
 

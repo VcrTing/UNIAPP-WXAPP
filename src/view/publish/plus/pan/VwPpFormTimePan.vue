@@ -4,27 +4,27 @@
             <OPanInnerY :h="'46.8vh'" :idx="idx" :orientation="'b'">
                 <template #top>
                     <view class="fx-s">
-                        <OButtonWht @tap="funn.last" clazz="w-30 fx-i tis">
-                            <view class="tis">
+                        <view @tap="funn.last" class="w-30 fx-i tis ">
+                            <view class="tis py px-row fx-aii-btn-def">
                                 <text v-if="aii.next == 0">关闭</text>
                                 <view class="fx-r" v-if="aii.next == 1">
-                                    <UiI i="i"/>
-                                    <text>返回</text>
+                                    <UiI i="a-i"/>
+                                    <text class="pi-s">返回</text>
                                 </view>
                             </view>
-                        </OButtonWht>
-                        <view class="py w-40 ta-c">
+                        </view>
+                        <view class="w-40 ta-c">
                             <text class="h7 fw-550">
                                 <text>{{ aii.next == 0 ? '开始时间' : '结束时间'  }}</text>
                             </text>
                         </view>
-                        <OButtonWht @tap="funn.next" clazz="w-30">
-                            <view class="fx-r py pri" v-if="aii.next == 0">
+                        <view @tap="funn.next" class="w-30">
+                            <view class="fx-r py pri fx-aii-btn-pri-iht px-row" v-if="aii.next == 0">
                                 <text>下一步</text>
                                 <UiI i="a-r"/>
                             </view>
-                            <view class="pi py pri ta-r" v-else>确定</view>
-                        </OButtonWht>
+                            <view class="fx-r py pri fx-aii-btn-pri-iht px-row" v-else>确定</view>
+                        </view>
                     </view>
                 </template>
                 <view>

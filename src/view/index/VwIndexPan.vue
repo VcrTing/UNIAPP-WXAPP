@@ -12,19 +12,9 @@
                 >
                 <view class="pt-row"></view>
                 <view class="px-row">
-                    <view v-if="index.ioading">
-                        <CkDataIoading :h="12"/>
-                    </view>
-                    <view v-else>
-                        <view v-if="aii.activities && aii.activities.length > 0">
-                            <VwIndexContList :activities="aii.activities"/>
-                        </view>
-                        <view v-else>
-                            <view class="h-80vh">
-                                <CoEmpty/>
-                            </view>
-                        </view>
-                    </view>
+                    <CoViDataLoading :ioading="index.ioading" :items="aii.activities">
+                        <VwIndexContList :activities="aii.activities"/>
+                    </CoViDataLoading>
                 </view>
                 <CkSpace :h="3"/>
                 <view class=" w-100" v-if="index.end">
@@ -56,6 +46,7 @@ import { pageIndexDispatch, pageIndexState } from '@/memory/page';
 import def_ativity from '@/server/__def/def_ativity';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import CoEmpty from '@/components/genra/empty/CoEmpty.vue';
+import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
 
 // const prp = defineProps<{}>()
 

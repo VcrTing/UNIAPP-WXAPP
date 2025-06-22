@@ -1,6 +1,12 @@
 <template>
     <view class="">
-        <view class="bg-con py-col">
+        <view class="bg-con pt-col">
+            <view class="">
+                <CkInpItem :tit="'活动时间'" :clazz_tit="'tid'">
+                    <input class="inp-app ta-r"
+                        :value="timed" @tap="funn.openTimeChoise" placeholder="请挑选活动时间"/>
+                </CkInpItem>
+            </view>
             <view class="">
                 <CkInpItem :tit="'活动地址'">
                     <view v-if="form.addrdata.documentId" class="ta-r pr-inp fx-r" @tap="funn.open_addr">
@@ -27,17 +33,23 @@
                     </view>
                 </CkInpItem>
             </view>
-            <view v-if="form.typed == DATA_ACTIVITY_TYPED_SM.v" class="py px-inp">
-                <view class="pi card tid fs-n">
+            <view v-if="form.typed == DATA_ACTIVITY_TYPED_SM.v" class="py px-inp fx-aii-btn-def">
+                <view class="pi tid fs-n pb-col">
                     <view>非公开类型活动，是指不会被展示在首页、不会被他人搜索到的，只属于个人的活动。</view>
-                    <view>不过，您可以主动邀请别人，来参与您发布后的活动。</view>
+                    <view>您可以主动邀请别人来参与您发布后的活动，限制人数为 99 人。</view>
                 </view>
             </view>
+            <view v-if="form.typed == DATA_ACTIVITY_TYPED_GK.v" class="pb-col">
+                <CkInpItem :tit="'报名费用'" :clazz_tit="'tid'">
+                    <input class="inp-app ta-r" v-model="form.fee" type="number" placeholder="每位参与者的报名费用(￥)"/>
+                </CkInpItem>
+            </view>
         </view>
-
-        <!--
-        <VwPpFormTimePan :idx="pan_time.idx" @result=""/>
-        -->
+        <!-- -->
+        <VwPpFormTimePan 
+            :start="form.__start" :end="form.__end"
+            :idx="pan_time.idx"/>
+        <!-- -->
         <VwPpFormAddrChoisePagePan :idx="pan_addr.idx" :form="form"/>
     </view>
 </template>
@@ -51,24 +63,27 @@ import VwPpFormAddrChoisePagePan from './pan/VwPpFormAddrChoisePagePan.vue';
 import pan_tooi from '@/tool/app/pan_tooi';
 import CoImg from '@/components/media/img/CoImg.vue';
 import mock_orders from '@/server/mock/order/mock_orders';
-import { is_nice_arr } from '@/tool/util/valued';
-import { tipsucc, tipwarn } from '@/tool/uni/uni-global';
-import { open_choise_addr } from '@/tool/uni/uni-app';
-// const prp = defineProps<{}>()
+import VwPpFormTimePan from './pan/VwPpFormTimePan.vue';
+import times from '@/tool/web/times';
 
 const form = reactive({
     typed: DATA_ACTIVITY_TYPED_GK.v,
-    addrdata: <ActivityAddress>{ }
+    addrdata: <ActivityAddress>{ }, fee: undefined, participantLimit: undefined,
+    __start: <Co.TimePieckerForm>{ year: 0, month: 0, day: 0, hour: 0, minute: 0 },
+    __end: <Co.TimePieckerForm>{ year: 0, month: 0, day: 0, hour: 0, minute: 0 },
 })
 
 const aii = reactive({
+
 })
 
 const pan_time = { idx: 30, hui: <ElePanHui>{ opacity: 0.4 } }
 const pan_addr = { idx: 31, hui: <ElePanHui>{ opacity: 0.4 } }
 
 const funn = {
-    
+    openTimeChoise: () => {
+        pan_tooi.open_def_b(pan_time.idx, pan_time.hui)
+    },
     open_addr: async () => {
         /*
         console.log('打开地址选择器')
@@ -94,6 +109,19 @@ defineExpose(funn)
 
 const typed = computed(() => {
     return DATA_ACTIVITY_TYPED
+})
+
+const timed = computed(() => {
+    const s: Co.TimePieckerForm = form.__start
+    const e: Co.TimePieckerForm = form.__end
+    if (e.year) {
+        const __st: string = times.build(s.year, s.month, s.day, s.hour, s.minute)
+        const __ed: string = times.build(e.year, e.month, e.day, e.hour, e.minute)
+        const st: string = times.fmt(__st, 'MM-DD HH:mm')
+        const ed: string = times.fmt(__ed, 'MM-DD HH:mm')
+        return st + ' 至 ' + ed
+    }
+    return ''
 })
 </script>
 

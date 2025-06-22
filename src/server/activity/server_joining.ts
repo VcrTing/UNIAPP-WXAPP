@@ -48,9 +48,15 @@ const join_history = async (): Promise<ActivityJoin[]> => {
     return await fetching(__pm, net_tool.generate_pagination(999))
 }
 
+// 金钱
+const join_for_money = async (): Promise<ActivityJoin[]> => {
+    return await join_history()
+}
+
 export default {
     join,
     join_history,
     join_of_mine,
+    join_for_money,
     join_of_activity
 }

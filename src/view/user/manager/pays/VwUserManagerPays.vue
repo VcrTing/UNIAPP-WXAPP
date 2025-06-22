@@ -3,37 +3,37 @@
         <view class="px-row py-row">     
             
             <view class="" >
-                <view v-if="msgs && msgs.length > 0">
+                <CoViDataLoading :ioading="aii.ioading" :items="aii.records">
                     <view>
-                        <view class="py-s" v-for="(v, i) in msgs" :key="i">
-                            <view class="card">
-                                <view class="fx-aii-btn-def py px-x2">
-                                    <view class="py">
-                                        <text :class="v.isAdd ? 'money' : 'err'" class="h5 fw-550">
+                        <view class="py-s" v-for="(v, i) in aii.records" :key="i">
+                            <view class="card o-h">
+                                <view class="">
+                                    <view class="fx-aii-btn-def pt pb-s px-x2">
+                                        <text :class="'err'" class="h4 fw-550">
+                                            <!--
                                             <text v-if="v.isAdd">+</text>
                                             <text v-else>-</text>
-                                            <text>{{v.money}}</text>
+                                            -->
+                                            <text>-&nbsp;</text>
+                                            <text>{{v.feeAmount}}</text>
                                         </text>
                                     </view>
-                                    <view class="">
+                                    <view class="fx-aii-btn-def pt-s pb px-x2">
                                         <view class="tiw">
-                                            您的账户于2025年5月27日，入账300元
+                                            您参加了《{{ v.activity.title }}》活动，购票数 {{ v.num }} 张，每张 {{ v.price || 0 }} 元。
                                         </view>
                                     </view>
-                                    <view class="py">
+                                    <view class="">
                                         <view class="bg-hr h-1"></view>
                                     </view>
-                                    <view class="fx-r">
-                                        <text class="sus">{{ v.timed }}</text>
+                                    <view class="fx-aii-btn-def py-s px-x2 fx-r fs-n">
+                                        <text class="sus">{{ times.fmts(v.registrationTime) }}</text>
                                     </view>
                                 </view>
                             </view>
                         </view>
                     </view>
-                </view>
-                <view v-else class="pt-x2">
-                    <CoEmpty/>
-                </view>
+                </CoViDataLoading>
             </view>
             
         </view>
@@ -42,28 +42,34 @@
 
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
-import CoEmpty from '@/components/genra/empty/CoEmpty.vue';
-import CoMoUserInfo from '@/components/modules/user/CoMoUserInfo.vue';
+import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
+import server_joining from '@/server/activity/server_joining';
 import mock_msg from '@/server/mock/msg/mock_msg';
-import mock_meizi from '@/server/mock/user/mock_meizi';
+import { futuring, promise } from '@/tool/util/future';
+import times from '@/tool/web/times';
 import UiI from '@/ui/element/i/UiI.vue';
-import { reactive } from 'vue';
+import { nextTick, reactive } from 'vue';
 
 // const prp = defineProps<{}>()
 
 const msgs = mock_msg.sys_pays
 
 const aii = reactive({
-    i: 0
+    i: 0, ioading: false,
+    records: <ActivityJoin[]> [ ]
 })
 
 const funn = {
-    focusyou: (v: ONE) => {
-        aii.i = 0
-    },
-    loveyou: (v: ONE) => {
-        aii.i = 1
-    }
+    fetching: () => futuring(aii, async () => {
+        const us: ActivityJoin[] = await server_joining.join_for_money()
+        if (us && us.length) {
+            aii.records = us
+        }
+    }),
+    init: () => promise(() => {
+        funn.fetching()
+    })
 }
+
+nextTick(funn.init)
 </script>

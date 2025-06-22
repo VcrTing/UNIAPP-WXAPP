@@ -36,8 +36,6 @@
 
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
-import OButtonIht from '@/cake/button/OButtonIht.vue';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import mock_orders from '@/server/mock/order/mock_orders';
 import uniRouter from '@/tool/uni/uni-router';

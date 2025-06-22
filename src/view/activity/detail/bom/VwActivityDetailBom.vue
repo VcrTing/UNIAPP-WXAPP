@@ -1,6 +1,9 @@
 <template>
-    <view class="w-100 bg-con">
-        <view class="fx-s">
+    <view class="w-100">
+        <view class="" v-if="is_publisher">
+            <CoBomBackBtn :clazz="'btn-wht-s'"/>
+        </view>
+        <view v-else class="fx-s w-100 bg-con">
             <view class="fx-1 fx-i">
                 <view class="ta-c pt-s pb-s fx-aii-btn-def" @tap="uniRouter.back">
                     <view class="px-x2 h-1em h8">
@@ -38,23 +41,25 @@
 
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
+import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
 import { authGetters, needLogin, orderReFresh } from '@/memory/global';
 import activity_tool from '@/tool/modules/activity_tool';
 import { tipwarn } from '@/tool/uni/uni-global';
 import uniRouter from '@/tool/uni/uni-router';
 import { future, futuring } from '@/tool/util/future';
+import { must_one } from '@/tool/util/valued';
 import times from '@/tool/web/times';
 import UiI from '@/ui/element/i/UiI.vue';
 import { computed, reactive } from 'vue';
 
 const prp = defineProps<{ one: Activity, user: User, isjoin: boolean }>()
-/*
+
 const is_publisher = computed((): boolean => {
     const puber: User = must_one(prp.one.publisher)
     const uid: string = authGetters.userid
-    return (puber.documentId === uid);
+    return ((puber.id + '') === uid);
 })
-*/
+
 const aii = reactive({
     ioading: false
 })

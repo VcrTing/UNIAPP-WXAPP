@@ -4,22 +4,25 @@
             <CkAvatar v-if="v" :clazz="'w-3em h-3em'" :id="v.id" :src="v.avatarUrl"/>
             <view v-else class="w-3em h-3em"></view>
         </view>
-        <view class="fx-1 px">
-            <view class="fx-i h7">
-                <text>{{ v.nickName }}</text>
-                <CkAgeSex :age="v.age" :sex="v.gender"/>
+        <view class="fx-1">
+            <view class="fx-i h7 fx-aii-btn-def br-1">
+                <view class=" d-ib py-t br-t px-s">{{ v.nickName }}</view>
+                <CkAgeSex :age="v.age" :sex="v.gender" :clazz="'w-2em fx-aii-btn-def br-s py-s'"/>
             </view>
-            <view class="">
-                <view class="pt-s fs-n tid">
-                    <text>个人简介:</text><text class="pi-s">{{ v.introduction || '无' }}</text>
+            
+            <view class="fx-s">
+                <view class="w-100">
+                    <view class="fs-n tid py-t br-1 px-s fx-aii-btn-def ">
+                        <text>个人简介:</text><text class="pi-s">{{ v.introduction || '无' }}</text>
+                    </view>
+                    <view class="fs-s tis py-t br-1 px-s fx-aii-btn-def ">
+                        <text>社交账号:</text><text class="pi-s">{{ v.socialAccount || '无' }}</text>
+                    </view>
                 </view>
-                <view class="pt-s fs-s tis">
-                    <text>社交账号:</text><text class="pi-s">{{ v.socialAccount || '无' }}</text>
+                <view>
+                    <slot></slot>
                 </view>
             </view>
-        </view>
-        <view>
-            <slot></slot>
         </view>
     </view>
 </template>

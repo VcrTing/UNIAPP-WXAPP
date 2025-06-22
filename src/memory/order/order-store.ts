@@ -41,8 +41,8 @@ const _s: Store<OrderStore> = createStore({
         // await orderDispatch('refresh_my_join')
         // 刷新我的参与
         refresh_my_join: async ({ state, commit }): Promise< ActivityJoin[] > => {
-            if (state.__ioading) return state.join_of_mine;
-            commit('__change', [ '__ioading', true ])
+            // if (state.__ioading) return state.join_of_mine;
+            // commit('__change', [ '__ioading', true ])
             try {
                 const u: ActivityJoin[] = await server_joining.join_of_mine()
                 // console.log('AU__________ =', u)
@@ -52,7 +52,7 @@ const _s: Store<OrderStore> = createStore({
                 }
             }
             finally {
-                commit('__change', [ '__ioading', false ])
+                // commit('__change', [ '__ioading', false ])
             }
             return state.join_of_mine;
         },

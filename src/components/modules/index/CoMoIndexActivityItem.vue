@@ -7,20 +7,22 @@
             <view class="pt-s" v-if="v.publisher">
                 <view class="fx-i">
                     <CkAvatar clazz="w-2em h-2em fs-w" :id="v.publisher.id" :src="v.publisher.avatarUrl"/>
-                    <view class="pi-s">
-                        <view class="d-ib">{{ v.publisher.nickName }}</view>
-                        <view class="d-ib pi-t">
-                            <CkSex :sex="v.publisher.gender"/>
+                    <view class="pi-t">
+                        <view class="d-ib">
+                            <view class="d-ib fx-aii-btn-def px-t py-s br-1" @tap="funn.mainpg(v.publisher)">{{ v.publisher.nickName }}</view>
+                            <view class="d-ib fx-aii-btn-def px-s br-cir">
+                                <CkSex :sex="v.publisher.gender"/>
+                            </view>
                         </view>
-                        <view class="d-ib pri pi fs-w">
+                        <view class="d-ib pri fs-w">
                             <CkSimpleTag>#&nbsp;十单十成</CkSimpleTag>
                         </view>
                     </view>
                 </view>
             </view>
             <view class="py">
-                <view class="pt-s">
-                    <OButton clazz="d-ib fs-s br-1" :weak="true"><text class="fs-s">报名中</text></OButton>
+                <view class="">
+                    <CoSusAcyIndex :v="v" :joins="undefined"/>
                     <view class="d-ib px-t fs-n">
                         <CkSimpleTag><text class="">{{ activity_tool.getweek(v) }}</text>&nbsp;{{ activity_tool.gettime_start(v) }}</CkSimpleTag>
                         <text class="pi-t">|</text>
@@ -66,7 +68,10 @@
                         </view>
                         -->
                     </view>
-                    <view>
+                    <view v-if="funn.isjoin()">
+                        <OButton color="pri-iht" :weak="true" @tap="emt('detail', v)" :clazz="'fw-550 mw-5em py-s br-rnd'">已加入</OButton>
+                    </view>
+                    <view v-else>
                         <OButton :weak="true" @tap="emt('detail', v)" :clazz="'fw-550 mw-5em py-s br-rnd'">上车</OButton>
                     </view>
                 </view>
@@ -81,13 +86,18 @@ import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import CkSex from '@/cake/visual/ider/CkSex.vue';
 import CkSimpleTag from '@/cake/visual/tag/CkSimpleTag.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
+import CoSusAcyIndex from '@/components/status/activity/CoSusAcyIndex.vue';
 import CoViAvatarTogether from '@/components/visual/imgs/CoViAvatarTogether.vue';
+import { authDispatch } from '@/memory/global';
 import activity_tool from '@/tool/modules/activity_tool';
+import join_tool from '@/tool/modules/join_tool';
+import uniRouter from '@/tool/uni/uni-router';
+import { future, promise } from '@/tool/util/future';
 import { computed } from 'vue';
 
 const prp = defineProps<{
     v: Activity,
-    joins?: ActivityJoin[ ]
+    joins: ActivityJoin[ ]
 }>()
 
 const gallery = computed((): ActivityMedia[] => {
@@ -97,4 +107,17 @@ const gallery = computed((): ActivityMedia[] => {
 const gallerylen = computed((): number => gallery.value.length)
 
 const emt = defineEmits([ 'detail' ])
+
+const funn = {
+    isjoin: () => {
+        return join_tool.judge_is_join(prp.joins || [ ], prp.v)
+    },
+    mainpg: (user: User) => future(async () => {
+        if (user && user.id) {
+            const u: UserMainPage = await authDispatch('fetch_someone_mainpag', { userid: user.id })
+            // console.log('点击到的用户主页 =', u)
+            uniRouter.gopg('user_mainpage')
+        }
+    })
+}
 </script>

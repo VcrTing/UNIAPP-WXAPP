@@ -4,7 +4,7 @@
             <view class="py">
             <CoViDataLoading :ioading="aii.ioading" :items="aii.loves">
                 <view class="" v-for="(v, i) in aii.loves" :key="i">
-                    <view class="fx-aii-btn-def px-row py">
+                    <view class="px-row py">
                         <view class="fx-s">
                             <view class="fx-1">
                                 <CoMoUserInfo :v="v.love" :clazz="'h4 pr-s'"/>

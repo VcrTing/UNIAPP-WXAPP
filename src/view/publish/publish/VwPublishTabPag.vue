@@ -78,6 +78,9 @@ const funn = {
         if (i == 1) {
             funn.freshWaiting()
         }
+        else if (i == 0) {
+            funn.freshWorking()
+        }
     }
 }
 

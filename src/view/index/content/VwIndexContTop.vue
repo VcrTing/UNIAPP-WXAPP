@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
-import { pageIndexState } from '@/memory/page';
+import { pageIndexDispatch, pageIndexState } from '@/memory/page';
 import def_ativity from '@/server/__def/def_ativity';
 import pan_tooi from '@/tool/app/pan_tooi';
 import { futuring, promise } from '@/tool/util/future';
@@ -105,6 +105,8 @@ const funn = {
         if (aii.active !== __def) {
             aii.active = __def;
         }
+        // 检查 tag
+        pageIndexDispatch('freshtags')
     })
 }
 

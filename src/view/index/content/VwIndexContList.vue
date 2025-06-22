@@ -1,15 +1,16 @@
 <template>
     <view>
         <view v-for="(v, i) in activities" :key="i" class="br pb-row w-100">
-            <CoMoIndexActivityItem @detail="funn.detail" :v="v" :meizi="aii.meizi"/>
+            <CoMoIndexActivityItem @detail="funn.detail" :v="v"
+                :joins="joins"
+            />
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
-import OButton from '@/cake/button/OButton.vue';
 import CoMoIndexActivityItem from '@/components/modules/index/CoMoIndexActivityItem.vue';
-import { acyReFresh, authGetters } from '@/memory/global';
+import { acyReFresh, authGetters, orderState } from '@/memory/global';
 import mock_orders from '@/server/mock/order/mock_orders';
 import mock_meizi from '@/server/mock/user/mock_meizi';
 import uniRouter from '@/tool/uni/uni-router';
@@ -22,6 +23,10 @@ const prp = defineProps<{
 const aii = reactive({
     items: mock_orders.items,
     meizi: mock_meizi.items
+})
+
+const joins = computed((): ActivityJoin[] => {
+    return orderState.join_of_mine || [ ]
 })
 
 const funn = {

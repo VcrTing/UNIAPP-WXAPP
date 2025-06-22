@@ -1,18 +1,13 @@
 <template>
     <view>
         <view class="">
-            <view class="px-row py-row fx-aii-btn-def">
-                <view class="tis fs-n ta-r pt">
-                    <text class="pr-s">{{ must_arr(joins).length }}</text>
-                    <text>条参与记录</text>
-                </view>
-            </view>
+            <CoMoOrderJoinLen :joins="joins"/>
         </view>
         <view>
         <view class="">
             <!-- -->
             <view v-for="(v, i) in joins" :key="i"
-                class="pb-x1"
+                class="py"
             >
                 <CoMoOrderWorkingItem :v="funn.ioc(v)" @view="funn.view"/>
                 <view class="px-row">
@@ -66,6 +61,7 @@ import { arrfindi } from '@/tool/util/iodash';
 import { must_arr, must_one } from '@/tool/util/valued';
 import times from '@/tool/web/times';
 import UiI from '@/ui/element/i/UiI.vue';
+import CoMoOrderJoinLen from './components/CoMoOrderJoinLen.vue';
 const prp = defineProps<{
     joins: ActivityJoin[ ],
     activities: Activity[ ]

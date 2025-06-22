@@ -1,8 +1,31 @@
 <template>
     <view class="o-h">
-        <view class="br-ti br-tr o-h bg-con">
-            <view class="px-x1 ls-x2 py">
+        <view class="br-ti br-tr o-h bg-con fx-aii-btn-def" @tap="emt('view')">
+            <view class="px-x1 ls-x2 pt pb-s">
                 <text class="h7">{{ v.title }}</text>
+            </view>
+        </view>
+        <view class="py-t bg-con px-x1 fx-aii-btn-def" @tap="emt('view')">
+            <view class="row">
+                <view class="px-s d-ib" v-for="(m, n) in v.activity_tags" :key="n">
+                    <view class="btn-def br-t">
+                        <view class="fs-s px py-t tid">{{ m.name }}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="bg-con pr-s"  @tap="emt('view')">
+            <view class="pi-x1 d-ib ani-scaie-aii py-n fx-aii-btn-def br-1">
+                <view class="fx-i tid pr-s">
+                    <text class="fs-s">{{ activity_tool.gettime(v) }}</text>
+                </view>
+            </view>
+            <view class="tiw px-t d-ib fs-s">|</view>
+            <view class="d-ib ani-scaie-aii py-n fx-aii-btn-def br-1">
+                <view class="fx-i px-s tid">
+                    <text class="fs-s">{{ activity_tool.getfar(v) }}</text>
+                    <text class="fs-s pi-s">{{ activity_tool.getaddress(v) }}</text>
+                </view>
             </view>
         </view>
         <view class="">
@@ -17,7 +40,52 @@
                 </view>
             </view>
         </view>
-        <view class="bg-con py br-bi br-br px-x1" @tap="emt('view')">
+        <!---->
+        <view class="bg-con br-bi br-br fx-s o-h">
+            
+            <!-- -->
+            <view class="tiw fx-aii-btn-def px-x1 py w-618">
+                <view class="d-ib tis fs-s">
+                    <UiI :i="'lock'" clazz="d-ib"/>
+                    <text class="pi-s">{{ activity_tool.getjoin_limit(v) }}</text>
+                    <text >人</text>
+                </view>
+                <view class="d-ib fs-s">
+                    <text class="">，每人</text>
+                    <text class="">{{ v.fee }}</text>
+                    <text class="">元</text>
+                </view>
+            </view>
+            
+            <view class="tis fx-aii-btn-def px-x1 py w-382 ta-r">
+                <view class="d-ib tis fs-s">
+                    <UiI i='users' clazz="d-ib"/>
+                    <text class="pi-s">{{ activity_tool.getjoiner_len(v) }}</text>
+                    <text >人</text>
+                </view>
+            </view>
+        </view>
+        <view class="fx-r">
+            <view class="d-ib" v-if="!activity_tool.istyped_sm(v)">
+            </view>
+        </view>
+
+    </view>
+</template>
+
+<script setup lang="ts">
+import CoImg from '@/components/media/img/CoImg.vue';
+import activity_tool from '@/tool/modules/activity_tool';
+import UiI from '@/ui/element/i/UiI.vue';
+
+const prp = defineProps<{
+    v: Activity
+}>()
+
+const emt = defineEmits([ 'view' ])
+</script>
+
+            <!--
             <view class="fx-s">
                 <view class="row">
                     <view class="px-s d-ib" v-for="(m, n) in v.activity_tags" :key="n">
@@ -29,39 +97,20 @@
                 <view class="" v-if="activity_tool.istyped_sm(v)">
                     <view class="fx-r tis fs-s">
                         <UiI :i="'lock'"/>
-                        <text class="pi-s">私密</text>
+                        <text class="pi-s">{{ activity_tool.getjoin_limit(v) }}</text>
+                        <text >人</text>
                     </view>
                 </view>
             </view>
-            <view class="fx-r">
-                <view class="d-ib" v-if="!activity_tool.istyped_sm(v)">
-                    <view class="">
-                        <view class="d-ib">
-                            <text class="fs-n">限制</text>
-                            <text class="px-s">{{ activity_tool.getjoin_limit(v) }}</text>
-                            <text class="fs-n">人</text>
-                        </view>
-                        <view class="d-ib">
-                            <text class="fs-n">，每人</text>
-                            <text class="px-s">{{ v.fee }}</text>
-                            <text class="fs-n">元</text>
-                        </view>
-                    </view>
-                </view>
-            </view>
-        </view>
-        <view class="py-col">
+             -->
+<!--
+
             <view class="btn-wht pt-col br-rnd mb-s py-s d-ib ani-scaie-aii">
                 <view class="fx-i px-x1 tid">
                     <UiI i="addr" clazz="fs-w"/>
                     <text class="fs-s pi-s">{{ activity_tool.getfar(v) }}</text>
                     <text class="fs-s pi-s">{{ activity_tool.getaddress(v) }}</text>
                 </view>
-                <!--
-                <view class="ps-r zi-t">
-                    <CoImg clazz="w-2em h-2em fs-s br-cir abs-c zi-s r-0" :src="mock_orders.mapimg"/>
-                </view>
-                -->
             </view>
             <view class="btn-wht pt-col br-rnd py-s d-ib ani-scaie-aii">
                 <view class="fx-i px-x1 tid">
@@ -69,28 +118,7 @@
                     <text class="fs-s px-s">{{ activity_tool.gettime(v) }}</text>
                 </view>
             </view>
-        </view>
-    </view>
-</template>
-
-<script setup lang="ts">
-import OButtonDef from '@/cake/button/OButtonDef.vue';
-import CoImg from '@/components/media/img/CoImg.vue';
-import mock_activity from '@/server/mock/activity/mock_activity';
-import mock_orders from '@/server/mock/order/mock_orders';
-import mock_publish from '@/server/mock/publish/mock_publish';
-import mock_user from '@/server/mock/user/mock_user';
-import activity_tool from '@/tool/modules/activity_tool';
-import UiI from '@/ui/element/i/UiI.vue';
-import { computed } from 'vue';
-
-const prp = defineProps<{
-    v: Activity
-}>()
-
-const emt = defineEmits([ 'view' ])
-</script>
-
+            -->
                 <!--
                 <view class="pr pi-s">
                     <view class="pb">&nbsp;</view>

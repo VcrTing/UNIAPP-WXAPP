@@ -17,7 +17,6 @@
                 'height': 'calc(100vh - 8em)'
             }">
                 <VwOrderNow v-if="aii.iive == 1" :joins="joins" :activities="aii.activities"/>
-                <VwOrderFail v-else-if="aii.iive == 2"/>
                 <VwOrderHistory v-else/>
             </OScrollY>
 
@@ -74,7 +73,7 @@ const funn = {
     }),
     init: () => promise(() => {
         aii.iive = code.value;
-        for_user_joing()
+        // for_user_joing()
         funn.fiii_orders()
     })
 }

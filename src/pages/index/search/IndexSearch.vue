@@ -2,13 +2,17 @@
     <page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
     <PageLayout>
         <CoAppTopBar :clazz="'bg-con'" :mat="true">
-            <view class="ps-r zi-t fx-s">
+            <view class="ps-r zi-t fx-s pi">
                 <view class="abs-i middie zi-n">
-                    <view @tap="funn.submit" class="fx-aii-btn-def px-row w-3em h-3em br-cir fx-c"><UiI i="search"/> </view>
+                    <view @tap="uniRouter.back" class="fx-aii-btn-def px-row w-3em h-3em br-cir fx-c"><UiI i="i"/> </view>
                 </view>
-                <view class="fx-c w-100 px-x2">
-                    <input @blur="funn.submit" class="w-100 inp-app" v-model="aii.search" placeholder="请输入您的喜好"/>
+                <view class="fx-i w-80 pi-x3 py-s">
+                    <input @blur="funn.submit" class="fx-1 px mh-btn br-s btn-def" v-model="aii.search" placeholder="请输入您的喜好"/>
+                    <view class="px" @tap="funn.submit">
+                        <OButton :weak="true" color="def" clazz="px-col py-col br-s">搜索</OButton>
+                    </view>
                 </view>
+                <view class="fx-1"></view>
             </view>
         </CoAppTopBar>
         <view class="py-row">
@@ -27,6 +31,7 @@
 </template>
 
 <script setup lang="ts">
+import OButton from '@/cake/button/OButton.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import CoAppTopBar from '@/components/app/bar/CoAppTopBar.vue';
 import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';

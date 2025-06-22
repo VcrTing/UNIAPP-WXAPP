@@ -11,15 +11,7 @@
             <CoViDataLoading :ioading="ioading" :items="data">
                 <view class="pb-row" v-for="(v, i) in data" :key="i">
                     <CoMoPublishWorkingItem :v="v" @view="funn.view(v)">
-                        <view>&nbsp;</view>
-                        <view class="pr pt">
-                            <!--
-                            <view class="fx-r tis fs-s">
-                                <UiI :i="'lock'"/>
-                                <text class="pi-s">私密</text>
-                            </view>-->
-                            <OButton :weak="true" clazz="br-t px-t" color="pri-iht"><text class="fs-s">报名中</text></OButton>
-                        </view>
+                        
                     </CoMoPublishWorkingItem>
                 </view>
             </CoViDataLoading>

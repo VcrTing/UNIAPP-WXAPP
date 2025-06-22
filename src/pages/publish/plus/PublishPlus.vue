@@ -4,7 +4,7 @@
         <CoAppTopBackBar :clazz="'bg-con pb-s'" @back="uniRouter.back" :mat="true">
             <template #tit><view class="header ta-c">新增活动</view></template>
         </CoAppTopBackBar>
-        <view class="">
+        <view class="pt-row">
             <VwPubPlusTopForm ref="top"/>
             <view class="py-s"></view>
             <VwPubPlusAddrForm ref="addr"/>
@@ -13,7 +13,7 @@
             <view class="">
                 <CoMoSecurityAgreeLine :canedit="true" ref="agree"/>
             </view>
-            <CkSpace :h="12"/>
+            <CkSpace :h="16"/>
         </view>
         <CoAppBomCarBar :clazz="'bg-pag-pri'">
             <view class="px-row pt-x1 pb">
@@ -67,11 +67,9 @@ const funn = {
         const userid: string = authGetters.userid
         const addr: ActivityAddress = must_one<ActivityAddress>(src.addrdata)
         const res = <ONE>{
-            title: src.title,
-            activity_tags: tgsid,
+            title: src.title, activity_tags: tgsid,
             typed: src.typed, 
-            publisher: userid, dataStatus: 0,
-            activity_address: addr.documentId,
+            publisher: userid, dataStatus: 0, activity_address: addr.documentId,
         }
         // 构建搜索
         res['search'] = activity_tool.group_search_field(res, addr, src.tags)
