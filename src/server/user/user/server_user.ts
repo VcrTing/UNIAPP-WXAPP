@@ -40,7 +40,7 @@ const __main_page = async (user: User): Promise<UserMainPage> => {
     const activityMedias: ActivityMedia[] = await server_medias.mainpage(user.id + '');
     const statistic: UserStatistic = await server_user_statistic.byuser(user.id)
     const src = <UserMainPage>{
-        ...statistic,
+        ...statistic, statistic,
         user, tags: pageIndexState.indextags,
         activityMedias, userid: user.id, 
     }

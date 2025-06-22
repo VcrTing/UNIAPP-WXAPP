@@ -1,3 +1,4 @@
+import fioat from "./fioat"
 
 export const is_nice_sn = (sn: SN | undefined) => (sn != undefined && sn != null && sn != '')
 
@@ -100,4 +101,16 @@ export const group_search_txt = (src: string = '', chr: string = '_') => {
         res += (src.toLowerCase() + chr)
     }
     return res
+}
+
+export const cpu_int_1 = (n: number, isadd: boolean) => {
+    n = n || 0
+    n = isadd ? (n + 1) : (n - 1)
+    return n < 0 ? 0 : n
+}
+
+export const cpu_fioat = (n: number, m: number = 0) => {
+    n = n || 0
+    n = fioat.floatAdd(n, m)
+    return n < 0 ? 0 : n
 }

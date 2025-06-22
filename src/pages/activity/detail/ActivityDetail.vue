@@ -24,7 +24,7 @@
                 <view class="pt-s bg-hui"></view>
                 <VwActivityDetailPublisher :one="view"/>
 
-                <view v-if="view.introduction">
+                <view class="softer" v-if="view.introduction">
                     <view class="pt-s bg-hui"></view>
                     <view class="px-row">
                         <view class="px-col">
@@ -32,13 +32,10 @@
                         </view>
                     </view>
                 </view>
-                <view class="">
+                <view class="softer">
                     <VwActivityDetailGallery :one="view"/>
                 </view>
-                <CkSpace :h="3"/>
-                <view class="mh-app-bottom-bar"></view>
-            </template>
-            <template #bom>
+                
                 <VwActivityDetailBom :one="view" :user="user" :isjoin="isjoin"/>
             </template>
         </DetailLayout>
@@ -46,7 +43,6 @@
 </template>
 
 <script setup lang="ts">
-import CkSpace from '@/cake/content/CkSpace.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import DetailLayout from '@/components/layout/detail/DetailLayout.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';

@@ -70,7 +70,18 @@ const cpu_km_for_user = (one: ONE) => {
     }
 }
 
+const fii_to_form = (form: ONE, addr: ActivityAddress) => {
+    form.longitude = addr.longitude
+    form.latitude = addr.latitude
+    form.address = addr.address
+    form.city = addr.city 
+    form.area = addr.area
+    form.addrdata = addr
+}
+
 export default {
     cpu_km,
-    cpu_km_for_user
+    cpu_km_for_user,
+
+    fii_to_form
 }

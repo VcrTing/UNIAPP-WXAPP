@@ -51,7 +51,7 @@ import OButtonDef from '@/cake/button/OButtonDef.vue';
 import { arrfindi } from '@/tool/util/iodash';
 import { tipsucc, tipwarn } from '@/tool/uni/uni-global';
 import { open_choise_img } from '@/tool/uni/uni-app';
-import { future, timeout } from '@/tool/util/future';
+import { future, futuring, timeout } from '@/tool/util/future';
 import server_upload_media from '@/server/media/server_upload_media';
 import media_tool from '@/tool/modules/media_tool';
 import { must_arr } from '@/tool/util/valued';
@@ -78,9 +78,7 @@ const len3 = computed((): boolean => {
 })
 
 const funn = {
-    choseImg: () => future(async () => {
-        if (aii.ioading) return;
-        aii.ioading = true
+    choseImg: () => futuring(aii, async () => {
         const chose = await open_choise_img()
         const ps: string[] = must_arr(chose.tempFilePaths)
         const fs: File[] = must_arr(chose.tempFiles)
@@ -98,7 +96,6 @@ const funn = {
         }
         tipsucc('文件上传成功。')
         await funn.asyncImg(need);
-        timeout(() => aii.ioading = false)
     }),
     // 换成 strapi 的图片数据
     asyncImg: async (src: ActivityMedia[]) => {

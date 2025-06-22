@@ -38,12 +38,7 @@
 <script setup lang="ts">
 import { computed, reactive } from 'vue';
 import VwUcpNumberMsg from './center/VwUcpNumberMsg.vue';
-import VwUcpGallery from './center/VwUcpGallery.vue';
-import CoHeaderTabItem from '@/components/element/tabs/CoHeaderTabItem.vue';
-import CoEmpty from '@/components/genra/empty/CoEmpty.vue';
-import CkSpace from '@/cake/content/CkSpace.vue';
 import CoMoUcpGoBtns from './component/CoMoUcpGoBtns.vue';
-import VwUcpPubMineActivity from './center/VwUcpPubMineActivity.vue';
 import CoMoUserAdvSwipper from '@/components/modules/user/CoMoUserAdvSwipper.vue';
 
 const aii = reactive({

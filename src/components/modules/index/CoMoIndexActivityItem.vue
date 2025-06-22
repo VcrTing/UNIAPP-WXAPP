@@ -1,7 +1,7 @@
 <template>
     <view class="fx-s fx-t ps-r zi-m w-100" >
         <view class="card w-100 br px-col py-col">
-            <view class="py-col">
+            <view class="py-col" @tap="emt('detail', v)">
                 <view class="fw-600 h5 hih tils-x1">{{ v.title }}</view>
             </view>
             <view class="pt-s" v-if="v.publisher">
@@ -20,7 +20,7 @@
                     </view>
                 </view>
             </view>
-            <view class="py">
+            <view class="py" @tap="emt('detail', v)">
                 <view class="">
                     <CoSusAcyIndex :v="v" :joins="undefined"/>
                     <view class="d-ib px-t fs-n">
@@ -53,7 +53,7 @@
             </view>
             <!--
             -->
-            <view class="pt-x1">
+            <view class="pt-x1"  @tap="emt('detail', v)">
                 <view class="fx-s">
                     <view class="fx-i fx-1">
                         <!--<CoViAvatarTogether :w="2" v-if="v.publisher" :items="[ v.publisher ]"/>-->
@@ -69,10 +69,10 @@
                         -->
                     </view>
                     <view v-if="funn.isjoin()">
-                        <OButton color="pri-iht" :weak="true" @tap="emt('detail', v)" :clazz="'fw-550 mw-5em py-s br-rnd'">已加入</OButton>
+                        <OButton color="pri-iht" :weak="true" :clazz="'fw-550 mw-5em py-s br-rnd'">已加入</OButton>
                     </view>
                     <view v-else>
-                        <OButton :weak="true" @tap="emt('detail', v)" :clazz="'fw-550 mw-5em py-s br-rnd'">上车</OButton>
+                        <OButton :weak="true" :clazz="'fw-550 mw-5em py-s br-rnd'">上车</OButton>
                     </view>
                 </view>
             </view>

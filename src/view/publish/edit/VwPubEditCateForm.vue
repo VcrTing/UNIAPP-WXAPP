@@ -1,6 +1,6 @@
 <template>
     <view>
-        <view class="bg-con pi-inp">
+        <view class="bg-con py-s">
             <CkInpItem :tit="'活动时间'" :clazz_tit="'tid'">
                 <input class="inp-app ta-r" v-if="canedit"
                     :value="timed" @tap="funn.openTimeChoise" placeholder="请挑选活动时间"/>

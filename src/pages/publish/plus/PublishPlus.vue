@@ -30,19 +30,16 @@ import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import CoBomBtnGroup from '@/components/element/button/CoBomBtnGroup.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoMoSecurityAgreeLine from '@/components/modules/security/CoMoSecurityAgreeLine.vue';
-import { APP_GENERATE_DETAIL } from '@/conf/conf-app';
 import { authGetters, orderDispatch, orderState, uiState } from '@/memory/global';
 import server_pubplus from '@/server/publish/server_pubplus';
-import pan_tooi from '@/tool/app/pan_tooi';
 import activity_tool from '@/tool/modules/activity_tool';
 import media_tool from '@/tool/modules/media_tool';
 import appRouter from '@/tool/uni/app-router';
-import { tipwarn } from '@/tool/uni/uni-global';
 import uniRouter from '@/tool/uni/uni-router';
 import { future } from '@/tool/util/future';
 import { arrfind, arrgotv } from '@/tool/util/iodash';
 import { must_one } from '@/tool/util/valued';
-import VwPubSecurityPagPan from '@/view/publish/component/VwPubSecurityPagPan.vue';
+import times from '@/tool/web/times';
 import VwPubPlusAddrForm from '@/view/publish/plus/VwPubPlusAddrForm.vue';
 import VwPubPlusTopForm from '@/view/publish/plus/VwPubPlusTopForm.vue';
 import { reactive, ref } from 'vue';
@@ -67,11 +64,13 @@ const funn = {
         const userid: string = authGetters.userid
         const addr: ActivityAddress = must_one<ActivityAddress>(src.addrdata)
         const res = <ONE>{
-            title: src.title, activity_tags: tgsid,
+            title: src.title, activity_tags: tgsid, fee: src.fee,
             typed: src.typed, 
             publisher: userid, dataStatus: 0, activity_address: addr.documentId,
         }
         // 构建搜索
+        res['startTime'] = times.build_of_form(src.__start)
+        res['endTime'] = times.build_of_form(src.__end)
         res['search'] = activity_tool.group_search_field(res, addr, src.tags)
         return res
     },
@@ -83,7 +82,7 @@ const funn = {
     },
     submit: () => future(async () => {
         const src = funn.collection()
-        console.log('src =', src)
+        // console.log('src =', src)
         if (src) {
             if (!agree.value.v()) return;
             const fom = funn.buildform(src)
@@ -95,9 +94,9 @@ const funn = {
                 for (let j= 0; j< linkms.length; j++ ) {
                     const ms: ActivityMedia = media_tool.build_activity_plus_data(linkms[j], acvdocid);
                     const __res: ActivityMedia = await server_pubplus.plus_media(ms)
-                    console.log('连接结果 =', __res)
+                    // console.log('连接结果 =', __res)
                 }
-                // funn.success()
+                funn.success()
             }
             // console.log('res =', res)
             // uniRouter.navigatorpg('publish')

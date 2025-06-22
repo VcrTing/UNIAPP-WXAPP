@@ -11,7 +11,7 @@
                 <view class="fx-1 fx-i">
                     <view class="fx-i">
                         <UiI class="fs-n" i='time'/>
-                        <view class="fs-n pi-s tis">{{ times.fmt(v.createdAt) }}</view>
+                        <view class="fs-n pi-s tis">{{ times.fmt(v.createdAt) }}<text class="px-s">创建</text></view>
                     </view>
                     <view class="px-s"></view>
                     <view class="fx-r tis fs-s">
@@ -27,21 +27,6 @@
             </view>
         </view>
         <view>
-            <!--
-            <OButtonDef :weak="true" clazz="fs-s px-s br-s">已完成</OButtonDef>
-            -->
-                <!--
-                <view class="pr pi-s">
-                    <view class="pb">&nbsp;</view>
-                    <view v-if="v.status == 2" class="money fx-r">
-                        <UiI class="fs-s" :i="'+'"/>
-                        <view class="pi-t fw-550">{{ v.money.price }}</view>
-                    </view>
-                    <view v-if="v.status == -1" class="fx-r">
-                        <OButtonDef :weak="true" clazz="fs-s px-s br-s">已取消</OButtonDef>
-                    </view>
-                </view>
-                -->
         </view>
     </view>
 </template>
@@ -66,3 +51,19 @@ const funn = {
 }
 
 </script>
+
+            <!--
+            <OButtonDef :weak="true" clazz="fs-s px-s br-s">已完成</OButtonDef>
+            -->
+                <!--
+                <view class="pr pi-s">
+                    <view class="pb">&nbsp;</view>
+                    <view v-if="v.status == 2" class="money fx-r">
+                        <UiI class="fs-s" :i="'+'"/>
+                        <view class="pi-t fw-550">{{ v.money.price }}</view>
+                    </view>
+                    <view v-if="v.status == -1" class="fx-r">
+                        <OButtonDef :weak="true" clazz="fs-s px-s br-s">已取消</OButtonDef>
+                    </view>
+                </view>
+                -->

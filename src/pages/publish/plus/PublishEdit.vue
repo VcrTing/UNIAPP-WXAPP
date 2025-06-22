@@ -46,7 +46,10 @@ import { DATA_ACTIVITY_JOINER_LIMIT, DATA_ACTIVITY_MEDIA, DATA_ACTIVITY_TAG_LIMI
 import { authGetters, orderDispatch, orderState, uiState } from '@/memory/global';
 import { pagePublishState } from '@/memory/page';
 import server_pubplus from '@/server/publish/server_pubplus';
+import server_user from '@/server/user/user/server_user';
+import server_user_statistic from '@/server/user/user/server_user_statistic';
 import activity_tool from '@/tool/modules/activity_tool';
+import address_tool from '@/tool/modules/address_tool';
 import media_tool from '@/tool/modules/media_tool';
 import appRouter from '@/tool/uni/app-router';
 import { tipwarn } from '@/tool/uni/uni-global';
@@ -73,7 +76,7 @@ const aii = reactive({ ioading: false,
 const funn = {
     // 入口时重置表单
     reset: (src: Activity) => {
-        console.log('执行值替换 src =', src)
+        // console.log('执行值替换 src =', src)
         if (src) {
             formfii(form, src);
             form.taglimit = DATA_ACTIVITY_TAG_LIMIT
@@ -82,6 +85,7 @@ const funn = {
             form.tags = src.activity_tags
             form.banner = media_tool.convert_upload_imgs(activity_tool.getbanner(src))
             form.gallery = media_tool.convert_upload_imgs(activity_tool.getgallery(src))
+            address_tool.fii_to_form(form, src.activity_address)
         }
     },
     // 收集数据
@@ -145,8 +149,10 @@ const func = {
         if (!agree.value.v()) return;
         const src: ONE = funn.buildform(form);
         src['dataStatus'] = 1
+        src['isRecommended'] = 1
         const res: ONE = await server_pubplus.edit(src, edit.value)
         if (res.documentId) {
+            await server_user_statistic.num_publish()
             appRouter.publish_waiting()
         }
     }),
@@ -155,7 +161,7 @@ const func = {
     },
     init: () => promise(() => {
         const v: Activity = must_one(edit.value)
-        console.log('进来 =', v)
+        // console.log('v =', v)
         if (v.documentId) {
             funn.reset(v)
         }

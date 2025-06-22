@@ -56,7 +56,22 @@ const group_medias_ids = (medias: ActivityMedia[]) => {
     }).filter((e: string) => (e != ''))
 }
 
+const __img_h_view = (w_wrapper: number, w_img: number, h_img: number): number | null => {
+    if (w_wrapper && w_img && h_img) {
+        return (w_wrapper * h_img / w_img)
+    }
+    return null
+}
+const img_h_view = (w_wrapper: number, w_img: number, h_img: number): string => {
+    // console.log('w =', w_wrapper, w_img, h_img, (w_wrapper * h_img / w_img))
+    const src: number | null = __img_h_view(w_wrapper, w_img, h_img)
+    return src ? (src + 'px') : '14em'
+}
+
 export default {
+    img_h_view,
+    __img_h_view,
+
     generate_upload_img,
     convert_upload_imgs,
     replace_upload_img,

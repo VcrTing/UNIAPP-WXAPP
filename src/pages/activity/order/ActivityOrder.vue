@@ -27,10 +27,10 @@
         </view>
         <CoAppBomFuncBar :clazz="'bg-pag-pri'" :mat="true">
             <view class="w-100 px-row pt pb-x1 ">
-                <OButton clazz="mh-btn" @tap="funn.submit">
+                <OButton clazz="mh-btn" @tap="funn.submit" :ioading="aii.ioading">
                     <view>
                         <text class="h7">确认支付&nbsp;</text>
-                        <text class="h6">￥<text class="fw-550">69.00</text></text>
+                        <text class="h6">￥<text class="fw-550">{{ activity.fee }}</text></text>
                     </view>
                 </OButton>
             </view>
@@ -49,11 +49,14 @@ import CoMoSecurityAgreeLine from '@/components/modules/security/CoMoSecurityAgr
 import { for_user_joing } from '@/conf/__for_index/for_user_loging';
 import { authState, orderDispatch, orderState, uiState } from '@/memory/global';
 import server_joining from '@/server/activity/server_joining';
+import server_user_statistic from '@/server/user/user/server_user_statistic';
 import join_tool from '@/tool/modules/join_tool';
 import appRouter from '@/tool/uni/app-router';
 import { tipsucc } from '@/tool/uni/uni-global';
 import uniRouter from '@/tool/uni/uni-router';
+import fioat from '@/tool/util/fioat';
 import { futuring, promise } from '@/tool/util/future';
+import { must_one } from '@/tool/util/valued';
 import VwActivityOrderMsg from '@/view/activity/order/VwActivityOrderMsg.vue';
 import { computed, nextTick, reactive } from 'vue';
 
@@ -63,8 +66,12 @@ const order_of_place = computed((): OrderItem => {
     return orderState.order_of_place
 })
 
+const activity = computed((): Activity => {
+    return must_one<Activity>(order_of_place.value.one)
+})
+
 const aii = reactive({
-    agree: false, ioading: false,
+    agree: false, ioading: false, price: 0.0, num: 1
 })
 
 const funn = {
@@ -82,13 +89,20 @@ const funn = {
         const o: OrderItem = order_of_place.value
         const form: ONE = join_tool.build_plus_form(o.one, o.joiner);
         const src: ActivityJoin = await server_joining.join(form)
-        if (src.documentId) { funn.succ() }
+        if (src.documentId) { 
+            await server_user_statistic.num_join()
+            await server_user_statistic.num_join_pay(fioat.floatMul(aii.price, aii.num))
+            funn.succ() 
+        }
     }),
     init: () => promise(() => {
         const o: OrderItem = order_of_place.value
         const a: Activity = o.one || { }
         if (!a.documentId) {
             uniRouter.back()
+        }
+        else {
+            aii.price = activity.value.fee
         }
     })
 }

@@ -7,17 +7,24 @@
             <view class="px-col"><text class="sus">详情图片</text></view>
         </view>
         <view class="pt-x1">
-            <view v-for="(v, i) in gallery" :key="i">
-                <image class="w-100 h-28vh" :src="v.url" mode="aspectFill"/>
+            <view v-for="(v, i) in gallery" :key="i"
+                :style="{
+                        'height': media_tool.img_h_view(w_screen, v.w, v.h)
+                    }">
+                <image class="w-100 h-100" :src="v.url" mode="aspectFill"/>
             </view>
         </view>
+    </view>
+    <view v-else>
+        <CkSpace :h="4"/>
     </view>
 </template>
 
 <script setup lang="ts">
-import CoImg from '@/components/media/img/CoImg.vue';
+import CkSpace from '@/cake/content/CkSpace.vue';
+import { uiState } from '@/memory/global';
 import activity_tool from '@/tool/modules/activity_tool';
-import { must_one } from '@/tool/util/valued';
+import media_tool from '@/tool/modules/media_tool';
 import { computed } from 'vue';
 
 const prp = defineProps<{
@@ -26,5 +33,9 @@ const prp = defineProps<{
 
 const gallery = computed(() => {
     return activity_tool.getgallery(prp.one)
+})
+
+const w_screen = computed(() => {
+    return uiState.w || 375
 })
 </script>

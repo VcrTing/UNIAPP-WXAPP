@@ -26,10 +26,10 @@
                         </view>
                     </view>
                 </view>
-                <view class="" v-if="activity_tool.istyped_sm(v)">
+                <view class="">
                     <view class="fx-r tis fs-s">
-                        <UiI :i="'lock'"/>
-                        <text class="pi-s">私密</text>
+                        <UiI :i="'users'"/>
+                        <text class="pi-s">{{ activity_tool.getjoin_remaining(v) }}&nbsp;/&nbsp;{{ activity_tool.getjoin_limit(v) }}</text>
                     </view>
                 </view>
             </view>

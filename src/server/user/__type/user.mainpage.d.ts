@@ -10,6 +10,8 @@ interface UserMainPage {
     id: number
     documentId: string
 
+    statistic: UserStatistic
+
     user: User
     tags: ActivityTag[]
     activityMedias: ActivityMedia[]

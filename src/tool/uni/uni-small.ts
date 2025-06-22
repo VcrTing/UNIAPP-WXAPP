@@ -1,4 +1,3 @@
-import confDev from "@/conf/conf-dev"
 
 // LOGIN
 // 获取 TOKEN

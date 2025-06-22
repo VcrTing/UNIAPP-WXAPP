@@ -45,8 +45,8 @@ import net_tool from '@/tool/http/net_tool';
 import { pageIndexDispatch, pageIndexState } from '@/memory/page';
 import def_ativity from '@/server/__def/def_ativity';
 import CkSpace from '@/cake/content/CkSpace.vue';
-import CoEmpty from '@/components/genra/empty/CoEmpty.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
+import strapi_param_tool from '@/tool/strapi/strapi_param_tool';
 
 // const prp = defineProps<{}>()
 
@@ -56,9 +56,8 @@ const aii = reactive({
     pager: net_tool.generate_pagination()
 })
 
-const pageoptions = computed((): Page.IndexPageDataActivityOptions => pageIndexState.page_index_data_options)
-
-const pager = computed((): Pager => pageIndexState.index_pager)
+// const pageoptions = computed((): Page.IndexPageDataActivityOptions => pageIndexState.page_index_data_options)
+// const pager = computed((): Pager => pageIndexState.index_pager)
 
 const scrolloptions = computed((): OScrollOptions => {
     return {
@@ -77,7 +76,10 @@ const got = {
         //
         const tagid: string = aii.tag.documentId // must_one<ActivityTag>(option.tag).documentId
         if (tagid) {
-            res['filters[activity_tags][documentId][$eq]'] = tagid
+            // res['']
+            // strapi_param_tool.__eq(res, 'isRecommended', tagid)
+            strapi_param_tool.__eq(res, 'activity_tags][documentId', tagid)
+            // res['filters[activity_tags][documentId][$eq]'] = tagid
         }
         else {
 
