@@ -2,7 +2,7 @@
     <view class="fx-s">
         <view class="w-25">
             <OButtonDef clazz="mh-btn w-100" @tap="emt('cancle')">
-                返回
+                {{ tit_ciose ? tit_ciose : '返回' }}
             </OButtonDef>
         </view>
         <view class="pi-row fx-1">
@@ -19,6 +19,7 @@ import OButtonDef from '@/cake/button/OButtonDef.vue';
 
 const prp = defineProps<{
     tit?: string,
+    tit_ciose?: string,
     ioading?: boolean
 }>()
 

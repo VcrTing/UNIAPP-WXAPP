@@ -1,4 +1,4 @@
-import { FILE, MASTER, NET, NET_ENDPOINTS, NET_FUNCTION_GET_JWT, } from "@/conf/conf-net";
+import { BUSINESS, FILE, MASTER, NET, NET_ENDPOINTS, NET_FUNCTION_GET_JWT, } from "@/conf/conf-net";
 import Net from "./net";
 
 // 主数据源
@@ -7,6 +7,14 @@ export const master = new Net(
     NET_ENDPOINTS[ MASTER ], 
     NET_FUNCTION_GET_JWT,
     NET.MASTER.TIMEOUT_GET, NET.MASTER.TIMEOUT_POS, NET.MASTER.IS_LOG
+);
+
+// 商业数据源
+export const business = new Net(
+    NET.BUSINESS.URI + '/' + NET.BUSINESS.API, 
+    NET_ENDPOINTS[ BUSINESS ], 
+    NET_FUNCTION_GET_JWT,
+    NET.BUSINESS.TIMEOUT_GET, NET.BUSINESS.TIMEOUT_POS, NET.BUSINESS.IS_LOG
 );
 
 // 文件上传

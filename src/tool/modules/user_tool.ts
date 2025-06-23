@@ -6,8 +6,13 @@ const num = (n: number, isadd: boolean) => {
     return n < 0 ? 0 : n
 }
 
+const isboy = (v: User) => {
+    return v.gender === 1
+}
+
 export default {
     num,
+    isboy,
     //
     getgender: (v: User) => {
         return v.gender === 1 ? '男' : '女'

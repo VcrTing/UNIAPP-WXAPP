@@ -1,10 +1,10 @@
 <template>
     
-    <view class="w-100">
-        <view class="fx-c w-100">
+    <view class="w-100 fx-aii-btn-def br">
+        <view class="fx-c w-100 pt-s">
             <view class="br-cir ps-r">
                 <view class="w-3em h-3em br-cir bd-x1 bd-s-d bc-def fx-c
-                    fx-aii-btn-def bg-def
+                     bg-def
                 ">
                     <view class="ta-c">
                         <UiI i="+"/>

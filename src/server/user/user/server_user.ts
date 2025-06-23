@@ -1,7 +1,7 @@
 import { authGetters, authState } from "@/memory/global"
 import { pageIndexState } from "@/memory/page"
 import server_medias from "@/server/media/server_medias"
-import { master } from "@/tool/http/http"
+import { business, master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
 import strapi_param_tool from "@/tool/strapi/strapi_param_tool"
 import { netip } from "@/tool/uni/uni-global"
@@ -14,9 +14,15 @@ const relations = <string[]>[  ]
 
 const fetching = async (param: ONE, pager: Pager): Promise<User[]> => {
     const __pm: ONE = net_tool.build_param(param, pager, relations)
-    const src: NET_RES = await master.get('user', null, __pm)
+    const src: NET_RES = await business.get('user', null, __pm)
     // if (is_str(src)) return netip(src, [ ]);
     // const res: ONE | MANY = (src as HttpResult).data
+    return must_arr(src)
+}
+
+const aii = async (): Promise<User[]> => {
+    const param: ONE = { }
+    const src: User[] = await fetching(param, net_tool.generate_pagination(6))
     return must_arr(src)
 }
 
@@ -67,6 +73,7 @@ const mainpage = async (userid: string): Promise<UserMainPage> => {
 }
 
 export default {
+    aii,
     byphone,
     byids,
     mainpage,

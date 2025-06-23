@@ -23,6 +23,7 @@ const NET_ENDPOINT_USER = <ONE>{
 // 活动
 const NET_ENDPOINT_ACTIVITY = <ONE> {
     'join': 'activity-registrations',
+    'invite': 'activity-invites',
     'activity': 'activities',
     'activity-tags': 'activity-tags',
     'activity-media': 'activity-medias',
@@ -31,11 +32,15 @@ const NET_ENDPOINT_ACTIVITY = <ONE> {
 
 export const NET_ENDPOINTS_MASTER = <ONE> {
     ...NET_ENDPOINT_AUTH,
-    ...NET_ENDPOINT_TEST,
     ...NET_ENDPOINT_USER,
     ...NET_ENDPOINT_ACTIVITY
 }
 
+export const NET_ENDPOINTS_BUSINESS = <ONE> {
+    ...NET_ENDPOINT_AUTH,
+    ...NET_ENDPOINT_USER,
+    ...NET_ENDPOINT_ACTIVITY
+}
 
 export const NET_ENDPOINT_FILE = <ONE> {
     'upload': 'upload',

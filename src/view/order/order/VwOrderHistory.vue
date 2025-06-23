@@ -9,19 +9,21 @@
                     class="py"
                 >
                     <view class="card o-h">
-                        <view class="py px-x1 fx-aii-btn-def">
+                        <view class="pt pb-s px-x1 fx-aii-btn-def">
                             <view class="">
                                 <text class="h5 pr-s fw-600 coh tils-x1">{{ v.activity.title }}</text>
                             </view>
                         </view>
-                        <view class="fx-i px-x1 fx-aii-btn-def" v-if="activity_tool.istyped_sm(v.activity)">
-                            <view class="sus d-ib fs-s pr"><UiI i="lock" clazz="d-ib"/><text class="pi-s">私密</text></view>
-                            <!--<view class="sus fx-i fs-s">
-                                <UiI i="addr" /><text class="pi-s">{{ activity_tool.getaddress(v.activity) }}</text>
-                            </view>-->
+                        <view class="fx-i px-x1 fx-aii-btn-def py-s">
+                            <view v-if="activity_tool.istyped_sm(v.activity)" class="sus d-ib fs-s pr">
+                                <UiI i="lock" clazz="d-ib"/><text class="pi-s">私密</text>
+                            </view>
+                            <view v-else class="sus d-ib fs-s pr"><text class="pi-s">公开类型</text></view>
                         </view>
-                        <view v-if="v.consumeStatus == 1"></view>
-                        <view v-else class="fx-aii-btn-def py-s">
+                        <view v-if="v.consumeStatus == 1">
+
+                        </view>
+                        <view v-else class="">
                             <view class="px-x1 fs-n btn-def py-s">
                                 <text>{{ activity_tool.gettime_start(v.activity) }}开始，</text>
                                 <text>距离开始，还剩:</text>

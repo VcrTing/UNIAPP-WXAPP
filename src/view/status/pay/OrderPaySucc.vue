@@ -1,17 +1,22 @@
 <template>
     <view>
-        <view class="card pa-card fx-c mh-10em">
-            <view class="">
-                <view class="h5 sus">支付成功</view>
+        <view class="h-60vh fx-c">
+            <view class="ta-c">
+                <view class="btn-succ w-5em h-5em br-cir fx-c"><UiI clazz="h3" i="check"/></view>
+                <view class="ta-c py-x1">
+                    <view class="succ h4"><text>支付成功</text></view>
+                </view>
             </view>
         </view>
-        <view class="abs-b i-0 w-100 px-row">
-            <view class="py-x3">
-                <OButtonWht clazz="btn-app" @tap="funn.home">返回首页</OButtonWht>
-                <view class="py-n"></view>
-                <OButton clazz="btn-app">查看活动</OButton>
+        <view class="abs-b i-0 fx-c w-100">
+            <view class="w-618">
+                <view class="py-x3">
+                    <OButton color="def" clazz="btn-app" @tap="funn.home">返回首页</OButton>
+                    <view class="py-n"></view>
+                    <OButton clazz="btn-app" @tap="appRouter.order_my_working()">查看我的参与</OButton>
+                </view>
+                <OSafeAreaBottom/>
             </view>
-            <OSafeAreaBottom/>
         </view>
     </view>
 </template>
@@ -23,6 +28,7 @@ import OButtonDef from '@/cake/button/OButtonDef.vue';
 import OButtonWht from '@/cake/button/OButtonWht.vue';
 import CoEmpty from '@/components/genra/empty/CoEmpty.vue';
 import appRouter from '@/tool/uni/app-router';
+import UiI from '@/ui/element/i/UiI.vue';
 
 // const prp = defineProps<{}>()
 const funn = {

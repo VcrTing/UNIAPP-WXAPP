@@ -46,3 +46,17 @@ interface ActivityJoin { // ActivityRegistration
     consumeTime: string
     consumeStatus: number
 }
+
+interface ActivityInvite {
+    id: number
+    documentId: string
+    readNum: number
+    agreeStatus: number
+    refuseComment: string
+    refuseTime: string
+    invite_user: User
+    activityId: string
+    publisherId: string
+    inviteTime: string
+    inviteUserId: string
+}

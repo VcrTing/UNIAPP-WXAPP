@@ -87,7 +87,6 @@ import CkSex from '@/cake/visual/ider/CkSex.vue';
 import CkSimpleTag from '@/cake/visual/tag/CkSimpleTag.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
 import CoSusAcyIndex from '@/components/status/activity/CoSusAcyIndex.vue';
-import CoViAvatarTogether from '@/components/visual/imgs/CoViAvatarTogether.vue';
 import { authDispatch } from '@/memory/global';
 import activity_tool from '@/tool/modules/activity_tool';
 import join_tool from '@/tool/modules/join_tool';

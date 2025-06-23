@@ -10,30 +10,26 @@
 
 <script setup lang="ts">
 import CoMoIndexActivityItem from '@/components/modules/index/CoMoIndexActivityItem.vue';
-import { acyReFresh, authGetters, orderState } from '@/memory/global';
-import mock_orders from '@/server/mock/order/mock_orders';
-import mock_meizi from '@/server/mock/user/mock_meizi';
-import uniRouter from '@/tool/uni/uni-router';
+import { orderState } from '@/memory/global';
+import open_of_activity from '@/server/__func/open_of_activity';
+import { future, futuring } from '@/tool/util/future';
 import { computed, reactive } from 'vue';
 
 const prp = defineProps<{
     activities: Activity[]
 }>()
 
-const aii = reactive({
-    items: mock_orders.items,
-    meizi: mock_meizi.items
-})
+const aii = reactive({ ioading: false })
 
 const joins = computed((): ActivityJoin[] => {
     return orderState.join_of_mine || [ ]
 })
 
 const funn = {
-    detail: (v: Activity) => {
-        acyReFresh('view', v);
-        uniRouter.gopg('activity_detail');
-    }
+    detail: (v: Activity) => futuring(aii, async () => {
+        console.log('访问 活动')
+        await open_of_activity.view(v)
+    })
 }
 
 </script>

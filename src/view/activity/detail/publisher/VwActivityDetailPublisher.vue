@@ -2,9 +2,9 @@
     <view v-if="publisher">
         <view class="softer">
             <CoMoAdHeader>发布者</CoMoAdHeader>
-            <view class="fx-i py fx-aii-btn-def px-row" @tap="funn.__to(publisher.id)">
-                <view class="pi-col h9">
-                    <CkAvatar v-if="publisher" :clazz="'w-3em h-3em'" :id="publisher.id" :src="publisher.avatarUrl"/>
+            <view class="fx-i py fx-aii-btn-def px-row bg-con">
+                <view class="pi-col h9" @tap="funn.__to(publisher.id)">
+                    <CkAvatar v-if="publisher" :clazz="'w-3em h-3em'" :not_mainpage="true" :id="publisher.id" :src="publisher.avatarUrl"/>
                 </view>
                 <view class="fx-1 pi-x1">
                     <view class="h9 pt-s">
@@ -15,42 +15,22 @@
                     </view>
                     <view class="pt fx-i">
                         <view class="d-ib fs-s">
-                            <view class="">
-                                <view class="sus mr d-ib">
+                            <view class="sus">
+                                <view class=" mr d-ib">
                                     <text>#</text>
-                                    <!--
-                                    <UiI i="check" clazz="d-ib" />
-                                    -->
                                     <text class="pi-s">平台认证</text>
                                 </view>
-                                <view class="sus mr d-ib">
+                                <view class=" mr d-ib">
                                     <text>#</text>
                                     <text class="pi-s">十单十成</text>
                                 </view>
                             </view>
                         </view>
-                        <!--
-                        <view class="pr-x2">
-                            <view class="tis">
-                                <text class="fs-s">发布数</text>
-                                <text class="pi-s fs-s">23</text>
-                            </view>
-                        </view>
-                        <view class="pr-x2">
-                            <view class="tis">
-                                <text class="fs-s">会员数</text>
-                                <text class="pi-s fs-s">123</text>
-                            </view>
-                        </view>
-                        -->
                     </view>
                 </view>
-                <view class="pr-col">
+                <view class="pr-col"  @tap="funn.__to(publisher.id)">
                     <view class="fx-r tiw">
-                        <!--
-                        <view class="fs-w">查看主页</view>
-                        <view><UiI i="r"/></view>
-                        -->
+                       
                         <OFI i="r"/>
                     </view>
                 </view>
@@ -91,7 +71,27 @@ const funn = {
     },
 }
 </script>
-
+ <!--
+                        <view class="fs-w">查看主页</view>
+                        <view><UiI i="r"/></view>
+                        -->
+                        <!--
+                        <UiI i="check" clazz="d-ib" />
+                        -->
+                        <!--
+                        <view class="pr-x2">
+                            <view class="tis">
+                                <text class="fs-s">发布数</text>
+                                <text class="pi-s fs-s">23</text>
+                            </view>
+                        </view>
+                        <view class="pr-x2">
+                            <view class="tis">
+                                <text class="fs-s">会员数</text>
+                                <text class="pi-s fs-s">123</text>
+                            </view>
+                        </view>
+                        -->
 
                     <!--
                     <view class="d-ib pi">

@@ -1,21 +1,17 @@
 <template>
-    <view>
+    <view class="bg-con">
         <CoMoAdHeader>活动描述</CoMoAdHeader>
         <view class="pt-s pb coh">
             <view class="py-s px-row" v-for="(v, i) in contents" :key="i">
                 <view class="px-col">
                     {{ v }}
                 </view>
-                <!--
-                {{ one.introduction ? one.introduction : one.title }}
-                -->
             </view>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
-import mock_orders from '@/server/mock/order/mock_orders';
 import { is_nice_sn, must_arr, must_one } from '@/tool/util/valued';
 import { computed } from 'vue';
 import CoMoAdHeader from './component/CoMoAdHeader.vue';
@@ -43,6 +39,10 @@ const tags = computed((): ActivityTag[] => {
 })
 </script>
 
+                <!--
+                {{ one.introduction ? one.introduction : one.title }}
+                -->
+                
             <!--
             <view v-for="(v, i) in contents" :key="i">
                 <view class="py-s">{{ v.txt }}</view>

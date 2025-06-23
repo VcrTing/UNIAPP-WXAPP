@@ -3,7 +3,7 @@
         <view class="pt-s bg-hui"></view>
         <CoMoAdHeader>详情图片</CoMoAdHeader>
         
-        <view class="pt-x1">
+        <view class="pt-x1 bg-con">
             <view v-for="(v, i) in gallery" :key="i"
                 :style="{
                         'height': media_tool.img_h_view(w_screen, v.w, v.h)
@@ -12,7 +12,7 @@
             </view>
         </view>
     </view>
-    <view v-else>
+    <view v-else class="bg-con">
         <CkSpace :h="4"/>
     </view>
 </template>

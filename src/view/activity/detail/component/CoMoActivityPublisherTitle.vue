@@ -2,20 +2,18 @@
     <view class="fx-s pt-x2 pb-col fx-aii-btn-def px-row">
         <view class="fx-i pi-col">
             <view class="">
-                <text class="fw-500">参与者&nbsp;</text>
+                <text class="fw-500">邀请对象&nbsp;</text>
             </view>
             <view class="sus fs-n">
                 <text>.&nbsp;{{ activity_tool.getjoiner_len(one) }}</text>
                 <text>人</text>
-                <text>一起</text>
             </view>
         </view>
         <view class="fx-1 ta-r">
             <view class="pri fs-n">
-                <text>仅剩</text>
-                <text>{{ activity_tool.getjoin_remaining(one) }}</text>
-                <text>个名额</text>
-                <UiI clazz="d-ib" :i="'r'"/>
+                <text>还可邀请</text>
+                <text class="px-s">{{ activity_tool.getjoin_limit(one) - invites.length }}</text>
+                <text>人</text>
             </view>
         </view>
     </view>
@@ -27,7 +25,8 @@ import UiI from '@/ui/element/i/UiI.vue';
 import { computed } from 'vue';
 
 const prp = defineProps<{
-    one: Activity
+    one: Activity,
+    invites: ActivityInvite[ ]
 }>()
 
 const issm = computed((): boolean => activity_tool.istyped_sm(prp.one))

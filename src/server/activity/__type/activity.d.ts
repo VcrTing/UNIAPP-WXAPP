@@ -17,6 +17,7 @@ interface Activity {
     dataStatus: number
     //
     activity_registrations: ActivityJoin[]
+    activity_invites: ActivityInvite[]
     activity_address: ActivityAddress
     activity_medias: ActivityMedia[]
     activity_tags: ActivityTag[]

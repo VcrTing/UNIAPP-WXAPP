@@ -1,5 +1,5 @@
 <template>
-    <view class="btn px pb pt-s br fx-aii-btn-bd-def">
+    <view class="btn px pb pt-s br fx-aii-btn-def">
         <view class="fx-c mh-3em">
             <UiI class="h5" :i="i"/>
         </view>

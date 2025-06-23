@@ -33,11 +33,10 @@
 </template>
 
 <script setup lang="ts">
-import OButton from '@/cake/button/OButton.vue';
 import CoMoPublishWorkingItem from '@/components/modules/publish/CoMoPublishWorkingItem.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
 import { DATA_ACTIVITY_TYPED, DATA_ACTIVITY_TYPED_GK } from '@/conf/conf-datas';
-import mock_publish from '@/server/mock/publish/mock_publish';
+import open_of_activity from '@/server/__func/open_of_activity';
 import appRouter from '@/tool/uni/app-router';
 import uniRouter from '@/tool/uni/uni-router';
 import { must_arr } from '@/tool/util/valued';
@@ -59,7 +58,7 @@ const data = computed((): Activity[] => {
 })
 
 const funn = {
-    view: (v: Activity) => appRouter.activity_detail(v),
+    view: (v: Activity) => open_of_activity.view(v),
     edit: (v: ONE) => {
         uniRouter.gopg('publish_edit')
     },

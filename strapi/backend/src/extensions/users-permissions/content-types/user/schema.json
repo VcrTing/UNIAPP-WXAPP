@@ -123,12 +123,6 @@
       "target": "api::activity-registration.activity-registration",
       "inversedBy": "user"
     },
-    "activity_invite_publishers": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::activity-invite.activity-invite",
-      "mappedBy": "publiser"
-    },
     "activity_invites": {
       "type": "relation",
       "relation": "oneToMany",

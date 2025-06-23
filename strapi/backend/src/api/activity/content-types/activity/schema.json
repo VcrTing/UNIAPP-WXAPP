@@ -93,12 +93,6 @@
     "area": {
       "type": "string"
     },
-    "activity_invites": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::activity-invite.activity-invite",
-      "mappedBy": "activity"
-    },
     "activity_address": {
       "type": "relation",
       "relation": "manyToOne",

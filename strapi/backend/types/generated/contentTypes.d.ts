@@ -431,7 +431,7 @@ export interface ApiActivityInviteActivityInvite
     draftAndPublish: true;
   };
   attributes: {
-    activity: Schema.Attribute.Relation<'manyToOne', 'api::activity.activity'>;
+    activityId: Schema.Attribute.String;
     agreeStatus: Schema.Attribute.Integer;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -440,23 +440,19 @@ export interface ApiActivityInviteActivityInvite
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    inviteTime: Schema.Attribute.DateTime;
+    inviteUserId: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::activity-invite.activity-invite'
     > &
       Schema.Attribute.Private;
-    moneyStatus: Schema.Attribute.Integer;
-    publiser: Schema.Attribute.Relation<
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
     publishedAt: Schema.Attribute.DateTime;
-    read_num: Schema.Attribute.Integer;
+    publisherId: Schema.Attribute.String;
+    readNum: Schema.Attribute.Integer;
     refuseComment: Schema.Attribute.String;
     refuseTime: Schema.Attribute.DateTime;
-    rewardNum: Schema.Attribute.Integer;
-    totalMoney: Schema.Attribute.Decimal;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -612,10 +608,6 @@ export interface ApiActivityActivity extends Struct.CollectionTypeSchema {
     activity_address: Schema.Attribute.Relation<
       'manyToOne',
       'api::activity-address.activity-address'
-    >;
-    activity_invites: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::activity-invite.activity-invite'
     >;
     activity_medias: Schema.Attribute.Relation<
       'oneToMany',
@@ -1245,10 +1237,6 @@ export interface PluginUsersPermissionsUser
     activity_addresses: Schema.Attribute.Relation<
       'oneToMany',
       'api::activity-address.activity-address'
-    >;
-    activity_invite_publishers: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::activity-invite.activity-invite'
     >;
     activity_invites: Schema.Attribute.Relation<
       'oneToMany',

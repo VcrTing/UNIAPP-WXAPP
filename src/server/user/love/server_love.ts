@@ -1,6 +1,6 @@
 import { is_strapi_mode } from "@/conf/conf"
 import { authGetters, authState } from "@/memory/global"
-import { master } from "@/tool/http/http"
+import { business, master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
 import strapi_param_tool from "@/tool/strapi/strapi_param_tool"
 import { netip } from "@/tool/uni/uni-global"
@@ -11,7 +11,7 @@ const relations = <string[]>[ 'love' ]
 
 const fetching = async (param: ONE, pager: Pager): Promise<UserLove[]> => {
     const __pm: ONE = net_tool.build_param(param, pager, relations)
-    const src: NET_RES = await master.get('love', null, __pm)
+    const src: NET_RES = await business.get('love', null, __pm)
     if (is_str(src)) return netip(src, [ ]);
     const res: ONE | MANY = (src as HttpResult).data
     return net_tool.many<UserLove>(res)
@@ -27,7 +27,7 @@ const myloves = async (): Promise<UserLove[]> => {
 
 const pius = async (form: ONE): Promise<UserLove> => {
     const __pm: ONE = net_tool.build_data(form)
-    const src: NET_RES = await master.pos('love', null, __pm)
+    const src: NET_RES = await business.pos('love', null, __pm)
     if (is_str(src)) return netip(src, <UserLove>{ });
     const res: ONE | MANY = (src as HttpResult).data
     return net_tool.one<UserLove>(res)
@@ -35,7 +35,7 @@ const pius = async (form: ONE): Promise<UserLove> => {
 const edit = async (form: ONE, origin: UserLove): Promise<UserLove> => {
     const id: string = is_strapi_mode() ? origin['documentId'] : (origin['id'] + '')
     const __pm: ONE = net_tool.build_data(form)
-    const src: NET_RES = await master.put('love', id, __pm)
+    const src: NET_RES = await business.put('love', id, __pm)
     if (is_str(src)) return netip(src, <UserLove>{ });
     const res: ONE | MANY = (src as HttpResult).data
     return net_tool.one<UserLove>(res)

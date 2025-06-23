@@ -2,16 +2,19 @@
     <view class="">
         <view class="pt-s bg-hui"></view>
         <view class="">
-            <view class="">
+            <view class="bg-con">
                 <CoMoActivityJoinerTitle :one="one"/>
                 <view class="py-s px-row">
-                    <view class="fx-i">
+                    <view class="fx-i" v-if="members && members.length > 0">
                         <view class="w-20" v-for="(v, i) in members" :key="i">
                             <view class="fx-aii-btn-def pt-s br-s">
                                 <CoMoActivityJoinerBlock :v="v"/>
                             </view>
                         </view> 
                         <CoMoActivityJoinerBlockMore v-if="last" :user="last" clazz="w-20"/>
+                    </view>
+                    <view v-else class="pt-s">
+                        <view class="h-3em w-3em"></view>
                     </view>
                 </view>
             </view>

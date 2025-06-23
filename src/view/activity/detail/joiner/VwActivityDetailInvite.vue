@@ -2,16 +2,16 @@
     <view class="">
         <view class="pt-s bg-hui"></view>
         <view class="">
-            <view class="">
-                <CoMoActivityJoinerTitle :one="one"/>
+            <view class="bg-con">
+                <CoMoActivityPublisherTitle :one="one" :invites="invites"/>
                 <OScrollX>
-                    <view class="pb-s pt px-row">
+                    <view class="pb-s pt-s px-row">
                         <view class="fx-i">
                             <view class="w-20 d-ib fx-c">
                                 <CoMoActivityJoinerBtn @tap="funn.open"/>
                             </view>
                             <view class="w-20 d-ib" v-for="(v, i) in members" :key="i">
-                                <view class="fx-aii-btn-def pt br-s">
+                                <view class="fx-aii-btn-def pt-s br-s">
                                     <CoMoActivityJoinerBlock :v="v"/>
                                 </view>
                             </view> 
@@ -24,7 +24,7 @@
             </view>
         </view>
 
-        <VwAdInvitePan :idx="pan_ivt.idx"/>
+        <VwAdInvitePan :idx="pan_ivt.idx" :one="one"/>
     </view>
 </template>
 
@@ -37,24 +37,30 @@ import CoMoActivityJoinerBtn from '@/components/modules/activity/CoMoActivityJoi
 import CoMoActivityJoinerTitle from '../component/CoMoActivityJoinerTitle.vue';
 import VwAdInvitePan from '../pan/VwAdInvitePan.vue';
 import pan_tooi from '@/tool/app/pan_tooi';
+import CoMoActivityPublisherTitle from '../component/CoMoActivityPublisherTitle.vue';
 
 const prp = defineProps<{
     one: Activity, joiners: ActivityJoin[]
 }>()
 
+const invites = computed((): ActivityInvite[] => {
+    const av: Activity = prp.one
+    return must_arr(av.activity_invites)
+})
+
 const members = computed((): User[] => {
-    let src = prp.joiners; // mock_meizi.items
+    let src = invites.value; // mock_meizi.items
     if (src && src.length >= 5) {
         src = must_arr([
             src[0], src[1], src[2], src[3]
         ])
     }
-    return src.map((e: ActivityJoin) => {
-        return e.user
+    return src.map((e: ActivityInvite) => {
+        return e.invite_user
     })
 })
 
-const pan_ivt = { idx: 14, hui: <ElePanHui>{ opacity: 0 } }
+const pan_ivt = { idx: 14, hui: <ElePanHui>{ opacity: 0.4 } }
 
 const funn = {
     open: () => {

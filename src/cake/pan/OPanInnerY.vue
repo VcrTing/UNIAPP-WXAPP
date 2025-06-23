@@ -21,7 +21,7 @@
         </OScrollY>
 
         
-        <view class="abs-bi w-100 zi-x1 soft">
+        <view class="abs-bi w-100 zi-x1 soft bg-con">
             <slot name="bom"></slot>
             <OSafeAreaBottom v-if="(orientation !== 't')"/>
         </view>

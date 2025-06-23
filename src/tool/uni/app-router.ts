@@ -100,5 +100,8 @@ export default {
     activity_detail: (v: Activity) => future(async () => {
         await acyDispatch('change', [ 'view', v ])
         uniRouter.gopg('activity_detail')
-    })
+    }),
+
+    // 查看我的参与
+    
 }

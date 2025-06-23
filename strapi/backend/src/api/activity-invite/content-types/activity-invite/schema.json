@@ -11,16 +11,10 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "read_num": {
+    "readNum": {
       "type": "integer"
     },
     "agreeStatus": {
-      "type": "integer"
-    },
-    "totalMoney": {
-      "type": "decimal"
-    },
-    "rewardNum": {
       "type": "integer"
     },
     "refuseComment": {
@@ -29,26 +23,23 @@
     "refuseTime": {
       "type": "datetime"
     },
-    "moneyStatus": {
-      "type": "integer"
-    },
-    "publiser": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "activity_invite_publishers"
-    },
     "invite_user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "activity_invites"
     },
-    "activity": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::activity.activity",
-      "inversedBy": "activity_invites"
+    "activityId": {
+      "type": "string"
+    },
+    "publisherId": {
+      "type": "string"
+    },
+    "inviteTime": {
+      "type": "datetime"
+    },
+    "inviteUserId": {
+      "type": "string"
     }
   }
 }

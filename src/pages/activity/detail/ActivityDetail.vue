@@ -10,15 +10,15 @@
             </template>
             <template #con>
                 <VwActivityDetailTitle :issm="issm" :one="view"/>
-                
                 <VwActivityDetailAddrTime :one="view"/>
 
-                <view v-if="issm"><VwActivityDetailInvite :one="view" :joiners="aii.joiners"/> </view>
-                <view v-else><VwActivityDetailJoiner :one="view" :joiners="aii.joiners"
-                    v-if="aii.joiners && aii.joiners.length > 0"/></view>
+                <view><VwActivityDetailJoiner :one="view" :joiners="aii.joiners"/></view>
                 
-                <view class="pt-s bg-hui"></view>
-                <VwActivityDetailPublisher :one="view"/>
+                <view v-if="issm"><VwActivityDetailInvite :one="view" :joiners="aii.joiners"/> </view>
+                <view v-if="!issm">
+                    <view class="pt-s bg-hui"></view>
+                    <VwActivityDetailPublisher :one="view"/>
+                </view>
 
                 <view class="softer" v-if="view.introduction">
                     <view class="pt-s bg-hui"></view>
@@ -39,7 +39,6 @@ import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import DetailLayout from '@/components/layout/detail/DetailLayout.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { acyState, authGetters, authState, needLogin, orderReFresh, orderState, uiState } from '@/memory/global';
-import pan_tooi from '@/tool/app/pan_tooi';
 import activity_tool from '@/tool/modules/activity_tool';
 import uniRouter from '@/tool/uni/uni-router';
 import VwActivityDetailAddrTime from '@/view/activity/detail/VwActivityDetailAddrTime.vue';
