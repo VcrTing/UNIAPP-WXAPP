@@ -1,6 +1,5 @@
 import { DATA_ACTIVITY_TYPED_GK, DATA_IS_RECOMMEND } from "@/conf/conf-datas"
 import { DEV_SM_ALLOW_SEARCH } from "@/conf/conf-dev"
-import { authGetters } from "@/memory/global"
 import { master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
 import strapi_param_tool from "@/tool/strapi/strapi_param_tool"

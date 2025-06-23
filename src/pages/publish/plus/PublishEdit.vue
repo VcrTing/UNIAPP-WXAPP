@@ -18,7 +18,7 @@
             
             <view><VwPubEditGallery  ref="gallery" :documentId="documentId" :form="form" :canedit="canedit"/></view>
             <view class="py-s"></view>
-            <view><VwPubEditStatus :aii="aii" :form="form" :canedit="canedit"/></view>
+            <view><VwPubEditStatus :aii="aii" :form="form" :canedit="canedit"  :documentId="documentId"/></view>
 
             <view class="py-row">
                 <CoMoSecurityAgreeLine ref="agree" :canedit="canedit"/>
@@ -181,7 +181,7 @@ const form = reactive({
     banner: <Form.UploadImages>[ ], gallery: <Form.UploadImages>[ ]
 })
 
-const edit = computed(() => (pagePublishState.edit))
+const edit = computed((): ONE => (pagePublishState.edit))
 const documentId = computed((): string => edit.value.documentId)
 
 const canedit = computed((): boolean => {

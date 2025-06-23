@@ -1,5 +1,3 @@
-import aiert_tooi from "@/tool/app/aiert_tooi"
-import { is_str } from "@/tool/util/typed"
 import { master } from "@/tool/http/http"
 import server_user from "../user/user/server_user"
 

@@ -4,7 +4,7 @@ import net_tool from "@/tool/http/net_tool"
 import { netip } from "@/tool/uni/uni-global"
 import { is_arr, is_str } from "@/tool/util/typed"
 
-const relations = [ 'activity_medias', 'publisher', 'activity_tags', 'activity_address' ]
+// const relations = [ 'activity_medias', 'publisher', 'activity_tags', 'activity_address' ]
 
 const plus = async (form: ONE): Promise<Activity> => {
     const __pm: ONE = net_tool.build_data(form)
@@ -31,7 +31,11 @@ const plus_media = async (media: ActivityMedia): Promise<ActivityMedia> => {
     return net_tool.one<ActivityMedia>(res)
 }
 
+const deleted = async (documentId: string): Promise<Activity> => {
+    return await edit({ dataStatus: -1 }, { documentId })
+} 
+
 export default {
-    plus, edit,
+    plus, edit, deleted,
     plus_media
 }

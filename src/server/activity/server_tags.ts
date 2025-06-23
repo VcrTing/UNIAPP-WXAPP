@@ -1,4 +1,3 @@
-import aiert_tooi from "@/tool/app/aiert_tooi"
 import { master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
 import { netip } from "@/tool/uni/uni-global"

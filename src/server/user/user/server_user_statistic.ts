@@ -1,8 +1,6 @@
-import { is_strapi_mode } from "@/conf/conf"
 import { authState } from "@/memory/global"
 import { master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
-import user_tool from "@/tool/modules/user_tool"
 import strapi_param_tool from "@/tool/strapi/strapi_param_tool"
 import { netip } from "@/tool/uni/uni-global"
 import { is_str } from "@/tool/util/typed"

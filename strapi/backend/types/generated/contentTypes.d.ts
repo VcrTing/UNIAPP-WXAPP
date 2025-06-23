@@ -534,6 +534,7 @@ export interface ApiActivityRegistrationActivityRegistration
     orderId: Schema.Attribute.String;
     overStatus: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     paymentStatus: Schema.Attribute.Integer;
+    price: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
     refundPrice: Schema.Attribute.Decimal;
     refundRemark: Schema.Attribute.String;

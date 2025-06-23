@@ -33,17 +33,12 @@
 <script setup lang="ts">
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
-import CoBomCenterBtn from '@/components/element/button/CoBomCenterBtn.vue';
-import DetailLayout from '@/components/layout/detail/DetailLayout.vue';
-import UserCenterLayout from '@/components/layout/detail/UserCenterLayout.vue';
 import UserDetailLayout from '@/components/layout/detail/UserDetailLayout.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
-import { acyState, authGetters, authState, orderReFresh, uiState } from '@/memory/global';
-import mock_user from '@/server/mock/user/mock_user';
+import { authState, uiState } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';
 import { must_arr, must_one } from '@/tool/util/valued';
-import UiI from '@/ui/element/i/UiI.vue';
 import VwUmpNumberMsg from '@/view/user/mainpage/cont/VwUmpNumberMsg.vue';
 import VwUserMainPageCon from '@/view/user/mainpage/VwUserMainPageCon.vue';
 import VwUserMainPageTop from '@/view/user/mainpage/VwUserMainPageTop.vue';

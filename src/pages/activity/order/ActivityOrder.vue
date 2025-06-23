@@ -47,7 +47,7 @@ import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoMoOrderPayingItem from '@/components/modules/activity/order/CoMoOrderPayingItem.vue';
 import CoMoSecurityAgreeLine from '@/components/modules/security/CoMoSecurityAgreeLine.vue';
 import { for_user_joing } from '@/conf/__for_index/for_user_loging';
-import { authState, orderDispatch, orderState, uiState } from '@/memory/global';
+import { orderState, uiState } from '@/memory/global';
 import server_joining from '@/server/activity/server_joining';
 import server_user_statistic from '@/server/user/user/server_user_statistic';
 import join_tool from '@/tool/modules/join_tool';

@@ -1,7 +1,14 @@
 <template>
     <view class="">
         <view class="bg-con pt-x1">
-            <view class="px-inp pb-x1"><text>活动描述</text></view>
+            <view class="px-inp pb-s"><text>活动描述</text></view>
+            <view class="py-s px-inp fx-aii-btn-def">
+                <view class="fs-s tid">
+                    <text>温馨提示：</text>
+                    <text>系统自动识别'中文句号(。)'，展示描述时，会根据'中文句号'自动换行。</text>
+                </view>
+            </view>
+            <view class="pb"></view>
             <CkInpItem :tit="''">
                 <!--
                 <OTextarea class="pt-t" :def="aii.form.description" @result="(v) => aii.form.name = v" 
