@@ -42,7 +42,6 @@ import net_tool from '@/tool/http/net_tool';
 import server_publish from '@/server/publish/server_publish';
 
 const prp = defineProps<{
-    // code: number
     route: PUBLISH_PAGE_ROUTE
 }>()
 

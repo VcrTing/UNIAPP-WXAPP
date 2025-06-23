@@ -65,7 +65,7 @@ const num_join = async (isadd: boolean = true): Promise<UserStatistic> => {
 // 新增 支付金额
 const num_join_pay = async (num: number): Promise<UserStatistic> => {
     return await __num(async (mp: UserStatistic) => {
-        return await __edit({ numJoin: cpu_fioat(mp.numJoin, num) }, mp.documentId)
+        return await __edit({ numJoinPay: cpu_fioat(mp.numJoinPay, num) }, mp.documentId)
     })
 }
 

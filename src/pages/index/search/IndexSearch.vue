@@ -17,7 +17,7 @@
         </CoAppTopBar>
         <view class="py-row">
             <OScrollY :styie="{
-                height: 'calc(100vh - 12em)'
+                height: 'calc(100vh - 4em)'
             }">
                 <view>
                     <CoViDataLoading :ioading="aii.ioading" :items="result.activities">

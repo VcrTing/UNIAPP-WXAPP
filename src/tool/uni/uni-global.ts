@@ -29,6 +29,10 @@ export const tiperr = (title: string = '错误') => {
   uni.showToast({ title, icon: 'none', duration: 3400 })
 }
 
+export const tipiong = (title: string = '您好') => {
+  uni.showToast({ title, icon: 'none', duration: 4400 })
+}
+
 export const netip = <T>(src: NET_RES, def: T): T => {
   tiperr(src + '')
   return def

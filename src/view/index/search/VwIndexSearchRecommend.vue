@@ -23,9 +23,6 @@ import mock_publish from '@/server/mock/publish/mock_publish';
 import UiI from '@/ui/element/i/UiI.vue';
 import { reactive } from 'vue';
 
-// const prp = defineProps<{}>()
-
-// const prp = defineProps<{}>()
 const aii = reactive({
     items: mock_publish.history
 })

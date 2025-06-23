@@ -87,7 +87,7 @@ const funn = {
     },
     submit: () => futuring(aii, async () => {
         const o: OrderItem = order_of_place.value
-        const form: ONE = join_tool.build_plus_form(o.one, o.joiner);
+        const form: ONE = join_tool.build_plus_form(o.one, o.joiner, aii.num);
         const src: ActivityJoin = await server_joining.join(form)
         if (src.documentId) { 
             await server_user_statistic.num_join()

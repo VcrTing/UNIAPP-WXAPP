@@ -1,15 +1,17 @@
+import fioat from "../util/fioat";
 import { must_arr } from "../util/valued";
 import times from "../web/times"
 
 
-const build_plus_form = (act: Activity, user: User) => {
+const build_plus_form = (act: Activity, user: User, num: number) => {
+    const feeAmount: number = fioat.floatMul(act.fee || 0, num)
     return {
         user: user.id,
         activity: act.documentId,
-        feeAmount: act.fee,
+        feeAmount, price: act.fee,
         registrationTime: times.fmts(null),
         paymentStatus: 1,
-        num: 1,
+        num,
     }
 }
 
@@ -32,9 +34,22 @@ const getconsume_time = (join: ActivityJoin) => {
     return times.fmts(join.activity.startTime)
 }
 
+const judge_is_invited = (items: ActivityInvite[ ], user: User): boolean => {
+    const id: string = user.id + '';
+    let res = false
+    must_arr(items).map((e: ActivityInvite) => {
+        const uid: string = e.inviteUserId || ''
+        if (uid === id) {
+            res = true
+        }
+    })
+    return res
+}
+
 export default {
     build_plus_form,
     judge_is_join,
+    judge_is_invited,
 
     getconsume_time
 }

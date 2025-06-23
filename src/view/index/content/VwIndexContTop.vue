@@ -2,7 +2,7 @@
     <view>
         <OScrollX>
             <view class="pi-row ">
-                <view class="d-ib pr" v-for="(v, i) in menus" :key="i"
+                <view class="d-ib pr softer" v-for="(v, i) in menus" :key="i"
                     @click="funn.chose(v)"
                     >
                     <view class="ts py-s h6 fx-c fw-500"
@@ -17,14 +17,14 @@
         <view class="fx-s fx-b">
             <view class="">
                 <view class="py px-row" @tap="func.switchLocation">
-                    <OButtonDef clazz="px-row br-rnd py-t tid" 
-                        :weak="true" :color="'def-s'">
+                    <OButton clazz="px-row br-rnd py-t tid softer" 
+                        :weak="true" color="def-s">
                         {{ city.name }}
-                    </OButtonDef>
+                    </OButton>
                 </view>
             </view>
             <view>
-                <view class="py px-row" @tap="func.openTags">
+                <view class="py px-row softer" @tap="func.openTags">
                     <view class="btn-def-s px-col br-t fx-aii-btn-def"><UiI clazz="tiw" i="b"/> </view>
                 </view>
             </view>
@@ -48,6 +48,7 @@ import OButtonDef from '@/cake/button/OButtonDef.vue';
 import UiI from '@/ui/element/i/UiI.vue';
 import VwIndexTagsPan from '../pan/VwIndexTagsPan.vue';
 import { arrfindi } from '@/tool/util/iodash';
+import OButton from '@/cake/button/OButton.vue';
 
 const pan_ioc = { idx: 2, hui: <ElePanHui>{ opacity: 0.4 } }
 const pan_tag = { idx: 4, hui: <ElePanHui>{ opacity: 0.4 } }

@@ -1,6 +1,6 @@
 <template>
     <view class="w-100 softer">
-        <view class="softer" v-if="is_publisher">
+        <view class="softer" v-if="ispublisher">
             <CoBomBackBtn :clazz="'btn-wht-s'"/>
         </view>
         <view v-else>
@@ -25,16 +25,18 @@
                     >
                         <text>您已经报名</text>
                     </OButton>
-                    <OButton v-else
-                        :ioading="aii.ioading"
-                        clazz="btn-app" @tap="funn.join">
-                        <text class="">
-                            <text class="h8">￥</text>
-                            <text class="h7 fw-550">{{ one.fee }}</text>
-                            <text>元，</text>
-                        </text>
-                        <text>上车</text>
-                    </OButton>
+                    <view v-else class="softer">
+                        <OButton
+                            :ioading="aii.ioading"
+                            clazz="btn-app" @tap="funn.join">
+                            <text class="">
+                                <text class="h8">￥</text>
+                                <text class="h7 fw-550">{{ one.fee || 0 }}</text>
+                                <text>元，</text>
+                            </text>
+                            <text>加入</text>
+                        </OButton>
+                    </view>
                 </view>
             </view>
             <CkSpace :h="8"/>
@@ -56,13 +58,13 @@ import times from '@/tool/web/times';
 import UiI from '@/ui/element/i/UiI.vue';
 import { computed, reactive } from 'vue';
 
-const prp = defineProps<{ one: Activity, user: User, isjoin: boolean }>()
-
-const is_publisher = computed((): boolean => {
-    const puber: User = must_one(prp.one.publisher)
-    const uid: string = authGetters.userid
-    return ((puber.id + '') === uid);
-})
+const prp = defineProps<{ 
+    one: Activity, 
+    user: User, 
+    isjoin: boolean,
+    isinvited: boolean,
+    ispublisher: boolean
+}>()
 
 const aii = reactive({
     ioading: false

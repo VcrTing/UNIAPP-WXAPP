@@ -33,6 +33,7 @@ interface ActivityJoin { // ActivityRegistration
     activity: Activity
     user: User
     num: string
+    price: number
     feeAmount: number
 
     refundStatus: number

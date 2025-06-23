@@ -33,8 +33,6 @@ import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { uiState } from '@/memory/global';
 import mock_orders from '@/server/mock/order/mock_orders';
 import UiI from '@/ui/element/i/UiI.vue';
-import VwInteractionCon from '@/view/interact/interaction/VwInteractionCon.vue';
-import VwInteractionTop from '@/view/interact/interaction/VwInteractionTop.vue';
 import VwMsgSystem from '@/view/msg/msg/VwMsgSystem.vue';
 import VwMsgTaiks from '@/view/msg/msg/VwMsgTaiks.vue';
 import VwMsgTop from '@/view/msg/msg/VwMsgTop.vue';
@@ -42,8 +40,7 @@ import { reactive } from 'vue';
 // const prp = defineProps<{}>()
 
 const aii = reactive({
-    doing: mock_orders.items[0],
-    items: mock_orders.items
+    ioading: false
 })
 </script>
 

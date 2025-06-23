@@ -38,6 +38,7 @@ import CoMoActivityJoinerTitle from '../component/CoMoActivityJoinerTitle.vue';
 import VwAdInvitePan from '../pan/VwAdInvitePan.vue';
 import pan_tooi from '@/tool/app/pan_tooi';
 import CoMoActivityPublisherTitle from '../component/CoMoActivityPublisherTitle.vue';
+import { promise, timeout } from '@/tool/util/future';
 
 const prp = defineProps<{
     one: Activity, joiners: ActivityJoin[]
@@ -65,6 +66,12 @@ const pan_ivt = { idx: 14, hui: <ElePanHui>{ opacity: 0.4 } }
 const funn = {
     open: () => {
         pan_tooi.open_def_b(pan_ivt.idx, pan_ivt.hui)
-    }
+    },
+    
+    init: () => promise(() => {
+        timeout(() => {
+
+        })
+    })
 }
 </script>

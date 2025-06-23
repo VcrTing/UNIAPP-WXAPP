@@ -12,8 +12,7 @@
 import CoMoIndexActivitySearchItem from '@/components/modules/index/CoMoIndexActivitySearchItem.vue';
 import CoMoOrderWorkingItem from '@/components/modules/order/CoMoOrderWorkingItem.vue';
 import { acyReFresh, authState, orderState } from '@/memory/global';
-import Activity from '@/pages/activity/activity.vue';
-import uniRouter from '@/tool/uni/uni-router';
+import open_of_activity from '@/server/__func/open_of_activity';
 import { future } from '@/tool/util/future';
 import { computed } from 'vue';
 
@@ -25,8 +24,7 @@ const joins = computed((): ActivityJoin[] => orderState.join_of_mine)
 
 const funn = {
     view: (v: Activity) => future(async () => {
-        acyReFresh('view', v);
-        uniRouter.gopg('activity_detail');
+        open_of_activity.view(v)
     })
 }
 </script>

@@ -36,7 +36,7 @@ export default {
     },
     // 订单 - 全部参与的
     order_my_history: () => {
-        storage.set('PAGE_ORDER_KEY', 2)
+        storage.set('PAGE_ORDER_KEY', 0)
         uniRouter.gopg('order')
     },
 
@@ -102,6 +102,9 @@ export default {
         uniRouter.gopg('activity_detail')
     }),
 
-    // 查看我的参与
-    
+    // 重定向到用户
+    user: () => {
+        uniRouter.navigatorpg('user')
+    }
+
 }

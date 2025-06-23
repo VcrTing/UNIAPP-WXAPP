@@ -26,18 +26,19 @@
 </template>
 
 <script setup lang="ts">
-import OFI from '@/cake/button/i/OFI.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
-import { orderDispatch, orderState, uiState } from '@/memory/global';
+import { authGetters, uiState } from '@/memory/global';
+import appRouter from '@/tool/uni/app-router';
 import uniRouter from '@/tool/uni/uni-router';
+import { promise } from '@/tool/util/future';
 import { storage } from '@/tool/web/storage';
 import VwUserManagerAddr from '@/view/user/manager/addr/VwUserManagerAddr.vue';
 import VwUserManagerLove from '@/view/user/manager/love/VwUserManagerLove.vue';
 import VwUserManagerPays from '@/view/user/manager/pays/VwUserManagerPays.vue';
 import VwUserManagerTags from '@/view/user/manager/tags/VwUserManagerTags.vue';
-import { computed, ref } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 
 const code = computed(() => {
     const src = storage.get('PAGE_MANAGER_KEY') || 0
@@ -54,11 +55,12 @@ const tit = computed(() => {
 })
 
 const funn = {
-    submit: () => {
-        
-        // uniRouter.navigatorpg('publish')
-    }
+    init: () => promise(() => {
+        if (!authGetters.is_login) { appRouter.user() }
+    })
 }
+
+nextTick(funn.init)
 </script>
 
 <style lang="sass">

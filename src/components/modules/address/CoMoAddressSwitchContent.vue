@@ -1,12 +1,12 @@
 <template>
     <view>
-        <view class="px-row">
+        <view class="px-row softer">
             <view><text class="header-s">当前城市</text></view>
             <view class="py">
                 <OButtonDef :weak="true" clazz="mw-6em py-s">{{ city.name }}</OButtonDef>
             </view>
         </view>
-        <view class="px-row pt-x2">
+        <view class="px-row softer pt-x2">
             <view><text class="header-s">切换城市</text></view>
             <view class="pt-x1">
                 <view class="w-100 pb" v-for="(v, i) in aii.citys" :key="i"

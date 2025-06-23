@@ -1,4 +1,5 @@
-import { DATA_IS_RECOMMEND } from "@/conf/conf-datas"
+import { DATA_ACTIVITY_TYPED_GK, DATA_IS_RECOMMEND } from "@/conf/conf-datas"
+import { DEV_SM_ALLOW_SEARCH } from "@/conf/conf-dev"
 import { authGetters } from "@/memory/global"
 import { master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
@@ -27,7 +28,11 @@ const index_recommond = async (param: ONE, pager: Pager): Promise<Activity[]> =>
     // 状态已审核
     strapi_param_tool.build_filter_in(param, 'dataStatus', [ 2 ])
     // 开启推荐
-    param['filters[isRecommended][$eq]'] = DATA_IS_RECOMMEND // [ 'activity_address', 'activity_medias', 'publisher' ]
+    strapi_param_tool.__eq(param, 'isRecommended', DATA_IS_RECOMMEND)
+    // 处理私密
+    if (!DEV_SM_ALLOW_SEARCH) {
+        strapi_param_tool.__eq(param, 'typed', DATA_ACTIVITY_TYPED_GK.v)
+    }
     return await index(param, pager)
 }
 

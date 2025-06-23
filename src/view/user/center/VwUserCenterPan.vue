@@ -1,6 +1,6 @@
 <template>
     <view>
-        <view class="">
+        <view class="softer">
             <VwUcpNumberMsg/>
             <view class="py-row"></view>
             <!-- -->

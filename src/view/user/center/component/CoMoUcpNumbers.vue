@@ -4,11 +4,11 @@
             <CoMoUserNumberShow :num="must_int(mainpage.numJoin)" @tap="uniRouter.gopg('ui')"  clazz="px-row py-row br-br" :class="clazz">
                 参与数
             </CoMoUserNumberShow>
-            <CoMoUserNumberShow :num="must_int(mainpage.numPublish)"  clazz="px-row py-row br-bi br-br" :class="clazz">
-                发布数
+            <CoMoUserNumberShow :num="must_int(mainpage.numLoveTotal)"  clazz="px-row py-row br-bi br-br" :class="clazz">
+                关注数
             </CoMoUserNumberShow>
-            <CoMoUserNumberShow :num="must_int(mainpage.numMemberTotal)"  clazz="px-row py-row br-bi br-br" :class="clazz">
-                会员数
+            <CoMoUserNumberShow :num="must_int(mainpage.numFansTotal)"  clazz="px-row py-row br-bi br-br" :class="clazz">
+                粉丝数
             </CoMoUserNumberShow>
         </view>
     </view>

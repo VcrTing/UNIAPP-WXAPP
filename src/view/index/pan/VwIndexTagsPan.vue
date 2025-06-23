@@ -12,13 +12,13 @@
                 </view>
             </template>
             <CkSpace :h="3"/>
-            <view class="py-x1">
+            <view class="pt-x1 softer">
                 <view class="px-row">
-                    <view class="pb">
+                    <view class="pb h8">
                         <text>首页推荐</text>
                     </view>
                     <view class="row py-row">
-                        <view class="w-25 pb d-ib px-s" v-for="(v, i) in indextags" :key="i"
+                        <view class="w-25 pb d-ib px-s softer" v-for="(v, i) in indextags" :key="i"
                             @tap="funn.switchTag(v)"
                             >
                             <CkDefTag :iive="funn.iive(v)" :clazz_iive="'btn btn-pri-out'">{{ v.name }}</CkDefTag>
@@ -27,11 +27,11 @@
                 </view>
                 <view class="py-s"></view>
                 <view class="px-row">
-                    <view class="pb">
+                    <view class="pb h8">
                         <text>其他标签</text>
                     </view>
                     <view class="row py-row">
-                        <view class="w-25 pb d-ib px-s" v-for="(v, i) in aii.cache" :key="i"
+                        <view class="w-25 pb d-ib px-s softer" v-for="(v, i) in aii.cache" :key="i"
                             @tap="funn.switchTag(v)"
                             >
                             <CkDefTag :iive="funn.iive(v)" :clazz_iive="'btn btn-pri-out'">
@@ -40,7 +40,13 @@
                         </view>
                     </view>
                 </view>
+                <view class="py px-row fx-c fx-aii-btn-def btn-def softer">
+                    <view class="tis fs-n">
+                        若想新增标签，可以与客服提要求。
+                    </view>
+                </view>
             </view>
+            <view class="pb-x1"></view>
             <CkSpace :h="4"/>
         </OPanInnerY>
     </OPan>
