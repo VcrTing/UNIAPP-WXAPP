@@ -7,7 +7,7 @@
 			<view class="layout-detail-sec ps-a t-0 i-0 w-100 h-100 zi-s">
 				<view class="layout-detail-sec-inner"
 					:style="{
-						height: toph
+						height: __toph
 					}"
 				>
 					<OSafeAreaTop/>
@@ -16,7 +16,7 @@
 			</view>
 			<view class="layout-detail-con ps-a b-0 i-0 w-100 zi-n"
 				:style="{
-					height: conh
+					height: __conh
 				}"
 			>
 				<view class="layout-detail-con-inner h-100 ps-r zi-n"
@@ -39,26 +39,28 @@ import { computed } from 'vue';
 
 const prp = defineProps<{
 	h?: number,
+	toph?: number,
 	clazz_con?: string
 }>()
 
-const __def = 61.8;
-const __unit = 'vh'
+const __def = 300;
+const __unit = 'px'
 
-const toph = computed(() => {
+const __toph = computed(() => {
 	let res = __def
-	if (prp.h) {
-		let tp = 100 - prp.h
-		res = tp < 0 ? 0 : tp
+	if (prp.toph) {
+		res = prp.toph
 	}
 	return res + __unit
 })
 
-const conh = computed(() => {
+const h_web = computed((): string => '100vh')
+
+const __conh = computed((): string => {
 	let res = __def
-	if (prp.h) {
-		res = prp.h
+	if (prp.toph) {
+		res = prp.toph
 	}
-	return res + __unit
+	return `calc(${h_web.value} - ${res + __unit})`
 })
 </script>

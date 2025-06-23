@@ -1,8 +1,13 @@
 <template>
     <view class="o-h">
         <view class="br-ti br-tr o-h bg-con fx-aii-btn-def" @tap="emt('view')">
-            <view class="px-x1 ls-x2 pt pb-s">
-                <text class="h7">{{ v.title }}</text>
+            <view class="px-x1 ls-x2 pt pb-s fx-s">
+                <view class="h7">{{ v.title }}</view>
+                <!--
+                <view>
+                    <CoSusAcyIndex :v="v" :joins="undefined"/>
+                </view>
+                -->
             </view>
         </view>
         <view class="py-t bg-con px-x1 fx-aii-btn-def" @tap="emt('view')">
@@ -44,24 +49,33 @@
         <view class="bg-con br-bi br-br fx-s o-h">
             
             <!-- -->
-            <view class="tiw fx-aii-btn-def px-x1 py w-618">
-                <view class="d-ib tis fs-s">
-                    <UiI :i="'lock'" clazz="d-ib"/>
-                    <text class="pi-s">{{ activity_tool.getjoin_limit(v) }}</text>
+            <view class="tid fx-aii-btn-def px-x1 py w-618">
+                    <!--
+                <view class="d-ib pr">
+                    <CoSusAcyIndex :v="v" :joins="undefined"/>
+                </view>
+                    -->
+                <view class="d-ib fs-s">
+                    <UiI :i="'lock'" clazz="d-ib tiw"/>
+                    <text class="pi-s">限</text>
+                    <text class="px-s">{{ activity_tool.getjoin_limit(v) }}</text>
                     <text >人</text>
                 </view>
                 <view class="d-ib fs-s">
                     <text class="">，每人</text>
-                    <text class="">{{ v.fee }}</text>
+                    <text class="px-s">{{ v.fee || 0 }}</text>
                     <text class="">元</text>
                 </view>
             </view>
             
-            <view class="tis fx-aii-btn-def px-x1 py w-382 ta-r">
+            <view class="tis fx-aii-btn-def pi-x1 pr py w-382 ta-r">
                 <view class="d-ib tis fs-s">
                     <UiI i='users' clazz="d-ib"/>
                     <text class="pi-s">{{ activity_tool.getjoiner_len(v) }}</text>
                     <text >人</text>
+                </view>
+                <view class="d-ib pi">
+                    <CoSusAcyIndex :v="v" :joins="undefined"/>
                 </view>
             </view>
         </view>
@@ -75,6 +89,7 @@
 
 <script setup lang="ts">
 import CoImg from '@/components/media/img/CoImg.vue';
+import CoSusAcyIndex from '@/components/status/activity/CoSusAcyIndex.vue';
 import activity_tool from '@/tool/modules/activity_tool';
 import UiI from '@/ui/element/i/UiI.vue';
 

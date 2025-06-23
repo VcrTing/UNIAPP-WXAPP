@@ -1,3 +1,4 @@
+import { APP_W_DEF } from "@/conf/conf-dev"
 import { is_nice_arr, must_arr } from "../util/valued"
 
 const generate_upload_img = (path: string, file: File, media: ActivityMedia): Form.UploadImage => {
@@ -68,6 +69,25 @@ const img_h_view = (w_wrapper: number, w_img: number, h_img: number): string => 
     return src ? (src + 'px') : '14em'
 }
 
+// 计算首页 banenr 高度
+const cpu_index_banner_h = (banners: ActivityMedia[], w_web: number = APP_W_DEF): number => {
+    let w = 0
+    let h = 0
+    banners.map((e: ActivityMedia) => {
+        const __w: number | null = e.w
+        const __h: number | null = e.h
+        w += __w
+        h += __h
+    })
+    let src: number | null = __img_h_view(w_web, w, h)
+    //
+    if (!src || src < (APP_W_DEF - 100)) {
+        src = APP_W_DEF - 100
+    }
+    // console.log('banner h =', src, h, w, w_web.value)
+    return src // + 'px'
+}
+
 export default {
     img_h_view,
     __img_h_view,
@@ -80,4 +100,5 @@ export default {
     group_publish_medias,
     build_activity_plus_data,
     
+    cpu_index_banner_h
 }

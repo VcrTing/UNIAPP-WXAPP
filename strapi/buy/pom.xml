@@ -49,13 +49,12 @@
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>1.1.21</version>
         </dependency>
+
+        <!-- -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version>
-            <scope>runtime</scope>
+            <version>8.0.33</version>  <!-- 可以使用最新版本 -->
         </dependency>
-
-
     </dependencies>
 </project>

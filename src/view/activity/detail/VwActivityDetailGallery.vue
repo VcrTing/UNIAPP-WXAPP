@@ -1,11 +1,8 @@
 <template>
     <view v-if="gallery && gallery.length > 0">
-        
         <view class="pt-s bg-hui"></view>
-
-        <view class="pb-col pt-x2 px-row">
-            <view class="px-col"><text class="sus">详情图片</text></view>
-        </view>
+        <CoMoAdHeader>详情图片</CoMoAdHeader>
+        
         <view class="pt-x1">
             <view v-for="(v, i) in gallery" :key="i"
                 :style="{
@@ -26,6 +23,7 @@ import { uiState } from '@/memory/global';
 import activity_tool from '@/tool/modules/activity_tool';
 import media_tool from '@/tool/modules/media_tool';
 import { computed } from 'vue';
+import CoMoAdHeader from './component/CoMoAdHeader.vue';
 
 const prp = defineProps<{
     one: Activity

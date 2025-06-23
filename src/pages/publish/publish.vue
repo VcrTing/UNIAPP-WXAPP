@@ -29,7 +29,6 @@ import { promise } from '@/tool/util/future';
 import { must_arr, must_int } from '@/tool/util/valued';
 import { storage } from '@/tool/web/storage';
 import VwPublishTabPag from '@/view/publish/publish/VwPublishTabPag.vue';
-import VwPublishTop from '@/view/publish/publish/VwPublishTop.vue';
 import { computed, onMounted, reactive, ref, watch } from 'vue';
 // const prp = defineProps<{}>()
 

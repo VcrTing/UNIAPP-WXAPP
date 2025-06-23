@@ -10,9 +10,8 @@ import { authDispatch } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';
 import { future } from '@/tool/util/future';
 
-// const prp = defineProps<{}>()
 const prp = defineProps<{
-    src: string,
+    src: string | undefined,
     id: number | string | undefined,
     clazz?: string,
     not_mainpage?: boolean

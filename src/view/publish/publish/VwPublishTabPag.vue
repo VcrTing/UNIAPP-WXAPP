@@ -37,10 +37,7 @@ import { onMounted, reactive, ref, watch } from 'vue';
 import VwPptPagHistory from './pag/VwPptPagHistory.vue';
 import VwPptPagWorking from './pag/VwPptPagWorking.vue';
 import VwPptPagWarehouse from './pag/VwPptPagWarehouse.vue';
-import CoHeaderTabs from '@/components/element/tabs/CoHeaderTabs.vue';
-import UiI from '@/ui/element/i/UiI.vue';
 import { future, timeout } from '@/tool/util/future';
-import server_activity from '@/server/activity/server_activity';
 import net_tool from '@/tool/http/net_tool';
 import server_publish from '@/server/publish/server_publish';
 

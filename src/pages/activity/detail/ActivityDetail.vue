@@ -1,23 +1,19 @@
 <template>
     <page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
     <PageLayout>
-        <DetailLayout :h="68">
+        <DetailLayout :toph="h_banner">
             <template #bg>
-                <VwActivityDetailBanner :one="view" :h="'32.2vh'"/>
+                <VwActivityDetailBanner :one="view" :banners="banners" :toph="h_banner"/>
             </template>
             <template #top>
                 <CoAppTopBackBar @back="funn.back" :clazz_i="'c-fff'"></CoAppTopBackBar>
             </template>
             <template #con>
-                <view class="px-row py-s">
-                    <view class="px-col pb-col">
-                        <VwActivityDetailTitle :issm="issm" :one="view"/>
-                    </view>
-                </view>
+                <VwActivityDetailTitle :issm="issm" :one="view"/>
                 
                 <VwActivityDetailAddrTime :one="view"/>
 
-                <view v-if="issm" class="px-col"><VwActivityDetailInvite :one="view"/> </view>
+                <view v-if="issm"><VwActivityDetailInvite :one="view" :joiners="aii.joiners"/> </view>
                 <view v-else><VwActivityDetailJoiner :one="view" :joiners="aii.joiners"
                     v-if="aii.joiners && aii.joiners.length > 0"/></view>
                 
@@ -26,11 +22,7 @@
 
                 <view class="softer" v-if="view.introduction">
                     <view class="pt-s bg-hui"></view>
-                    <view class="px-row">
-                        <view class="px-col">
-                            <VwActivityDetailContent :one="view"/>
-                        </view>
-                    </view>
+                    <VwActivityDetailContent :one="view"/>
                 </view>
                 <view class="softer">
                     <VwActivityDetailGallery :one="view"/>
@@ -63,14 +55,15 @@ import VwActivityDetailPublisher from '@/view/activity/detail/publisher/VwActivi
 import appRouter from '@/tool/uni/app-router';
 import join_tool from '@/tool/modules/join_tool';
 import { futuring, promise } from '@/tool/util/future';
-import server_user from '@/server/user/user/server_user';
 import server_joining from '@/server/activity/server_joining';
+import media_tool from '@/tool/modules/media_tool';
+import { must_one } from '@/tool/util/valued';
 
 const view = computed((): Activity => acyState.view)
 const user = computed(() => authState.user)
 const joins = computed((): ActivityJoin[] => orderState.join_of_mine)
 
-const joiners = computed((): ActivityJoin[] => view.value.activity_registrations || [ ])
+// const joiners = computed((): ActivityJoin[] => view.value.activity_registrations || [ ])
 
 const isjoin = computed((): boolean => join_tool.judge_is_join(joins.value, view.value))
 
@@ -100,7 +93,6 @@ const funn = {
     },
     init: () => promise(() => {
         const src = view.value || { }
-        // console.log('SRC =', src)
         if (!src) {
             appRouter.index()
         }
@@ -111,11 +103,11 @@ const funn = {
     })
 }
 
-onMounted(() => {
-    pan_tooi.close_pan(aii.price_pan_idx)
-})
-
 nextTick(funn.init)
+
+const banners = computed((): ActivityMedia[] => activity_tool.getbanner(must_one<Activity>(view.value)))
+const h_banner = computed((): number => media_tool.cpu_index_banner_h(banners.value, uiState.w))
+
 </script>
 
 

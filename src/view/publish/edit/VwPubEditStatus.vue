@@ -24,12 +24,8 @@
 
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
-import OInput from '@/cake/input/inp/OInput.vue';
-import CkInpItem from '@/cake/input/wrapper/CkInpItem.vue';
 import CoAppConfirm from '@/components/app/confirm/CoAppConfirm.vue';
 import { app_confirm } from '@/conf/conf-app';
-import pan_tooi from '@/tool/app/pan_tooi';
 import { promise } from '@/tool/util/future';
 import UiI from '@/ui/element/i/UiI.vue';
 import { reactive } from 'vue';

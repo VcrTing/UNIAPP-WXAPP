@@ -15,9 +15,10 @@
                 </view>
             </view>
         </view>
-        <view class="h-1 bg-hr"></view>
+        <view class="h-1 bg-hr-s"></view>
+
         <view class="px-row fx-aii-btn-def">
-            <view class="fx-s pb-n pt-s px-col">
+            <view class="fx-s pb-t pt-t px-col">
                 <view class="fx-1 fx-i">
                     <UiI class="h6" :i="'addr'"/>
                     <view class="pi-x1 d-ib">

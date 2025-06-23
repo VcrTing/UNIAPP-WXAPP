@@ -45,7 +45,6 @@
 </template>
 
 <script setup lang="ts">
-import ODiv from '@/cake/button/div/ODiv.vue';
 import OFI from '@/cake/button/i/OFI.vue';
 import OButtonWht from '@/cake/button/OButtonWht.vue';
 import OScrollX from '@/cake/ux/scroll/OScrollX.vue';

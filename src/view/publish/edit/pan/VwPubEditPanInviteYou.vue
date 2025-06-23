@@ -91,11 +91,8 @@
 </template>
 
 <script setup lang="ts">
-import OButtonWht from '@/cake/button/OButtonWht.vue';
-import CkSpace from '@/cake/content/CkSpace.vue';
 import OPan from '@/cake/pan/OPan.vue';
 import OPanInnerY from '@/cake/pan/OPanInnerY.vue';
-import { storage } from '@/tool/web/storage';
 import { computed, nextTick, onMounted, reactive } from 'vue';
 import { timeout } from '@/tool/util/future';
 import pan_tooi from '@/tool/app/pan_tooi';

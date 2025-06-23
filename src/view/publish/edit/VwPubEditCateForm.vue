@@ -27,11 +27,12 @@
                         clazz="fs-s py-t br-rnd px mi" :weak="true">{{ v.name }}</OButton>
                 </view>
             </CkInpItem>
-            <CkInpItem v-if="form.typed == DATA_ACTIVITY_TYPED_GK.v" :tit="'报名费用'" :clazz_tit="'tid'">
+            <!--  v-if="form.typed == DATA_ACTIVITY_TYPED_GK.v" -->
+            <CkInpItem :tit="'报名费用'" :clazz_tit="'tid'">
                 <input class="inp-app ta-r" v-if="canedit" v-model="form.fee" type="number" placeholder="每位参与者的报名费用(￥)"/>
                 <view class="ta-r pr-inp" v-else>{{form.fee}}</view>
             </CkInpItem>
-            <CkInpItem v-if="form.typed == DATA_ACTIVITY_TYPED_GK.v" :tit="'人数限制'" :clazz_tit="'tid'">
+            <CkInpItem :tit="'人数限制'" :clazz_tit="'tid'">
                 <input class="inp-app ta-r" v-if="canedit" v-model="form.participantLimit" type="number" placeholder="每位参与者支付的报名费用"/>
                 <view class="ta-r pr-inp" v-else>{{form.participantLimit}}</view>
             </CkInpItem>

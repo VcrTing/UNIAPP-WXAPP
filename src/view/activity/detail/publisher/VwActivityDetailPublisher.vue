@@ -1,12 +1,10 @@
 <template>
     <view v-if="publisher">
-        <view class="softer" @tap="funn.__to(publisher.id)">
-            <view class="pb pt-x1 px-row">
-                <view class="sus px-col">发布者</view>
-            </view>
-            <view class="fx-i py fx-aii-btn-def px-row">
+        <view class="softer">
+            <CoMoAdHeader>发布者</CoMoAdHeader>
+            <view class="fx-i py fx-aii-btn-def px-row" @tap="funn.__to(publisher.id)">
                 <view class="pi-col h9">
-                    <CkAvatar :clazz="'w-3em h-3em'" :id="publisher.id" :src="publisher.avatarUrl"/>
+                    <CkAvatar v-if="publisher" :clazz="'w-3em h-3em'" :id="publisher.id" :src="publisher.avatarUrl"/>
                 </view>
                 <view class="fx-1 pi-x1">
                     <view class="h9 pt-s">
@@ -70,6 +68,7 @@ import uniRouter from '@/tool/uni/uni-router';
 import { must_arr, must_one } from '@/tool/util/valued';
 import UiI from '@/ui/element/i/UiI.vue';
 import { computed } from 'vue';
+import CoMoAdHeader from '../component/CoMoAdHeader.vue';
 
 const prp = defineProps<{
     one: Activity

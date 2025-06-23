@@ -1,11 +1,14 @@
 <template>
     <view>
-        <view class="pb-col pt-x2">
-            <text class="sus">活动描述</text>
-        </view>
-        <view class="pt-s">
-            <view class="pt pb-x2 h7">
+        <CoMoAdHeader>活动描述</CoMoAdHeader>
+        <view class="pt-s pb coh">
+            <view class="py-s px-row" v-for="(v, i) in contents" :key="i">
+                <view class="px-col">
+                    {{ v }}
+                </view>
+                <!--
                 {{ one.introduction ? one.introduction : one.title }}
+                -->
             </view>
         </view>
     </view>
@@ -13,15 +16,26 @@
 
 <script setup lang="ts">
 import mock_orders from '@/server/mock/order/mock_orders';
-import { must_one } from '@/tool/util/valued';
+import { is_nice_sn, must_arr, must_one } from '@/tool/util/valued';
 import { computed } from 'vue';
+import CoMoAdHeader from './component/CoMoAdHeader.vue';
 
 const prp = defineProps<{
     one: Activity
 }>()
 
-const contents = computed(() => {
-    return mock_orders.content
+const contents = computed((): string[] => {
+    const src = prp.one.introduction ? prp.one.introduction : prp.one.title
+    const res = <string[]>[ ]
+    if (is_nice_sn(src)) {
+        const st = src.split('。')
+        must_arr(st).map((e: string) => {
+            if (e) {
+                res.push(e + '。')
+            }
+        })
+    }
+    return res
 })
 
 const tags = computed((): ActivityTag[] => {

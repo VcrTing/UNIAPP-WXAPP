@@ -24,13 +24,8 @@
 import { computed, reactive } from 'vue';
 import UiI from '@/ui/element/i/UiI.vue';
 import ODashBtn from '@/cake/content/ODashBtn.vue';
-import mock_publish from '@/server/mock/publish/mock_publish';
-import mock_interact from '@/server/mock/interact/mock_interact';
-import mock_meizi from '@/server/mock/user/mock_meizi';
 import mock_user from '@/server/mock/user/mock_user';
 import CoImg from '@/components/media/img/CoImg.vue';
-import CkInpItem from '@/cake/input/wrapper/CkInpItem.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
 
 // const prp = defineProps<{}>()
 

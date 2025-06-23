@@ -151,7 +151,7 @@ export default {
         return must_one<Conf.Tab>(one).name || '状态缺失'
     },
 
-    istyped_sm: (v: Activity): boolean => {
+    istyped_sm: (v: Activity = { }): boolean => {
         const tpd: number = must_int(v.typed)
         return tpd === DATA_ACTIVITY_TYPED_SM.v
     },
