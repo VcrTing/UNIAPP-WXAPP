@@ -40,7 +40,7 @@ const byids = async (ids: string[]): Promise<User[]> => {
 
 const __main_page = async (user: User): Promise<UserMainPage> => {
     console.log("搜索用户的主页 =", user)
-    const activityMedias: ActivityMedia[] = await server_medias.mainpage(user.id + '');
+    const activityMedias: Media[] = await server_medias.mainpage(user.id + '');
     const statistic: UserStatistic = await server_user_statistic.byuser(user.id)
     const src = <UserMainPage>{
         ...statistic, statistic,

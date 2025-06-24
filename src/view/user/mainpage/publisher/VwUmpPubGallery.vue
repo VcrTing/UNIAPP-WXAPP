@@ -14,11 +14,11 @@ import { must_arr } from '@/tool/util/valued';
 import { computed } from 'vue';
 
 const prp = defineProps<{
-    medias: ActivityMedia[]
+    medias: Media[]
 }>()
 
 const gallery = computed(() => {
-    const src: ActivityMedia[] = must_arr(prp.medias)
+    const src: Media[] = must_arr(prp.medias)
     return src
 })
 

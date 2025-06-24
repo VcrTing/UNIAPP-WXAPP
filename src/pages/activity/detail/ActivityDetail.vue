@@ -122,7 +122,7 @@ nextTick(funn.init)
 
 watch(() => view.value, (n, o) => { uniRouter.navigatorpg('index') })
 
-const banners = computed((): ActivityMedia[] => activity_tool.getbanner(must_one<Activity>(view.value)))
+const banners = computed((): Media[] => activity_tool.getbanner(must_one<Activity>(view.value)))
 const h_banner = computed((): number => media_tool.cpu_index_banner_h(banners.value, uiState.w))
 
 const is_publisher = computed((): boolean => {

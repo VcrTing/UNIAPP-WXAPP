@@ -91,7 +91,6 @@
 <script setup lang="ts">
 import OFI from '@/cake/button/i/OFI.vue';
 import OButton from '@/cake/button/OButton.vue';
-import OButtonIht from '@/cake/button/OButtonIht.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import OScrollYFresh from '@/cake/ux/scroll/OScrollYFresh.vue';

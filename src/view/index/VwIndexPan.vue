@@ -1,6 +1,6 @@
 <template>
     <view class="ps-r zi-n">
-        <view class="bg-con pt">
+        <view class="pt-s">
             <VwIndexContTop @result="funn.switchTag"/>
         </view>
         <view class="">
@@ -11,11 +11,9 @@
                 @uprefresh="funn.initing"
                 >
                 <view class="pt-row"></view>
-                <view class="px-row">
-                    <CoViDataLoading :ioading="index.ioading" :items="aii.activities">
-                        <VwIndexContList :activities="aii.activities"/>
-                    </CoViDataLoading>
-                </view>
+                <CoViDataLoading :ioading="index.ioading" :items="aii.activities">
+                    <VwIndexContList :activities="aii.activities"/>
+                </CoViDataLoading>
                 <CkSpace :h="3"/>
                 <view class=" w-100" v-if="index.end">
                     <view class="py-row px-row fx-aii-btn-def fx-c">
@@ -51,7 +49,7 @@ import strapi_param_tool from '@/tool/strapi/strapi_param_tool';
 // const prp = defineProps<{}>()
 
 const aii = reactive({
-    tag: <ActivityTag> { }, ioading: false,
+    tag: <Tag> { }, ioading: false,
     activities: <Activity[]>[ ],
     pager: net_tool.generate_pagination()
 })
@@ -74,7 +72,7 @@ const got = {
             
         }
         //
-        const tagid: string = aii.tag.documentId // must_one<ActivityTag>(option.tag).documentId
+        const tagid: string = aii.tag.documentId // must_one<Tag>(option.tag).documentId
         if (tagid) {
             // res['']
             // strapi_param_tool.__eq(res, 'isRecommended', tagid)
@@ -124,7 +122,7 @@ const funn = {
         aii.activities = src
     }),
 
-    switchTag: (tag: ActivityTag) => {
+    switchTag: (tag: Tag) => {
         aii.tag = tag;
         funn.fetching()
     },

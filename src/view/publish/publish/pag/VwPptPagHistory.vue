@@ -46,22 +46,18 @@
 </template>
 
 <script setup lang="ts">
-import ODiv from '@/cake/button/div/ODiv.vue';
 import OFI from '@/cake/button/i/OFI.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
 import OPan from '@/cake/pan/OPan.vue';
 import OPanInnerY from '@/cake/pan/OPanInnerY.vue';
 import CoMoPublishViewItem from '@/components/modules/publish/CoMoPublishViewItem.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
 import { DATA_ACTIVITY_STATUS, DATA_ACTIVITY_STATUS_DEF } from '@/conf/conf-datas';
-import mock_publish from '@/server/mock/publish/mock_publish';
 import server_publish from '@/server/publish/server_publish';
 import pan_tooi from '@/tool/app/pan_tooi';
 import net_tool from '@/tool/http/net_tool';
 import activity_tool from '@/tool/modules/activity_tool';
 import { future, timeout } from '@/tool/util/future';
 import { arrfind } from '@/tool/util/iodash';
-import UiI from '@/ui/element/i/UiI.vue';
 import { computed, nextTick, reactive } from 'vue';
 
 const pan = { idx: 20, hui: <ElePanHui>{ opacity: 0 } }

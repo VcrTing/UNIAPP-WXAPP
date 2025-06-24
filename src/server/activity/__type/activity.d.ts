@@ -20,8 +20,8 @@ interface Activity {
     activity_registrations: ActivityJoin[]
     activity_invites: ActivityInvite[]
     activity_address: ActivityAddress
-    activity_medias: ActivityMedia[]
-    activity_tags: ActivityTag[]
+    activity_medias: Media[]
+    activity_tags: Tag[]
     publisher: User
 
     typed: number
@@ -36,12 +36,18 @@ interface Activity {
     search: string
 }
 
-interface ActivityTag {
+interface Tag {
+    id: number
     documentId: string
+
     name: string 
+    cover: string
+
     handsome: number
-    
-    documentId: string
+    indexLevel: number
+
+    isMain: number
+    dataStatus: number
 
     __clazz_die: string
     __clazz_iive: string

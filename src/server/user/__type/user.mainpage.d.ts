@@ -13,8 +13,8 @@ interface UserMainPage {
     statistic: UserStatistic
 
     user: User
-    tags: ActivityTag[]
-    activityMedias: ActivityMedia[]
+    tags: Tag[]
+    activityMedias: Media[]
 }
 
 interface UserStatistic {

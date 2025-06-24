@@ -4,6 +4,7 @@ import { deepcopy, formfiimit, group_search_txt, must_arr, must_int, must_one, p
 import { authGetters } from "@/memory/global"
 import times from "../web/times"
 import address_tool from "./address_tool"
+import { DEV_K } from "@/conf/conf-dev"
 
     // 0-待完善, 1-审核中, 2-已发布, 3-已取消, 4-已结束, 5-已下架
 
@@ -76,14 +77,14 @@ import address_tool from "./address_tool"
     const group_search_field = (
         activity: Activity | ONE,
         addr: ActivityAddress,
-        tags: ActivityTag[]
+        tags: Tag[]
     ) => {
         let s: string = '_'
         s += (group_search_txt(activity.title))
         s += (group_search_txt(addr.address))
         s += (group_search_txt(addr.city))
         s += (group_search_txt(addr.area))
-        must_arr(tags).map((e: ActivityTag) => {
+        must_arr(tags).map((e: Tag) => {
             const __s: string = e.search || ''
             s += (group_search_txt(__s))
             return e;
@@ -102,21 +103,21 @@ export default {
         return positive(must_int(lm - ln));
     },
 
-    getbanner: (v: Activity): ActivityMedia[] => {
-        const mds: ActivityMedia[ ] = must_arr(v.activity_medias)
-        const res: ActivityMedia[ ] = mds.filter(e => !e.isGallery)
+    getbanner: (v: Activity): Media[] => {
+        const mds: Media[ ] = must_arr(v.activity_medias)
+        const res: Media[ ] = mds.filter(e => !e.isGallery)
         return must_arr(res)
     },
-    getgallery: (v: Activity): ActivityMedia[] => {
-        const mds: ActivityMedia[ ] = must_arr(v.activity_medias)
-        const res: ActivityMedia[ ] = mds.filter(e => e.isGallery)
+    getgallery: (v: Activity): Media[] => {
+        const mds: Media[ ] = must_arr(v.activity_medias)
+        const res: Media[ ] = mds.filter(e => e.isGallery)
         return must_arr(res)
     },
-    getindex_banner: (v: Activity): ActivityMedia[] => {
-        const mds: ActivityMedia[ ] = must_arr(v.activity_medias)
+    getindex_banner: (v: Activity): Media[] => {
+        const mds: Media[ ] = must_arr(v.activity_medias)
         //
-        const banners: ActivityMedia[ ] = mds.filter(e => !e.isGallery)
-        const gallery: ActivityMedia[ ] = mds.filter(e => e.isGallery)
+        const banners: Media[ ] = mds.filter(e => !e.isGallery)
+        const gallery: Media[ ] = mds.filter(e => e.isGallery)
         return arrimit([ ...banners, ...gallery ], 3)
     },
     getweek, gettime_start, gettime_end,
@@ -151,7 +152,7 @@ export default {
         return must_one<Conf.Tab>(one).name || '状态缺失'
     },
 
-    istyped_sm: (v: Activity = { }): boolean => {
+    istyped_sm: (v = <Activity>{ }): boolean => {
         const tpd: number = must_int(v.typed)
         return tpd === DATA_ACTIVITY_TYPED_SM.v
     },

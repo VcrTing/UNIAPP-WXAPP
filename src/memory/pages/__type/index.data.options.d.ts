@@ -2,7 +2,7 @@
 namespace Page {
 
     interface IndexDataActivityOption {
-        tag: ActivityTag
+        tag: Tag
         pager: Pager
     }
 

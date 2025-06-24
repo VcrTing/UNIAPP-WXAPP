@@ -81,8 +81,8 @@ import media_tool from '@/tool/modules/media_tool';
 
 // const prp = defineProps<{}>()
 const form = reactive({
-    title: '', tags: <ActivityTag[]>[ ], taglimit: 3,
-    __banner: <ActivityMedia[]>[ ]
+    title: '', tags: <Tag[]>[ ], taglimit: 3,
+    __banner: <Media[]>[ ]
 })
 
 const taglen = computed(() => must_arr(form.tags).length)
@@ -96,7 +96,7 @@ const aii = reactive({
 })
 
 const funn = {
-    trashTag: (v: ActivityTag) => {
+    trashTag: (v: Tag) => {
         const i = arrfindi(form.tags, v.documentId, 'documentId')
         form.tags.splice(i, 1)
     },
@@ -128,7 +128,7 @@ const funn = {
         aii.paths.push(...ps)
         for (let j= 0; j< ps.length; j++ ) {
             const p = ps[j]
-            const res: ActivityMedia = await server_upload_media.activity(p, aii.data);
+            const res: Media = await server_upload_media.activity(p, aii.data);
             const op: Form.UploadImage = media_tool.generate_upload_img(p, fs[j], res)
             // details.push(op); 
             aii.success.push(op);
@@ -137,7 +137,7 @@ const funn = {
     },
     vid: () => {
         const iives = aii.success.filter(f => f.__iive);
-        form.__banner = iives.map((e) => (e.data as ActivityMedia))
+        form.__banner = iives.map((e) => (e.data as Media))
 
         if (!is_nice_arr(form.__banner)) {
             tipwarn('请至少上传一张活动宣传图。')

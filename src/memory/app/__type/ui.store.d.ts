@@ -14,6 +14,12 @@ interface UiStore {
     h: number
 }
 
+interface UiGatters {
+    ispc: boolean
+    ispad: boolean
+    isphone: boolean
+}
+
 type UI_STORE_FIELD = 
     'root_font_size' | 'root_font_size_coefficient'
 

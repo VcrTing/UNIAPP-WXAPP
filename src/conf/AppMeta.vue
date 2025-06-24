@@ -7,11 +7,12 @@
 <script setup lang="ts">
 import { uiDispatch } from '@/memory/global';
 import { future, promising, timeout } from '@/tool/util/future';
+import { W } from './conf-dev';
 
 const func = {
-	isPc: (w: number = 0) => (w > 1099),
-	isPad: (w: number = 0) => (w > 699 && w < 1099),
-	isPhone: (w: number = 0) => (w <= 699),
+	isPc: (w: number = 0) => (w > W.PC),
+	isPad: (w: number = 0) => (w > W.PAD && w <= W.PC),
+	isPhone: (w: number = 0) => (w <= W.PAD),
 }
 
 const init = () => future(async () => {

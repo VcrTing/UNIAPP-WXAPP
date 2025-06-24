@@ -1,10 +1,13 @@
 
-interface ActivityMedia {
+interface Media {
     id: number
     documentId: string
     url: string
     urlSmall: string
-    activity: string | number
+    sortOrder: number
+    // activity: string | number
+    isSex: 0 | 1
+    isFrezz: 0 | 1
     isGallery: 0 | 1
     mediaType: number
     w: number

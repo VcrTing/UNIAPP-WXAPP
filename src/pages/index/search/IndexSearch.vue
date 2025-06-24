@@ -4,12 +4,14 @@
         <CoAppTopBar :clazz="'bg-con'" :mat="true">
             <view class="ps-r zi-t fx-s pi">
                 <view class="abs-i middie zi-n">
-                    <view @tap="uniRouter.back" class="fx-aii-btn-def px-row w-3em h-3em br-cir fx-c"><UiI i="i"/> </view>
+                    <view @tap="uniRouter.back" class="fx-aii-btn-def px-row w-3em h-3em br-cir fx-c c-p"><UiI i="i"/> </view>
                 </view>
-                <view class="fx-i w-80 pi-x3 py-s">
-                    <input @blur="funn.submit" class="fx-1 px mh-btn br-s btn-def" v-model="aii.search" placeholder="请输入您的喜好"/>
-                    <view class="px" @tap="funn.submit">
-                        <OButton :weak="true" color="def" clazz="px-col py-col br-s">搜索</OButton>
+                <view class="w-80 pi-x3 py-s">
+                    <view class="fx-i pi-s w-100">
+                        <input @blur="funn.submit" class="fx-1 px mh-btn br-s btn-def" v-model="aii.search" placeholder="请输入您的喜好"/>
+                        <view class="px" @tap="funn.submit">
+                            <OButton :weak="true" color="def" clazz="px-col py-col br-s">搜索</OButton>
+                        </view>
                     </view>
                 </view>
                 <view class="fx-1"></view>
@@ -37,7 +39,7 @@ import CoAppTopBar from '@/components/app/bar/CoAppTopBar.vue';
 import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
-import { orderDispatch, orderState, uiState } from '@/memory/global';
+import { uiState } from '@/memory/global';
 import server_search from '@/server/activity/server_search';
 import net_tool from '@/tool/http/net_tool';
 import uniRouter from '@/tool/uni/uni-router';

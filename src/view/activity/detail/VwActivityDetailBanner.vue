@@ -18,7 +18,7 @@
 <script setup lang="ts">
 const prp = defineProps<{
     one: Activity,
-    banners: ActivityMedia[]
+    banners: Media[]
     toph: number
 }>()
 

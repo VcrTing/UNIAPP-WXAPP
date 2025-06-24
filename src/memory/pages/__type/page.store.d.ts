@@ -3,7 +3,7 @@ namespace Page {
         city: Conf.City
         
         ioading: number
-        indextags: ActivityTag[]
+        indextags: Tag[]
 
         index_pager: Pager
         index_activities: Activity[]

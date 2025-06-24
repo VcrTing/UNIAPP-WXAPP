@@ -15,7 +15,6 @@
 </template>
 
 <script setup lang="ts">
-import OButtonDef from '@/cake/button/OButtonDef.vue';
 
 const prp = defineProps<{
     num?: number,

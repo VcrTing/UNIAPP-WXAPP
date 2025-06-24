@@ -173,7 +173,7 @@ const func = {
 
 const form = reactive({
     title: '', typed: DATA_ACTIVITY_TYPED_GK.v, addrdata: null,
-    tags: <ActivityTag[]>[ ], taglimit: DATA_ACTIVITY_TAG_LIMIT, fee: null, introduction: '',
+    tags: <Tag[]>[ ], taglimit: DATA_ACTIVITY_TAG_LIMIT, fee: null, introduction: '',
     longitude: null, latitude: null, address: null, city: null, area: null,
     endJoinTime: new Date(), participantLimit: DATA_ACTIVITY_JOINER_LIMIT,
     __start: <Co.TimePieckerForm>{ year: 0, month: 0, day: 0, hour: 0, minute: 0 },

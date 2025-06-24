@@ -1,16 +1,20 @@
 <template>
-    <view>
-        <view v-for="(v, i) in activities" :key="i" class="br pb-row w-100">
-            <CoMoIndexActivityItem @detail="funn.detail" :v="v"
-                :joins="joins"
-            />
+    <view :class="isphone ? 'px-row' : 'px-row'">
+        <view :class="isphone ? '' : 'row'">
+            <view v-for="(v, i) in activities" :key="i" class="br pb-row"
+                :class="w_clazz"
+            >
+                <CoMoIndexActivityItem @detail="funn.detail" :v="v"
+                    :joins="joins"
+                />
+            </view>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
 import CoMoIndexActivityItem from '@/components/modules/index/CoMoIndexActivityItem.vue';
-import { orderState } from '@/memory/global';
+import { orderState, uiGetters, uiState } from '@/memory/global';
 import open_of_activity from '@/server/__func/open_of_activity';
 import { future, futuring } from '@/tool/util/future';
 import { computed, reactive } from 'vue';
@@ -18,6 +22,15 @@ import { computed, reactive } from 'vue';
 const prp = defineProps<{
     activities: Activity[]
 }>()
+
+const isphone = computed((): boolean => uiGetters.isphone)
+const ispc = computed((): boolean => uiGetters.ispc)
+
+const w_clazz = computed((): string => {
+    if (isphone.value) return 'w-100'
+    if (ispc.value) return 'w-333 px-s d-ib'
+    return 'w-50 px-s d-ib'
+})
 
 const aii = reactive({ ioading: false })
 

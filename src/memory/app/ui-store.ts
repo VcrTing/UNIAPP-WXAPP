@@ -1,4 +1,5 @@
 
+import { W } from '@/conf/conf-dev';
 import { Store, createStore } from 'vuex';
 
 const DEF_CAPACITY = 14
@@ -10,10 +11,12 @@ const _uiStore: Store<UiStore> = createStore({
         root_font_size: 16,
         root_font_size_coefficient: 16,
         w: 375,
-        h: 750
+        h: 750,
     },
     getters: {
-
+        ispc: s => (s.platform === 'pc'),
+        ispad: s => (s.platform === 'pad'),
+        isphone: s => (s.platform === 'phone'),
     },
     mutations: {
         change: (s: ONE, v: ANYS) => s[ v[0] ] = v[1]
@@ -33,9 +36,24 @@ const _uiStore: Store<UiStore> = createStore({
         //
         asyncwh: async ({ state }) => {
             const info = await uni.getSystemInfo()
-            state.w = info.screenWidth || 375;
-            state.h = info.windowWidth || 750;
-        }
+            const w: number = info.screenWidth || 375;
+            const h: number = info.windowWidth || 750;
+
+            state.w = w 
+            state.h = h
+            if (w > W.PC) {
+                state.platform = 'pc'
+            }
+            else {
+                if (w > W.PAD) {
+                    state.platform = 'pad'
+                }
+                else {
+                    state.platform = 'phone'
+                }
+            }
+            console.log('平台 === ', state.platform)
+        },
     }
 })
 

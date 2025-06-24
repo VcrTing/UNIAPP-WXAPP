@@ -46,7 +46,7 @@
                     </view>
                 </view>
                 <view class="br o-h fx-s" v-else-if="gallerylen > 2">
-                    <view class="w-33 h-14vh" v-for="(m, n) in gallery" :key="n">
+                    <view class="w-333 h-14vh" v-for="(m, n) in gallery" :key="n">
                         <CoImg :clazz="'h-14vh'" :src="m.url"/>
                     </view>
                 </view>
@@ -99,7 +99,7 @@ const prp = defineProps<{
     joins: ActivityJoin[ ]
 }>()
 
-const gallery = computed((): ActivityMedia[] => {
+const gallery = computed((): Media[] => {
     return activity_tool.getindex_banner(prp.v)
 })
 

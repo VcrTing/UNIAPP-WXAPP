@@ -4,17 +4,23 @@
             <view class="fx-s">
                 <view class="w-30 fx-c">
                     <CoMoMsgMainItem :tit="'活动消息'" @tap="appRouter.msg_activity">
-                        <OButtonIht :clazz="'w-3em h-3em h7'"><UiI clazz="h5" :i="'user'"/></OButtonIht>
+                        <OButton color="pri-iht" :clazz="'br-cir'" :weak="true">
+                            <view class="w-3em h-3em h7 fx-c"><UiI clazz="h5" i='user'/></view>
+                        </OButton>
                     </CoMoMsgMainItem>
                 </view>
                 <view class="w-30 fx-c">
                     <CoMoMsgMainItem :num="1" :tit="'邀请我'" @tap="appRouter.msg_yaoqing">
-                        <OButtonIht :clazz="'w-3em h-3em h7'"><UiI clazz="h5" :i="'user'"/></OButtonIht>
+                        <OButton color="pri-iht" :clazz="'br-cir'" :weak="true">
+                            <view class="w-3em h-3em h7 fx-c"><UiI clazz="h5" i='user'/></view>
+                        </OButton>
                     </CoMoMsgMainItem>
                 </view>
                 <view class="w-30 fx-c">
                     <CoMoMsgMainItem :tit="'系统公告'" @tap="appRouter.msg_gonggao">
-                        <OButtonIht :clazz="'w-3em h-3em h7'"><UiI clazz="h5" :i="'user'"/></OButtonIht>
+                        <OButton color="pri-iht" :clazz="'br-cir'" :weak="true">
+                            <view class="w-3em h-3em h7 fx-c"><UiI clazz="h5" i='user'/></view>
+                        </OButton>
                     </CoMoMsgMainItem>
                 </view>
             </view>
@@ -23,7 +29,9 @@
             <CkIconAndBomLineItem @tap="appRouter.msg_notify">
                 <template #i>
                     <view class="pt-s pr">
-                        <OButtonIht :clazz="'w-3em h-3em'"><UiI clazz="h6" :i="'user'"/></OButtonIht>
+                        <OButton color="pri-iht" :clazz="'br-cir'" :weak="true">
+                            <view class="w-3em h-3em h6 fx-c"><UiI clazz="h5" i='user'/></view>
+                        </OButton>
                     </view>
                 </template>
                 <template #con>
@@ -35,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import OButtonIht from '@/cake/button/OButtonIht.vue';
+import OButton from '@/cake/button/OButton.vue';
 import CkIconAndBomLineItem from '@/cake/content/item/CkIconAndBomLineItem.vue';
 import UiI from '@/ui/element/i/UiI.vue';
 import CoMoMsgShowItem from '../__component/CoMoMsgShowItem.vue';

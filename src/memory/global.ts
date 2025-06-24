@@ -11,7 +11,7 @@ import activity from './activity/activty-store'
 // UI
 export const uiStore: Store<UiStore> = ui
 export const uiState: UiStore = ui.state
-export const uiGetters: ONE = ui.getters
+export const uiGetters: UiGatters = ui.getters
 export const uiCommit: Function = ui.commit
 export const uiDispatch: Function = ui.dispatch
 export const uiReFresh: (n: UI_STORE_FIELD, v: any) => void = 

@@ -90,10 +90,10 @@ const funn = {
             const res = await server_pubplus.plus(fom)
             const acvdocid = must_one<Activity>(res).documentId || undefined
             if (acvdocid) {
-                const linkms: ActivityMedia[ ] = src.__banner
+                const linkms: Media[ ] = src.__banner
                 for (let j= 0; j< linkms.length; j++ ) {
-                    const ms: ActivityMedia = media_tool.build_activity_plus_data(linkms[j], acvdocid);
-                    const __res: ActivityMedia = await server_pubplus.plus_media(ms)
+                    const ms: Media = media_tool.build_activity_plus_data(linkms[j], acvdocid);
+                    const __res: Media = await server_pubplus.plus_media(ms)
                     // console.log('连接结果 =', __res)
                 }
                 funn.success()

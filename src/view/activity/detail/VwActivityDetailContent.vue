@@ -34,7 +34,7 @@ const contents = computed((): string[] => {
     return res
 })
 
-const tags = computed((): ActivityTag[] => {
+const tags = computed((): Tag[] => {
     return must_one<Activity>(prp.one).activity_tags || [ ]
 })
 </script>

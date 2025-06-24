@@ -49,12 +49,12 @@ const _s: Store<Page.IndexPageStore> = createStore({
 
         // 提前刷新 首页 TAGS
         freshtags: async (c: ONE) => {
-            const origins: ActivityTag[] = c.state.indextags || [ ]
+            const origins: Tag[] = c.state.indextags || [ ]
             if (is_nice_arr(origins)) {
                 console.log('无需刷新首页 TAGS')
             }
             else {
-                const src: ActivityTag[] = arrsort(await server_tags.index(), 'handsome')
+                const src: Tag[] = arrsort(await server_tags.index(), 'handsome')
                 console.log('刷新首页 TAGS =', src)
                 c.commit('change', [ 'indextags', src ])
             }

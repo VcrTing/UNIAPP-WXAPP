@@ -8,7 +8,7 @@ import strapi_media_tool from "@/tool/strapi/strapi_media_tool"
 import { upload_file } from "@/tool/uni/uni-app"
 
 // 上传文件
-const activity = async (path: string, data: ONE = { }): Promise<ActivityMedia> => {
+const activity = async (path: string, data: ONE = { }): Promise<Media> => {
     const url = __net_file_url('any')
     const src: NET_RES = await upload_file(url, path, data)
     return net_tool.data(src);

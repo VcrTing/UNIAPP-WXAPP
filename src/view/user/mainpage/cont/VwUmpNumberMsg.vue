@@ -36,8 +36,8 @@ const prp = defineProps<{
     data: UserMainPage
 }>()
 
-const tags = computed((): ActivityTag[] => {
-    let src: ActivityTag[] = must_arr(prp.data.tags)
+const tags = computed((): Tag[] => {
+    let src: Tag[] = must_arr(prp.data.tags)
     src = src.length <= 0 ? pageIndexState.indextags : src
     return arrimit(src, 5)
 })

@@ -1,9 +1,9 @@
 <template>
     <view class="fx-s">
         <view class="w-25">
-            <OButtonDef clazz="mh-btn w-100" @tap="emt('cancle')">
+            <OButton color="def" :weak="true" clazz="btn-app" @tap="emt('cancle')">
                 {{ tit_ciose ? tit_ciose : '返回' }}
-            </OButtonDef>
+            </OButton>
         </view>
         <view class="pi-row fx-1">
             <OButton :ioading="ioading" clazz="mh-btn" @tap="emt('submit')">
@@ -15,7 +15,6 @@
 
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
 
 const prp = defineProps<{
     tit?: string,

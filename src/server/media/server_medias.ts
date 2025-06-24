@@ -9,15 +9,15 @@ import { is_arr, is_str } from "@/tool/util/typed"
 
 const relations = <string[]>[  ]
 
-const fetching = async (param: ONE, pager: Pager): Promise<ActivityMedia[]> => {
+const fetching = async (param: ONE, pager: Pager): Promise<Media[]> => {
     const __pm: ONE = net_tool.build_param(param, pager, relations)
     const src: NET_RES = await master.get('activity-media', null, __pm)
     if (is_str(src)) return netip(src, [ ]);
     const res: ONE | MANY = (src as HttpResult).data
-    return net_tool.many<ActivityMedia>(res as ONE)
+    return net_tool.many<Media>(res as ONE)
 }
 
-const mainpage = async (userid: string): Promise<ActivityMedia[]> => {
+const mainpage = async (userid: string): Promise<Media[]> => {
     return await fetching({ }, net_tool.generate_pagination(24))
 }
 

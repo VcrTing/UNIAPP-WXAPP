@@ -3,7 +3,7 @@
         <view class="px-row softer">
             <view><text class="header-s">当前城市</text></view>
             <view class="py">
-                <OButtonDef :weak="true" clazz="mw-6em py-s">{{ city.name }}</OButtonDef>
+                <OButton color="def" :weak="true" clazz="mw-6em py-s">{{ city.name }}</OButton>
             </view>
         </view>
         <view class="px-row softer pt-x2">
@@ -24,7 +24,6 @@
 
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
 import { DATA_CITY_DEF, DATA_CITYS } from '@/conf/conf-datas';
 import { pageIndexState } from '@/memory/page';
 import { promise } from '@/tool/util/future';

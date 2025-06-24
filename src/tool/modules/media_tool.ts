@@ -1,14 +1,14 @@
 import { APP_W_DEF } from "@/conf/conf-dev"
 import { is_nice_arr, must_arr } from "../util/valued"
 
-const generate_upload_img = (path: string, file: File, media: ActivityMedia): Form.UploadImage => {
+const generate_upload_img = (path: string, file: File, media: Media): Form.UploadImage => {
     return {
         path, file, link: media.url, data: media,
         __iive: true
     }
 }
 
-const replace_upload_img = (src: Form.UploadImage, data: ActivityMedia): Form.UploadImage => {
+const replace_upload_img = (src: Form.UploadImage, data: Media): Form.UploadImage => {
     const ph: string = src.link || ''
     if (ph == data.urlSmall) {
         src.data = data
@@ -19,9 +19,9 @@ const replace_upload_img = (src: Form.UploadImage, data: ActivityMedia): Form.Up
     return src
 }
 
-const convert_upload_imgs = (srcs: ActivityMedia[]): Form.UploadImages => {
+const convert_upload_imgs = (srcs: Media[]): Form.UploadImages => {
     if (is_nice_arr(srcs)) {
-        return srcs.map((e: ActivityMedia) => {
+        return srcs.map((e: Media) => {
             return <Form.UploadImage>{
                 path: e.urlSmall, link: e.url, data: e,
                 __iive: true, file: null
@@ -31,8 +31,8 @@ const convert_upload_imgs = (srcs: ActivityMedia[]): Form.UploadImages => {
     return [ ]
 }
 
-const build_activity_plus_data = (origin: ActivityMedia, activityDocumentId: string | number): ActivityMedia => {
-    return <ActivityMedia>{
+const build_activity_plus_data = (origin: Media, activityDocumentId: string | number): Media => {
+    return <Media>{
         url: origin.url,
         urlSmall: origin.urlSmall,
         mediaType: origin.mediaType,
@@ -43,16 +43,16 @@ const build_activity_plus_data = (origin: ActivityMedia, activityDocumentId: str
     }
 }
 
-const group_publish_medias = (banner: Form.UploadImages, gallery: Form.UploadImages): ActivityMedia[] => {
-    const bns: ActivityMedia[] = must_arr(banner).filter((e: Form.UploadImage) => e.__iive)
-        .map((e: Form.UploadImage) => (e.data as ActivityMedia))
-    const gss: ActivityMedia[] = must_arr(gallery).filter((e: Form.UploadImage) => e.__iive)
-        .map((e: Form.UploadImage) => (e.data as ActivityMedia))
+const group_publish_medias = (banner: Form.UploadImages, gallery: Form.UploadImages): Media[] => {
+    const bns: Media[] = must_arr(banner).filter((e: Form.UploadImage) => e.__iive)
+        .map((e: Form.UploadImage) => (e.data as Media))
+    const gss: Media[] = must_arr(gallery).filter((e: Form.UploadImage) => e.__iive)
+        .map((e: Form.UploadImage) => (e.data as Media))
     return [ ...bns, ...gss ]
 }
 
-const group_medias_ids = (medias: ActivityMedia[]) => {
-    return must_arr(medias).map((e: ActivityMedia) => {
+const group_medias_ids = (medias: Media[]) => {
+    return must_arr(medias).map((e: Media) => {
         return e.documentId || ''
     }).filter((e: string) => (e != ''))
 }
@@ -70,10 +70,10 @@ const img_h_view = (w_wrapper: number, w_img: number, h_img: number): string => 
 }
 
 // 计算首页 banenr 高度
-const cpu_index_banner_h = (banners: ActivityMedia[], w_web: number = APP_W_DEF): number => {
+const cpu_index_banner_h = (banners: Media[], w_web: number = APP_W_DEF): number => {
     let w = 0
     let h = 0
-    banners.map((e: ActivityMedia) => {
+    banners.map((e: Media) => {
         const __w: number | null = e.w
         const __h: number | null = e.h
         w += __w

@@ -93,22 +93,22 @@ const funn = {
             tipwarn('图片上传数量，已达最大限度。')
             return
         }
-        const need: ActivityMedia[] = [ ]
+        const need: Media[] = [ ]
         for (let j= 0; j< ps.length; j++ ) {
             const p = ps[j]
-            const res: ActivityMedia = await server_upload_media.activity(p, aii.data);
+            const res: Media = await server_upload_media.activity(p, aii.data);
             const op: Form.UploadImage = media_tool.generate_upload_img(p, fs[j], res)
             aii.success.push(op);
-            need.push(op.data as ActivityMedia)
+            need.push(op.data as Media)
         }
         tipsucc('文件上传成功。')
         await funn.asyncImg(need);
     }),
     // 换成 strapi 的图片数据
-    asyncImg: async (src: ActivityMedia[]) => {
+    asyncImg: async (src: Media[]) => {
         for (let j= 0; j< src.length; j++ ) {
             const v = src[j]
-            const res: ActivityMedia = await server_pubplus.plus_media(media_tool.build_activity_plus_data(v, prp.documentId))
+            const res: Media = await server_pubplus.plus_media(media_tool.build_activity_plus_data(v, prp.documentId))
             if (res.documentId) {
                 const i: number = arrfindi(aii.success, res.urlSmall, 'link')
                 console.log('对比 =', res, i, aii.success[i])

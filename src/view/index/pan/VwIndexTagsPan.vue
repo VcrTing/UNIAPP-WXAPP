@@ -68,19 +68,19 @@ import { computed, nextTick, reactive } from 'vue';
 
 const prp = defineProps<{
     idx: number,
-    active: ActivityTag
+    active: Tag
 }>()
 
 const aii = reactive({
-    ioading: false, cache: <ActivityTag[]>[],
-    chose: <ActivityTag>{ }
+    ioading: false, cache: <Tag[]>[],
+    chose: <Tag>{ }
 })
 
-const indextags = computed((): ActivityTag[] => pageIndexState.indextags)
+const indextags = computed((): Tag[] => pageIndexState.indextags)
 
 const funn = {
-    switchTag: (v: ActivityTag) => { aii.chose = v },
-    iive: (v: ActivityTag) => { 
+    switchTag: (v: Tag) => { aii.chose = v },
+    iive: (v: Tag) => { 
         const src: boolean = v.documentId === prp.active.documentId 
         if (src) return src;
         return v.documentId === aii.chose.documentId
@@ -91,9 +91,9 @@ const funn = {
         funn.close()
     }),
     init: () => futuring(aii, async () => {
-        const tags: ActivityTag[] = await server_tags.all()
+        const tags: Tag[] = await server_tags.all()
         if (is_nice_arr(tags)) {
-            aii.cache = arrsaixuan<ActivityTag>(tags, indextags.value)
+            aii.cache = arrsaixuan<Tag>(tags, indextags.value)
         }
         // 
         aii.chose = prp.active

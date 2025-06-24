@@ -23,12 +23,12 @@ const edit = async (form: ONE, origin: ONE): Promise<Activity> => {
     return net_tool.one<Activity>(res)
 } 
 
-const plus_media = async (media: ActivityMedia): Promise<ActivityMedia> => {
+const plus_media = async (media: Media): Promise<Media> => {
     const __pm: ONE = net_tool.build_data(media)
     const src: NET_RES = await master.pos('activity-media', null, __pm)
-    if (is_str(src)) return netip(src, <ActivityMedia>{ });
+    if (is_str(src)) return netip(src, <Media>{ });
     const res: ONE | MANY = (src as HttpResult).data
-    return net_tool.one<ActivityMedia>(res)
+    return net_tool.one<Media>(res)
 }
 
 const deleted = async (documentId: string): Promise<Activity> => {

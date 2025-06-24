@@ -27,20 +27,15 @@
 
 <script setup lang="ts">
 import PageLayout from '@/components/layout/page/PageLayout.vue';
-import VwUserCenterTop from '@/view/user/center/VwUserCenterTop.vue';
 import { authState, uiState } from '@/memory/global';
 import { computed } from 'vue';
 import UserFaceLayout from '@/components/layout/detail/UserFaceLayout.vue';
 import VwInteractUserInfo from '@/view/interact/detail/VwInteractUserInfo.vue';
-import CoBomCenterBtn from '@/components/element/button/CoBomCenterBtn.vue';
 import VwInteractMoney from '@/view/interact/detail/VwInteractMoney.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import uniRouter from '@/tool/uni/uni-router';
 import VwInteractCon from '@/view/interact/detail/VwInteractCon.vue';
-import OButton from '@/cake/button/OButton.vue';
-import OFI from '@/cake/button/i/OFI.vue';
-import CoMoUserOptionBtn from '@/components/modules/user/CoMoUserOptionBtn.vue';
 import CoBomBtnGroup from '@/components/element/button/CoBomBtnGroup.vue';
 import OSafeAreaBottom from '@/cake/app/safearea/OSafeAreaBottom.vue';
 

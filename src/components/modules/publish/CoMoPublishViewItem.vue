@@ -45,7 +45,7 @@ const prp = defineProps<{
 
 const funn = {
     get_banner_src: (v: Activity): string => {
-        const one: ActivityMedia = must_one(activity_tool.getbanner(v)[0]);
+        const one: Media = must_one(activity_tool.getbanner(v)[0]);
         return one.url || DATA_ACTIVITY_BANNER_DEF.url
     }
 }

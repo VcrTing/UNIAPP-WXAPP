@@ -62,12 +62,12 @@ const prp = defineProps<{
     form: ONE
 }>()
 
-const choises = computed((): ActivityTag[] => {
+const choises = computed((): Tag[] => {
     return must_one<ONE>(prp.form).tags
 })
 
 const aii = reactive({
-    items: <ActivityTag[]>[ ], ioading: false
+    items: <Tag[]>[ ], ioading: false
 })
 
 const tags = computed(() => {
@@ -75,11 +75,11 @@ const tags = computed(() => {
 })
 
 const funn = {
-    where: (v: ActivityTag): number => arrfindi(choises.value || [], v.documentId, 'documentId'),
-    has: (v: ActivityTag) => {
+    where: (v: Tag): number => arrfindi(choises.value || [], v.documentId, 'documentId'),
+    has: (v: Tag) => {
         return funn.where(v) >= 0
     },
-    chose: (v: ActivityTag, i: number) => {
+    chose: (v: Tag, i: number) => {
         if (funn.has(v)) {
             funn.kiii(v)
         }
@@ -94,7 +94,7 @@ const funn = {
             }
         }
     },
-    kiii: (v: ActivityTag) => {
+    kiii: (v: Tag) => {
         const i: number = funn.where(v)
         prp.form.tags.splice(i, 1)
     }
@@ -106,7 +106,7 @@ const func = {
     },
     init: () => future(async () => {
         aii.ioading = true
-        const dts: ActivityTag[] = await server_tags.all()
+        const dts: Tag[] = await server_tags.all()
         aii.items = arrsort(dts, 'indexLevel')
         timeout(() => aii.ioading = false)
     })

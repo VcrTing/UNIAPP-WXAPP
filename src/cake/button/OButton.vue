@@ -1,5 +1,5 @@
 <template>
-    <view class="btn bd tils fx-c ani-scaie-aii" :class="cls">
+    <view class="btn bd tils fx-c ani-scaie-aii c-p" :class="cls">
         <view v-if="!weak" class="ts mr" :class="ioading ? 'o-o-s' : 'o-o-h'">
             <CkIoading/>
         </view>

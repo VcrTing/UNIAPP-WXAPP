@@ -12,7 +12,7 @@ interface User {
     socialAccount: string
 }
 
-type UserMedia = ActivityMedia
+type UserMedia = Media
 
 
 interface UserLove {
