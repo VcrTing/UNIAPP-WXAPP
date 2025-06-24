@@ -2,14 +2,16 @@
     <view class="fx-s fx-t ps-r zi-m w-100" >
         <view class="card w-100 br px-col py-col">
             <view class="py-col" @tap="emt('detail', v)">
-                <view class="fw-600 h5 hih tils-x1">{{ v.title }}</view>
+                <view class="fw-600 h5 hih tils-x1">
+                    <view class="ani-scaie-aii d-ib c-p">{{ v.title }}</view>
+                </view>
             </view>
             <view class="pt-s" v-if="v.publisher">
                 <view class="fx-i">
                     <CkAvatar clazz="w-2em h-2em fs-w" :id="v.publisher.id" :src="v.publisher.avatarUrl"/>
                     <view class="pi-t">
                         <view class="d-ib">
-                            <view class="d-ib fx-aii-btn-def px-t py-s br-1" @tap="funn.mainpg(v.publisher)">{{ v.publisher.nickName }}</view>
+                            <view class="d-ib fx-aii-btn-def px-t py-s br-1 c-p" @tap="funn.mainpg(v.publisher)">{{ v.publisher.nickName }}</view>
                             <view class="d-ib fx-aii-btn-def px-s br-cir">
                                 <CkSex :sex="v.publisher.gender"/>
                             </view>
@@ -57,7 +59,7 @@
                 <view class="fx-s">
                     <view class="fx-i fx-1">
                         <!--<CoViAvatarTogether :w="2" v-if="v.publisher" :items="[ v.publisher ]"/>-->
-                        <view class="tid">
+                        <view class="tid fx-aii-btn-def br-rnd">
                             <text>{{ activity_tool.getjoiner_len(v) }}</text>
                             <text class="fs-n">人已上车</text>
                         </view>

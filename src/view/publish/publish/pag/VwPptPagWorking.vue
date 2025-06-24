@@ -9,26 +9,17 @@
         </view>
         <view class="px-row py-s ani-fade-b">
             <CoViDataLoading :ioading="ioading" :items="data">
-                <view class="pb-row" v-for="(v, i) in data" :key="i">
-                    <CoMoPublishWorkingItem :v="v" @view="funn.view(v)">
-                        
-                    </CoMoPublishWorkingItem>
+                <view :class="isphone ? '' : 'row'">
+                    <view class="pb-row" v-for="(v, i) in data" :key="i"
+                        :class="w_clazz"
+                    >
+                        <CoMoPublishWorkingItem :v="v" @view="funn.view(v)">
+                            
+                        </CoMoPublishWorkingItem>
+                    </view>
                 </view>
             </CoViDataLoading>
         </view>
-        <!--
-        <view class="py-x2">
-            <view class="">
-                <view class="fx-aii-btn-def">Nihao</view>
-            </view>
-            <view class="">
-                <view class="bg-def-hv">Nihao</view>
-            </view>
-            <view class="">
-                <view class="bg-def-fcs">Nihao</view>
-            </view>
-        </view>
-        -->
     </view>
 </template>
 
@@ -36,8 +27,8 @@
 import CoMoPublishWorkingItem from '@/components/modules/publish/CoMoPublishWorkingItem.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
 import { DATA_ACTIVITY_TYPED, DATA_ACTIVITY_TYPED_GK } from '@/conf/conf-datas';
+import { uiGetters } from '@/memory/global';
 import open_of_activity from '@/server/__func/open_of_activity';
-import appRouter from '@/tool/uni/app-router';
 import uniRouter from '@/tool/uni/uni-router';
 import { must_arr } from '@/tool/util/valued';
 import UiI from '@/ui/element/i/UiI.vue';
@@ -68,4 +59,13 @@ const funn = {
 }
 
 const tabs = DATA_ACTIVITY_TYPED
+
+
+const isphone = computed((): boolean => uiGetters.isphone)
+const ispc = computed((): boolean => uiGetters.ispc)
+const w_clazz = computed((): string => {
+    if (isphone.value) return 'w-100'
+    if (ispc.value) return 'w-333 px-s d-ib'
+    return 'w-50 px-s d-ib'
+})
 </script>

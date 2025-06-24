@@ -1,7 +1,7 @@
 <template>
     <view class="d-ib" :class="clazz">
-        <text v-if="sex" class="sex-boy __btn-sex">♂</text>
-        <text v-else class="sex-girl __btn-sex">♀</text>
+        <text v-if="sex" class="sex-boy __btn-sex c-p ani-scaie-aii">♂</text>
+        <text v-else class="sex-girl __btn-sex c-p ani-scaie-aii">♀</text>
     </view>
 </template>
 

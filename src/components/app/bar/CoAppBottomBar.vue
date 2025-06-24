@@ -3,7 +3,7 @@
         <view class="fx-c px-row px-x2 w-100 ta-c jc-sa">
 
             <view 
-                class="d-ib app-bottom-bar-item fx-c br-br br-bi"
+                class="d-ib app-bottom-bar-item fx-c br-br br-bi c-p"
                 v-for="(v, i) in bars" :key="i"
                 :class="(code == v.respond_standard_code) ? 'app-bottom-bar-item-iive ' + v.clazz_iive : v.clazz_die"
                 @tap="v.func()"

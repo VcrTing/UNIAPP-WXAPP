@@ -1,9 +1,10 @@
 <template>
     <view class="abs-t w-100 zi-t">
-        <view class="w-100 h-18vh" :style="{
-            'margin-top': '-3.1em'
+        <view class="w-100" :style="{
+            'margin-top': '-3.1em',
+            'height': 'calc(11.2rem + 0.62vh)'
         }">
-            <image class="w-100 h-18vh" mode="aspectFill" :src="banner"/>
+            <image class="w-100 h-100" mode="aspectFill" :src="banner"/>
         </view>
     </view>
 </template>

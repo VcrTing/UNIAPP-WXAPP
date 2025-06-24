@@ -25,7 +25,6 @@ const prp = defineProps<{
 
 const isphone = computed((): boolean => uiGetters.isphone)
 const ispc = computed((): boolean => uiGetters.ispc)
-
 const w_clazz = computed((): string => {
     if (isphone.value) return 'w-100'
     if (ispc.value) return 'w-333 px-s d-ib'

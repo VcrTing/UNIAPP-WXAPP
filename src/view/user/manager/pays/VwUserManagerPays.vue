@@ -4,8 +4,10 @@
             
             <view class="" >
                 <CoViDataLoading :ioading="aii.ioading" :items="aii.records">
-                    <view>
-                        <view class="py-s" v-for="(v, i) in aii.records" :key="i">
+                    <view class="ani-fade-b" :class="isphone ? '' : 'row'">
+                        <view class="py-s" v-for="(v, i) in aii.records" :key="i"
+                            :class="w_clazz"
+                        >
                             <view class="card o-h">
                                 <view class="">
                                     <view class="fx-aii-btn-def pt pb-s px-x2">
@@ -43,16 +45,23 @@
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
+import { uiGetters } from '@/memory/global';
 import server_joining from '@/server/activity/server_joining';
 import mock_msg from '@/server/mock/msg/mock_msg';
 import { futuring, promise } from '@/tool/util/future';
 import times from '@/tool/web/times';
 import UiI from '@/ui/element/i/UiI.vue';
-import { nextTick, reactive } from 'vue';
+import { computed, nextTick, reactive } from 'vue';
 
 // const prp = defineProps<{}>()
 
-const msgs = mock_msg.sys_pays
+const isphone = computed((): boolean => uiGetters.isphone)
+const ispc = computed((): boolean => uiGetters.ispc)
+const w_clazz = computed((): string => {
+    if (isphone.value) return 'w-100'
+    if (ispc.value) return 'w-333 px-s d-ib'
+    return 'w-50 px-s d-ib'
+})
 
 const aii = reactive({
     i: 0, ioading: false,

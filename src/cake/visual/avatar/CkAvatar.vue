@@ -1,6 +1,6 @@
 <template>
-    <image class="mxw-12em uni-img br-cir ani-scaie-aii" :class="clazz"
-        mode="aspectFit" @tap="funn.tomainpage"
+    <image class="mxw-12em uni-img br-cir ani-scaie-aii c-p" :class="clazz"
+        mode="aspectFill" @tap="funn.tomainpage"
         :src="src" v-if="src"/>
     <view class="mxw-12em bg-def fx-aii-btn-def br-cir ani-scaie-aii" :class="clazz" v-else></view>
 </template>

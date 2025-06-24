@@ -1,5 +1,5 @@
 <template>
-    <view class="d-ib fx-aii-btn-def px-t br-t ani-scaie-aii"><slot></slot></view>
+    <view class="d-ib fx-aii-btn-def px-t br-t ani-scaie-aii c-p"><slot></slot></view>
 </template>
 
 <script setup lang="ts">

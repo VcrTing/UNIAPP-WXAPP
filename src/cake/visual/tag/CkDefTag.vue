@@ -1,5 +1,5 @@
 <template>
-    <view class="ta-c py-s w-100 fx-aii-btn-def br-t btn"
+    <view class="ta-c py-s w-100 fx-aii-btn-def br-t btn ani-scaie-aii"
         :class="iive ? (clazz_iive ? clazz_iive : 'btn-def') : 'btn-def'"
         >
         <text class="fs-w">
