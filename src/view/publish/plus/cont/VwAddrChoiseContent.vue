@@ -1,63 +1,66 @@
 <template>
     <view>
-        <view class="py-row">
-            <OScrollX>
-                <view class="ts softer pr-row" v-if="choises && choises.documentId">
-                    <view class="d-ib pi pb w-100">
-                        <view class="btn-wht w-100 br px-col py-col" :weak="true">
-                            <view class="ta-i py h8 fw-550">
-                                <text>{{ choises.province }}，</text>
-                                <text>{{ choises.city }}</text>
+        <view class="pt-row">
+            <view class="ts softer pr-row" v-if="choises && choises.documentId">
+                <view class="d-ib pi pb w-100">
+                    <view class="btn-wht w-100 br px-col py-col" :weak="true">
+                        <view class="ta-i py h8 fw-550">
+                            <text>{{ choises.province }}，</text>
+                            <text>{{ choises.city }}</text>
+                        </view>
+                        <view class="fx-s pb fx-b">
+                            <view class="pr-s">
+                                <text>{{ choises.address }}&nbsp;</text>
+                                <text>（{{ choises.remark }}）</text>
                             </view>
-                            <view class="fx-s pb fx-b">
-                                <view class="pr-s">{{ choises.address }}</view>
-                                <view class="tis" v-if="choises.documentId">
-                                    <text>{{ address_tool.cpu_km_for_user(choises) }}</text>
-                                </view>
+                            <view class="tis" v-if="choises.documentId">
+                                <text>{{ address_tool.cpu_km_for_user(choises) }}</text>
                             </view>
                         </view>
                     </view>
                 </view>
-                <view v-else class="op-0 pb">
-                    <view class="d-ib pi pb w-100">
-                        <view class="btn-wht w-100 br px-col py-col" :weak="true">
-                            <view class="ta-i py h8 fw-550">
-                                <text>&nbsp;</text>
-                            </view>
-                            <view class="fx-s pb">
-                                <view class="">&nbsp;</view>
-                                <view class="tis">
-                                </view>
+            </view>
+            <view v-else class="op-0 pb">
+                <view class="d-ib pi pb w-100">
+                    <view class="btn-wht w-100 br px-col py-col" :weak="true">
+                        <view class="ta-i py h8 fw-550">
+                            <text>&nbsp;</text>
+                        </view>
+                        <view class="fx-s pb">
+                            <view class="">&nbsp;</view>
+                            <view class="tis">
                             </view>
                         </view>
                     </view>
                 </view>
-            </OScrollX>
+            </view>
         </view>
         <view class="px-row">
             <view class="card py-card ps-r zi-t">
                 <OScrollY 
                     :styie="{
-                        'height': 'calc(100vh - 28em)'
+                        'height': 'calc(100vh - 20em)'
                     }"
                 >
                     <view class="py-col">
                         <CoViDataLoading :ioading="aii.ioading" :items="aii.items">
                             <view class="pb-s" v-for="(v, i) in tags" :key="i">
                                 <view 
-                                    class="fx-aii-btn-def py-s pr-row h-3em fx-i"
+                                    class="fx-aii-btn-def py-s pr-row h-3em fx-s"
                                     :class="(funn.has(v) ? '' : '') + ' '"
-                                    @tap="funn.chose(v)">
+                                    @tap="funn.chose(v)"
+                                >
                                     <view class="px-row">
                                         <UiI v-if="funn.has(v)" i="check" clazz="pri h7"/>
                                         <view v-else class="pi-s"></view>
                                     </view>
-                                    <view class="">
+                                    <view class="fx-1 ta-i">
                                         <text class="">{{ v.city }}，</text>
                                         <text>{{ v.address }}&nbsp;</text>
-                                        <view class="d-ib pi-s">
-                                            <OButton color="pri-iht" clazz="fs-s px-s br-1" :weak="true">常用</OButton>
-                                        </view>
+                                        <text>（{{ choises.remark }}）</text>
+                                    </view>
+                                    <view class="d-ib pi-s">
+                                        <OButton color="pri-iht" clazz="fs-s px-s br-1" :weak="true">常用</OButton>
                                     </view>
                                 </view>
                             </view>
@@ -110,7 +113,6 @@
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
-import CkInpItem from '@/cake/input/wrapper/CkInpItem.vue';
 import CkInpLgItem from '@/cake/input/wrapper/CkInpLgItem.vue';
 import OPan from '@/cake/pan/OPan.vue';
 import OPanInnerY from '@/cake/pan/OPanInnerY.vue';
@@ -118,7 +120,7 @@ import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
-import { authGetters } from '@/memory/global';
+import { authGetters, authState } from '@/memory/global';
 import server_address from '@/server/common/server_address';
 import mock_orders from '@/server/mock/order/mock_orders';
 import pan_tooi from '@/tool/app/pan_tooi';
@@ -181,20 +183,21 @@ const funn = {
 const func = {
     submit: () => futuring(aii, async () => {
         if (funn.vid()) {
+            //
             const form = <ONE>{
-                ...newdata, user: authGetters.userid
+                ...newdata, publisherId: authGetters.userid
             }
             const src: Address = await server_address.plus(form)
             if (src && src.documentId) {
                 funn.reset()
                 pan_tooi.close_pan(pan_add.idx)
-                func.fetching()
+                aii.items = await server_address.mine()
+                funn.chose(src)
             }
         } 
     }),
     fetching: () => futuring(aii, async () => {
-        const dts: Address[] = await server_address.mine()
-        aii.items = dts
+        aii.items = await server_address.mine()
     }),
     init: () => promise(() => {
         func.fetching()

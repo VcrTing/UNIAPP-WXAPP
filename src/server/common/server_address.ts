@@ -1,3 +1,4 @@
+import { authGetters } from "@/memory/global"
 import { master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
 import strapi_param_tool from "@/tool/strapi/strapi_param_tool"
@@ -17,14 +18,14 @@ const fetching = async (param: ONE = { }, pager: Pager): Promise<Address[]> => {
 
 // 为首页
 const mine = async (param: ONE = { }): Promise<Address[]> => {
-    net_tool.limit_mine(param)
+    strapi_param_tool.__eq(param, 'publisherId', authGetters.userid)
     return await fetching(param, net_tool.generate_pagination())
 }
 
 // 查重复
 const same = async (longitude: string, latitude: string): Promise<Address[]> => {
     const __pm: ONE = { }
-    net_tool.limit_mine(__pm)
+    strapi_param_tool.__eq(__pm, 'publisherId', authGetters.userid)
     strapi_param_tool.__eq(__pm, 'longitude', longitude)
     strapi_param_tool.__eq(__pm, 'latitude', latitude)
     return await fetching(__pm, net_tool.generate_pagination())

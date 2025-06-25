@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "activity_notices",
+  "info": {
+    "singularName": "activity-notice",
+    "pluralName": "activity-notices",
+    "displayName": "ActivityNotice"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "text"
+    },
+    "dataStatus": {
+      "type": "integer",
+      "default": 1
+    },
+    "activity": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::activity.activity"
+    },
+    "activityId": {
+      "type": "text"
+    },
+    "publisherId": {
+      "type": "text"
+    },
+    "isTop": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

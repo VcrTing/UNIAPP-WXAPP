@@ -17,7 +17,7 @@
         </view>
         <CoAppBomCarBar :clazz="'bg-pag-pri'">
             <view class="px-row pt-x1 pb">
-                <CoBomBtnGroup @submit="funn.submit" @cancle="uniRouter.back"></CoBomBtnGroup>
+                <CoBomBtnGroup @submit="funn.submit" @cancle="uniRouter.back" :ioading="aii.ioading"></CoBomBtnGroup>
             </view>
         </CoAppBomCarBar>
     </PageLayout>
@@ -36,7 +36,7 @@ import activity_tool from '@/tool/modules/activity_tool';
 import media_tool from '@/tool/modules/common/media_tool';
 import appRouter from '@/tool/uni/app-router';
 import uniRouter from '@/tool/uni/uni-router';
-import { future } from '@/tool/util/future';
+import { future, futuring } from '@/tool/util/future';
 import { arrfind, arrgotv } from '@/tool/util/iodash';
 import { must_one } from '@/tool/util/valued';
 import times from '@/tool/web/times';
@@ -48,6 +48,8 @@ const addr = ref()
 const money = ref()
 
 const agree = ref()
+
+const aii = reactive({ ioading: false })
 
 const funn = {
     collection: () => {
@@ -80,7 +82,7 @@ const funn = {
     success: () => {
         appRouter.publish_waiting()
     },
-    submit: () => future(async () => {
+    submit: () => futuring(aii, async () => {
         const src = funn.collection()
         // console.log('src =', src)
         if (src) {

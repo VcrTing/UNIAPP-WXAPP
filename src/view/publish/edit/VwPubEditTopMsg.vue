@@ -25,7 +25,7 @@ const edit = computed(() => (pagePublishState.edit))
 const dataStatus = computed((): number => (must_int(edit.value.dataStatus)))
 
 const show = computed((): boolean => {
-    return dataStatus.value == 1
+    return dataStatus.value < 2
 })
 
 const reviewStatus = computed((): number => (must_int(edit.value.reviewStatus)))

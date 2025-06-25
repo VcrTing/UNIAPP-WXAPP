@@ -24,9 +24,6 @@
 <script setup lang="ts">
 import OSafeAreaBottom from '@/cake/app/safearea/OSafeAreaBottom.vue';
 import OButton from '@/cake/button/OButton.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
-import OButtonWht from '@/cake/button/OButtonWht.vue';
-import CoEmpty from '@/components/genra/empty/CoEmpty.vue';
 import appRouter from '@/tool/uni/app-router';
 import UiI from '@/ui/element/i/UiI.vue';
 

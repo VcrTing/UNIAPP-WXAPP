@@ -25,6 +25,7 @@ const NET_ENDPOINT_ACTIVITY = <ONE> {
     'join': 'activity-registrations',
     'notice': 'activity-notices',
     'invite': 'activity-invites',
+    'content': 'product-contents',
     'activity': 'activities',
     'activity-tags': 'activity-tags',
     'activity-media': 'activity-medias',

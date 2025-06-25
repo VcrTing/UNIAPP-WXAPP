@@ -408,14 +408,11 @@ export interface ApiActivityAddressActivityAddress
     longitude: Schema.Attribute.String;
     province: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    publisherId: Schema.Attribute.String;
     remark: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user: Schema.Attribute.Relation<
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
   };
 }
 
@@ -476,7 +473,7 @@ export interface ApiActivityMediaActivityMedia
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     h: Schema.Attribute.Decimal;
-    isFrezz: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    isAllow: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
     isGallery: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     isSex: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -499,6 +496,41 @@ export interface ApiActivityMediaActivityMedia
       'plugin::users-permissions.user'
     >;
     w: Schema.Attribute.Decimal;
+  };
+}
+
+export interface ApiActivityNoticeActivityNotice
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'activity_notices';
+  info: {
+    displayName: 'ActivityNotice';
+    pluralName: 'activity-notices';
+    singularName: 'activity-notice';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    activity: Schema.Attribute.Relation<'oneToOne', 'api::activity.activity'>;
+    activityId: Schema.Attribute.Text;
+    content: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dataStatus: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
+    isTop: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::activity-notice.activity-notice'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    publisherId: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -643,6 +675,10 @@ export interface ApiActivityActivity extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     longitude: Schema.Attribute.Decimal;
     participantLimit: Schema.Attribute.Integer;
+    product_contents: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product-content.product-content'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     publisher: Schema.Attribute.Relation<
       'manyToOne',
@@ -659,6 +695,43 @@ export interface ApiActivityActivity extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     viewCount: Schema.Attribute.Integer;
+  };
+}
+
+export interface ApiProductContentProductContent
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'product_contents';
+  info: {
+    displayName: 'ProductContent';
+    pluralName: 'product-contents';
+    singularName: 'product-content';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    activity: Schema.Attribute.Relation<'manyToOne', 'api::activity.activity'>;
+    activityId: Schema.Attribute.String;
+    content: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dataStatus: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
+    introduction: Schema.Attribute.Text;
+    isAllow: Schema.Attribute.Integer;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product-content.product-content'
+    > &
+      Schema.Attribute.Private;
+    numHate: Schema.Attribute.Integer;
+    numNice: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    publisherId: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1235,10 +1308,6 @@ export interface PluginUsersPermissionsUser
       'oneToMany',
       'api::activity.activity'
     >;
-    activity_addresses: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::activity-address.activity-address'
-    >;
     activity_invites: Schema.Attribute.Relation<
       'oneToMany',
       'api::activity-invite.activity-invite'
@@ -1325,9 +1394,11 @@ declare module '@strapi/strapi' {
       'api::activity-address.activity-address': ApiActivityAddressActivityAddress;
       'api::activity-invite.activity-invite': ApiActivityInviteActivityInvite;
       'api::activity-media.activity-media': ApiActivityMediaActivityMedia;
+      'api::activity-notice.activity-notice': ApiActivityNoticeActivityNotice;
       'api::activity-registration.activity-registration': ApiActivityRegistrationActivityRegistration;
       'api::activity-tag.activity-tag': ApiActivityTagActivityTag;
       'api::activity.activity': ApiActivityActivity;
+      'api::product-content.product-content': ApiProductContentProductContent;
       'api::user-love.user-love': ApiUserLoveUserLove;
       'api::user-preference-tag.user-preference-tag': ApiUserPreferenceTagUserPreferenceTag;
       'api::user-statistic.user-statistic': ApiUserStatisticUserStatistic;

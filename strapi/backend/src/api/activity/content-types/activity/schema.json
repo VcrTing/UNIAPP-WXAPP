@@ -101,6 +101,12 @@
     },
     "search": {
       "type": "text"
+    },
+    "product_contents": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product-content.product-content",
+      "mappedBy": "activity"
     }
   }
 }

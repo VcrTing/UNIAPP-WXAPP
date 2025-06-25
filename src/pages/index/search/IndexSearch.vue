@@ -40,7 +40,7 @@ import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
 import { uiState } from '@/memory/global';
-import server_search from '@/server/activity/server_search';
+import server_search from '@/server/common/server_search';
 import net_tool from '@/tool/http/net_tool';
 import uniRouter from '@/tool/uni/uni-router';
 import { futuring } from '@/tool/util/future';

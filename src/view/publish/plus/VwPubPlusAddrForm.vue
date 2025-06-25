@@ -41,7 +41,7 @@
                 </view>
             </view>
             <view class="pb-col">
-                <CkInpItem :tit="'报名费用'" :clazz_tit="'tid'">
+                <CkInpItem :tit="'活动费用'" :clazz_tit="'tid'">
                     <input class="inp-app ta-r" v-model="form.fee" type="number" placeholder="每位参与者的报名费用(￥)"/>
                 </CkInpItem>
             </view>

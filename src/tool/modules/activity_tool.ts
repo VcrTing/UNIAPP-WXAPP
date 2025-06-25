@@ -1,12 +1,18 @@
-import { DATA_ACTIVITY_JOINER_LIMIT, DATA_ACTIVITY_STATUS, DATA_ACTIVITY_TYPED_SM } from "@/conf/conf-datas"
+import { DATA_ACTIVITY_STATUS, DATA_ACTIVITY_TYPED_SM, DATA_PUBLISH_LIMIT } from "@/conf/conf-datas"
 import { arrfind, arrgotv, arrimit } from "../util/iodash"
 import { deepcopy, formfiimit, group_search_txt, must_arr, must_int, must_one, positive } from "../util/valued"
 import { authGetters } from "@/memory/global"
 import times from "../web/times"
 import address_tool from "./common/address_tool"
-import { DEV_K } from "@/conf/conf-dev"
 
     // 0-待完善, 1-审核中, 2-已发布, 3-已取消, 4-已结束, 5-已下架
+
+    // 获取 图片
+    const __medias = (v: Activity): Media[] => {
+        const mds: Media[ ] = must_arr(v.activity_medias)
+        // 不允许
+        return mds
+    }   
 
     const getweek = (v: Activity): string => {
         const st: string = v.startTime || ''
@@ -68,7 +74,7 @@ import { DEV_K } from "@/conf/conf-dev"
 
         // 私密活动
         if (typed == DATA_ACTIVITY_TYPED_SM.v) {
-            res['participantLimit'] = DATA_ACTIVITY_JOINER_LIMIT
+            res['participantLimit'] = DATA_PUBLISH_LIMIT.JOINER
         }
         return res
     }
@@ -104,17 +110,17 @@ export default {
     },
 
     getbanner: (v: Activity): Media[] => {
-        const mds: Media[ ] = must_arr(v.activity_medias)
+        const mds: Media[ ] = __medias(v)
         const res: Media[ ] = mds.filter(e => !e.isGallery)
         return must_arr(res)
     },
     getgallery: (v: Activity): Media[] => {
-        const mds: Media[ ] = must_arr(v.activity_medias)
+        const mds: Media[ ] = __medias(v)
         const res: Media[ ] = mds.filter(e => e.isGallery)
         return must_arr(res)
     },
     getindex_banner: (v: Activity): Media[] => {
-        const mds: Media[ ] = must_arr(v.activity_medias)
+        const mds: Media[ ] = __medias(v)
         //
         const banners: Media[ ] = mds.filter(e => !e.isGallery)
         const gallery: Media[ ] = mds.filter(e => e.isGallery)

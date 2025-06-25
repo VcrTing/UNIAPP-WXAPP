@@ -7,30 +7,34 @@
                 <text v-else>无法修改</text>
             </view></template>
         </CoAppTopBackBar>
-        <view>
+        <view class="">
             <VwPubEditTopMsg />
-            <view><VwPubEditTopForm ref="top" :documentId="documentId" :form="form" :canedit="canedit"/></view>
+            <view class="pt-row"  v-if="documentId">
+                <VwPubEditTopForm ref="top" :documentId="documentId" :form="form" :canedit="canedit"/>
+            </view>
             <view class="py-s"></view>
             <view>
                 <VwPubEditCateForm ref="cate" :form="form" :canedit="canedit"/>
             </view>
-            <view class="py-s"></view>
-            
-            <view><VwPubEditGallery  ref="gallery" :documentId="documentId" :form="form" :canedit="canedit"/></view>
-            <view class="py-s"></view>
-            <view><VwPubEditStatus :aii="aii" :form="form" :canedit="canedit"  :documentId="documentId"/></view>
 
-            <view class="py-row">
-                <CoMoSecurityAgreeLine ref="agree" :canedit="canedit"/>
-            </view>
-
-            <CkSpace :h="12"/>
-            <CoAppBomFuncBar :clazz="'bg-pag-pri'">
-                <view class="py px-row">
-                    <OButton v-if="canedit" clazz="" @tap="func.submit"><view class="py-t">提交审核</view></OButton>
-                    <OButton v-else color="def" @tap="appRouter.publish_waiting()"><view class="py-t tis">返回</view></OButton>
+            <view v-if="aii.init" class="softer">
+                <view v-if="documentId">
+                    <view class="py-s"></view>
+                    <view><VwPubEditGallery  ref="gallery" :documentId="documentId" :form="form" :canedit="canedit"/></view>
+                    <view class="py-s"></view>
+                    <view><VwPubEditStatus :aii="aii" :form="form" :canedit="canedit"  :documentId="documentId"/></view>
                 </view>
-            </CoAppBomFuncBar>
+                <view class="py-row">
+                    <CoMoSecurityAgreeLine ref="agree" :canedit="canedit"/>
+                </view>
+                <CkSpace :h="12"/>
+                <CoAppBomFuncBar :clazz="'bg-pag-pri softer'">
+                    <view class="py px-row">
+                        <OButton :ioading="aii.ioading" v-if="canedit" clazz="" @tap="func.submit"><view class="py-t">提交审核</view></OButton>
+                        <OButton v-else color="def" @tap="appRouter.publish_waiting()"><view class="py-t tis">返回</view></OButton>
+                    </view>
+                </CoAppBomFuncBar>
+            </view>
         </view>
     </PageLayout>
 </template>
@@ -42,11 +46,11 @@ import CoAppBomFuncBar from '@/components/app/bar/bom/CoAppBomFuncBar.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoMoSecurityAgreeLine from '@/components/modules/security/CoMoSecurityAgreeLine.vue';
-import { DATA_ACTIVITY_JOINER_LIMIT, DATA_ACTIVITY_MEDIA, DATA_ACTIVITY_TAG_LIMIT, DATA_ACTIVITY_TYPED_GK, DATA_ACTIVITY_TYPED_SM } from '@/conf/conf-datas';
-import { authGetters, orderDispatch, orderState, uiState } from '@/memory/global';
+import { DATA_ACTIVITY_MEDIA, DATA_ACTIVITY_TYPED_GK, DATA_ACTIVITY_TYPED_SM, DATA_PUBLISH_LIMIT } from '@/conf/conf-datas';
+import { uiState } from '@/memory/global';
 import { pagePublishState } from '@/memory/page';
+import server_content from '@/server/activity/server_content';
 import server_pubplus from '@/server/publish/server_pubplus';
-import server_user from '@/server/user/user/server_user';
 import server_user_statistic from '@/server/user/user/server_user_statistic';
 import activity_tool from '@/tool/modules/activity_tool';
 import address_tool from '@/tool/modules/common/address_tool';
@@ -54,7 +58,7 @@ import media_tool from '@/tool/modules/common/media_tool';
 import appRouter from '@/tool/uni/app-router';
 import { tipwarn } from '@/tool/uni/uni-global';
 import uniRouter from '@/tool/uni/uni-router';
-import { future, promise } from '@/tool/util/future';
+import { future, futuring, promise, timeout } from '@/tool/util/future';
 import { deepcopy, formfii, is_nice_arr, must_one } from '@/tool/util/valued';
 import times from '@/tool/web/times';
 import VwPubEditCateForm from '@/view/publish/edit/VwPubEditCateForm.vue';
@@ -70,16 +74,21 @@ const gallery = ref()
 
 const agree = ref()
 
-const aii = reactive({ ioading: false, 
+const aii = reactive({ ioading: false, contents: <ProductContent[]>[], init: false,
     imit_banner: DATA_ACTIVITY_MEDIA.BANNER_LESS, imit_gallery: DATA_ACTIVITY_MEDIA.GALLERY_LESS })
 
 const funn = {
+    reset_content: (src: ProductContent) => {
+        if (src.content) {
+            form.introduction = src.content
+        }
+    },
     // 入口时重置表单
     reset: (src: Activity) => {
         // console.log('执行值替换 src =', src)
         if (src) {
             formfii(form, src);
-            form.taglimit = DATA_ACTIVITY_TAG_LIMIT
+            form.taglimit = DATA_PUBLISH_LIMIT.TAG
             form.__start = times.generate_picker_data(src.startTime)
             form.__end = times.generate_picker_data(src.endTime)
             form.tags = src.activity_tags
@@ -144,26 +153,46 @@ const funn = {
 }
 
 const func = {
-    submit: () => future(async () => {
+    success: async (src: ONE) => {
+        try {
+            // 新增、修改 content
+            await server_content.plus_or_edit(edit.value, aii.contents[0], '', src['introduction'])
+            // 加一个 publish 值
+            await server_user_statistic.num_publish()
+        }
+        finally {
+            appRouter.publish_waiting()
+        }
+    },
+    submit: () => futuring(aii, async () => {
         if (!funn.collection()) return;
         if (!agree.value.v()) return;
         const src: ONE = funn.buildform(form);
-        src['dataStatus'] = 1
-        src['isRecommended'] = 1
+        src['dataStatus'] = 1 // 不可编辑状态
+        src['isRecommended'] = 1 // 自动推荐
+        src['reviewStatus'] = 0 // 送审
         const res: ONE = await server_pubplus.edit(src, edit.value)
         if (res.documentId) {
-            await server_user_statistic.num_publish()
-            appRouter.publish_waiting()
+            await func.success(src)
         }
     }),
     cancle: () => {
         uniRouter.back()
     },
-    init: () => promise(() => {
+    
+    ioad_contents: () => futuring(aii, async () => {
+        const nss: ProductContent[] = await server_content.by_activity(edit.value);
+        if (is_nice_arr(nss)) {
+            aii.contents = nss || [ ]; funn.reset_content(nss[0])
+        }
+    }),
+    init: () => future(async () => {
         const v: Activity = must_one(edit.value)
         // console.log('v =', v)
         if (v.documentId) {
             funn.reset(v)
+            await func.ioad_contents()
+            timeout(() => (aii.init = true))
         }
         else {
             appRouter.publish_waiting()
@@ -173,22 +202,20 @@ const func = {
 
 const form = reactive({
     title: '', typed: DATA_ACTIVITY_TYPED_GK.v, addrdata: null,
-    tags: <Tag[]>[ ], taglimit: DATA_ACTIVITY_TAG_LIMIT, fee: null, introduction: '',
+    tags: <Tag[]>[ ], taglimit: DATA_PUBLISH_LIMIT.TAG, fee: null, introduction: '',
     longitude: null, latitude: null, address: null, city: null, area: null,
-    endJoinTime: new Date(), participantLimit: DATA_ACTIVITY_JOINER_LIMIT,
+    endJoinTime: new Date(), participantLimit: DATA_PUBLISH_LIMIT.JOINER,
     __start: <Co.TimePieckerForm>{ year: 0, month: 0, day: 0, hour: 0, minute: 0 },
     __end: <Co.TimePieckerForm>{ year: 0, month: 0, day: 0, hour: 0, minute: 0 },
     banner: <Form.UploadImages>[ ], gallery: <Form.UploadImages>[ ]
 })
 
-const edit = computed((): ONE => (pagePublishState.edit))
+const edit = computed((): Activity => (pagePublishState.edit))
 const documentId = computed((): string => edit.value.documentId)
 
 const canedit = computed((): boolean => {
     const sts: number = edit.value.dataStatus
-    if (!sts) {
-        return true
-    }
+    if (!sts) { return true }
     return false
 })
 

@@ -3,7 +3,7 @@
         <view class="pt-s bg-hui"></view>
         <CoMoAdHeader>详情图片</CoMoAdHeader>
         
-        <view class="pt-x1 bg-con">
+        <view class="pt-x1 bg-con softer" v-if="aii.init">
             <view v-for="(v, i) in gallery" :key="i"
                 :style="{
                         'height': media_tool.img_h_view(w_screen, v.w, v.h)
@@ -22,12 +22,17 @@ import CkSpace from '@/cake/content/CkSpace.vue';
 import { uiState } from '@/memory/global';
 import activity_tool from '@/tool/modules/activity_tool';
 import media_tool from '@/tool/modules/common/media_tool';
-import { computed } from 'vue';
+import { computed, nextTick, reactive } from 'vue';
 import CoMoAdHeader from './component/CoMoAdHeader.vue';
+import { timeout } from '@/tool/util/future';
 
 const prp = defineProps<{
     one: Activity
 }>()
+
+const aii = reactive({
+    init: false
+})
 
 const gallery = computed(() => {
     return activity_tool.getgallery(prp.one)
@@ -36,4 +41,14 @@ const gallery = computed(() => {
 const w_screen = computed(() => {
     return uiState.w || 375
 })
+
+const funn = {
+    init: () => {
+        timeout(() => {
+            (aii.init = true)
+        }, 600)
+    }
+}
+
+nextTick(funn.init)
 </script>

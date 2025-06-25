@@ -24,7 +24,7 @@ function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: numbe
     return distance;
 }
 
-const __nice_addr = (one: ONE): boolean => {
+const __nice_addr = (one: ONE = { }): boolean => {
     let lon1 = ser_fiot(one['longitude'], -1)
     let lat1 = ser_fiot(one['latitude'], -1)
     if (lon1 != -1 && lat1 != -1) {
@@ -55,10 +55,10 @@ const cpu_km = (one: ONE, two: ONE) => {
     return '未知'
 }
 
-const cpu_km_for_user = (one: ONE) => {
+const cpu_km_for_user = (one: ONE = { }) => {
     const ud: UserAddress | null = authGetters.addr
     if (ud) {
-        if (__nice_addr(one)) {
+        if (__nice_addr(one) && __nice_addr(ud)) {
             return cpu_km(one, ud)
         }
         else {
@@ -71,12 +71,14 @@ const cpu_km_for_user = (one: ONE) => {
 }
 
 const fii_to_form = (form: ONE, addr: Address) => {
-    form.longitude = addr.longitude
-    form.latitude = addr.latitude
-    form.address = addr.address
-    form.city = addr.city 
-    form.area = addr.area
-    form.addrdata = addr
+    if (addr) {
+        form.longitude = addr.longitude
+        form.latitude = addr.latitude
+        form.address = addr.address
+        form.city = addr.city 
+        form.area = addr.area
+        form.addrdata = addr
+    }
 }
 
 export default {

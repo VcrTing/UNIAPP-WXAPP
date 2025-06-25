@@ -35,6 +35,11 @@
                     </view>
                 </view>
             </view>
+            <view class="btn-pri px-row" v-if="is_publisher">
+                <view class="px-col py-s fs-w fx-c">
+                    <text>您是改活动的发布者，可以更改公告等内容。</text>
+                </view>
+            </view>
         </view>
     </view>
 </template>
@@ -51,7 +56,7 @@ import { computed } from 'vue';
 import CoMoAdHeader from '../component/CoMoAdHeader.vue';
 
 const prp = defineProps<{
-    one: Activity
+    one: Activity, is_publisher: boolean
 }>()
 
 const tags = computed((): MANY => {

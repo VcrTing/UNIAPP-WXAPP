@@ -29,7 +29,7 @@
                 <view class="">
                     <view class="fx-r tis fs-s">
                         <UiI :i="'users'"/>
-                        <text class="pi-s">{{ activity_tool.getjoin_remaining(v) }}&nbsp;/&nbsp;{{ activity_tool.getjoin_limit(v) }}</text>
+                        <text class="pi-s">{{ activity_tool.getjoiner_len(v) }}&nbsp;/&nbsp;{{ activity_tool.getjoin_limit(v) }}</text>
                     </view>
                 </view>
             </view>

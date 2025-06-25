@@ -2,6 +2,7 @@
 interface Activity {
     id: number
     documentId: string
+    createdAt: string
     
     title: string
     startTime: string
@@ -18,6 +19,7 @@ interface Activity {
     dataStatus: number
     //
     activity_registrations: ActivityJoin[]
+    activity_contents: ProductContent[]
     activity_invites: ActivityInvite[]
     activity_address: Address
     activity_medias: Media[]
@@ -25,7 +27,6 @@ interface Activity {
     publisher: User
 
     typed: number
-    createdAt: string
     
     address: string
     city: string
@@ -34,4 +35,24 @@ interface Activity {
     longitude: string
 
     search: string
+}
+
+interface ProductContent {
+
+    id: number
+    documentId: string
+    createdAt: string
+
+    content: string
+    introduction: string
+
+    activityId: string
+    publisherId: string
+
+    activity: Activity
+    isFrezz: number
+    dataStatus: number
+
+    numNice: number
+    numHate: number
 }

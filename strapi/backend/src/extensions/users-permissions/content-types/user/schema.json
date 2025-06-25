@@ -108,12 +108,6 @@
       "target": "api::activity.activity",
       "mappedBy": "publisher"
     },
-    "activity_addresses": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::activity-address.activity-address",
-      "mappedBy": "user"
-    },
     "phone": {
       "type": "string"
     },

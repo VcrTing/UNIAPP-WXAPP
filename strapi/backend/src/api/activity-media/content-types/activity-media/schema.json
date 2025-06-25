@@ -26,10 +26,6 @@
       "type": "integer",
       "default": 0
     },
-    "isFrezz": {
-      "type": "integer",
-      "default": 0
-    },
     "isGallery": {
       "type": "integer",
       "default": 0
@@ -64,6 +60,10 @@
     },
     "h": {
       "type": "decimal"
+    },
+    "isAllow": {
+      "type": "integer",
+      "default": 1
     }
   }
 }

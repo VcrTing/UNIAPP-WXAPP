@@ -4,36 +4,56 @@
             <OScrollX>
                 <view class="ts softer pr-row" v-if="choises && choises.length > 0">
                     <view class="d-ib pi pb" v-for="(v, i) in choises" :key="i">
-                        <OButtonWht :clazz="'fx-c btn-rnd'" :weak="true">
+                        <OButton color="wht" :clazz="'fx-c btn-rnd'" :weak="true">
                             <view class="pi-row pr-s">{{ v.name }}</view>
                             <OFI @tap="funn.kiii(v)" clazz="fx-aii-btn-def w-2em h-2em" :i="'x'"/>
-                        </OButtonWht>
+                        </OButton>
                     </view>
                 </view>
                 <view v-else class="op-0 pb">
-                    <OButtonWht :clazz="'fx-c btn-rnd'" :weak="true">
+                    <OButton color="wht" :clazz="'fx-c btn-rnd'" :weak="true">
                         <view class="pi-row pr-s">&nbsp;</view>
                         <OFI clazz="fx-aii-btn-def w-2em h-2em" :i="'x'"/>
-                    </OButtonWht>
+                    </OButton>
                 </view>
             </OScrollX>
         </view>
         <view class="px-row">
-            <view class="card px-x1 py">
+            <view class="card py">
                 <OScrollY 
                     :styie="{
                         'height': 'calc(100vh - 18em)'
                     }"
                 >
-                    <view class="py-col">
+                    <view class="py-col px-x1">
                         <CoViDataLoading :ioading="aii.ioading" :items="aii.items">
-                            <view class="row">
-                                <view class="pb w-333 d-ib px-s" v-for="(v, i) in tags" :key="i"
-                                    @tap="funn.chose(v, i)"
-                                >
-                                    <CkDefTag :iive="funn.has(v)" :clazz_iive="'btn-pri-out'">
-                                        {{ v.name }}
-                                    </CkDefTag>
+                            <view>
+                                <view class="pb h8">
+                                    <text>主标签</text>
+                                </view>
+                                <view class="row">
+                                    <view class="pb w-333 d-ib px-s" v-for="(v, i) in maintags" :key="i"
+                                        @tap="funn.chose(v, i)"
+                                    >
+                                        <CkDefTag :iive="funn.has(v)" :clazz_iive="'btn-pri-out'">
+                                            {{ v.name }}
+                                        </CkDefTag>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="py"></view>
+                            <view>
+                                <view class="pb h8">
+                                    <text>细分标签</text>
+                                </view>
+                                <view class="row">
+                                    <view class="pb w-333 d-ib px-s" v-for="(v, i) in othertags" :key="i"
+                                        @tap="funn.chose(v, i)"
+                                    >
+                                        <CkDefTag :iive="funn.has(v)" :clazz_iive="'btn-pri-out'">
+                                            {{ v.name }}
+                                        </CkDefTag>
+                                    </view>
                                 </view>
                             </view>
                         </CoViDataLoading>
@@ -46,7 +66,7 @@
 
 <script setup lang="ts">
 import OFI from '@/cake/button/i/OFI.vue';
-import OButtonWht from '@/cake/button/OButtonWht.vue';
+import OButton from '@/cake/button/OButton.vue';
 import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import CkDefTag from '@/cake/visual/tag/CkDefTag.vue';
@@ -72,6 +92,16 @@ const aii = reactive({
 
 const tags = computed(() => {
     return aii.items
+})
+
+const maintags = computed(() => {
+    const src: Tag[] = aii.items || []
+    return src.filter((e: Tag) => (e.isMain ? true : false))
+})
+const othertags = computed(() => {
+    let src: Tag[] = aii.items || []
+    src = src.filter((e: Tag) => (e.isMain ? false : true))
+    return src
 })
 
 const funn = {

@@ -19,7 +19,7 @@
                     <view v-if="issm && is_publisher"><VwActivityDetailInvite :one="view" :joiners="aii.joiners"/> </view>
                     <view v-if="!issm || !is_publisher">
                         <view class="pt-s bg-hui"></view>
-                        <VwActivityDetailPublisher :one="view"/>
+                        <VwActivityDetailPublisher :one="view" :is_publisher="is_publisher"/>
                     </view>
 
                     <view class="softer" v-if="view.introduction">
@@ -30,8 +30,7 @@
                         <VwActivityDetailGallery :one="view"/>
                     </view>
                 </view>
-                
-                <VwActivityDetailBom :one="view" :user="user" :isjoin="isjoin" :isinvited="aii.is_invited" :ispublisher="is_publisher"/>
+                <VwActivityDetailBom v-if="aii.init" :one="view" :user="user" :isjoin="isjoin" :isinvited="aii.is_invited" :ispublisher="is_publisher"/>
             </template>
         </DetailLayout>
     </PageLayout>
@@ -56,7 +55,7 @@ import VwActivityDetailBom from '@/view/activity/detail/bom/VwActivityDetailBom.
 import VwActivityDetailPublisher from '@/view/activity/detail/publisher/VwActivityDetailPublisher.vue';
 import appRouter from '@/tool/uni/app-router';
 import join_tool from '@/tool/modules/join_tool';
-import { futuring, promise, timeout } from '@/tool/util/future';
+import { future, futuring, promise, timeout } from '@/tool/util/future';
 import server_joining from '@/server/activity/server_joining';
 import media_tool from '@/tool/modules/common/media_tool';
 import { must_arr, must_one } from '@/tool/util/valued';
@@ -84,7 +83,6 @@ const funn = {
         const actid: string = view.value.documentId || ''
         if (actid) {
             const joiners: ActivityJoin[] = await server_joining.join_of_activity(actid)
-            console.log('joiners =', joiners)
             aii.joiners = joiners
         }
     }),
@@ -102,7 +100,7 @@ const funn = {
     back: () => {
         uniRouter.back()
     },
-    init: () => promise(() => {
+    init: () => future(async () => {
         try {
             const src = view.value || { }
             if (!src) {
@@ -111,7 +109,7 @@ const funn = {
             if (!src.documentId) {
                 appRouter.index()
             }
-            funn.ioad_joiners();
+            await funn.ioad_joiners();
             funn.invited()
         }
         finally {

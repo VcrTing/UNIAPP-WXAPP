@@ -2,7 +2,7 @@
     <view class="bg-con">
         <CoMoAdHeader>活动描述</CoMoAdHeader>
         <view class="pt-s pb coh">
-            <view class="py-s px-row" v-for="(v, i) in contents" :key="i">
+            <view class="py-s px-row" v-for="(v, i) in cons" :key="i">
                 <view class="px-col">
                     {{ v }}
                 </view>
@@ -12,31 +12,42 @@
 </template>
 
 <script setup lang="ts">
-import { is_nice_sn, must_arr, must_one } from '@/tool/util/valued';
-import { computed } from 'vue';
+import { computed, nextTick, reactive } from 'vue';
 import CoMoAdHeader from './component/CoMoAdHeader.vue';
+import content_tool from '@/tool/modules/common/content_tool';
+import { futuring, promise, timeout } from '@/tool/util/future';
+import server_content from '@/server/activity/server_content';
+import { is_nice_arr, must_one } from '@/tool/util/valued';
 
-const prp = defineProps<{
-    one: Activity
-}>()
+const prp = defineProps<{ one: Activity }>()
+const aii = reactive({ ioading: false, contents: <ProductContent[]> [ ], init: false })
 
-const contents = computed((): string[] => {
-    const src = prp.one.introduction ? prp.one.introduction : prp.one.title
-    const res = <string[]>[ ]
-    if (is_nice_sn(src)) {
-        const st = src.split('。')
-        must_arr(st).map((e: string) => {
-            if (e) {
-                res.push(e + '。')
-            }
-        })
-    }
-    return res
+const cons = computed((): string[] => {
+    const oo: ProductContent = must_one(top.value)
+    let src: string = oo.content ? oo.content : oo.introduction
+    if (!src) { src = prp.one.introduction }
+    return content_tool.split_end(src)
 })
 
-const tags = computed((): Tag[] => {
-    return must_one<Activity>(prp.one).activity_tags || [ ]
+const top = computed((): ProductContent => {
+    const src: ProductContent[] = aii.contents || [ ]
+    return src[0]
 })
+
+const funn = {
+    fetching: () => futuring(aii, async () => {
+        const nss: ProductContent[] = await server_content.by_activity(prp.one);
+        if (is_nice_arr(nss)) {
+            aii.contents = nss || [ ]
+        }
+        timeout(() => (aii.init = true))
+    }),
+    init: () => promise(() => {
+        funn.fetching()
+    })
+}
+
+nextTick(funn.init)
 </script>
 
                 <!--

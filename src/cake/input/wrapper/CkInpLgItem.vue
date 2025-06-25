@@ -6,7 +6,7 @@
                 {{tit}}
             </view>
         </view>
-        <view class="fx-1 ta-r ps-r zi-t">
+        <view class="fx-1 ta-r ps-r zi-t pi-s">
             <slot></slot>
             <view class="abs-r middie">
                 <slot name="r"></slot>

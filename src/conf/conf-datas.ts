@@ -32,14 +32,12 @@ export const DATA_ACTIVITY_STATUS = <Conf.Tabs>[
     { name: '已结束', v: 4 },
 ]
 
-// 是否推荐
-export const DATA_IS_RECOMMEND = 1
-
-// 标签最大个数
-export const DATA_ACTIVITY_TAG_LIMIT = 3
-
-// 默认活动人数限制
-export const DATA_ACTIVITY_JOINER_LIMIT = 20
+export const DATA_PUBLISH_LIMIT = {
+    // 标签最大个数
+    TAG: 4,
+    // 默认活动人数限制
+    JOINER: 100
+}
 
 export const DATA_ACTIVITY_MEDIA = {
     BANNER_LESS: 1,

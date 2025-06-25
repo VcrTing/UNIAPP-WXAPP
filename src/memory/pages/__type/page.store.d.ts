@@ -13,6 +13,6 @@ namespace Page {
 
     interface PublishPageStore {
         num: number
-        edit: ONE
+        edit: Activity
     }
 }

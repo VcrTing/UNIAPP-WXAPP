@@ -14,8 +14,11 @@
                 <OTextarea class="pt-t" :def="aii.form.description" @result="(v) => aii.form.name = v" 
                     :pchd="'请输入活动描述'"/> -->
                 <textarea auto-height maxlength="600" type="text"
-                    class="inp-app" v-model="form.introduction"
+                    class="inp-app" v-model="form.introduction" v-if="canedit"
                     :placeholder="'请输入活动描述'" />
+                <view v-else class="inp-app">
+                    <text>{{ form.introduction || '(无)' }}</text>
+                </view>
             </CkInpItem>
         </view>
         <view class="bg-con px-inp py-col">

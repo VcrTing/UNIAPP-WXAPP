@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_contents",
+  "info": {
+    "singularName": "product-content",
+    "pluralName": "product-contents",
+    "displayName": "ProductContent"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "content": {
+      "type": "text"
+    },
+    "activityId": {
+      "type": "string"
+    },
+    "publisherId": {
+      "type": "string"
+    },
+    "isAllow": {
+      "type": "integer"
+    },
+    "introduction": {
+      "type": "text"
+    },
+    "activity": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::activity.activity",
+      "inversedBy": "product_contents"
+    },
+    "dataStatus": {
+      "type": "integer",
+      "default": 1
+    },
+    "numNice": {
+      "type": "integer"
+    },
+    "numHate": {
+      "type": "integer"
+    }
+  }
+}
