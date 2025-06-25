@@ -4,10 +4,12 @@ import { deepcopy, formfiimit, group_search_txt, must_arr, must_int, must_one, p
 import { authGetters } from "@/memory/global"
 import times from "../web/times"
 import address_tool from "./common/address_tool"
-import { DEV_MEDIA_ALLOW } from "@/conf/conf-dev"
 import media_tool from "./common/media_tool"
 
     // 0-待完善, 1-审核中, 2-已发布, 3-已取消, 4-已结束, 5-已下架
+
+    // 首页 展示多少张 图片
+    const ITEM_IMG_VIEW_LIMIT = 3
 
     // 获取 图片
     const __medias = (v: Activity): Media[] => {
@@ -36,7 +38,7 @@ import media_tool from "./common/media_tool"
         const st: string = v.startTime || ''
         const ed: string = v.endTime || ''
         
-        return '22:30'
+        return times.fmt(ed, 'HH:mm')
     }
     const getstarttime_remaining = (v: Activity): string => {
         const minutes: number = times.remaining(null, v.startTime)
@@ -130,7 +132,7 @@ export default {
         //
         const banners: Media[ ] = mds.filter(e => !e.isGallery)
         const gallery: Media[ ] = mds.filter(e => e.isGallery)
-        return arrimit([ ...banners, ...gallery ], 3)
+        return arrimit([ ...banners, ...gallery ], ITEM_IMG_VIEW_LIMIT)
     },
     getweek, gettime_start, gettime_end,
     gettime_start_iong,

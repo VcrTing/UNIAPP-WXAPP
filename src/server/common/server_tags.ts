@@ -18,7 +18,7 @@ const __fetching = async (param: ONE = { }, pager: Pager): Promise<Tag[]> => {
 }
 const fetching = async (param: ONE = { }): Promise<Tag[]> => {
     srp_p.__eq(param, STS_TAG.LIVE.K, STS_TAG.LIVE.V)
-    return await __fetching(param, net_tool.generate_pagination(DEV_PAGER.SIZE_LONG))
+    return await __fetching(param, net_tool.__pager_long())
 }
 
 // 为首页

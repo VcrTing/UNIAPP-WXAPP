@@ -15,7 +15,7 @@ const fetching = async (param: ONE, pager: Pager): Promise<Media[]> => {
 }
 
 const mainpage = async (userid: string): Promise<Media[]> => {
-    return await fetching({ }, net_tool.generate_pagination(24))
+    return await fetching({ }, net_tool.__pager(24))
 }
 
 export default {

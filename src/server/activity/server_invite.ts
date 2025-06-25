@@ -32,7 +32,7 @@ const plus = async (one: Activity, invite_user: User): Promise<ActivityInvite> =
 const byactivity = async (activityId: string): Promise<ActivityInvite[]> => {
     const __pm: ONE = { }
     srp_p.__eq(__pm, 'activityId', activityId)
-    const src: ActivityInvite[] = await fetching(__pm, net_tool.generate_pagination());
+    const src: ActivityInvite[] = await fetching(__pm, net_tool.__pager());
     return src
 }
 

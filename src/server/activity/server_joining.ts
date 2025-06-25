@@ -1,6 +1,8 @@
+import { STS } from "@/conf/conf-status";
 import { authGetters } from "@/memory/global";
 import { master } from "@/tool/http/http";
 import net_tool from "@/tool/http/net_tool";
+import srp_p from "@/tool/strapi/srp_p";
 import { netip } from "@/tool/uni/uni-global";
 import { is_str } from "@/tool/util/typed";
 
@@ -26,26 +28,24 @@ const fetching = async (param: ONE, pager: Pager): Promise<ActivityJoin[]> => {
 const join_of_mine = async (): Promise<ActivityJoin[]> => {
     const userid: string = authGetters.userid;
     const __pm: ONE = { }
-    __pm['filters[user][$eq]'] = userid
-    __pm['filters[overStatus][$eq]'] = 0
-    __pm['filters[safeStatus][$eq]'] = 1
-    return await fetching(__pm, net_tool.generate_pagination(999))
+    srp_p.__eq(__pm, 'user', userid)
+    srp_p.__eq(__pm, 'overStatus', STS.NO)
+    srp_p.__eq(__pm, 'safeStatus', STS.YES)
+    return await fetching(__pm, net_tool.__pager_long())
 }
 
 const join_of_activity = async (actid: string): Promise<ActivityJoin[]> => {
-    // const userid: string = authGetters.userid;
     const __pm: ONE = { }
-    __pm['filters[activity][documentId][$eq]'] = actid
-    __pm['filters[safeStatus][$eq]'] = 1
-    return await fetching(__pm, net_tool.generate_pagination(99))
+    srp_p.__eq(__pm, 'activity][documentId', actid)
+    srp_p.__eq(__pm, 'safeStatus', STS.YES)
+    return await fetching(__pm, net_tool.__pager_long())
 }
 
 // 参与历史
 const join_history = async (): Promise<ActivityJoin[]> => {
     const __pm: ONE = { }
-    __pm['filters[user][$eq]'] = authGetters.userid
-    // __pm['filters[safeStatus][$eq]'] = 1
-    return await fetching(__pm, net_tool.generate_pagination(999))
+    srp_p.__eq(__pm, 'user', authGetters.userid)
+    return await fetching(__pm, net_tool.__pager_long())
 }
 
 // 金钱

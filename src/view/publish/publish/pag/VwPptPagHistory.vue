@@ -67,7 +67,7 @@ const tabs = DATA_ACTIVITY_STATUS
 const aii = reactive({
     items: <Activity[]>[ ], ioading: false,
     i: DATA_ACTIVITY_STATUS_DEF.v,
-    param: { }, pager: net_tool.generate_pagination(20)
+    param: { }, pager: net_tool.__pager(20)
 })
 
 const tab = computed((): Conf.Tab => {

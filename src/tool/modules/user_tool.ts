@@ -1,3 +1,4 @@
+import { DEV_GENDER } from "@/conf/conf-dev"
 
 
 const num = (n: number, isadd: boolean) => {
@@ -7,7 +8,7 @@ const num = (n: number, isadd: boolean) => {
 }
 
 const isboy = (v: User) => {
-    return v.gender === 1
+    return v.gender === DEV_GENDER.BOY
 }
 
 export default {
@@ -15,6 +16,6 @@ export default {
     isboy,
     //
     getgender: (v: User) => {
-        return v.gender === 1 ? '男' : '女'
+        return v.gender === DEV_GENDER.BOY ? '男' : '女'
     }
 }

@@ -12,7 +12,12 @@ const generate_http_result = (data: any, code: number, message: string) => {
 }
 
 // 生成分页
-const generate_pagination = (pageSize: number = DEV_PAGER.SIZE_DEF): Pager => {
+const __pager = (pageSize: number = DEV_PAGER.SIZE_DEF): Pager => {
+    return <Pager>{
+        page: 1, pageSize, total: 999
+    }
+}
+const __pager_long = (pageSize: number = DEV_PAGER.SIZE_LONG): Pager => {
     return <Pager>{
         page: 1, pageSize, total: 999
     }
@@ -64,7 +69,8 @@ const one = <T>(src: ONE | MANY | undefined): T => {
 
 export default {
     generate_http_result,
-    generate_pagination,
+    __pager, // generate_pagination,
+    __pager_long,
     build_param,
     limit_mine,
     build_data,

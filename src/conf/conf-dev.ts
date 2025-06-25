@@ -6,6 +6,9 @@ export const W = {
     PAD: 752
 }
 
+export const DEV_ID = 'id'
+export const DEV_DOC_ID = 'documentId'
+
 // 分页
 export const DEV_PAGER = {
     SIZE_DEF: 10,
@@ -25,7 +28,7 @@ export const DEV_SM_ALLOW_SEARCH = false
 
 // 是否允许展示
 export const DEV_MEDIA_ALLOW = {
-    IS_SEX: 0, // 是否允许展示 色情 1 = 允许
+    ALLOW_SEX: 0, // 是否允许展示 色情 1 = 允许
     OPEN_ALLOW: true, // 允许展示 被允许的 true = 打开 isAllow 开关，其他 = 不检查 isAllow
 }
 
@@ -38,6 +41,10 @@ export const DEV_MEDIA_VIEW = {
 
 export const DEV_K = {
     MEDIA: 'activity_medias'
+}
+
+export const DEV_GENDER = {
+    BOY: 1, GIRL: 0
 }
 
 export const DEV_STATUS_DEF = {

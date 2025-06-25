@@ -1,4 +1,5 @@
 import { is_strapi_mode } from "@/conf/conf"
+import { STS } from "@/conf/conf-status"
 import { authGetters, authState } from "@/memory/global"
 import { business, master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
@@ -20,9 +21,9 @@ const fetching = async (param: ONE, pager: Pager): Promise<UserLove[]> => {
 // 查询 我的 love
 const myloves = async (): Promise<UserLove[]> => {
     const __pm: ONE = { }
-    __pm['filters[whoId][$eq]'] = authGetters.userid
-    __pm['filters[dataStatus][$eq]'] = 1
-    return await fetching(__pm, net_tool.generate_pagination(100))
+    srp_p.__eq(__pm, 'whoId', authGetters.userid)
+    srp_p.__eq(__pm, 'dataStatus', STS.YES)
+    return await fetching(__pm, net_tool.__pager(100))
 }
 
 const pius = async (form: ONE): Promise<UserLove> => {
@@ -44,21 +45,22 @@ const edit = async (form: ONE, origin: UserLove): Promise<UserLove> => {
 // 自动执行关注
 const ilove = async (touserid: string): Promise<UserLove> => {
     const __pm: ONE = { whoId: authGetters.userid }
-    __pm['love'] = touserid; __pm['loveId'] = touserid;
+    __pm['love'] = touserid; 
+    __pm['loveId'] = touserid;
     return await pius(__pm)
 }
 
 // 执行关注
 const losslove = async (v: UserLove) : Promise<UserLove> => {
-    return edit({ dataStatus: 0 }, v)
+    return edit({ dataStatus: STS.NO }, v)
 }
 const focuslove = async (touserid: string) : Promise<UserLove> => {
     const __pm: ONE = { }
     srp_p.__eq(__pm, 'whoId', authGetters.userid)
     srp_p.__eq(__pm, 'loveId', touserid)
-    const same: UserLove[] = await fetching(__pm, net_tool.generate_pagination())
+    const same: UserLove[] = await fetching(__pm, net_tool.__pager())
     if (is_nice_arr(same)) {
-        return await edit({ dataStatus: 1 }, same[0])
+        return await edit({ dataStatus: STS.YES }, same[0])
     }
     else {
         return await ilove(touserid)

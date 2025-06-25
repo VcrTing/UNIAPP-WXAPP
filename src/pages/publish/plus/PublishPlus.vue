@@ -30,6 +30,7 @@ import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import CoBomBtnGroup from '@/components/element/button/CoBomBtnGroup.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoMoSecurityAgreeLine from '@/components/modules/security/CoMoSecurityAgreeLine.vue';
+import { STS_ACTIVITY } from '@/conf/conf-status';
 import { authGetters, orderDispatch, orderState, uiState } from '@/memory/global';
 import server_pubplus from '@/server/publish/server_pubplus';
 import activity_tool from '@/tool/modules/activity_tool';
@@ -68,8 +69,10 @@ const funn = {
         const res = <ONE>{
             title: src.title, activity_tags: tgsid, fee: src.fee,
             typed: src.typed, 
-            publisher: userid, dataStatus: 0, activity_address: addr.documentId,
+            publisher: userid, activity_address: addr.documentId,
         }
+        // 初始化状态
+        res[STS_ACTIVITY.STATUS.K] = STS_ACTIVITY.STATUS.EDITING
         // 构建搜索
         res['startTime'] = times.build_of_form(src.__start)
         res['endTime'] = times.build_of_form(src.__end)

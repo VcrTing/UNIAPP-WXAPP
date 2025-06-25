@@ -1,3 +1,4 @@
+import { STS_CONTENT } from "@/conf/conf-status"
 import { authGetters } from "@/memory/global"
 import { master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
@@ -22,11 +23,11 @@ const by_activity_ids = async (ids: string[]): Promise<ProductContent[]> => {
     // ID = 这些
     srp_p.build_filter_in(param, 'activityId', ids || [ ])
     // 状态已审核
-    srp_p.__eq(param, 'dataStatus', 1)
+    srp_p.__eq(param, STS_CONTENT.STATUS.K, STS_CONTENT.STATUS.PASS)
     // 未关闭
-    srp_p.__eq(param, 'isAllow', 1)
+    srp_p.__eq(param, STS_CONTENT.ALLOW.K, STS_CONTENT.ALLOW.YES)
     // 返回
-    return await fetching(param, net_tool.generate_pagination(999))
+    return await fetching(param, net_tool.__pager_long())
 }
 
 // 搜寻单个
@@ -37,14 +38,13 @@ const by_activity = async (one: Activity): Promise<ProductContent[]> => {
 // 改动
 const plus_or_edit = async (one: Activity, src: ProductContent, introduction: string, content: string): Promise<ProductContent> => {
     let docId: string = must_one<ProductContent>(src).documentId;
-    console.log('SRC ID =', docId)
     const form: ONE = { introduction, content, activityId: one.documentId, publisherId: authGetters.userid }
     if (is_nice_sn(docId)) {
         // 修改
     }
     else {
-        form['isAllow'] = 1
-        form['dataStatus'] = 1
+        form[STS_CONTENT.ALLOW.K] = STS_CONTENT.ALLOW.YES
+        form[STS_CONTENT.STATUS.K] = STS_CONTENT.STATUS.PASS
     }
     const __pm: ONE = net_tool.build_data( form )
     if (is_nice_sn(docId)) {

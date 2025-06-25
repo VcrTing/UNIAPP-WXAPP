@@ -1,5 +1,6 @@
 import { DATA_ACTIVITY_TYPED_GK } from "@/conf/conf-datas"
-import { DEV_SM_ALLOW_SEARCH, DEV_STATUS_DEF } from "@/conf/conf-dev"
+import { DEV_DOC_ID, DEV_SM_ALLOW_SEARCH, DEV_STATUS_DEF } from "@/conf/conf-dev"
+import { STS_ACTIVITY } from "@/conf/conf-status"
 import { master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
 import srp_p from "@/tool/strapi/srp_p"
@@ -21,15 +22,15 @@ const fetching = async (param: ONE, pager: Pager): Promise<Activity[]> => {
 
 const index = async (param: ONE, pager: Pager): Promise<Activity[]> => {
     // 审核通过的
-    srp_p.__eq(param, 'reviewStatus', DEV_STATUS_DEF.IS_PASS)
+    srp_p.__eq(param, STS_ACTIVITY.REVIEW.K, STS_ACTIVITY.REVIEW.YES)
     return await fetching(param, pager)
 }
 
 const index_recommond = async (param: ONE, pager: Pager): Promise<Activity[]> => {
     // 状态已审核
-    srp_p.build_filter_in(param, 'dataStatus', [ 2, 3 ])
+    srp_p.build_filter_in(param, STS_ACTIVITY.STATUS.K, [ STS_ACTIVITY.STATUS.PASS ])
     // 开启推荐
-    srp_p.__eq(param, 'isRecommended', DEV_STATUS_DEF.IS_RECOMMEND)
+    srp_p.__eq(param, STS_ACTIVITY.RECOMMEND.K, STS_ACTIVITY.RECOMMEND.YES)
     // 处理私密
     if (!DEV_SM_ALLOW_SEARCH) {
         srp_p.__eq(param, 'typed', DATA_ACTIVITY_TYPED_GK.v)
@@ -41,13 +42,13 @@ const index_recommond = async (param: ONE, pager: Pager): Promise<Activity[]> =>
 const byids = async (ids: string[]): Promise<Activity[]> => {
     const param: ONE = { }
     // ID = 这些
-    srp_p.build_filter_in(param, 'documentId', ids || [ ])
+    srp_p.build_filter_in(param, DEV_DOC_ID, ids || [ ])
     // 状态已审核
-    srp_p.build_filter_in(param, 'dataStatus', [ 2 ])
+    srp_p.build_filter_in(param, STS_ACTIVITY.STATUS.K, [ STS_ACTIVITY.STATUS.PASS ])
     // 审核通过的
-    srp_p.__eq(param, 'reviewStatus', DEV_STATUS_DEF.IS_PASS)
+    srp_p.__eq(param, STS_ACTIVITY.REVIEW.K, STS_ACTIVITY.REVIEW.YES)
     // 返回
-    return await fetching(param, net_tool.generate_pagination(999))
+    return await fetching(param, net_tool.__pager_long())
 }
 
 // 搜寻单个
@@ -62,7 +63,7 @@ const byid = async (docid: string): Promise<Activity> => {
 const mine_history = async (): Promise<Activity[]> => {
     const param: ONE = { }
     net_tool.limit_mine(param)
-    const us: Activity[] = await fetching(param, net_tool.generate_pagination())
+    const us: Activity[] = await fetching(param, net_tool.__pager())
     return us
 }
 

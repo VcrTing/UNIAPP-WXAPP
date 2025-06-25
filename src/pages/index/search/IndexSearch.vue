@@ -50,7 +50,7 @@ import VwIndexSearchPag from '@/view/index/search/VwIndexSearchPag.vue';
 import { reactive, ref } from 'vue';
 
 const aii = reactive({
-    prev: '', search: '', ioading: false, pager: net_tool.generate_pagination()
+    prev: '', search: '', ioading: false, pager: net_tool.__pager()
 })
 const result = reactive({
     activities: <Activity[]> [ ],

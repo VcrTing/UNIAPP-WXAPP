@@ -39,7 +39,7 @@ const _s: Store<Page.IndexPageStore> = createStore({
                 // 先去 本地 取
                 // 
                 // 拿默认
-                src = net_tool.generate_pagination()
+                src = net_tool.__pager()
             }
             return src
         },

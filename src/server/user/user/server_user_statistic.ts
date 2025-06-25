@@ -18,7 +18,7 @@ const fetching = async (param: ONE, pager: Pager): Promise<UserStatistic[]> => {
 
 const mine = async (param: ONE = { }): Promise<UserStatistic> => {
     net_tool.limit_mine(param, 'user');
-    const src: UserStatistic[] = await fetching(param, net_tool.generate_pagination());
+    const src: UserStatistic[] = await fetching(param, net_tool.__pager());
     return must_one(src[0])
 }
 
@@ -26,7 +26,7 @@ const byuser = async (userid: number): Promise<UserStatistic> => {
     const __pm: ONE = { }
     srp_p.__eq(__pm, 'user][id', userid)
     // __pm['filters[user][id][$eq]'] = userid
-    const src: UserStatistic[] = await fetching(__pm, net_tool.generate_pagination());
+    const src: UserStatistic[] = await fetching(__pm, net_tool.__pager());
     return must_one(src[0])
 }
 

@@ -1,3 +1,4 @@
+import { STS_ACTIVITY } from "@/conf/conf-status"
 import { master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
 import srp_p from "@/tool/strapi/srp_p"
@@ -17,11 +18,11 @@ const fetching = async (param: ONE, pager: Pager): Promise<Activity[]> => {
 }
 
 // 个人
-const mine = async (param: ONE, pager: Pager, dataStatus: number[] = []): Promise<Activity[]> => {
+const mine = async (param: ONE, pager: Pager, sts: number[] = []): Promise<Activity[]> => {
     net_tool.limit_mine(param, 'publisher')
     // 状态筛选
-    if (dataStatus.length) { 
-        srp_p.build_filter_in(param, 'dataStatus', dataStatus)
+    if (sts.length) { 
+        srp_p.build_filter_in(param, STS_ACTIVITY.STATUS.K, sts)
     }
     //
     return await fetching(param, pager)
@@ -29,16 +30,16 @@ const mine = async (param: ONE, pager: Pager, dataStatus: number[] = []): Promis
 
 // 上架中
 const working = async (param: ONE): Promise<Activity[]> => {
-    return await mine(param, net_tool.generate_pagination(999), [ 2 ])
+    return await mine(param, net_tool.__pager_long(), [ STS_ACTIVITY.STATUS.PASS ])
 }
 // 待发布
 const waiting = async (param: ONE): Promise<Activity[]> => {
-    return await mine(param, net_tool.generate_pagination(999), [ 0, 1 ])
+    return await mine(param, net_tool.__pager_long(), [ STS_ACTIVITY.STATUS.EDITING, STS_ACTIVITY.STATUS.CHECKING ])
 }
 
 // 历史
 const history = async (param: ONE): Promise<Activity[]> => {
-    return await mine(param, net_tool.generate_pagination(999))
+    return await mine(param, net_tool.__pager_long())
 }
 
 export default {

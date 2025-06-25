@@ -19,14 +19,14 @@ const fetching = async (param: ONE, pager: Pager): Promise<User[]> => {
 
 const aii = async (): Promise<User[]> => {
     const param: ONE = { }
-    const src: User[] = await fetching(param, net_tool.generate_pagination(6))
+    const src: User[] = await fetching(param, net_tool.__pager(6))
     return must_arr(src)
 }
 
 const byphone = async (phone: string): Promise<User> => {
     const param: ONE = { }
     srp_p.__eq(param, 'phone', phone)
-    const src: User[] = await fetching(param, net_tool.generate_pagination())
+    const src: User[] = await fetching(param, net_tool.__pager())
     return must_one(src[0])
 }
 
@@ -35,7 +35,7 @@ const byids = async (ids: string[]): Promise<User[]> => {
     // ID = 这些
     srp_p.build_filter_in(param, 'id', ids || [ ])
     // 用户
-    return await fetching(param, net_tool.generate_pagination(9))
+    return await fetching(param, net_tool.__pager(9))
 }
 
 const __main_page = async (user: User): Promise<UserMainPage> => {

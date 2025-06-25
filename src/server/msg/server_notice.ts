@@ -19,7 +19,7 @@ const by_activity = async (one: Activity): Promise<ActivityNotice[]> => {
     const __pm: ONE = { }
     srp_p.__eq(__pm, 'activityId', activityId)
     srp_p.__sort(__pm)
-    return await fetching(__pm, net_tool.generate_pagination())
+    return await fetching(__pm, net_tool.__pager())
 }
 
 const plus = async (form: ONE): Promise<ActivityNotice> => {

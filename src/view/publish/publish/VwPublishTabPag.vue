@@ -52,7 +52,7 @@ const aii = reactive({
         { name: '待发布', v: 1 },
         { name: '历史活动', v: 2 },
     ],
-    param: { }, pager: net_tool.generate_pagination(200)
+    param: { }, pager: net_tool.__pager_long()
 })
 
 // 上架中

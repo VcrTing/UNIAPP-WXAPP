@@ -47,6 +47,7 @@ import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoMoSecurityAgreeLine from '@/components/modules/security/CoMoSecurityAgreeLine.vue';
 import { DATA_ACTIVITY_MEDIA, DATA_ACTIVITY_TYPED_GK, DATA_ACTIVITY_TYPED_SM, DATA_PUBLISH_LIMIT } from '@/conf/conf-datas';
+import { STS_ACTIVITY } from '@/conf/conf-status';
 import { uiState } from '@/memory/global';
 import { pagePublishState } from '@/memory/page';
 import server_content from '@/server/activity/server_content';
@@ -168,9 +169,9 @@ const func = {
         if (!funn.collection()) return;
         if (!agree.value.v()) return;
         const src: ONE = funn.buildform(form);
-        src['dataStatus'] = 1 // 不可编辑状态
-        src['isRecommended'] = 1 // 自动推荐
-        src['reviewStatus'] = 0 // 送审
+        src[STS_ACTIVITY.REVIEW.K] = STS_ACTIVITY.REVIEW.NO // 送审
+        src[STS_ACTIVITY.STATUS.K] = STS_ACTIVITY.STATUS.CHECKING // 不可编辑状态
+        src[STS_ACTIVITY.RECOMMEND.K] = STS_ACTIVITY.RECOMMEND.YES // 自动推荐
         const res: ONE = await server_pubplus.edit(src, edit.value)
         if (res.documentId) {
             await func.success(src)

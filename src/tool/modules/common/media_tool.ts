@@ -1,6 +1,7 @@
 import { APP_W_DEF, DEV_MEDIA_ALLOW } from "@/conf/conf-dev"
 import { is_nice_arr, must_arr } from "../../util/valued"
 import { authGetters } from "@/memory/global"
+import { STS_MEDIA } from "@/conf/conf-status"
 
 const generate_upload_img = (path: string, file: File, media: Media): Form.UploadImage => {
     return {
@@ -40,8 +41,8 @@ const build_activity_plus_data = (origin: Media, activityDocumentId: string | nu
         isGallery: origin.isGallery,
         w: origin.w, 
         h: origin.h,
-        isAllow: 1,
-        isSex: 0,
+        isAllow: STS_MEDIA.ALLOW.YES,
+        isSex: STS_MEDIA.ALLOW.NO,
 
         activity: activityDocumentId,
         user: authGetters.user_doc_id
@@ -96,7 +97,7 @@ const cpu_index_banner_h = (banners: Media[], w_web: number = APP_W_DEF): number
 // 过滤掉色情
 const fer_sex = (src: Media[] = []): Media[] => {
     return must_arr(src).filter((e: Media) => {
-        if (DEV_MEDIA_ALLOW.IS_SEX === 1) {
+        if (DEV_MEDIA_ALLOW.ALLOW_SEX === 1) {
             // 允许色情
             return true
         }
@@ -104,7 +105,7 @@ const fer_sex = (src: Media[] = []): Media[] => {
             // 不允许色情
             const __v: number | undefined = e.isSex
             // 色情内容不返回
-            if (__v) { return false }
+            if (__v === STS_MEDIA.SEX.YES) { return false }
         }
         return true
     })
@@ -117,7 +118,7 @@ const fer_allow = (src: Media[] = []): Media[] => {
             // 只展示 isAllow
             const __v: number | undefined = e.isAllow
             // 
-            if (__v) { return true }
+            if (__v === STS_MEDIA.ALLOW.YES) { return true }
             else { return false }
         }
         else {

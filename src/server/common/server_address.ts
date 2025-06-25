@@ -19,7 +19,7 @@ const fetching = async (param: ONE = { }, pager: Pager): Promise<Address[]> => {
 // 为首页
 const mine = async (param: ONE = { }): Promise<Address[]> => {
     srp_p.__eq(param, 'publisherId', authGetters.userid)
-    return await fetching(param, net_tool.generate_pagination())
+    return await fetching(param, net_tool.__pager())
 }
 
 // 查重复
@@ -28,7 +28,7 @@ const same = async (longitude: string, latitude: string): Promise<Address[]> => 
     srp_p.__eq(__pm, 'publisherId', authGetters.userid)
     srp_p.__eq(__pm, 'longitude', longitude)
     srp_p.__eq(__pm, 'latitude', latitude)
-    return await fetching(__pm, net_tool.generate_pagination())
+    return await fetching(__pm, net_tool.__pager())
 }
 
 // 新增

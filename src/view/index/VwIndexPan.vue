@@ -51,7 +51,7 @@ import srp_p from '@/tool/strapi/srp_p';
 const aii = reactive({
     tag: <Tag> { }, ioading: false,
     activities: <Activity[]>[ ],
-    pager: net_tool.generate_pagination()
+    pager: net_tool.__pager()
 })
 
 // const pageoptions = computed((): Page.IndexPageDataActivityOptions => pageIndexState.page_index_data_options)
@@ -178,7 +178,7 @@ onMounted(func.init)
         if (option == null) {
             option = {
                 tag: aii.tag,
-                pager: net_tool.generate_pagination()
+                pager: net_tool.__pager()
             }
         }
 

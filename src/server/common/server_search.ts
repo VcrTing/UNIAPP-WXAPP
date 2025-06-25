@@ -19,7 +19,7 @@ const fetching = async (param: ONE, pager: Pager): Promise<Activity[]> => {
 }
 
 // 搜索活动
-const search = async (search: string, param: ONE = { }, pager: Pager = net_tool.generate_pagination()): Promise<Activity[]> => {
+const search = async (search: string, param: ONE = { }, pager: Pager = net_tool.__pager()): Promise<Activity[]> => {
     srp_p.__like(param, 'search', search)
     // 处理私密
     if (!DEV_SM_ALLOW_SEARCH) {
