@@ -1,5 +1,6 @@
-import { APP_W_DEF } from "@/conf/conf-dev"
+import { APP_W_DEF, DEV_MEDIA_ALLOW } from "@/conf/conf-dev"
 import { is_nice_arr, must_arr } from "../../util/valued"
+import { authGetters } from "@/memory/global"
 
 const generate_upload_img = (path: string, file: File, media: Media): Form.UploadImage => {
     return {
@@ -37,9 +38,13 @@ const build_activity_plus_data = (origin: Media, activityDocumentId: string | nu
         urlSmall: origin.urlSmall,
         mediaType: origin.mediaType,
         isGallery: origin.isGallery,
-        activity: activityDocumentId,
         w: origin.w, 
-        h: origin.h
+        h: origin.h,
+        isAllow: 1,
+        isSex: 0,
+
+        activity: activityDocumentId,
+        user: authGetters.user_doc_id
     }
 }
 
@@ -88,7 +93,43 @@ const cpu_index_banner_h = (banners: Media[], w_web: number = APP_W_DEF): number
     return src // + 'px'
 }
 
+// 过滤掉色情
+const fer_sex = (src: Media[] = []): Media[] => {
+    return must_arr(src).filter((e: Media) => {
+        if (DEV_MEDIA_ALLOW.IS_SEX === 1) {
+            // 允许色情
+            return true
+        }
+        else {
+            // 不允许色情
+            const __v: number | undefined = e.isSex
+            // 色情内容不返回
+            if (__v) { return false }
+        }
+        return true
+    })
+}
+
+// 过滤掉允许
+const fer_allow = (src: Media[] = []): Media[] => {
+    return must_arr(src).filter((e: Media) => {
+        if (DEV_MEDIA_ALLOW.OPEN_ALLOW) {
+            // 只展示 isAllow
+            const __v: number | undefined = e.isAllow
+            // 
+            if (__v) { return true }
+            else { return false }
+        }
+        else {
+            // 无限制
+            return true
+        }
+    })
+}
+
 export default {
+    fer_sex, fer_allow,
+
     img_h_view,
     __img_h_view,
 

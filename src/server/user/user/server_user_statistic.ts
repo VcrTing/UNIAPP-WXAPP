@@ -1,7 +1,7 @@
 import { authState } from "@/memory/global"
 import { master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
-import strapi_param_tool from "@/tool/strapi/strapi_param_tool"
+import srp_p from "@/tool/strapi/srp_p"
 import { netip } from "@/tool/uni/uni-global"
 import { is_str } from "@/tool/util/typed"
 import { cpu_fioat, cpu_int_1, must_arr, must_one } from "@/tool/util/valued"
@@ -24,7 +24,7 @@ const mine = async (param: ONE = { }): Promise<UserStatistic> => {
 
 const byuser = async (userid: number): Promise<UserStatistic> => {
     const __pm: ONE = { }
-    strapi_param_tool.__eq(__pm, 'user][id', userid)
+    srp_p.__eq(__pm, 'user][id', userid)
     // __pm['filters[user][id][$eq]'] = userid
     const src: UserStatistic[] = await fetching(__pm, net_tool.generate_pagination());
     return must_one(src[0])

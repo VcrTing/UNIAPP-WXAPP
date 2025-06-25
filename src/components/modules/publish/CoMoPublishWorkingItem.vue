@@ -2,7 +2,7 @@
     <view class="o-h">
         <view class="br-ti br-tr o-h bg-con fx-aii-btn-def" @tap="emt('view')">
             <view class="px-x1 ls-x2 pt pb-s fx-s">
-                <view class="h7">{{ v.title }}</view>
+                <view class="h7"><text class="c-p">{{ v.title }}</text></view>
                 <!--
                 <view>
                     <CoSusAcyIndex :v="v" :joins="undefined"/>
@@ -13,20 +13,20 @@
         <view class="py-t bg-con px-x1 fx-aii-btn-def" @tap="emt('view')">
             <view class="row">
                 <view class="px-s d-ib" v-for="(m, n) in v.activity_tags" :key="n">
-                    <view class="btn-def br-t">
+                    <view class="btn-def br-t c-p">
                         <view class="fs-s px py-t tid">{{ m.name }}</view>
                     </view>
                 </view>
             </view>
         </view>
         <view class="bg-con pr-s"  @tap="emt('view')">
-            <view class="pi-x1 d-ib ani-scaie-aii py-n fx-aii-btn-def br-1">
+            <view class="pi-x1 d-ib ani-scaie-aii py-n fx-aii-btn-def br-1 c-p">
                 <view class="fx-i tid pr-s">
                     <text class="fs-s">{{ activity_tool.gettime(v) }}</text>
                 </view>
             </view>
             <view class="tiw px-t d-ib fs-s">|</view>
-            <view class="d-ib ani-scaie-aii py-n fx-aii-btn-def br-1">
+            <view class="d-ib ani-scaie-aii py-n fx-aii-btn-def br-1 c-p">
                 <view class="fx-i px-s tid">
                     <text class="fs-s">{{ activity_tool.getfar(v) }}</text>
                     <text class="fs-s pi-s">{{ activity_tool.getaddress(v) }}</text>
@@ -55,13 +55,13 @@
                     <CoSusAcyIndex :v="v" :joins="undefined"/>
                 </view>
                     -->
-                <view class="d-ib fs-s">
+                <view class="d-ib fs-s c-p">
                     <UiI :i="'lock'" clazz="d-ib tiw"/>
                     <text class="pi-s">限</text>
                     <text class="px-s">{{ activity_tool.getjoin_limit(v) }}</text>
                     <text >人</text>
                 </view>
-                <view class="d-ib fs-s">
+                <view class="d-ib fs-s c-p">
                     <text class="">，每人</text>
                     <text class="px-s">{{ v.fee || 0 }}</text>
                     <text class="">元</text>
@@ -69,7 +69,7 @@
             </view>
             
             <view class="tis fx-aii-btn-def pi-x1 pr py w-382 ta-r">
-                <view class="d-ib tis fs-s">
+                <view class="d-ib tis fs-s c-p">
                     <UiI i='users' clazz="d-ib"/>
                     <text class="pi-s">{{ activity_tool.getjoiner_len(v) }}</text>
                     <text >人</text>

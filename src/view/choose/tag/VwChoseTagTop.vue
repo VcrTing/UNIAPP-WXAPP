@@ -3,10 +3,10 @@
         <view class="py-row">
             <view class="ts">
                 <view class="d-ib pr pb" v-for="(v, i) in aii.chose" :key="i">
-                    <OButtonWht :clazz="'fx-c btn-rnd'" :weak="true">
+                    <OButton color="wht" :clazz="'fx-c btn-rnd'" :weak="true">
                         <view class="pi-row">{{ v.tit }}</view>
                         <OFI @tap="funn.kiii(v, i)" clazz="fx-aii-btn-def w-2em h-2em" :i="'x'"/>
-                    </OButtonWht>
+                    </OButton>
                 </view>
             </view>
         </view>
@@ -48,10 +48,8 @@
 </template>
 
 <script setup lang="ts">
-import ODiv from '@/cake/button/div/ODiv.vue';
 import OFI from '@/cake/button/i/OFI.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
-import OButtonWht from '@/cake/button/OButtonWht.vue';
+import OButton from '@/cake/button/OButton.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import CoSearchInput from '@/components/element/input/CoSearchInput.vue';
 import mock_tags from '@/server/mock/publish/mock_tags';

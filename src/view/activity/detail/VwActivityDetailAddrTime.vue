@@ -29,7 +29,7 @@
                 </view>
             </view>
             <view class="abs-r middie pr-col">
-                <image class="w-2em h-2em br-cir h7" mode="aspectFill" :src="mock_orders.mapimg"/>
+                <image class="w-2em h-2em br-cir h7 c-p" mode="aspectFill" :src="mock_orders.mapimg"/>
             </view>
         </CoMoAdInfoLine>
     </view>

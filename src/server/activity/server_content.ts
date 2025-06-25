@@ -1,7 +1,7 @@
 import { authGetters } from "@/memory/global"
 import { master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
-import strapi_param_tool from "@/tool/strapi/strapi_param_tool"
+import srp_p from "@/tool/strapi/srp_p"
 import { netip } from "@/tool/uni/uni-global"
 import { is_arr, is_str } from "@/tool/util/typed"
 import { is_nice_sn, must_arr, must_one } from "@/tool/util/valued"
@@ -20,11 +20,11 @@ const fetching = async (param: ONE, pager: Pager): Promise<ProductContent[]> => 
 const by_activity_ids = async (ids: string[]): Promise<ProductContent[]> => {
     const param: ONE = { }
     // ID = 这些
-    strapi_param_tool.build_filter_in(param, 'activityId', ids || [ ])
+    srp_p.build_filter_in(param, 'activityId', ids || [ ])
     // 状态已审核
-    strapi_param_tool.__eq(param, 'dataStatus', 1)
+    srp_p.__eq(param, 'dataStatus', 1)
     // 未关闭
-    strapi_param_tool.__eq(param, 'isAllow', 1)
+    srp_p.__eq(param, 'isAllow', 1)
     // 返回
     return await fetching(param, net_tool.generate_pagination(999))
 }

@@ -67,6 +67,7 @@ const _s: Store<AuthStore> = createStore({
         username: s => s.user.nickname,
         phone: s => s.phone,
         userid: s => (s.user.id || '') + '',
+        user_doc_id: s => (s.user.documentId || ''),
         company_id: s => s.company.id,
         is_login: s => islogin(s),
         is_publisher: s => (s.user.publisher),

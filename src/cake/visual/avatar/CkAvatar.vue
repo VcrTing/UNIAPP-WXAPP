@@ -2,10 +2,11 @@
     <image class="mxw-12em uni-img br-cir ani-scaie-aii c-p" :class="clazz"
         mode="aspectFill" @tap="funn.tomainpage"
         :src="src" v-if="src"/>
-    <view class="mxw-12em bg-def fx-aii-btn-def br-cir ani-scaie-aii" :class="clazz" v-else></view>
+    <Ov class="mxw-12em bg-def br-cir" :clazz="clazz" v-else></Ov>
 </template>
 
 <script setup lang="ts">
+import Ov from '@/cake/button/touch/Ov.vue';
 import { authDispatch } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';
 import { future } from '@/tool/util/future';

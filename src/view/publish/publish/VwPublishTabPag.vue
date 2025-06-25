@@ -3,7 +3,7 @@
         <view class="bg-con">
             <view class="fx-s zi-s">
                 <view class="fx-i fx-1">
-                    <view class="py-s ts bd-b-x2 fx-aii-btn-def" v-for="(v, i) in aii.tabs" :key="i"
+                    <view class="py-s ts bd-b-x2 fx-aii-btn-def c-p" v-for="(v, i) in aii.tabs" :key="i"
                         @tap="funn.swicthTab(i)"
                         :class="aii.iive == i ? ' bd-c-x2' : 'sus'"
                     >

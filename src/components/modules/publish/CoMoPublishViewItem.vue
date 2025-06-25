@@ -1,5 +1,5 @@
 <template>
-    <view class="card fx-s o-h">
+    <view class="card fx-s o-h c-p">
         <view class="w-5em h-5em">
             <CoImg clazz="h-100" :src="funn.get_banner_src(v)"/>
         </view>

@@ -4,13 +4,19 @@ import { deepcopy, formfiimit, group_search_txt, must_arr, must_int, must_one, p
 import { authGetters } from "@/memory/global"
 import times from "../web/times"
 import address_tool from "./common/address_tool"
+import { DEV_MEDIA_ALLOW } from "@/conf/conf-dev"
+import media_tool from "./common/media_tool"
 
     // 0-待完善, 1-审核中, 2-已发布, 3-已取消, 4-已结束, 5-已下架
 
     // 获取 图片
     const __medias = (v: Activity): Media[] => {
-        const mds: Media[ ] = must_arr(v.activity_medias)
-        // 不允许
+        let mds: Media[ ] = must_arr(v.activity_medias)
+        // 不允许色情
+        mds = media_tool.fer_sex(mds)
+        // 不允许被禁止的
+        mds = media_tool.fer_allow(mds)
+        // 返回
         return mds
     }   
 

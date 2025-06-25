@@ -46,7 +46,7 @@ const funn = {
     init: () => {
         timeout(() => {
             (aii.init = true)
-        }, 600)
+        }, 200)
     }
 }
 

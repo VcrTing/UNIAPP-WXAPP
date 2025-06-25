@@ -46,7 +46,7 @@
                         </view>
                     </view>
                     <view class="px-inp">
-                        <OButtonWht @tap="funn.addgirl" clazz="bd-x2 bd-s-d w-3em h-3em br-cir fx-c" :weak="true"><UiI class="" :i="'+'"/> </OButtonWht>
+                        <OButton color="wht" @tap="funn.addgirl" clazz="bd-x2 bd-s-d w-3em h-3em br-cir fx-c" :weak="true"><UiI class="" :i="'+'"/> </OButton>
                     </view>
                 </view>
                 <view v-else class="bg-co n">
@@ -69,7 +69,6 @@
 
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
-import OButtonWht from '@/cake/button/OButtonWht.vue';
 import CoMoUserInfoItem from '@/components/modules/user/CoMoUserInfoItem.vue';
 import mock_meizi from '@/server/mock/user/mock_meizi';
 import appRouter from '@/tool/uni/app-router';

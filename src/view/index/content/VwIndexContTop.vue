@@ -25,7 +25,7 @@
             </view>
             <view>
                 <view class="pb pt-s px-row softer" @tap="func.openTags">
-                    <view class="btn-def-s px-col br-t fx-aii-btn-def"><UiI clazz="tiw" i="b"/> </view>
+                    <view class="btn-def-s px-col br-t fx-aii-btn-def c-p"><UiI clazz="tiw" i="b"/> </view>
                 </view>
             </view>
         </view>

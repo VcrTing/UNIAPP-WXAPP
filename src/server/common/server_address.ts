@@ -1,7 +1,7 @@
 import { authGetters } from "@/memory/global"
 import { master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
-import strapi_param_tool from "@/tool/strapi/strapi_param_tool"
+import srp_p from "@/tool/strapi/srp_p"
 import { netip, tiperr, tipwarn } from "@/tool/uni/uni-global"
 import { is_arr, is_str } from "@/tool/util/typed"
 import { formvtostr } from "@/tool/util/valued"
@@ -10,7 +10,7 @@ const relations: string[] = [ ]
 
 const fetching = async (param: ONE = { }, pager: Pager): Promise<Address[]> => {
     const __pm: ONE = net_tool.build_param(param, pager, relations)
-    const src: NET_RES = await master.get('activity-address', null, __pm)
+    const src: NET_RES = await master.get('address', null, __pm)
     if (is_str(src)) return netip(src, [ ]);
     const res: ONE | MANY = (src as HttpResult).data
     return net_tool.many<Address>(res)
@@ -18,16 +18,16 @@ const fetching = async (param: ONE = { }, pager: Pager): Promise<Address[]> => {
 
 // 为首页
 const mine = async (param: ONE = { }): Promise<Address[]> => {
-    strapi_param_tool.__eq(param, 'publisherId', authGetters.userid)
+    srp_p.__eq(param, 'publisherId', authGetters.userid)
     return await fetching(param, net_tool.generate_pagination())
 }
 
 // 查重复
 const same = async (longitude: string, latitude: string): Promise<Address[]> => {
     const __pm: ONE = { }
-    strapi_param_tool.__eq(__pm, 'publisherId', authGetters.userid)
-    strapi_param_tool.__eq(__pm, 'longitude', longitude)
-    strapi_param_tool.__eq(__pm, 'latitude', latitude)
+    srp_p.__eq(__pm, 'publisherId', authGetters.userid)
+    srp_p.__eq(__pm, 'longitude', longitude)
+    srp_p.__eq(__pm, 'latitude', latitude)
     return await fetching(__pm, net_tool.generate_pagination())
 }
 
@@ -44,7 +44,7 @@ const plus = async (form: ONE = { }): Promise<Address> => {
     }
     else {
         const __pm: ONE = net_tool.build_data(form)
-        const src: NET_RES = await master.pos('activity-address', null, __pm)
+        const src: NET_RES = await master.pos('address', null, __pm)
         if (is_str(src)) return netip(src, <Address>{ });
         const res: ONE | MANY = (src as HttpResult).data
         return net_tool.one<Address>(res)

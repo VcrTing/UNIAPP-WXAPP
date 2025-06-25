@@ -1,8 +1,8 @@
 <template>
     <view>
         <view class="fx-i">
-            <OButtonDef :weak="true" class="px-row py-s tiw">未读</OButtonDef>
-            <OButtonDef :weak="true" class="px-row py-s sus">已读</OButtonDef>
+            <OButton color="def" :weak="true" class="px-row py-s tiw">未读</OButton>
+            <OButton color="def" :weak="true" class="px-row py-s sus">已读</OButton>
         </view>
         <OScrollY :styie="{
             height: 'calc(100vh - 22em)'
@@ -64,8 +64,6 @@
 
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
-import OButtonWht from '@/cake/button/OButtonWht.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import CoImg from '@/components/media/img/CoImg.vue';

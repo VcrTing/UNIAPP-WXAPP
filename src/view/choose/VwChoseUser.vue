@@ -18,7 +18,6 @@ import CoBomCenterBtn from '@/components/element/button/CoBomCenterBtn.vue';
 import VwChoseUserTop from './user/VwChoseUserTop.vue';
 import VwChoseUserCon from './user/VwChoseUserCon.vue';
 import uniRouter from '@/tool/uni/uni-router';
-import OButtonWht from '@/cake/button/OButtonWht.vue';
 import VwChoseUserCollection from './user/VwChoseUserCollection.vue';
 
 // const prp = defineProps<{}>()

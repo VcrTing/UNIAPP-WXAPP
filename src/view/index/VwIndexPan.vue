@@ -44,7 +44,7 @@ import { pageIndexDispatch, pageIndexState } from '@/memory/page';
 import def_ativity from '@/server/__def/def_ativity';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
-import strapi_param_tool from '@/tool/strapi/strapi_param_tool';
+import srp_p from '@/tool/strapi/srp_p';
 
 // const prp = defineProps<{}>()
 
@@ -75,8 +75,8 @@ const got = {
         const tagid: string = aii.tag.documentId // must_one<Tag>(option.tag).documentId
         if (tagid) {
             // res['']
-            // strapi_param_tool.__eq(res, 'isRecommended', tagid)
-            strapi_param_tool.__eq(res, 'activity_tags][documentId', tagid)
+            // srp_p.__eq(res, 'isRecommended', tagid)
+            srp_p.__eq(res, 'activity_tags][documentId', tagid)
             // res['filters[activity_tags][documentId][$eq]'] = tagid
         }
         else {

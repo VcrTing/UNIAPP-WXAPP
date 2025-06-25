@@ -1,7 +1,7 @@
 import { authGetters, authState } from "@/memory/global";
 import { master } from "@/tool/http/http";
 import net_tool from "@/tool/http/net_tool";
-import strapi_param_tool from "@/tool/strapi/strapi_param_tool";
+import srp_p from "@/tool/strapi/srp_p";
 import { netip } from "@/tool/uni/uni-global";
 import { is_str } from "@/tool/util/typed";
 import times from "@/tool/web/times";
@@ -31,7 +31,7 @@ const plus = async (one: Activity, invite_user: User): Promise<ActivityInvite> =
 
 const byactivity = async (activityId: string): Promise<ActivityInvite[]> => {
     const __pm: ONE = { }
-    strapi_param_tool.__eq(__pm, 'activityId', activityId)
+    srp_p.__eq(__pm, 'activityId', activityId)
     const src: ActivityInvite[] = await fetching(__pm, net_tool.generate_pagination());
     return src
 }

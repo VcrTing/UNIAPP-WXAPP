@@ -10,16 +10,20 @@ import { NET } from "./conf-net"
 const NET_ENDPOINT_AUTH = <ONE> {
     'login': 'app/auth/login' // 'sys/login'
 }
-// 测试用例
-const NET_ENDPOINT_TEST = <ONE> {
-    'timeout': 'zeng_test/timeout'
-}
+
 // 用户
 const NET_ENDPOINT_USER = <ONE>{
     'user': 'users',
     'love': 'user-loves',
     'statistic': 'user-statistics'
 }
+// 通用
+const NET_ENDPOINT_COMMON = <ONE> {
+    'tag': 'activity-tags',
+    'media': 'activity-medias',
+    'address': 'activity-addresses',
+}
+
 // 活动
 const NET_ENDPOINT_ACTIVITY = <ONE> {
     'join': 'activity-registrations',
@@ -27,20 +31,19 @@ const NET_ENDPOINT_ACTIVITY = <ONE> {
     'invite': 'activity-invites',
     'content': 'product-contents',
     'activity': 'activities',
-    'activity-tags': 'activity-tags',
-    'activity-media': 'activity-medias',
-    'activity-address': 'activity-addresses',
 }
 
 export const NET_ENDPOINTS_MASTER = <ONE> {
     ...NET_ENDPOINT_AUTH,
     ...NET_ENDPOINT_USER,
+    ...NET_ENDPOINT_COMMON,
     ...NET_ENDPOINT_ACTIVITY
 }
 
 export const NET_ENDPOINTS_BUSINESS = <ONE> {
     ...NET_ENDPOINT_AUTH,
     ...NET_ENDPOINT_USER,
+    ...NET_ENDPOINT_COMMON,
     ...NET_ENDPOINT_ACTIVITY
 }
 

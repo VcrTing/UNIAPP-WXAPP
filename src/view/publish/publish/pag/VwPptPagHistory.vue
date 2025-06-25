@@ -2,7 +2,7 @@
     <view>
         <view>
             <view class="fx-r py-s softer">
-                <view class="fx-r fx-aii-btn-def ts" @tap="funn.openfilter">
+                <view class="fx-r fx-aii-btn-def ts c-p" @tap="funn.openfilter">
                     <text class="pr-s py-row pi-x1 tit">
                         {{ tab['name'] }}
                     </text>

@@ -2,7 +2,7 @@ import { DATA_ACTIVITY_TYPED_GK } from "@/conf/conf-datas"
 import { DEV_SM_ALLOW_SEARCH, DEV_STATUS_DEF } from "@/conf/conf-dev"
 import { master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
-import strapi_param_tool from "@/tool/strapi/strapi_param_tool"
+import srp_p from "@/tool/strapi/srp_p"
 import { netip } from "@/tool/uni/uni-global"
 import { is_arr, is_str } from "@/tool/util/typed"
 import { must_arr, must_one } from "@/tool/util/valued"
@@ -21,18 +21,18 @@ const fetching = async (param: ONE, pager: Pager): Promise<Activity[]> => {
 
 const index = async (param: ONE, pager: Pager): Promise<Activity[]> => {
     // 审核通过的
-    strapi_param_tool.__eq(param, 'reviewStatus', DEV_STATUS_DEF.IS_PASS)
+    srp_p.__eq(param, 'reviewStatus', DEV_STATUS_DEF.IS_PASS)
     return await fetching(param, pager)
 }
 
 const index_recommond = async (param: ONE, pager: Pager): Promise<Activity[]> => {
     // 状态已审核
-    strapi_param_tool.build_filter_in(param, 'dataStatus', [ 2, 3 ])
+    srp_p.build_filter_in(param, 'dataStatus', [ 2, 3 ])
     // 开启推荐
-    strapi_param_tool.__eq(param, 'isRecommended', DEV_STATUS_DEF.IS_RECOMMEND)
+    srp_p.__eq(param, 'isRecommended', DEV_STATUS_DEF.IS_RECOMMEND)
     // 处理私密
     if (!DEV_SM_ALLOW_SEARCH) {
-        strapi_param_tool.__eq(param, 'typed', DATA_ACTIVITY_TYPED_GK.v)
+        srp_p.__eq(param, 'typed', DATA_ACTIVITY_TYPED_GK.v)
     }
     return await index(param, pager)
 }
@@ -41,11 +41,11 @@ const index_recommond = async (param: ONE, pager: Pager): Promise<Activity[]> =>
 const byids = async (ids: string[]): Promise<Activity[]> => {
     const param: ONE = { }
     // ID = 这些
-    strapi_param_tool.build_filter_in(param, 'documentId', ids || [ ])
+    srp_p.build_filter_in(param, 'documentId', ids || [ ])
     // 状态已审核
-    strapi_param_tool.build_filter_in(param, 'dataStatus', [ 2 ])
+    srp_p.build_filter_in(param, 'dataStatus', [ 2 ])
     // 审核通过的
-    strapi_param_tool.__eq(param, 'reviewStatus', DEV_STATUS_DEF.IS_PASS)
+    srp_p.__eq(param, 'reviewStatus', DEV_STATUS_DEF.IS_PASS)
     // 返回
     return await fetching(param, net_tool.generate_pagination(999))
 }

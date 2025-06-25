@@ -1,10 +1,8 @@
 import { is_strapi_mode } from "@/conf/conf"
-import strapi_param_tool from "../strapi/strapi_param_tool"
+import srp_p from "../strapi/srp_p"
 import { authGetters } from "@/memory/global"
 import { is_nice_arr, is_nice_one, must_arr, must_one } from "../util/valued"
-
-
-const PAGER_SIZE_DEF = 10
+import { DEV_PAGER } from "@/conf/conf-dev"
 
 // 生成返回结果
 const generate_http_result = (data: any, code: number, message: string) => {
@@ -14,7 +12,7 @@ const generate_http_result = (data: any, code: number, message: string) => {
 }
 
 // 生成分页
-const generate_pagination = (pageSize: number = PAGER_SIZE_DEF): Pager => {
+const generate_pagination = (pageSize: number = DEV_PAGER.SIZE_DEF): Pager => {
     return <Pager>{
         page: 1, pageSize, total: 999
     }
@@ -23,7 +21,7 @@ const generate_pagination = (pageSize: number = PAGER_SIZE_DEF): Pager => {
 // 构建参数
 const build_param = (param: ONE, pager: Pager, relations: string[]): ONE => {
     if (is_strapi_mode()) {
-        return strapi_param_tool.build_param(param, pager, relations)
+        return srp_p.build_param(param, pager, relations)
     }
     else {
         return { }

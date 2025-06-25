@@ -29,6 +29,7 @@ interface AuthGetters {
     is_publisher: boolean,
 
     userid: string,
+    user_doc_id: string,
     company_id: string,
 
     addr: UserAddress | null

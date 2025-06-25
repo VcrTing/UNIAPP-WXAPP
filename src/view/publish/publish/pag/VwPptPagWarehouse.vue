@@ -2,7 +2,7 @@
     <view>
         <view class="">
             <view class="fx-i softer">
-                <view class="btn-def py px-row ts" v-for="(v, i) in tabs" :key="i"
+                <view class="btn-def py px-row ts c-p" v-for="(v, i) in tabs" :key="i"
                     @tap="aii.i = v.v"
                 ><text :class="(aii.i == v.v) ? '' : 'sus'">{{ v.name }}</text></view>
             </view>

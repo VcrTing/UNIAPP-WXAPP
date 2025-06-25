@@ -3,7 +3,7 @@ import { pageIndexState } from "@/memory/page"
 import server_medias from "@/server/media/server_medias"
 import { business, master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
-import strapi_param_tool from "@/tool/strapi/strapi_param_tool"
+import srp_p from "@/tool/strapi/srp_p"
 import server_user_statistic from "./server_user_statistic"
 import { must_arr, must_one } from "@/tool/util/valued"
 
@@ -25,7 +25,7 @@ const aii = async (): Promise<User[]> => {
 
 const byphone = async (phone: string): Promise<User> => {
     const param: ONE = { }
-    strapi_param_tool.__eq(param, 'phone', phone)
+    srp_p.__eq(param, 'phone', phone)
     const src: User[] = await fetching(param, net_tool.generate_pagination())
     return must_one(src[0])
 }
@@ -33,7 +33,7 @@ const byphone = async (phone: string): Promise<User> => {
 const byids = async (ids: string[]): Promise<User[]> => {
     const param: ONE = { }
     // ID = 这些
-    strapi_param_tool.build_filter_in(param, 'id', ids || [ ])
+    srp_p.build_filter_in(param, 'id', ids || [ ])
     // 用户
     return await fetching(param, net_tool.generate_pagination(9))
 }

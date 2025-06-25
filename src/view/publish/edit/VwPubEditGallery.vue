@@ -24,7 +24,7 @@
         <view class="bg-con px-inp py-col">
             <view class="py">活动相册</view>
             <view class="pt-s"></view>
-            <view class="o-h row">
+            <view class="row">
                 <view class="w-333 h-12vh d-ib ps-r zi-t mb-s" v-for="(v, i) in view" :key="i">
                     <view class="w-100 h-12vh px-s fx-c abs-b i-0">
                         <CoImg clazz="h-100 w-100 br" :src="v.path"/>

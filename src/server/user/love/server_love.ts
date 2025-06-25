@@ -2,7 +2,7 @@ import { is_strapi_mode } from "@/conf/conf"
 import { authGetters, authState } from "@/memory/global"
 import { business, master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
-import strapi_param_tool from "@/tool/strapi/strapi_param_tool"
+import srp_p from "@/tool/strapi/srp_p"
 import { netip } from "@/tool/uni/uni-global"
 import { is_arr, is_str } from "@/tool/util/typed"
 import { is_nice_arr } from "@/tool/util/valued"
@@ -54,8 +54,8 @@ const losslove = async (v: UserLove) : Promise<UserLove> => {
 }
 const focuslove = async (touserid: string) : Promise<UserLove> => {
     const __pm: ONE = { }
-    strapi_param_tool.__eq(__pm, 'whoId', authGetters.userid)
-    strapi_param_tool.__eq(__pm, 'loveId', touserid)
+    srp_p.__eq(__pm, 'whoId', authGetters.userid)
+    srp_p.__eq(__pm, 'loveId', touserid)
     const same: UserLove[] = await fetching(__pm, net_tool.generate_pagination())
     if (is_nice_arr(same)) {
         return await edit({ dataStatus: 1 }, same[0])

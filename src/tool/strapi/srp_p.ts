@@ -18,27 +18,21 @@ const build_param = (param: ONE, pager: Pager, relations: string[]) => {
     return res;
 }
 
-const app_pager_to_strapi_pager = (pager: Pager) => {
-
-}
-
 const __sort = (target: ONE = { }, isasc: boolean = false) => {
     target['sort'] = 'createdAt:' + (isasc ? 'asc' : 'desc')
 }
 
+const __kv = (t: ONE, f: string, k: string, v: string | number) => {
+    const __K: string = 'filters[' + k + '][$' + f + ']'
+    t[ __K ] = v
+}
+
 // {}, filters[id][$in], [ 0, 1 ]
-const __eq = (target: ONE , key: string, v: string | number ) => {
-    const __K: string = 'filters[' + key + '][$eq]'
-    target[ __K ] = v
-}
-const __ne = (target: ONE , key: string, v: string | number ) => {
-    const __K: string = 'filters[' + key + '][$ne]'
-    target[ __K ] = v
-}
-const __like = (target: ONE , key: string, v: string | number ) => {
-    const __K: string = 'filters[' + key + '][$contains]'
-    target[ __K ] = v
-}
+const __eq = (src: ONE , k: string, v: string | number ) => __kv(src, 'eq', k, v)
+const __ne = (src: ONE , k: string, v: string | number ) => __kv(src, 'ne', k, v)
+const __gt = (src: ONE , k: string, v: string | number ) => __kv(src, 'gt', k, v)
+const __like = (src: ONE , k: string, v: string | number ) => __kv(src, 'contains', k, v)
+//
 const build_filter_in = (target: ONE , key_prefix: string, ins: any[] ) => {
     const __K: string = 'filters[' + key_prefix + '][$in]'
     ins.map((e, i) => {
@@ -49,7 +43,7 @@ const build_filter_in = (target: ONE , key_prefix: string, ins: any[] ) => {
 }
 
 export default {
-    __eq, __ne, __like, __sort,
+    __eq, __ne, __gt, __like, __sort,
     build_filter_in,
     build_param_pager,
     build_param

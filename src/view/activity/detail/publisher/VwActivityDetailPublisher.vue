@@ -35,7 +35,7 @@
                     </view>
                 </view>
             </view>
-            <view class="btn-pri px-row" v-if="is_publisher">
+            <view class="btn-pri px-row ani-scaie-aii" v-if="is_publisher">
                 <view class="px-col py-s fs-w fx-c">
                     <text>您是改活动的发布者，可以更改公告等内容。</text>
                 </view>

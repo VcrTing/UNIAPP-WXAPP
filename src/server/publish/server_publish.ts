@@ -1,6 +1,6 @@
 import { master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
-import strapi_param_tool from "@/tool/strapi/strapi_param_tool"
+import srp_p from "@/tool/strapi/srp_p"
 import { netip } from "@/tool/uni/uni-global"
 import { is_arr, is_str } from "@/tool/util/typed"
 
@@ -21,7 +21,7 @@ const mine = async (param: ONE, pager: Pager, dataStatus: number[] = []): Promis
     net_tool.limit_mine(param, 'publisher')
     // 状态筛选
     if (dataStatus.length) { 
-        strapi_param_tool.build_filter_in(param, 'dataStatus', dataStatus)
+        srp_p.build_filter_in(param, 'dataStatus', dataStatus)
     }
     //
     return await fetching(param, pager)
