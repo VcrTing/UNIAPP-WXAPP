@@ -17,13 +17,13 @@
                     </view>
                     <view v-if="canedit"
                         class="w-28 h-12vh br-s d-ib ps-r zi-t">
-                        <OButtonDef clazz="h-100 fx-c abs-b i-0 w-100 br" :weak="true" @tap="funn.choseImg">
+                        <OButton color="def" clazz="h-100 fx-c abs-b i-0 w-100 br" :weak="true" @tap="funn.choseImg">
                             <view class="fs-n tiw">
                                 <UiI :clazz="'d-ib'" :i="'+'"/>
                                 <text class="px-s">添加优质</text>
                                 <view>图片更吸引人</view>
                             </view>
-                        </OButtonDef>
+                        </OButton>
                     </view>
                 </OScrollX>
 
@@ -39,15 +39,15 @@
                     <OScrollX>
                         <view class="" >
                             <view class="d-ib pr" v-for="(v, i) in form.tags" :key="i">
-                                <OButtonDef :weak="true" clazz="fs-n tid pi br-s">
+                                <OButton color="def" :weak="true" clazz="fs-n tid pi br-s">
                                     <text>{{ v.name }}</text>
-                                    <OButtonDef v-if="canedit" @tap="funn.trashTag(v)">
+                                    <OButton color="def" :weak="true" v-if="canedit" @tap="funn.trashTag(v)">
                                         <UiI clazz="d-ib fs-s" i="trash"/>
-                                    </OButtonDef>
+                                    </OButton>
                                     <view class="d-ib py-s pr-s" v-else>
                                         &nbsp;
                                     </view>
-                                </OButtonDef>
+                                </OButton>
                             </view>
                             <view v-if="(taglen < form.taglimit) && canedit" class="d-ib px-inp" @tap="funn.ediTag">
                                 <view class="btn-def w-2em fx-c h-2em br-cir"><UiI i="+"/></view>
@@ -64,7 +64,7 @@
 <script setup lang="ts">
 import { computed, reactive } from 'vue';
 import UiI from '@/ui/element/i/UiI.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
+import OButton from '@/cake/button/OButton.vue';
 import CkInpItem from '@/cake/input/wrapper/CkInpItem.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
 import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
@@ -76,7 +76,7 @@ import { tipsucc, tipwarn } from '@/tool/uni/uni-global';
 import { open_choise_img } from '@/tool/uni/uni-app';
 import { future, timeout } from '@/tool/util/future';
 import server_upload_media from '@/server/media/server_upload_media';
-import media_tool from '@/tool/modules/media_tool';
+import media_tool from '@/tool/modules/common/media_tool';
 import server_pubplus from '@/server/publish/server_pubplus';
 import { DATA_ACTIVITY_MEDIA } from '@/conf/conf-datas';
 

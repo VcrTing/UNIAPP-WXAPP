@@ -3,7 +3,7 @@ import { arrfind, arrgotv, arrimit } from "../util/iodash"
 import { deepcopy, formfiimit, group_search_txt, must_arr, must_int, must_one, positive } from "../util/valued"
 import { authGetters } from "@/memory/global"
 import times from "../web/times"
-import address_tool from "./address_tool"
+import address_tool from "./common/address_tool"
 import { DEV_K } from "@/conf/conf-dev"
 
     // 0-待完善, 1-审核中, 2-已发布, 3-已取消, 4-已结束, 5-已下架
@@ -35,7 +35,7 @@ import { DEV_K } from "@/conf/conf-dev"
         return minutes + ' 分钟'
     }
     const getfar = (v: Activity): string => {
-        let addr: ActivityAddress | Activity = must_one(v.activity_address)
+        let addr: Address | Activity = must_one(v.activity_address)
         if (!addr.documentId) {
             addr = v
         }
@@ -76,7 +76,7 @@ import { DEV_K } from "@/conf/conf-dev"
     // 构建搜索
     const group_search_field = (
         activity: Activity | ONE,
-        addr: ActivityAddress,
+        addr: Address,
         tags: Tag[]
     ) => {
         let s: string = '_'
@@ -135,12 +135,12 @@ export default {
     getfar, getstarttime_remaining,
 
     getindex_address: (v: Activity): string => {
-        // const ad: ActivityAddress = v.activity_address || { }
+        // const ad: Address = v.activity_address || { }
         const src: string = v.address || ''
         return src ? src.substring(0, 10) : '地点未定'
     },
     getaddress: (v: Activity): string => {
-        // const ad: ActivityAddress = v.activity_address || { }
+        // const ad: Address = v.activity_address || { }
         const src: string = v.address || ''
         return src ? src : '地点未定'
     },

@@ -59,7 +59,7 @@ import OPan from '@/cake/pan/OPan.vue';
 import OPanInnerY from '@/cake/pan/OPanInnerY.vue';
 import CkDefTag from '@/cake/visual/tag/CkDefTag.vue';
 import { pageIndexState } from '@/memory/page';
-import server_tags from '@/server/activity/server_tags';
+import server_tags from '@/server/common/server_tags';
 import pan_tooi from '@/tool/app/pan_tooi';
 import { futuring, promise } from '@/tool/util/future';
 import { arrfind, arrsaixuan } from '@/tool/util/iodash';

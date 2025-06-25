@@ -1,33 +1,4 @@
 
-interface Media {
-    id: number
-    documentId: string
-    url: string
-    urlSmall: string
-    sortOrder: number
-    // activity: string | number
-    isSex: 0 | 1
-    isFrezz: 0 | 1
-    isGallery: 0 | 1
-    mediaType: number
-    w: number
-    h: number
-}
-
-interface ActivityAddress {
-    id: number
-    documentId: string
-    address: string
-    city: string
-    area: string
-    latitude: number
-    longitude: number
-    province: string
-    country: string
-    remark: string
-    addressSystem: string
-}
-
 interface ActivityJoin { // ActivityRegistration
     id: number
     documentId: string
@@ -63,4 +34,16 @@ interface ActivityInvite {
     publisherId: string
     inviteTime: string
     inviteUserId: string
+}
+
+interface ActivityNotice {
+    id: number
+    documentId: string
+    createdAt: string
+    title: string
+    content: string
+    dataStatus: number
+    activityId: string
+    publisherId: string
+    isTop: number
 }

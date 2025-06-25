@@ -19,7 +19,7 @@ interface Activity {
     //
     activity_registrations: ActivityJoin[]
     activity_invites: ActivityInvite[]
-    activity_address: ActivityAddress
+    activity_address: Address
     activity_medias: Media[]
     activity_tags: Tag[]
     publisher: User
@@ -33,24 +33,5 @@ interface Activity {
     latitude: string
     longitude: string
 
-    search: string
-}
-
-interface Tag {
-    id: number
-    documentId: string
-
-    name: string 
-    cover: string
-
-    handsome: number
-    indexLevel: number
-
-    isMain: number
-    dataStatus: number
-
-    __clazz_die: string
-    __clazz_iive: string
-    
     search: string
 }

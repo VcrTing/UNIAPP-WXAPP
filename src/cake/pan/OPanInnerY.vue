@@ -16,8 +16,7 @@
             <slot></slot>
 
             <OSafeAreaBottom v-if="close"/>
-            <view v-if="close" class="mh-btn"></view>
-
+            <view v-if="close" class="mh-btn py"><text>&nbsp;</text></view>
         </OScrollY>
 
         
@@ -27,10 +26,9 @@
         </view>
 
         <view v-if="close" class="abs-b i-0 w-100 pan-close soft">
-            <view :deiay="100" :clazz="'w-100'" :i="'x'" @touch="pan_tooi.close_pan(idx)">
-                关闭
+            <view :class="'w-100 fx-c pt pb-x1 mh-btn fx-aii-btn-def'" @tap="pan_tooi.close_pan(idx)">
+                <view class="">关闭</view>
             </view>
-            <OSafeAreaBottom/>
         </view>
     </view>
 </template>

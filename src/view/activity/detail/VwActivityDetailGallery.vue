@@ -21,7 +21,7 @@
 import CkSpace from '@/cake/content/CkSpace.vue';
 import { uiState } from '@/memory/global';
 import activity_tool from '@/tool/modules/activity_tool';
-import media_tool from '@/tool/modules/media_tool';
+import media_tool from '@/tool/modules/common/media_tool';
 import { computed } from 'vue';
 import CoMoAdHeader from './component/CoMoAdHeader.vue';
 

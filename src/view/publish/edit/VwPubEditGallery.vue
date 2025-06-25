@@ -34,13 +34,13 @@
                 </view>
                 <view class="w-333 h-12vh d-ib px-s bs-bb mb-s" v-if="canedit">
                     <view class="w-100 h-100 ps-r zi-t">
-                        <OButtonDef @tap="funn.choseImg" clazz="w-100 h-12vh abs-b i-0 br fx-c" :weak="true">
+                        <OButton color="def" @tap="funn.choseImg" clazz="w-100 h-12vh abs-b i-0 br fx-c" :weak="true">
                             <view class="fs-n tiw">
                                 <UiI :clazz="'d-ib'" :i="'+'"/>
                                 <text class="px-s">添加优质</text>
                                 <view>图片更吸引人</view>
                             </view>
-                        </OButtonDef>
+                        </OButton>
                     </view>
                 </view>
             </view>
@@ -54,13 +54,13 @@ import { computed, reactive } from 'vue';
 import UiI from '@/ui/element/i/UiI.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
 import CkInpItem from '@/cake/input/wrapper/CkInpItem.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
+import OButton from '@/cake/button/OButton.vue';
 import { arrfindi } from '@/tool/util/iodash';
 import { tipsucc, tipwarn } from '@/tool/uni/uni-global';
 import { open_choise_img } from '@/tool/uni/uni-app';
 import { future, futuring, timeout } from '@/tool/util/future';
 import server_upload_media from '@/server/media/server_upload_media';
-import media_tool from '@/tool/modules/media_tool';
+import media_tool from '@/tool/modules/common/media_tool';
 import { must_arr } from '@/tool/util/valued';
 import server_pubplus from '@/server/publish/server_pubplus';
 import { DATA_ACTIVITY_MEDIA } from '@/conf/conf-datas';
@@ -78,10 +78,6 @@ const view = computed((): Form.UploadImages => {
 const aii = reactive({
     data: { isGallery: 1 }, ioading: false,
     success: <Form.UploadImages>[ ], imit: DATA_ACTIVITY_MEDIA.GALLERY_LIMIT
-})
-
-const len3 = computed((): boolean => {
-    return view.value.length > 3
 })
 
 const funn = {

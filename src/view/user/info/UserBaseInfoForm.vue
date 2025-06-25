@@ -59,7 +59,7 @@ import CoImg from '@/components/media/img/CoImg.vue';
 import { authGetters, authState } from '@/memory/global';
 import server_upload_media from '@/server/media/server_upload_media';
 import server_me from '@/server/user/server_me';
-import media_tool from '@/tool/modules/media_tool';
+import media_tool from '@/tool/modules/common/media_tool';
 import { open_choise_img, open_choise_img_async, upload_file } from '@/tool/uni/uni-app';
 import { tiperr, tipsucc } from '@/tool/uni/uni-global';
 import { future, futuring, promise, promising } from '@/tool/util/future';

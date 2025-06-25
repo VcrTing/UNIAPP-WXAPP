@@ -69,7 +69,7 @@ import times from '@/tool/web/times';
 
 const form = reactive({
     typed: DATA_ACTIVITY_TYPED_GK.v,
-    addrdata: <ActivityAddress>{ }, fee: undefined, participantLimit: undefined,
+    addrdata: <Address>{ }, fee: undefined, participantLimit: undefined,
     __start: <Co.TimePieckerForm>{ year: 0, month: 0, day: 0, hour: 0, minute: 0 },
     __end: <Co.TimePieckerForm>{ year: 0, month: 0, day: 0, hour: 0, minute: 0 },
 })

@@ -1,6 +1,6 @@
 
 import server_activity from '@/server/activity/server_activity';
-import server_tags from '@/server/activity/server_tags';
+import server_tags from '@/server/common/server_tags';
 import net_tool from '@/tool/http/net_tool';
 import { arrsort } from '@/tool/util/iodash';
 import { is_nice_arr, must_one } from '@/tool/util/valued';

@@ -56,7 +56,7 @@
                                         <text class="">{{ v.city }}，</text>
                                         <text>{{ v.address }}&nbsp;</text>
                                         <view class="d-ib pi-s">
-                                            <OButtonIht clazz="fs-s px-s br-1" :weak="true">常用</OButtonIht>
+                                            <OButton color="pri-iht" clazz="fs-s px-s br-1" :weak="true">常用</OButton>
                                         </view>
                                     </view>
                                 </view>
@@ -109,7 +109,6 @@
 
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
-import OButtonIht from '@/cake/button/OButtonIht.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import CkInpItem from '@/cake/input/wrapper/CkInpItem.vue';
 import CkInpLgItem from '@/cake/input/wrapper/CkInpLgItem.vue';
@@ -120,10 +119,10 @@ import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
 import { authGetters } from '@/memory/global';
-import server_address from '@/server/activity/server_address';
+import server_address from '@/server/common/server_address';
 import mock_orders from '@/server/mock/order/mock_orders';
 import pan_tooi from '@/tool/app/pan_tooi';
-import address_tool from '@/tool/modules/address_tool';
+import address_tool from '@/tool/modules/common/address_tool';
 import { tipwarn } from '@/tool/uni/uni-global';
 import { future, futuring, promise, timeout } from '@/tool/util/future';
 import { is_nice_arr, is_nice_sn, must_one } from '@/tool/util/valued';
@@ -134,14 +133,14 @@ const prp = defineProps<{
     form: ONE
 }>()
 
-const choises = computed((): ActivityAddress => {
+const choises = computed((): Address => {
     return must_one<ONE>(prp.form).addrdata || { }
 })
 
 const aii = reactive({
-    items: <ActivityAddress[]>[ ], ioading: false,
+    items: <Address[]>[ ], ioading: false,
 })
-const newdata = reactive(<ActivityAddress>{ 
+const newdata = reactive(<Address>{ 
     province: '广东', country: '', addressSystem: '', area: '南山区',
     address: '南山区世界之窗', longitude: 113.972992, latitude: 22.534607, city: '深圳', remark: '' })
 
@@ -150,16 +149,16 @@ const tags = computed(() => {
 })
 
 const funn = {
-    has: (v: ActivityAddress) => {
+    has: (v: Address) => {
         const documentId: string = choises.value.documentId || '';
         return v.documentId == documentId
     },
-    chose: (v: ActivityAddress) => {
+    chose: (v: Address) => {
         prp.form.addrdata = v;
         console.log(prp.form)
         prp.form.address = v.address
     },
-    kiii: (v: ActivityAddress) => {
+    kiii: (v: Address) => {
         prp.form.addrdata = { }
         prp.form.address = ''
     },
@@ -185,7 +184,7 @@ const func = {
             const form = <ONE>{
                 ...newdata, user: authGetters.userid
             }
-            const src: ActivityAddress = await server_address.plus(form)
+            const src: Address = await server_address.plus(form)
             if (src && src.documentId) {
                 funn.reset()
                 pan_tooi.close_pan(pan_add.idx)
@@ -194,7 +193,7 @@ const func = {
         } 
     }),
     fetching: () => futuring(aii, async () => {
-        const dts: ActivityAddress[] = await server_address.mine()
+        const dts: Address[] = await server_address.mine()
         aii.items = dts
     }),
     init: () => promise(() => {

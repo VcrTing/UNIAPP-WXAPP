@@ -23,18 +23,20 @@
                     <OButton v-if="isjoin" clazz="btn-app"
                         color="def" @tap="uniRouter.back"
                     >
-                        <text>您已经报名</text>
+                        <text class="">您已经报名</text>
                     </OButton>
                     <view v-else class="softer">
                         <OButton
                             :ioading="aii.ioading"
-                            clazz="btn-app" @tap="funn.join">
-                            <text class="">
-                                <text class="h8">￥</text>
-                                <text class="h7 fw-550">{{ one.fee || 0 }}</text>
-                                <text>元，</text>
-                            </text>
-                            <text>加入</text>
+                            clazz="btn-app mh-btn-x1" @tap="funn.join">
+                            <view class="">
+                                <text class="">
+                                    <text class="h8">￥</text>
+                                    <text class="h7 fw-550">{{ one.fee || 0 }}</text>
+                                    <text>元，</text>
+                                </text>
+                                <text>加入</text>
+                            </view>
                         </OButton>
                     </view>
                 </view>
@@ -48,12 +50,11 @@
 import OButton from '@/cake/button/OButton.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
-import { authGetters, needLogin, orderReFresh } from '@/memory/global';
+import { needLogin, orderReFresh } from '@/memory/global';
 import activity_tool from '@/tool/modules/activity_tool';
 import { tipwarn } from '@/tool/uni/uni-global';
 import uniRouter from '@/tool/uni/uni-router';
 import { future, futuring } from '@/tool/util/future';
-import { must_one } from '@/tool/util/valued';
 import times from '@/tool/web/times';
 import UiI from '@/ui/element/i/UiI.vue';
 import { computed, reactive } from 'vue';

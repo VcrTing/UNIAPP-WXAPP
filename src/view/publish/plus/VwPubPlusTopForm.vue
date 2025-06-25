@@ -16,13 +16,13 @@
                         </view>
                     </view>
                     <view class="w-28 h-12vh br-s d-ib ps-r zi-t">
-                        <OButtonDef clazz="h-100 fx-c abs-b i-0 w-100 br" :weak="true" @tap="funn.choseImg">
+                        <OButton color="def" clazz="h-100 fx-c abs-b i-0 w-100 br" :weak="true" @tap="funn.choseImg">
                             <view class="fs-n tiw">
                                 <UiI :clazz="'d-ib'" :i="'+'"/>
                                 <text class="px-s">添加优质</text>
                                 <view>图片更吸引人</view>
                             </view>
-                        </OButtonDef>
+                        </OButton>
                     </view>
                 </OScrollX>
             </view>
@@ -41,12 +41,12 @@
                         <OScrollX>
                             <view class="" >
                                 <view class="d-ib pr" v-for="(v, i) in form.tags" :key="i">
-                                    <OButtonDef :weak="true" clazz="fs-n tid pi br-s">
+                                    <OButton color="def" :weak="true" clazz="fs-n tid pi br-s">
                                         <text>{{ v.name }}</text>
-                                        <OButtonDef @tap="funn.trashTag(v)">
+                                        <OButton color="def" :weak="true" @tap="funn.trashTag(v)">
                                             <UiI clazz="d-ib fs-s" i="trash"/>
-                                        </OButtonDef>
-                                    </OButtonDef>
+                                        </OButton>
+                                    </OButton>
                                 </view>
                                 <view v-if="taglen < form.taglimit" class="d-ib px-inp" @tap="funn.ediTag">
                                     <view class="btn-def w-2em fx-c h-2em br-cir"><UiI i="+"/></view>
@@ -65,7 +65,7 @@
 import OInput from '@/cake/input/inp/OInput.vue';
 import { computed, reactive } from 'vue';
 import UiI from '@/ui/element/i/UiI.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
+import OButton from '@/cake/button/OButton.vue';
 import CkInpItem from '@/cake/input/wrapper/CkInpItem.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
 import { arrfind, arrfindi } from '@/tool/util/iodash';
@@ -77,7 +77,7 @@ import { open_choise_img, upload_file } from '@/tool/uni/uni-app';
 import server_upload_media from '@/server/media/server_upload_media';
 import { tipsucc, tipwarn } from '@/tool/uni/uni-global';
 import { __net_file_url, NET_ENDPOINT_FILE } from '@/conf/conf-endpoints';
-import media_tool from '@/tool/modules/media_tool';
+import media_tool from '@/tool/modules/common/media_tool';
 
 // const prp = defineProps<{}>()
 const form = reactive({

@@ -33,7 +33,7 @@ import CoMoSecurityAgreeLine from '@/components/modules/security/CoMoSecurityAgr
 import { authGetters, orderDispatch, orderState, uiState } from '@/memory/global';
 import server_pubplus from '@/server/publish/server_pubplus';
 import activity_tool from '@/tool/modules/activity_tool';
-import media_tool from '@/tool/modules/media_tool';
+import media_tool from '@/tool/modules/common/media_tool';
 import appRouter from '@/tool/uni/app-router';
 import uniRouter from '@/tool/uni/uni-router';
 import { future } from '@/tool/util/future';
@@ -62,7 +62,7 @@ const funn = {
     buildform: (src: ONE = { }) => {
         const tgsid = arrgotv(src.tags, 'documentId')
         const userid: string = authGetters.userid
-        const addr: ActivityAddress = must_one<ActivityAddress>(src.addrdata)
+        const addr: Address = must_one<Address>(src.addrdata)
         const res = <ONE>{
             title: src.title, activity_tags: tgsid, fee: src.fee,
             typed: src.typed, 

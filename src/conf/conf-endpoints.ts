@@ -23,6 +23,7 @@ const NET_ENDPOINT_USER = <ONE>{
 // 活动
 const NET_ENDPOINT_ACTIVITY = <ONE> {
     'join': 'activity-registrations',
+    'notice': 'activity-notices',
     'invite': 'activity-invites',
     'activity': 'activities',
     'activity-tags': 'activity-tags',

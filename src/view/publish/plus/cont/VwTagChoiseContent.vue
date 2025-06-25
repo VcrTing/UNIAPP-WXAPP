@@ -51,7 +51,7 @@ import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import CkDefTag from '@/cake/visual/tag/CkDefTag.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
-import server_tags from '@/server/activity/server_tags';
+import server_tags from '@/server/common/server_tags';
 import { tipwarn } from '@/tool/uni/uni-global';
 import { future, timeout } from '@/tool/util/future';
 import { arrfindi, arrsort } from '@/tool/util/iodash';

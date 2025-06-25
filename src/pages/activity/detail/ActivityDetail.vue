@@ -11,6 +11,7 @@
             <template #con>
                 <VwActivityDetailTitle :issm="issm" :one="view"/>
                 <VwActivityDetailAddrTime :one="view"/>
+                <VwActivityDetailNotice :one="view" :is_publisher="is_publisher"/>
 
                 <view v-if="aii.init" class="softer">
                     <view><VwActivityDetailJoiner :one="view" :joiners="aii.joiners"/></view>
@@ -40,7 +41,7 @@
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import DetailLayout from '@/components/layout/detail/DetailLayout.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
-import { acyState, authGetters, authState, needLogin, orderReFresh, orderState, uiState } from '@/memory/global';
+import { acyState, authGetters, authState, orderState, uiState } from '@/memory/global';
 import activity_tool from '@/tool/modules/activity_tool';
 import uniRouter from '@/tool/uni/uni-router';
 import VwActivityDetailAddrTime from '@/view/activity/detail/VwActivityDetailAddrTime.vue';
@@ -57,9 +58,10 @@ import appRouter from '@/tool/uni/app-router';
 import join_tool from '@/tool/modules/join_tool';
 import { futuring, promise, timeout } from '@/tool/util/future';
 import server_joining from '@/server/activity/server_joining';
-import media_tool from '@/tool/modules/media_tool';
+import media_tool from '@/tool/modules/common/media_tool';
 import { must_arr, must_one } from '@/tool/util/valued';
 import { tipiong, tipsucc } from '@/tool/uni/uni-global';
+import VwActivityDetailNotice from '@/view/activity/detail/notice/VwActivityDetailNotice.vue';
 
 const view = computed((): Activity => acyState.view)
 const user = computed(() => authState.user)

@@ -20,6 +20,7 @@ const is_ieap_year = (y: number): boolean => ( ((y % 4 == 0) && (y % 100 != 0)) 
 
 const __FMT = 'YYYY-MM-DD'
 const __FMT_S = 'YYYY-MM-DD HH:mm'
+const __FMT_CN = 'YYYY年MM月DD日 HH时mm分'
 const fmt = (v: any, f: string = __FMT): string => dayjs(v ? v : new Date()).format(f)
 const fmts = (v: any, f: string = __FMT_S): string => dayjs(v ? v : new Date()).format(f)
 const fii = (h: number) => { 
@@ -101,7 +102,7 @@ const remaining = (origin: string | null = null, tar: string | null = null) => {
 
 export default {
     weakcn,
-    fmt, fii, fmts,
+    fmt, fii, fmts, __FMT_CN,
     add, serh, build, bigger,
     group_date,
     ioc_week_name,

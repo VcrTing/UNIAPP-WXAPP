@@ -22,6 +22,10 @@ const app_pager_to_strapi_pager = (pager: Pager) => {
 
 }
 
+const __sort = (target: ONE = { }, isasc: boolean = false) => {
+    target['sort'] = 'createdAt:' + (isasc ? 'asc' : 'desc')
+}
+
 // {}, filters[id][$in], [ 0, 1 ]
 const __eq = (target: ONE , key: string, v: string | number ) => {
     const __K: string = 'filters[' + key + '][$eq]'
@@ -41,7 +45,7 @@ const build_filter_in = (target: ONE , key_prefix: string, ins: any[] ) => {
 }
 
 export default {
-    __eq, __like,
+    __eq, __like, __sort,
     build_filter_in,
     build_param_pager,
     build_param
