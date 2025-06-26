@@ -1,6 +1,8 @@
 interface Media {
     id: number
     documentId: string
+    createdAt: string
+
     url: string
     urlSmall: string
     sortOrder: number
@@ -19,6 +21,7 @@ interface Media {
 interface Tag {
     id: number
     documentId: string
+    createdAt: string
 
     name: string 
     cover: string
@@ -39,6 +42,8 @@ interface Tag {
 interface Address {
     id: number
     documentId: string
+    createdAt: string
+    
     address: string
     city: string
     area: string

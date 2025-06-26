@@ -5,6 +5,9 @@ import uniRouter from "./uni-router"
 import { acyDispatch } from "@/memory/global"
 
 export default {
+    login: () => {
+        uniRouter.gopg('login')
+    },
     index: () => {
         uniRouter.navigatorpg('index')
     },

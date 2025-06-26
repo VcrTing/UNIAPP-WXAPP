@@ -10,14 +10,14 @@ import UiI from '@/ui/element/i/UiI.vue';
 import { computed } from 'vue';
 
 const prp = defineProps<{
-    sex: number,
+    sex: number | undefined,
     bg?: boolean,
     clazz?: string
 }>()
 
 const clazz = computed((): string => {
     let res = ''
-    if (prp.bg) {
+    if (prp.bg && prp.sex) {
         if (prp.sex >= 1) {
             res = 'btn-sex-boy '
         }

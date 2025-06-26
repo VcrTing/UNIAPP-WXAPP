@@ -66,7 +66,7 @@ export const storage = {
 // 构建数据隔离 
 // 仓库代表私人仓库
 const key_prefix = () => {
-    return authGetters.user_id + '_' + authGetters.company_id + '-'
+    return authGetters.userid + '_' + authGetters.company_id + '-'
 }
 
 export const warehouse = {

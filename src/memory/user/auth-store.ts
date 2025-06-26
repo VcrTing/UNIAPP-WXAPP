@@ -5,7 +5,7 @@ import server_me from '@/server/user/server_me';
 import server_user from '@/server/user/user/server_user';
 import pan_tooi from '@/tool/app/pan_tooi';
 import { arrfindi } from '@/tool/util/iodash';
-import { is_nice_arr, is_nice_sn } from '@/tool/util/valued';
+import { is_nice_arr, is_nice_sn, must_one } from '@/tool/util/valued';
 import { storage } from '@/tool/web/storage';
 import { Store, createStore } from 'vuex';
 
@@ -82,12 +82,13 @@ const _s: Store<AuthStore> = createStore({
         _num: (s: ONE) => {
             s.num = s.num + 1
         },
-        _login: (s: ONE, auth: ONE) => {
+        _login: (s: ONE, auth: AppAuth) => {
             storage.set('jwt', auth.token)
             s.auth = auth
             s.user = auth.user 
             s.jwt = auth.token 
             s.role = ROLE_AUTH
+            s.phonedata = auth.phonedata
             s.loginhouse.iive = false
         },
         _logout: (s: ONE) => {
@@ -96,7 +97,7 @@ const _s: Store<AuthStore> = createStore({
             s.user = USER_DEF
             s.jwt = ''
             s.role = ROLE_ANON
-
+            s.phonedata = { }
             s.loginhouse.iive = true
         },
     },
@@ -122,11 +123,18 @@ const _s: Store<AuthStore> = createStore({
         auto_login: ({ getters, commit }): AutoLoginStatus => {
             if (!getters.is_login) {
                 const auth: AppAuth | undefined = storage.get('auth')
-                console.log('=== 自动登录成功 ===', auth)
                 if (auth) {
-                    commit('_login', auth); 
-                    for_user_loging()
-                    return AutoLoginStatus.AUTO_SUCCESS
+                    // 检测
+                    const user: User = must_one(auth.user)
+                    if (user.id) {
+                        console.log('=== 自动登录成功 ===', auth)
+                        commit('_login', auth); 
+                        for_user_loging()
+                        return AutoLoginStatus.AUTO_SUCCESS
+                    }
+                    else {
+                        console.log("=== 自动登录失效 ===")
+                    }
                 } 
                 return AutoLoginStatus.AUTO_FAIL
             }
@@ -159,7 +167,7 @@ const _s: Store<AuthStore> = createStore({
                     const u: User = await server_me.one(uid)
                     if (u && u.id) {
                         commit('_login', { user: u, token: u.documentId })
-                        // console.log('刷新用户数据 =', u)
+                        console.log('========= 刷新用户数据 =', u)
                         commit('__change', [ 'user', u ])
                         return u;
                     }
@@ -172,7 +180,7 @@ const _s: Store<AuthStore> = createStore({
         refresh_mainpage: async ({ state, commit }): Promise<UserMainPage> => {
             return await locking(state, commit, state.mainpage, async () => {
                 const u: UserMainPage = await server_user.mymainpage()
-                console.log('刷新我的主页数据 =', u)
+                console.log('========= 刷新我的主页数据 =', u)
                 if (u && u.documentId) {
                     commit('__change', [ 'mainpage', u ])
                     return u;

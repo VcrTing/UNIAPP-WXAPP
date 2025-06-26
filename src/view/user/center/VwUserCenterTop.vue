@@ -25,6 +25,7 @@
 <script setup lang="ts">
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import { authCommit, authDispatch, authState, needLogin, uiGetters } from '@/memory/global';
+import appRouter from '@/tool/uni/app-router';
 import { computed } from 'vue';
 
 // const prp = defineProps<{}>()
@@ -33,11 +34,16 @@ const user = computed((): User => authState.user)
 
 const funn = {
     ck_avatar: async () => {
-        if (await needLogin()) {
-            console.log('需要登录')
+        if (isphone.value) {
+            if (await needLogin()) {
+                console.log('需要登录')
+            }
+            else {
+                authDispatch('mod_login')
+            }
         }
         else {
-            authDispatch('mod_login')
+            appRouter.login()
         }
     },
     ck_name: async () => {
@@ -49,4 +55,5 @@ const funn = {
 
 const isphone = computed((): boolean => uiGetters.isphone)
 const ispad = computed((): boolean => uiGetters.ispad)
+const ispc = computed((): boolean => uiGetters.ispc)
 </script>

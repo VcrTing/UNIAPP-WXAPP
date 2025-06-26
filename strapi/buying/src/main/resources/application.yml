@@ -1,0 +1,30 @@
+
+spring:
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+
+small:
+  # 小程序 APP ID
+  wx:
+    app-id: wxd57cad570de63615
+    app-secret: 386ee4eef92a32690c74f378ae614f53
+    api:
+      url-token: https://api.weixin.qq.com/cgi-bin/token
+      url-phone: https://api.weixin.qq.com/wxa/business/getuserphonenumber
+
+
+mybatis-plus:
+  mapper-locations: classpath*:/**/xml/*Mapper.xml
+  global-config:
+    db-config:
+      logic-delete-field: deleted  # 全局逻辑删除字段名
+      logic-delete-value: 1       # 逻辑已删除值
+      logic-not-delete-value: 0   # 逻辑未删除值
+
+logging:
+  level:
+    c.b: ERROR
