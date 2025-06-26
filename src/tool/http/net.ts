@@ -20,7 +20,8 @@ class NeTooi {
             'Content-Type': isF ? `multipart/form-data` : 'application/json' 
         }
         if (jwt) { 
-            // res['Authorization'] = 'Bearer ' + jwt 
+            res['Authorization'] = 'Bearer ' + jwt 
+            // console.log('启用 TOKEN 访问，Authorization = ', res['Authorization'])
             // res['X-Access-Token'] = jwt
             // res['VcrTing-Token'] = jwt
             // res['Access-Control-Request-Headers'] = jwt
@@ -114,7 +115,7 @@ class Net extends NeTooi {
         // 请求 配置
         const __config: UniApp.RequestOptions = this._config_get(__url, params ? params : { }, this.jwt(), false);
         if (this.is_log) {
-            console.log("GET", __url, __config)
+            console.log("GET", __url, __config, this.jwt)
         }
         // 返回
         return this.adapter(__config);
@@ -133,7 +134,7 @@ class Net extends NeTooi {
     }
 
     put (url_name: string, url_suffix: string | null, data: ONE | null): NET_RES_PROMISE {
-        console.log('url_suffix =', url_suffix)
+        // console.log('url_suffix =', url_suffix)
         // 请求 URL
         const __url: string = this.build_url(url_name, url_suffix)
         // 请求 配置

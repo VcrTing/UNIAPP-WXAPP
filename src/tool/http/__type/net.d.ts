@@ -23,6 +23,11 @@ interface HttpResultPagination {
     total: number
 }
 
+interface AuthResult {
+    jwt: string
+    user: User
+}
+
 type HttpResultBackend = UniappHttpResult
 
 type NET_RES = HttpResult | string

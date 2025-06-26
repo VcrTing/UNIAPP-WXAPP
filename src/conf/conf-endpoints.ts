@@ -6,10 +6,6 @@
 
 import { NET } from "./conf-net"
 
-// 登录认证
-const NET_ENDPOINT_AUTH = <ONE> {
-    'login': 'app/auth/login' // 'sys/login'
-}
 // 用户
 const NET_ENDPOINT_USER = <ONE>{
     'user': 'users',
@@ -20,35 +16,37 @@ const NET_ENDPOINT_USER = <ONE>{
 const NET_ENDPOINT_COMMON = <ONE> {
     'tag': 'activity-tags',
     'media': 'activity-medias',
-    'address': 'activity-addresses',
 }
 
 // 活动
 const NET_ENDPOINT_ACTIVITY = <ONE> {
-    'join': 'activity-registrations',
-    'notice': 'activity-notices',
-    'invite': 'activity-invites',
     'content': 'product-contents',
-    'activity': 'activities',
+    'join': 'activity-registrations',
+    'address': 'activity-addresses',
 }
 
-// APP
+/*
+-------------------------------------------------------------------
+*/
+
+// APP, 无需 TOKEN 的 strapi
 export const NET_ENDPOINTS_APP = <ONE>{
+    ...NET_ENDPOINT_USER,
+    ...NET_ENDPOINT_COMMON,
     'app-info': 'app-infos',
+    'login': 'auth/local',
+    'activity': 'activities', // 活动的查询
 }
 // MASTER
 export const NET_ENDPOINTS_MASTER = <ONE> {
-    ...NET_ENDPOINT_AUTH,
-    ...NET_ENDPOINT_USER,
-    ...NET_ENDPOINT_COMMON,
-    ...NET_ENDPOINT_ACTIVITY
+    ...NET_ENDPOINT_ACTIVITY,
+    'invite': 'activity-invites',
+    'notice': 'activity-notices',
+    'activity': 'activities', // 活动的编辑
 }
 // BUSINESS
 export const NET_ENDPOINTS_BUSINESS = <ONE> {
-    ...NET_ENDPOINT_AUTH,
-    ...NET_ENDPOINT_USER,
-    ...NET_ENDPOINT_COMMON,
-    ...NET_ENDPOINT_ACTIVITY
+    
 }
 
 export const NET_ENDPOINT_FILE = <ONE> {

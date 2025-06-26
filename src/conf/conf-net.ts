@@ -1,7 +1,15 @@
-import { authGetters, authState } from "@/memory/global"
+import { appGetters, authGetters, authState } from "@/memory/global"
 import { IS_NET_LOG, is_strapi_mode, IS_TEST_MODE } from "./conf"
 import { NET_ENDPOINT_FILE, NET_ENDPOINTS_APP, NET_ENDPOINTS_BUSINESS, NET_ENDPOINTS_MASTER } from "./conf-endpoints"
 
+// 1. 用户 role 要设置对，
+// 2. role 的权限要设置对
+// 3. 接口要开放 token 访问。
+// 4. 用户不能是 blocked = true
+export const NET_BASIC_PROFILE = {
+    username: 'vcrting@163.com',
+    password: 'qiong123456'
+}
 
 // 数据来源
 export const APP: string = 'APP'
@@ -14,13 +22,18 @@ export const FILE: string = 'FILE'
 
 // 全局配置
 export const NET = {
-    // 负责 应用
+    // 负责 应用、不使用 TOKEN 的东西，
     APP: {
         URI: is_strapi_mode() ? 'http://localhost:1337' : '',
         API: is_strapi_mode() ? 'api' : 'api',
         TIMEOUT_GET: 1000 * 30,
         TIMEOUT_POS: 1000 * 30,
-        IS_LOG: true
+        IS_LOG: true,
+        JWT_FUNCTION: (): string => {
+            // NET_IS_LOG ? console.log('APP 请求的 JWT =', authGetters.jwt) : undefined;
+            // authGetters.jwt;
+            return ''; 
+        }
     },
     // 负责 商品、活动、标签
     MASTER: {
@@ -28,7 +41,11 @@ export const NET = {
         API: is_strapi_mode() ? 'api' : 'api',
         TIMEOUT_GET: 1000 * 30,
         TIMEOUT_POS: 1000 * 30,
-        IS_LOG: true
+        IS_LOG: true,
+        JWT_FUNCTION: (): string => {
+            // NET_IS_LOG ? console.log('MASTER 请求的 JWT =', appGetters.jwt) : undefined;
+            return appGetters.jwt; 
+        }
     },
     // 负责 用户、订单
     BUSINESS: {
@@ -36,7 +53,11 @@ export const NET = {
         API: is_strapi_mode() ? 'api' : 'api',
         TIMEOUT_GET: 1000 * 30,
         TIMEOUT_POS: 1000 * 30,
-        IS_LOG: true
+        IS_LOG: true,
+        JWT_FUNCTION: (): string => {
+            NET_IS_LOG ? console.log('BUSINESS 请求的 JWT =', authGetters.jwt) : undefined;
+            return authGetters.jwt;
+        }
     },
     // 负责 媒体
     FILE: {
@@ -44,7 +65,11 @@ export const NET = {
         API: is_strapi_mode() ? 'api' : 'api',
         TIMEOUT_GET: 1000 * 30,
         TIMEOUT_POS: 1000 * 30,
-        IS_LOG: true
+        IS_LOG: true,
+        JWT_FUNCTION: (): string => {
+            // NET_IS_LOG ? console.log('FILE 请求的 JWT =', authGetters.jwt) : undefined;
+            return authGetters.jwt;
+        }
     }
 }
 
@@ -63,13 +88,6 @@ export const NET_TIMEOUT_POS = 1000 * 30
 
 // 打印 网络连接
 export const NET_IS_LOG = IS_NET_LOG
-
-// 获取 JWT 的方法，从 authStore 里面拿 jwt
-export const NET_FUNCTION_GET_JWT = (): string => {
-    NET_IS_LOG ? console.log('请求的 JWT =', authGetters.jwt) : undefined;
-    return authGetters.jwt;
-}
-
 
 /**
  * 网络 LINK 合集 ====================================================================================================

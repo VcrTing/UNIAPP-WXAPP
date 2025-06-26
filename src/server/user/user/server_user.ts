@@ -1,7 +1,7 @@
 import { authGetters, authState } from "@/memory/global"
 import { pageIndexState } from "@/memory/page"
 import server_medias from "@/server/media/server_medias"
-import { business, master } from "@/tool/http/http"
+import { master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
 import srp_p from "@/tool/strapi/srp_p"
 import server_user_statistic from "./server_user_statistic"
@@ -11,7 +11,7 @@ const relations = <string[]>[  ]
 
 const fetching = async (param: ONE, pager: Pager): Promise<User[]> => {
     const __pm: ONE = net_tool.build_param(param, pager, relations)
-    const src: NET_RES = await business.get('user', null, __pm)
+    const src: NET_RES = await master.get('user', null, __pm)
     // if (is_str(src)) return netip(src, [ ]);
     // const res: ONE | MANY = (src as HttpResult).data
     return must_arr(src)

@@ -20,7 +20,7 @@ export const uiReFresh: (n: UI_STORE_FIELD, v: any) => void =
 // APP
 export const appStore: Store<AppStore> = app
 export const appState: AppStore = app.state
-export const appGetters: ONE = app.getters
+export const appGetters: AppGatters = app.getters
 export const appCommit: Function = app.commit
 export const appDispatch: Function = app.dispatch
 export const appReFresh: (n: APP_STORE_FIELD, v: any) => void = 

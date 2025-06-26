@@ -1,11 +1,11 @@
-import { APP, BUSINESS, FILE, MASTER, NET, NET_ENDPOINTS, NET_FUNCTION_GET_JWT, } from "@/conf/conf-net";
+import { APP, BUSINESS, FILE, MASTER, NET, NET_ENDPOINTS } from "@/conf/conf-net";
 import Net from "./net";
 
 // APP
 export const app = new Net(
     NET.APP.URI + '/' + NET.APP.API, 
     NET_ENDPOINTS[ APP ], 
-    NET_FUNCTION_GET_JWT,
+    NET.APP.JWT_FUNCTION,
     NET.APP.TIMEOUT_GET, NET.APP.TIMEOUT_POS, NET.APP.IS_LOG
 );
 
@@ -13,7 +13,7 @@ export const app = new Net(
 export const master = new Net(
     NET.MASTER.URI + '/' + NET.MASTER.API, 
     NET_ENDPOINTS[ MASTER ], 
-    NET_FUNCTION_GET_JWT,
+    NET.MASTER.JWT_FUNCTION,
     NET.MASTER.TIMEOUT_GET, NET.MASTER.TIMEOUT_POS, NET.MASTER.IS_LOG
 );
 
@@ -21,7 +21,7 @@ export const master = new Net(
 export const business = new Net(
     NET.BUSINESS.URI + '/' + NET.BUSINESS.API, 
     NET_ENDPOINTS[ BUSINESS ], 
-    NET_FUNCTION_GET_JWT,
+    NET.BUSINESS.JWT_FUNCTION,
     NET.BUSINESS.TIMEOUT_GET, NET.BUSINESS.TIMEOUT_POS, NET.BUSINESS.IS_LOG
 );
 
@@ -29,6 +29,6 @@ export const business = new Net(
 export const file = new Net(
     NET.FILE.URI + '/' + NET.FILE.API, 
     NET_ENDPOINTS[ FILE ], 
-    NET_FUNCTION_GET_JWT,
+    NET.FILE.JWT_FUNCTION,
     NET.FILE.TIMEOUT_GET, NET.FILE.TIMEOUT_POS, NET.FILE.IS_LOG
 );

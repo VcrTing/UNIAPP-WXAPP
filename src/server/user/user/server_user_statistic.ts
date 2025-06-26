@@ -1,5 +1,5 @@
 import { authState } from "@/memory/global"
-import { master } from "@/tool/http/http"
+import { app } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
 import srp_p from "@/tool/strapi/srp_p"
 import { netip } from "@/tool/uni/uni-global"
@@ -10,7 +10,7 @@ const relations = <string[]>[  ]
 
 const fetching = async (param: ONE, pager: Pager): Promise<UserStatistic[]> => {
     const __pm: ONE = net_tool.build_param(param, pager, relations)
-    const src: NET_RES = await master.get('statistic', null, __pm)
+    const src: NET_RES = await app.get('statistic', null, __pm)
     if (is_str(src)) return netip(src, <UserStatistic[]>[]);
     const res: ONE | MANY = (src as HttpResult).data
     return net_tool.many<UserStatistic>(res)
@@ -33,7 +33,7 @@ const byuser = async (userid: number): Promise<UserStatistic> => {
 
 const __edit = async (form: ONE, id: string): Promise<UserStatistic> => {
     const __pm: ONE = net_tool.build_data(form)
-    const src: NET_RES = await master.put('statistic', id, __pm)
+    const src: NET_RES = await app.put('statistic', id, __pm)
     if (is_str(src)) return netip(src, <UserStatistic>{ });
     const res: ONE | MANY = (src as HttpResult).data
     return net_tool.one<UserStatistic>(res)
