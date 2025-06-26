@@ -1,4 +1,8 @@
 <template>
+    <view class="w-100 h-100">
+        <image class="w-100 h-100" mode="aspectFill" :src="banner"/>
+    </view>
+    <!--
     <view class="abs-t w-100 zi-t">
         <view class="w-100" :style="{
             'margin-top': '-3.1em',
@@ -7,6 +11,7 @@
             <image class="w-100 h-100" mode="aspectFill" :src="banner"/>
         </view>
     </view>
+    -->
 </template>
 
 <script setup lang="ts">

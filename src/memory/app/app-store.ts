@@ -1,10 +1,14 @@
 
+import { APP_GENERATE_DETAIL } from '@/conf/conf-app';
+import server_app_info from '@/server/app/server_app_info';
 import { has_document } from '@/tool/web/doc';
 import { Store, createStore } from 'vuex';
 
 const _appStore: Store<AppStore> = createStore({
     
     state: <AppStore>{
+        info: <AppInfo>APP_GENERATE_DETAIL,
+
         document: has_document(),
 
         // 全局加载标识, -1 = close. 0 = loading
@@ -49,7 +53,12 @@ const _appStore: Store<AppStore> = createStore({
         // 直接在 actions 里面修改 state, 还能异步
         // actions 里面可以异步，所以，能用 actions 尽量用 actions
         // change: ({ commit, state }, v: ANYS ) => setTimeout(() => commit('change', v), 1),
-        change: (c: ONE, v: ANYS) => c.state[ v[0] ] = v[1]
+        change: (c: ONE, v: ANYS) => c.state[ v[0] ] = v[1],
+
+        ioadinfo: async ({ state, commit }) => {
+            const info: AppInfo = await server_app_info.info()
+            commit('change', [ 'info', info ])
+        }
     }
 })
 

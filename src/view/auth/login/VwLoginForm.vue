@@ -15,7 +15,7 @@
 					<radio class="" :value="'true'" :checked="me.agree" />
                     <view>
                         <text>已同意并阅读</text>
-                        <text class="pri" @tap="appRouter.security_fwxy">《{{ APP_GENERATE_DETAIL.name }}服务协议》</text>
+                        <text class="pri" @tap="appRouter.security_fwxy">《{{ info.name }}服务协议》</text>
                         <text class="pri" @tap="appRouter.security_ys">《隐私政策》</text>
                     </view>
                 </view>
@@ -26,14 +26,13 @@
 
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
-import { APP_GENERATE_DETAIL } from '@/conf/conf-app';
 import { authDispatch } from '@/memory/global';
 import mock_user from '@/server/mock/user/mock_user';
 import appRouter from '@/tool/uni/app-router';
 import uniRouter from '@/tool/uni/uni-router';
 import { reactive } from 'vue';
 
-const prp = defineProps<{ aii: ONE }>()
+defineProps<{ aii: ONE, info: AppInfo }>()
 
 const me = reactive({
     agree: 'true'

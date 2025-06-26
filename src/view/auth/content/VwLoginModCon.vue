@@ -35,7 +35,7 @@
 					<radio class="" :value="'true'" :checked="aii.agree" />
                     <view>
                         <text>已同意并阅读</text>
-                        <text class="pri" @tap="appRouter.security_fwxy">《{{ APP_GENERATE_DETAIL.name }}服务协议》</text>
+                        <text class="pri" @tap="appRouter.security_fwxy">《{{ info.name }}服务协议》</text>
                         <text class="pri" @tap="appRouter.security_ys">《隐私政策》</text>
                     </view>
                 </view>
@@ -49,8 +49,7 @@
 import OSafeAreaBottom from '@/cake/app/safearea/OSafeAreaBottom.vue';
 import OButton from '@/cake/button/OButton.vue';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
-import { APP_GENERATE_DETAIL } from '@/conf/conf-app';
-import { authDispatch, authState } from '@/memory/global';
+import { appState, authDispatch, authState } from '@/memory/global';
 import server_auth from '@/server/auth/server_auth';
 import appRouter from '@/tool/uni/app-router';
 import { tipwarn } from '@/tool/uni/uni-global';
@@ -85,4 +84,5 @@ const funn = {
     })
 }
 
+const info = computed((): AppInfo => appState.info) 
 </script>

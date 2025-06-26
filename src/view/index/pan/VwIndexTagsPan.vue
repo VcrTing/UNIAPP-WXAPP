@@ -18,7 +18,8 @@
                         <text>首页推荐</text>
                     </view>
                     <view class="row py-row">
-                        <view class="w-25 pb d-ib px-s softer" v-for="(v, i) in indextags" :key="i"
+                        <view class="pb d-ib px-s softer" v-for="(v, i) in indextags" :key="i"
+                            :class="w_clazz"
                             @tap="funn.switchTag(v)"
                             >
                             <CkDefTag :iive="funn.iive(v)" :clazz_iive="'btn btn-pri-out'">{{ v.name }}</CkDefTag>
@@ -31,7 +32,8 @@
                         <text>其他标签</text>
                     </view>
                     <view class="row py-row">
-                        <view class="w-25 pb d-ib px-s softer" v-for="(v, i) in aii.cache" :key="i"
+                        <view class="pb d-ib px-s softer" v-for="(v, i) in aii.cache" :key="i"
+                            :class="w_clazz"
                             @tap="funn.switchTag(v)"
                             >
                             <CkDefTag :iive="funn.iive(v)" :clazz_iive="'btn btn-pri-out'">
@@ -40,6 +42,7 @@
                         </view>
                     </view>
                 </view>
+                <CkSpace :h="2" v-if="ispc"/>
                 <view class="py px-row fx-c fx-aii-btn-def btn-def softer">
                     <view class="tis fs-n">
                         若想新增标签，可以与客服提要求。
@@ -58,6 +61,7 @@ import CkSpace from '@/cake/content/CkSpace.vue';
 import OPan from '@/cake/pan/OPan.vue';
 import OPanInnerY from '@/cake/pan/OPanInnerY.vue';
 import CkDefTag from '@/cake/visual/tag/CkDefTag.vue';
+import { uiGetters } from '@/memory/global';
 import { pageIndexState } from '@/memory/page';
 import server_tags from '@/server/common/server_tags';
 import pan_tooi from '@/tool/app/pan_tooi';
@@ -103,4 +107,12 @@ const funn = {
 nextTick(funn.init)
 
 const emt = defineEmits([ 'result' ])
+
+const isphone = computed((): boolean => uiGetters.isphone)
+const ispc = computed((): boolean => uiGetters.ispc)
+const w_clazz = computed((): string => {
+    if (isphone.value) return 'w-25'
+    if (ispc.value) return 'w-10 px-s d-ib'
+    return 'w-20 px-s d-ib'
+})
 </script>

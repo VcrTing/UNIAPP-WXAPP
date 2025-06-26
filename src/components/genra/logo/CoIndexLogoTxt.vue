@@ -4,16 +4,19 @@
             mode="aspectFit" 
             src="../../../static/logo.png"/>
         <view class="pi-s">
-            <text class="h7">{{ APP_GENERATE_DETAIL.desc }}</text>
+            <text class="h7">{{ info.desc }}</text>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
-import { APP_GENERATE_DETAIL } from '@/conf/conf-app';
+import { appState } from '@/memory/global';
+import { computed } from 'vue';
 
 // const prp = defineProps<{}>()
 defineProps<{
     clazz?: string,
 }>()
+
+const info = computed((): AppInfo => appState.info) 
 </script>

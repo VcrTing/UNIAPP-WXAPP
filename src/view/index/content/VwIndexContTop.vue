@@ -1,35 +1,36 @@
 <template>
     <view>
-        <OScrollX>
-            <view class="pi-row py-s">
-                <view class="d-ib pr softer" v-for="(v, i) in menus" :key="i"
-                    @click="funn.chose(v)"
-                    >
-                    <view class="ts py-s h6 fx-c fw-500 br-rnd c-p ani-scaie-aii"
-                        :class="funn.checkIive(v) ? v.__clazz_iive : v.__clazz_die">
-                        <view>
-                            {{ v.name }}
+        <view>
+            <OScrollX>
+                <view class="pi-row py-s">
+                    <view class="d-ib pr softer" v-for="(v, i) in menus" :key="i"
+                        @click="funn.chose(v)"
+                        >
+                        <view class="ts py-s h6 fx-c fw-500 br-rnd c-p ani-scaie-aii"
+                            :class="funn.checkIive(v) ? v.__clazz_iive : v.__clazz_die">
+                            <view>
+                                {{ v.name }}
+                            </view>
                         </view>
                     </view>
                 </view>
-            </view>
-        </OScrollX>
-        <view class="fx-s fx-b">
-            <view class="">
-                <view class="pb pt-s px-row" @tap="func.switchLocation">
-                    <OButton clazz="px-row br-rnd py-t tid softer" 
-                        :weak="true" color="def-s">
-                        {{ city.name }}
-                    </OButton>
+            </OScrollX>
+            <view class="fx-s fx-b">
+                <view class="">
+                    <view class="pb pt-s px-row" @tap="func.switchLocation">
+                        <OButton clazz="px-row br-rnd py-t tid softer" 
+                            :weak="true" color="def-s">
+                            {{ city.name }}
+                        </OButton>
+                    </view>
                 </view>
-            </view>
-            <view>
-                <view class="pb pt-s px-row softer" @tap="func.openTags">
-                    <view class="btn-def-s px-col br-t fx-aii-btn-def c-p"><UiI clazz="tiw" i="b"/> </view>
+                <view>
+                    <view class="pb pt-s px-row softer" @tap="func.openTags">
+                        <view class="btn-def-s px-col br-t fx-aii-btn-def c-p"><UiI clazz="tiw" i="b"/> </view>
+                    </view>
                 </view>
             </view>
         </view>
-        <!-- -->
         <VwIndexTagsPan :idx="pan_tag.idx" :active="aii.active" @result="funn.choseFromPan"/>
         <VwIndexLocationPan :idx="pan_ioc.idx"/>
     </view>
@@ -49,8 +50,8 @@ import VwIndexTagsPan from '../pan/VwIndexTagsPan.vue';
 import { arrfindi } from '@/tool/util/iodash';
 import OButton from '@/cake/button/OButton.vue';
 
-const pan_ioc = { idx: 2, hui: <ElePanHui>{ opacity: 0.4 } }
-const pan_tag = { idx: 4, hui: <ElePanHui>{ opacity: 0.4 } }
+const pan_ioc = { idx: 72, hui: <ElePanHui>{ opacity: 0.4 } }
+const pan_tag = { idx: 74, hui: <ElePanHui>{ opacity: 0.4 } }
 
 const deftag: Tag = def_ativity.tags.index
 

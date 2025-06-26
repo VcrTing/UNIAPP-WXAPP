@@ -10,7 +10,6 @@ import { NET } from "./conf-net"
 const NET_ENDPOINT_AUTH = <ONE> {
     'login': 'app/auth/login' // 'sys/login'
 }
-
 // 用户
 const NET_ENDPOINT_USER = <ONE>{
     'user': 'users',
@@ -33,13 +32,18 @@ const NET_ENDPOINT_ACTIVITY = <ONE> {
     'activity': 'activities',
 }
 
+// APP
+export const NET_ENDPOINTS_APP = <ONE>{
+    'app-info': 'app-infos',
+}
+// MASTER
 export const NET_ENDPOINTS_MASTER = <ONE> {
     ...NET_ENDPOINT_AUTH,
     ...NET_ENDPOINT_USER,
     ...NET_ENDPOINT_COMMON,
     ...NET_ENDPOINT_ACTIVITY
 }
-
+// BUSINESS
 export const NET_ENDPOINTS_BUSINESS = <ONE> {
     ...NET_ENDPOINT_AUTH,
     ...NET_ENDPOINT_USER,

@@ -4,32 +4,11 @@
             <VwUcpNumberMsg/>
             <view class="py-row"></view>
             <!-- -->
-            <view class="px-row pt-x1 softer"><CoMoUcpGoBtns/></view>
+            <view class="px-row pt-x1 softer mxw-pc"><CoMoUcpGoBtns/></view>
             <!-- -->
             <view class="pt-x2 softer">
                 <view class="py"></view>
                 <CoMoUserAdvSwipper/>
-                <!--
-                <view class="pt-s bg-con-fer-s bf">
-                    <view class="fx-i zi-s">
-                        <CoHeaderTabItem class="w-333" 
-                            @tap="aii.iive = i" :iive="aii.iive == i" :tit="v.tit"
-                            v-for="(v, i) in tabs" :key="i">
-                        </CoHeaderTabItem>
-                    </view>
-                    <view class="zi-t bd-b w-100 bd-c-s"></view>
-                </view>
-                <view>
-                    <view class="bg-pag-pri" v-if="aii.iive == 0">
-                        <VwUcpPubMineActivity/>
-                        <CkSpace :h="5"/>
-                    </view>
-                    <view v-if="aii.iive == 1">
-                        <VwUcpGallery/>
-                        <CkSpace :h="5"/>
-                    </view>
-                </view>
-                -->
             </view>
         </view>
     </view>
@@ -57,6 +36,28 @@ const funn = {
     
 }
 </script>
+
+                <!--
+                <view class="pt-s bg-con-fer-s bf">
+                    <view class="fx-i zi-s">
+                        <CoHeaderTabItem class="w-333" 
+                            @tap="aii.iive = i" :iive="aii.iive == i" :tit="v.tit"
+                            v-for="(v, i) in tabs" :key="i">
+                        </CoHeaderTabItem>
+                    </view>
+                    <view class="zi-t bd-b w-100 bd-c-s"></view>
+                </view>
+                <view>
+                    <view class="bg-pag-pri" v-if="aii.iive == 0">
+                        <VwUcpPubMineActivity/>
+                        <CkSpace :h="5"/>
+                    </view>
+                    <view v-if="aii.iive == 1">
+                        <VwUcpGallery/>
+                        <CkSpace :h="5"/>
+                    </view>
+                </view>
+                -->
             <!--
             <view v-if="is_publisher">
                 <view class="px-row pt">

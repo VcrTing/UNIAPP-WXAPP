@@ -1,11 +1,10 @@
 
 import { for_user_loging } from '@/conf/__for_index/for_user_loging';
 import { ROLE_ANON, ROLE_AUTH, USER_DEF, USER_TEST } from '@/conf/conf-role';
-import server_me from '@/server/user/server_me';
 import server_user from '@/server/user/user/server_user';
 import pan_tooi from '@/tool/app/pan_tooi';
 import { arrfindi } from '@/tool/util/iodash';
-import { is_nice_arr, is_nice_sn, must_one } from '@/tool/util/valued';
+import { must_one } from '@/tool/util/valued';
 import { storage } from '@/tool/web/storage';
 import { Store, createStore } from 'vuex';
 
@@ -160,6 +159,7 @@ const _s: Store<AuthStore> = createStore({
         },
 
         // 更新
+        /*
         refresh_info: async ({ state, commit }): Promise<User> => {
             return await locking(state, commit, state.user, async () => {
                 const uid: number = state.user.id;
@@ -175,6 +175,7 @@ const _s: Store<AuthStore> = createStore({
                 return null
             })
         },
+        */
 
         // 获取我的主页信息
         refresh_mainpage: async ({ state, commit }): Promise<UserMainPage> => {
@@ -206,9 +207,9 @@ const _s: Store<AuthStore> = createStore({
                 commit('__change', [ 'mainpage_of_view', srcs[ iii ] ]);
                 return srcs[ iii ]
             }
-            return <UserMainPage>{ }
+            // return <UserMainPage>{ }
         }
     }
-})
+}) 
 
 export default _s

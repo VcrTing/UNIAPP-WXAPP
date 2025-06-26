@@ -4,10 +4,11 @@
             <CoMoOrderJoinLen :joins="joins"/>
         </view>
         <view>
-        <view class="">
+        <view class="" :class="isphone ? '' : 'row'">
             <!-- -->
             <view v-for="(v, i) in joins" :key="i"
                 class="py"
+                :class="w_clazz"
             >
                 <CoMoOrderWorkingItem :v="funn.ioc(v)" @view="funn.view"/>
                 <view class="px-row">
@@ -52,7 +53,7 @@ import OButton from '@/cake/button/OButton.vue';
 import CoMoOrderMsgItem from '@/components/modules/order/CoMoOrderMsgItem.vue';
 import CoMoOrderWorkingItem from '@/components/modules/order/CoMoOrderWorkingItem.vue';
 import CoMoney from '@/components/visual/money/CoMoney.vue';
-import { acyReFresh } from '@/memory/global';
+import { acyReFresh, uiGetters } from '@/memory/global';
 import { open_of_net } from '@/server/__func/open_of_net';
 import { tiperr, tipwarn } from '@/tool/uni/uni-global';
 import uniRouter from '@/tool/uni/uni-router';
@@ -62,6 +63,7 @@ import { must_arr, must_one } from '@/tool/util/valued';
 import times from '@/tool/web/times';
 import UiI from '@/ui/element/i/UiI.vue';
 import CoMoOrderJoinLen from './components/CoMoOrderJoinLen.vue';
+import { computed } from 'vue';
 const prp = defineProps<{
     joins: ActivityJoin[ ],
     activities: Activity[ ]
@@ -95,4 +97,12 @@ const funn = {
         }
     })
 }
+
+const isphone = computed((): boolean => uiGetters.isphone)
+const ispc = computed((): boolean => uiGetters.ispc)
+const w_clazz = computed((): string => {
+    if (isphone.value) return 'w-100'
+    if (ispc.value) return 'w-333 px-s d-ib'
+    return 'w-50 px-s d-ib'
+})
 </script>

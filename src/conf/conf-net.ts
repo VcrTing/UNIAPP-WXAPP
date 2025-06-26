@@ -1,8 +1,10 @@
 import { authGetters, authState } from "@/memory/global"
 import { IS_NET_LOG, is_strapi_mode, IS_TEST_MODE } from "./conf"
-import { NET_ENDPOINT_FILE, NET_ENDPOINTS_BUSINESS, NET_ENDPOINTS_MASTER } from "./conf-endpoints"
+import { NET_ENDPOINT_FILE, NET_ENDPOINTS_APP, NET_ENDPOINTS_BUSINESS, NET_ENDPOINTS_MASTER } from "./conf-endpoints"
 
 
+// 数据来源
+export const APP: string = 'APP'
 // 数据来源
 export const MASTER: string = 'MASTER'
 // 数据来源
@@ -12,6 +14,14 @@ export const FILE: string = 'FILE'
 
 // 全局配置
 export const NET = {
+    // 负责 应用
+    APP: {
+        URI: is_strapi_mode() ? 'http://localhost:1337' : '',
+        API: is_strapi_mode() ? 'api' : 'api',
+        TIMEOUT_GET: 1000 * 30,
+        TIMEOUT_POS: 1000 * 30,
+        IS_LOG: true
+    },
     // 负责 商品、活动、标签
     MASTER: {
         URI: is_strapi_mode() ? 'http://localhost:1337' : '',
@@ -66,6 +76,7 @@ export const NET_FUNCTION_GET_JWT = (): string => {
  */
 // 网站的 endpoint，key 名字和 上面的要对应
 export const NET_ENDPOINTS = <ONEO>{
+    'APP': NET_ENDPOINTS_APP,
     'MASTER': NET_ENDPOINTS_MASTER,
     'FILE': NET_ENDPOINT_FILE,
     'BUSINESS': NET_ENDPOINTS_BUSINESS

@@ -1,18 +1,35 @@
 <template>
-    <o-scroll-y class="h-100">
-        <view :class="clazz" class="oh-x scroll-hide">
-            <root>
-                <slot></slot>
-                <co-app-bottom-bar/>
-            </root>
-            <CoGlobal/>
-            <CoIndexMenuBar/>
+    <view class="h-100 w-100">
+        <slot name="top"></slot>
+		<view class="">
+            <view class="abs-t w-100 zi-t">
+                <view class="w-100" :style="{
+                    'margin-top': '-3.3rem',
+                    'height': 'calc(14.5rem)'
+                }">
+                    <slot name="bg"></slot>
+                </view>
+            </view>
+			<OSafeAreaTop/>
+			<view class="mh-app-top-bar"></view>
+            <slot></slot>
         </view>
-    </o-scroll-y>
+        
+		<CoAppBottomBar/>
+    </view>
 </template>
 
 <script setup lang="ts">
-// import CoIndexMenuBar from '@/components/menu/CoIndexMenuBar.vue';
+import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
+import CoAppBottomBar from '@/components/app/bar/CoAppBottomBar.vue';
+import { for_user_joing } from '@/conf/__for_index/for_user_loging';
+import { timeout } from '@/tool/util/future';
+import { nextTick } from 'vue';
+
 defineProps<{ clazz?: string }>()
 
+const funn = {
+	init: () => timeout(() => { for_user_joing() }, 600)
+}
+nextTick(funn.init)
 </script>

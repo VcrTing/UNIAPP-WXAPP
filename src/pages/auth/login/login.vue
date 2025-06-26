@@ -4,16 +4,16 @@
 		<LoginLayout>
 			<template #bg>
 				<view class="w-100 h-100">
-					<CoImg :src="src" clazz="h-100"/>
+					<CoImg :src="info.bgLogin" clazz="h-100"/>
 				</view>
 			</template>
 			<view class="w-100">
-				<VwLoginTop/>
+				<VwLoginTop :info="info"/>
 				<view class="py"></view>
 				<view class="py"></view>
 				<view class="fx-c pt-t">
 					<view class="mxw-pc-s">
-						<VwLoginForm :aii="aii" @submit="funn.submit()"/>
+						<VwLoginForm :info="info" :aii="aii" @submit="funn.submit()"/>
 					</view>
 				</view>
 				<CkSpace :h="7"/>
@@ -27,19 +27,19 @@ import CkSpace from '@/cake/content/CkSpace.vue';
 import LoginLayout from '@/components/layout/auth/LoginLayout.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
-import { authDispatch, authGetters, authState, uiState } from '@/memory/global';
+import { appState, authDispatch, authGetters, authState, uiState } from '@/memory/global';
 import { tipwarn } from '@/tool/uni/uni-global';
 import { future, futuring, promise } from '@/tool/util/future';
 import { vid_phone } from '@/tool/web/vid';
 import VwLoginForm from '@/view/auth/login/VwLoginForm.vue';
 import VwLoginTop from '@/view/auth/login/VwLoginTop.vue';
-import { nextTick, reactive } from 'vue';
-
-const src = 'https://pic.rmb.bdstatic.com/bjh/down/VO71yj0jXIpiVpiH4RncQwcdb339b9cbdc38e7d07ffb138c8269f9.jpg?for=bg'
+import { computed, nextTick, reactive } from 'vue';
 
 const aii = reactive({
 	phone: '', ioading: false
 })
+
+const info = computed((): AppInfo => appState.info) 
 
 const funn = {
 	collect: () => {

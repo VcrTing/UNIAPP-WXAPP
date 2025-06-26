@@ -1,12 +1,12 @@
 <template>
     <view class="ps-r zi-n">
-        <view class="pt-s bg-con">
+        <view class="pt-s">
             <VwIndexContTop @result="funn.switchTag"/>
         </view>
         <view class="">
             <OScrollYFresh id="index_scroll"
                 :options="scrolloptions"
-                :styie="{ 'height': 'calc( 100vh - 17em )' }"
+                :styie="{ 'height': 'calc( 100vh - 16rem )' }"
                 @downrefresh="funn.next"
                 @uprefresh="funn.initing"
                 >

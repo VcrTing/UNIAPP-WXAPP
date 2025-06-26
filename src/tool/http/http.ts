@@ -1,5 +1,13 @@
-import { BUSINESS, FILE, MASTER, NET, NET_ENDPOINTS, NET_FUNCTION_GET_JWT, } from "@/conf/conf-net";
+import { APP, BUSINESS, FILE, MASTER, NET, NET_ENDPOINTS, NET_FUNCTION_GET_JWT, } from "@/conf/conf-net";
 import Net from "./net";
+
+// APP
+export const app = new Net(
+    NET.APP.URI + '/' + NET.APP.API, 
+    NET_ENDPOINTS[ APP ], 
+    NET_FUNCTION_GET_JWT,
+    NET.APP.TIMEOUT_GET, NET.APP.TIMEOUT_POS, NET.APP.IS_LOG
+);
 
 // 主数据源
 export const master = new Net(

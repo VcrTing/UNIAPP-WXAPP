@@ -13,7 +13,7 @@
                 </view>
                 <view class="">
                     <text class="tit">已同意并阅读</text>
-                    <text class="pri" @tap="funn.look(1)">《{{ APP_GENERATE_DETAIL.name }}服务协议》</text>
+                    <text class="pri" @tap="funn.look(1)">《{{ info.name }}服务协议》</text>
                     <text class="pri" @tap="funn.look(0)">《隐私政策》</text>
                 </view>
             </view>
@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { APP_GENERATE_DETAIL } from '@/conf/conf-app';
+import { appState } from '@/memory/global';
 import pan_tooi from '@/tool/app/pan_tooi';
 import { tipwarn } from '@/tool/uni/uni-global';
 import UiI from '@/ui/element/i/UiI.vue';
@@ -69,6 +69,8 @@ const funn = {
 }
 
 defineExpose(funn)
+
+const info = computed((): AppInfo => appState.info) 
 
 const pan_xy = { idx: 99, hui: <ElePanHui>{ opacity: 0.1 } }
 </script>

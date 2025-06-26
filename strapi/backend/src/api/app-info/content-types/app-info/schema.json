@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "app_infos",
+  "info": {
+    "singularName": "app-info",
+    "pluralName": "app-infos",
+    "displayName": "AppInfo"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "logo": {
+      "type": "text"
+    },
+    "desc": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "dataStatus": {
+      "type": "integer",
+      "default": 1
+    },
+    "logoLogin": {
+      "type": "text"
+    },
+    "descLogin": {
+      "type": "string"
+    },
+    "bgLogin": {
+      "type": "text"
+    }
+  }
+}

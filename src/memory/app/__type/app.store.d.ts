@@ -12,6 +12,7 @@ interface AppStore {
     document: boolean,
 
     // 
+    info: AppInfo
 }
 type APP_STORE_FIELD = 
     'menu' | 'page' | 'ioading' | 'document'

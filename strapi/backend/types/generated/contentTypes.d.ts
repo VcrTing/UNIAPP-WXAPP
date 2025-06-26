@@ -698,6 +698,40 @@ export interface ApiActivityActivity extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAppInfoAppInfo extends Struct.CollectionTypeSchema {
+  collectionName: 'app_infos';
+  info: {
+    displayName: 'AppInfo';
+    pluralName: 'app-infos';
+    singularName: 'app-info';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    bgLogin: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dataStatus: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
+    desc: Schema.Attribute.String;
+    descLogin: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::app-info.app-info'
+    > &
+      Schema.Attribute.Private;
+    logo: Schema.Attribute.Text;
+    logoLogin: Schema.Attribute.Text;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProductContentProductContent
   extends Struct.CollectionTypeSchema {
   collectionName: 'product_contents';
@@ -1398,6 +1432,7 @@ declare module '@strapi/strapi' {
       'api::activity-registration.activity-registration': ApiActivityRegistrationActivityRegistration;
       'api::activity-tag.activity-tag': ApiActivityTagActivityTag;
       'api::activity.activity': ApiActivityActivity;
+      'api::app-info.app-info': ApiAppInfoAppInfo;
       'api::product-content.product-content': ApiProductContentProductContent;
       'api::user-love.user-love': ApiUserLoveUserLove;
       'api::user-preference-tag.user-preference-tag': ApiUserPreferenceTagUserPreferenceTag;

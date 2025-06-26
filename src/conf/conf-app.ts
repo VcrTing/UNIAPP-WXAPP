@@ -3,11 +3,13 @@ import uniRouter from "@/tool/uni/uni-router"
 
 export const UX_DOUBLE_TOUCH_JUDGE_TIME = 300
 
-export const APP_GENERATE_DETAIL = {
-    logo: '../../../static/logo.png',
+export const APP_GENERATE_DETAIL = <AppInfo>{
+    logo: 'https://img2.baidu.com/it/u=1882819932,1177030922&fm=253&fmt=auto&app=120&f=JPEG?w=655&h=655',
     desc: '找派对 上同趣圈',
     name: '同趣圈',
-    desc_auth: '上同趣圈 找派对'
+    logoLogin: 'https://img1.baidu.com/it/u=1178382764,329077325&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500',
+    descLogin: '上同趣圈 找派对',
+    bgLogin: 'https://pic.rmb.bdstatic.com/bjh/down/VO71yj0jXIpiVpiH4RncQwcdb339b9cbdc38e7d07ffb138c8269f9.jpg?for=bg'
 }
 
 export const app_confirm = () => pan_tooi.open_def_b(1001, { opacity: 0.4 })
