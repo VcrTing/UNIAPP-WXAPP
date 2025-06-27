@@ -1,13 +1,16 @@
 
 export const APP_W_DEF: number = 375
 
+// 宽度临界值
 export const W = {
     PC: 1028,
     PAD: 752
 }
 
+// 默认国家代码
 export const DEV_COUNTRY_CODE_DEF = 86
 
+//
 export const DEV_GENERATE_SPECIAL = (c: number | string, s: string) => {
     return c + '_' + s + '_VCR_TING'
 }
@@ -29,15 +32,26 @@ export const DEV_TAG = {
     INDEX_LEVEL_LIMIT: 300 // 不是手机 端值可以少一点
 }
 
-// 是否运行私密
-export const DEV_SM_ALLOW_SEARCH = false
+// 活动的开发设置
+export const DEV_ACTIVITY = {
+    // 是否 允许 私密
+    ALLOW_SEARCH_SM: false,
+    //
+    SORT: {
+        // 首页数据的排序状况
+        INDEX: [
+            { K: 'createdAt', ASC: true }
+        ]
+    }
+}
 
-// 是否允许展示
+// 媒体禁止
 export const DEV_MEDIA_ALLOW = {
     ALLOW_SEX: 0, // 是否允许展示 色情 1 = 允许
     OPEN_ALLOW: true, // 允许展示 被允许的 true = 打开 isAllow 开关，其他 = 不检查 isAllow
 }
 
+// 媒体展示
 export const DEV_MEDIA_VIEW = {
     // 所展示的 banner 媒体高度，超越了 100vh 时
     BANNER_MORE_THAN_VH: (src: number, h_app: number): number => {
@@ -45,10 +59,7 @@ export const DEV_MEDIA_VIEW = {
     }
 }
 
-export const DEV_K = {
-    MEDIA: 'activity_medias'
-}
-
+// 性别设定
 export const DEV_GENDER = {
     BOY: 1, GIRL: 0
 }

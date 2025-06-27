@@ -877,10 +877,7 @@ export interface ApiUserStatisticUserStatistic
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user: Schema.Attribute.Relation<
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
+    userId: Schema.Attribute.String;
   };
 }
 
@@ -1405,10 +1402,6 @@ export interface PluginUsersPermissionsUser
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user_statistic: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::user-statistic.user-statistic'
-    >;
     username: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &

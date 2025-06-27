@@ -94,6 +94,12 @@ const _appStore: Store<AppStore> = createStore({
                 await __iogin(commit)
             }
         },
+        // 清理登录
+        outauth: async ({ state, commit }) => {
+            storage.remove(ADMIN_AUTH_K)
+            commit('change', [ 'jwt', '' ])
+            commit('change', [ 'admin', { } ])
+        }
     }
 })
 

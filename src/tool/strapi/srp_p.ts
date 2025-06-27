@@ -18,8 +18,18 @@ const build_param = (param: ONE, pager: Pager, relations: string[]) => {
     return res;
 }
 
-const __sort = (target: ONE = { }, isasc: boolean = false) => {
-    target['sort'] = 'createdAt:' + (isasc ? 'asc' : 'desc')
+const __sort = (t: ONE = { }, isasc: boolean = false) => {
+    t['sort'] = 'createdAt:' + (isasc ? 'asc' : 'desc')
+}
+
+const __sorts = (t: ONE = { }, options: MANY = [ ]) => {
+    options.map((e: ONE) => {
+        const __K: string = e['K'] || 'createdAt'
+        const __ASC: boolean = e['ASC']
+        if (__K) {
+            t['sort'] = __K + ':' + (__ASC ? 'asc' : 'desc')
+        }
+    })
 }
 
 const __kv = (t: ONE, f: string, k: string, v: string | number) => {
@@ -43,7 +53,8 @@ const build_filter_in = (target: ONE , key_prefix: string, ins: any[] ) => {
 }
 
 export default {
-    __eq, __ne, __gt, __like, __sort,
+    __eq, __ne, __gt, __like, 
+    __sort, __sorts,
     build_filter_in,
     build_param_pager,
     build_param

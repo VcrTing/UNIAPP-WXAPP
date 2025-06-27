@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.q.buy.module.media.form.ProductMediaForm;
 import com.q.buy.module.media.model.ProductMedia;
 import com.q.buy.module.media.mappers.ProductMediaMapper;
-import com.q.buy.module.media.tool.UploadTool;
+import com.q.buy.backend.media.UploadTool;
 import com.q.buy.util.q.QListUtil;
 import com.q.buy.util.q.QMediaUtil;
 import org.springframework.beans.factory.annotation.Autowired;

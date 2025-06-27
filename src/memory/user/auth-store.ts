@@ -4,9 +4,11 @@ import { ROLE_ANON, ROLE_AUTH, USER_DEF, USER_TEST } from '@/conf/conf-role';
 import server_user from '@/server/user/user/server_user';
 import pan_tooi from '@/tool/app/pan_tooi';
 import { arrfindi } from '@/tool/util/iodash';
-import { must_one } from '@/tool/util/valued';
+import { is_nice_one, must_one } from '@/tool/util/valued';
 import { storage } from '@/tool/web/storage';
 import { Store, createStore } from 'vuex';
+
+const __K_OF_USER_AUTH = "USER_AUTH"
 
 export enum AutoLoginStatus {
     ALREADY_LOGIN,
@@ -17,7 +19,7 @@ export enum AutoLoginStatus {
 const islogin = (s: ONE): boolean => {
     // const auth: AppAuth = s.auth || { }
     // const p: string = (auth.phonedata || { }).phoneNumber || ''
-    return (s.role !== ROLE_ANON)
+    return (s.jwt && s.jwt.length > 0) // (s.role !== ROLE_ANON) && 
 }
 
 const locking = async <T>(state: ONE, commit: Function, def: T, func: Function): Promise<T> => {
@@ -78,11 +80,11 @@ const _s: Store<AuthStore> = createStore({
     },
     mutations: {
         __change: (s: ONE, v: ANYS) => s[ v[0] ] = v[1],
-        _num: (s: ONE) => {
+        __num: (s: ONE) => {
             s.num = s.num + 1
         },
-        _login: (s: ONE, auth: AppAuth) => {
-            storage.set('jwt', auth.token)
+        __login: (s: ONE, auth: AppAuth) => {
+            storage.set(__K_OF_USER_AUTH, auth)
             s.auth = auth
             s.user = auth.user 
             s.jwt = auth.token 
@@ -90,8 +92,8 @@ const _s: Store<AuthStore> = createStore({
             s.phonedata = auth.phonedata
             s.loginhouse.iive = false
         },
-        _logout: (s: ONE) => {
-            storage.remove('jwt')
+        __logout: (s: ONE) => {
+            storage.remove(__K_OF_USER_AUTH)
             s.auth = { }
             s.user = USER_DEF
             s.jwt = ''
@@ -108,26 +110,21 @@ const _s: Store<AuthStore> = createStore({
         /**
          * 
          */
-        login: ({ commit }, auth: AppAuth) => {
-            storage.set('auth', auth)
-            // console.log('LOGIN AUTH =', auth)
-            commit('_login', auth)
-        },
-        logout: ({ commit }) => {
-            commit('_logout')
-        },
+        login: ({ commit }, auth: AppAuth) => { commit('__login', auth) },
+        logout: ({ commit }) => { commit('__logout') },
         // 0 加载虚幻号码
 
         // 1 自动登录成功，0 已经登录了，-1 
         auto_login: ({ getters, commit }): AutoLoginStatus => {
             if (!getters.is_login) {
-                const auth: AppAuth | undefined = storage.get('auth')
+                const auth: AppAuth | undefined = storage.get(__K_OF_USER_AUTH)
+                console.log(__K_OF_USER_AUTH + ' =', auth)
                 if (auth) {
                     // 检测
                     const user: User = must_one(auth.user)
                     if (user.id) {
-                        console.log('=== 自动登录成功 ===', auth)
-                        commit('_login', auth); 
+                        // console.log('=== 自动登录成功 ===', auth)
+                        commit('__login', auth); 
                         for_user_loging()
                         return AutoLoginStatus.AUTO_SUCCESS
                     }
@@ -154,9 +151,10 @@ const _s: Store<AuthStore> = createStore({
             const _lg = islogin(state)
             if (!_lg) {
                 const hs = state.loginhouse;
-                commit('_num')
+                commit('__num')
                 
-                if (hs.iive) pan_tooi.open_def_b(hs.pan_idx, hs.pan_hui);
+                // if (hs.iive) 
+                    pan_tooi.open_def_b(hs.pan_idx, hs.pan_hui);
                 return true
             }   
             return false
@@ -220,7 +218,7 @@ export default _s
                 if (uid) {
                     const u: User = await server_me.one(uid)
                     if (u && u.id) {
-                        commit('_login', { user: u, token: u.documentId })
+                        commit('__login', { user: u, token: u.documentId })
                         console.log('========= 刷新用户数据 =', u)
                         commit('__change', [ 'user', u ])
                         return u;

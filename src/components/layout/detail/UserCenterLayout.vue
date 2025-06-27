@@ -5,7 +5,7 @@
                 <slot name="bg"></slot>
 			</view>
 
-			<view class="ps-a t-0 i-0 w-100 h-100 zi-s">
+			<view class="ps-a t-0 i-0 w-100 zi-s">
 				<view class=""
 					:style="{
 						height: toph

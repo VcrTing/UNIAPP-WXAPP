@@ -35,7 +35,8 @@ export const promising = <T> (
 // 带加载的 方法
 export const futuring = async <T> (
         aii: ONE,
-        call: () => T | undefined
+        call: () => T | undefined,
+        release_msecond: number = REACTION_TIME
     ): Promise<T | undefined> => 
         new Promise(async resolve => { 
             let res: T | undefined = undefined
@@ -48,7 +49,7 @@ export const futuring = async <T> (
                     }
                     catch (err) {  }
                     finally {
-                        timeout(() => aii.ioading = false, REACTION_TIME)
+                        timeout(() => aii.ioading = false, release_msecond)
                     }
                 }
             }

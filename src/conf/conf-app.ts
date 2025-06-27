@@ -9,7 +9,12 @@ export const APP_GENERATE_DETAIL = <AppInfo>{
     name: '同趣圈',
     logoLogin: 'https://img1.baidu.com/it/u=1178382764,329077325&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500',
     descLogin: '上同趣圈 找派对',
-    bgLogin: 'https://pic.rmb.bdstatic.com/bjh/down/VO71yj0jXIpiVpiH4RncQwcdb339b9cbdc38e7d07ffb138c8269f9.jpg?for=bg'
+    bgLogin: 'https://pic.rmb.bdstatic.com/bjh/down/VO71yj0jXIpiVpiH4RncQwcdb339b9cbdc38e7d07ffb138c8269f9.jpg?for=bg',
+    userDefAvatarUrl: 'https://img2.baidu.com/it/u=1985709170,3830724062&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500',
+    userDefBackground: 'https://wx3.sinaimg.cn/mw690/008x0tqcgy1i1wlvuoyxcj30u01swanp.jpg',
+    index_banners: [
+        <Media>{ url: '' }
+    ]
 }
 
 export const app_confirm = () => pan_tooi.open_def_b(1001, { opacity: 0.4 })

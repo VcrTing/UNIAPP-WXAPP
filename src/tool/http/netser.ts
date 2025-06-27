@@ -3,9 +3,11 @@ import { _TYPE_OBJECT, is_str } from "../util/typed";
 import { goLogin } from "../router/router";
 import { promise } from "../util/future";
 import net_tool from "./net_tool";
-import { must_int } from "../util/valued";
+import { is_nice_one, must_int } from "../util/valued";
+import { for_net_when_403 } from "@/conf/__for_net/for_net_error";
 
 const __HTTP_CODE_SAFE: number = 399
+const __HTTP_CODE_FBD: number = 403
 
 // 响应式 网络 错误
 const ser_err_txt = (origin: ONE | string = ''): string => {
@@ -22,6 +24,18 @@ const ser_err_txt = (origin: ONE | string = ''): string => {
         }
     }
     return res ? res : '网络连接错误，属于未捕捉到的异常。'
+}
+
+const ser_403 = (src: ONE) => {
+    if (is_nice_one(src)) {
+        const code: number = must_int(src.statusCode)
+        if (code) {
+            if (code === __HTTP_CODE_FBD) {
+                // console.log('-------------- 处理 403 --------------')
+                for_net_when_403()
+            }
+        } 
+    }
 }
 
 // 雪莲花 后端返回 格式
@@ -77,6 +91,7 @@ export const netser_succ = (src: ONE): NET_RES => {
                     }
                     // 错误
                     else {
+                        ser_403(__dt)
                         return '[500][SUCC_CONNECT] ' + __msg.substring(0, 255)
                     }
                 }
@@ -109,7 +124,8 @@ export const netser_succ = (src: ONE): NET_RES => {
     } 
     // 非安全返回
     else {
-        console.log('接口请求 出错 = ', data)
+        ser_403(src)
+        // console.log('接口请求 出错 = ', data)
         if (data instanceof Object) {
             const _dt: ONE = data as ONE
             return _dt.error ? '[' + code + ']' + ser_err_txt( _dt.error ) : '[' + code + '] WEB后端 网络请求 未返回任何错误信息。'

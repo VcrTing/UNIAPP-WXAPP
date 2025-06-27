@@ -28,13 +28,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     JwtAuthenticationTokenFilter tokenFilter;
 
+    final String[] WHITE_LIST = { "/api/auth/login", "/static/**", "/public/**" };
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
-                .antMatchers( "/static/**", "/public/**", "/api/auth/login").anonymous()
+                .antMatchers( WHITE_LIST ).anonymous()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()

@@ -29,14 +29,11 @@
     "numLoveTotal": {
       "type": "integer"
     },
-    "user": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "user_statistic"
-    },
     "numMemberTotal": {
       "type": "integer"
+    },
+    "userId": {
+      "type": "string"
     }
   }
 }

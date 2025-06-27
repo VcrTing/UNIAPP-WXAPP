@@ -131,12 +131,6 @@
     },
     "gender": {
       "type": "integer"
-    },
-    "user_statistic": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::user-statistic.user-statistic",
-      "mappedBy": "user"
     }
   }
 }

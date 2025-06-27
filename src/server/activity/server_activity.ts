@@ -1,5 +1,5 @@
 import { DATA_ACTIVITY_TYPED_GK } from "@/conf/conf-datas"
-import { DEV_DOC_ID, DEV_SM_ALLOW_SEARCH, DEV_STATUS_DEF } from "@/conf/conf-dev"
+import { DEV_ACTIVITY, DEV_DOC_ID } from "@/conf/conf-dev"
 import { STS_ACTIVITY } from "@/conf/conf-status"
 import { app } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
@@ -23,6 +23,8 @@ const fetching = async (param: ONE, pager: Pager): Promise<Activity[]> => {
 const index = async (param: ONE, pager: Pager): Promise<Activity[]> => {
     // 审核通过的
     srp_p.__eq(param, STS_ACTIVITY.REVIEW.K, STS_ACTIVITY.REVIEW.YES)
+    // 顺序问题
+    srp_p.__sorts(param, DEV_ACTIVITY.SORT.INDEX)
     return await fetching(param, pager)
 }
 
@@ -32,7 +34,7 @@ const index_recommond = async (param: ONE, pager: Pager): Promise<Activity[]> =>
     // 开启推荐
     srp_p.__eq(param, STS_ACTIVITY.RECOMMEND.K, STS_ACTIVITY.RECOMMEND.YES)
     // 处理私密
-    if (!DEV_SM_ALLOW_SEARCH) {
+    if (!DEV_ACTIVITY.ALLOW_SEARCH_SM) {
         srp_p.__eq(param, 'typed', DATA_ACTIVITY_TYPED_GK.v)
     }
     return await index(param, pager)

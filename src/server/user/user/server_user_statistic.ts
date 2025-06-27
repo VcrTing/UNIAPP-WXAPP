@@ -1,4 +1,4 @@
-import { authState } from "@/memory/global"
+import { authGetters, authState } from "@/memory/global"
 import { app } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
 import srp_p from "@/tool/strapi/srp_p"
@@ -17,24 +17,35 @@ const fetching = async (param: ONE, pager: Pager): Promise<UserStatistic[]> => {
 }
 
 const mine = async (param: ONE = { }): Promise<UserStatistic> => {
-    net_tool.limit_mine(param, 'user');
+    // srp_p.__eq(param, 'user][id', userid)
+    srp_p.__eq(param, 'userId', authGetters.userid)
     const src: UserStatistic[] = await fetching(param, net_tool.__pager());
     return must_one(src[0])
 }
 
 const byuser = async (userid: number): Promise<UserStatistic> => {
     const __pm: ONE = { }
-    srp_p.__eq(__pm, 'user][id', userid)
+    srp_p.__eq(__pm, 'userId', userid)
     // __pm['filters[user][id][$eq]'] = userid
     const src: UserStatistic[] = await fetching(__pm, net_tool.__pager());
     return must_one(src[0])
 }
 
+const __plus = async (form: ONE): Promise<UserStatistic> => {
+    form['userId'] = authGetters.userid
+    const __pm: ONE = net_tool.build_data(form)
+    const src: NET_RES = await app.pos('statistic', null, __pm)
+    if (is_str(src)) return netip(src, <UserStatistic>{ });
+    const res: ONE | MANY = (src as HttpResult).data
+    return net_tool.one<UserStatistic>(res)
+}
 
 const __edit = async (form: ONE, id: string): Promise<UserStatistic> => {
     const __pm: ONE = net_tool.build_data(form)
     const src: NET_RES = await app.put('statistic', id, __pm)
-    if (is_str(src)) return netip(src, <UserStatistic>{ });
+    if (is_str(src)) {
+        console.log('================== 修改一个用户统计数据，出错了。')
+    };
     const res: ONE | MANY = (src as HttpResult).data
     return net_tool.one<UserStatistic>(res)
 } 
