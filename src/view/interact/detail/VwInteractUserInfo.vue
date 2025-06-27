@@ -25,9 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import OButtonDef from '@/cake/button/OButtonDef.vue';
 import OTag from '@/cake/button/tag/OTag.vue';
-import CkSpace from '@/cake/content/CkSpace.vue';
 
 const prp = defineProps<{
     user: User

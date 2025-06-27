@@ -25,7 +25,7 @@
 
                 <template #bom>
                     <view class="fx-s px-row bg-con pb-row pt-s">
-                        <OButtonDef @tap="pan_tooi.close_pan(idx)" clazz="w-382 mh-btn fx-aii-btn-pri">再想想</OButtonDef>
+                        <OButton color="def" @tap="pan_tooi.close_pan(idx)" clazz="w-382 mh-btn fx-aii-btn-pri">再想想</OButton>
                         <view class="d-ib px-s"></view>
                         <OButton @tap="funn.submit" clazz="fx-1 mh-btn">下单套餐</OButton>
                     </view>
@@ -38,7 +38,6 @@
 <script setup lang="ts">
 import OSafeAreaBottom from '@/cake/app/safearea/OSafeAreaBottom.vue';
 import OButton from '@/cake/button/OButton.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
 import OPan from '@/cake/pan/OPan.vue';
 import OPanInnerY from '@/cake/pan/OPanInnerY.vue';
 import CoMoActivityMoneyItem from '@/components/modules/activity/CoMoActivityMoneyItem.vue';

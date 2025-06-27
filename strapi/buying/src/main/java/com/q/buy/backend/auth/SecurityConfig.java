@@ -4,6 +4,7 @@ import com.q.buy.backend.auth.common.ErrAccessDeniedHandler;
 import com.q.buy.backend.auth.common.ErrAuthEntryPointHandler;
 import com.q.buy.backend.auth.service.CustomUserDetailsService;
 import com.q.buy.backend.auth.service.JwtAuthenticationTokenFilter;
+import com.q.buy.conf.NetConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     JwtAuthenticationTokenFilter tokenFilter;
 
-    final String[] WHITE_LIST = { "/api/auth/login", "/static/**", "/public/**" };
+    final String[] WHITE_LIST = { "/" + NetConfig.API + "/auth/login", "/static/**", "/public/**" };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

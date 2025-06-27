@@ -21,12 +21,20 @@ export const BUSINESS: string = 'BUSINESS'
 // 数据来源
 export const FILE: string = 'FILE'
 
+const IS_DEV_MODE = true
+
+const __API_NAME_STRAPI = 'api'
+const __API_NAME_BACKEND = 'backend'
+
+const __LINK_STRAPI = IS_DEV_MODE ? 'http://localhost:1337' : ''
+const __LINK_BACKEND = IS_DEV_MODE ? 'http://localhost:8889' : ''
+
 // 全局配置
 export const NET = {
     // 负责 应用、不使用 TOKEN 的东西，
     APP: {
-        URI: is_strapi_mode() ? 'http://localhost:1337' : '',
-        API: is_strapi_mode() ? 'api' : 'api',
+        URI: __LINK_STRAPI,
+        API: __API_NAME_STRAPI,
         TIMEOUT_GET: 1000 * 30,
         TIMEOUT_POS: 1000 * 30,
         IS_LOG: true,
@@ -34,8 +42,8 @@ export const NET = {
     },
     // 负责 商品、活动、标签
     MASTER: {
-        URI: is_strapi_mode() ? 'http://localhost:1337' : '',
-        API: is_strapi_mode() ? 'api' : 'api',
+        URI: __LINK_STRAPI,
+        API: __API_NAME_STRAPI,
         TIMEOUT_GET: 1000 * 30,
         TIMEOUT_POS: 1000 * 30,
         IS_LOG: true,
@@ -43,8 +51,8 @@ export const NET = {
     },
     // 负责 用户、订单
     BUSINESS: {
-        URI: is_strapi_mode() ? 'http://localhost:8888' : '',
-        API: is_strapi_mode() ? 'api' : 'api',
+        URI: __LINK_BACKEND,
+        API: __API_NAME_BACKEND,
         TIMEOUT_GET: 1000 * 30,
         TIMEOUT_POS: 1000 * 30,
         IS_LOG: true,
@@ -55,8 +63,8 @@ export const NET = {
     },
     // 负责 媒体
     FILE: {
-        URI: is_strapi_mode() ? 'http://localhost:8888' : '',
-        API: is_strapi_mode() ? 'api' : 'api',
+        URI: __LINK_BACKEND,
+        API: __API_NAME_BACKEND,
         TIMEOUT_GET: 1000 * 30,
         TIMEOUT_POS: 1000 * 30,
         IS_LOG: true,
@@ -66,19 +74,6 @@ export const NET = {
         }
     }
 }
-
-/*
-// 全局 主响应 URI
-export const NET_URI_MASTER = is_strapi_mode() ? 'http://localhost:1337' : ''
-
-// 全局 主响应 的 API
-export const NET_URI_MASTER_API = is_strapi_mode() ? 'api' : 'api'
-
-// GET 超时时间
-export const NET_TIMEOUT_GET = 1000 * 30
-// POST 超时时间
-export const NET_TIMEOUT_POS = 1000 * 30
-*/
 
 // 打印 网络连接
 export const NET_IS_LOG = IS_NET_LOG

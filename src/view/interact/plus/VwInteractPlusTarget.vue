@@ -14,7 +14,7 @@
                         </ODiv>
                     </view>
                     <view class="" @tap="funn.addgirl">
-                        <OButtonDef clazz="bd-x2 bd-s-d w-3em h-3em br-cir fx-c" :weak="true"><UiI class="" :i="'+'"/> </OButtonDef>
+                        <OButton color="def" clazz="bd-x2 bd-s-d w-3em h-3em br-cir fx-c" :weak="true"><UiI class="" :i="'+'"/> </OButton>
                     </view>
                 </view>
             </view>
@@ -25,13 +25,9 @@
 <script setup lang="ts">
 import ODiv from '@/cake/button/div/ODiv.vue';
 import OButton from '@/cake/button/OButton.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
-import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import CoMoUserInfo from '@/components/modules/user/CoMoUserInfo.vue';
 import mock_meizi from '@/server/mock/user/mock_meizi';
 import appRouter from '@/tool/uni/app-router';
-import uniRouter from '@/tool/uni/uni-router';
-import { storage } from '@/tool/web/storage';
 import UiI from '@/ui/element/i/UiI.vue';
 import { computed } from 'vue';
 

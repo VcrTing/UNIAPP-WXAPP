@@ -46,9 +46,9 @@
                                         </view>
                                     </view>
                                     <view class="fx-1 fx-r">
-                                        <OButtonDef :weak="true" clazz="fs-s px h-2em br-rnd fx-c">
+                                        <OButton color="def" :weak="true" clazz="fs-s px h-2em br-rnd fx-c">
                                             <UiI clazz="sus" i="trash"/>
-                                        </OButtonDef>
+                                        </OButton>
                                         <view class="px-s"></view>
                                         <OButton :weak="true" clazz="fs-s px h-2em br-rnd">同意</OButton>
                                     </view>

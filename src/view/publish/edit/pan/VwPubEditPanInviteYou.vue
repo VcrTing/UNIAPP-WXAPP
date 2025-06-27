@@ -76,13 +76,13 @@
                         <OButton v-if="aii.next == 0" clazz="btn-app" @tap="funn.next">
                             打赏
                         </OButton>
-                        <OButtonDef v-else clazz="btn-app" @tap="funn.next">
+                        <OButton color="def" v-else clazz="btn-app" @tap="funn.next">
                             确定
-                        </OButtonDef>
+                        </OButton>
                         <view class="py-s"></view>
-                        <OButtonDef clazz="btn-app" @tap="pan_tooi.close_pan(idx)">
+                        <OButton color="def" clazz="btn-app" @tap="pan_tooi.close_pan(idx)">
                             关闭
-                        </OButtonDef>
+                        </OButton>
                     </view>
                 </template>
             </OPanInnerY>
@@ -100,7 +100,6 @@ import mock_meizi from '@/server/mock/user/mock_meizi';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
 import OButton from '@/cake/button/OButton.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
 import OInput from '@/cake/input/inp/OInput.vue';
 import UiI from '@/ui/element/i/UiI.vue';
 

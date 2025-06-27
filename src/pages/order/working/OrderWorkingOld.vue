@@ -18,15 +18,11 @@
 </template>
 
 <script setup lang="ts">
-import OSafeAreaBottom from '@/cake/app/safearea/OSafeAreaBottom.vue';
 import OButton from '@/cake/button/OButton.vue';
-import OButtonOut from '@/cake/button/OButtonOut.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
-import DetailLayout from '@/components/layout/detail/DetailLayout.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { acyState, authState, orderReFresh, orderState, uiState } from '@/memory/global';
 import mock_orders from '@/server/mock/order/mock_orders';
-import pan_tooi from '@/tool/app/pan_tooi';
 import uniRouter from '@/tool/uni/uni-router';
 import { must_arr } from '@/tool/util/valued';
 import VwOrderWorkingAddr from '@/view/order/working/VwOrderWorkingAddr.vue';

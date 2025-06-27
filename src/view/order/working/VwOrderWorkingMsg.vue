@@ -5,10 +5,10 @@
                 <template #i>活动标签</template>
                 <template #r>
                     <view class="w-100 fx-i">
-                        <OButtonDef :weak="true" clazz="fs-n br-s px-s mr">黑丝</OButtonDef>
-                        <OButtonDef :weak="true" clazz="fs-n br-s px-s mr">JK</OButtonDef>
-                        <OButtonDef :weak="true" clazz="fs-n br-s px-s mr">约会</OButtonDef>
-                        <OButtonDef :weak="true" clazz="fs-n br-s px-s">台球助教</OButtonDef>
+                        <OButton color="def" :weak="true" clazz="fs-n br-s px-s mr">黑丝</OButton>
+                        <OButton color="def" :weak="true" clazz="fs-n br-s px-s mr">JK</OButton>
+                        <OButton color="def" :weak="true" clazz="fs-n br-s px-s mr">约会</OButton>
+                        <OButton color="def" :weak="true" clazz="fs-n br-s px-s">台球助教</OButton>
                     </view>
                 </template>
             </CoMoOrderMsgItem>
@@ -39,8 +39,6 @@ import { must_one } from '@/tool/util/valued';
 import { computed } from 'vue';
 import CoMoOrderMsgItem from '@/components/modules/order/CoMoOrderMsgItem.vue';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
-import ODiv from '@/cake/button/div/ODiv.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
 import mock_meizi from '@/server/mock/user/mock_meizi';
 
 const prp = defineProps<{

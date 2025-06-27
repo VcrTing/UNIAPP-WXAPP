@@ -29,7 +29,7 @@
                     <view class="py-row">
                         <view>
                             <view class="pr d-ib" v-for="(v, i) in tags" :key="i">
-                                <OButtonDef :clazz="'px-row br-s'" :weak="true">{{ v.tit }}</OButtonDef>
+                                <OButton color="def" :clazz="'px-row br-s'" :weak="true">{{ v.tit }}</OButton>
                             </view>
                         </view>
                     </view>
@@ -40,7 +40,8 @@
 </template>
 
 <script setup lang="ts">
-import OButtonDef from '@/cake/button/OButtonDef.vue';
+
+import OButton from '@/cake/button/OButton.vue';
 import UiI from '@/ui/element/i/UiI.vue';
 
 const prp = defineProps<{

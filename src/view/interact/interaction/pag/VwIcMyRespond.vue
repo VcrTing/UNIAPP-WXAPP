@@ -30,7 +30,7 @@
                                     <text>打赏金额:&nbsp;</text>
                                     <text class="h6 fw-800">300</text>
                                 </view>
-                                <OButtonOut @tap="funn.detail(v)" :weak="true" clazz="btn-rnd px py-t">详情</OButtonOut>
+                                <OButton color="pri-out" @tap="funn.detail(v)" :weak="true" clazz="btn-rnd px py-t">详情</OButton>
                             </view>
                         </view>
                     </view>
@@ -41,8 +41,6 @@
 </template>
 
 <script setup lang="ts">
-import ODiv from '@/cake/button/div/ODiv.vue';
-import OButtonOut from '@/cake/button/OButtonOut.vue';
 import OButton from '@/cake/button/OButton.vue';
 import OTag from '@/cake/button/tag/OTag.vue';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';

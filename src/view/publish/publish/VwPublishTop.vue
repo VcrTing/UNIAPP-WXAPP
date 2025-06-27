@@ -23,7 +23,6 @@
 </template>
 
 <script setup lang="ts">
-import OButtonDef from '@/cake/button/OButtonDef.vue';
 import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
 import uniRouter from '@/tool/uni/uni-router';
 import UiI from '@/ui/element/i/UiI.vue';

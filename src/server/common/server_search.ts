@@ -1,5 +1,5 @@
 import { DATA_ACTIVITY_TYPED_GK } from "@/conf/conf-datas"
-import { DEV_SM_ALLOW_SEARCH } from "@/conf/conf-dev"
+import { DEV_ACTIVITY } from "@/conf/conf-dev"
 import { app } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
 import srp_p from "@/tool/strapi/srp_p"
@@ -22,7 +22,7 @@ const fetching = async (param: ONE, pager: Pager): Promise<Activity[]> => {
 const search = async (search: string, param: ONE = { }, pager: Pager = net_tool.__pager()): Promise<Activity[]> => {
     srp_p.__like(param, 'search', search)
     // 处理私密
-    if (!DEV_SM_ALLOW_SEARCH) {
+    if (!DEV_ACTIVITY.ALLOW_SEARCH_SM) {
         srp_p.__eq(param, 'typed', DATA_ACTIVITY_TYPED_GK.v)
     }
     return await fetching(param, pager)

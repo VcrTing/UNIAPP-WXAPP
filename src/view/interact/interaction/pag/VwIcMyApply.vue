@@ -39,12 +39,10 @@
 
 <script setup lang="ts">
 import ODiv from '@/cake/button/div/ODiv.vue';
-import OButtonOut from '@/cake/button/OButtonOut.vue';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import mock_interact from '@/server/mock/interact/mock_interact';
 import mock_meizi from '@/server/mock/user/mock_meizi';
 import uniRouter from '@/tool/uni/uni-router';
-import UiI from '@/ui/element/i/UiI.vue';
 import { computed, reactive } from 'vue';
 
 
