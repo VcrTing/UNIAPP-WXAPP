@@ -24,7 +24,7 @@ export const USER_DEF = <User>{
     // documentId: 'b2zdp5c17dem6rvmj8qo0m3u',
     nickName: '未登录用户',
     avatarUrl: 'https://img2.baidu.com/it/u=465760855,3158087440&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
-    background: 'https://img1.baidu.com/it/u=467309576,3460257531&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=1084', 
+    background: '', 
     age: 18,
     gender: 1,
     phone: '135',

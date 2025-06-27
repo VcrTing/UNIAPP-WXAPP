@@ -2,7 +2,7 @@
     <view>
         <view class="o-app-top-bar" :class="clazz">
             <view class="mh-app-top-bar">
-                <OSafeAreaTop/>
+                <OSafeAreaTop v-if="!not_in_safearea"/>
                 <slot></slot>
             </view>
         </view>
@@ -18,6 +18,7 @@ import OSafeAreaTop from '../safearea/OSafeAreaTop.vue';
 
 defineProps<{
     mat?: boolean,
-    clazz?: string
+    clazz?: string,
+    not_in_safearea?: boolean
 }>()
 </script>

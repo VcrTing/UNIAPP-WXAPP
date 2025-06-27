@@ -1,22 +1,33 @@
 <template>
     <page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
     <PageLayout>
-        <CoAppTopBar :clazz="'bg-con'" :mat="true">
-            <view class="ps-r zi-t fx-s pi">
-                <view class="abs-i middie zi-n">
-                    <view @tap="uniRouter.back" class="fx-aii-btn-def px-row w-3em h-3em br-cir fx-c c-p"><UiI i="i"/> </view>
+        
+        
+        <OAppTopBar :mat="true" :not_in_safearea="true">
+            <view class="ps-r zi-t">
+                <view class="abs-b i-0 w-100 h-100">
+                    <VwIndexBanner/>
                 </view>
-                <view class="w-80 pi-x3 py-s">
-                    <view class="fx-i pi-s w-100">
-                        <input @blur="funn.submit" class="fx-1 px mh-btn br-s btn-def" v-model="aii.search" placeholder="请输入您的喜好"/>
-                        <view class="px" @tap="funn.submit">
-                            <OButton :weak="true" color="def" clazz="px-col py-col br-s">搜索</OButton>
+                <OSafeAreaTop/>
+                <view class="fx-s w-100 pi-row ps-r zi-s">
+                    <view class="abs-i middie zi-n">
+                        <view @tap="uniRouter.back" class="pi-row">
+                            <view class="btn-wht-s px-row w-2em h-2em br-cir fx-c c-p"><UiI i="i"/> </view>
                         </view>
                     </view>
+                    <view class="w-80 pi-x3 py-s">
+                        <view class="fx-i pi w-100">
+                            <input @blur="funn.submit" class="fx-1 px mh-btn br-s btn-wht-s" v-model="aii.search" placeholder="请输入您的喜好"/>
+                            <view class="px" @tap="funn.submit">
+                                <OButton :weak="true" color="wht" clazz="px-col py-col br-s">搜索</OButton>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="fx-1"></view>
                 </view>
-                <view class="fx-1"></view>
             </view>
-        </CoAppTopBar>
+        </OAppTopBar>
+
         <view class="py-row">
             <OScrollY :styie="{
                 height: 'calc(100vh - 4em)'
@@ -33,6 +44,8 @@
 </template>
 
 <script setup lang="ts">
+import OAppTopBar from '@/cake/app/bar/OAppTopBar.vue';
+import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
 import OButton from '@/cake/button/OButton.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import CoAppTopBar from '@/components/app/bar/CoAppTopBar.vue';
@@ -47,6 +60,7 @@ import { futuring } from '@/tool/util/future';
 import { is_nice_arr } from '@/tool/util/valued';
 import UiI from '@/ui/element/i/UiI.vue';
 import VwIndexSearchPag from '@/view/index/search/VwIndexSearchPag.vue';
+import VwIndexBanner from '@/view/index/VwIndexBanner.vue';
 import { reactive, ref } from 'vue';
 
 const aii = reactive({

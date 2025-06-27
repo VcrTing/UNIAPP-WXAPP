@@ -3,16 +3,21 @@
         <slot name="top"></slot>
 		<view class="">
             <view class="abs-t w-100 zi-t">
-                <view class="w-100" :style="{
+                <view class="w-100 ts" :style="{
                     'margin-top': '-3.3rem',
-                    'height': 'calc(14.5rem)'
+                    'height': 'calc(14.5rem + ' + h + ')'
                 }">
                     <slot name="bg"></slot>
                 </view>
             </view>
 			<OSafeAreaTop/>
 			<view class="mh-app-top-bar"></view>
-            <slot></slot>
+            <view class="softer">
+                <view :style="{
+                    height: h
+                }"></view>
+                <slot></slot>
+            </view>
         </view>
         
 		<CoAppBottomBar/>
@@ -26,7 +31,7 @@ import { for_user_joing } from '@/conf/__for_index/for_user_loging';
 import { timeout } from '@/tool/util/future';
 import { nextTick } from 'vue';
 
-defineProps<{ clazz?: string }>()
+defineProps<{ clazz?: string, h?: string }>()
 
 const funn = {
 	init: () => timeout(() => { for_user_joing() }, 600)

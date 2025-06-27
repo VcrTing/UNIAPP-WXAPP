@@ -18,6 +18,7 @@ export const TEST_LOGIN_USER: ONE = {
         username: 'qiong2',
         password: 'ZT123zlt'
     },
+    /*
     SMALL: <ONE> {
         phone: '13576639986',
         countryCode: 86,
@@ -33,6 +34,7 @@ export const TEST_LOGIN_USER: ONE = {
             province: "",
         }
     }
+        */
 }
 
 export const K_STRAPI = 'strapi'

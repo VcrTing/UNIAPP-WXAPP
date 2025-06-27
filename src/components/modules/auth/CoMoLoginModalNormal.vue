@@ -72,13 +72,21 @@ const funn = {
             storage.set('AUTH_LOGIN_SEEK', pd.phoneNumber)
             const src: AuthResult = await server_auth_business.login(pd.phoneNumber, aii.ff(pd.countryCode, pd.phoneNumber))
             if (src.jwt && src.user) {
-                pan_tooi.close_pan(loginhouse.value.pan_idx)
-                await authDispatch('change', [ '__unreal', pd ])
-                src.phonedata = pd
-                await authDispatch('login', src)
+                funn.success(src, pd)
             }
 		}
 	}),
+    success: async (src: AuthResult, phonedata: AppPhoneWX) => {
+        try {
+            pan_tooi.close_pan(loginhouse.value.pan_idx)
+            // await authDispatch('change', [ '__unreal', phonedata ])
+            src.phonedata = phonedata
+            await authDispatch('login', src)
+        }
+        finally {
+            pan_tooi.close_pan(loginhouse.value.pan_idx)
+        }
+    },
     init: () => promise(() => {
         const p: string | undefined = storage.get('AUTH_LOGIN_SEEK')
         if (is_nice_sn(p)) { aii.phone = p + ''; }

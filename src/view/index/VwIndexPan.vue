@@ -6,7 +6,7 @@
         <view class="">
             <OScrollYFresh id="index_scroll"
                 :options="scrolloptions"
-                :styie="{ 'height': 'calc( 100vh - 16rem )' }"
+                :styie="{ 'height': 'calc( 100vh - 16rem - ' + (h || '0px') + ' )' }"
                 @downrefresh="funn.next"
                 @uprefresh="funn.initing"
                 >
@@ -41,12 +41,13 @@ import CkDataIoading from '@/cake/content/ioading/CkDataIoading.vue';
 import OScrollYFresh from '@/cake/ux/scroll/OScrollYFresh.vue';
 import net_tool from '@/tool/http/net_tool';
 import { pageIndexDispatch, pageIndexState } from '@/memory/page';
-import def_ativity from '@/server/__def/def_ativity';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
 import srp_p from '@/tool/strapi/srp_p';
 
-// const prp = defineProps<{}>()
+const prp = defineProps<{
+    h: string
+}>()
 
 const aii = reactive({
     tag: <Tag> { }, ioading: false,

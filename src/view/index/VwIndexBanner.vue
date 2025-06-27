@@ -30,8 +30,8 @@ import { computed } from 'vue';
 const aii = {
     indicatorDots: true,
     autoplay: true,
-    interval: 3000,
-    duration: 800
+    interval: 6000,
+    duration: 900
 }
 // const prp = defineProps<{}>()
 

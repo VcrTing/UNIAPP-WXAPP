@@ -26,7 +26,7 @@ const index = async (param: ONE = { }): Promise<Tag[]> => {
     const isphone: boolean = uiGetters.isphone
     const imit: number = isphone ? DEV_TAG.INDEX_LEVEL_LIMIT_PHONE : DEV_TAG.INDEX_LEVEL_LIMIT
     srp_p.__gt(param, 'indexLevel', imit)
-    srp_p.__eq(param, 'isMain', 1)
+    // srp_p.__eq(param, 'isMain', 1)
     return await fetching(param)
 }
 
