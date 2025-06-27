@@ -12,8 +12,8 @@ const login = async (data: ONE): ONE_PROMISE => {
 const login = async (phonedata: AppPhoneWX): Promise<AppAuth | null> => {
     const user: User = await server_user.byphone(phonedata.phoneNumber)
     if (user && user.id) {
-        return {
-            token: user.documentId,
+        return <AppAuth>{
+            jwt: user.documentId,
             user,
             phonedata
         }

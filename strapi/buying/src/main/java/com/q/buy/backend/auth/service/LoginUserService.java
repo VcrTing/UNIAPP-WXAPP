@@ -47,7 +47,7 @@ public class LoginUserService {
             // 注册
             synchronized (addLock) {
                 XUser user = xUserService.getRegisterUser(phone, countryCode, phone, phone);
-                user.setPassword(passwordEncoder.encode(user.getPassword()));
+                user.setPasswordBackend(passwordEncoder.encode(user.getPasswordBackend()));
                 if (!xUserService.save(user)) { xUserService.save(user); }
                 System.out.println("注册一个新用户 ========== " + user.toString());
                 return user;

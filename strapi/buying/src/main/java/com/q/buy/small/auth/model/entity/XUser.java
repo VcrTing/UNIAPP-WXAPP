@@ -9,13 +9,14 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@TableName("x_user")
+@TableName("up_users") // x_user
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class XUser {
-    @TableId(type = IdType.INPUT)
-    Long id;
+    // @TableId(type = IdType.INPUT)
+    @TableId(type = IdType.AUTO)
+    Integer id;
     String documentId;
     Date createdAt;
     Date updatedAt;
@@ -33,14 +34,15 @@ public class XUser {
     String phone;
     Integer countryCode;
 
+    String passwordBackend;
+
     String smallAppAvatar;
     String smallAppAuthCode;
     String smallAppOpenId;
-    String smallAppIv;
-    String smallAppEncryptedData;
-
-    Integer isFreezing;
-    String password;
+    // String smallAppIv;
+    // Integer isFreezing;
+    // String smallAppEncryptedData;
+    // String password;
 
     public String generateRegisterPassword() {
         StringBuffer sb = new StringBuffer();
@@ -58,7 +60,8 @@ public class XUser {
     }
 
     public void keepSecurity() {
-        this.password = "";
-        this.smallAppEncryptedData = "";
+
+        this.passwordBackend = "";
+        // this.smallAppEncryptedData = "";
     }
 }

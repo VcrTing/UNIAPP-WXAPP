@@ -6,7 +6,8 @@ import net_tool from "@/tool/http/net_tool"
 import srp_p from "@/tool/strapi/srp_p"
 import { netip } from "@/tool/uni/uni-global"
 import { is_arr, is_str } from "@/tool/util/typed"
-import { must_arr, must_one } from "@/tool/util/valued"
+import { cpu_int_1, must_arr, must_one } from "@/tool/util/valued"
+import server_pubplus from "../publish/server_pubplus"
 
 // http://localhost:1337/api/activities?populate[publisher][fields]=*&filters[activity_tags][name][$eq]=原味
 
@@ -69,8 +70,16 @@ const mine_history = async (): Promise<Activity[]> => {
     return us
 }
 
+// 加以阅读量
+const view1 = async (one: Activity): Promise<Activity> => {
+    return await server_pubplus.edit({
+        viewCount: cpu_int_1(one.viewCount)
+    }, one)
+}
+
 export default {
     mine_history,
+    view1,
     byid,
     byids,
     index,

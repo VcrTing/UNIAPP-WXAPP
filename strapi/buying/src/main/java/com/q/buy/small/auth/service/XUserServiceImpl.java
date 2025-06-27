@@ -42,20 +42,18 @@ public class XUserServiceImpl extends ServiceImpl<XUserMapper, XUser> {
             String phone, Integer countryCode, String code, String openId
     ) {
         XUser user = new XUser();
-        Long id = snow.nextId();
-        user.setId(id);
+        Long docId = snow.nextId();
+        user.setDocumentId(QVUtil.serStr(docId));
         user.setPhone(phone);
         user.setNickName("用户_" + phone);
         user.setUsername(phone);
         user.setEmail(user.generateEmail());
         user.setCountryCode(countryCode);
-        user.setDocumentId(QVUtil.serStr(id));
         user.setSmallAppOpenId(openId);
         user.setSmallAppAuthCode(phone);
         user.setCreatedAt(new Date());
         user.setUpdatedAt(new Date());
-        user.setIsFreezing(0);
-        user.setPassword(user.generateRegisterPassword());
+        user.setPasswordBackend(user.generateRegisterPassword());
         return user;
     }
     // register user
@@ -91,8 +89,6 @@ public class XUserServiceImpl extends ServiceImpl<XUserMapper, XUser> {
             // 新增
             Long id = snow.nextId();
             user.setCreatedAt(new Date());
-            user.setIsFreezing(0);
-            user.setId(id);
             user.setDocumentId(QVUtil.serStr(id));
             this.save(user);
         }

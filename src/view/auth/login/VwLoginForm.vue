@@ -10,7 +10,7 @@
                     class="inp-app btn-def br-rnd" placeholder="仅需输入手机号"/>
             </view>
             <view class="py-n"></view>
-            <OButton @tap="emt('submit')" :clazz="'btn-app'">登录/注册</OButton>
+            <OButton @tap="emt('submit')" :ioading="aii.ioading" :clazz="'btn-app'">登录/注册</OButton>
             <view class="pt-s"></view>
             <view class="pt">
                 <view class="fx-c fs-s tis">

@@ -28,6 +28,11 @@ const NET_ENDPOINT_ACTIVITY = <ONE> {
     'activity': 'activities', // 活动的编辑
 }
 
+// 登录后才能查看的系统消息
+const NET_ENDPOINT_SYSTEM = <ONE> {
+    'msg': 'msg-systems'
+}
+
 /*
 -------------------------------------------------------------------
 */
@@ -42,6 +47,7 @@ export const NET_ENDPOINTS_APP = <ONE>{
 }
 // MASTER 需要 TOKEN 才能访问
 export const NET_ENDPOINTS_MASTER = <ONE> {
+    ...NET_ENDPOINT_SYSTEM,
     ...NET_ENDPOINT_ACTIVITY,
 }
 // BUSINESS

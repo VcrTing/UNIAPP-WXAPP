@@ -31,7 +31,6 @@ import CoAppBottomBar from '@/components/app/bar/CoAppBottomBar.vue';
 import CoAppTopBar from '@/components/app/bar/CoAppTopBar.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { uiState } from '@/memory/global';
-import mock_orders from '@/server/mock/order/mock_orders';
 import UiI from '@/ui/element/i/UiI.vue';
 import VwMsgSystem from '@/view/msg/msg/VwMsgSystem.vue';
 import VwMsgTaiks from '@/view/msg/msg/VwMsgTaiks.vue';

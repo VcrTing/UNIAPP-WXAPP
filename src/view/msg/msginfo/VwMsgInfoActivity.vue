@@ -1,8 +1,8 @@
 <template>
     <view>
         <view class="fx-i">
-            <OButtonDef :weak="true" class="px-row py-s tiw">未读</OButtonDef>
-            <OButtonDef :weak="true" class="px-row py-s sus">已读</OButtonDef>
+            <OButton color="def" :weak="true" class="px-row py-s tiw">未读</OButton>
+            <OButton color="def" :weak="true" class="px-row py-s sus">已读</OButton>
         </view>
         <view class="">
         <OScrollY :styie="{
@@ -42,15 +42,11 @@
 
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
-import OButtonDef from '@/cake/button/OButtonDef.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
-import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import CoEmpty from '@/components/genra/empty/CoEmpty.vue';
-import CoImg from '@/components/media/img/CoImg.vue';
 import mock_msg from '@/server/mock/msg/mock_msg';
 import mock_orders from '@/server/mock/order/mock_orders';
 import mock_meizi from '@/server/mock/user/mock_meizi';
-import UiI from '@/ui/element/i/UiI.vue';
 
 // const prp = defineProps<{}>()
 

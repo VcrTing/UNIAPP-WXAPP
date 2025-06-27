@@ -1,6 +1,6 @@
 
 import { APP_GENERATE_DETAIL } from '@/conf/conf-app';
-import { NET_BASIC_PROFILE } from '@/conf/conf-net';
+import { NET_BASIC_YOU } from '@/conf/conf-net';
 import server_app_info from '@/server/app/server_app_info';
 import server_auth_strapi from '@/server/auth/server_auth_strapi';
 import srp_a from '@/tool/strapi/srp_a';
@@ -14,7 +14,7 @@ const ADMIN_AUTH_K = 'APP_STORE_ADMIN_AUTH'
 
 const __iogin = async (commit: any) => {
     retrying(async () => {
-        const ar: AuthResult = await server_auth_strapi.login(NET_BASIC_PROFILE.username, NET_BASIC_PROFILE.password)
+        const ar: AuthResult = await server_auth_strapi.login(NET_BASIC_YOU.saak, NET_BASIC_YOU.spec)
         if (ar && ar.jwt) {
             commit('change', [ 'jwt', ar.jwt ])
             commit('change', [ 'admin', ar.user ])

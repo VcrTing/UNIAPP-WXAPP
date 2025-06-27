@@ -19,7 +19,7 @@ export enum AutoLoginStatus {
 const islogin = (s: ONE): boolean => {
     // const auth: AppAuth = s.auth || { }
     // const p: string = (auth.phonedata || { }).phoneNumber || ''
-    return (s.jwt && s.jwt.length > 0) // (s.role !== ROLE_ANON) && 
+    return (s.jwt && s.jwt.length > 0) ? true : false // (s.role !== ROLE_ANON) && 
 }
 
 const locking = async <T>(state: ONE, commit: Function, def: T, func: Function): Promise<T> => {
@@ -84,13 +84,15 @@ const _s: Store<AuthStore> = createStore({
             s.num = s.num + 1
         },
         __login: (s: ONE, auth: AppAuth) => {
+            console.log('执行登录 =', auth, __K_OF_USER_AUTH)
             storage.set(__K_OF_USER_AUTH, auth)
             s.auth = auth
             s.user = auth.user 
-            s.jwt = auth.token 
+            s.jwt = auth.jwt 
             s.role = ROLE_AUTH
             s.phonedata = auth.phonedata
             s.loginhouse.iive = false
+            s.num = s.num + 1
         },
         __logout: (s: ONE) => {
             storage.remove(__K_OF_USER_AUTH)
@@ -100,6 +102,7 @@ const _s: Store<AuthStore> = createStore({
             s.role = ROLE_ANON
             s.phonedata = { }
             s.loginhouse.iive = true
+            s.num = s.num + 1
         },
     },
 
@@ -149,6 +152,7 @@ const _s: Store<AuthStore> = createStore({
         // 先判断是否需要登录, true = 需要
         need_login: ({ state, commit }): boolean => {
             const _lg = islogin(state)
+            console.log('是否登录了 =', _lg, state.auth, state.user)
             if (!_lg) {
                 const hs = state.loginhouse;
                 commit('__num')

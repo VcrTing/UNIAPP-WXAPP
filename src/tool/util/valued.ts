@@ -103,7 +103,7 @@ export const group_search_txt = (src: string = '', chr: string = '_') => {
     return res
 }
 
-export const cpu_int_1 = (n: number, isadd: boolean) => {
+export const cpu_int_1 = (n: number, isadd: boolean = true) => {
     n = n || 0
     n = isadd ? (n + 1) : (n - 1)
     return n < 0 ? 0 : n

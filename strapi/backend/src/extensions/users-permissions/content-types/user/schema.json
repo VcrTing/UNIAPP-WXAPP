@@ -66,18 +66,6 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "introduction": {
-      "type": "text"
-    },
-    "age": {
-      "type": "integer"
-    },
-    "background": {
-      "type": "text"
-    },
-    "socialAccount": {
-      "type": "string"
-    },
     "createTime": {
       "type": "datetime"
     },
@@ -93,9 +81,6 @@
       "target": "api::activity-tag.activity-tag",
       "mappedBy": "user"
     },
-    "avatarDefault": {
-      "type": "text"
-    },
     "activity_medias": {
       "type": "relation",
       "relation": "oneToMany",
@@ -107,9 +92,6 @@
       "relation": "oneToMany",
       "target": "api::activity.activity",
       "mappedBy": "publisher"
-    },
-    "phone": {
-      "type": "string"
     },
     "activity_registration": {
       "type": "relation",
@@ -131,6 +113,36 @@
     },
     "gender": {
       "type": "integer"
+    },
+    "background": {
+      "type": "text"
+    },
+    "socialAccount": {
+      "type": "string"
+    },
+    "introduction": {
+      "type": "text"
+    },
+    "age": {
+      "type": "integer"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "smallAppAvatar": {
+      "type": "text"
+    },
+    "smallAppOpenId": {
+      "type": "string"
+    },
+    "smallAppAuthCode": {
+      "type": "string"
+    },
+    "countryCode": {
+      "type": "integer"
+    },
+    "passwordBackend": {
+      "type": "text"
     }
   }
 }

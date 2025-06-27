@@ -735,6 +735,40 @@ export interface ApiAppInfoAppInfo extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiMsgSystemMsgSystem extends Struct.CollectionTypeSchema {
+  collectionName: 'msg_systems';
+  info: {
+    displayName: 'MsgSystem';
+    pluralName: 'msg-systems';
+    singularName: 'msg-system';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    isRead: Schema.Attribute.Integer;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::msg-system.msg-system'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    publisherId: Schema.Attribute.String;
+    readTime: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    toId: Schema.Attribute.String;
+    typed: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProductContentProductContent
   extends Struct.CollectionTypeSchema {
   collectionName: 'product_contents';
@@ -1359,12 +1393,12 @@ export interface PluginUsersPermissionsUser
       'api::activity-tag.activity-tag'
     >;
     age: Schema.Attribute.Integer;
-    avatarDefault: Schema.Attribute.Text;
     avatarUrl: Schema.Attribute.Text;
     background: Schema.Attribute.Text;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    countryCode: Schema.Attribute.Integer;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1389,6 +1423,7 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    passwordBackend: Schema.Attribute.Text;
     phone: Schema.Attribute.String;
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
@@ -1397,6 +1432,9 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    smallAppAuthCode: Schema.Attribute.String;
+    smallAppAvatar: Schema.Attribute.Text;
+    smallAppOpenId: Schema.Attribute.String;
     socialAccount: Schema.Attribute.String;
     unionid: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
@@ -1429,6 +1467,7 @@ declare module '@strapi/strapi' {
       'api::activity-tag.activity-tag': ApiActivityTagActivityTag;
       'api::activity.activity': ApiActivityActivity;
       'api::app-info.app-info': ApiAppInfoAppInfo;
+      'api::msg-system.msg-system': ApiMsgSystemMsgSystem;
       'api::product-content.product-content': ApiProductContentProductContent;
       'api::user-love.user-love': ApiUserLoveUserLove;
       'api::user-preference-tag.user-preference-tag': ApiUserPreferenceTagUserPreferenceTag;

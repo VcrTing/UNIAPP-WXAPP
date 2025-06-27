@@ -61,6 +61,7 @@ import media_tool from '@/tool/modules/common/media_tool';
 import { must_arr, must_one } from '@/tool/util/valued';
 import { tipiong, tipsucc } from '@/tool/uni/uni-global';
 import VwActivityDetailNotice from '@/view/activity/detail/notice/VwActivityDetailNotice.vue';
+import server_activity from '@/server/activity/server_activity';
 
 const view = computed((): Activity => acyState.view)
 const user = computed(() => authState.user)
@@ -102,7 +103,7 @@ const funn = {
     },
     init: () => future(async () => {
         try {
-            const src = view.value || { }
+            const src: Activity = view.value || { }
             if (!src) {
                 appRouter.index()
             }
@@ -111,6 +112,8 @@ const funn = {
             }
             await funn.ioad_joiners();
             funn.invited()
+            // 加一阅读量
+            timeout(() => { server_activity.view1(src) }, 800)
         }
         finally {
             timeout(() => { aii.init = true })

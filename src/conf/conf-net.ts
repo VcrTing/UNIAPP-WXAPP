@@ -6,9 +6,9 @@ import { NET_ENDPOINT_FILE, NET_ENDPOINTS_APP, NET_ENDPOINTS_BUSINESS, NET_ENDPO
 // 2. role 的权限要设置对
 // 3. 接口要开放 token 访问。
 // 4. 用户不能是 blocked = true
-export const NET_BASIC_PROFILE = {
-    username: 'vcrting@163.com',
-    password: 'qiong123456'
+export const NET_BASIC_YOU = {
+    saak: 'vcrting@163.com', // 'vcrting@163.com',
+    spec: 'qiong123456'
 }
 
 

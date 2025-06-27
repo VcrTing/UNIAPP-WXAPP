@@ -18,8 +18,8 @@ const build_param = (param: ONE, pager: Pager, relations: string[]) => {
     return res;
 }
 
-const __sort = (t: ONE = { }, isasc: boolean = false) => {
-    t['sort'] = 'createdAt:' + (isasc ? 'asc' : 'desc')
+const __sort = (t: ONE = { }, k: string = 'createdAt', isasc: boolean = false) => {
+    t['sort'] = k + ':' + (isasc ? 'asc' : 'desc')
 }
 
 const __sorts = (t: ONE = { }, options: MANY = [ ]) => {

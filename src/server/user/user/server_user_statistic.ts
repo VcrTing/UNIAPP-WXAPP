@@ -31,20 +31,19 @@ const byuser = async (userid: number): Promise<UserStatistic> => {
     return must_one(src[0])
 }
 
-const __plus = async (form: ONE): Promise<UserStatistic> => {
+const __plus = async (form: ONE): Promise<NET_RES> => {
     form['userId'] = authGetters.userid
     const __pm: ONE = net_tool.build_data(form)
     const src: NET_RES = await app.pos('statistic', null, __pm)
-    if (is_str(src)) return netip(src, <UserStatistic>{ });
-    const res: ONE | MANY = (src as HttpResult).data
-    return net_tool.one<UserStatistic>(res)
+    return src
 }
 
 const __edit = async (form: ONE, id: string): Promise<UserStatistic> => {
     const __pm: ONE = net_tool.build_data(form)
-    const src: NET_RES = await app.put('statistic', id, __pm)
+    let src: NET_RES = await app.put('statistic', id, __pm)
     if (is_str(src)) {
         console.log('================== 修改一个用户统计数据，出错了。')
+        src = await __plus(form)
     };
     const res: ONE | MANY = (src as HttpResult).data
     return net_tool.one<UserStatistic>(res)

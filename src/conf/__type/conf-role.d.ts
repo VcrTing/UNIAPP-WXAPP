@@ -9,6 +9,6 @@ interface AppPhoneWX {
 
 interface AppAuth {
     phonedata: AppPhoneWX
-    token: string
+    jwt: string
     user: User
 }
