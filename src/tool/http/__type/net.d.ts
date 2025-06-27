@@ -26,6 +26,7 @@ interface HttpResultPagination {
 interface AuthResult {
     jwt: string
     user: User
+    phonedata: AppPhoneWX
 }
 
 type HttpResultBackend = UniappHttpResult

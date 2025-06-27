@@ -22,7 +22,6 @@ import CoMoUserAdvSwipper from '@/components/modules/user/CoMoUserAdvSwipper.vue
 
 const aii = reactive({
     iive: 0,
-
 })
 
 const tabs = computed((): MANY => {

@@ -75,3 +75,56 @@ export const deloop = (fn: Function, delay: number): () => null => {
     execute();
     return () => { isActive = false; };
 }
+/*
+function retry(fn: Function, max = 1) {
+    let retryCount = 0;
+    let lastError = null;
+
+    while (retryCount <= max) {
+        try {
+            return fn();
+        } 
+        catch (error: any) {
+            lastError = error;
+            retryCount++;
+            
+            if (retryCount <= max) {
+                console.log(`执行失败，第 ${retryCount} 次重试...`, error.message);
+            }
+        }
+    }
+
+    throw lastError;
+}
+*/
+
+export const retrying = async <T>(fn: Function, fn_err: Function, max = 1): Promise<T | undefined> => {
+    let cc = 0;
+    let lastError = null;
+
+    while (cc <= max) {
+        // console.log('============== 执行 cc =', cc)
+        try {
+            const res: T = await fn();
+
+            return res;
+        } 
+        catch (error: any) {
+            lastError = error;
+            cc++;
+        }
+    }
+
+    if (lastError) {
+        try {
+            fn_err(lastError.message)
+        }
+        finally {
+
+        }
+    }
+}
+
+export const error = (msg: any) => {
+    throw new Error(msg + '');
+}

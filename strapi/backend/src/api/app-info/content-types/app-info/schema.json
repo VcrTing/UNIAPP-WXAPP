@@ -32,6 +32,17 @@
     },
     "bgLogin": {
       "type": "text"
+    },
+    "userDefAvatarUrl": {
+      "type": "text"
+    },
+    "userDefBackground": {
+      "type": "text"
+    },
+    "index_banners": {
+      "type": "component",
+      "component": "swiper.swiper",
+      "repeatable": true
     }
   }
 }

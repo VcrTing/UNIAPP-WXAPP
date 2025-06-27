@@ -3,7 +3,7 @@
 	<PageLayout>
 		<UserCenterLayout :h="72.8" :clazz_con="'bg-con'">
 			<template #bg>
-				<CoImg :src="user.background" clazz="h-100"/>
+				<CoImg :src="user.background || info.userDefBackground" clazz="h-100"/>
 			</template>
 			<template #top>
 				<VwUserCenterTop/>
@@ -21,7 +21,7 @@ import CoAppBottomBar from '@/components/app/bar/CoAppBottomBar.vue';
 import PageLayout from '../../components/layout/page/PageLayout.vue';
 import VwUserCenterPan from '@/view/user/center/VwUserCenterPan.vue';
 import VwUserCenterTop from '@/view/user/center/VwUserCenterTop.vue';
-import { authState, uiState } from '@/memory/global';
+import { appState, authState, uiState } from '@/memory/global';
 import UserCenterLayout from '@/components/layout/detail/UserCenterLayout.vue';
 import { computed, nextTick, reactive, ref } from 'vue';
 import CoImg from '@/components/media/img/CoImg.vue';
@@ -35,4 +35,6 @@ const funn = {
 	})
 }
 nextTick(funn.init)
+
+const info = computed((): AppInfo => appState.info) 
 </script>

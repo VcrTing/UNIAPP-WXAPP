@@ -9,20 +9,34 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public final class QVUtil {
-    public static boolean hasLen(String v) {
-        return StringUtils.hasLength(v);
+    public static boolean hasLen(Object v) {
+        return StringUtils.hasLength(serStr(v));
     }
-    public static boolean notLen(String v) {
-        return !StringUtils.hasLength(v);
+    public static boolean notLen(Object v) {
+        return !StringUtils.hasLength(serStr(v));
     }
 
     public static String serStr(Object src) {
         if (src == null) return "";
         return src.toString().trim();
     }
-
+    public static Long serLong(Object src, Long def) {
+        if (src == null) return def;
+        if (src instanceof String) {
+            if (src.equals("")) return def;
+        }
+        if (src instanceof Boolean) {
+            return def;
+        }
+        try {
+            return Long.parseLong(src.toString());
+        }
+        catch (Exception e) { }
+        return def;
+    }
     public static Integer serInt(Object src, Integer def) {
         if (src == null) return def;
         if (src instanceof String) {
@@ -65,4 +79,12 @@ public final class QVUtil {
         res.setCurrent(src.getCurrent());
         return res;
     }
+
+    public static int random() {
+        return new Random().nextInt(100);
+    }
+    public static int max(int src, int max) {
+        return src >= max ? src : max;
+    }
+
 }

@@ -135,6 +135,9 @@ const _s: Store<AuthStore> = createStore({
                         console.log("=== 自动登录失效 ===")
                     }
                 } 
+                else {
+                    console.log("=== 自动登录失效 2 ===")
+                }
                 return AutoLoginStatus.AUTO_FAIL
             }
             return AutoLoginStatus.ALREADY_LOGIN
@@ -152,44 +155,38 @@ const _s: Store<AuthStore> = createStore({
             if (!_lg) {
                 const hs = state.loginhouse;
                 commit('_num')
+                
                 if (hs.iive) pan_tooi.open_def_b(hs.pan_idx, hs.pan_hui);
                 return true
             }   
             return false
         },
 
-        // 更新
-        /*
-        refresh_info: async ({ state, commit }): Promise<User> => {
-            return await locking(state, commit, state.user, async () => {
-                const uid: number = state.user.id;
-                if (uid) {
-                    const u: User = await server_me.one(uid)
-                    if (u && u.id) {
-                        commit('_login', { user: u, token: u.documentId })
-                        console.log('========= 刷新用户数据 =', u)
-                        commit('__change', [ 'user', u ])
+        // 获取我的主页信息
+        refresh_mainpage: async ({ state, commit, getters }): Promise<UserMainPage> => {
+            return await locking(state, commit, state.mainpage, async () => {
+                const origin: UserMainPage = must_one(state.mainpage)
+                if (origin.documentId && origin.user && origin.user.documentId) {
+                    return origin
+                }
+                if (getters.is_login) {
+                    const u: UserMainPage = await server_user.mymainpage()
+                    console.log('========= 刷新我的主页数据 =', u)
+                    if (u && u.documentId) {
+                        commit('__change', [ 'mainpage', u ])
                         return u;
                     }
                 }
-                return null
-            })
-        },
-        */
-
-        // 获取我的主页信息
-        refresh_mainpage: async ({ state, commit }): Promise<UserMainPage> => {
-            return await locking(state, commit, state.mainpage, async () => {
-                const u: UserMainPage = await server_user.mymainpage()
-                console.log('========= 刷新我的主页数据 =', u)
-                if (u && u.documentId) {
-                    commit('__change', [ 'mainpage', u ])
-                    return u;
+                else {
+                    console.log('========= 未登录，不刷主页')
                 }
                 return null
             })
         },
 
+        clean_someone_mainpag: ({ state, commit }) => {
+            commit('__change', [ 'mainpage_of_view', { } ]);
+        },
         // 获取某人的主页信息
         fetch_someone_mainpag: async ({ state, commit }, { userid }): Promise<UserMainPage> => {
             const srcs: UserMainPage[] = state.mainpages || []
@@ -213,3 +210,23 @@ const _s: Store<AuthStore> = createStore({
 }) 
 
 export default _s
+
+
+        // 更新
+        /*
+        refresh_info: async ({ state, commit }): Promise<User> => {
+            return await locking(state, commit, state.user, async () => {
+                const uid: number = state.user.id;
+                if (uid) {
+                    const u: User = await server_me.one(uid)
+                    if (u && u.id) {
+                        commit('_login', { user: u, token: u.documentId })
+                        console.log('========= 刷新用户数据 =', u)
+                        commit('__change', [ 'user', u ])
+                        return u;
+                    }
+                }
+                return null
+            })
+        },
+        */

@@ -1,5 +1,4 @@
-import { promise } from "../util/future"
-import { netser, netser_err, netser_succ } from "./netser"
+import { netser_err, netser_succ } from "./netser"
 
 const error = (error: string = '网络连接错误。'): Promise<UniApp.RequestSuccessCallbackResult> => new Promise( resolve => resolve({
     statusCode: 500,
@@ -21,7 +20,7 @@ class NeTooi {
         }
         if (jwt) { 
             res['Authorization'] = 'Bearer ' + jwt 
-            // console.log('启用 TOKEN 访问，Authorization = ', res['Authorization'])
+            console.log('-- 启用 TOKEN 访问，Authorization = ', res['Authorization'].substring(0, 20))
             // res['X-Access-Token'] = jwt
             // res['VcrTing-Token'] = jwt
             // res['Access-Control-Request-Headers'] = jwt
@@ -115,7 +114,7 @@ class Net extends NeTooi {
         // 请求 配置
         const __config: UniApp.RequestOptions = this._config_get(__url, params ? params : { }, this.jwt(), false);
         if (this.is_log) {
-            console.log("GET", __url, __config, this.jwt)
+            console.log("GET", __url, __config)
         }
         // 返回
         return this.adapter(__config);

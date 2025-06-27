@@ -53,14 +53,14 @@ import OButton from '@/cake/button/OButton.vue';
 import Ov from '@/cake/button/touch/Ov.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
-import { needLogin, orderReFresh } from '@/memory/global';
+import { orderReFresh } from '@/memory/global';
 import activity_tool from '@/tool/modules/activity_tool';
+import auth_tool from '@/tool/modules/common/auth_tool';
 import { tipwarn } from '@/tool/uni/uni-global';
 import uniRouter from '@/tool/uni/uni-router';
-import { future, futuring } from '@/tool/util/future';
 import times from '@/tool/web/times';
 import UiI from '@/ui/element/i/UiI.vue';
-import { computed, reactive } from 'vue';
+import { reactive } from 'vue';
 
 const prp = defineProps<{ 
     one: Activity, 
@@ -100,14 +100,9 @@ const funn = {
         }
         return true;
     },
-    join: () => futuring(aii, async () => {
-        if (await needLogin()) {
-            console.log('需要登录')
-        }
-        else {
-            if (funn.vid()) {
-                funn.submit()
-            }
+    join: () => auth_tool.doac(async () => {
+        if (funn.vid()) {
+            funn.submit()
         }
     }),
     //

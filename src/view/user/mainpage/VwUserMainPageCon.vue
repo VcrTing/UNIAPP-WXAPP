@@ -61,17 +61,5 @@ const tabs = computed((): MANY => {
         // { tit: '她的发布', v: 1 },
         // { tit: '历史活动', v: 2 },
     ]
-    if (is_publisher.value) {
-        return [
-            { tit: '个人相册', v: 0 },
-            { tit: '她的发布', v: 1 },
-            { tit: '历史活动', v: 2 },
-        ]
-    }
-    return [
-        { tit: '进行中', v: 0 },
-        { tit: '收藏的妹子', v: 1 },
-        { tit: '历史活动', v: 2 },
-    ]
 })
 </script>

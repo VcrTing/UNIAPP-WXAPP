@@ -87,9 +87,6 @@ const got = {
     }
 }
 
-const deftag = def_ativity.tags.index
-
-
 const funn = {
     next: () => futuring(aii, async () => {
         if (index.end) {

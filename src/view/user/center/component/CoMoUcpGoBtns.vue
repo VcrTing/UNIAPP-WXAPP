@@ -14,17 +14,18 @@
         <CoMoUserOptionBtn :i="'bank-card'" :tit="'交易记录'"  @tap="funn.pays"/>
     </view>
 </template>
-
+ 
 <script setup lang="ts">
 import CoMoUserOptionBtn from '@/components/modules/user/CoMoUserOptionBtn.vue';
 import { orderState } from '@/memory/global';
+import auth_tool from '@/tool/modules/common/auth_tool';
 import appRouter from '@/tool/uni/app-router';
 import { must_arr } from '@/tool/util/valued';
 import { computed } from 'vue';
 
 const joins = computed((): ActivityJoin[] => orderState.join_of_mine)
 const len = computed((): number => must_arr(joins.value).length)
-
+ 
 const funn = {
     
     aiijoin: () => {
@@ -39,11 +40,11 @@ const funn = {
     togallery: () => {
         // uniRouter.gopg('user_gallery')
     },
-    love: () => {
+    love: () => auth_tool.doac(async () => {
         appRouter.manager_love()
-    },
-    pays: () => {
+    }),
+    pays: () => auth_tool.doac(async () => {
         appRouter.manger_pays()
-    }
+    })
 }
 </script>

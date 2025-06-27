@@ -2,7 +2,6 @@
 import server_joining from '@/server/activity/server_joining';
 import { is_nice_arr } from '@/tool/util/valued';
 import { Store, createStore } from 'vuex';
-import { orderDispatch } from '../global';
 
 const _s: Store<OrderStore> = createStore({
     

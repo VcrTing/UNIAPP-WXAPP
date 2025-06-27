@@ -45,20 +45,23 @@ export const session = {
 
 // 废弃：统一先用 session，也就是 globalData
 // 统一使用 local store
+
+const __K_OF_APP_STORAGE = 'VCRT_'
+
 export const storage = {
     
     get: <T> (k: string): T | undefined => {
         // const v: T | undefined = session.get( k )
         // return v ? v : local.get( k )
-        return local.get( k )
+        return local.get( __K_OF_APP_STORAGE + k )
     },
     set: <T> (k: string, v: T): void => {
         // session.set( k, v )
-        local.set( k, v )
+        local.set( __K_OF_APP_STORAGE + k, v )
     },
     remove: (k: string) => {
         // session.remove( k )
-        local.remove( k )
+        local.remove( __K_OF_APP_STORAGE + k )
     }
 }
 

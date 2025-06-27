@@ -1,19 +1,28 @@
 <template>
     <view v-if="view">
-		<CoMoAuthLoginModal/>
+		<CoMoLoginModalSmall v-if="ismall"/>
+        <CoMoLoginModalNormal v-else/>
     </view>
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref } from 'vue';
-import CoMoAuthLoginModal from '../modules/auth/CoMoAuthLoginModal.vue';
+import { computed, nextTick, ref } from 'vue';
+import CoMoLoginModalSmall from '../modules/auth/CoMoLoginModalSmall.vue';
+import { authDispatch, uiGetters } from '@/memory/global';
+import CoMoLoginModalNormal from '../modules/auth/CoMoLoginModalNormal.vue';
+import { promise } from '@/tool/util/future';
 
-// const prp = defineProps<{}>()
 const view = ref<boolean>(false)
 
-nextTick(() => {
-    setTimeout(() => {
-        view.value = true
-    }, 1200)
-})
+const funn = {
+    // 自动登录
+    init: () => promise(() => {
+        authDispatch('auto_login')
+        setTimeout(() => { view.value = true }, 1200)
+    })
+}
+
+nextTick(funn.init)
+
+const ismall = computed(() => uiGetters.ismall)
 </script>

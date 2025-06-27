@@ -5,7 +5,9 @@
             <OButton color="def" @tap="funn.login(0)" :clazz="'btn-app'">登录发起者</OButton>
             -->
             <view>
-                <input v-model="aii.phone" class="inp-app btn-def br-rnd" placeholder="仅需输入手机号"/>
+                <input v-model="aii.phone" 
+                    @keydown="funn.kd"
+                    class="inp-app btn-def br-rnd" placeholder="仅需输入手机号"/>
             </view>
             <view class="py-n"></view>
             <OButton @tap="emt('submit')" :clazz="'btn-app'">登录/注册</OButton>
@@ -29,7 +31,9 @@ import OButton from '@/cake/button/OButton.vue';
 import { authDispatch } from '@/memory/global';
 import mock_user from '@/server/mock/user/mock_user';
 import appRouter from '@/tool/uni/app-router';
+import { uni_key_down_enter } from '@/tool/uni/uni';
 import uniRouter from '@/tool/uni/uni-router';
+import { promise } from '@/tool/util/future';
 import { reactive } from 'vue';
 
 defineProps<{ aii: ONE, info: AppInfo }>()
@@ -41,6 +45,9 @@ const me = reactive({
 const emt = defineEmits([ 'submit' ])
 
 const funn = {
+    kd: (e: ONE) => promise(() => {
+        if (uni_key_down_enter(e)) { emt('submit') }
+    }),
     login: (i: number) => {
         authDispatch('login', (i == 1) ? mock_user.boy : mock_user.girl)
         // 

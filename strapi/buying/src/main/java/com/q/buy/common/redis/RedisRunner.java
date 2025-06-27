@@ -15,22 +15,35 @@ public class RedisRunner {
     /**
      * 设置缓存
      */
-    public void set(String key, Object value) {
-        redisTemplate.opsForValue().set(key, value);
-    }
+    public boolean set(String key, Object value) {
+        try {
+            redisTemplate.opsForValue().set(key, value);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
 
-    /**
-     * 设置缓存并指定过期时间
-     */
-    public void setWithExpire(String key, Object value, long timeout, TimeUnit unit) {
-        redisTemplate.opsForValue().set(key, value, timeout, unit);
+    }
+    public boolean set(String key, Object value, long time) {
+        try {
+            if (time > 0) {
+                redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
+            } else {
+                set(key, value);
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
      * 获取缓存
      */
     public Object get(String key) {
-        return redisTemplate.opsForValue().get(key);
+        return key == null ? null : redisTemplate.opsForValue().get(key);
     }
 
     /**
@@ -43,17 +56,17 @@ public class RedisRunner {
     /**
      * 设置过期时间
      */
-    public Boolean expire(String key, long timeout, TimeUnit unit) {
-        return redisTemplate.expire(key, timeout, unit);
+    public boolean expire(String key, long time) {
+        try {
+            if (time > 0) {
+                redisTemplate.expire(key, time, TimeUnit.SECONDS);
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
-
-    /**
-     * 获取剩余过期时间
-     */
-    public Long getExpire(String key, TimeUnit unit) {
-        return redisTemplate.getExpire(key, unit);
-    }
-
     /**
      * 判断key是否存在
      */

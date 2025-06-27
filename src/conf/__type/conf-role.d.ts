@@ -2,7 +2,7 @@
 type ROLES = 'ANON' | 'AUTH' | 'ADMIN'
 
 interface AppPhoneWX {
-    countryCode: string,
+    countryCode: string | number,
     phoneNumber: string,
     purePhoneNumber: string
 }

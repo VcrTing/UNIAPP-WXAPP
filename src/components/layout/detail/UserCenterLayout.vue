@@ -1,7 +1,7 @@
 <template>
         
 		<view class="h-100 mxh-100 ps-r zi-t">
-			<view class="h-62vh zi-s abs-i t-0 r-0">
+			<view class="h-62vh zi-s abs-i t-0 r-0 bg-def-s">
                 <slot name="bg"></slot>
 			</view>
 

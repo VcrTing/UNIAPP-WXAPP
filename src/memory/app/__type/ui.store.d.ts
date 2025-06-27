@@ -15,6 +15,8 @@ interface UiStore {
 }
 
 interface UiGatters {
+    ismall: boolean
+    
     ispc: boolean
     ispad: boolean
     isphone: boolean

@@ -716,6 +716,7 @@ export interface ApiAppInfoAppInfo extends Struct.CollectionTypeSchema {
     dataStatus: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
     desc: Schema.Attribute.String;
     descLogin: Schema.Attribute.String;
+    index_banners: Schema.Attribute.Component<'swiper.swiper', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -729,6 +730,8 @@ export interface ApiAppInfoAppInfo extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    userDefAvatarUrl: Schema.Attribute.Text;
+    userDefBackground: Schema.Attribute.Text;
   };
 }
 

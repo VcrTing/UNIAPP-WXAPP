@@ -37,3 +37,12 @@ export const netip = <T>(src: NET_RES, def: T): T => {
   tiperr(src + '')
   return def
 }
+
+export const tiperror = (func: Function) => {
+  try {
+    func()
+  }
+  catch (err: any) {
+    tiperr(err ? err.message : '[-1] 未知错误')
+  }
+} 

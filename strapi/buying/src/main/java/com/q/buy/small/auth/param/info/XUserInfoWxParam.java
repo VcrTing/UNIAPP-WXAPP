@@ -52,7 +52,7 @@ public class XUserInfoWxParam {
         }
         else {
             old.setGender(gender);
-            old.setNickname(nickname);
+            old.setNickName(nickname);
             old.setSmallAppAvatar(smallAppAvatar);
             old.setSmallAppAuthCode(smallAppAuthCode);
             old.setUpdatedAt(new Date());

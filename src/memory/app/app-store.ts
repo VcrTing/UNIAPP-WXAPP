@@ -3,6 +3,9 @@ import { APP_GENERATE_DETAIL } from '@/conf/conf-app';
 import { NET_BASIC_PROFILE } from '@/conf/conf-net';
 import server_app_info from '@/server/app/server_app_info';
 import server_auth_strapi from '@/server/auth/server_auth_strapi';
+import srp_a from '@/tool/strapi/srp_a';
+import { tiperr, tiperror } from '@/tool/uni/uni-global';
+import { retrying } from '@/tool/util/future';
 import { has_document } from '@/tool/web/doc';
 import { storage } from '@/tool/web/storage';
 import { Store, createStore } from 'vuex';
@@ -10,13 +13,16 @@ import { Store, createStore } from 'vuex';
 const ADMIN_AUTH_K = 'APP_STORE_ADMIN_AUTH'
 
 const __iogin = async (commit: any) => {
-    const ar: AuthResult = await server_auth_strapi.login(NET_BASIC_PROFILE.username, NET_BASIC_PROFILE.password)
-    if (ar && ar.jwt) {
-        commit('change', [ 'jwt', ar.jwt ])
-        commit('change', [ 'admin', ar.user ])
-
-        storage.set(ADMIN_AUTH_K, ar)
-    }
+    retrying(async () => {
+        const ar: AuthResult = await server_auth_strapi.login(NET_BASIC_PROFILE.username, NET_BASIC_PROFILE.password)
+        if (ar && ar.jwt) {
+            commit('change', [ 'jwt', ar.jwt ])
+            commit('change', [ 'admin', ar.user ])
+            //
+            storage.set(ADMIN_AUTH_K, ar)
+        }
+    }, 
+    tiperr)
 }
 
 const _appStore: Store<AppStore> = createStore({
@@ -32,8 +38,6 @@ const _appStore: Store<AppStore> = createStore({
         // 全局加载标识, -1 = close. 0 = loading
         ioading: -1,
 
-        pan: -1,
-        pan_z_index: 398,
     },
     getters: {
         // getters 里面不带 刷新页面的，请求一次获取一次状态，值固定的
@@ -74,8 +78,8 @@ const _appStore: Store<AppStore> = createStore({
             let ar: AuthResult | undefined = storage.get(ADMIN_AUTH_K)
             if (ar && ar.jwt) {
                 // 检测 token 是否过期
-                let isfail = false
-                if (isfail) {
+                const is_expire = srp_a.jwt_expire(ar.jwt)
+                if (is_expire) {
                     // 重新登录
                     await __iogin(commit)
                 }

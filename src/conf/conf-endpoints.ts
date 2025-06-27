@@ -23,6 +23,9 @@ const NET_ENDPOINT_ACTIVITY = <ONE> {
     'content': 'product-contents',
     'join': 'activity-registrations',
     'address': 'activity-addresses',
+    'invite': 'activity-invites',
+    'notice': 'activity-notices',
+    'activity': 'activities', // 活动的编辑
 }
 
 /*
@@ -37,16 +40,13 @@ export const NET_ENDPOINTS_APP = <ONE>{
     'login': 'auth/local',
     'activity': 'activities', // 活动的查询
 }
-// MASTER
+// MASTER 需要 TOKEN 才能访问
 export const NET_ENDPOINTS_MASTER = <ONE> {
     ...NET_ENDPOINT_ACTIVITY,
-    'invite': 'activity-invites',
-    'notice': 'activity-notices',
-    'activity': 'activities', // 活动的编辑
 }
 // BUSINESS
 export const NET_ENDPOINTS_BUSINESS = <ONE> {
-    
+    'login': 'auth/login'
 }
 
 export const NET_ENDPOINT_FILE = <ONE> {

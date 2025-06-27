@@ -4,7 +4,7 @@
         <UserDetailLayout :h="68" :clazz_con="'bg-pag-pri br-tr br-ti'">
             <template #bg>
                 <view class="h-100" v-if="user">
-                    <CoImg :src="user.background" clazz="h-100"/>
+                    <CoImg :src="user.background || info.userDefBackground" clazz="h-100"/>
                 </view>
             </template>
             <template #top>
@@ -17,14 +17,6 @@
             </template>
             <template #bom>
                 <CoBomBackBtn :clazz="'btn-wht-s'" @tap="uniRouter.back"/>
-                <!--
-                <CoBomCenterBtn @go="funn.love" :clazz="'mh-btn btn-wht-s'">
-                    <view class="fx-c">
-                        <UiI i="love"/>
-                        <text>加入收藏夹</text>
-                    </view>
-                </CoBomCenterBtn>
-                -->
             </template>
         </UserDetailLayout>
     </PageLayout>
@@ -36,20 +28,22 @@ import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
 import UserDetailLayout from '@/components/layout/detail/UserDetailLayout.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
-import { authState, uiState } from '@/memory/global';
+import { appState, authDispatch, authState, uiState } from '@/memory/global';
+import appRouter from '@/tool/uni/app-router';
 import uniRouter from '@/tool/uni/uni-router';
+import { promise } from '@/tool/util/future';
 import { must_arr, must_one } from '@/tool/util/valued';
 import VwUmpNumberMsg from '@/view/user/mainpage/cont/VwUmpNumberMsg.vue';
 import VwUserMainPageCon from '@/view/user/mainpage/VwUserMainPageCon.vue';
 import VwUserMainPageTop from '@/view/user/mainpage/VwUserMainPageTop.vue';
-import { computed, reactive } from 'vue';
+import { computed, nextTick, reactive } from 'vue';
 
 // const prp = defineProps<{}>()
 const user = computed((): User | undefined => {
     const ump: UserMainPage = usermainpage.value
     const user: User = ump.user
     if (user && user.id) { return user } 
-    else { uniRouter.back() }
+    else { return undefined }
 })
 
 const usermainpage = computed((): UserMainPage => {
@@ -57,14 +51,20 @@ const usermainpage = computed((): UserMainPage => {
     return srcs
 }) 
 
-const aii = reactive({
-    price_pan_idx: 11, hui: <ElePanHui>{ opacity: 0.4 }
-})
+const info = computed((): AppInfo => appState.info) 
 
 const funn = {
-    init: () => {
+    init: () => promise(() => {
+        const u: User | undefined = user.value
+        console.log('获取到的主页 =', u)
+        if (u && u.documentId) {
 
-    },
+        }
+        else {
+            authDispatch('clean_someone_mainpag')
+            appRouter.index()
+        }
+    }),
     love: () => {
 
     },
@@ -72,4 +72,15 @@ const funn = {
         uniRouter.back()
     }
 }
+
+nextTick(funn.init)
 </script>
+
+                <!--
+                <CoBomCenterBtn @go="funn.love" :clazz="'mh-btn btn-wht-s'">
+                    <view class="fx-c">
+                        <UiI i="love"/>
+                        <text>加入收藏夹</text>
+                    </view>
+                </CoBomCenterBtn>
+                -->

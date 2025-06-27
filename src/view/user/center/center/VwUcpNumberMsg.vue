@@ -68,7 +68,7 @@ const funn = {
         appRouter.manager_tags()
     },
     edit: () => futuring(aii, async () => {
-        await authDispatch('refresh_info')
+        // await authDispatch('refresh_info')
         uniRouter.gopg('user_info')
     })
 }

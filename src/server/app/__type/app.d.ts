@@ -11,4 +11,9 @@ interface AppInfo {
     bgLogin: string
 
     dataStatus: number
+
+    userDefAvatarUrl: string
+    userDefBackground: string
+
+    index_banners: Media[]
 }

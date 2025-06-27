@@ -1,5 +1,5 @@
-import { appGetters, authGetters, authState } from "@/memory/global"
-import { IS_NET_LOG, is_strapi_mode, IS_TEST_MODE } from "./conf"
+import { appGetters, authGetters } from "@/memory/global"
+import { IS_NET_LOG, is_strapi_mode } from "./conf"
 import { NET_ENDPOINT_FILE, NET_ENDPOINTS_APP, NET_ENDPOINTS_BUSINESS, NET_ENDPOINTS_MASTER } from "./conf-endpoints"
 
 // 1. 用户 role 要设置对，
@@ -10,6 +10,7 @@ export const NET_BASIC_PROFILE = {
     username: 'vcrting@163.com',
     password: 'qiong123456'
 }
+
 
 // 数据来源
 export const APP: string = 'APP'
@@ -29,11 +30,7 @@ export const NET = {
         TIMEOUT_GET: 1000 * 30,
         TIMEOUT_POS: 1000 * 30,
         IS_LOG: true,
-        JWT_FUNCTION: (): string => {
-            // NET_IS_LOG ? console.log('APP 请求的 JWT =', authGetters.jwt) : undefined;
-            // authGetters.jwt;
-            return ''; 
-        }
+        JWT_FUNCTION: (): string => { return ''; }
     },
     // 负责 商品、活动、标签
     MASTER: {
@@ -42,14 +39,11 @@ export const NET = {
         TIMEOUT_GET: 1000 * 30,
         TIMEOUT_POS: 1000 * 30,
         IS_LOG: true,
-        JWT_FUNCTION: (): string => {
-            // NET_IS_LOG ? console.log('MASTER 请求的 JWT =', appGetters.jwt) : undefined;
-            return appGetters.jwt; 
-        }
+        JWT_FUNCTION: (): string => { return appGetters.jwt; }
     },
     // 负责 用户、订单
     BUSINESS: {
-        URI: is_strapi_mode() ? 'http://localhost:1337' : '',
+        URI: is_strapi_mode() ? 'http://localhost:8888' : '',
         API: is_strapi_mode() ? 'api' : 'api',
         TIMEOUT_GET: 1000 * 30,
         TIMEOUT_POS: 1000 * 30,

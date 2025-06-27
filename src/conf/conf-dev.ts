@@ -6,6 +6,12 @@ export const W = {
     PAD: 752
 }
 
+export const DEV_COUNTRY_CODE_DEF = 86
+
+export const DEV_GENERATE_SPECIAL = (c: number | string, s: string) => {
+    return c + '_' + s + '_VCR_TING'
+}
+
 export const DEV_ID = 'id'
 export const DEV_DOC_ID = 'documentId'
 

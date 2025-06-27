@@ -20,8 +20,16 @@ public class XUser {
     Date createdAt;
     Date updatedAt;
 
-    String nickname;
+    String username;
+    String email;
+
+    String socialAccount;
+    String introduction;
+    String background;
+    String avatarUrl;
+    String nickName;
     Integer gender;
+    Integer age;
     String phone;
     Integer countryCode;
 
@@ -32,4 +40,25 @@ public class XUser {
     String smallAppEncryptedData;
 
     Integer isFreezing;
+    String password;
+
+    public String generateRegisterPassword() {
+        StringBuffer sb = new StringBuffer();
+        sb.append(countryCode).append("_");
+        sb.append(phone).append("_");
+        sb.append("VCR_TING");
+        return sb.toString();
+    }
+
+    public String generateEmail() {
+        StringBuffer sb = new StringBuffer();
+        sb.append(phone);
+        sb.append("@163.com");
+        return sb.toString();
+    }
+
+    public void keepSecurity() {
+        this.password = "";
+        this.smallAppEncryptedData = "";
+    }
 }

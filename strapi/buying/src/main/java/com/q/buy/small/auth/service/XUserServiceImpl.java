@@ -9,6 +9,8 @@ import com.q.buy.small.auth.param.info.XUserInfoWxParam;
 import com.q.buy.util.database.SnowflakeIdWorker;
 import com.q.buy.util.q.QListUtil;
 import com.q.buy.util.q.QVUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -33,6 +35,29 @@ public class XUserServiceImpl extends ServiceImpl<XUserMapper, XUser> {
         return this.list(wrapper);
     }
 
+    final static Object addLock = new Object();
+
+    // register user
+    public XUser getRegisterUser(
+            String phone, Integer countryCode, String code, String openId
+    ) {
+        XUser user = new XUser();
+        Long id = snow.nextId();
+        user.setId(id);
+        user.setPhone(phone);
+        user.setNickName("用户_" + phone);
+        user.setUsername(phone);
+        user.setEmail(user.generateEmail());
+        user.setCountryCode(countryCode);
+        user.setDocumentId(QVUtil.serStr(id));
+        user.setSmallAppOpenId(openId);
+        user.setSmallAppAuthCode(phone);
+        user.setCreatedAt(new Date());
+        user.setUpdatedAt(new Date());
+        user.setIsFreezing(0);
+        user.setPassword(user.generateRegisterPassword());
+        return user;
+    }
     // register user
     public XUser registerUser(
             String code, String phone, Integer countryCode, String openId
@@ -45,24 +70,16 @@ public class XUserServiceImpl extends ServiceImpl<XUserMapper, XUser> {
                 user.setSmallAppAuthCode(code);
                 user.setSmallAppOpenId(openId);
             }
-            return userList.get(0);
+            return QListUtil.first(userList);
         }
         else {
-            XUser user = new XUser();
-            Long id = snow.nextId();
-            user.setId(id);
-            user.setPhone(phone);
-            user.setCountryCode(countryCode);
-            user.setDocumentId(QVUtil.serStr(id));
-            user.setSmallAppOpenId(openId);
-            user.setSmallAppAuthCode(code);
-            user.setCreatedAt(new Date());
-            user.setUpdatedAt(new Date());
-            user.setIsFreezing(0);
-            if (!this.save(user)) {
-                this.save(user);
+            synchronized (addLock) {
+                XUser user = getRegisterUser(phone, countryCode, code, openId);
+                if (!this.save(user)) {
+                    this.save(user);
+                }
+                return user;
             }
-            return user;
         }
     }
 
@@ -87,12 +104,15 @@ public class XUserServiceImpl extends ServiceImpl<XUserMapper, XUser> {
     }
 
     // 微信获取用户数据
-    public XUser hasUser(XUserInfoWxParam param) {
-        List<XUser> userList = this.phone(param.getPhone());
+    public XUser hasUser(String phone) {
+        List<XUser> userList = this.phone(phone);
         if (QListUtil.isBadList(userList)) {
             return null;
         }
         return userList.get(0);
+    }
+    public XUser hasUser(XUserInfoWxParam param) {
+        return hasUser(param.getPhone());
     }
 
 }

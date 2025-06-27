@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_swiper_swipers",
+  "info": {
+    "displayName": "Swiper",
+    "icon": "chartBubble"
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "text"
+    },
+    "isSex": {
+      "type": "integer"
+    },
+    "w": {
+      "type": "decimal"
+    },
+    "h": {
+      "type": "decimal"
+    },
+    "mediaType": {
+      "type": "integer"
+    },
+    "isGallery": {
+      "type": "integer"
+    }
+  },
+  "config": {}
+}

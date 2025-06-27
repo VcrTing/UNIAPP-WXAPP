@@ -51,7 +51,7 @@ const _s: Store<Page.IndexPageStore> = createStore({
         freshtags: async (c: ONE) => {
             const origins: Tag[] = c.state.indextags || [ ]
             if (is_nice_arr(origins)) {
-                console.log('无需刷新首页 TAGS')
+                // console.log('无需刷新首页 TAGS')
             }
             else {
                 const src: Tag[] = arrsort(await server_tags.index(), 'handsome')

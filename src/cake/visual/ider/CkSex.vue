@@ -1,12 +1,12 @@
 <template>
     <view class="d-ib" :class="clazz">
-        <text v-if="sex" class="sex-boy __btn-sex c-p ani-scaie-aii">♂</text>
-        <text v-else class="sex-girl __btn-sex c-p ani-scaie-aii">♀</text>
+        <text v-if="sex === DEV_GENDER.BOY" class="sex-boy c-p ani-scaie-aii __btn-sex">♂</text>
+        <text v-else class="sex-girl c-p ani-scaie-aii  __btn-sex">♀</text>
     </view>
 </template>
 
 <script setup lang="ts">
-import UiI from '@/ui/element/i/UiI.vue';
+import { DEV_GENDER } from '@/conf/conf-dev';
 import { computed } from 'vue';
 
 const prp = defineProps<{
@@ -18,7 +18,7 @@ const prp = defineProps<{
 const clazz = computed((): string => {
     let res = ''
     if (prp.bg && prp.sex) {
-        if (prp.sex >= 1) {
+        if (prp.sex >= DEV_GENDER.BOY) {
             res = 'btn-sex-boy '
         }
         else {

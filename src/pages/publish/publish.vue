@@ -24,8 +24,9 @@ import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { DATA_ACTIVITY_TYPED_GK } from '@/conf/conf-datas';
 import { uiState } from '@/memory/global';
 import { pagePublishState } from '@/memory/page';
+import auth_tool from '@/tool/modules/common/auth_tool';
 import uniRouter from '@/tool/uni/uni-router';
-import { promise } from '@/tool/util/future';
+import { future, promise } from '@/tool/util/future';
 import { must_arr, must_int } from '@/tool/util/valued';
 import { storage } from '@/tool/web/storage';
 import VwPublishTabPag from '@/view/publish/publish/VwPublishTabPag.vue';
@@ -53,9 +54,9 @@ const funn = {
             storage.remove('PAGE_PUBLISH_TAB_CODE')
         // }
     }),
-    plus: () => {
+    plus: () => auth_tool.doac(async () => {
         uniRouter.gopg('publish_plus')
-    }
+    })
 }
 
 onMounted(funn.initTab)

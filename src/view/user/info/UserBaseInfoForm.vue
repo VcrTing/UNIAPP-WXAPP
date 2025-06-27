@@ -1,7 +1,7 @@
 <template>
     <view>
         <view class="zi-t ps-r">
-            <image class="w-100 user-info-backimg ani-scaie-aii" mode="aspectFill" :src="form.background"/>
+            <image class="w-100 user-info-backimg ani-scaie-aii" mode="aspectFill" :src="form.background || info.userDefBackground"/>
             <view class="abs-r t-0 zi-s">
                 <view class="">
                     <OButton @tap="funn.change_background" color="bck" clazz="px-row py br-1" :weak="true">
@@ -15,7 +15,7 @@
             <view class="py-row user-info-avatar">
                 <view class="fx-c">
                     <view class="w-8em h-8em ps-r zi-t" @tap="funn.change_avatar">
-                        <CoImg clazz="w-100 h-100 bg-con bd-x2 br-cir ani-scaie-aii" :src="form.avatarUrl" />
+                        <CoImg clazz="w-100 h-100 bg-con bd-x2 br-cir ani-scaie-aii" :src="form.avatarUrl || info.userDefAvatarUrl" />
                         <!--
                         <view class="abs-b r-0 zi-s">
                             <OButtonWht>
@@ -56,9 +56,10 @@
 import OButton from '@/cake/button/OButton.vue';
 import CkInpItem from '@/cake/input/wrapper/CkInpItem.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
-import { authGetters, authState } from '@/memory/global';
+import { appState, authGetters, authState } from '@/memory/global';
 import server_upload_media from '@/server/media/server_upload_media';
 import server_me from '@/server/user/server_me';
+import auth_tool from '@/tool/modules/common/auth_tool';
 import media_tool from '@/tool/modules/common/media_tool';
 import { open_choise_img, open_choise_img_async, upload_file } from '@/tool/uni/uni-app';
 import { tiperr, tipsucc } from '@/tool/uni/uni-global';
@@ -70,8 +71,10 @@ const prp = defineProps<{
     form: ONE
 }>()
 
-const is_publisher = computed(() => authGetters.is_publisher)
-const user = computed(() => authState.user)
+// const is_publisher = computed(() => authGetters.is_publisher)
+// const user = computed(() => authState.user)
+
+const info = computed((): AppInfo => appState.info) 
 
 const aii = reactive({
     ioading: false
@@ -93,7 +96,7 @@ const funn = {
             tiperr('未找到文件。')
         }
     })),
-    change_avatar: () => {
+    change_avatar: () => auth_tool.doac(async () => {
         funn.__change(async (src: UserMedia) => {
             const ns: User = await server_me.change_avatar(src.urlSmall)
             if (ns && ns.id) {
@@ -101,8 +104,8 @@ const funn = {
                 tipsucc('头像更改成功。')
             }
         })
-    },
-    change_background: () => {
+    }),
+    change_background: () => auth_tool.doac(async () => {
         funn.__change(async (src: UserMedia) => {
             const ns: User = await server_me.change_background(src.url)
             if (ns && ns.id) {
@@ -110,7 +113,7 @@ const funn = {
                 tipsucc('背景更改成功。')
             }
         })
-    }
+    })
 }
 </script>
 

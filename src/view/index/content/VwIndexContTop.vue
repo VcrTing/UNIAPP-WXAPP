@@ -31,8 +31,10 @@
                 </view>
             </view>
         </view>
-        <VwIndexTagsPan :idx="pan_tag.idx" :active="aii.active" @result="funn.choseFromPan"/>
-        <VwIndexLocationPan :idx="pan_ioc.idx"/>
+        <view v-if="aii.init">
+            <VwIndexTagsPan :idx="pan_tag.idx" :active="aii.active" @result="funn.choseFromPan"/>
+            <VwIndexLocationPan :idx="pan_ioc.idx"/>
+        </view>
     </view>
 </template>
 
@@ -41,7 +43,7 @@ import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
 import { pageIndexDispatch, pageIndexState } from '@/memory/page';
 import def_ativity from '@/server/__def/def_ativity';
 import pan_tooi from '@/tool/app/pan_tooi';
-import { futuring, promise } from '@/tool/util/future';
+import { futuring, promise, timeout } from '@/tool/util/future';
 import { must_arr } from '@/tool/util/valued';
 import { computed, onMounted, reactive, watch } from 'vue';
 import VwIndexLocationPan from '../pan/VwIndexLocationPan.vue';
@@ -56,7 +58,7 @@ const pan_tag = { idx: 74, hui: <ElePanHui>{ opacity: 0.4 } }
 const deftag: Tag = def_ativity.tags.index
 
 const aii = reactive({
-    choses: <Tag[]> [ ],
+    choses: <Tag[]> [ ], init: false,
     active: <Tag> { }, tag: null, ioading: false
 })
 
@@ -108,6 +110,9 @@ const funn = {
         }
         // 检查 tag
         pageIndexDispatch('freshtags')
+
+        //
+        timeout(() => (aii.init = true), 1200)
     })
 }
 

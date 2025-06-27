@@ -1,6 +1,7 @@
 
 import { W } from '@/conf/conf-dev';
 import { Store, createStore } from 'vuex';
+import { appState } from '../global';
 
 const DEF_CAPACITY = 14
 
@@ -17,6 +18,13 @@ const _uiStore: Store<UiStore> = createStore({
         ispc: s => (s.platform === 'pc'),
         ispad: s => (s.platform === 'pad'),
         isphone: s => (s.platform === 'phone'),
+        ismall: s => {
+            const isdoc: boolean = appState.document
+            if (s.platform === 'phone') {
+                if (!isdoc) { return true }
+            }
+            return false
+        }
     },
     mutations: {
         change: (s: ONE, v: ANYS) => s[ v[0] ] = v[1]
