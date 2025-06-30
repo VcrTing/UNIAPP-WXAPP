@@ -64,6 +64,12 @@
     "isAllow": {
       "type": "integer",
       "default": 1
+    },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "medias"
     }
   }
 }

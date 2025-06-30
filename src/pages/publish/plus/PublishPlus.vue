@@ -31,14 +31,14 @@ import CoBomBtnGroup from '@/components/element/button/CoBomBtnGroup.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoMoSecurityAgreeLine from '@/components/modules/security/CoMoSecurityAgreeLine.vue';
 import { STS_ACTIVITY } from '@/conf/conf-status';
-import { authGetters, orderDispatch, orderState, uiState } from '@/memory/global';
+import { authGetters, uiState } from '@/memory/global';
 import server_pubplus from '@/server/publish/server_pubplus';
 import activity_tool from '@/tool/modules/activity_tool';
 import media_tool from '@/tool/modules/common/media_tool';
 import appRouter from '@/tool/uni/app-router';
 import uniRouter from '@/tool/uni/uni-router';
-import { future, futuring } from '@/tool/util/future';
-import { arrfind, arrgotv } from '@/tool/util/iodash';
+import { futuring } from '@/tool/util/future';
+import { arrgotv } from '@/tool/util/iodash';
 import { must_one } from '@/tool/util/valued';
 import times from '@/tool/web/times';
 import VwPubPlusAddrForm from '@/view/publish/plus/VwPubPlusAddrForm.vue';
@@ -46,7 +46,6 @@ import VwPubPlusTopForm from '@/view/publish/plus/VwPubPlusTopForm.vue';
 import { reactive, ref } from 'vue';
 const top = ref()
 const addr = ref()
-const money = ref()
 
 const agree = ref()
 

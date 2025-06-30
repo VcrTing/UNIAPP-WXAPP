@@ -1,10 +1,10 @@
 
 namespace Conf {
     interface YESNO {
-        YES: 1, NO: 0 | string
+        YES: 1, NO: 0 | '' | null
     }
     interface YESNO_K {
-        YES: 1, NO: 0 | string, K: string
+        YES: 1, NO: 0 | '' | null, K: string
     }
 
     interface PostStatus {

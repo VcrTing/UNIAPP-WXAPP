@@ -43,7 +43,6 @@ import { computed, nextTick, reactive } from 'vue';
 const code = computed(() => { return storage.get('PAGE_ORDER_KEY') || 0 })
 //
 const joins = computed((): ActivityJoin[] => orderState.join_of_mine)
-// const len = computed((): number => must_arr(joins.value).length)
 
 const aii = reactive(<ONE>{
     ioading: false,
@@ -51,7 +50,6 @@ const aii = reactive(<ONE>{
     tabs: [
         { name: '全部', v: 0 },
         { name: '进行中', v: 1 },
-        // { name: '已结束', v: 2 },
     ],
     activities: [ ]
 })
@@ -71,7 +69,6 @@ const funn = {
     }),
     init: () => promise(() => {
         aii.iive = code.value;
-        // for_user_joing()
         funn.fiii_orders()
     })
 }

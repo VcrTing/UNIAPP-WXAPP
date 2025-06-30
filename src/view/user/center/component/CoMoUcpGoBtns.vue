@@ -1,17 +1,14 @@
 <template>
     
     <view class="br bg-def-s fx-s">
-        <view class="ps-r zi-t">
-            <CoMoUserOptionBtn :i="'doing'" :tit="'我的参与'"  @tap="funn.working"/>
-            <view class="abs-r t-0 pr-s pt" v-if="len > 0">
-                <view class="dot-err">
-                    <text class="fs-s w-1em h-1em fx-c">{{ len }}</text>
+        <view class="ps-r zi-t" v-for="(v, i) in tabs" :key="i">
+            <CoMoUserOptionBtn :i="v.i" :tit="v.name"  @tap="v.doing"/>
+            <view class="abs-r t-0 pr-s pt" v-if="v.len() > 0">
+                <view class="dot-err softer">
+                    <text class="fs-s w-1em h-1em fx-c">{{ v.len() }}</text>
                 </view>
             </view>
         </view>
-        <CoMoUserOptionBtn :i="'grid'" :tit="'参与历史'"  @tap="funn.history"/>
-        <CoMoUserOptionBtn :i="'love'" :tit="'我的关注'"  @tap="funn.love"/>
-        <CoMoUserOptionBtn :i="'bank-card'" :tit="'交易记录'"  @tap="funn.pays"/>
     </view>
 </template>
  
@@ -26,6 +23,25 @@ import { computed } from 'vue';
 const joins = computed((): ActivityJoin[] => orderState.join_of_mine)
 const len = computed((): number => must_arr(joins.value).length)
  
+const tabs = [
+    {
+        name: '我的参与', i: 'doing', 
+        doing: () => { funn.working() }, len: () => { return len.value || 0 }
+    },
+    {
+        name: '参与历史', i: 'grid', 
+        doing: () => { funn.history() }, len: () => { return 0 }
+    },
+    {
+        name: '我的关注', i: 'love', 
+        doing: () => { funn.love() }, len: () => { return 0 }
+    },
+    {
+        name: '交易记录', i: 'bank-card', 
+        doing: () => { funn.pays() }, len: () => { return 0 }
+    }
+]
+
 const funn = {
     
     aiijoin: () => {
@@ -48,3 +64,9 @@ const funn = {
     })
 }
 </script>
+
+        <!--
+        <CoMoUserOptionBtn :i="'grid'" :tit="'参与历史'"  @tap="funn.history"/>
+        <CoMoUserOptionBtn :i="'love'" :tit="'我的关注'"  @tap="funn.love"/>
+        <CoMoUserOptionBtn :i="'bank-card'" :tit="'交易记录'"  @tap="funn.pays"/>
+        -->

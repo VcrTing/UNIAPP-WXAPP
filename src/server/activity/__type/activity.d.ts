@@ -36,23 +36,3 @@ interface Activity {
 
     search: string
 }
-
-interface ProductContent {
-
-    id: number
-    documentId: string
-    createdAt: string
-
-    content: string
-    introduction: string
-
-    activityId: string
-    publisherId: string
-
-    activity: Activity
-    isFrezz: number
-    dataStatus: number
-
-    numNice: number
-    numHate: number
-}

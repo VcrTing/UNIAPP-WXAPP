@@ -1,6 +1,6 @@
 <template>
     <view>
-        <view class="softer">
+        <view class="softer bg-con">
             <OScrollX>
                 <view class="pi-row py-s">
                     <view class="d-ib pr softer" v-for="(v, i) in menus" :key="i"

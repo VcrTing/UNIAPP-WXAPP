@@ -10,9 +10,15 @@
 				</CoAppTopBar>
 			</template>
 			<template #bg>
+				<!--
 				<VwIndexBanner/>
+				-->
+				<WvIndexBanner/>
 			</template>
 			<VwIndexPan :h="h_v"/>
+			<!--
+			<WvIndexPan :h="h_v"/>
+			-->
 		</IndexLayout>
 	</PageLayout>
 </template>
@@ -27,6 +33,8 @@ import uniRouter from '@/tool/uni/uni-router';
 import VwIndexPan from '@/view/index/VwIndexPan.vue';
 import VwIndexBanner from '@/view/index/VwIndexBanner.vue';
 import { computed } from 'vue';
+import WvIndexBanner from '@/wave/index/WvIndexBanner.vue';
+import WvIndexPan from '@/wave/index/WvIndexPan.vue';
 //
 const isphone = computed((): boolean => uiGetters.isphone)
 const ispc = computed((): boolean => uiGetters.ispc)

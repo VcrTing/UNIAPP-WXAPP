@@ -20,12 +20,25 @@ const NET_ENDPOINT_COMMON = <ONE> {
 
 // 活动
 const NET_ENDPOINT_ACTIVITY = <ONE> {
-    'content': 'product-contents',
-    'join': 'activity-registrations',
-    'address': 'activity-addresses',
-    'invite': 'activity-invites',
-    'notice': 'activity-notices',
-    'activity': 'activities', // 活动的编辑
+    AUTH: {
+        'join': 'activity-registrations',
+        'invite': 'activity-invites',
+        'notice': 'activity-notices',
+        'content': 'product-contents',
+        'address': 'activity-addresses',
+        'activity': 'activities'
+    },
+    ANON: {
+        'activity': 'activities'
+    }
+}
+const NET_ENDPOINT_PRODUCT = <ONE> {
+    AUTH: {
+        'product': 'products'
+    },
+    ANON: {
+        'product': 'products'
+    }
 }
 
 // 登录后才能查看的系统消息
@@ -43,12 +56,14 @@ export const NET_ENDPOINTS_APP = <ONE>{
     ...NET_ENDPOINT_COMMON,
     'app-info': 'app-infos',
     'login': 'auth/local',
-    'activity': 'activities', // 活动的查询
+    ...NET_ENDPOINT_PRODUCT.ANON,
+    ...NET_ENDPOINT_ACTIVITY.ANON,
 }
 // MASTER 需要 TOKEN 才能访问
 export const NET_ENDPOINTS_MASTER = <ONE> {
     ...NET_ENDPOINT_SYSTEM,
-    ...NET_ENDPOINT_ACTIVITY,
+    ...NET_ENDPOINT_PRODUCT.AUTH,
+    ...NET_ENDPOINT_ACTIVITY.AUTH,
 }
 // BUSINESS
 export const NET_ENDPOINTS_BUSINESS = <ONE> {

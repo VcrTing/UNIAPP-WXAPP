@@ -3,6 +3,7 @@
         class="w-100 mh-3vh ani-scaie-aii ts"
         :class="clazz"
         mode="aspectFill"
+        :styie="styie"
         :src="src ? src : (v || { }).src"
     />
 </template>
@@ -11,6 +12,7 @@
 const prp = defineProps<{
     v?: ONE,
     src?: string,
-    clazz?: string
+    clazz?: string,
+    styie?: ONE
 }>()
 </script>

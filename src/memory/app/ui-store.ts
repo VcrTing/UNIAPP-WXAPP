@@ -21,7 +21,8 @@ const _uiStore: Store<UiStore> = createStore({
         ismall: s => {
             const isdoc: boolean = appState.document
             if (s.platform === 'phone') {
-                if (!isdoc) { return true }
+                return true
+                // if (!isdoc) { return true }
             }
             return false
         }

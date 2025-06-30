@@ -484,6 +484,7 @@ export interface ApiActivityMediaActivityMedia
       Schema.Attribute.Private;
     media: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     mediaType: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
     sortOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
     updatedAt: Schema.Attribute.DateTime;
@@ -615,6 +616,7 @@ export interface ApiActivityTagActivityTag extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
+    products: Schema.Attribute.Relation<'manyToMany', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
     search: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
@@ -800,6 +802,68 @@ export interface ApiProductContentProductContent
     numNice: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     publisherId: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiProductProduct extends Struct.CollectionTypeSchema {
+  collectionName: 'products';
+  info: {
+    displayName: 'Product';
+    pluralName: 'products';
+    singularName: 'product';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    contentTyped: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dataStatus: Schema.Attribute.Integer;
+    endSellTime: Schema.Attribute.DateTime;
+    introduction: Schema.Attribute.String;
+    inv: Schema.Attribute.Integer;
+    invTyped: Schema.Attribute.Integer;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product.product'
+    > &
+      Schema.Attribute.Private;
+    medias: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::activity-media.activity-media'
+    >;
+    numHate: Schema.Attribute.Integer;
+    numHot: Schema.Attribute.Integer;
+    numNice: Schema.Attribute.Integer;
+    numSell: Schema.Attribute.Integer;
+    numView: Schema.Attribute.Integer;
+    price: Schema.Attribute.Decimal;
+    priceFirst: Schema.Attribute.Decimal;
+    priceInv: Schema.Attribute.Decimal;
+    publishedAt: Schema.Attribute.DateTime;
+    publisher: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    publishStatus: Schema.Attribute.Integer;
+    recommendStatus: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    reviewComment: Schema.Attribute.String;
+    reviewStatus: Schema.Attribute.Integer;
+    search: Schema.Attribute.Text;
+    sexStatus: Schema.Attribute.Integer;
+    startSellTime: Schema.Attribute.DateTime;
+    tags: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::activity-tag.activity-tag'
+    >;
+    title: Schema.Attribute.String;
+    titleSubForSell: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1469,6 +1533,7 @@ declare module '@strapi/strapi' {
       'api::app-info.app-info': ApiAppInfoAppInfo;
       'api::msg-system.msg-system': ApiMsgSystemMsgSystem;
       'api::product-content.product-content': ApiProductContentProductContent;
+      'api::product.product': ApiProductProduct;
       'api::user-love.user-love': ApiUserLoveUserLove;
       'api::user-preference-tag.user-preference-tag': ApiUserPreferenceTagUserPreferenceTag;
       'api::user-statistic.user-statistic': ApiUserStatisticUserStatistic;

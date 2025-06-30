@@ -127,12 +127,12 @@ export default {
         const res: Media[ ] = mds.filter(e => e.isGallery)
         return must_arr(res)
     },
-    getindex_banner: (v: Activity): Media[] => {
+    getindex_banner: (v: Activity, imit: number = ITEM_IMG_VIEW_LIMIT): Media[] => {
         const mds: Media[ ] = __medias(v)
         //
         const banners: Media[ ] = mds.filter(e => !e.isGallery)
         const gallery: Media[ ] = mds.filter(e => e.isGallery)
-        return arrimit([ ...banners, ...gallery ], ITEM_IMG_VIEW_LIMIT)
+        return arrimit([ ...banners, ...gallery ], imit)
     },
     getweek, gettime_start, gettime_end,
     gettime_start_iong,

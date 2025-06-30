@@ -1,0 +1,102 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "introduction": {
+      "type": "string"
+    },
+    "numView": {
+      "type": "integer"
+    },
+    "numSell": {
+      "type": "integer"
+    },
+    "numHot": {
+      "type": "integer"
+    },
+    "titleSubForSell": {
+      "type": "string"
+    },
+    "medias": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::activity-media.activity-media",
+      "mappedBy": "product"
+    },
+    "publisher": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "dataStatus": {
+      "type": "integer"
+    },
+    "sexStatus": {
+      "type": "integer"
+    },
+    "search": {
+      "type": "text"
+    },
+    "invTyped": {
+      "type": "integer"
+    },
+    "inv": {
+      "type": "integer"
+    },
+    "priceInv": {
+      "type": "decimal"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "priceFirst": {
+      "type": "decimal"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::activity-tag.activity-tag",
+      "mappedBy": "products"
+    },
+    "recommendStatus": {
+      "type": "integer",
+      "default": 0
+    },
+    "numNice": {
+      "type": "integer"
+    },
+    "numHate": {
+      "type": "integer"
+    },
+    "endSellTime": {
+      "type": "datetime"
+    },
+    "publishStatus": {
+      "type": "integer"
+    },
+    "startSellTime": {
+      "type": "datetime"
+    },
+    "reviewComment": {
+      "type": "string"
+    },
+    "reviewStatus": {
+      "type": "integer"
+    },
+    "contentTyped": {
+      "type": "integer"
+    }
+  }
+}

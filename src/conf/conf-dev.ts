@@ -45,6 +45,17 @@ export const DEV_ACTIVITY = {
     }
 }
 
+// 商品的开发设置
+export const DEV_PRODUCT = {
+    //
+    SORT: {
+        // 首页数据的排序状况
+        INDEX: [
+            { K: 'createdAt', DESC: true }
+        ]
+    }
+}
+
 // 媒体禁止
 export const DEV_MEDIA_ALLOW = {
     ALLOW_SEX: 0, // 是否允许展示 色情 1 = 允许

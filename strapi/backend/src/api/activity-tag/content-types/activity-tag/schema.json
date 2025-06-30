@@ -47,6 +47,12 @@
     "isMain": {
       "type": "integer",
       "default": 0
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "inversedBy": "tags"
     }
   }
 }

@@ -50,3 +50,24 @@ export const STS_ACTIVITY = {
     },
     RECOMMEND: <Conf.YESNO_K>{ ...__YES_NO, K: 'isRecommended' },
 }
+
+
+// 产品的状态
+export const STS_PRODUCT = {
+    STATUS: <Conf.PostStatus> {
+        K: 'dataStatus',
+        EDITING: 0,
+        CHECKING: 1,
+        PASS: 2,
+        NICE: 3
+    },
+    REVIEW: <Conf.ReviewStatus> {
+        K: 'reviewStatus',
+        WAITING: null,
+        YES: 1,
+        NO: 2,
+        DIE: -1
+    },
+    RECOMMEND: <Conf.YESNO_K>{ ...__YES_NO, K: 'recommendStatus' },
+    PUBLISH: <Conf.YESNO_K>{ ...__YES_NO, K: 'publishStatus' },
+}
