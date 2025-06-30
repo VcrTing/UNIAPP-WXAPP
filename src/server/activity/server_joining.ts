@@ -29,7 +29,7 @@ const join_of_mine = async (): Promise<ActivityJoin[]> => {
     const userid: string = authGetters.userid;
     const __pm: ONE = { }
     srp_p.__eq(__pm, 'user', userid)
-    srp_p.__eq(__pm, 'overStatus', STS.NO)
+    // srp_p.__eq(__pm, 'overStatus', STS.NO)
     srp_p.__eq(__pm, 'safeStatus', STS.YES)
     return await fetching(__pm, net_tool.__pager_long())
 }

@@ -9,7 +9,7 @@
                 <text>人</text>
             </view>
         </view>
-        <view class="fx-1 ta-r">
+        <view class="fx-1 ta-r" @tap="emt('go')">
             <view class="pri fs-n">
                 <text>还可邀请</text>
                 <text class="px-s">{{ activity_tool.getjoin_limit(one) - invites.length }}</text>
@@ -21,7 +21,6 @@
 
 <script setup lang="ts">
 import activity_tool from '@/tool/modules/activity_tool';
-import UiI from '@/ui/element/i/UiI.vue';
 import { computed } from 'vue';
 
 const prp = defineProps<{
@@ -30,4 +29,6 @@ const prp = defineProps<{
 }>()
 
 const issm = computed((): boolean => activity_tool.istyped_sm(prp.one))
+
+const emt = defineEmits([ 'go' ])
 </script>

@@ -18,7 +18,7 @@
                                 <CoMoUserInfoItem :v="v" :clazz="'px-row'">
                                     <template #r>
                                         <view v-if="funn.has(v)">
-                                            <view class="pi-row py-s br-s fx-i">
+                                            <view class="pi-row py-s br-s fx-i pri">
                                                 <UiI i="check" clazz="pi-s"/>
                                                 已邀请</view>
                                         </view>
@@ -36,7 +36,7 @@
             </view>
             <CkSpace :h="4"/>
             <template #bom>
-                <view class="px-row bg-con">
+                <view class="px-row bg-con pt-s">
                     <CoBomBtnGroup tit="分享至微信" tit_ciose="关闭" 
                         @cancle="() => pan_tooi.close_pan(idx)" @submit="funn.goo"
                     />

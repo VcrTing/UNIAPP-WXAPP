@@ -12,7 +12,7 @@
             <view class="px-row" v-if="!is_login">
                 <view v-if="aii.next == 0">
                     <VwLoginModUnreal v-if="hasdoc" @next="funn.next"/>
-                    <VwLoginModInit v-else @next=""/>
+                    <VwLoginModInit v-else @next="funn.next"/>
                 </view>
                 <VwLoginModCon v-else-if="aii.next == 1" :user="aii.user" @back="() => aii.next = 0"/>
             </view>
@@ -30,7 +30,7 @@ import { appState, authDispatch, authGetters, authState, eleState, uiState } fro
 import uniSmall from '@/tool/uni/uni-small';
 import { futuring, promise } from '@/tool/util/future';
 import VwLoginModCon from '@/view/auth/content/VwLoginModCon.vue';
-import { computed, onMounted, reactive, watch } from 'vue';
+import { computed, nextTick, onMounted, reactive, watch } from 'vue';
 import VwLoginModInit from '@/view/auth/content/VwLoginModInit.vue';
 import VwLoginModLogined from '@/view/auth/content/VwLoginModLogined.vue';
 import mock_login from '@/server/mock/mock_login';
@@ -44,9 +44,7 @@ const aii = reactive({
 
 const hasdoc = computed((): boolean => appState.document)
 
-watch(() => authGetters.__fresh, () => {
-    console.log('refresh')
-})
+watch(() => authGetters.__fresh, () => { console.log('refresh') })
 
 const common = {
     phonesucc: (src: AppPhoneWX) => {
@@ -64,10 +62,8 @@ const common = {
 
 const funn = {
     init: () => promise(() => {
-        authDispatch('auto_login')
 
         aii.next = 0
-        aii.user = authState.user;
 
         /*
         if (is_login.value) {
@@ -110,7 +106,7 @@ const funn = {
 const loginhouse = computed(() => authState.loginhouse)
 const is_login = computed(() => authGetters.is_login)
 
-onMounted(funn.init)
+nextTick(funn.init)
 
 defineExpose(funn)
 </script>

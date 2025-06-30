@@ -3,7 +3,7 @@
         <view class="pt-s bg-hui"></view>
         <view class="">
             <view class="bg-con">
-                <CoMoActivityPublisherTitle :one="one" :invites="invites"/>
+                <CoMoActivityPublisherTitle :one="one" :invites="invites" @go="funn.open"/>
                 <OScrollX>
                     <view class="pb-s pt-s px-row">
                         <view class="fx-i">
@@ -15,15 +15,11 @@
                                     <CoMoActivityJoinerBlock :v="v"/>
                                 </view>
                             </view> 
-                            <!--
-                            <CoMoActivityJoinerBlockMore v-if="last" :user="last" clazz="w-20"/>
-                            -->
                         </view>
                     </view>
                 </OScrollX>
             </view>
         </view>
-
         <VwAdInvitePan :idx="pan_ivt.idx" :one="one"/>
     </view>
 </template>
@@ -34,7 +30,6 @@ import { must_arr, must_one } from '@/tool/util/valued';
 import { computed } from 'vue';
 import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
 import CoMoActivityJoinerBtn from '@/components/modules/activity/CoMoActivityJoinerBtn.vue';
-import CoMoActivityJoinerTitle from '../component/CoMoActivityJoinerTitle.vue';
 import VwAdInvitePan from '../pan/VwAdInvitePan.vue';
 import pan_tooi from '@/tool/app/pan_tooi';
 import CoMoActivityPublisherTitle from '../component/CoMoActivityPublisherTitle.vue';
@@ -75,3 +70,7 @@ const funn = {
     })
 }
 </script>
+
+        <!--
+        <CoMoActivityJoinerBlockMore v-if="last" :user="last" clazz="w-20"/>
+        -->

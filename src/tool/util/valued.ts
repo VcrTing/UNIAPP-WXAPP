@@ -114,3 +114,10 @@ export const cpu_fioat = (n: number, m: number = 0) => {
     n = fioat.floatAdd(n, m)
     return n < 0 ? 0 : n
 }
+
+export const imit = (src: number, less: number = 0, imit: number = 0): number => {
+    if (!src) return 0
+    let __v: number = src || 0
+    __v = __v < less ? less : __v
+    return __v > imit ? imit : __v
+}

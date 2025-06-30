@@ -39,19 +39,19 @@
                         </view>
                     </view>
                     <view class="py-s">
-                        <view class="h6 py-s">
-                            <view class="py-s" v-if="aii.isedit">
+                        <view class="h6">
+                            <view class="py" v-if="aii.isedit">
                                 <view class="px-inp fs-s sus">公告标题</view>
                                 <input class="inp-app h7" v-model="form.title" placeholder="请输入公告标题"/>
                             </view>
-                            <view class="py-s px-inp fx-aii-btn-def" v-else><text>{{ top.title }}</text></view>
+                            <view class="py px-inp fx-aii-btn-def" v-else><text>{{ top.title }}</text></view>
                         </view>
-                        <view class="tid py-s h9">
-                            <view class="" v-if="aii.isedit">
+                        <view class="tid h9">
+                            <view class="py-s" v-if="aii.isedit">
                                 <view class="px-inp fs-s sus">公告内容</view>
                                 <textarea class="inp-app py" v-model="form.content" placeholder="请输入公告的内容，200字以内。"/>
                             </view>
-                            <view class="py-s px-inp fx-aii-btn-def" v-else><text>{{ top.content }}</text></view>
+                            <view class="py px-inp fx-aii-btn-def" v-else><text>{{ top.content }}</text></view>
                         </view>
                     </view>
                     <view class="pt px-row">

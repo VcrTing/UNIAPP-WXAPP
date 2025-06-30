@@ -2,13 +2,8 @@
     <view class="h-100 w-100">
         <slot name="top"></slot>
 		<view class="">
-            <view class="abs-t w-100 zi-t">
-                <view class="w-100 ts" :style="{
-                    'margin-top': '-3.3rem',
-                    'height': 'calc(14.5rem + ' + h + ')'
-                }">
-                    <slot name="bg"></slot>
-                </view>
+            <view class="abs-t w-100 zi-t ps-f-imp">
+                <slot name="bg"></slot>
             </view>
 			<OSafeAreaTop/>
 			<view class="mh-app-top-bar"></view>

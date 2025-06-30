@@ -42,8 +42,8 @@
                         </view>
                     </view>
                 </view>
-                <CkSpace :h="2" v-if="ispc"/>
-                <view class="py px-row fx-c fx-aii-btn-def btn-def softer">
+                <CkSpace :h="2"/>
+                <view class="py px-row fx-c fx-aii-btn-def btn-def softer" @tap="pan_tooi.close_pan(idx)">
                     <view class="tis fs-n">
                         若想新增标签，可以与客服提要求。
                     </view>

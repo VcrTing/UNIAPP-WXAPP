@@ -2,7 +2,8 @@
     <view>
         <view v-if="ispad" :style="{
             height: 'calc(2vh)'
-        }"></view>
+        }">
+        </view>
         <view class="fx-c">
             <view class="ta-c">
                 <CkAvatar :not_mainpage="true" :id="user.id"

@@ -21,6 +21,32 @@
                     <CoEmpty/>
                 </view>
             </view>
+        </view>
+    </view>
+</template>
+
+<script setup lang="ts">
+import { computed, reactive } from 'vue';
+import CoEmpty from '@/components/genra/empty/CoEmpty.vue';
+import CoHeaderTabItem from '@/components/element/tabs/CoHeaderTabItem.vue';
+import VwUmpPubGallery from './publisher/VwUmpPubGallery.vue';
+
+defineProps<{
+    user: ONE, data: UserMainPage
+}>()
+
+const aii = reactive({ iive: 0, })
+
+const tabs = computed((): MANY => {
+    return [
+        { tit: '个人相册', v: 0 },
+        // { tit: '她的发布', v: 1 },
+        // { tit: '历史活动', v: 2 },
+    ]
+})
+</script>
+
+
             <!--
             <view v-else>
                 <view v-if="aii.iive == 0" class="py-row">
@@ -34,32 +60,3 @@
                 </view>
             </view>
             -->
-        </view>
-    </view>
-</template>
-
-<script setup lang="ts">
-import { authGetters } from '@/memory/global';
-import { computed, reactive } from 'vue';
-import CoEmpty from '@/components/genra/empty/CoEmpty.vue';
-import CoHeaderTabItem from '@/components/element/tabs/CoHeaderTabItem.vue';
-import VwUmpPubGallery from './publisher/VwUmpPubGallery.vue';
-
-const prp = defineProps<{
-    user: ONE, data: UserMainPage
-}>()
-
-const aii = reactive({
-    iive: 0,
-})
-
-// const is_publisher = computed(() => prp.user.publisher)
-
-const tabs = computed((): MANY => {
-    return [
-        { tit: '个人相册', v: 0 },
-        // { tit: '她的发布', v: 1 },
-        // { tit: '历史活动', v: 2 },
-    ]
-})
-</script>

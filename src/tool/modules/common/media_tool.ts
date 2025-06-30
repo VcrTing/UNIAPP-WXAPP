@@ -1,5 +1,5 @@
 import { APP_W_DEF, DEV_MEDIA_ALLOW } from "@/conf/conf-dev"
-import { is_nice_arr, must_arr } from "../../util/valued"
+import { imit, is_nice_arr, must_arr } from "../../util/valued"
 import { authGetters } from "@/memory/global"
 import { STS_MEDIA } from "@/conf/conf-status"
 
@@ -128,8 +128,20 @@ const fer_allow = (src: Media[] = []): Media[] => {
     })
 }
 
+const view_imit = (src: Media[], star: number, max: number): Media[] => {
+    const len = src.length
+    if (len) {
+        let __imit: number = imit(max, 0, len)
+        let __star: number = imit(star, 0, star)
+        return src.slice(__star, __imit)
+    }
+    return src 
+}
+
 export default {
     fer_sex, fer_allow,
+
+    view_imit,
 
     img_h_view,
     __img_h_view,

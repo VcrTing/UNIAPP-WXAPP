@@ -2,7 +2,7 @@
         
 		<view class="layout-detail h-100 mxh-100 ps-r zi-m">
 			<view class="h-100 zi-m">
-                <slot name="bg"></slot>
+                <CoImg :src="user.background || info.userDefBackground" clazz="h-68vh"/>
 			</view>
 			<view class="layout-detail-sec ps-a t-0 i-0 w-100 h-100 zi-s">
 				<view class="layout-detail-sec-inner"
@@ -35,11 +35,14 @@
 
 <script setup lang="ts">
 import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
+import CoImg from '@/components/media/img/CoImg.vue';
 import { computed } from 'vue';
 
 const prp = defineProps<{
 	h?: number,
-	clazz_con?: string
+	clazz_con?: string,
+	user: User,
+	info: AppInfo
 }>()
 
 const __def = 61.8;

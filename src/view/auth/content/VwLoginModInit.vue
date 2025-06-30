@@ -25,7 +25,7 @@
             </view>
             <view>
                 <view class="pt-x2">
-                    <OButton color="def" clazz="btn-app" @tap="emt('next')">
+                    <OButton color="def" clazz="btn-app" @tap="emt('next', unreal)">
                         <view class="">下一步</view>
                     </OButton>
                 </view>
@@ -38,11 +38,10 @@
 import OButton from '@/cake/button/OButton.vue';
 import { USER_DEF, USER_TEST } from '@/conf/conf-role';
 import { authDispatch, authState } from '@/memory/global';
-import pan_tooi from '@/tool/app/pan_tooi';
 import { computed } from 'vue';
 
 // const prp = defineProps<{}>()
-const loginhouse = computed(() => authState.loginhouse)
+// const loginhouse = computed(() => authState.loginhouse)
 
 const unreal = computed(() => authState.__unreal)
 

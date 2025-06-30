@@ -1,14 +1,9 @@
 <template>
     <page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
     <PageLayout>
-        <UserDetailLayout :h="68" :clazz_con="'bg-pag-pri br-tr br-ti'">
-            <template #bg>
-                <view class="h-100" v-if="user">
-                    <CoImg :src="user.background || info.userDefBackground" clazz="h-100"/>
-                </view>
-            </template>
+        <UserDetailLayout :user="user" :info="info" :h="68" :clazz_con="'br-tr br-ti bg-con'">
             <template #top>
-                <CoAppTopBackBar :mat="true" @back="funn.back" :clazz_i="'c-fff'"></CoAppTopBackBar>
+                <CoAppTopBackBar :mat="true" @back="uniRouter.back" :clazz_i="'c-fff'"></CoAppTopBackBar>
                 <VwUserMainPageTop v-if="user" :user="user"/>
             </template>
             <template #con>
@@ -38,25 +33,19 @@ import VwUserMainPageCon from '@/view/user/mainpage/VwUserMainPageCon.vue';
 import VwUserMainPageTop from '@/view/user/mainpage/VwUserMainPageTop.vue';
 import { computed, nextTick, reactive } from 'vue';
 
-// const prp = defineProps<{}>()
-const user = computed((): User | undefined => {
+const user = computed((): User => {
     const ump: UserMainPage = usermainpage.value
+    console.log('用于预览的 user main page =', ump)
     const user: User = ump.user
     if (user && user.id) { return user } 
-    else { return undefined }
+    else { return <User>{ } }
 })
-
-const usermainpage = computed((): UserMainPage => {
-    const srcs: UserMainPage = must_one<UserMainPage>(authState.mainpage_of_view)
-    return srcs
-}) 
-
+const usermainpage = computed((): UserMainPage => { return must_one<UserMainPage>(authState.mainpage_of_view) }) 
 const info = computed((): AppInfo => appState.info) 
-
 const funn = {
     init: () => promise(() => {
-        const u: User | undefined = user.value
-        console.log('获取到的主页 =', u)
+        const u: User = user.value
+        // console.log('获取到的主页 =', u)
         if (u && u.documentId) {
 
         }
@@ -64,13 +53,7 @@ const funn = {
             authDispatch('clean_someone_mainpag')
             appRouter.index()
         }
-    }),
-    love: () => {
-
-    },
-    back: () => {
-        uniRouter.back()
-    }
+    })
 }
 
 nextTick(funn.init)

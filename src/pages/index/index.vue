@@ -5,15 +5,15 @@
 			<template #top>
 				<CoAppTopBar :clazz="''">
 					<view class="ps-r zi-t">
-						<OFI @tap="uniRouter.gopg('index_search')" :i="'search'" :clazz="'d-ib px-row py-row c-fff fx-aii-btn-wht ani-scaie-aii'"/>
+						<OFI @tap="uniRouter.gopg('index_search')" :i="'search'" :clazz="'d-ib px-row py-row c-fff fx-aii-btn-wht-s ani-scaie-aii'"/>
 					</view>
 				</CoAppTopBar>
 			</template>
 			<template #bg>
+				<VwIndexBanner :h="h_v"/>
 				<!--
-				<VwIndexBanner/>
+				<WvIndexBanner :h="h_v"/>
 				-->
-				<WvIndexBanner/>
 			</template>
 			<VwIndexPan :h="h_v"/>
 			<!--
