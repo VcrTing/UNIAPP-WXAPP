@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>可以用来，图片懒加载，替换图片的 src。还能用来监听滚动</h3>
+    <div id="wrapper">
+        <div id="content">
+
+        </div>
+        <div id="target">
+
+        </div>
+    </div>
+
+    <script>
+        const wrapper = document.getElementById('wrapper')
+        const content = document.getElementById('content')
+        const target = document.getElementById('target')
+
+        const hrate = 0.5 // 50%, 进入 50% 时
+
+        const abserver = new IntersectionObserver(ent => {
+            const len = ent.length;
+            for (let j= 0; j< ent.length; j++ ) {
+                const one = ent[j]
+                const isIn = one.isIntersecting
+                const target = one.target 
+                // console.log(one)
+                if (target.id == 'target') {
+                    if (isIn) {
+                        console.log('target 进入众人视野......')
+                    }
+                    else {
+                        console.log('target 消失众人视野......')
+                    }
+                }
+            }
+        }, 
+        {
+            // rootMargin: '200px', // 外扩 50px 的进入
+            threshold: hrate
+        })
+
+        abserver.observe(target)
+
+
+    </script>
+</body>
+</html>
+
+
+    <style>
+        body {
+            background: #f2f4f7;
+        }
+        #wrapper {
+            width: 400px;
+            
+            height: 500px;
+            background: #fff;
+            overflow-y: scroll; border-radius: 8px;
+        }
+        #content {
+            height: 900px; margin: 0 auto;
+            width: 61.8%;
+            background: #f2f4f7; 
+        }
+        #target {
+            margin: 0 auto;
+            width: 61.8%; background: rgba(0, 168, 254, 1); height: 120px;
+        }
+        .item {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            margin: 10px 0;
+        }
+    </style>

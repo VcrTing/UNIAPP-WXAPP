@@ -1,0 +1,48 @@
+@use '../../sass/theme/primary/__conf' as *
+@use '../../sass/theme/define_txt/__conf' as *
+@use '../../sass/app/font/__conf' as *
+
+
+.uni-radio-wrapper
+    font-size: 1em
+    .uni-radio-input
+        width: 1em !important
+        height: 1em !important
+        background-color: $pri !important
+        border-color: $pri !important
+        svg 
+            width: 100%
+            height: 100%
+
+.o-switch
+    .uni-switch-input-checked
+        border-color: $pri !important
+        background-color: $pri !important
+
+// selection
+.o-sction-weak
+    display: inline-block
+    min-width: 4em
+    .uni-stat__select
+        display: inline-block !important
+    .uni-select__input-text,
+    .uni-select__selector .uni-select__selector-item
+        color: $tit !important
+        font-size: $fs !important
+    .uni-select__selector
+        min-width: 6em
+    .uni-stat-box
+        background: transparent !important
+    .uni-select
+        border-color: transparent !important
+
+.o-sction-r
+    text-align: right
+    .uni-select__input-text,
+    .uni-select__selector .uni-select__selector-item
+        text-align: right
+        align-items: center
+        justify-content: center
+    .uni-popper__arrow_bottom
+        left: 80% !important
+    

@@ -1,0 +1,15 @@
+
+    
+@use '../__conf' as *
+
+.c-btn-tit
+    color: $btn-tit
+.fx-hv-btn-tit:hover
+    color: $btn-tit
+.fx-fcs-btn-tit
+    &:active, &:focus, &:focus-visible
+        color: $btn-tit
+
+.fx-aii-btn-tit
+    @extend .fx-hv-btn-tit
+    @extend .fx-fcs-btn-tit

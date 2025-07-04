@@ -1,0 +1,110 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "introduction": {
+      "type": "text"
+    },
+    "numView": {
+      "type": "integer"
+    },
+    "numSell": {
+      "type": "integer"
+    },
+    "numHot": {
+      "type": "integer"
+    },
+    "titleSubForSell": {
+      "type": "string"
+    },
+    "medias": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product-media.product-media",
+      "mappedBy": "product"
+    },
+    "dataStatus": {
+      "type": "integer"
+    },
+    "sexStatus": {
+      "type": "integer"
+    },
+    "search": {
+      "type": "text"
+    },
+    "invTyped": {
+      "type": "integer"
+    },
+    "inv": {
+      "type": "integer"
+    },
+    "priceInv": {
+      "type": "decimal"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "priceFirst": {
+      "type": "decimal"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "products"
+    },
+    "recommendStatus": {
+      "type": "integer"
+    },
+    "numNice": {
+      "type": "integer"
+    },
+    "numHate": {
+      "type": "integer"
+    },
+    "endSellTime": {
+      "type": "datetime"
+    },
+    "publishStatus": {
+      "type": "integer"
+    },
+    "startSellTime": {
+      "type": "datetime"
+    },
+    "reviewComment": {
+      "type": "text"
+    },
+    "reviewStatus": {
+      "type": "integer"
+    },
+    "typed": {
+      "type": "integer"
+    },
+    "honours": {
+      "type": "component",
+      "component": "tag.tag",
+      "repeatable": true
+    },
+    "contentStatus": {
+      "type": "integer"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "products"
+    }
+  }
+}

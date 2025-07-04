@@ -1,0 +1,34 @@
+
+
+$ttf: ease-in-out
+$ttf_s: ease-in
+
+$ts-s: 0.122s
+$ts: 0.162s
+$ts-n: 0.192s
+$ts-x1: 0.242s
+
+.ts-s
+    transition: all $ts-s $ttf
+.ts
+    transition: all $ts $ttf
+.ts-n
+    transition: all $ts-n $ttf
+.ts-x1
+    transition: all $ts-x1 $ttf
+
+.soft
+    transition: all 0.062s $ttf_s
+
+
+$duration: 0.242s
+
+$duration_t: 0.032s
+$duration_s: 0.062s
+$duration_n: 0.122s
+
+$duration_x1: 0.362s
+$duration_x2: 0.482s
+$duration_x3: 0.962s
+
+$durations: ("-0": 0s, "": $duration, "-t": $duration_t, "-s": $duration_s, "-n": $duration_n, "-x1": $duration_x1, "-x2": $duration_x2, "-x3": $duration_x3)

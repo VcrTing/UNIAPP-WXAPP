@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_contents",
+  "info": {
+    "singularName": "product-content",
+    "pluralName": "product-contents",
+    "displayName": "ProductContent"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "content": {
+      "type": "text"
+    },
+    "publisherId": {
+      "type": "string"
+    },
+    "isAllow": {
+      "type": "integer"
+    },
+    "introduction": {
+      "type": "string"
+    },
+    "dataStatus": {
+      "type": "integer"
+    },
+    "belongId": {
+      "type": "string"
+    },
+    "category": {
+      "type": "integer",
+      "default": 0
+    },
+    "galleries": {
+      "type": "component",
+      "component": "swiper.gallery",
+      "repeatable": true
+    }
+  }
+}

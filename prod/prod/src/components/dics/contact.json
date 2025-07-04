@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_dics_contacts",
+  "info": {
+    "displayName": "Contact",
+    "icon": "user"
+  },
+  "options": {},
+  "attributes": {
+    "nickName": {
+      "type": "string"
+    },
+    "socialAccount": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "integer"
+    },
+    "age": {
+      "type": "integer",
+      "default": 18
+    },
+    "avatarUrl": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

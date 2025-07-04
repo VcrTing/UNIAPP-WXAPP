@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_tag_tags",
+  "info": {
+    "displayName": "Tag",
+    "icon": "attachment"
+  },
+  "options": {},
+  "attributes": {
+    "clazz": {
+      "type": "string"
+    },
+    "handsome": {
+      "type": "integer",
+      "default": 1
+    },
+    "dataStatus": {
+      "type": "integer",
+      "default": 1
+    },
+    "cover": {
+      "type": "text"
+    },
+    "name": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

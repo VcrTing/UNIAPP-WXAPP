@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_medias",
+  "info": {
+    "singularName": "product-media",
+    "pluralName": "product-medias",
+    "displayName": "ProductMedia"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "mediaType": {
+      "type": "integer"
+    },
+    "sortOrder": {
+      "type": "integer"
+    },
+    "url": {
+      "type": "text"
+    },
+    "urlSmall": {
+      "type": "text"
+    },
+    "isSex": {
+      "type": "integer"
+    },
+    "isAllow": {
+      "type": "integer",
+      "default": 1
+    },
+    "isGallery": {
+      "type": "integer"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "product_medias"
+    },
+    "w": {
+      "type": "decimal"
+    },
+    "h": {
+      "type": "decimal"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "medias"
+    }
+  }
+}

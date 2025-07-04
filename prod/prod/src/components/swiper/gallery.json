@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_swiper_galleries",
+  "info": {
+    "displayName": "Gallery",
+    "icon": "landscape"
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "text"
+    },
+    "w": {
+      "type": "decimal"
+    },
+    "h": {
+      "type": "decimal"
+    },
+    "isSex": {
+      "type": "integer"
+    },
+    "belongId": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,28 @@
+
+@use '../../sass/app/media-screen.sass' as *
+
+@function width($i)
+    @return $i * 1%
+
+// 无边界
+@for $i from 0 through 100
+    .w-#{$i}
+        width: width($i)
+
+/* ================================================================================== */
+
+// SMAII
+@each $k, $v in $smaii
+    @media screen and (#{$k}-width: #{$v}px)
+        .w-382-s
+            width: 38.2%
+        .w-618-s
+            width: 61.8%
+        .w-333-s
+            width: 33.3%
+        .w-666-s
+            width: 66.6%
+        @for $i from 0 through 100
+            .w-#{$i}-s
+                width: width($i)
+

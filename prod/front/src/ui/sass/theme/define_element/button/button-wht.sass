@@ -1,0 +1,48 @@
+
+@use '../../primary/' as *
+@use '../__conf' as *
+
+
+.shd-wht
+    box-shadow: 0px 0px 0px 0.3rem $btn-wht-shd
+
+.fx-hv-shd-wht:hover
+    @extend .shd-wht
+.fx-fcs-shd-wht:active, .fx-fcs-shd-wht:focus, .fx-fcs-shd-wht:focus-visible
+    @extend .shd-wht
+
+.fx-aii-btn-wht
+    @extend .fx-hv-shd-wht
+    @extend .fx-fcs-shd-wht
+    &:hover
+        background: $btn-wht-hv
+    &:active, &:focus, &:focus-visible
+        background: $btn-wht-hv
+        
+.fx-aii-btn-wht-s
+    @extend .fx-hv-shd-wht
+    @extend .fx-fcs-shd-wht
+    &:hover
+        background: $btn-wht-s
+    &:active, &:focus, &:focus-visible
+        background: $btn-wht-s
+
+.btn-wht
+    border-color: $btn-wht
+    background: transparent
+    background: $btn-wht
+    @extend .fx-aii-btn-wht
+.btn-wht-s
+    background: $btn-wht-s
+    backdrop-filter: blur(3px)
+    @extend .fx-aii-btn-wht
+    
+.bg-wht-t
+    background: $btn-wht-t
+.btn-wht-t
+    background: $btn-wht-t
+    backdrop-filter: blur(1px)
+    @extend .fx-aii-btn-wht
+
+
+        

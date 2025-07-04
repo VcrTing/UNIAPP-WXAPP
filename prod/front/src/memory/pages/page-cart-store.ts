@@ -1,0 +1,63 @@
+
+import { Store, createStore } from 'vuex';
+import memory_tool from '../__func/memory_tool';
+import { arrcoii, arrfind, arrfindi } from '@/tool/util/iodash';
+import { DEV_DOC_ID } from '@/conf/conf-dev';
+import { is_nice_arr } from '@/tool/util/valued';
+import cart_tool from '@/tool/modules/cart_tool';
+
+const _s: Store<Page.CartPageStore> = createStore({
+    
+    state: <Page.CartPageStore>{
+        num: 0,
+        __ioading: false,
+        carts: <Page.CartDataOptions>[ ],
+        carts_of_order: <Page.CartDataOptions>[ ]
+    },
+    getters: {
+        
+    },
+    mutations: {
+        __change: (s: ONE, v: ANYS) => s[ v[0] ] = v[1],
+        __num: (s: ONE) => { s.num = s.num + 1; },
+    },
+
+    actions: {
+        // 使用案例，vuex.dispatch('change', [ 'ioading', -1 ])
+        // 或者 authReFresh('ioading', -1)
+        change: (c: ONE, vs: ANYS) => (c.state[ vs[0] ] = vs[1]),
+        // 开启刷新
+        refresh: (c: ONE) => { c.commit('__num') },
+
+        // 加入购物车
+        cart_add: async ({ state, commit }, v: Product) => {
+            return await memory_tool.locking(state, commit, state.carts, async () => {
+                const carts: Page.CartDataOptions = cart_tool.cart_add(state.carts, v)
+                state.carts = carts
+                console.log('加入购物车 =', state.carts)
+            })
+        },
+        // 减去购物车
+        cart_min: async ({ state, commit }, v: Product) => {
+            return await memory_tool.locking(state, commit, state.carts, async () => {
+                const carts: Page.CartDataOptions = cart_tool.cart_min(state.carts, v)
+                state.carts = carts
+                console.log('减去购物车 =', state.carts)
+            })
+        },
+
+        // 减去 下单的
+        carts_clean: async ({ state, commit }, carts_finished: Page.CartDataOptions) => {
+            return await memory_tool.locking(state, commit, state.carts, async () => {
+                if (is_nice_arr(carts_finished)) {
+                    const choise: string[] = arrcoii(carts_finished, DEV_DOC_ID)
+                    const carts: Page.CartDataOptions = cart_tool.carts_clean(state.carts, choise)
+                    state.carts = carts
+                    console.log('清空已买的购物车 =', state.carts)
+                }
+            })
+        },
+    }
+})
+
+export default _s

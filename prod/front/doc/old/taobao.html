@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="card-container">
+        <div class="card">
+            <div class="card-image">
+            <img src="https://img0.baidu.com/it/u=3749404169,3428955615&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" alt="商品图片">
+            </div>
+            <div class="card-content">
+            <h3 class="card-title">商品标题</h3>
+            <p class="card-desc">商品描述信息...</p>
+            <div class="card-footer">
+                <span class="card-price">¥99.00</span>
+                <span class="card-sales">月销1000+</span>
+            </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-image">
+                <img src="https://img0.baidu.com/it/u=1553774219,250947781&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=749" alt="商品图片">
+            </div>
+            <div class="card-content">
+            <h3 class="card-title">商品标题</h3>
+            <p class="card-desc">商品描述信息...</p>
+            <div class="card-footer">
+                <span class="card-price">¥99.00</span>
+                <span class="card-sales">月销1000+</span>
+            </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-image">
+            <img src="https://img2.baidu.com/it/u=3443499407,3187460698&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=800" alt="商品图片">
+            </div>
+            <div class="card-content">
+            <h3 class="card-title">商品标题</h3>
+            <p class="card-desc">商品描述信息...</p>
+            <div class="card-footer">
+                <span class="card-price">¥99.00</span>
+                <span class="card-sales">月销1000+</span>
+            </div>
+            </div>
+        </div>
+        <!-- 更多卡片... -->
+    </div>
+
+    <style>
+        /* 其他样式与Flexbox版本相同 */
+
+        .card-price {
+        color: #ff5000;
+        font-size: 18px;
+        font-weight: bold;
+        position: relative;
+        padding-left: 15px;
+        }
+
+        .card-price::before {
+        content: "¥";
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 14px;
+        }
+
+        .card {
+            width: 186px;
+            overflow: hidden;
+            display: inline-block !important;
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</body>
+</html>
