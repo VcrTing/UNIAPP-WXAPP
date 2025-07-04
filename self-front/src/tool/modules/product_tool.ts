@@ -93,8 +93,8 @@ export default {
     },
 
     getprice: (v: Product): string => {
-        const src: number = v.price
-        return src + ''
+        const src: number = v.price || v.priceFirst
+        return (src || 0) + ''
     },
     getpricesub: (v: Product): string => {
         return '首单价'
