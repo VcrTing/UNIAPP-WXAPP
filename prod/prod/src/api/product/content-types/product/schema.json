@@ -105,6 +105,12 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "products"
+    },
+    "takeOffTime": {
+      "type": "datetime"
+    },
+    "takeOffNum": {
+      "type": "integer"
     }
   }
 }

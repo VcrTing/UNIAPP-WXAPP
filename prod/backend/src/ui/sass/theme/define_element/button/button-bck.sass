@@ -1,0 +1,39 @@
+
+@use '../../primary/' as *
+@use '../__conf' as *
+
+
+.shd-bck
+    box-shadow: 0px 0px 0px 0.3rem $btn-bck-shd
+
+.fx-hv-shd-bck:hover
+    @extend .shd-bck
+.fx-fcs-shd-bck:active, .fx-fcs-shd-bck:focus, .fx-fcs-shd-bck:focus-visible
+    @extend .shd-bck
+
+.fx-aii-btn-bck
+    @extend .fx-hv-shd-bck
+    @extend .fx-fcs-shd-bck
+    &:hover
+        background: $btn-bck-hv
+    &:active, &:focus, &:focus-visible
+        background: $btn-bck-hv
+        
+.fx-c-btn-bck
+    color: $btn-bck-tit
+    &:hover
+        color: $btn-bck-tit-hv
+    &:active, &:focus, &:focus-visible
+        color: $btn-bck-tit-hv
+
+.btn-bck
+    border-color: $btn-bck
+    background: transparent
+    border-color: transparent
+    background: $btn-bck
+    @extend .fx-c-btn-bck
+    @extend .fx-aii-btn-bck
+    
+
+
+        

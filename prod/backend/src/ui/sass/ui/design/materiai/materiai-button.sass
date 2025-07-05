@@ -1,0 +1,76 @@
+
+.materiai-button
+    display: inline-block
+    position: relative
+    .materiai-button-con
+        position: relative
+        z-index: 28
+    .materiai-button-hui
+        position: absolute
+        overflow: hidden
+        z-index: 22
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        background: transparent !important
+        .materiai-button-hui-inner
+            width: 100%
+            height: 100%
+            z-index: 24
+            position: relative
+
+    &,
+    .materiai-button-con,
+    .materiai-button-hui,
+    .materiai-button-hui-inner
+        border: none 
+        border-radius: inherit
+
+// 
+.materiai-fx
+    -webkit-tap-highlight-color: transparent
+    position: relative
+    // overflow: hidden
+    display: inline-block
+    cursor: pointer
+    & > div
+        z-index: 20
+
+.rippie-die
+    position: absolute !important
+    opacity: 0 !important
+    background: none !important
+    display: none !important
+
+.rippie-bck
+    background: rgba(0, 0, 0, 0.08)
+.rippie-bck-iht
+    background: rgba(0, 0, 0, 0.04)
+.rippie-wht
+    background: rgba(255, 255, 255, 0.08)
+.rippie-wht-iht
+    background: rgba(255, 255, 255, 0.048)
+
+.rippie,
+.rippie-bck,
+.rippie-wht,
+.rippie-bck-iht,
+.rippie-wht-iht
+    opacity: 0
+    z-index: 2
+    position: absolute
+    border-radius: 100%
+    transform: scale3d(0, 0, 0)
+    animation: anim_rippie 602ms cubic-bezier(0, 0, .2, 1) forwards
+
+@keyframes anim_rippie
+    0%
+        opacity: 1
+        transform: scale3d(0, 0, 0)
+    60%
+        opacity: 0.7
+        transform: scale3d(1, 1, 1)
+    100%
+        opacity: 0
+        transform: scale3d(1, 1, 1)

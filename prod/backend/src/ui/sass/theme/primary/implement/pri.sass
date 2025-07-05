@@ -1,0 +1,56 @@
+
+@use '../__conf' as *
+
+.c-pri
+    color: $pri 
+
+.fx-hv-c-pri:hover
+    @extend .c-pri
+.fx-fcs-c-pri
+    &:active, &:focus, &:focus-visible
+        @extend .c-pri
+
+.pri
+    color: $pri
+    &:hover
+        color: $pri-hv
+    &:active, &:focus, &:focus-visible
+        color: $pri-fcs
+
+
+.bd-pri
+    border-color: $pri
+
+.fx-hv-bd-pri:hover
+    @extend .bd-pri
+.fx-fcs-bd-pri
+    &:active, &:focus, &:focus-visible
+        @extend .bd-pri
+
+//
+.bg-pri
+    background: $pri
+.bg-pri-hv
+    background: $pri-hv
+.bg-pri-fcs
+    background: $pri-fcs
+
+//
+.fx-hv-bg-pri:hover
+    @extend .bg-pri-hv
+.fx-fcs-bg-pri
+    &:active, &:focus, &:focus-visible
+        @extend .bg-pri-fcs
+
+.shd-pri
+    box-shadow: 0px 0px 0px 0.3rem $pri-shd
+
+.fx-hv-shd-pri:hover
+    @extend .shd-pri
+.fx-fcs-shd-pri
+    &:active, &:focus, &:focus-visible
+        @extend .shd-pri
+
+//
+.bg-pri-shd
+    background-color: $pri-shd

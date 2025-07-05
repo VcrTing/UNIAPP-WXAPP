@@ -1,0 +1,45 @@
+
+@use '../../../app/view/__conf' as *
+@use '../../sec' as *
+@use './__button-tit' as *
+
+//    
+.fx-aii-btn-sec
+    @extend .fx-fcs-shd-sec
+    @extend .fx-hv-bg-sec
+    @extend .fx-fcs-bg-sec
+
+.btn-sec
+    @extend .fx-aii-btn-tit
+    @extend .c-btn-tit
+    @extend .bg-sec
+    @extend .fx-aii-btn-sec
+
+//    
+.fx-aii-btn-sec-out
+    background: $bg-con
+    @extend .fx-fcs-shd-sec
+    &:hover
+        background: $bg-con
+    &:active, &:focus, &:focus-visible
+        background: $bg-con
+
+.btn-sec-out
+    color: $sec
+    @extend .bd-sec
+    @extend .fx-aii-btn-sec-out
+
+//
+.fx-aii-btn-sec-iht
+    @extend .fx-hv-bd-sec
+    @extend .fx-fcs-bd-sec
+    @extend .fx-hv-bg-sec-iht
+    @extend .fx-fcs-bg-sec-iht
+    @extend .fx-fcs-shd-sec-iht
+
+.btn-sec-iht
+    color: $sec
+    background: $sec-iht
+    border-color: $sec-iht
+    @extend .fx-hv-c-sec
+    @extend .fx-aii-btn-sec-iht

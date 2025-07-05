@@ -1,0 +1,275 @@
+@font-face {
+  font-family: "i"; /* Project id 3063172 */
+  src: url('iconfont.woff2?t=1749286937057') format('woff2'),
+       url('iconfont.woff?t=1749286937057') format('woff'),
+       url('iconfont.ttf?t=1749286937057') format('truetype');
+}
+
+.i {
+  font-family: "i" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.i-bianji:before {
+  content: "\e6eb";
+}
+
+.i-shanchu:before {
+  content: "\e6ec";
+}
+
+.i-shoucang:before {
+  content: "\e6ed";
+}
+
+.i-dingwei:before {
+  content: "\101fe";
+}
+
+.i-shanchu1:before {
+  content: "\e618";
+}
+
+.i-fenxiang1:before {
+  content: "\e61a";
+}
+
+.i-xiaoxi3:before {
+  content: "\e61c";
+}
+
+.i-dingwei1:before {
+  content: "\e61d";
+}
+
+.i-biaoqian:before {
+  content: "\10208";
+}
+
+.i-shoucang1:before {
+  content: "\10209";
+}
+
+.i-shuju:before {
+  content: "\1020a";
+}
+
+.i-gouwu:before {
+  content: "\1020b";
+}
+
+.i-gengduo:before {
+  content: "\1020c";
+}
+
+.i-shouye:before {
+  content: "\1020d";
+}
+
+.i-riqi:before {
+  content: "\1020e";
+}
+
+.i-paizhao:before {
+  content: "\1020f";
+}
+
+.i-a-icon_quitbeifen21x:before {
+  content: "\e639";
+}
+
+.i-order_check:before {
+  content: "\e64f";
+}
+
+.i-order_close:before {
+  content: "\e6cc";
+}
+
+.i-location_stand:before {
+  content: "\e614";
+}
+
+.i-send_finished:before {
+  content: "\e600";
+}
+
+.i-send:before {
+  content: "\e9cc";
+}
+
+.i-bell:before {
+  content: "\e9d0";
+}
+
+.i-talk_failed:before {
+  content: "\ea9c";
+}
+
+.i-location_failed:before {
+  content: "\e855";
+}
+
+.i-bell_ring:before {
+  content: "\e601";
+}
+
+.i-contact_talk:before {
+  content: "\e61e";
+}
+
+.i-sends:before {
+  content: "\e7d6";
+}
+
+.i-erroro:before {
+  content: "\edb6";
+}
+
+.i-error:before {
+  content: "\e620";
+}
+
+.i-right:before {
+  content: "\e665";
+}
+
+.i-success:before {
+  content: "\e6d3";
+}
+
+.i-successt:before {
+  content: "\e65f";
+}
+
+.i-editf:before {
+  content: "\e9cf";
+}
+
+.i-edit:before {
+  content: "\ea14";
+}
+
+.i-rest:before {
+  content: "\e623";
+}
+
+.i-rightx:before {
+  content: "\e62c";
+}
+
+.i-rights:before {
+  content: "\e687";
+}
+
+.i-downb:before {
+  content: "\e697";
+}
+
+.i-downbb:before {
+  content: "\e69c";
+}
+
+.i-up:before {
+  content: "\e749";
+}
+
+.i-upi:before {
+  content: "\e6a1";
+}
+
+.i-down:before {
+  content: "\e7b2";
+}
+
+.i-downh:before {
+  content: "\e686";
+}
+
+.i-orderk:before {
+  content: "\e67f";
+}
+
+.i-order:before {
+  content: "\e713";
+}
+
+.i-orderr:before {
+  content: "\e602";
+}
+
+.i-orderb:before {
+  content: "\ebbc";
+}
+
+.i-minusr:before {
+  content: "\e698";
+}
+
+.i-location:before {
+  content: "\e61f";
+}
+
+.i-minus:before {
+  content: "\e8a7";
+}
+
+.i-locationr:before {
+  content: "\e609";
+}
+
+.i-gouwuche:before {
+  content: "\e63f";
+}
+
+.i-back:before {
+  content: "\e617";
+}
+
+.i-phone:before {
+  content: "\e6c2";
+}
+
+.i-moneyj:before {
+  content: "\e632";
+}
+
+.i-backn:before {
+  content: "\e7e0";
+}
+
+.i-phonel:before {
+  content: "\eb81";
+}
+
+.i-plus:before {
+  content: "\e668";
+}
+
+.i-wechat-pay:before {
+  content: "\e773";
+}
+
+.i-trash:before {
+  content: "\e655";
+}
+
+.i-backi:before {
+  content: "\e6db";
+}
+
+.i-phone1:before {
+  content: "\e875";
+}
+
+.i-money:before {
+  content: "\e897";
+}
+
+.i-plusr:before {
+  content: "\e694";
+}
+

@@ -1,0 +1,38 @@
+@use '../__conf' as *
+
+.bg-def-s
+    background: $def-s
+.bg-def-s-hv
+    background: $def-s-hv
+.bg-def-s-fcs
+    background: $def-s-fcs
+
+.fx-hv-bg-def-s:hover
+    @extend .bg-def-s-hv
+.fx-fcs-bg-def-s
+    &:active, &:focus, &:focus-visible
+        @extend .bg-def-s-fcs
+
+.shd-def-s
+    box-shadow: 0px 0px 0px 0.3rem $def-s-shd
+
+.fx-hv-shd-def-s:hover
+    @extend .shd-def-s
+.fx-fcs-shd-def-s
+    &:active, &:focus, &:focus-visible
+        @extend .shd-def-s
+
+.fx-aii-btn-def-s
+    @extend .fx-fcs-shd-def-s
+    @extend .fx-hv-bg-def-s
+    @extend .fx-fcs-bg-def-s
+
+.fx-aii-btn-bd-def-s
+    &:hover 
+        border-color: $def-s-hv
+    &:active, &:focus, &:focus-visible
+        border-color: $def-s-fcs
+
+.btn-def-s
+    @extend .bg-def-s
+    @extend .fx-aii-btn-def-s

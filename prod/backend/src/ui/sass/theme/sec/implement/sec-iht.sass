@@ -1,0 +1,29 @@
+
+@use '../__conf' as *
+
+
+.bd-sec-iht
+    border-color: $sec-iht
+
+.bg-sec-iht
+    background: $sec-iht
+.bg-sec-iht-hv
+    background: $sec-iht-hv
+.bg-sec-iht-fcs
+    background: $sec-iht-fcs
+
+.fx-hv-bg-sec-iht:hover
+    @extend .bg-sec-iht-hv
+.fx-fcs-bg-sec-iht:active, .fx-fcs-sec:focus, .fx-fcs-sec:focus-visible
+    @extend .bg-sec-iht-fcs
+
+.fx-hv-c-sec-iht:hover
+    background: $sec
+
+.shd-sec-iht
+    box-shadow: 0px 0px 0px 0.3rem $sec-iht-shd
+
+.fx-hv-shd-sec-iht:hover
+    @extend .shd-sec-iht
+.fx-fcs-shd-sec-iht:active, .fx-fcs-shd-sec-iht:focus, .fx-fcs-shd-sec-iht:focus-visible
+    @extend .shd-sec-iht

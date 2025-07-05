@@ -1,0 +1,4 @@
+
+type NET_SOURCE = 'MASTER' | 'COMPANY'
+
+type NET_SOURCE_DICT = { [k: NET_SOURCE]: ONE }

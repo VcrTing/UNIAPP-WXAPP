@@ -537,6 +537,8 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     sexStatus: Schema.Attribute.Integer;
     startSellTime: Schema.Attribute.DateTime;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
+    takeOffNum: Schema.Attribute.Integer;
+    takeOffTime: Schema.Attribute.DateTime;
     title: Schema.Attribute.String;
     titleSubForSell: Schema.Attribute.String;
     typed: Schema.Attribute.Integer;
