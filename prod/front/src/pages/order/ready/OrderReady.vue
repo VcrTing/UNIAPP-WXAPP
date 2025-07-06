@@ -27,10 +27,9 @@
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
-import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { DATA_PAYMENT_WAY_DEF } from '@/conf/conf-datas';
-import { authState, orderState, uiState } from '@/memory/global';
+import { authState, orderDispatch, orderState, uiState } from '@/memory/global';
 import { pageCartDispatch, pageCartState } from '@/memory/page';
 import server_checkout from '@/server/order/server_checkout';
 import cart_tool from '@/tool/modules/cart_tool';
@@ -59,7 +58,7 @@ const funn = {
         }
     }),
     vid: (): boolean => {
-
+        
         return true
     },
 
@@ -78,22 +77,26 @@ const func = {
         // 先新增一个订单
         const src: XOrder = await server_checkout.plus( data )
         if (src && src.documentId) {
-            await func.paying(src)
+            await func.next(src)
         }
     }),
+    next: async (xorder: XOrder) => {
+        pageCartDispatch('carts_clean', carts_of_order.value)
+        appRouter.order_succ(xorder)
+    },
+    /*
     paying: async (xorder: XOrder) => {
         console.log('打开支付页面');
-
         // 手动支付完成
         const src: XOrder = await server_checkout.checkout( xorder )
-
         if (src && src.documentId) {
             func.success()
         }
     },
-    success: () => {
+    */
+    success: (xorder: XOrder) => {
         pageCartDispatch('carts_clean', carts_of_order.value)
-        appRouter.order_succ()
+        appRouter.order_succ(xorder)
     }
 }
 

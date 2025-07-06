@@ -13,7 +13,7 @@
             <view class="py-s"></view>
             <view class="bg-con">
                 <view class="pt">
-                    <CoMoOrderMsgLine :tit="'总计'">
+                    <CoMoOrderMsgLine :tit="'金额总计'">
                         <view class="money">
                             <text>￥</text>
                             <text class="h7 fw-550">{{ price }}</text>
@@ -45,8 +45,12 @@
             <view class="py-s"></view>
             <view class="bg-con">
                 <CoMoOrderMsgLine :tit="'所属客服'" :clazz="'fx-t'">
-                    <view v-for="(v, i) in info.contacts" :key="i" class="pb-s">
-                        <CoMoContactBlock :v="v"/>
+                    <view v-if="info.contacts">
+                        <view v-for="(v, i) in info.contacts" :key="i" 
+                            :class="info.contacts.length > 1 ? 'pb' : ''"
+                        >
+                            <CoMoContactBlock :v="v"/>
+                        </view>
                     </view>
                 </CoMoOrderMsgLine>
                 

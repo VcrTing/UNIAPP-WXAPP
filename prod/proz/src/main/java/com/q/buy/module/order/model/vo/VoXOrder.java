@@ -64,6 +64,8 @@ public class VoXOrder {
     // 购买产品的详情
     List<Map<String, Object>> carts;
 
+    Map<String, Object> user;
+
     // 下单用户
     String userCode;
     String userPhone;
@@ -89,6 +91,13 @@ public class VoXOrder {
         }
         return null;
     }
+    public static Map<String, Object> getCvsUser(XOrder order) {
+        if (StringUtils.hasLength(order.getUserCode())) {
+            Map res = JSONUtil.toBean(order.getUserCode(), Map.class);
+            return res;
+        }
+        return null;
+    }
 
     public static IPage<VoXOrder> initOfPager(IPage<XOrder> page) {
         List<XOrder> srcList = page.getRecords();
@@ -101,6 +110,7 @@ public class VoXOrder {
         for (XOrder order : srcList) {
             VoXOrder one = QBeanUtil.convert(order, VoXOrder.class);
             one.setCarts(getCarts(order));
+            one.setUser(getCvsUser(order));
             res.add(one);
         }
         return res;

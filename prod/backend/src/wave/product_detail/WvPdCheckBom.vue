@@ -64,7 +64,7 @@ const funn = {
         if (src && src.documentId) {
             await pageIndexDispatch('refresh')
             pan_tooi.close_pan(cfm.idx)
-            emt('refresh')
+            uniRouter.back()
         }
     }),
     fail: (v: Product) => futuring(aii, async() => {

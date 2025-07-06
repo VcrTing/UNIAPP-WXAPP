@@ -510,6 +510,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     introduction: Schema.Attribute.Text;
     inv: Schema.Attribute.Integer;
     invTyped: Schema.Attribute.Integer;
+    invWeak: Schema.Attribute.Integer;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

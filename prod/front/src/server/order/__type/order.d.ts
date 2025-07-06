@@ -13,6 +13,7 @@ interface XOrder {
     userPhone: string
     userDocumentId: string
 
+    user: User
     carts: Page.CartDataOptions
 
     name: string

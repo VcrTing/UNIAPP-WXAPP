@@ -25,28 +25,36 @@ import { DEV_PRODUCT } from "@/conf/conf-dev"
         return mds
     }   
 
+    const init_inv = (invTyped: number, res: ONE) => {
+        // 库存设计
+        // 单件
+        if (invTyped === DEV_PRODUCT.INV_TYPED.ALONE) {
+            res['inv'] = 1;
+        }
+        // 无限制
+        else if (invTyped === DEV_PRODUCT.INV_TYPED.INFINI) {
+            res['inv'] = 999999
+        }
+        res['invWeak'] = res['inv']
+        return res
+    }
     const build_edit_data = (src: ONE) => {
         
         const tgsid = arrgotv(src.tags)
-        const typed: number = src.typed
         const userid: number = authGetters.userid
 
         let res: ONE = { }
         formfiimit(res, src, [ 
             'title', 'introduction', 'typed',
-            'inv', 'invTyped',
-            'price', 'priceFirst', 
-            // 'address', 'city', 'area', 'latitude', 'longitude',
-            // 'startTime', 'endTime', 'participantLimit',
-            // 'activity_medias'
+            'inv', 'invTyped', 'price', 'priceFirst', 
         ])
         res['user'] = userid
         res['tags'] = tgsid
 
-        // 私密活动
-        if (typed == DATA_ACTIVITY_TYPED_SM.v) {
-            res['participantLimit'] = DATA_PUBLISH_LIMIT.JOINER
-        }
+        // 库存设计
+        const invTyped = src.invTyped
+        // 单件
+        src = init_inv(invTyped, res)
         return res
     }
 
@@ -125,6 +133,7 @@ import { DEV_PRODUCT } from "@/conf/conf-dev"
     }
 
 export default {
+    init_inv,
     is_review_no,
     
     is_inv_many,

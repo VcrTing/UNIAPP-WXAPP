@@ -54,9 +54,6 @@ public class XOrder {
     Date sendStartTime;
     Date sendEndTime;
 
-    // 购买产品的详情
-    String cartsJson;
-
     // 下单用户
     String userCode;
     String userPhone;
@@ -82,4 +79,11 @@ public class XOrder {
     Long orderLockId;
 
     String sendFinishedRemark;
+
+    String orderCode;
+
+    // 用户 JSON
+    String userJson;
+    // 购买产品的详情
+    String cartsJson;
 }

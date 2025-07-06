@@ -3,6 +3,7 @@ import { must_arr, must_int } from "../util/valued"
 import { STS_ORDER } from "@/conf/conf-status"
 import { DEV_DOC_ID } from "@/conf/conf-dev"
 import { prodState } from "@/memory/moduies"
+import { authState } from "@/memory/global"
 
 const group_order_data = (form: ONE, xuser: User, carts: Page.CartDataOptions): XOrder => {
     return <XOrder>{
@@ -17,6 +18,7 @@ const group_order_data = (form: ONE, xuser: User, carts: Page.CartDataOptions): 
         userDocumentId: xuser.documentId,
 
         carts,
+        user: authState.user,
 
         name: xuser.nickName,
         phone: xuser.phone,

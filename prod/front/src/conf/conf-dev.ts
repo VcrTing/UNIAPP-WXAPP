@@ -74,6 +74,10 @@ export const DEV_ORDER = {
         DEF: [
             { K: 'createdAt', DESC: true }
         ]
+    },
+    // 支付窗口时间
+    PAY: {
+        WAITING_MINUTE: 15
     }
 }
 

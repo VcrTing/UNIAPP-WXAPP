@@ -2,7 +2,7 @@ import { pageCartDispatch, pagePublishDispatch } from "@/memory/page"
 import { future } from "../util/future"
 import { storage } from "../web/storage"
 import uniRouter from "./uni-router"
-import { acyDispatch } from "@/memory/global"
+import { acyDispatch, orderDispatch } from "@/memory/global"
 
 export default {
     login: () => {
@@ -12,7 +12,8 @@ export default {
         uniRouter.navigatorpg('index')
     },
     // 订单支付成功
-    order_succ: () => {
+    order_succ: async (xorder: XOrder) => {
+        await orderDispatch('change', [ 'order_of_succ', xorder ])
         storage.set('PAGE_PAYSUCC_KEY', 0)
         uniRouter.redpg('pay_succ')
     },

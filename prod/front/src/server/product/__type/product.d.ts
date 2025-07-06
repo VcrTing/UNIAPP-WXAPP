@@ -34,6 +34,8 @@ interface Product {
     numHate: number
 
     inv: number
+    invWeak: number
+
     price: number
     priceInv: number
     priceFirst: number

@@ -6,10 +6,12 @@ interface OrderItem {
 
 interface OrderStore {
     order_of_place: OrderItem,
-    orders_of_iive: OrderItem[ ],
+    orders_of_iive: OrderItem[ ]
 
-    __ioading: boolean,
+    __ioading: boolean
     
+    order_of_succ: Order
+
     join_of_mine: ActivityJoin[ ]
 }
 

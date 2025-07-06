@@ -3,18 +3,19 @@ package com.q.buy.module.order.tool;
 import com.q.buy.framework.exception.QException;
 import com.q.buy.module.order.form.OrderAddForm;
 import com.q.buy.module.order.form.OrderPayForm;
+import com.q.buy.module.order.form.cart.OrderShoppingCart;
 import com.q.buy.module.order.model.entity.XOrder;
 import com.q.buy.module.order.model.entity.XOrderLock;
 import com.q.buy.module.order.service.OrderLockServiceImpl;
 import com.q.buy.module.order.service.OrderServiceImpl;
+import com.q.buy.module.product.service.ProductServiceImpl;
 import com.q.buy.util.database.SnowflakeIdWorker;
 import com.q.buy.util.q.QVUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 
 @Component
 public class CheckOutTool {
@@ -23,6 +24,9 @@ public class CheckOutTool {
     OrderServiceImpl orderService;
     @Autowired
     OrderLockServiceImpl orderLockService;
+
+    @Autowired
+    ProductServiceImpl productService;
 
     SnowflakeIdWorker snow = new SnowflakeIdWorker( 0,0);
 
@@ -35,11 +39,14 @@ public class CheckOutTool {
             Long orderId = snow.nextId();
             order.setId(orderId);
             order.setDocumentId(QVUtil.serStr(orderId));
+            order.setOrderCode(order.getDocumentId());
             // 加订单
             boolean isOK = orderService.save(order);
             if (!isOK) {
                 throw new QException("新增订单失败，请重新提交。");
             }
+            // 扣库存
+            productService.costInvWhenOrder(OrderShoppingCart.getProductIdList(form.getCarts()), order.getDocumentId());
             // 加锁
             XOrderLock xOrderLock = orderLockService.add(order);
             if (xOrderLock != null) {

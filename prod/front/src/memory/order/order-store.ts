@@ -11,6 +11,8 @@ const _s: Store<OrderStore> = createStore({
         order_of_place: <OrderItem>{ },
         // 进行中的订单
         orders_of_iive: <OrderItem[]>[ ],
+        // 当前下单成功
+        order_of_succ: <XOrder>{ },
 
         // 用户的参与记录
         join_of_mine: <ActivityJoin[]>[ ],

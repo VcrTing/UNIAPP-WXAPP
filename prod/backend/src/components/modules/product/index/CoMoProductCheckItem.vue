@@ -68,7 +68,7 @@
                                 {{ product_tool.getinv_typed_txt(v) }}
                             </OButtonTag>
                         </view>
-                        <OButton clazz="fs-t" @tap="emt('pass', v)">审核</OButton> 
+                        <OButtonTag clazz="fs-t px-s py-t br-rnd" @tap="emt('pass', v)">审核通过</OButtonTag> 
                     </view>
                 </view>
             </view>

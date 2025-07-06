@@ -18,6 +18,14 @@ export const APP_GENERATE_DETAIL = <AppInfo>{
     ]
 }
 
+export const CONTACT_DEF = <User> {
+    nickName: '苏朵朵',
+    phone: '13576639986',
+    avatarUrl: 'https://ww4.sinaimg.cn/mw690/008apmBfgy1hyd10ozzjnj30u00u0q4k.jpg',
+    socialAccount: '13576639986',
+    gender: 1, age: 22
+}
+
 export const app_confirm = () => pan_tooi.open_def_b(1001, { opacity: 0.4 })
 
 export const APP_BAR_JOINER = <CoAppBottomBarItem[]> [

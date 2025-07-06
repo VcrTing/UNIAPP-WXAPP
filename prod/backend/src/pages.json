@@ -43,6 +43,9 @@
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "订单进行中" } },
 				
+		{ "path": "pages/order/order", "style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "订单" } },
 		{ "path": "pages/product/detail/ProductDetail", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "商品详情" } }

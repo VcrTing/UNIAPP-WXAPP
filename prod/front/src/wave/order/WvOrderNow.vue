@@ -36,7 +36,7 @@
                             <view class="fx-r px-row py-s fx-fcs-bg-def">
                                 <view class="pi-s">
                                     <CkSimpleTag :clazz="'btn-def fx-c px-s'">
-                                        <text class="fs-t cos">{{ times.fmts(v.createdAt) }}</text>
+                                        <text class="fs-t tis">{{ times.fmts(v.createdAt) }}</text>
                                     </CkSimpleTag>
                                 </view>
                                 <view class="pi-s">
@@ -47,7 +47,7 @@
                                     </view>
                                     <view v-else>
                                         <CkSimpleTag :clazz="'btn-err fx-c px-s'">
-                                            <text class="fs-t ">已支付</text>
+                                            <text class="fs-t ">未支付</text>
                                         </CkSimpleTag>
                                     </view>
                                 </view>
@@ -69,7 +69,6 @@ import { must_arr, must_one } from '@/tool/util/valued';
 import { computed, nextTick, reactive } from 'vue';
 import order_tool from '@/tool/modules/order_tool';
 import CoMoOrderProductItem from './__component/CoMoOrderProductItem.vue';
-import CkDefTag from '@/cake/visual/tag/CkDefTag.vue';
 import CkSimpleTag from '@/cake/visual/tag/CkSimpleTag.vue';
 import times from '@/tool/web/times';
 import open_of_product from '@/server/__func/open_of_product';

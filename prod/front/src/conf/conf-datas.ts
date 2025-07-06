@@ -76,6 +76,9 @@ export const DATA_PUBLISH_BANNER_DEF = {
 }
 
 // 支付方式
+export const DATA_WX_COVER = <Media>{
+    url: 'https://gips0.baidu.com/it/u=2981205666,3076745725&fm=3074&app=3074&f=JPEG?w=622&h=494&type=normal&func='
+}
 export const DATA_PAYMENT_WAY_DEF = {
     name: '微信支付', code: 'wx',
     cover: 'https://gips0.baidu.com/it/u=2981205666,3076745725&fm=3074&app=3074&f=JPEG?w=622&h=494&type=normal&func='

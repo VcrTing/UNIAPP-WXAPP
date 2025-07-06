@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,5 +29,13 @@ public class OrderShoppingCart {
         if (QVUtil.notLen(documentId)) {
             throw new QException("为找到产品 DOC ID。");
         }
+    }
+
+    public static List<String> getProductIdList(List<OrderShoppingCart> carts) {
+        List<String> productIdList = new ArrayList<>();
+        for (OrderShoppingCart cart : carts) {
+            productIdList.add(cart.getDocumentId());
+        }
+        return productIdList;
     }
 }

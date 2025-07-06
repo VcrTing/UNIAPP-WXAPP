@@ -1,6 +1,6 @@
 <template>
     <view class="fx-i" @tap="emt('view', v)">
-        <view class="w-22 h-9vh br-1 o-h">
+        <view class="w-15 h-6vh br-1 o-h">
             <CoImg clazz="h-100" :src="product_tool.getcover(v.product).urlSmall"/>
         </view>
         <view class="fx-1">
@@ -11,9 +11,6 @@
                 <view>
 
                 </view>
-            </view>
-            <view class="mh-1em">
-                <CoMoProductSubTitle :v="v.product" v-if="v.product" :clazz="'px'"/>
             </view>
             <view class="px">
                 <view class="fx-s fx-b">

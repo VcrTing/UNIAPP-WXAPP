@@ -74,6 +74,7 @@ const funn = {
         // 初始化状态
         res[STS_PRODUCT.STATUS.K] = STS_PRODUCT.STATUS.EDITING
         res[STS_PRODUCT.REVIEW.K] = STS_PRODUCT.REVIEW.WAITING
+        res['invWeak'] = res.inv
         // 构建搜索
         // res['startTime'] = times.build_of_form(src.__start)
         // res['endTime'] = times.build_of_form(src.__end)

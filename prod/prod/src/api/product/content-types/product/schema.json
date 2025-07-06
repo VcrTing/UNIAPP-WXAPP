@@ -111,6 +111,9 @@
     },
     "takeOffNum": {
       "type": "integer"
+    },
+    "invWeak": {
+      "type": "integer"
     }
   }
 }

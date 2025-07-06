@@ -42,6 +42,8 @@ public class OrderAddForm {
     String userPhone;
     String userDocumentId;
 
+    Map<String, Object> user;
+
     // 化为新增
     public XOrder toXOrder() {
         XOrder xOrder = new XOrder();
@@ -68,6 +70,10 @@ public class OrderAddForm {
         }
         if (num == null) {
             throw new RuntimeException("数量 = 0，啥都没有吗？");
+        }
+
+        if (user == null) {
+            throw new RuntimeException("用户 = 0，啥都没有吗？");
         }
 
         //
@@ -106,7 +112,7 @@ public class OrderAddForm {
         xOrder.setAliveStatus(0);
         xOrder.setRefundStatus(0);
         //
-
+        xOrder.setUserJson(JSONUtil.toJsonStr(user));
         return xOrder;
     }
 }

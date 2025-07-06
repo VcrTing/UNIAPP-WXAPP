@@ -115,8 +115,8 @@ const funn = {
 
         const newset: Product = prp.v || { }
         const startTime = newset.startSellTime
-        // 简单检查库存
-        // 检查在售时间
+        // 简单检查虚拟库存
+
         // 过
         return true;
     },

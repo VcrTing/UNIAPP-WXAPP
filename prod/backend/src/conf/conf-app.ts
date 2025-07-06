@@ -60,18 +60,6 @@ export const APP_BAR_JOINER = <CoAppBottomBarItem[]> [
             uniRouter.navigatorpg('publish')
         }
     },
-    {
-        tit: '订单',
-        icon: 'form',
-        icon_iive: 'form',
-        path: 'pages/order/order',
-        respond_standard_code: 'order',
-        clazz_die: '',
-        clazz_iive: 'app-bottom-bar-item-iive',
-        func: () => {
-            uniRouter.navigatorpg('order')
-        }
-    },
     /*
     {
         tit: '消息',
@@ -98,6 +86,18 @@ export const APP_BAR_JOINER = <CoAppBottomBarItem[]> [
         }
     },
     */
+    {
+        tit: '订单',
+        icon: 'form',
+        icon_iive: 'form',
+        path: 'pages/order/order',
+        respond_standard_code: 'order',
+        clazz_die: '',
+        clazz_iive: 'app-bottom-bar-item-iive',
+        func: () => {
+            uniRouter.navigatorpg('order')
+        }
+    },
     {
         tit: '我的',
         icon: 'user',

@@ -57,6 +57,9 @@ const takeon = async (v: Product, inv: number): Promise<Product> => {
     if (product_tool.show_inv_many(v)) {
         __pm['inv'] = must_int(inv)
     }
+    //
+    product_tool.init_inv(v.invTyped, __pm)
+    //
     return await edit(__pm, { documentId })
 } 
 
