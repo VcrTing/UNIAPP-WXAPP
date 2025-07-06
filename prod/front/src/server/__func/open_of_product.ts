@@ -11,7 +11,17 @@ const view = async (one: Product) => {
         uniRouter.gopg('product_detail');
     }
 }
+const view_buy = async (one: Product) => {
+    const docid: string = one.documentId || ''
+    if (docid) {
+        const src: Product = await server_product.mine_buy_byid(docid)
+        console.log('访问 商品 =', src, ' one =', one)
+        prodReFresh('view', src)
+        uniRouter.gopg('product_detail');
+    }
+}
 
 export default {
-    view
+    view,
+    view_buy
 }

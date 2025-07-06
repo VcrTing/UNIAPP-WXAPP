@@ -9,6 +9,7 @@
                 <CoAppTopBackBar @back="funn.back" :clazz_i="'c-fff'"></CoAppTopBackBar>
             </template>
             <template #con>
+                
                 <WvPdTitle :v="view"/>
                 <WvPdPublisherS v-if="!sts.is_buyed" :info="info" :v="view" :sts="sts" :is_publisher="is_publisher"/>
                 <WvPdPrice :v="view" :sts="sts" :is_publisher="is_publisher"/>

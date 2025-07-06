@@ -18,9 +18,6 @@ public class Product {
     Long id;
     String documentId;
     Date createdAt;
-    Date updatedAt;
-    String updatedBy;
-    String createdBy;
 
     Integer inv;
     Integer InvTyped;
@@ -29,4 +26,8 @@ public class Product {
     String title;
 
     Integer dataStatus;
+
+    Integer numSell;
+    Integer numHot;
+
 }

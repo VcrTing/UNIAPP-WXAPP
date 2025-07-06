@@ -28,7 +28,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> {
     public List<Product> getByIds(List<String> idList) {
         if (QListUtil.isBadList(idList)) { throw new QException("PIDs = null."); }
         LambdaQueryWrapper<Product> wrapper = new LambdaQueryWrapper<>();
-        wrapper.in(Product::getId, idList);
+        wrapper.in(Product::getDocumentId, idList);
         wrapper.orderByAsc(Product::getId);
         return list(wrapper);
     }
@@ -36,7 +36,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> {
     public List<Product> getByIdsForOrder(List<String> idList) {
         if (QListUtil.isBadList(idList)) { throw new QException("PIDs = null."); }
         LambdaQueryWrapper<Product> wrapper = new LambdaQueryWrapper<>();
-        wrapper.in(Product::getId, idList);
+        wrapper.in(Product::getDocumentId, idList);
         wrapper.orderByAsc(Product::getId);
         return list(wrapper);
     }
@@ -59,23 +59,24 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> {
         Integer invTyped = product.getInvTyped();
         // 新库存数量
         Integer invWeak = product.getInvWeak();
+
+        // 加热度
+        product.setNumHot(QVUtil.serInt(product.getNumHot(), 0) + 1);
+        product.setNumSell(QVUtil.serInt(product.getNumSell(), 0) + 1);
+
         // 一件库存
         if (invTyped == 2) {
-            if (invWeak <= 0) {
-                // 下架产品
-                product.setDataStatus(4);
-            }
         }
         // 多数库存
         else if (invTyped == 1) {
-            if (invWeak <= 0) {
-                // 下架产品
-                product.setDataStatus(4);
-            }
         }
         // 无限库存
         else {
 
+        }
+        if (invWeak <= 0) {
+            // 下架产品
+            product.setDataStatus(4);
         }
         return product;
     }
@@ -87,6 +88,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> {
         try {
             if (KeyLock.lock(k)) {
                 List<Product> productList = getByIdsForOrder(productIdList);
+                if (QListUtil.isBadList(productList)) { throw new QException("PRODUCT = null."); }
                 enoughInv(productList);
                 for (Product p : productList) {
                     Integer invWeak = p.getInvWeak();

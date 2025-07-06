@@ -27,6 +27,7 @@ public class VoXOrder {
     Date updatedAt;
     String updatedBy;
     String createdBy;
+    Integer version;
 
     // 配送消息
     BigDecimal longitude;
@@ -93,7 +94,7 @@ public class VoXOrder {
     }
     public static Map<String, Object> getCvsUser(XOrder order) {
         if (StringUtils.hasLength(order.getUserCode())) {
-            Map res = JSONUtil.toBean(order.getUserCode(), Map.class);
+            Map res = JSONUtil.toBean(order.getUserJson(), Map.class);
             return res;
         }
         return null;

@@ -58,7 +58,7 @@ const aii = reactive(<ONE>{
     ioading: false, iive: 0, init: false,
     tabs: [
         { name: '已购', v: 0 },
-        { name: '全站排行', v: 1 },
+        { name: '与我相关', v: 1 },
     ],
 })
 // 

@@ -1,5 +1,6 @@
 <template>
     <view class="w-100 softer">
+
         <view class="softer" v-if="modback">
             <CoBomBackBtn :clazz="'btn-wht-s'"/>
         </view>
@@ -71,7 +72,6 @@ import OButton from '@/cake/button/OButton.vue';
 import Ov from '@/cake/button/touch/Ov.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
-import { orderReFresh } from '@/memory/global';
 import { pageCartDispatch } from '@/memory/page';
 import cart_tool from '@/tool/modules/cart_tool';
 import auth_tool from '@/tool/modules/common/auth_tool';

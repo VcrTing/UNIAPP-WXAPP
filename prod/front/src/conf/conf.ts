@@ -8,6 +8,8 @@ export const IS_DEBUG_LOG = true
 // 是否 开启 测试 模式
 export const IS_TEST_MODE = true
 
+export const IS_TEST_DEV = true
+
 // 网络有关的 配置，请查看 net.ts
 export const TEST_LOGIN_USER: ONE = {
     'ADMIN': <ONE>{

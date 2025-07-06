@@ -92,7 +92,12 @@ const funn = {
     init: () => promise(() => {
         funn.fetching()
     }),
-    chose: (one: ONE) => { house.iive = one; },
+    chose: (one: ONE) => { 
+        if (house.iive === one) {
+            funn.init()
+        }
+        house.iive = one; 
+    },
     checkIive: (one: ONE) => { const v = one.v; return house.iive.v === v; },
 }
 nextTick(funn.init)
@@ -107,7 +112,7 @@ const menus = computed((): ONE[] => {
 //
 const func = {
     view: (v: Page.CartDataOption) => futuring(house, async () => {
-        await open_of_product.view(must_one(v.product))
+        await open_of_product.view_buy(must_one(v.product))
     })
 }
 </script>

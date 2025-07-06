@@ -53,6 +53,19 @@ const byid = async (docid: string): Promise<Product> => {
     return must_one(src[0])
 }
 
+const mine_buy_byid = async (docid: string): Promise<Product> => {
+    const __ids: string[] = [ ]
+    __ids.push( docid )
+    const param: ONE = { }
+    // ID = 这些
+    srp_p.build_filter_in(param, DEV_DOC_ID, __ids || [ ])
+    // 审核通过的
+    srp_p.__eq(param, STS_PRODUCT.REVIEW.K, STS_PRODUCT.REVIEW.YES)
+    // 返回
+    const src: Product[] = await fetching(param, net_tool.__pager_long(), relations_of_details)
+    return must_one(src[0])
+}
+
 // 我的
 const mine_history = async (): Promise<Product[]> => {
     const param: ONE = { }
@@ -72,6 +85,7 @@ const view1 = async (one: Product): Promise<Product> => {
 
 export default {
     mine_history,
+    mine_buy_byid,
     byid,
     byids,
     index,

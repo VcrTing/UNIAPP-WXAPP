@@ -1,12 +1,12 @@
 <template>
-    <view class="fx-i" @tap="emt('view', v)">
+    <view class="fx-i">
         <view class="w-15 h-6vh br-1 o-h">
-            <CoImg clazz="h-100" :src="product_tool.getcover(v.product).urlSmall"/>
+            <CoImg clazz="h-100" @tap="emt('view', v)" :src="product_tool.getcover(v.product).urlSmall"/>
         </view>
         <view class="fx-1">
             <view class="fx-s mh-1em pb-s px">
                 <view class="fx-1">
-                    <view class="fs-w">{{ product_tool.gettitle(v.product) }}</view>
+                    <view class="fs-w" @tap="emt('view', v)">{{ product_tool.gettitle(v.product) }}</view>
                 </view>
                 <view>
 

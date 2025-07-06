@@ -26,7 +26,7 @@ export const DATA_PRODUCT_TYPED_INV_MANY = <Conf.Tab>{ name: '多数量库存', 
 export const DATA_PRODUCT_TYPED_INV_INFINI = <Conf.Tab>{ name: '无限制', v: 0 }
 export const DATA_PRODUCT_TYPED_INV = <Conf.Tabs>[
     DATA_PRODUCT_TYPED_INV_ALONE,
-    DATA_PRODUCT_TYPED_INV_MANY,
+    // DATA_PRODUCT_TYPED_INV_MANY,
     DATA_PRODUCT_TYPED_INV_INFINI
 ]
 

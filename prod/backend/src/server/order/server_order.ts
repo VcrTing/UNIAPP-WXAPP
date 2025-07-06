@@ -36,7 +36,12 @@ const mine = async (param: ONE, pager: Pager): Promise<XOrder[]> => {
     return await fetching(param, pager)
 }
 
+// 需要设置状态
+const working = async (param: ONE = { }, pager: Pager): Promise<XOrder[]> => {
+    param[STS_ORDER.PAY.K] = STS_ORDER.PAY.NO
+    return await fetching(param, pager)
+}
+
 export default {
-    all,
-    mine
+    working
 }

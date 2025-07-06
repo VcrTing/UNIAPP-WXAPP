@@ -54,6 +54,14 @@
                     </view>
                 </view>
             </view>
+
+            <!-- -->
+            <view v-if="IS_TEST_DEV">
+                <view class="px-row fs-t pb-col">
+                    <view class="px-t br-1 btn-def d-ib">{{ product_tool.getinv_typed_txt(v) }}</view>
+                    <view class="pi-s d-ib">库存: {{ v.inv }}, 虚拟: {{ v.invWeak }}</view>
+                </view>
+            </view>
         </view>
     </view>
 </template>
@@ -66,6 +74,7 @@ import { computed } from 'vue';
 import CoMoProductSubTitle from '../inner/CoMoProductSubTitle.vue';
 import UiI from '@/ui/element/i/UiI.vue';
 import OButtonTag from '@/cake/button/OButtonTag.vue';
+import { IS_TEST_DEV } from '@/conf/conf';
 
 const prp = defineProps<{
     v: Product, w: number,

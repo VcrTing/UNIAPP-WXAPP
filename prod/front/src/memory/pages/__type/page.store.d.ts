@@ -2,6 +2,7 @@ namespace Page {
     interface IndexPageStore {
         city: Conf.City
         
+        num: number
         ioading: number
         indextags: Tag[]
 

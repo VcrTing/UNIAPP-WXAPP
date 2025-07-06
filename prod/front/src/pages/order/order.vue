@@ -14,7 +14,7 @@
                             :clazz="'ts py-s px-row br-s mx-s'">
                             <text class="fw-550">{{ v.name }}</text>
                         </OButton>
-                        <view @tap="aii.iive = v.v" class="ts py-s px-row fx-aii-btn-wht-s" v-else>
+                        <view @tap="funn.choise" class="ts py-s px-row fx-aii-btn-wht-s" v-else>
                             <text class="tid fs-w">{{ v.name }}</text>
                         </view>
                     </view>
@@ -44,6 +44,8 @@ import CoAppBottomBar from '@/components/app/bar/CoAppBottomBar.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { orderState, uiGetters, uiState } from '@/memory/global';
 import { pageCartState } from '@/memory/page';
+import appRouter from '@/tool/uni/app-router';
+import uniRouter from '@/tool/uni/uni-router';
 import { futuring, promise, timeout } from '@/tool/util/future';
 import { storage } from '@/tool/web/storage';
 import WvIndexBanner from '@/wave/index/WvIndexBanner.vue';
@@ -63,6 +65,10 @@ const aii = reactive(<ONE>{
 })
 // 
 const funn = {
+    choise: (v: number) => {
+        aii.iive = v;
+        storage.set('PAGE_ORDER_KEY', 0)
+    },
     init: () => promise(() => { aii.iive = code.value; })
 }
 nextTick(funn.init)
