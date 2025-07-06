@@ -1,3 +1,4 @@
+import { pageIndexDispatch } from "@/memory/page"
 import pan_tooi from "@/tool/app/pan_tooi"
 import appRouter from "@/tool/uni/app-router"
 import uniRouter from "@/tool/uni/uni-router"
@@ -22,7 +23,7 @@ export const app_confirm = () => pan_tooi.open_def_b(1001, { opacity: 0.4 })
 
 export const APP_BAR_JOINER = <CoAppBottomBarItem[]> [
     {
-        tit: '首页',
+        tit: '审核',
         icon: 'alexa',
         icon_iive: 'alexa',
         path: 'pages/index/index',
@@ -31,8 +32,10 @@ export const APP_BAR_JOINER = <CoAppBottomBarItem[]> [
         clazz_iive: 'app-bottom-bar-item-iive',
         func: () => {
             uniRouter.navigatorpg('index')
+            pageIndexDispatch('refresh')
         }
     },
+    /*
     {
         tit: '购物车',
         icon: 'cart',

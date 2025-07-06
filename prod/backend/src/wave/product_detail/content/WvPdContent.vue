@@ -1,8 +1,7 @@
 <template>
     <view class="softer" v-if="product_tool.has_content(v)">
         <view v-if="sts.is_buyed" class="pt-s">
-            <view><view class="h-1 bg-hr"></view></view>
-            <!--<CoMoPdHeader>内容</CoMoPdHeader>-->
+            <view class="h7 py-x2 px-row"><view class="px-col">商品内容</view></view>
             <CoViDataLoading :ioading="me.ioading" :items="me.contents">
                 <view class="">
                     <view v-for="(n, m) in me.contents" :key="m">

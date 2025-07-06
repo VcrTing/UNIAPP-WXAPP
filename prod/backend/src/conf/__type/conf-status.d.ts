@@ -20,6 +20,7 @@ namespace Conf {
     interface ReviewStatus {
         K: string
         WAITING: number | null
+        CHECKING: number
         YES: number
         NO: number
     }

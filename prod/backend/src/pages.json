@@ -6,12 +6,6 @@
 		{ "path": "pages/auth/login/login", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "登录" } },
-		{ "path": "pages/interact/interaction", "style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "互动" } },
-		{ "path": "pages/order/order", "style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "订单" } },
 		{ "path": "pages/publish/publish", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "发布" } },
@@ -21,27 +15,12 @@
 		{ "path": "pages/user/user", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "我的" } },
-		{ "path": "pages/auth/intor/AuthIntor", "style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "发起者登录" } },
 		{ "path": "pages/ui/ui/ui", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "UI" } },
-		{ "path": "pages/common/choose/AnyChoose", "style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "用户选择" } },
-		{ "path": "pages/common/security/AuthSecurity", "style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "安全与协议" } },
 		{ "path": "pages/common/manager/UserManager", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "信息管理" } },
-		{ "path": "pages/activity/detail/ActivityDetail", "style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "活动详情" } },
-		{ "path": "pages/activity/order/ActivityOrder", "style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "订单信息" } },
 		{ "path": "pages/publish/plus/PublishPlus", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "新增活动" } },
@@ -57,28 +36,16 @@
 		{ "path": "pages/user/media/UserGallery", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "个人相册" } },
-		{ "path": "pages/index/search/IndexSearch", "style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "搜索" } },
 		{ "path": "pages/common/msginfo/MsgInfo", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "消息详情" } },
-		{ "path": "pages/common/success/PaymentSuccess", "style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "付款成功" } },
 		{ "path": "pages/order/working/OrderWorking", "style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "订单进行中" } },
 				
 		{ "path": "pages/product/detail/ProductDetail", "style": {
 				"navigationStyle": "custom",
-				"navigationBarTitleText": "商品详情" } },
-		{ "path": "pages/cart/cart", "style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "购物车" } },
-		{ "path": "pages/order/ready/OrderReady", "style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "下单结算" } }
+				"navigationBarTitleText": "商品详情" } }
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

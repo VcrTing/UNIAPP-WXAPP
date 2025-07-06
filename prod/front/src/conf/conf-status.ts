@@ -44,7 +44,8 @@ export const STS_ACTIVITY = {
     REVIEW: <Conf.ReviewStatus> {
         K: 'reviewStatus',
         WAITING: null,
-        YES: 1,
+        CHECKING: 1,
+        YES: 3,
         NO: 2,
         DIE: -1
     },
@@ -65,7 +66,8 @@ export const STS_PRODUCT = {
     REVIEW: <Conf.ReviewStatus> {
         K: 'reviewStatus',
         WAITING: null,
-        YES: 1,
+        CHECKING: 1,
+        YES: 3,
         NO: 2,
         DIE: -1
     },

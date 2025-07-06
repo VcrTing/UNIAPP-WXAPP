@@ -30,13 +30,21 @@ export const DATA_PRODUCT_TYPED_INV = <Conf.Tabs>[
     DATA_PRODUCT_TYPED_INV_INFINI
 ]
 
-// 审核状态, 0 等待、1 通过、2 拒绝
+// 审核状态, 0 等待、1 审核中、2 拒绝、3 通过
 export const DATA_ACTIVITY_REVIEW_DEF = <Conf.Tab>{ name: '待完善', v: 0 }
 export const DATA_ACTIVITY_REVIEW = <Conf.Tabs>[
     DATA_ACTIVITY_REVIEW_DEF,
     { name: '审核中', v: 1 },
     { name: '未通过审核', v: 2 },
 ]
+
+export const DATA_PRODUCT_REVIEW_DEF = <Conf.Tab>{ name: '待完善', v: 0 }
+export const DATA_PRODUCT_REVIEW_CHECKING = <Conf.Tab>{ name: '审核中', v: 1 }
+// export const DATA_PRODUCT_REVIEW_NO = <Conf.Tab>{ name: '未通过审核', v: 2 }
+export const DATA_PRODUCT_REVIEW = <Conf.Tabs>[
+    DATA_PRODUCT_REVIEW_DEF, DATA_PRODUCT_REVIEW_CHECKING //, DATA_PRODUCT_REVIEW_NO
+]
+
 
 // 全部活动状态
 export const DATA_ACTIVITY_STATUS_DEF = <Conf.Tab>{ name: '全部', v: -1 }

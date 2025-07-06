@@ -1,18 +1,20 @@
 <template>
     <view class="ps-r zi-n">
+        <!--
         <view class="pt-s">
             <WvIndexConTop :ioading="aii.ioading" :change="change" @result="funn.switchTag"/>
         </view>
+        -->
         <view class="">
             <OScrollYFresh id="index_scroll"
                 :options="scrolloptions"
-                :styie="{ 'height': 'calc( 100vh - 16rem - ' + (h || '0px') + ' )' }"
+                :styie="{ 'height': 'calc( 100vh - 10rem - ' + (h || '0px') + ' )' }"
                 @downrefresh="funn.next"
                 @uprefresh="funn.initing"
                 >
                 <view class="pt-row"></view>
                 <CoViDataLoading :ioading="index.ioading" :items="aii.items">
-                    <WvIndexConList :items="aii.items"/>
+                    <WvIndexConList :items="aii.items" @refresh="funn.fetching"/>
                 </CoViDataLoading>
                 <CkSpace :h="3"/>
                 <view class=" w-100" v-if="index.end">
@@ -32,7 +34,7 @@
 </template>
  
 <script setup lang="ts">
-import { computed, nextTick, reactive } from 'vue';
+import { computed, nextTick, reactive, watch } from 'vue';
 import { future, futuring } from '@/tool/util/future';
 import CkDataIoading from '@/cake/content/ioading/CkDataIoading.vue';
 import OScrollYFresh from '@/cake/ux/scroll/OScrollYFresh.vue';
@@ -45,6 +47,7 @@ import server_product from '@/server/product/server_product';
 import WvIndexConTop from './content/WvIndexConTop.vue';
 import def_tag from '@/server/__def/def_tag';
 import { DATA_FILTER_TAB_DEF, DATA_FILTER_TABS } from '@/conf/conf-datas';
+import { pageIndexState } from '@/memory/page';
 
 const prp = defineProps<{
     h: string
@@ -86,7 +89,7 @@ const got = {
         return res;
     }
 }
-
+ 
 const funn = {
     next: () => futuring(aii, async () => {
         if (index.end) {
@@ -95,7 +98,7 @@ const funn = {
         }
         aii.pager.page += 1
         const param: ONE = got.buildparam()
-        const src: Product[] = await server_product.index_recommond(param, aii.pager)
+        const src: Product[] = await server_product.index_need_check(param, aii.pager)
         if (src && src.length > 0) {
             aii.items.push(...src)
             index.end = false
@@ -114,7 +117,7 @@ const funn = {
     fetching: () => futuring(index, async () => {
         aii.pager.page = 1
         const param: ONE = got.buildparam()
-        const src: Product[] = await server_product.index_recommond(param, aii.pager)
+        const src: Product[] = await server_product.index_need_check(param, aii.pager)
         aii.items = src
     }),
 
@@ -135,7 +138,8 @@ const func = {
         funn.initing()
     },
     init: () => futuring(aii, async () => {
-        func.reset()
+        func.reset();
+        funn.fetching();
     })
 }
 
@@ -150,4 +154,9 @@ const scrolloptions = computed((): OScrollOptions => {
     }
 })
 
+const num = computed((): number => pageIndexState.num)
+watch(num, () => {
+    console.log('首页刷新')
+    funn.initing()
+})
 </script>

@@ -1,6 +1,6 @@
 <template>
-    <view v-if="!sts.is_buyed">
-        <view class="pt pb px-row fx-aii-btn-def" v-if="p">
+    <view >
+        <view class="pt pb px-row fx-aii-btn-def">
             <view class="fx-s px-col fx-b">
                 <view class="fx-i fx-b row">
                     <view class="money">
@@ -15,24 +15,21 @@
                             <text class="td-lt">{{ p_less }}</text>
                         </CkSimpleTag>
                     </view>
-                    <view class="px fs-n fx-i" v-if="is_publisher">
+                    <view class="px fs-n fx-i">
                         <view v-if="product_tool.show_inv_many(v)"><text>库存剩余:</text><text class="px-s">{{ v.inv }}</text></view>
                         <view v-else>
                             <view v-if="product_tool.is_inv_infini(v)">库存{{ DATA_PRODUCT_TYPED_INV_INFINI.name }}</view>
                             <view v-if="product_tool.is_inv_alone(v)">{{ DATA_PRODUCT_TYPED_INV_ALONE.name }}</view>
                         </view>
                     </view>
-                    <view class="px-s fs-n" v-else>
-                        <CkSimpleTag>包邮</CkSimpleTag>
-                    </view>
                 </view>
                 <view class="row">
-                    <view class="cos fx-r">
+                    <view class="tiw fx-r">
                         <CkSimpleTag>
                             <text class="fs-w">{{ product_tool.getnum_view(v) }}</text>
                             <text class="fs-n">浏览</text>
                         </CkSimpleTag>
-                        <view class="pi-s" v-if="is_publisher">
+                        <view class="pi-s">
                             <CkSimpleTag>
                                 <text class="fs-w">{{ product_tool.getnum_sell_txt(v) }}</text>
                             </CkSimpleTag>

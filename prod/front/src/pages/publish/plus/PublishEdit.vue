@@ -159,7 +159,7 @@ const func = {
         if (!funn.collection()) return;
         if (!agree.value.v()) return;
         const src: ONE = funn.buildform(form);
-        src[STS_PRODUCT.REVIEW.K] = STS_PRODUCT.REVIEW.NO // 送审
+        src[STS_PRODUCT.REVIEW.K] = STS_PRODUCT.REVIEW.CHECKING // 送审
         src[STS_PRODUCT.STATUS.K] = STS_PRODUCT.STATUS.CHECKING // 不可编辑状态
         src[STS_PRODUCT.RECOMMEND.K] = STS_PRODUCT.RECOMMEND.YES // 自动推荐
         const res: ONE = await server_pubplus.edit(src, edit.value)

@@ -1,4 +1,4 @@
-import { DATA_ACTIVITY_STATUS, DATA_ACTIVITY_TYPED_SM, DATA_PRODUCT_TYPED, DATA_PRODUCT_TYPED_FREE, DATA_PRODUCT_TYPED_INV_INFINI, DATA_PRODUCT_TYPED_SM, DATA_PUBLISH_LIMIT } from "@/conf/conf-datas"
+import { DATA_ACTIVITY_STATUS, DATA_ACTIVITY_TYPED_SM, DATA_PRODUCT_TYPED, DATA_PRODUCT_TYPED_FREE, DATA_PRODUCT_TYPED_INV_ALONE, DATA_PRODUCT_TYPED_INV_INFINI, DATA_PRODUCT_TYPED_INV_MANY, DATA_PRODUCT_TYPED_SM, DATA_PUBLISH_LIMIT } from "@/conf/conf-datas"
 import { arrfind, arrgotv, arrhas, arrimit, arrsort } from "../util/iodash"
 import { deepcopy, formfiimit, group_search_txt, must_arr, must_int, must_one, positive } from "../util/valued"
 import { authGetters } from "@/memory/global"
@@ -103,6 +103,13 @@ import { DEV_PRODUCT } from "@/conf/conf-dev"
         const it: number = must_int(v.invTyped)
         return (it === DEV_PRODUCT.INV_TYPED.INFINI)
     }
+    const getinv_typed_txt = (v: Product): string => {
+        const it: number = must_int(v.invTyped)
+        if (it === DEV_PRODUCT.INV_TYPED.INFINI) return DATA_PRODUCT_TYPED_INV_INFINI.name
+        if (it === DEV_PRODUCT.INV_TYPED.ALONE) return DATA_PRODUCT_TYPED_INV_ALONE.name
+        if (it === DEV_PRODUCT.INV_TYPED.MANY) return DATA_PRODUCT_TYPED_INV_MANY.name
+        return DATA_PRODUCT_TYPED_INV_INFINI.name
+    }
     const show_inv_many = (v: Product): boolean => {
         if (is_sm(v)) {
             return is_inv_many(v)
@@ -123,6 +130,7 @@ export default {
     is_inv_many,
     is_inv_alone,
     is_inv_infini,
+    getinv_typed_txt,
     
     show_inv_many,
 
@@ -144,6 +152,11 @@ export default {
         const res: Media[ ] = mds.filter(e => e.isGallery)
         return must_arr(res)
     },
+    getimgs: (v: Product): Media[] => {
+        const mds: Media[ ] = __medias(v)
+        return must_arr(mds)
+    },
+
     getindex_banner: (v: Product, imit: number = ITEM_IMG_VIEW_LIMIT_DEF): Media[] => {
         const mds: Media[ ] = __medias(v)
         //

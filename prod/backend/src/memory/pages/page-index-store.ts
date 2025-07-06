@@ -10,7 +10,7 @@ const _s: Store<Page.IndexPageStore> = createStore({
     
     state: <ONE> {
         city: <Conf.City>{ },
-
+        num: 1,
         ioading: 0,
         indextags: [ ],
         index_pager: <Pager>{ },
@@ -22,6 +22,7 @@ const _s: Store<Page.IndexPageStore> = createStore({
     },
     mutations: {
         change: (s: ONE, v: ANYS) => s[ v[0] ] = v[1],
+        __num: (s: ONE) => { s.num = s.num + 1; },
         __refresh_index_pager: (s: ONE, v: Pager) => {
             s.index_pager = v;
             // 存本地
@@ -46,6 +47,8 @@ const _s: Store<Page.IndexPageStore> = createStore({
     },
     actions: {
         change: (c: ONE, v: ANYS) => c.state[ v[0] ] = v[1],
+        // 开启刷新
+        refresh: (c: ONE) => { c.commit('__num') },
 
         // 提前刷新 首页 TAGS
         freshtags: async (c: ONE) => {

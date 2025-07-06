@@ -1,36 +1,34 @@
 <template>
-    <swiper class="swiper" circular 
-        v-if="banners && banners.length > 0"
-        :indicator-dots="aii.indicatorDots" 
-        :autoplay="aii.autoplay" 
-        :interval="aii.interval"
-        :duration="aii.duration"
-
-        :style="{
-            height: (toph + 'px')
-        }"
-        >
-        <swiper-item v-for="(j, k) in banners" :key="k">
-            <image class="swiper-item w-100 h-100" mode="aspectFill" :src="j.url"/>
-        </swiper-item>
-    </swiper>
-    <view v-else class="w-100 h-100 btn-def">
-        <view class="h-8em fx-c fx-b">
-            <text class="tis">未找到任何图片</text>
+    <view>
+        <view v-for="(v, i) in banners" :key="i"
+            :class="w_clazz" class="d-ib"
+            :style="{
+                    'height': media_tool.img_h_view(w_item, v.w, v.h)
+                }">
+            <image class="w-100 h-100" :src="v.url" mode="aspectFill"/>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
+import { uiGetters, uiState } from '@/memory/global';
+import media_tool from '@/tool/modules/common/media_tool';
+import { computed } from 'vue';
+
 const prp = defineProps<{
     banners: Media[]
     toph: number
 }>()
 
-const aii = {
-    indicatorDots: true,
-    autoplay: true,
-    interval: 3400,
-    duration: 800
-}
+const w_screen = computed(() => uiState.w)
+const isphone = computed(() => uiGetters.isphone)
+const w_item = computed(() => {
+    if (isphone.value) { return w_screen.value / 2 }
+    return w_screen.value / 5
+})
+const w_clazz = computed(() => {
+    if (isphone.value) return 'w-50'
+    return 'w-20'
+})
+
 </script>

@@ -1,47 +1,90 @@
 <template>
-    <view class="pr-s fx-s fx-t">
-        <view class="w-50 d-ib">
-            <view v-for="(v, i) in first" :key="i" class="br pb-s pi-s"
-            >
-                <CoMoIndexProductItem :w="w_item"
-                    :v="v" :joins="joins" @detail="funn.detail"/>
+    <view>
+        <view class="pr-s fx-s fx-t" v-if="isphone">
+            <view class="w-50 d-ib">
+                <view v-for="(v, i) in data1" :key="i" class="br pb-s pi-s">
+                    <CoMoProductCheckItem :w="w_item" :v="v" :joins="joins" @pass="funn.pass" @detail="funn.detail"/>
+                </view>
+            </view>
+            <view class="w-50 d-ib">
+                <view v-for="(v, i) in data2" :key="i" class="br pb-n pi-s">
+                    <CoMoProductCheckItem :w="w_item" :v="v" :joins="joins" @pass="funn.pass" @detail="funn.detail"/>
+                </view>
             </view>
         </view>
-        <view class="w-50 d-ib">
-            <view v-for="(v, i) in last" :key="i" class="br pb-n pi-s"
-            >
-                <CoMoIndexProductItem :w="w_item"
-                    :v="v" :joins="joins" @detail="funn.detail"/>
+        <!-- -->
+        <view class="pr-s fx-s fx-t" v-else>
+            <view class="w-25 d-ib">
+                <view v-for="(v, i) in data1" :key="i" class="br pb-s pi-s">
+                    <CoMoProductCheckItem :w="w_item" :v="v" :joins="joins" @pass="funn.pass" @detail="funn.detail"/>
+                </view>
+            </view>
+            <view class="w-25 d-ib">
+                <view v-for="(v, i) in data2" :key="i" class="br pb-s pi-s">
+                    <CoMoProductCheckItem :w="w_item" :v="v" :joins="joins" @pass="funn.pass" @detail="funn.detail"/>
+                </view>
+            </view>
+            <view class="w-25 d-ib">
+                <view v-for="(v, i) in data3" :key="i" class="br pb-s pi-s">
+                    <CoMoProductCheckItem :w="w_item" :v="v" :joins="joins" @pass="funn.pass" @detail="funn.detail"/>
+                </view>
+            </view>
+            <view class="w-25 d-ib">
+                <view v-for="(v, i) in data4" :key="i" class="br pb-n pi-s">
+                    <CoMoProductCheckItem :w="w_item" :v="v" :joins="joins" @pass="funn.pass" @detail="funn.detail"/>
+                </view>
             </view>
         </view>
+        
+        <CoCoConfirm :idx="cfm.idx" :ioading="aii.ioading"
+            @submit="funn.submit" @cancle="pan_tooi.close_pan(cfm.idx)"/>
     </view>
 </template>
 
 <script setup lang="ts">
-import CoMoIndexProductItem from '@/components/modules/product/index/CoMoIndexProductItem.vue';
+import CoCoConfirm from '@/components/common/CoCoConfirm.vue';
+import CoMoProductCheckItem from '@/components/modules/product/index/CoMoProductCheckItem.vue';
 import { orderState, uiGetters, uiState } from '@/memory/global';
 import open_of_product from '@/server/__func/open_of_product';
+import server_product from '@/server/product/server_product';
+import server_pubplus from '@/server/publish/server_pubplus';
+import pan_tooi from '@/tool/app/pan_tooi';
 import { future, futuring } from '@/tool/util/future';
 import { computed, reactive } from 'vue';
 
 const prp = defineProps<{
     items: Product[]
 }>()
+const isphone = computed((): boolean => uiGetters.isphone)
+const ispc = computed((): boolean => uiGetters.ispc)
 
-const first = computed((): Product[] => {
-    return funn.feed(prp.items, 1, aii.wpnum)
-})
-const last = computed((): Product[] => {
-    return funn.feed(prp.items, 2, aii.wpnum)
-})
+const data1 = computed((): Product[] => { return funn.feed(prp.items, 1, aii.wpnum) })
+const data2 = computed((): Product[] => { return funn.feed(prp.items, 2, aii.wpnum) })
+const data3 = computed((): Product[] => { return funn.feed(prp.items, 3, aii.wpnum) })
+const data4 = computed((): Product[] => { return funn.feed(prp.items, 4, aii.wpnum) })
 
+const cfm = { idx: 1, hui: <ElePanHui>{ opacity: 0.4 } }
+const aii = reactive({ 
+    edit: <Product>{ },
+    ioading: false, wpnum: isphone.value ? 2 : 4 })
+const joins = computed((): ActivityJoin[] => { return orderState.join_of_mine || [ ] })
 
-const aii = reactive({ ioading: false, wpnum: 2 })
-const joins = computed((): ActivityJoin[] => {
-    return orderState.join_of_mine || [ ]
-})
+const emt = defineEmits([ 'refresh' ])
 
 const funn = {
+    submit: () => futuring(aii, async () => {
+        console.log('通过 V =', aii.edit)
+        const src: Product = await server_pubplus.pass(aii.edit)
+        if (src && src.documentId) {
+            pan_tooi.close_pan(cfm.idx)
+            emt('refresh')
+        }
+    }),
+    pass: (v: Product) => {
+        aii.edit = v
+        console.log('通过 V =', aii.edit)
+        pan_tooi.open_def_b(cfm.idx, cfm.hui)
+    },
     detail: (v: Product) => futuring(aii, async () => {
         await open_of_product.view(v)
     }),
@@ -62,8 +105,6 @@ const funn = {
     }
 }
 
-const isphone = computed((): boolean => uiGetters.isphone)
-const ispc = computed((): boolean => uiGetters.ispc)
 const w_xs = computed((): number => {
     return 1 / (aii.wpnum || 1)
 })

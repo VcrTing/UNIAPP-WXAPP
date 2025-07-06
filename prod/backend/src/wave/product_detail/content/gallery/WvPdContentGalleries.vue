@@ -1,24 +1,17 @@
 <template>
     <view>
-        <view v-for="(v, i) in first" :key="i"
+        <view v-for="(v, i) in gallery" :key="i"
+            :class="w_clazz" class="d-ib"
             :style="{
-                    'height': media_tool.img_h_view(w_screen, v.w, v.h)
+                    'height': media_tool.img_h_view(w_item, v.w, v.h)
                 }">
             <image class="w-100 h-100" :src="v.url" mode="aspectFill"/>
-        </view>
-        <view v-if="init">
-            <view v-for="(v, i) in last" :key="i"
-                :style="{
-                        'height': media_tool.img_h_view(w_screen, v.w, v.h)
-                    }">
-                <image class="w-100 h-100" :src="v.url" mode="aspectFill"/>
-            </view>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
-import { uiState } from '@/memory/global';
+import { uiGetters, uiState } from '@/memory/global';
 import media_tool from '@/tool/modules/common/media_tool';
 import { timeout } from '@/tool/util/future';
 import { must_arr } from '@/tool/util/valued';
@@ -34,15 +27,16 @@ const gallery = computed(() => {
     return media_tool.fer_sex(src)
 })
 
-const first = computed((): Media[] => {
-    return media_tool.view_imit(gallery.value, 0, 3)
-})
-
-const last = computed((): Media[] => {
-    return media_tool.view_imit(gallery.value, 3, gallery.value.length)
-})
-
 const w_screen = computed(() => uiState.w)
+const isphone = computed(() => uiGetters.isphone)
+const w_item = computed(() => {
+    if (isphone.value) { return w_screen.value / 2 }
+    return w_screen.value / 5
+})
+const w_clazz = computed(() => {
+    if (isphone.value) return 'w-50'
+    return 'w-20'
+})
 
 const init = ref(false)
 const funn = {

@@ -60,8 +60,29 @@ const takeon = async (v: Product, inv: number): Promise<Product> => {
     return await edit(__pm, { documentId })
 } 
 
+// 审核通过
+const pass = async (v: Product): Promise<Product> => {
+    const documentId: string = v.documentId
+    const __pm: ONE = { }
+    __pm[ STS_PRODUCT.STATUS.K ] = STS_PRODUCT.STATUS.PASS
+    __pm[ STS_PRODUCT.REVIEW.K ] = STS_PRODUCT.REVIEW.YES
+    
+    return await edit(__pm, { documentId })
+} 
+
+// 取消
+const fail = async (v: Product, remark: string): Promise<Product> => {
+    const documentId: string = v.documentId
+    const __pm: ONE = { }
+    __pm[ STS_PRODUCT.STATUS.K ] = STS_PRODUCT.STATUS.EDITING
+    __pm[ STS_PRODUCT.REVIEW.K ] = STS_PRODUCT.REVIEW.NO
+    __pm[ 'reviewComment' ] = remark
+    return await edit(__pm, { documentId })
+} 
+
 export default {
     plus, edit, deleted,
     plus_media, delete_media,
-    takeon
+    takeon,
+    pass, fail
 }

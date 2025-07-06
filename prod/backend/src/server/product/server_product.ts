@@ -7,7 +7,7 @@ import { netip } from "@/tool/uni/uni-global"
 import { is_arr, is_str } from "@/tool/util/typed"
 import { cpu_int_1, must_arr, must_one } from "@/tool/util/valued"
 
-const relations_of_items = <string[]>[ 'medias' ]
+const relations_of_items = <string[]>[ 'medias', 'user', 'tags', 'honours' ]
 const relations_of_details = <string[]>[ 'medias', 'tags', 'honours', 'user' ]
 
 const fetching = async (param: ONE, pager: Pager, relations: string[]): Promise<Product[]> => {
@@ -20,15 +20,15 @@ const fetching = async (param: ONE, pager: Pager, relations: string[]): Promise<
 
 const index = async (param: ONE, pager: Pager): Promise<Product[]> => {
     // 审核通过的
-    srp_p.__eq(param, STS_PRODUCT.REVIEW.K, STS_PRODUCT.REVIEW.YES)
+    // srp_p.__eq(param, STS_PRODUCT.REVIEW.K, STS_PRODUCT.REVIEW.YES)
     // 顺序问题
     srp_p.__sorts(param, DEV_PRODUCT.SORT.INDEX)
     return await fetching(param, pager, relations_of_items)
 }
 
-const index_recommond = async (param: ONE, pager: Pager): Promise<Product[]> => {
+const index_need_check = async (param: ONE, pager: Pager): Promise<Product[]> => {
     // 状态正常
-    srp_p.build_filter_in(param, STS_PRODUCT.STATUS.K, [ STS_PRODUCT.STATUS.PASS ])
+    srp_p.build_filter_in(param, STS_PRODUCT.STATUS.K, [ STS_PRODUCT.STATUS.CHECKING ])
     return await index(param, pager)
 }
 
@@ -38,9 +38,9 @@ const byids = async (ids: string[]): Promise<Product[]> => {
     // ID = 这些
     srp_p.build_filter_in(param, DEV_DOC_ID, ids || [ ])
     // 状态正常
-    srp_p.build_filter_in(param, STS_PRODUCT.STATUS.K, [ STS_PRODUCT.STATUS.PASS ])
+    // srp_p.build_filter_in(param, STS_PRODUCT.STATUS.K, [ STS_PRODUCT.STATUS.PASS ])
     // 审核通过的
-    srp_p.__eq(param, STS_PRODUCT.REVIEW.K, STS_PRODUCT.REVIEW.YES)
+    // srp_p.__eq(param, STS_PRODUCT.REVIEW.K, STS_PRODUCT.REVIEW.YES)
     // 返回
     return await fetching(param, net_tool.__pager_long(), relations_of_details)
 }
@@ -70,10 +70,11 @@ const view1 = async (one: Product): Promise<Product> => {
 }
 */
 
+
 export default {
     mine_history,
     byid,
     byids,
     index,
-    index_recommond
+    index_need_check
 }

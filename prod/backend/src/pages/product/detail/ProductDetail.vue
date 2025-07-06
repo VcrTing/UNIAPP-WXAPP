@@ -22,10 +22,13 @@
                 </view>
                 <WvPdGallery :v="view"/>
 
+                <!--
                 <WvPdBom v-if="aii.init" 
                     :v="view" :user="user" :sts="sts"
                     :is_publisher="is_publisher"
                     />
+                -->
+                <WvPdCheckBom :v="view"/>
             </template>
         </DetailLayout>
     </PageLayout>
@@ -52,10 +55,8 @@ import WvPdDesc from '@/wave/product_detail/top/WvPdDesc.vue';
 import WvPdPublisher from '@/wave/product_detail/member/WvPdPublisher.vue';
 import WvPdGallery from '@/wave/product_detail/media/WvPdGallery.vue';
 import WvPdContent from '@/wave/product_detail/content/WvPdContent.vue';
-import cart_tool from '@/tool/modules/cart_tool';
-import WvPdBom from '@/wave/product_detail/WvPdBom.vue';
-import order_tool from '@/tool/modules/order_tool';
 import WvPdPublisherS from '@/wave/product_detail/member/WvPdPublisherS.vue';
+import WvPdCheckBom from '@/wave/product_detail/WvPdCheckBom.vue';
 
 const view = computed((): Product => prodState.view)
 const user = computed(() => authState.user)
@@ -72,8 +73,8 @@ const funn = {
         }
     }),
     check: (src: Product) => {
-        sts.is_in_cart = cart_tool.is_in_cart(src)
-        sts.is_buyed = order_tool.isbuyed(src)
+        sts.is_in_cart = false // cart_tool.is_in_cart(src)
+        sts.is_buyed = true // order_tool.isbuyed(src)
     },
     back: () => { uniRouter.back() },
     init: () => future(async () => {

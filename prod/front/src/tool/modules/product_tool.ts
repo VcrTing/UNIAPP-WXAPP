@@ -5,7 +5,7 @@ import { authGetters } from "@/memory/global"
 import times from "../web/times"
 import media_tool from "./common/media_tool"
 import { is_json } from "../util/typed"
-import { STS } from "@/conf/conf-status"
+import { STS, STS_PRODUCT } from "@/conf/conf-status"
 import { DEV_PRODUCT } from "@/conf/conf-dev"
 
     // 0-待完善, 1-审核中, 2-已发布, 3-已取消, 4-已结束, 5-已下架
@@ -119,7 +119,14 @@ import { DEV_PRODUCT } from "@/conf/conf-dev"
         return DATA_PRODUCT_TYPED_FREE.name
     }
 
+    const is_review_no = (v: Product): boolean => {
+        const vv: number = v.reviewStatus
+        return vv === STS_PRODUCT.REVIEW.NO
+    }
+
 export default {
+    is_review_no,
+    
     is_inv_many,
     is_inv_alone,
     is_inv_infini,

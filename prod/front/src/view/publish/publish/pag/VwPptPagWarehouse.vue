@@ -9,11 +9,16 @@
         </view>
         <view class="px-row py-s">
             <!-- 待完善 -->
-            <view v-if="aii.i == 0">
+            <view v-if="aii.i == DATA_PRODUCT_REVIEW_DEF.v">
                 <CoViDataLoading :ioading="ioading" :items="data">
                     <view class="pb-row softer" v-for="(v, i) in data" :key="i">
                         <CoMoPublishItem :v="v" @tap="funn.edit(v)">
-                            <view class="fx-r tis fs-s btn-err px-t">
+                            <view class="fx-r tis fs-s btn-err px-t" v-if="product_tool.is_review_no(v)">
+                                <text class="pi-s">
+                                    审核不通过
+                                </text>
+                            </view>
+                            <view class="fx-r tis fs-s btn-err px-t" v-else>
                                 <text class="pi-s">
                                     待完善
                                 </text>
@@ -22,7 +27,7 @@
                     </view>
                 </CoViDataLoading>
             </view>
-            <view v-else-if="aii.i == 1">
+            <view v-else-if="aii.i == DATA_PRODUCT_REVIEW_CHECKING.v">
                 <CoViDataLoading :ioading="ioading" :items="data">
                     <view class="pb-row softer" v-for="(v, i) in data" :key="i">
                         <CoMoPublishItem :v="v" @tap="funn.edit(v)">
@@ -41,8 +46,9 @@
 
 <script setup lang="ts">
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
-import { DATA_ACTIVITY_REVIEW, DATA_ACTIVITY_REVIEW_DEF } from '@/conf/conf-datas';
+import { DATA_PRODUCT_REVIEW, DATA_PRODUCT_REVIEW_CHECKING, DATA_PRODUCT_REVIEW_DEF } from '@/conf/conf-datas';
 import { pagePublishDispatch } from '@/memory/page';
+import product_tool from '@/tool/modules/product_tool';
 import uniRouter from '@/tool/uni/uni-router';
 import { promise } from '@/tool/util/future';
 import { must_arr } from '@/tool/util/valued';
@@ -51,13 +57,30 @@ import { computed, reactive } from 'vue';
 //
 const prp = defineProps<{ items: Product[], ioading: boolean }>()
 //
-const aii = reactive({ i: DATA_ACTIVITY_REVIEW_DEF.v })
+const aii = reactive({ i: DATA_PRODUCT_REVIEW_DEF.v })
 // 待完善
 const data = computed((): Product[] => func.filter(aii.i))
 //
 const func = {
     filter: (v: number) => {
-        return must_arr(prp.items).filter(e => {
+        let src = must_arr(prp.items)
+        /*
+        console.log('src =', src, ' v =', v, STS_PRODUCT.REVIEW.NO)
+        if (v === STS_PRODUCT.REVIEW.NO) {
+            return src.filter(e => {
+                const cd: number = e[ STS_PRODUCT.REVIEW.K ]
+                return cd === STS_PRODUCT.REVIEW.NO
+            })
+        }
+        else {
+            src = src.filter(e => {
+                const cd: number = e[ STS_PRODUCT.REVIEW.K ]
+                return cd !== STS_PRODUCT.REVIEW.NO
+            })
+        }
+        */
+
+        return src.filter(e => {
             const cd: number = e['dataStatus'];
             if (cd == v) { return true }
             return false
@@ -71,9 +94,9 @@ const funn = {
         uniRouter.gopg('publish_edit')
     },
     init: () => promise(() => {
-        aii.i = DATA_ACTIVITY_REVIEW_DEF.v
+        aii.i = DATA_PRODUCT_REVIEW_DEF.v
     })
 }
 //
-const tabs = DATA_ACTIVITY_REVIEW
+const tabs = DATA_PRODUCT_REVIEW
 </script>
