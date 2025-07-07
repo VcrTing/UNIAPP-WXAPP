@@ -15,6 +15,8 @@ const _s: Store<OrderStore> = createStore({
         // 用户的参与记录
         join_of_mine: <ActivityJoin[]>[ ],
         __ioading: false,
+
+        num: 0
     },
     getters: {
 
@@ -26,10 +28,12 @@ const _s: Store<OrderStore> = createStore({
             s.orders_of_iive = src;
         },
         change: (s: ONE, v: ANYS) => s[ v[0] ] = v[1],
+        __num: (s: ONE) => { s.num = s.num + 1; },
         __change: (s: ONE, v: ANYS) => s[ v[0] ] = v[1]
     },
     actions: {
         change: (c: ONE, v: ANYS) => c.state[ v[0] ] = v[1],
+        refresh: (c: ONE) => { c.commit('__num'); console.log('刷新订单页面') },
 
         place_an_order: ({ commit }, order: OrderItem) => {
             commit('__place_order', order)

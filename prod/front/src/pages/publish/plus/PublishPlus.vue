@@ -67,9 +67,9 @@ const funn = {
         const userid: number = authGetters.userid
         // const addr: Address = must_one<Address>(src.addrdata)
         const res = <ONE>{
-            title: src.title, tags: tgsid, price: src.price,
+            title: src.title, tags: tgsid, price: src.price, 
             typed: src.typed, inv: src.inv, invTyped: src.inv_typed,
-            user: must_int(userid), // activity_address: addr.documentId,
+            introduction: src.introduction, user: must_int(userid), // activity_address: addr.documentId,
         }
         // 初始化状态
         res[STS_PRODUCT.STATUS.K] = STS_PRODUCT.STATUS.EDITING

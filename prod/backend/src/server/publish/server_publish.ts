@@ -1,3 +1,4 @@
+import { DEV_PRODUCT } from "@/conf/conf-dev"
 import { STS_PRODUCT } from "@/conf/conf-status"
 import { app, master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
@@ -46,7 +47,17 @@ const takeoff = async (param: ONE): Promise<Product[]> => {
     return await mine(param, net_tool.__pager_long(), [ STS_PRODUCT.STATUS.OFF ])
 }
 
+const mineAii = async (param: ONE): Promise<Product[]> => {
+    srp_p.__eq(param, 'typed', DEV_PRODUCT.TYPED.SM)
+    // 状态筛选
+    srp_p.build_filter_in(param, STS_PRODUCT.STATUS.K, [ STS_PRODUCT.STATUS.OFF, STS_PRODUCT.STATUS.NICE, STS_PRODUCT.STATUS.PASS ])
+    //
+    return await fetching(param, net_tool.__pager_long())
+}
+
 export default {
+    mineAii,
+
     working,
     waiting,
     history,

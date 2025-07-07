@@ -18,7 +18,10 @@
                         <view><text class="us-a fw-550">{{ xorder.documentId }}</text></view>
                     </view> 
                 </view>
-                <view class="fs-s tid py px-row fx-aii-btn-def">请加一下客服为好友，客服会给您服务，不用害羞，谢谢您的理解。</view>
+                <view class="fs-s tid py px-row fx-aii-btn-def">
+                    <view>请加一下客服为好友，把订单号告诉客服，客服会给您解锁订单，</view>
+                    <view>谢谢您的理解。</view>
+                </view>
             </view>
             <view>
                 <OScrollX>

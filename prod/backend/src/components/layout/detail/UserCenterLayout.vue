@@ -1,7 +1,7 @@
 <template>
         
 		<view class="h-100 mxh-100 ps-r zi-t">
-			<view class="h-62vh zi-s abs-i t-0 r-0 bg-def-s">
+			<view class="h-100vh zi-s abs-i t-0 r-0 bg-def-s">
                 <slot name="bg"></slot>
 			</view>
 
@@ -21,7 +21,7 @@
 					height: conh
 				}"
 			>
-				<view class="br-it br-rt h-100" :class="clazz_con">
+				<view class="h-100" :class="clazz_con">
                     <slot name="con"></slot>
 				</view>
 			</view>

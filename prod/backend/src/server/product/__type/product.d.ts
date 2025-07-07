@@ -45,6 +45,8 @@ interface Product {
 
     takeOffNum: number
     takeOffTime: string
+
+    invWeak: number
 }
 
 interface ProductContent {

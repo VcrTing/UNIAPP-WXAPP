@@ -52,11 +52,10 @@ const deleted = async (documentId: string): Promise<Product> => {
 // 上架
 const takeon = async (v: Product, inv: number): Promise<Product> => {
     const documentId: string = v.documentId
-    const __pm: ONE = { }
+    const __pm: ONE = {  }
     __pm[ STS_PRODUCT.STATUS.K ] = STS_PRODUCT.STATUS.PASS
-    if (product_tool.show_inv_many(v)) {
-        __pm['inv'] = must_int(inv)
-    }
+    __pm['inv'] = must_int(inv)
+    __pm['invWeak'] = must_int(inv)
     return await edit(__pm, { documentId })
 } 
 

@@ -24,6 +24,7 @@ export const for_net_when_403 = (tag: string) => futuring(aii, async () => {
         // 清空用户的 登录
         await authDispatch('logout')
         tipwarn('您的登录已经失效。')
+        await authDispatch('mod_login')
     }
 },
 2000)
@@ -41,6 +42,7 @@ export const for_net_when_401 = (tag: string) => futuring(aii, async () => {
         // 清空用户的 登录
         await authDispatch('logout')
         tipwarn('您的登录已经失效。')
+        await authDispatch('mod_login')
     }
 },
 2000)

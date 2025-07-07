@@ -10,6 +10,7 @@ interface OrderStore {
 
     __ioading: boolean,
     
+    num: number,
     join_of_mine: ActivityJoin[ ]
 }
 

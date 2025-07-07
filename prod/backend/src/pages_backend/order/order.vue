@@ -14,7 +14,7 @@
                             :clazz="'ts py-s px-row br-s mx-s'">
                             <text class="fw-550">{{ v.name }}</text>
                         </OButton>
-                        <view @tap="funn.choise(v)" class="ts py-s px-row fx-aii-btn-wht-s" v-else>
+                        <view @tap="aii.iive = v.v" class="ts py-s px-row fx-aii-btn-wht-s" v-else>
                             <text class="tid fs-w">{{ v.name }}</text>
                         </view>
                     </view>
@@ -26,6 +26,9 @@
                 <view class="pt-s"></view>
                 <view v-if="aii.iive == 0">
                     <WvOrderNow/>
+                </view>
+                <view v-if="aii.iive == 1">
+                    <WvOrderMine/>
                 </view>
                 <CkSpace :h="2"/>
             </OScrollY>
@@ -42,28 +45,26 @@ import CkSpace from '@/cake/content/CkSpace.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import CoAppBottomBar from '@/components/app/bar/CoAppBottomBar.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
-import { orderState, uiGetters, uiState } from '@/memory/global';
-import { futuring, promise, timeout } from '@/tool/util/future';
+import { uiGetters, uiState } from '@/memory/global';
+import { promise } from '@/tool/util/future';
 import { storage } from '@/tool/web/storage';
-import WvIndexBanner from '@/wave/index/WvIndexBanner.vue';
-import WvOrderNow from '@/wave/order/WvOrderNow.vue';
+import WvIndexBanner from '@/wave_backend/index/WvIndexBanner.vue';
+import WvOrderMine from '@/wave_backend/order/mine/WvOrderMine.vue';
+import WvOrderNow from '@/wave_backend/order/WvOrderNow.vue';
 import { computed, nextTick, reactive, watch } from 'vue';
 //
 const code = computed(() => { return storage.get('PAGE_ORDER_KEY') || 0 })
+
 // 
 const aii = reactive(<ONE>{
     ioading: false, iive: 0, init: false,
     tabs: [
-        { name: '已购', v: 0 },
-        { name: '浏览记录', v: 1 },
+        { name: '过单', v: 0 },
+        { name: '我的产品', v: 1 },
     ],
 })
 // 
 const funn = {
-    choise: (v: ONE) => {
-        aii.iive = v.v;
-        storage.set('PAGE_ORDER_KEY', 0)
-    },
     init: () => promise(() => { aii.iive = code.value; })
 }
 nextTick(funn.init)

@@ -18,7 +18,7 @@
                 </view>
             </view>
             <!-- -->
-            <view class="">
+            <view class="" @tap="emt('detail', v)">
                 <CoMoProductSubTitle :v="v" :clazz="'px-col'"/>
                 <view class="pb-s fx-aii-btn-def px-col">
                     <view class="fx-s fx-b" v-if="product_tool.is_free(v)">

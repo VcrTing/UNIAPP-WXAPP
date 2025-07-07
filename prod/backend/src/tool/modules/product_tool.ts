@@ -5,7 +5,7 @@ import { authGetters } from "@/memory/global"
 import times from "../web/times"
 import media_tool from "./common/media_tool"
 import { is_json } from "../util/typed"
-import { STS } from "@/conf/conf-status"
+import { STS, STS_PRODUCT } from "@/conf/conf-status"
 import { DEV_PRODUCT } from "@/conf/conf-dev"
 
     // 0-待完善, 1-审核中, 2-已发布, 3-已取消, 4-已结束, 5-已下架
@@ -25,28 +25,36 @@ import { DEV_PRODUCT } from "@/conf/conf-dev"
         return mds
     }   
 
+    const init_inv = (invTyped: number, res: ONE): ONE => {
+        // 库存设计
+        // 单件
+        if (invTyped === DEV_PRODUCT.INV_TYPED.ALONE) {
+            res['inv'] = 1;
+        }
+        // 无限制
+        else if (invTyped === DEV_PRODUCT.INV_TYPED.INFINI) {
+            res['inv'] = 999999
+        }
+        res['invWeak'] = res['inv']
+        return res
+    }
     const build_edit_data = (src: ONE) => {
         
         const tgsid = arrgotv(src.tags)
-        const typed: number = src.typed
         const userid: number = authGetters.userid
 
         let res: ONE = { }
         formfiimit(res, src, [ 
             'title', 'introduction', 'typed',
-            'inv', 'invTyped',
-            'price', 'priceFirst', 
-            // 'address', 'city', 'area', 'latitude', 'longitude',
-            // 'startTime', 'endTime', 'participantLimit',
-            // 'activity_medias'
+            'inv', 'invTyped', 'price', 'priceFirst', 
         ])
         res['user'] = userid
         res['tags'] = tgsid
 
-        // 私密活动
-        if (typed == DATA_ACTIVITY_TYPED_SM.v) {
-            res['participantLimit'] = DATA_PUBLISH_LIMIT.JOINER
-        }
+        // 库存设计
+        const invTyped = src.invTyped
+        // 单件
+        src = init_inv(invTyped, res)
         return res
     }
 
@@ -106,9 +114,8 @@ import { DEV_PRODUCT } from "@/conf/conf-dev"
     const getinv_typed_txt = (v: Product): string => {
         const it: number = must_int(v.invTyped)
         if (it === DEV_PRODUCT.INV_TYPED.INFINI) return DATA_PRODUCT_TYPED_INV_INFINI.name
-        if (it === DEV_PRODUCT.INV_TYPED.ALONE) return DATA_PRODUCT_TYPED_INV_ALONE.name
         if (it === DEV_PRODUCT.INV_TYPED.MANY) return DATA_PRODUCT_TYPED_INV_MANY.name
-        return DATA_PRODUCT_TYPED_INV_INFINI.name
+        return DATA_PRODUCT_TYPED_INV_ALONE.name
     }
     const show_inv_many = (v: Product): boolean => {
         if (is_sm(v)) {
@@ -126,11 +133,24 @@ import { DEV_PRODUCT } from "@/conf/conf-dev"
         return DATA_PRODUCT_TYPED_FREE.name
     }
 
+    const is_review_no = (v: Product): boolean => {
+        const vv: number = v.reviewStatus
+        return vv === STS_PRODUCT.REVIEW.NO
+    }
+
+    const getimgs = (v: Product): Media[] => {
+        return __medias(v)
+    }
+
 export default {
+    getimgs,
+    init_inv,
+    is_review_no,
+    getinv_typed_txt,
+    
     is_inv_many,
     is_inv_alone,
     is_inv_infini,
-    getinv_typed_txt,
     
     show_inv_many,
 
@@ -152,11 +172,6 @@ export default {
         const res: Media[ ] = mds.filter(e => e.isGallery)
         return must_arr(res)
     },
-    getimgs: (v: Product): Media[] => {
-        const mds: Media[ ] = __medias(v)
-        return must_arr(mds)
-    },
-
     getindex_banner: (v: Product, imit: number = ITEM_IMG_VIEW_LIMIT_DEF): Media[] => {
         const mds: Media[ ] = __medias(v)
         //

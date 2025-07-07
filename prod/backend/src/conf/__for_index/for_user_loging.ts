@@ -1,6 +1,7 @@
 import { authDispatch, orderDispatch } from "@/memory/global";
 import { prodDispatch } from "@/memory/moduies";
-import { promise } from "@/tool/util/future";
+import { pageIndexDispatch } from "@/memory/page";
+import { promise, timeout } from "@/tool/util/future";
 
 // 用户登录成功后执行
 export const for_user_loging = () => promise(() => {
@@ -8,6 +9,7 @@ export const for_user_loging = () => promise(() => {
     authDispatch('refresh_mainpage')
     // orderDispatch('refresh_my_join')
     prodDispatch('refresh_buys')
+
 })
 
 // 用户参加成功一个活动后

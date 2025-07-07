@@ -7,15 +7,15 @@
             <view class="fx-c px-row py-s">
                 <text class="pr-s">{{ v.nickName }}</text>
                 <CkSex :sex="v.gender"/>
-                <CkAge :v="v.age"/>
+                <CkAge :v="v.age"/><text>岁</text>
             </view>
         </view>
         <view class="fx-aii-btn-def">
             <view class="fx-c py-s px-row">
-                <OButtonTag clazz="fx-c br px-s py-t h9">
-                    <CoImg clazz="w-2em h-2em fs-s br-cir" :src="DATA_WX_COVER.url"/>
+                <OButtonTag clazz="fx-c br px-s py-t h9" color="def">
+                    <CoImg clazz="w-1em h-1em br-cir" :src="DATA_WX_COVER.url"/>
                     <view>
-                        <text class="px-s">请加微信:</text>
+                        <text class="px-s">微信号:</text>
                         <text class="us-a">{{ v.socialAccount }}</text>
                     </view>
                 </OButtonTag>

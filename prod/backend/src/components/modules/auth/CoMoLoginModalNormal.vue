@@ -27,9 +27,9 @@
 <script setup lang="ts">
 import OPanInnerY from '@/cake/pan/OPanInnerY.vue';
 import OPan from '@/cake/pan/OPan.vue';
-import { appState, authDispatch, authState  } from '@/memory/global';
+import { appState, authDispatch, authState, orderDispatch  } from '@/memory/global';
 import { tipwarn } from '@/tool/uni/uni-global';
-import { futuring, promise } from '@/tool/util/future';
+import { futuring, promise, timeout } from '@/tool/util/future';
 import { vid_phone } from '@/tool/web/vid';
 import { computed, nextTick, reactive } from 'vue';
 import server_auth_business from '@/server/auth/server_auth_business';
@@ -42,6 +42,7 @@ import CkSpace from '@/cake/content/CkSpace.vue';
 import pan_tooi from '@/tool/app/pan_tooi';
 import { storage } from '@/tool/web/storage';
 import { is_nice_sn } from '@/tool/util/valued';
+import { pageIndexDispatch } from '@/memory/page';
 
 const aii = reactive({ phone: '', ioading: false, ff: DEV_GENERATE_SPECIAL })
 
@@ -84,6 +85,10 @@ const funn = {
             await authDispatch('login', src)
         }
         finally {
+            timeout(() => {
+                orderDispatch('refresh')
+                pageIndexDispatch('refresh')
+            })
             pan_tooi.close_pan(loginhouse.value.pan_idx)
         }
     },

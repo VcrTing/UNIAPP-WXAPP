@@ -27,7 +27,12 @@ const edit = computed(() => (pagePublishState.edit))
 const dataStatus = computed((): number => (must_int(edit.value.dataStatus)))
 
 const show = computed((): boolean => {
-    return dataStatus.value === STS_PRODUCT.STATUS.EDITING
+    if (dataStatus.value === STS_PRODUCT.STATUS.EDITING) {
+        if (reviewStatus.value === STS_PRODUCT.REVIEW.NO) {
+            return true
+        }
+    }
+    return dataStatus.value === STS_PRODUCT.STATUS.CHECKING
 })
 
 const reviewStatus = computed((): number => (must_int(edit.value.reviewStatus)))

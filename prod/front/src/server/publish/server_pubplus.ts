@@ -12,7 +12,7 @@ import { must_int } from "@/tool/util/valued"
 
 const plus = async (form: ONE): Promise<Product> => {
     const __pm: ONE = net_tool.build_data(form)
-    const src: NET_RES = await app.pos('product', null, __pm)
+    const src: NET_RES = await master.pos('product', null, __pm)
     if (is_str(src)) return netip(src, <Product>{ });
     const res: ONE | MANY = (src as HttpResult).data
     return net_tool.one<Product>(res)

@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 public class OrderQueryParam {
 
     String userDocumentId;
+    String documentId;
+    String userPhone;
 
     Integer makeStatus;
     Integer payStatus;
@@ -36,14 +38,21 @@ public class OrderQueryParam {
 
     public LambdaQueryWrapper<XOrder> wrapper() {
         LambdaQueryWrapper<XOrder> wrapper = new LambdaQueryWrapper<>();
+        if (QVUtil.hasLen(userPhone)) {
+            wrapper.eq(XOrder::getUserPhone, userPhone);
+        }
+        if (QVUtil.hasLen(documentId)) {
+            wrapper.eq(XOrder::getDocumentId, documentId);
+        }
         if (QVUtil.hasLen(userDocumentId)) {
             wrapper.eq(XOrder::getUserDocumentId, userDocumentId);
         }
-        if (QVUtil.serInt(makeStatus, -1) != -1) {
-            wrapper.eq(XOrder::getMakeStatus, makeStatus);
-        }
         if (QVUtil.serInt(payStatus, -1) != -1) {
             wrapper.eq(XOrder::getPayStatus, payStatus);
+        }
+        //
+        if (QVUtil.serInt(makeStatus, -1) != -1) {
+            wrapper.eq(XOrder::getMakeStatus, makeStatus);
         }
         if (QVUtil.serInt(sendStatus, -1) != -1) {
             wrapper.eq(XOrder::getSendStatus, sendStatus);
@@ -51,6 +60,8 @@ public class OrderQueryParam {
         if (QVUtil.serInt(refundStatus, -1) != -1) {
             wrapper.eq(XOrder::getRefundStatus, refundStatus);
         }
+
+        //
         wrapper.orderByDesc(XOrder::getCreatedAt);
         return wrapper;
     }

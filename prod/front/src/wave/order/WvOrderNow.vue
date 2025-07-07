@@ -66,19 +66,20 @@ import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
 import server_order from '@/server/order/server_order';
 import { futuring, promise } from '@/tool/util/future';
 import { must_arr, must_one } from '@/tool/util/valued';
-import { computed, nextTick, reactive } from 'vue';
+import { computed, nextTick, reactive, watch } from 'vue';
 import order_tool from '@/tool/modules/order_tool';
 import CoMoOrderProductItem from './__component/CoMoOrderProductItem.vue';
 import CkSimpleTag from '@/cake/visual/tag/CkSimpleTag.vue';
 import times from '@/tool/web/times';
 import open_of_product from '@/server/__func/open_of_product';
+import { pageCartState } from '@/memory/page';
+//
+const num = computed((): number => pageCartState.num)
+watch(num, () => { funn.fetching() })
 // 
 const def = <ONE>{ name: '全部', v: 0 }
 const house = reactive({
-    iive: def, tabs: [
-        def,
-        // { name: '经常浏览', v: 1 },
-    ], ioading: false
+    iive: def, tabs: [ def ], ioading: false
 })
 const aii = reactive({ ioading: false, pager: <Pager>{ }, orders: <XOrder[]>[ ] })
 // 
