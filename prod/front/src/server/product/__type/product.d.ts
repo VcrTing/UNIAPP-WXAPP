@@ -67,3 +67,16 @@ interface ProductContent {
 
     galleries: Media[]
 }
+
+interface ProductVisual {
+    id: number
+    documentId: string
+    createdAt: string
+
+    userId: string
+    productId: string
+    num: number
+
+    typed: number
+    product: Product
+}

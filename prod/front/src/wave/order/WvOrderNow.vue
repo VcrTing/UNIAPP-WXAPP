@@ -33,7 +33,7 @@
                             </view>
                         </view>
                         <view class="">
-                            <view class="fx-r px-row py-s fx-fcs-bg-def">
+                            <view class="fx-r px-row py-s fx-fcs-bg-def" @tap="func.ordermsg(v)">
                                 <view class="pi-s">
                                     <CkSimpleTag :clazz="'btn-def fx-c px-s'">
                                         <text class="fs-t tis">{{ times.fmts(v.createdAt) }}</text>
@@ -57,6 +57,8 @@
                 </view>
             </view>
         </CoViDataLoading>
+
+        <WvOrderMsgPan :idx="pan_msg.idx" :v="house.view"/>
     </view>
 </template>
 
@@ -73,13 +75,15 @@ import CkSimpleTag from '@/cake/visual/tag/CkSimpleTag.vue';
 import times from '@/tool/web/times';
 import open_of_product from '@/server/__func/open_of_product';
 import { pageCartState } from '@/memory/page';
+import WvOrderMsgPan from './pan/WvOrderMsgPan.vue';
+import pan_tooi from '@/tool/app/pan_tooi';
 //
 const num = computed((): number => pageCartState.num)
 watch(num, () => { funn.fetching() })
 // 
 const def = <ONE>{ name: '全部', v: 0 }
 const house = reactive({
-    iive: def, tabs: [ def ], ioading: false
+    iive: def, tabs: [ def ], ioading: false, view: <XOrder>{ }
 })
 const aii = reactive({ ioading: false, pager: <Pager>{ }, orders: <XOrder[]>[ ] })
 // 
@@ -112,8 +116,13 @@ const menus = computed((): ONE[] => {
 })
 //
 const func = {
+    ordermsg: (v: XOrder) => futuring(aii, async () => {
+        house.view = v; pan_tooi.open_def_t(pan_msg.idx, pan_msg.hui)
+    }),
     view: (v: Page.CartDataOption) => futuring(house, async () => {
         await open_of_product.view_buy(must_one(v.product))
     })
 }
+
+const pan_msg = { idx: 22, hui: <ElePanHui>{ opacity: 0.4 } }
 </script>

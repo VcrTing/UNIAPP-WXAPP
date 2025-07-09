@@ -1,5 +1,5 @@
 import { DEV_CONTENT_CATEGORY } from "@/conf/conf-dev"
-import { is_nice_sn, must_arr } from "@/tool/util/valued"
+import { deepcopy, is_nice_sn, must_arr } from "@/tool/util/valued"
 
 
 const split_end = (src: string): string[] => {
@@ -15,11 +15,29 @@ const split_end = (src: string): string[] => {
     return res
 }
 
-const is_gallery = (v: ProductContent): boolean => {
-    return v.category === DEV_CONTENT_CATEGORY.GALLERY
+// 是否媒体
+const is_medias = (v: ProductContent): boolean => {
+    return v.category === DEV_CONTENT_CATEGORY.MEDIAS
 }
+
+// 构建内容
+const build_content_medias = (): ProductContent => {
+    return <ProductContent>{
+        category: DEV_CONTENT_CATEGORY.MEDIAS,
+        galleries: <Media[]>[ ]
+    }
+}
+const build_content_words = (): ProductContent => {
+    return <ProductContent>{
+        category: DEV_CONTENT_CATEGORY.WORD,
+        content: ''
+    }
+}
+
 
 export default {
     split_end,
-    is_gallery
+    is_medias,
+    build_content_words,
+    build_content_medias
 }

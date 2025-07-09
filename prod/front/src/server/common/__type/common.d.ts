@@ -39,3 +39,17 @@ interface Address {
     remark: string
     addressSystem: string
 }
+
+
+interface TagPrefer {
+    id: number
+    documentId: string
+    createdAt: string
+
+    userId: string
+    tagId: string
+    numView: number
+    numCart: number
+
+    tag: Tag
+}

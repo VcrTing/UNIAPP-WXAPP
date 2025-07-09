@@ -2,8 +2,8 @@
 <template>
     <view>
         <CkSpace :h="8"/>
-        <view class="w-100 bg-con softer abs-b i-0 ps-f-imp">
-            <view class="mxw-pc py" :class="isphone ? '' : 'fx-s'">
+        <view class="w-100 bg-con softer abs-b i-0 ps-f-imp zi">
+            <view class="mxw-pc py-s" :class="isphone ? '' : 'fx-s'">
                 <view class="fx-i fx-1">
                     <view>
                         <OFI i="i" clazz="w-2em h-2em" @tap="uniRouter.back"/>
@@ -11,11 +11,11 @@
                     <view class="fx-1">
                         <input class="inp-app btn-def br-rnd" v-model="aii.remark" placeholder="审核信息"/>
                     </view>
-                    <view class="pi">
+                    <view class="pi-row" :class="isphone ? 'pt-s pr-row' : ''">
                         <OButton :ioading="aii.ioading" @tap="funn.fail(v)" color="err">审核不通过</OButton>
                     </view>
                 </view>
-                <view class="pi">
+                <view class="pi-row" :class="isphone ? 'pt-s pr-row' : ''">
                     <OButton :ioading="aii.ioading" @tap="funn.pass(v)" color="pri">审核通过</OButton>
                 </view>
             </view>

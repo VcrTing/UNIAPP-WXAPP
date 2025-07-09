@@ -1,3 +1,6 @@
+import srp_a from "@/tool/strapi/srp_a"
+import srp_p from "@/tool/strapi/srp_p"
+import { DEV_CREATE_AT } from "./conf-dev"
 
 export const DATA_CITY_DEF = <Conf.City>{ name: '深圳', documentId: '' }
 export const DATA_CITYS = <Conf.Citys>[
@@ -13,6 +16,9 @@ export const DATA_ACTIVITY_TYPED = <Conf.Tabs>[
     DATA_ACTIVITY_TYPED_GK,
     DATA_ACTIVITY_TYPED_SM,
 ]
+
+export const DATA_TAB_ALL = <Conf.Tab>{ name: '全部', v: -1 }
+
 // 产品类型
 export const DATA_PRODUCT_TYPED_SM = <Conf.Tab>{ name: '售卖品', v: 0 }
 export const DATA_PRODUCT_TYPED_FREE = <Conf.Tab>{ name: '公开品', v: 1 }
@@ -45,6 +51,14 @@ export const DATA_PRODUCT_REVIEW = <Conf.Tabs>[
     DATA_PRODUCT_REVIEW_DEF, DATA_PRODUCT_REVIEW_CHECKING //, DATA_PRODUCT_REVIEW_NO
 ]
 
+
+// 产品内容
+export const DATA_CONTENT_CATEGORY_WORD = <Conf.Tab>{ name: '文字内容', v: 0 }
+export const DATA_CONTENT_CATEGORY_MEDIAS = <Conf.Tab>{ name: '媒体内容', v: 1 }
+export const DATA_CONTENT_CATEGORY = <Conf.Tabs>[
+    DATA_CONTENT_CATEGORY_WORD,
+    DATA_CONTENT_CATEGORY_MEDIAS,
+]
 
 // 全部活动状态
 export const DATA_ACTIVITY_STATUS_DEF = <Conf.Tab>{ name: '全部', v: -1 }
@@ -92,8 +106,27 @@ export const DATA_PAYMENT_WAY = [
 ]
 
 // 排行
-export const DATA_FILTER_TAB_DEF = { name: '默认', v: 0  }
+export const DATA_FILTER_TAB_DEF = { name: '默认', v: 0, 
+    sorted: (pm: ONE = { }) => {
+        // 创建时间
+        srp_p.__sort(pm, DEV_CREATE_AT, false)
+        return pm
+    }  
+}
 export const DATA_FILTER_TABS = <Conf.Tabs>[
     DATA_FILTER_TAB_DEF, 
-    { name: '热门', v: 1 }
+    { name: '热门', v: 1, 
+        sorted: (pm: ONE = { }) => {
+            // 观看值
+            srp_p.__sort(pm, 'numView', false)
+            return pm
+        } 
+    }, 
+    { name: '热销排行', v: 2, 
+        sorted: (pm: ONE = { }) => {
+            // 观看值
+            srp_p.__sort(pm, 'numSell', false)
+            return pm
+        } 
+    }, 
 ]

@@ -65,7 +65,7 @@ const pass = async (v: Product): Promise<Product> => {
     const __pm: ONE = { }
     __pm[ STS_PRODUCT.STATUS.K ] = STS_PRODUCT.STATUS.PASS
     __pm[ STS_PRODUCT.REVIEW.K ] = STS_PRODUCT.REVIEW.YES
-    
+    //
     return await edit(__pm, { documentId })
 } 
 
@@ -76,6 +76,7 @@ const fail = async (v: Product, remark: string): Promise<Product> => {
     __pm[ STS_PRODUCT.STATUS.K ] = STS_PRODUCT.STATUS.EDITING
     __pm[ STS_PRODUCT.REVIEW.K ] = STS_PRODUCT.REVIEW.NO
     __pm[ 'reviewComment' ] = remark
+    //
     return await edit(__pm, { documentId })
 } 
 

@@ -21,16 +21,7 @@
             <view class="" @tap="emt('detail', v)">
                 <CoMoProductSubTitle :v="v" :clazz="'px-col'"/>
                 <view class="pb-s fx-aii-btn-def px-col">
-                    <view class="fx-s fx-b" v-if="product_tool.is_free(v)">
-                        <view>
-
-                        </view>
-                        <view class="fs-s tis">
-                            <text>{{ product_tool.getnum_view(v) }}</text>
-                            <text class="fs-t">浏览</text>
-                        </view>
-                    </view>
-                    <view v-else class="fx-s fx-b">
+                    <view  v-if="product_tool.is_sm(v)" class="fx-s fx-b">
                         <!-- L -->
                         <view class="fx-i fx-1 fx-b">
                             <view class="money ani-scaie-aii">
@@ -50,6 +41,15 @@
                             <view v-else class="fx-aii-btn-def br-rnd tis">
                                 <text class="fs-t">{{ product_tool.getnum_sell_txt(v) }}</text>
                             </view>
+                        </view>
+                    </view>
+                    <view class="fx-s fx-b" v-else>
+                        <view>
+
+                        </view>
+                        <view class="fs-s tis">
+                            <text>{{ product_tool.getnum_view(v) }}</text>
+                            <text class="fs-t">浏览</text>
                         </view>
                     </view>
                 </view>

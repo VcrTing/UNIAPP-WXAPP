@@ -79,7 +79,7 @@ export const DEV_ORDER = {
 
 // 媒体禁止
 export const DEV_MEDIA_ALLOW = {
-    ALLOW_SEX: 0, // 是否允许展示 色情 1 = 允许
+    ALLOW_SEX: 1, // 是否允许展示 色情 1 = 允许
     OPEN_ALLOW: true, // 允许展示 被允许的 true = 打开 isAllow 开关，其他 = 不检查 isAllow
 }
 

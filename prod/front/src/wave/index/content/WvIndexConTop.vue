@@ -17,7 +17,7 @@
             </OScrollX>
             <view class="fx-s fx-b">
                 <view class="">
-                    <view class="pb pt-s pi-row d-ib">
+                    <view class="pb pt-s pi-row d-ib softer">
                         <OButtonTag @tap="func.openChange" color="def-s" clazz="px-row br-rnd py-t tid softer fx-c">
                             <text class="fs-n pr-s">{{ change.tab.name }}</text>
                             <CkIoading v-if="ioading"/>
@@ -34,7 +34,7 @@
         </view>
         <view v-if="aii.init">
             <WvIndexTagsPan :idx="pan_tag.idx" :active="aii.iive" @result="funn.choseFromPan"/>
-            <CoCoSwitchPan :idx="pan_tab.idx" @result="func.switchTab"
+            <CoCoSwitchPan :idx="pan_tab.idx" @result="func.switchTab" @cancle="pan_tooi.close_pan(pan_tab.idx)"
                 :active="change.tab" :tabs="change.tabs" :tit="'排序方式'"
             />
         </view>
@@ -47,11 +47,10 @@ import { pageIndexDispatch, pageIndexState } from '@/memory/page';
 import def_tag from '@/server/__def/def_tag';
 import pan_tooi from '@/tool/app/pan_tooi';
 import { futuring, promise, timeout } from '@/tool/util/future';
-import { must_arr } from '@/tool/util/valued';
+import { must_arr, must_one } from '@/tool/util/valued';
 import { computed, nextTick, onMounted, reactive, watch } from 'vue';
 import UiI from '@/ui/element/i/UiI.vue';
 import { arrfindi } from '@/tool/util/iodash';
-import OButton from '@/cake/button/OButton.vue';
 import OButtonTag from '@/cake/button/OButtonTag.vue';
 import WvIndexTagsPan from '../pan/WvIndexTagsPan.vue';
 import CoCoSwitchPan from '@/components/common/CoCoSwitchPan.vue';
@@ -70,7 +69,13 @@ const aii = reactive({
 
 const func = {
     openChange: () => { pan_tooi.open_def_b(pan_tab.idx, pan_tab.hui) },
-    switchTab: (v: Conf.Tab) => { prp.change.tab = v; pan_tooi.close_pan(pan_tab.idx) },
+    switchTab: (v: Conf.Tab) => { 
+        const org: Conf.Tab = must_one<Conf.Tab>(prp.change.tab)
+        prp.change.tab = v; pan_tooi.close_pan(pan_tab.idx); 
+        if (v.v !== org.v) {
+            emt('refresh')
+        }
+    },
     openTags: () => futuring(aii, async () => { pan_tooi.open_def_b(pan_tag.idx, pan_tag.hui) })
 }
 
@@ -119,8 +124,8 @@ const menus = computed((): Tag[] => {
 })
 
 nextTick(funn.init)
-const emt = defineEmits([ 'result' ])
-watch(() => aii.iive, () => { emt('result', aii.iive) })
+const emt = defineEmits([ 'changetag', 'refresh' ])
+watch(() => aii.iive, () => { emt('changetag', aii.iive) })
 
 const pan_tab = { idx: 72, hui: <ElePanHui>{ opacity: 0.4 } }
 const pan_tag = { idx: 74, hui: <ElePanHui>{ opacity: 0.4 } }

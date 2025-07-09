@@ -406,6 +406,7 @@ export interface ApiAppInfoAppInfo extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    user_banners: Schema.Attribute.Component<'swiper.swiper', true>;
     userDefAvatarUrl: Schema.Attribute.Text;
     userDefBackground: Schema.Attribute.Text;
   };
@@ -489,6 +490,38 @@ export interface ApiProductMediaProductMedia
   };
 }
 
+export interface ApiProductVisualProductVisual
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'product_visuals';
+  info: {
+    displayName: 'ProductVisual';
+    pluralName: 'product-visuals';
+    singularName: 'product-visual';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product-visual.product-visual'
+    > &
+      Schema.Attribute.Private;
+    num: Schema.Attribute.Integer;
+    productId: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    typed: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    userId: Schema.Attribute.String;
+  };
+}
+
 export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   collectionName: 'products';
   info: {
@@ -506,7 +539,9 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     dataStatus: Schema.Attribute.Integer;
     endSellTime: Schema.Attribute.DateTime;
+    handsome: Schema.Attribute.Integer;
     honours: Schema.Attribute.Component<'tag.tag', true>;
+    indexLevel: Schema.Attribute.Integer;
     introduction: Schema.Attribute.Text;
     inv: Schema.Attribute.Integer;
     invTyped: Schema.Attribute.Integer;
@@ -550,6 +585,37 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+  };
+}
+
+export interface ApiTagVisualTagVisual extends Struct.CollectionTypeSchema {
+  collectionName: 'tag_visuals';
+  info: {
+    displayName: 'TagVisual';
+    pluralName: 'tag-visuals';
+    singularName: 'tag-visual';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tag-visual.tag-visual'
+    > &
+      Schema.Attribute.Private;
+    numCart: Schema.Attribute.Integer;
+    numView: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    tagId: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    userId: Schema.Attribute.String;
   };
 }
 
@@ -647,6 +713,8 @@ export interface ApiUserStatisticUserStatistic
     numLoveTotal: Schema.Attribute.Integer;
     numPublish: Schema.Attribute.Integer;
     numPublishMoneyGet: Schema.Attribute.Decimal;
+    numView: Schema.Attribute.Integer;
+    numVisited: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1152,6 +1220,8 @@ export interface PluginUsersPermissionsUser
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;
+    reviewAvatarUrl: Schema.Attribute.Text;
+    reviewBackground: Schema.Attribute.Text;
     role: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.role'
@@ -1186,7 +1256,9 @@ declare module '@strapi/strapi' {
       'api::app-info.app-info': ApiAppInfoAppInfo;
       'api::product-content.product-content': ApiProductContentProductContent;
       'api::product-media.product-media': ApiProductMediaProductMedia;
+      'api::product-visual.product-visual': ApiProductVisualProductVisual;
       'api::product.product': ApiProductProduct;
+      'api::tag-visual.tag-visual': ApiTagVisualTagVisual;
       'api::tag.tag': ApiTagTag;
       'api::user-love.user-love': ApiUserLoveUserLove;
       'api::user-statistic.user-statistic': ApiUserStatisticUserStatistic;

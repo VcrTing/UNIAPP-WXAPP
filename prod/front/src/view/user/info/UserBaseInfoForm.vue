@@ -1,8 +1,10 @@
 <template>
     <view>
-        <view class="zi-t ps-r">
-            <image class="w-100 user-info-backimg ani-scaie-aii" mode="aspectFill" :src="form.background || info.userDefBackground"/>
+        <view class="zi-t ps-r zi-t user-info-backimg">
+            <image class="w-100 h-100 ani-scaie-aii" mode="aspectFill" :src="form.background || info.userDefBackground"/>
             <view class="abs-r t-0 zi-s">
+                <view class="pt"></view>
+                <view class="mh-app-top-bar"></view>
                 <view class="">
                     <OButton @tap="funn.change_background" color="bck" clazz="px-row py br-1" :weak="true">
                         <UiI i="edit"/>
@@ -26,25 +28,25 @@
                     </view>
                 </view>
             </view>
-            <view class="card user-info-card pt-x2 pb">
+            <view class="user-info-card pt-x2 pb-x1 br">
                 <view class="pt-x2">
-                    <CkInpItem class="pt pb-s" :tit="'个人昵称'">
-                        <input class="inp-app h7" v-model="form.nickName" placeholder="请输入昵称" />
+                    <CkInpItem clazz="pt pb-s c-uic-item" :tit="'个人昵称'">
+                        <input class="inp-app h7" v-model="form.nickName" @blur="emt('submit')" placeholder="请输入昵称" />
                     </CkInpItem>
-                    <view class="pt fx-s fx-t">
+                    <view class="pt fx-s fx-t  c-uic-item">
                         <view class="pi-inp mw-6em py-s tiw">
                             <text class="">个人简介</text>
                         </view>
-                        <textarea auto-height maxlength="200" class="inp-app py-s mxh-5em pr-s" v-model="form.introduction"
+                        <textarea auto-height maxlength="200" @blur="emt('submit')" class="inp-app py-s mxh-5em pr-s" v-model="form.introduction"
                             placeholder="请输入个人简介"></textarea>
                     </view>
-                    <CkInpItem :tit="'真实年龄'">
-                        <input class="inp-app" type="number" v-model="form.age" 
+                    <CkInpItem :tit="'真实年龄'" clazz=" c-uic-item">
+                        <input class="inp-app" type="number" v-model="form.age" @blur="emt('submit')"
                             placeholder="请输入年龄" />
                     </CkInpItem>
-                    <CkInpItem :tit="'社交账号'">
-                        <input class="inp-app" v-model="form.socialAccount" 
-                            placeholder="请输入社交账号，附带App名称" />
+                    <CkInpItem :tit="'社交账号'" clazz=" c-uic-item">
+                        <input class="inp-app" v-model="form.socialAccount" @blur="emt('submit')"
+                            placeholder="请输入微信号、QQ号" />
                     </CkInpItem>
                 </view>
             </view>
@@ -53,17 +55,18 @@
 </template>
 
 <script setup lang="ts">
+import OSafeArea from '@/cake/app/safearea/OSafeArea.vue';
+import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
 import OButton from '@/cake/button/OButton.vue';
 import CkInpItem from '@/cake/input/wrapper/CkInpItem.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
-import { appState, authGetters, authState } from '@/memory/global';
+import { appState, authDispatch } from '@/memory/global';
 import server_upload_media from '@/server/media/server_upload_media';
 import server_me from '@/server/user/server_me';
 import auth_tool from '@/tool/modules/common/auth_tool';
-import media_tool from '@/tool/modules/common/media_tool';
-import { open_choise_img, open_choise_img_async, upload_file } from '@/tool/uni/uni-app';
+import { open_choise_img_async } from '@/tool/uni/uni-app';
 import { tiperr, tipsucc } from '@/tool/uni/uni-global';
-import { future, futuring, promise, promising } from '@/tool/util/future';
+import { future, futuring } from '@/tool/util/future';
 import UiI from '@/ui/element/i/UiI.vue';
 import { computed, reactive } from 'vue';
 
@@ -71,16 +74,22 @@ const prp = defineProps<{
     form: ONE
 }>()
 
-// const is_publisher = computed(() => authGetters.is_publisher)
-// const user = computed(() => authState.user)
-
 const info = computed((): AppInfo => appState.info) 
 
 const aii = reactive({
     ioading: false
 })
+const me = reactive({
+    ioading: false
+})
+const emt = defineEmits([ 'submit' ])
 
 const funn = {
+    change: () => futuring(me, async () => {
+
+        emt('submit')
+    }),
+
     __change: (
         succFunc: Function
     ) => open_choise_img_async(1, async (src: UniChoseImg) => futuring(aii, async () => {
@@ -98,7 +107,7 @@ const funn = {
     })),
     change_avatar: () => auth_tool.doac(async () => {
         funn.__change(async (src: UserMedia) => {
-            const ns: User = await server_me.change_avatar(src.urlSmall)
+            const ns: User = await authDispatch('change_info', { avatarUrl: src.url, reviewAvatarUrl: src.url })
             if (ns && ns.id) {
                 prp.form.avatarUrl = ns.avatarUrl;
                 tipsucc('头像更改成功。')
@@ -107,9 +116,9 @@ const funn = {
     }),
     change_background: () => auth_tool.doac(async () => {
         funn.__change(async (src: UserMedia) => {
-            const ns: User = await server_me.change_background(src.url)
+            const ns: User = await authDispatch('change_info', { background: src.url, reviewBackground: src.url })
             if (ns && ns.id) {
-                prp.form.background = ns.background;
+                prp.form.background = src.url;
                 tipsucc('背景更改成功。')
             }
         })
@@ -119,9 +128,13 @@ const funn = {
 
 <style lang="sass">
 .user-info-backimg
-    min-height: 38.2vh
+    height: 100vh
 .user-info-form
-    margin-top: -15em
+    margin-top: -82vh
 .user-info-card
     margin-top: -3em
+    background: rgba(255, 255, 255, 0.4)
+.c-uic-item
+    background: rgba(255, 255, 255, 0.6)
+    backdrop-filter: blur(2px)
 </style>

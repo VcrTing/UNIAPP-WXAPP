@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tag_visuals",
+  "info": {
+    "singularName": "tag-visual",
+    "pluralName": "tag-visuals",
+    "displayName": "TagVisual"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "userId": {
+      "type": "string"
+    },
+    "tagId": {
+      "type": "string"
+    },
+    "numView": {
+      "type": "integer"
+    },
+    "numCart": {
+      "type": "integer"
+    }
+  }
+}

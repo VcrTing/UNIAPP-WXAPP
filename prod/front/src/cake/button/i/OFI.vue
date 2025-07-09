@@ -1,6 +1,6 @@
 <template>
     <view
-        class="btn bd o-f-i fx-c br-cir"
+        class="btn bd o-f-i fx-c br-cir ani-scaie-aii c-p"
         :class="clazz"
         >
         <UiI class="w-1em h-1em fx-c" :class="clazz_i" :i="i"/>

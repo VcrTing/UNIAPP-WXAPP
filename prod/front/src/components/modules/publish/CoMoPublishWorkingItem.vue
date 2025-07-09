@@ -4,7 +4,7 @@
             <CoImg clazz="h-100" :src="product_tool.getcover(v).urlSmall"/>
         </view>
         <view class="w-76">
-            <view class="mh-1em fx-s pb-s px">
+            <view class="mh-1em fx-s pb-s pt-t px fx-aii-btn-def">
                 <view class="fx-1">
                     <view class="fs-w"><text class="eiies o-h">{{ product_tool.gettitle(v) }}</text></view>
                 </view>
@@ -15,18 +15,9 @@
             <view class="mh-1em">
                 <CoMoProductSubTitle :v="v" v-if="v" :clazz="'px'"/>
             </view>
-            <view class="mh-1em px">
+            <view class="mh-1em px fx-aii-btn-def py-t">
                 <view class="fx-s fx-b">
-                    <view class="fx-1" v-if="product_tool.is_free(v)">
-                        <view class="fs-n tiw">
-                            <!--
-                            <UiI i="eye" clazz="d-ib"/>
-                            -->
-                            <text class="pr-t">{{ product_tool.getnum_view(v) }}</text>
-                            <text class="fs-s">人浏览</text>
-                        </view>
-                    </view>
-                    <view class="fx-1" v-else>
+                    <view class="fx-1" v-if="product_tool.is_sm(v)">
                         <view class="money d-ib">
                             <text class="fs-s">￥</text>
                             <text class="">{{ product_tool.getprice_less(v) }}</text>
@@ -35,6 +26,15 @@
                         <view class="tiw d-ib td-lt">
                             <text class="fs-s">￥</text>
                             <text class="fs-s">{{ product_tool.getprice_must(v) }}</text>
+                        </view>
+                    </view>
+                    <view class="fx-1" v-else>
+                        <view class="fs-n tiw">
+                            <!--
+                            <UiI i="eye" clazz="d-ib"/>
+                            -->
+                            <text class="pr-t">{{ product_tool.getnum_view(v) }}</text>
+                            <text class="fs-s">人浏览</text>
                         </view>
                     </view>
                     <view class="">

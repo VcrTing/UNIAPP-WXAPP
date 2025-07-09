@@ -5,8 +5,11 @@
                 <OScrollX>
                     <view class="py">
                         <view class="d-ib pi-inp"></view>
-                        <view class="w-28 h-12vh d-ib mr ps-r zi-t" v-for="(v, i) in view" :key="i">
-                            <view class="w-100 h-12vh fx-c abs-b i-0">
+                        <view class="w-28 d-ib mr ps-r zi-t" v-for="(v, i) in view" :key="i"
+                        >
+                            <view class="w-100 fx-c abs-b i-0" 
+                                :class="ispc ? 'h-16vh ' : 'h-12vh'"
+                                >
                                 <CoImg clazz="h-100 w-100 br" :src="v.path"/>
                                 <view class="abs-b r-0 zi-n" v-if="canedit">
                                     <view @tap="funn.trashImg(v)" class="px-s py-s bg-028 br-ti br-br">
@@ -83,6 +86,7 @@ import media_tool from '@/tool/modules/common/media_tool';
 import server_pubplus from '@/server/publish/server_pubplus';
 import { DATA_PUBLISH_MEDIA } from '@/conf/conf-datas';
 import CoCoTagChoisePagePan from '../pan/CoCoTagChoisePagePan.vue';
+import { uiGetters } from '@/memory/global';
 
 const prp = defineProps<{
     form: ONE, canedit: boolean, documentId: string
@@ -157,6 +161,9 @@ const funn = {
 }
 
 defineExpose(funn)
+
+
+const ispc = computed((): boolean => uiGetters.ispc)
 
 const pan_tag = { idx: 41, hui: <ElePanHui> { opacity: 0.1 } }
 </script>

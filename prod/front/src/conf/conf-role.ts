@@ -28,7 +28,7 @@ export const USER_DEF = <User>{
     age: 18,
     gender: 1,
     phone: '135',
-    introduction: '未登录用户，无法参加活动，请先登录。',
+    introduction: '未登录用户，无法获取优质商品，请先登录。',
     socialAccount: '无社交账号展示'
 }
 

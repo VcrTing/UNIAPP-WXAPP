@@ -2,7 +2,7 @@
     <OPan :idx="idx">
         <OPanInnerY :idx="idx" :orientation="'b'">
             <view class="py-x2">
-                <view class="fx-c"><text class="header-s ls">
+                <view class="fx-c" @tap="emt('cancle')"><text class="header-s ls">
                     {{ tit ? tit : '切换' }}
                 </text></view>
             </view>
@@ -37,5 +37,5 @@ const prp = defineProps<{
     active: Conf.Tab,
 }>()
 
-const emt = defineEmits([ 'result' ])
+const emt = defineEmits([ 'result', 'cancle' ])
 </script>

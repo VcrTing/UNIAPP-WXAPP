@@ -69,7 +69,7 @@
 import OFI from '@/cake/button/i/OFI.vue';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import CkAgeSex from '@/cake/visual/ider/CkAgeSex.vue';
-import { authDispatch } from '@/memory/global';
+import { authDispatch, soDispatch } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';
 import { must_arr, must_one } from '@/tool/util/valued';
 import UiI from '@/ui/element/i/UiI.vue';
@@ -92,7 +92,7 @@ const publisher = computed((): User => {
 const funn = {
     __to: async (userid: any) => {
         if (userid) {
-            const u: UserMainPage = await authDispatch('fetch_someone_mainpag', { userid })
+            const u: UserMainPage = await soDispatch('fetch_someone_mainpag', { userid })
             // console.log('点击到的用户主页 =', u)
             uniRouter.gopg('user_mainpage')
         }

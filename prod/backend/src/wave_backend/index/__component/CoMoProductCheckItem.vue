@@ -14,7 +14,7 @@
                 </OScrollX>
             </view>
             <!-- -->
-            <view class="pt-col pi-col pr-t fx-aii-btn-def" @tap="emt('detail', v)">
+            <view class="pt-col pb-t pi-col pr-t fx-aii-btn-def" @tap="emt('detail', v)">
                 <view class="fw-550 hih fs-n d-ib c-p">
                     <text class="ani-scaie-aii">{{ v.title }}</text>
                 </view>

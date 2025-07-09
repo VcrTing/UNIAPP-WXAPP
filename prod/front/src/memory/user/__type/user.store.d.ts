@@ -13,14 +13,11 @@ interface AuthStore {
 
     addr: UserAddress
 
-    mainpage: UserMainPage
-    mainpages: UserMainPage[]
-    mainpage_of_view: UserMainPage
 }
 type AUTH_STORE_FIELD = 
     'info' | 'user' | 'auth' | 'num' | 'addr' |
-    'jwt' | 'role' | 'needlogin' | 'mainpage' | 'mainpage'
-
+    'jwt' | 'role' | 'needlogin' 
+    
 interface AuthGetters {
     jwt: string,
     username: string,

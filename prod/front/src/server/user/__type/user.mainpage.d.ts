@@ -7,6 +7,9 @@ interface UserMainPage {
     numLoveTotal: number
     numMemberTotal: number
 
+    numView: number
+    newVisited: number
+
     id: number
     documentId: string
 
@@ -20,6 +23,9 @@ interface UserMainPage {
 interface UserStatistic {
     id: number
     documentId: string
+
+    numView: number
+    nuwVisited: number
 
     numPublish: number
     numJoin: number

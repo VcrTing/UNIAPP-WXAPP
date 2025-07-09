@@ -144,6 +144,11 @@ const view_imit = (src: Media[], star: number, max: number): Media[] => {
 export default {
     fer_sex, fer_allow,
 
+    is_sex: (v: Media) => {
+        const m: number = v.isSex || 0
+        return m === STS_MEDIA.SEX.YES
+    },
+
     view_imit,
 
     img_h_view,

@@ -42,14 +42,14 @@ const __main_page = async (user: User): Promise<UserMainPage> => {
     console.log("搜索用户的主页 =", user)
     const medias: Media[] = await server_medias.mainpage(user.id + '');
     const statistic: UserStatistic = await server_user_statistic.byuser(user.id)
-    const src = <UserMainPage>{
+    const src = <UserMainPage | ONE>{
         ...statistic, statistic,
         user, tags: pageIndexState.indextags,
         medias, userid: user.id, 
     }
     src['id'] = user.id
     src['documentId'] = user.documentId
-    return src;
+    return src as UserMainPage;
 }
 
 const mymainpage = async (): Promise<UserMainPage> => {

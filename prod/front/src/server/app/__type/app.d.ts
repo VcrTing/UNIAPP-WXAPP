@@ -16,6 +16,6 @@ interface AppInfo {
     userDefBackground: string
 
     index_banners: Media[]
-
+    user_banners: Media[]
     contacts: User[]
 }

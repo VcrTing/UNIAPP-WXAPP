@@ -54,9 +54,7 @@ const funn = {
     edit: (v: ONE) => {
         uniRouter.gopg('publish_edit')
     },
-    switchTab: (v: ONE) => {
-        aii.i = v.v
-    }
+    switchTab: (v: ONE) => { aii.i = v.v }
 }
 
 const tabs = DATA_PRODUCT_TYPED

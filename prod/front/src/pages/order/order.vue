@@ -27,6 +27,9 @@
                 <view v-if="aii.iive == 0">
                     <WvOrderNow/>
                 </view>
+                <view v-if="aii.iive == 1">
+                    <WvProductVisual :is_index_mode="false"/>
+                </view>
                 <CkSpace :h="2"/>
             </OScrollY>
         </view>
@@ -47,6 +50,7 @@ import { futuring, promise, timeout } from '@/tool/util/future';
 import { storage } from '@/tool/web/storage';
 import WvIndexBanner from '@/wave/index/WvIndexBanner.vue';
 import WvOrderNow from '@/wave/order/WvOrderNow.vue';
+import WvProductVisual from '@/wave/visual/WvProductVisual.vue';
 import { computed, nextTick, reactive, watch } from 'vue';
 //
 const code = computed(() => { return storage.get('PAGE_ORDER_KEY') || 0 })

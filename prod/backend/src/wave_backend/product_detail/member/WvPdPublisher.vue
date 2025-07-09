@@ -56,16 +56,13 @@
 <script setup lang="ts">
 import OFI from '@/cake/button/i/OFI.vue';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
-import CkAgeSex from '@/cake/visual/ider/CkAgeSex.vue';
 import { authDispatch } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';
 import { must_arr, must_one } from '@/tool/util/valued';
-import UiI from '@/ui/element/i/UiI.vue';
 import { computed } from 'vue';
 import CoMoPdHeader from '../__component/CoMoPdHeader.vue';
 import { PUBLISHER_DEF } from '@/conf/conf-role';
 import CkSex from '@/cake/visual/ider/CkSex.vue';
-import CkDefTag from '@/cake/visual/tag/CkDefTag.vue';
 import CkSimpleTag from '@/cake/visual/tag/CkSimpleTag.vue';
 
 const prp = defineProps<{

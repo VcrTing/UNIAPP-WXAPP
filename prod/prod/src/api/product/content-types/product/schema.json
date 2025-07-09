@@ -114,6 +114,12 @@
     },
     "invWeak": {
       "type": "integer"
+    },
+    "handsome": {
+      "type": "integer"
+    },
+    "indexLevel": {
+      "type": "integer"
     }
   }
 }

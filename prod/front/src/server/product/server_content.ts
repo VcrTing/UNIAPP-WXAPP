@@ -1,4 +1,6 @@
-import { STS_CONTENT } from "@/conf/conf-status"
+import { is_strapi_mode } from "@/conf/conf"
+import { DEV_DOC_ID, DEV_ID } from "@/conf/conf-dev"
+import { STS, STS_CONTENT, STS_PRODUCT } from "@/conf/conf-status"
 import { authGetters } from "@/memory/global"
 import { master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
@@ -44,9 +46,9 @@ const by_product = async (one: Product): Promise<ProductContent[]> => {
 }
 
 // 改动
-const plus_or_edit = async (one: Activity, src: ProductContent, introduction: string, content: string): Promise<ProductContent> => {
+const plus_or_edit = async (one: Product, src: ProductContent, content: string): Promise<ProductContent> => {
     let docId: string = must_one<ProductContent>(src).documentId;
-    const form: ONE = { introduction, content, activityId: one.documentId, publisherId: authGetters.userid }
+    const form: ONE = { content, belongId: one.documentId, publisherId: authGetters.userid + '' }
     if (is_nice_sn(docId)) {
         // 修改
     }
@@ -70,7 +72,25 @@ const plus_or_edit = async (one: Activity, src: ProductContent, introduction: st
     }
 }
 
+
+const edit = async (form: ONE, origin: ONE): Promise<ProductContent> => {
+    const id: string = is_strapi_mode() ? origin[DEV_DOC_ID] : (origin[DEV_ID] + '')
+    const __pm: ONE = net_tool.build_data(form)
+    const src: NET_RES = await master.put('content', id, __pm)
+    if (is_str(src)) return netip(src, <ProductContent>{ });
+    const res: ONE | MANY = (src as HttpResult).data
+    return net_tool.one<ProductContent>(res)
+} 
+
+// 删除
+const deleted = async (src: ProductContent): Promise<ProductContent> => {
+    const __pm: ONE = { }
+    __pm[ STS.K ] = STS.NO
+    return await edit(__pm, { documentId: src.documentId })
+}
+
 export default {
+    deleted,
     by_product,
     plus_or_edit
 }

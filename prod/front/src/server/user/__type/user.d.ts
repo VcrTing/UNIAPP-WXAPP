@@ -10,6 +10,9 @@ interface User {
     age: number
     introduction: string
     socialAccount: string
+
+    reviewAvatarUrl: string
+    reviewBackground: string
 }
 
 type UserMedia = Media

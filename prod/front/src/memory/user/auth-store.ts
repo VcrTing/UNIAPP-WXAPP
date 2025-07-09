@@ -1,15 +1,15 @@
 
 import { for_user_loging } from '@/conf/__for_index/for_user_loging';
 import { ROLE_ANON, ROLE_AUTH, USER_DEF, USER_TEST } from '@/conf/conf-role';
-import server_user from '@/server/user/user/server_user';
 import pan_tooi from '@/tool/app/pan_tooi';
-import { arrfindi } from '@/tool/util/iodash';
-import { is_nice_one, must_one } from '@/tool/util/valued';
+import { formfii, is_nice_one, must_one } from '@/tool/util/valued';
 import { storage } from '@/tool/web/storage';
 import { Store, createStore } from 'vuex';
-import memory_tool from '../__func/memory_tool';
+import server_me from '@/server/user/server_me';
 
 const __K_OF_USER_AUTH = "USER_AUTH"
+
+const __K_OF_ID = "USER_ID"
 
 export enum AutoLoginStatus {
     ALREADY_LOGIN,
@@ -44,16 +44,21 @@ const _s: Store<AuthStore> = createStore({
             pan_hui: { opacity: 0.4 },
             iive: true
         },
-        mainpage: <UserMainPage>{ },
-        mainpages: <UserMainPage[]>[ ],
-        mainpage_of_view: <UserMainPage>{ }
     },
     getters: {
         jwt: s => s.jwt,
         __fresh: s => s.num,
         username: s => s.user.nickname,
         phone: s => s.phone,
-        userid: s => (s.user.id || -1),
+        userid: s => {
+            const id: number = (s.user.id || 0)
+            if (id) {
+                return id
+            }
+            else {
+                return storage.get('__K_OF_ID') || 0
+            }
+        },
         user_doc_id: s => (s.user.documentId || ''),
         company_id: s => s.company.id,
         is_login: s => islogin(s),
@@ -71,14 +76,16 @@ const _s: Store<AuthStore> = createStore({
         },
         __login: (s: ONE, auth: AppAuth) => {
             console.log('执行登录 =', auth, __K_OF_USER_AUTH)
-            storage.set(__K_OF_USER_AUTH, auth)
             s.auth = auth
             s.user = auth.user 
             s.jwt = auth.jwt 
             s.role = ROLE_AUTH
             s.phonedata = auth.phonedata
             s.loginhouse.iive = false
-            s.num = s.num + 1
+            s.num = s.num + 1;
+            
+            storage.set(__K_OF_USER_AUTH, auth)
+            storage.set(__K_OF_ID, auth.user.id)
         },
         __logout: (s: ONE) => {
             storage.remove(__K_OF_USER_AUTH)
@@ -150,71 +157,24 @@ const _s: Store<AuthStore> = createStore({
             return false
         },
 
-        // 获取我的主页信息
-        refresh_mainpage: async ({ state, commit, getters }): Promise<UserMainPage> => {
-            return await memory_tool.locking(state, commit, state.mainpage, async () => {
-                const origin: UserMainPage = must_one(state.mainpage)
-                if (origin.documentId && origin.user && origin.user.documentId) {
-                    return origin
-                }
-                if (getters.is_login) {
-                    const u: UserMainPage = await server_user.mymainpage()
-                    console.log('========= 刷新我的主页数据 =', u)
-                    if (u && u.documentId) {
-                        commit('__change', [ 'mainpage', u ])
-                        return u;
-                    }
-                }
-                else {
-                    console.log('========= 未登录，不刷主页')
-                }
-                return null
-            })
-        },
-
-        clean_someone_mainpag: ({ state, commit }) => {
-            commit('__change', [ 'mainpage_of_view', { } ]);
-        },
-        // 获取某人的主页信息
-        fetch_someone_mainpag: async ({ state, commit }, { userid }): Promise<UserMainPage> => {
-            const srcs: UserMainPage[] = state.mainpages || []
-            console.log('userid =', userid, ' srcs =', srcs)
-            const iii: number = arrfindi(srcs, userid, 'id')
-            if (iii < 0) {
-                const u: UserMainPage = await server_user.mainpage(userid)
-                console.log('获取某人主页 =', u)
-                srcs.push(u);
-                commit('__change', [ 'mainpages', srcs ]);
-                commit('__change', [ 'mainpage_of_view', u ]);
-                return u;
+        // 修改个人信息
+        change_info: async ({state, commit}, u: User): Promise<User> => {
+            const ori: User = state.user
+            const res: User = await server_me.edit(u, ori)
+            if (res && res.documentId) {
+                // tipsucc('个人资料修改成功。')
+                // formfii(ori, u)
+                commit('__change', [ 'user', res ])
+                const auth = state.auth
+                auth.user = res
+                commit('__change', [ 'auth', auth ])
+                // console.log('替换 user =', res, ' o =', state.user)
+                storage.set(__K_OF_USER_AUTH, auth)
+                return res
             }
-            else {
-                commit('__change', [ 'mainpage_of_view', srcs[ iii ] ]);
-                return srcs[ iii ]
-            }
-            // return <UserMainPage>{ }
+            return ori
         }
     }
 }) 
 
 export default _s
-
-
-        // 更新
-        /*
-        refresh_info: async ({ state, commit }): Promise<User> => {
-            return await locking(state, commit, state.user, async () => {
-                const uid: number = state.user.id;
-                if (uid) {
-                    const u: User = await server_me.one(uid)
-                    if (u && u.id) {
-                        commit('__login', { user: u, token: u.documentId })
-                        console.log('========= 刷新用户数据 =', u)
-                        commit('__change', [ 'user', u ])
-                        return u;
-                    }
-                }
-                return null
-            })
-        },
-        */

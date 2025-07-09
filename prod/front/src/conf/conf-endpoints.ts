@@ -15,6 +15,7 @@ const NET_ENDPOINT_USER = <ONE>{
 // 通用
 const NET_ENDPOINT_COMMON = <ONE> {
     'tag': 'tags',
+    'prefer': 'tag-visuals',
     'media': 'product-medias',
 }
 
@@ -33,7 +34,8 @@ const NET_ENDPOINT_PRODUCT = <ONE> {
         'product': 'products'
     },
     ANON: {
-        'product': 'products'
+        'product': 'products',
+        'visual': 'product-visuals'
     }
 }
 
@@ -57,6 +59,7 @@ export const NET_ENDPOINTS_APP = <ONE>{
 }
 // MASTER 需要 TOKEN 才能访问
 export const NET_ENDPOINTS_MASTER = <ONE> {
+    'user': 'users',
     ...NET_ENDPOINT_SYSTEM,
     ...NET_ENDPOINT_PRODUCT.AUTH,
     ...NET_ENDPOINT_ACTIVITY.AUTH,

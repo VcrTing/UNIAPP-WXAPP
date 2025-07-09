@@ -122,6 +122,12 @@
       "relation": "oneToMany",
       "target": "api::product.product",
       "mappedBy": "user"
+    },
+    "reviewAvatarUrl": {
+      "type": "text"
+    },
+    "reviewBackground": {
+      "type": "text"
     }
   }
 }

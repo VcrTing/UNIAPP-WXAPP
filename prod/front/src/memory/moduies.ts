@@ -8,5 +8,5 @@ export const prodState: ProductStore = prod.state
 export const prodGetters: ONE = prod.getters
 export const prodCommit: Function = prod.commit
 export const prodDispatch: Function = prod.dispatch
-export const prodReFresh: (n: PRODUCT_STORE_FIELD, v: any) => void = (n: PRODUCT_STORE_FIELD, v: any) => 
-    prod.dispatch('change', [ n, v ])
+export const prodReFresh: (n: PRODUCT_STORE_FIELD, v: any) => void = async (n: PRODUCT_STORE_FIELD, v: any) => 
+    await prod.dispatch('change', [ n, v ])

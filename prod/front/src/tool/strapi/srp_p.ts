@@ -1,3 +1,4 @@
+import { DEV_CREATE_AT } from "@/conf/conf-dev"
 
 const PAGER_SIZE_DEF = 10
 
@@ -18,13 +19,13 @@ const build_param = (param: ONE, pager: Pager, relations: string[]) => {
     return res;
 }
 
-const __sort = (t: ONE = { }, k: string = 'createdAt', isasc: boolean = false) => {
+const __sort = (t: ONE = { }, k: string = DEV_CREATE_AT, isasc: boolean = false) => {
     t['sort'] = k + ':' + (isasc ? 'asc' : 'desc')
 }
 
 const __sorts = (t: ONE = { }, options: MANY = [ ]) => {
     options.map((e: ONE) => {
-        const __K: string = e['K'] || 'createdAt'
+        const __K: string = e['K'] || DEV_CREATE_AT
         const __ASC: boolean = e['ASC']
         if (__K) {
             t['sort'] = __K + ':' + (__ASC ? 'asc' : 'desc')

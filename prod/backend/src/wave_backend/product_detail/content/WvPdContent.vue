@@ -6,7 +6,7 @@
                 <view class="">
                     <view v-for="(n, m) in me.contents" :key="m">
                         <view v-if="content_tool.is_gallery(n)">
-                            <WvPdContentGalleries :content="n" :v="v"/>
+                            <WvPdContentGalleries :content="n" :v="v" @sex="funn.sex"/>
                         </view>
                         <view v-else>
                             <WvPdContentWord :content="n" :v="v"/>
@@ -35,10 +35,8 @@ import product_tool from '@/tool/modules/product_tool';
 import { future, futuring, promise } from '@/tool/util/future';
 import { is_nice_arr } from '@/tool/util/valued';
 import { nextTick, reactive } from 'vue';
-import CoMoPdHeader from '../__component/CoMoPdHeader.vue';
 import times from '@/tool/web/times';
 import CkSimpleTag from '@/cake/visual/tag/CkSimpleTag.vue';
-import UiI from '@/ui/element/i/UiI.vue';
 import WvPdContentGalleries from './gallery/WvPdContentGalleries.vue';
 import WvPdContentWord from './word/WvPdContentWord.vue';
 
@@ -50,6 +48,8 @@ const me = reactive({
     ioading: false,
     contents: <ProductContent[]>[ ]
 })
+
+const emt = defineEmits([ 'sex' ])
 
 const funn = {
     fetching: () => futuring(me, async () => {
@@ -65,7 +65,8 @@ const funn = {
         else {
             
         }
-    })
+    }),
+    sex: (v: Media) => emt('sex', v)
 }
 
 nextTick(funn.init)

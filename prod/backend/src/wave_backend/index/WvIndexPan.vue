@@ -45,7 +45,6 @@ import srp_p from '@/tool/strapi/srp_p';
 import WvIndexConList from './content/WvIndexConList.vue';
 import server_product from '@/server/product/server_product';
 import def_tag from '@/server/__def/def_tag';
-import { DATA_FILTER_TAB_DEF, DATA_FILTER_TABS } from '@/conf/conf-datas';
 import { pageIndexState } from '@/memory/page';
 
 const prp = defineProps<{
@@ -59,10 +58,6 @@ const aii = reactive({
     ioading: false, tag: deftag,
     items: <Product[]>[ ],
     pager: net_tool.__pager()
-})
-
-const change = reactive({
-    tabs: DATA_FILTER_TABS, tab: DATA_FILTER_TAB_DEF,
 })
 
 const got = {

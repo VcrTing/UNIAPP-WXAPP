@@ -23,7 +23,7 @@ import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
 import UserDetailLayout from '@/components/layout/detail/UserDetailLayout.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
-import { appState, authDispatch, authState, uiState } from '@/memory/global';
+import { appState, authDispatch, authState, soDispatch, soState, uiState } from '@/memory/global';
 import appRouter from '@/tool/uni/app-router';
 import uniRouter from '@/tool/uni/uni-router';
 import { promise } from '@/tool/util/future';
@@ -40,7 +40,7 @@ const user = computed((): User => {
     if (user && user.id) { return user } 
     else { return <User>{ } }
 })
-const usermainpage = computed((): UserMainPage => { return must_one<UserMainPage>(authState.mainpage_of_view) }) 
+const usermainpage = computed((): UserMainPage => { return must_one<UserMainPage>(soState.mainpage_of_view) }) 
 const info = computed((): AppInfo => appState.info) 
 const funn = {
     init: () => promise(() => {
@@ -50,7 +50,7 @@ const funn = {
 
         }
         else {
-            authDispatch('clean_someone_mainpag')
+            soDispatch('clean_someone_mainpag')
             appRouter.index()
         }
     })

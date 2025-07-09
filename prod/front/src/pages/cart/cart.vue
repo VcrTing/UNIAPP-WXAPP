@@ -22,7 +22,9 @@
                         <WvCartNow :carts="carts" :choises="aii.choises"/>
                     </CoViDataLoading>
                 </view>
-                <WvCartHistory v-else/>
+                <view v-else>
+                    <WvProductVisual :is_index_mode="true"/>
+                </view>
                 <CkSpace :h="2"/>
             </OScrollY>
         </view>
@@ -46,8 +48,8 @@ import { futuring, promise, timeout } from '@/tool/util/future';
 import { arrcoii } from '@/tool/util/iodash';
 import { is_nice_arr, must_arr } from '@/tool/util/valued';
 import { storage } from '@/tool/web/storage';
-import WvCartHistory from '@/wave/cart/WvCartHistory.vue';
 import WvCartNow from '@/wave/cart/WvCartNow.vue';
+import WvProductVisual from '@/wave/visual/WvProductVisual.vue';
 import { computed, nextTick, reactive, watch } from 'vue';
 //
 const code = computed(() => { return storage.get('PAGE_CART_KEY') || 0 })
@@ -57,9 +59,7 @@ watch(num, () => {
     funn.fiii_products()
 })
 //
-
 const carts = computed((): Page.CartDataOptions => must_arr(pageCartState.carts))
-
 
 const aii = reactive(<ONE>{
     ioading: false, iive: 0, init: false,

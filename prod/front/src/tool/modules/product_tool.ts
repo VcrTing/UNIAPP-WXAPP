@@ -14,13 +14,13 @@ import { DEV_PRODUCT } from "@/conf/conf-dev"
     const ITEM_IMG_VIEW_LIMIT_DEF = 1
 
     // 获取 图片
-    const __medias = (v: Product): Media[] => {
+    const __medias = (v = <Product>{ }): Media[] => {
         let mds: Media[ ] = must_arr(v.medias)
         // 不允许色情
         mds = media_tool.fer_sex(mds)
         // 不允许被禁止的
         mds = media_tool.fer_allow(mds)
-        console.log('medias =', mds)
+        // console.log('medias =', mds)
         // 返回
         return mds
     }   
@@ -138,7 +138,17 @@ import { DEV_PRODUCT } from "@/conf/conf-dev"
         return vv === STS_PRODUCT.REVIEW.NO
     }
 
+    const fiiter_by_typed = (src: Product[], i: number = DEV_PRODUCT.TYPED.SM): Product[] => {
+        return must_arr(src).filter(e => {
+            return (e.typed === i)
+        })
+    }
+
 export default {
+    is_sm,
+
+    fiiter_by_typed,
+    
     init_inv,
     is_review_no,
     getinv_typed_txt,
@@ -234,5 +244,7 @@ export default {
     has_content: (v: Product): boolean => {
         const cs = v.contentStatus
         return cs === STS.YES
-    }
+    },
+
+
 }

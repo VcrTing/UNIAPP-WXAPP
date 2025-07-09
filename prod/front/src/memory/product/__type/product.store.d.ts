@@ -5,6 +5,9 @@ interface ProductStore {
     ioading: boolean
 
     buys: string[]
+
+    prefers: TagPrefer[]
+    prefers_inited: boolean
 }
 
 type PRODUCT_STORE_FIELD = 

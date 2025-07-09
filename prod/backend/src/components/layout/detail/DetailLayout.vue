@@ -4,6 +4,7 @@
 			<view class="zi-m">
                 <slot name="bg"></slot>
 			</view>
+			<!--
 			<view class="layout-detail-sec ps-a t-0 i-0 w-100 zi-s">
 				<view class="layout-detail-sec-inner mxw-pc"
 					:style="{
@@ -13,7 +14,8 @@
 					<OSafeAreaTop/>
                     <slot name="top"></slot>
 				</view>
-			</view>
+			</view> 
+			-->
 			<view class="layout-detail-con w-100 zi-n"
 			>
 				<view class="layout-detail-con-inner h-100 ps-r zi-n"

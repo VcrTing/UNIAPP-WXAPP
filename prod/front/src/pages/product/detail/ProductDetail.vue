@@ -29,6 +29,7 @@
                     />
             </template>
         </DetailLayout>
+        <WvPdVisual v-if="aii.init" :v="view"/>
     </PageLayout>
 </template>
 
@@ -57,6 +58,7 @@ import cart_tool from '@/tool/modules/cart_tool';
 import WvPdBom from '@/wave/product_detail/WvPdBom.vue';
 import order_tool from '@/tool/modules/order_tool';
 import WvPdPublisherS from '@/wave/product_detail/member/WvPdPublisherS.vue';
+import WvPdVisual from '@/wave/product_detail/visual/WvPdVisual.vue';
 
 const view = computed((): Product => prodState.view)
 const user = computed(() => authState.user)

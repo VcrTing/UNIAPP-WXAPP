@@ -14,4 +14,5 @@ export const for_app_loading = () => future(async () => {
     pageIndexDispatch('change', [ 'city', DATA_CITY_DEF ])
     // 获取 APP 的 TOKEN
     appDispatch('autoauth') //
+    
 })

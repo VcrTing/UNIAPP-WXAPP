@@ -7,7 +7,7 @@ const view = async (one: Product) => {
     if (docid) {
         const src: Product = await server_product.byid(docid)
         console.log('访问 商品 =', src, ' one =', one)
-        prodReFresh('view', src)
+        await prodReFresh('view', src)
         uniRouter.gopg('product_detail');
     }
 }
@@ -16,7 +16,7 @@ const view_buy = async (one: Product) => {
     if (docid) {
         const src: Product = await server_product.mine_buy_byid(docid)
         console.log('访问 商品 =', src, ' one =', one)
-        prodReFresh('view', src)
+        await prodReFresh('view', src)
         uniRouter.gopg('product_detail');
     }
 }

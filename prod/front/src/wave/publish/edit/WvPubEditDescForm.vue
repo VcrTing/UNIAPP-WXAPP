@@ -25,8 +25,10 @@
             <view class="py">详情图片</view>
             <view class="pt-s"></view>
             <view class="row">
-                <view class="w-333 h-12vh d-ib ps-r zi-t mb-s" v-for="(v, i) in view" :key="i">
-                    <view class="w-100 h-12vh px-s fx-c abs-b i-0">
+                <view class="w-333 d-ib ps-r zi-t mb-s" v-for="(v, i) in view" :key="i">
+                    <view class="w-100 px-s fx-c abs-b i-0"
+                                :class="ispc ? 'h-16vh ' : 'h-12vh'"
+                                >
                         <CoImg clazz="h-100 w-100 br" :src="v.path"/>
                         <view class="abs-b r-0 zi-n pr-s" v-if="canedit">
                             <view @tap="funn.trashImg(v)" class="px-s py-s bg-028 br-ti br-br">
@@ -35,9 +37,10 @@
                         </view>
                     </view>
                 </view>
-                <view class="w-333 h-12vh d-ib px-s bs-bb mb-s" v-if="canedit">
-                    <view class="w-100 h-100 ps-r zi-t">
-                        <OButton color="def" @tap="funn.choseImg" clazz="w-100 h-12vh abs-b i-0 br fx-c" :weak="true">
+                <view class="w-333 d-ib px-s bs-bb mb-s" v-if="canedit">
+                    <view class="w-100 h-100 ps-r zi-t"
+                                :class="ispc ? 'h-16vh ' : 'h-12vh'">
+                        <OButton color="def" @tap="funn.choseImg" clazz="w-100 h-100 abs-b i-0 br fx-c" :weak="true">
                             <view class="fs-n tiw">
                                 <UiI :clazz="'d-ib'" :i="'+'"/>
                                 <text class="px-s">添加优质</text>
@@ -67,6 +70,7 @@ import media_tool from '@/tool/modules/common/media_tool';
 import { must_arr } from '@/tool/util/valued';
 import server_pubplus from '@/server/publish/server_pubplus';
 import { DATA_PUBLISH_MEDIA } from '@/conf/conf-datas';
+import { uiGetters } from '@/memory/global';
 
 const prp = defineProps<{
     form: ONE, canedit: boolean, documentId: string
@@ -139,4 +143,6 @@ const funn = {
 }
 
 defineExpose(funn)
+
+const ispc = computed((): boolean => uiGetters.ispc)
 </script>

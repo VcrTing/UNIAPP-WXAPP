@@ -8,7 +8,7 @@
             <!-- -->
             <view class="pt-x2 softer">
                 <view class="py"></view>
-                <CoMoUserAdvSwipper/>
+                <CoMoUserAdvSwipper :info="info"/>
             </view>
         </view>
     </view>
@@ -19,6 +19,7 @@ import { computed, reactive } from 'vue';
 import VwUcpNumberMsg from './center/VwUcpNumberMsg.vue';
 import CoMoUcpGoBtns from './component/CoMoUcpGoBtns.vue';
 import CoMoUserAdvSwipper from '@/components/modules/user/CoMoUserAdvSwipper.vue';
+import { appState } from '@/memory/global';
 
 const aii = reactive({
     iive: 0,
@@ -34,6 +35,8 @@ const tabs = computed((): MANY => {
 const funn = {
     
 }
+
+const info = computed((): AppInfo => appState.info) 
 </script>
 
                 <!--

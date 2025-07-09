@@ -11,7 +11,9 @@ namespace Conf {
 
     interface Tab {
         name: string
-        v: number
+        v: number,
+        cover?: string,
+        clazz?: string
     }
 
     type Tabs = Tab[]

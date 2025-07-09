@@ -17,6 +17,10 @@
                 <WvPubEditDetailForm ref="detail" :form="form" :canedit="canedit"/>
             </view>
 
+            <view v-if="aii.init && form.typed === DATA_PRODUCT_TYPED_SM.v" class="softer">
+                <WvPubEditContent :v="edit" :canedit="canedit"/>
+            </view>
+
             <view v-if="aii.init" class="softer">
                 <view v-if="documentId">
                     <view class="py-s"></view>
@@ -30,10 +34,23 @@
                 <CkSpace :h="12"/>
                 <CoAppBomFuncBar :clazz="'bg-pag-pri softer'">
                     <view class="py px-row">
-                        <CoBomBtnGroup v-if="canedit" @submit="func.submit" @cancle="uniRouter.back" :ioading="aii.ioading"></CoBomBtnGroup>
-                        <!--
-                        <OButton :ioading="aii.ioading" v-if="canedit" clazz="" @tap="func.submit"><view class="py-t">提交审核</view></OButton>
-                        -->
+                        <view class="fx-s" v-if="canedit">
+                            <view class="w-25 pr-row">
+                                <OButton color="def" :weak="true" clazz="btn-app" @tap="uniRouter.back">
+                                    返回
+                                </OButton>
+                            </view>
+                            <view class="w-333 pr-row">
+                                <OButton color="pri" :weak="true" clazz="btn-app" @tap="func.submit(false)">
+                                    保存数据
+                                </OButton>
+                            </view>
+                            <view class="fx-1">
+                                <OButton color="sec" :ioading="aii.ioading" clazz="mh-btn" @tap="func.submit(true)">
+                                    提交审核
+                                </OButton>
+                            </view>
+                        </view>
                         <OButton v-else color="def" @tap="appRouter.publish_waiting()"><view class="py-t tis">返回</view></OButton>
                     </view>
                 </CoAppBomFuncBar>
@@ -47,7 +64,6 @@ import OButton from '@/cake/button/OButton.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import CoAppBomFuncBar from '@/components/app/bar/bom/CoAppBomFuncBar.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
-import CoBomBtnGroup from '@/components/element/button/CoBomBtnGroup.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoMoSecurityAgreeLine from '@/components/modules/security/CoMoSecurityAgreeLine.vue';
 import { DATA_PUBLISH_MEDIA, DATA_PUBLISH_LIMIT, DATA_PRODUCT_TYPED_SM, DATA_PRODUCT_TYPED_INV_INFINI } from '@/conf/conf-datas';
@@ -63,6 +79,7 @@ import uniRouter from '@/tool/uni/uni-router';
 import { future, futuring, timeout } from '@/tool/util/future';
 import { deepcopy, formfii, is_nice_arr, must_one } from '@/tool/util/valued';
 import VwPubEditTopMsg from '@/view/publish/edit/VwPubEditTopMsg.vue';
+import WvPubEditContent from '@/wave/publish/content/WvPubEditContent.vue';
 import WvPubEditDescForm from '@/wave/publish/edit/WvPubEditDescForm.vue';
 import WvPubEditDetailForm from '@/wave/publish/edit/WvPubEditDetailForm.vue';
 import WvPubEditStatus from '@/wave/publish/edit/WvPubEditStatus.vue';
@@ -90,11 +107,11 @@ const funn = {
         if (src) {
             formfii(form, src);
             form.taglimit = DATA_PUBLISH_LIMIT.TAG
-            // form.__start = times.generate_picker_data(src.startTime)
-            // form.__end = times.generate_picker_data(src.endTime)
             form.tags = src.tags
             form.banner = media_tool.convert_upload_imgs(product_tool.getbanner(src))
             form.gallery = media_tool.convert_upload_imgs(product_tool.getgallery(src))
+            // form.__start = times.generate_picker_data(src.startTime)
+            // form.__end = times.generate_picker_data(src.endTime)
             // address_tool.fii_to_form(form, src.activity_address)
             // form.priceFirst = (src.priceFirst === null) ? (src.price === null ? 0 : src.price) : src.priceFirst
         }
@@ -155,16 +172,27 @@ const func = {
             appRouter.publish_waiting()
         }
     },
-    submit: () => futuring(aii, async () => {
+    submit: (check: boolean = false) => futuring(aii, async () => {
         if (!funn.collection()) return;
         if (!agree.value.v()) return;
         const src: ONE = funn.buildform(form);
-        src[STS_PRODUCT.REVIEW.K] = STS_PRODUCT.REVIEW.CHECKING // 送审
-        src[STS_PRODUCT.STATUS.K] = STS_PRODUCT.STATUS.CHECKING // 不可编辑状态
+        //
+        if (check) {
+            src[STS_PRODUCT.REVIEW.K] = STS_PRODUCT.REVIEW.CHECKING // 送审
+            src[STS_PRODUCT.STATUS.K] = STS_PRODUCT.STATUS.CHECKING // 不可编辑状态
+        }
+        else {
+            src[STS_PRODUCT.REVIEW.K] = STS_PRODUCT.REVIEW.WAITING // 送审
+            src[STS_PRODUCT.STATUS.K] = STS_PRODUCT.STATUS.EDITING // 不可编辑状态
+        }
+
         src[STS_PRODUCT.RECOMMEND.K] = STS_PRODUCT.RECOMMEND.YES // 自动推荐
         const res: ONE = await server_pubplus.edit(src, edit.value)
-        if (res.documentId) {
-            await func.success(src)
+
+        if (check) {
+            if (res.documentId) {
+                await func.success(src)
+            }
         }
     }),
     cancle: () => {
@@ -196,12 +224,12 @@ const form = reactive({
     tags: <Tag[]>[ ], taglimit: DATA_PUBLISH_LIMIT.TAG, introduction: '',
     inv: null, invTyped: DATA_PRODUCT_TYPED_INV_INFINI.v,
     price: null, priceFirst: null, 
+    banner: <Form.UploadImages>[ ], gallery: <Form.UploadImages>[ ]
+        
     // longitude: null, latitude: null, address: null, city: null, area: null,
     // endJoinTime: new Date(), participantLimit: DATA_PUBLISH_LIMIT.JOINER,
-    
     // __start: <Co.TimePieckerForm>{ year: 0, month: 0, day: 0, hour: 0, minute: 0 },
     // __end: <Co.TimePieckerForm>{ year: 0, month: 0, day: 0, hour: 0, minute: 0 },
-    banner: <Form.UploadImages>[ ], gallery: <Form.UploadImages>[ ]
 })
 
 const edit = computed((): Product => (pagePublishState.edit))

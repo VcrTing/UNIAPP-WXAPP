@@ -1,7 +1,9 @@
 <template>
     <view class="ps-r zi-n">
         <view class="pt-s">
-            <WvIndexConTop :ioading="aii.ioading" :change="change" @result="funn.switchTag"/>
+            <WvIndexConTop :ioading="aii.ioading" :change="change" 
+                @refresh="funn.initing"
+                @changetag="funn.switchTag"/>
         </view>
         <view class="">
             <OScrollYFresh id="index_scroll"
@@ -51,7 +53,7 @@ const prp = defineProps<{
 }>()
 
 const deftag: Tag = def_tag.index
-const hottag: Tag = def_tag.hot
+const sectag: Tag = def_tag.smp
 
 const aii = reactive({
     ioading: false, tag: deftag,
@@ -65,7 +67,7 @@ const change = reactive({
 
 const got = {
     buildparam: () => {
-        const res = <ONE>{
+        let res = <ONE>{
             
         }
         //
@@ -78,11 +80,13 @@ const got = {
             if (id === deftag.id) {
                 // console.log('开启默认查询模式')
             }
-            else if (id === hottag.id) {
-                // console.log('开始热度查询模式')
+            else if (id === sectag.id) {
+                console.log('开始售卖品查询模式')
             }
         }
-        //
+        // 构建排序方式
+        console.log('CHANGE TAB =', change.tab.sorted)
+        res = change.tab.sorted(res)
         return res;
     }
 }

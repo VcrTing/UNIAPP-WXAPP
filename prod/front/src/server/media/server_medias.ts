@@ -1,5 +1,6 @@
 import { app } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
+import srp_p from "@/tool/strapi/srp_p"
 import { netip } from "@/tool/uni/uni-global"
 import { is_arr, is_str } from "@/tool/util/typed"
 
@@ -15,7 +16,9 @@ const fetching = async (param: ONE, pager: Pager): Promise<Media[]> => {
 }
 
 const mainpage = async (userid: string): Promise<Media[]> => {
-    return await fetching({ }, net_tool.__pager(24))
+    const pm: ONE = { user: userid }
+    srp_p.__sort(pm)
+    return await fetching(pm, net_tool.__pager(24))
 }
 
 export default {

@@ -1,8 +1,8 @@
 
 const __K: string = 'dataStatus'
 
-const __YES_NO: Conf.YESNO = {
-    YES: 1, NO: 0,
+const __YES_NO: Conf.YESNO_K = {
+    YES: 1, NO: 0, K: 'dataStatus'
 }
 
 // TAG 的状态

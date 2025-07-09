@@ -3,7 +3,7 @@ import ui from './app/ui-store'
 import ele from './app/ele-store'
 import app from './app/app-store'
 import auth from './user/auth-store'
-import layout from './user/layout-store'
+import somone from './user/somone-store'
 
 import order from './order/order-store'
 import activity from './activity/activty-store'
@@ -46,13 +46,9 @@ export const eleReFresh: (n: ELE_STORE_FIELD, v: any) => void =
     (n: ELE_STORE_FIELD, v: any) => ele.dispatch('change', [ n, v ])
 
 // LAYOUT
-export const ulStore: Store<LayoutStore> = layout
-export const ulState: LayoutStore = layout.state
-export const ulGetters: ONE = layout.getters
-export const ulCommit: Function = layout.commit
-export const ulDispatch: Function = layout.dispatch
-export const ulReFresh: (n: LAYOUT_STORE_FIELD, v: any) => void = 
-    (n: LAYOUT_STORE_FIELD, v: any) => layout.dispatch('change', [ n, v ])
+// export const so: Store<LayoutStore> = somone
+export const soState: SomoneStore = somone.state
+export const soDispatch: Function = somone.dispatch
 
 // ACTIVITY
 export const acyStore: Store<ActivityStore> = activity

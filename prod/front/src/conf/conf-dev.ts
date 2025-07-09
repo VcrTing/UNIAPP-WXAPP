@@ -18,6 +18,7 @@ export const DEV_GENERATE_SPECIAL = (c: number | string, s: string) => {
 
 export const DEV_ID = 'id'
 export const DEV_DOC_ID = 'documentId'
+export const DEV_CREATE_AT = 'createdAt'
 
 // 分页
 export const DEV_PAGER = {
@@ -66,6 +67,7 @@ export const DEV_PRODUCT = {
     }
 }
 
+
 // 订单的开发设置
 export const DEV_ORDER = {
     //
@@ -110,6 +112,6 @@ export const DEV_STATUS_DEF = {
 }
 
 export const DEV_CONTENT_CATEGORY = {
-    WORD: null,
-    GALLERY: 1
+    WORD: 0,
+    MEDIAS: 1
 }

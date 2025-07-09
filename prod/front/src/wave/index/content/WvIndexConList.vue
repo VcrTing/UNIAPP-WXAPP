@@ -1,14 +1,14 @@
 <template>
     <view class="pr-s fx-s fx-t">
         <view class="w-50 d-ib">
-            <view v-for="(v, i) in first" :key="i" class="br pb-s pi-s"
+            <view v-for="(v, i) in first" :key="i" class="br pb-s pi-s softer"
             >
                 <CoMoIndexProductItem :w="w_item"
                     :v="v" :joins="joins" @detail="funn.detail"/>
             </view>
         </view>
         <view class="w-50 d-ib">
-            <view v-for="(v, i) in last" :key="i" class="br pb-n pi-s"
+            <view v-for="(v, i) in last" :key="i" class="br pb-n pi-s softer"
             >
                 <CoMoIndexProductItem :w="w_item"
                     :v="v" :joins="joins" @detail="funn.detail"/>
@@ -24,9 +24,7 @@ import open_of_product from '@/server/__func/open_of_product';
 import { future, futuring } from '@/tool/util/future';
 import { computed, reactive } from 'vue';
 
-const prp = defineProps<{
-    items: Product[]
-}>()
+const prp = defineProps<{ items: Product[] }>()
 
 const first = computed((): Product[] => {
     return funn.feed(prp.items, 1, aii.wpnum)
@@ -34,7 +32,6 @@ const first = computed((): Product[] => {
 const last = computed((): Product[] => {
     return funn.feed(prp.items, 2, aii.wpnum)
 })
-
 
 const aii = reactive({ ioading: false, wpnum: 2 })
 const joins = computed((): ActivityJoin[] => {

@@ -22,7 +22,7 @@ const index = async (param: ONE, pager: Pager): Promise<Product[]> => {
     // 审核通过的
     srp_p.__eq(param, STS_PRODUCT.REVIEW.K, STS_PRODUCT.REVIEW.YES)
     // 顺序问题
-    srp_p.__sorts(param, DEV_PRODUCT.SORT.INDEX)
+    // srp_p.__sorts(param, DEV_PRODUCT.SORT.INDEX)
     return await fetching(param, pager, relations_of_items)
 }
 
@@ -38,7 +38,7 @@ const byids = async (ids: string[]): Promise<Product[]> => {
     // ID = 这些
     srp_p.build_filter_in(param, DEV_DOC_ID, ids || [ ])
     // 状态正常
-    srp_p.build_filter_in(param, STS_PRODUCT.STATUS.K, [ STS_PRODUCT.STATUS.PASS ])
+    srp_p.build_filter_in(param, STS_PRODUCT.STATUS.K, [ STS_PRODUCT.STATUS.PASS, STS_PRODUCT.STATUS.NICE ])
     // 审核通过的
     srp_p.__eq(param, STS_PRODUCT.REVIEW.K, STS_PRODUCT.REVIEW.YES)
     // 返回

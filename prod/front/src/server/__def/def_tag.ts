@@ -5,5 +5,8 @@ export default {
     },
     hot: <Tag> {
         id: -88, name: '热销'
+    },
+    smp: <Tag> {
+        id: -77, name: '售卖品'
     }
 }

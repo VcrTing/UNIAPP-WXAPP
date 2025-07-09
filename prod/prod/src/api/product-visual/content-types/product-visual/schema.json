@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_visuals",
+  "info": {
+    "singularName": "product-visual",
+    "pluralName": "product-visuals",
+    "displayName": "ProductVisual"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "userId": {
+      "type": "string"
+    },
+    "productId": {
+      "type": "string"
+    },
+    "num": {
+      "type": "integer"
+    },
+    "typed": {
+      "type": "integer"
+    }
+  }
+}

@@ -89,7 +89,7 @@ import CkSex from '@/cake/visual/ider/CkSex.vue';
 import CkSimpleTag from '@/cake/visual/tag/CkSimpleTag.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
 import CoSusAcyIndex from '@/components/status/activity/CoSusAcyIndex.vue';
-import { authDispatch } from '@/memory/global';
+import { authDispatch, soDispatch } from '@/memory/global';
 import activity_tool from '@/tool/modules/activity_tool';
 import join_tool from '@/tool/modules/join_tool';
 import uniRouter from '@/tool/uni/uni-router';
@@ -115,7 +115,7 @@ const funn = {
     },
     mainpg: (user: User) => future(async () => {
         if (user && user.id) {
-            const u: UserMainPage = await authDispatch('fetch_someone_mainpag', { userid: user.id })
+            const u: UserMainPage = await soDispatch('fetch_someone_mainpag', { userid: user.id })
             // console.log('点击到的用户主页 =', u)
             uniRouter.gopg('user_mainpage')
         }
