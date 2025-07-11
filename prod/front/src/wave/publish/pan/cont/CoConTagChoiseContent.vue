@@ -35,7 +35,7 @@
                                     <view class="pb w-333 d-ib px-s" v-for="(v, i) in maintags" :key="i"
                                         @tap="funn.chose(v, i)"
                                     >
-                                        <CkDefTag :iive="funn.has(v)" :clazz_iive="'btn-pri-out'">
+                                        <CkDefTag :iive="funn.has(v)" :clazz_iive="'btn-pri'">
                                             {{ v.name }}
                                         </CkDefTag>
                                     </view>
@@ -50,7 +50,7 @@
                                     <view class="pb w-333 d-ib px-s" v-for="(v, i) in othertags" :key="i"
                                         @tap="funn.chose(v, i)"
                                     >
-                                        <CkDefTag :iive="funn.has(v)" :clazz_iive="'btn-pri-out'">
+                                        <CkDefTag :iive="funn.has(v)" :clazz_iive="'btn-pri'">
                                             {{ v.name }}
                                         </CkDefTag>
                                     </view>

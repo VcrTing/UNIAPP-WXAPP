@@ -40,8 +40,8 @@ import CoAppBottomBar from '@/components/app/bar/CoAppBottomBar.vue';
 import CoAppTopBar from '@/components/app/bar/CoAppTopBar.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
-import { orderState, uiState } from '@/memory/global';
-import { pageCartState } from '@/memory/page';
+import { authGetters, authState, orderState, uiState } from '@/memory/global';
+import { pageCartDispatch, pageCartState } from '@/memory/page';
 import server_product from '@/server/product/server_product';
 import cart_tool from '@/tool/modules/cart_tool';
 import { futuring, promise, timeout } from '@/tool/util/future';
@@ -56,10 +56,14 @@ const code = computed(() => { return storage.get('PAGE_CART_KEY') || 0 })
 const num = computed((): number => pageCartState.num)
 watch(num, () => {
     console.log('更新')
-    funn.fiii_products()
+    funn.init()
 })
 //
 const carts = computed((): Page.CartDataOptions => must_arr(pageCartState.carts))
+
+const me = reactive({
+    ioading: false
+})
 
 const aii = reactive(<ONE>{
     ioading: false, iive: 0, init: false,
@@ -70,18 +74,26 @@ const aii = reactive(<ONE>{
     products: <Product[]>[ ], choises: [ ]
 })
 
+const is_login = computed((): boolean => authGetters.is_login)
+
 const funn = {
-    fiii_products: () => futuring(aii, async () => {
+    fiii_products: async () => {
         const ids: string[] = arrcoii(carts.value)
         const pss: Product[] = await server_product.byids(ids)
         if (is_nice_arr(pss)) {
             aii.products = pss || [ ];
             cart_tool.fiii_products(carts.value, aii.products)
         }
-    }),
-    init: () => promise(() => {
+    },
+    load: async () => {
+        await pageCartDispatch('refresh_cart')
+        await funn.fiii_products()
+    },
+    init: () => futuring(aii, async () => {
         aii.iive = code.value;
-        funn.fiii_products()
+        if (is_login.value) {
+            await funn.load()
+        }
     })
 }
 

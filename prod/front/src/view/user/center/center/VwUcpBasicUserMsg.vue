@@ -1,25 +1,25 @@
 <template>
     <view class="">
-        <view class="fx-s bg-con-fer bf pr-row br-it br-rt">
+        <view class="fx-s bf-wht-t bf pr-row">
             <CoMoUcpNumbers />
-            <OButton color="def" @click="funn.edit" :weak="true" :clazz="'py px br-s'">
+            <OButton color="wht-t" @click="funn.edit" :weak="true" :clazz="'py px br-s'">
                 <view class="tid">编辑个人资料</view>
             </OButton>
         </view>
-        <view class="pt">
+        <view class="pt bf-wht-t">
             <view class="pt">
                 <view class="pi-row py fx-i">
-                    <OButton color="def" :weak="true" clazz="br-t ani-scaie-aii tid">
+                    <OButton color="wht-s" :weak="true" clazz="br-t ani-scaie-aii tid">
                         <CkSex :sex="user.gender" />
                         <text class="fs-n pi-s">{{ user_tool.getgender(user) }}</text>
                     </OButton>
                     <view class="d-ib px-n"></view>
-                    <OButton color="def" :weak="true" clazz="br-t ani-scaie-aii tid">
-                        <text>{{ user.age }}</text>
+                    <OButton color="wht-s" :weak="true" clazz="br-t ani-scaie-aii tid">
+                        <text>{{ user.age || 18 }}</text>
                         <text class="fs-n pi-s">岁</text>
                     </OButton>
                 </view>
-                <view class="tid fs-n fx-aii-btn-def px-row py bg-con-fer bf">
+                <view class="tid fs-n px-row py bf btn-wht-s">
                     <view class="d-ib">
                         <text>社交账号:&nbsp;&nbsp;</text>
                         <text v-if="user.socialAccount">{{ user.socialAccount }}</text>

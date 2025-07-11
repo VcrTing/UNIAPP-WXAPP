@@ -6,7 +6,8 @@ import times from "../web/times"
 import media_tool from "./common/media_tool"
 import { is_json } from "../util/typed"
 import { STS, STS_PRODUCT } from "@/conf/conf-status"
-import { DEV_PRODUCT } from "@/conf/conf-dev"
+import { DEV_MEDIA_VIEW, DEV_PRODUCT } from "@/conf/conf-dev"
+import product_build_tool from "./func/product_build_tool"
 
     // 0-待完善, 1-审核中, 2-已发布, 3-已取消, 4-已结束, 5-已下架
 
@@ -50,11 +51,19 @@ import { DEV_PRODUCT } from "@/conf/conf-dev"
         ])
         res['user'] = userid
         res['tags'] = tgsid
+        if (!res['priceFirst']) {
+            res['priceFirst'] = res['price']
+        }
 
         // 库存设计
         const invTyped = src.invTyped
         // 单件
-        src = init_inv(invTyped, res)
+        res = init_inv(invTyped, res)
+
+        // 随机一点浏览量
+        res['numView'] = product_build_tool.gen_init_num_view()
+        res['numHot'] = res['numView']
+
         return res
     }
 
@@ -233,7 +242,7 @@ export default {
 
     getcover_h: (vs: Media[], w_item: number): string => {
         const v: Media = vs[0]
-        return media_tool.img_h_view(w_item, v.w, v.h)
+        return media_tool.img_h_view(w_item, v.w, v.h, DEV_MEDIA_VIEW.ITEM_COVER_H_LIMIT)
     },
 
     gethonours: (v: Product): Tag[] => {

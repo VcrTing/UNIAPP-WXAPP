@@ -9,8 +9,9 @@ import { NET } from "./conf-net"
 // 用户
 const NET_ENDPOINT_USER = <ONE>{
     'user': 'users',
+    'cart': 'user-carts',
     'love': 'user-loves',
-    'statistic': 'user-statistics'
+    'statistic': 'user-statistics',
 }
 // 通用
 const NET_ENDPOINT_COMMON = <ONE> {

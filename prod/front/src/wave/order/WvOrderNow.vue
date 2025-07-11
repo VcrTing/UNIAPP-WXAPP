@@ -77,6 +77,7 @@ import open_of_product from '@/server/__func/open_of_product';
 import { pageCartState } from '@/memory/page';
 import WvOrderMsgPan from './pan/WvOrderMsgPan.vue';
 import pan_tooi from '@/tool/app/pan_tooi';
+import net_tool from '@/tool/http/net_tool';
 //
 const num = computed((): number => pageCartState.num)
 watch(num, () => { funn.fetching() })
@@ -85,7 +86,7 @@ const def = <ONE>{ name: '全部', v: 0 }
 const house = reactive({
     iive: def, tabs: [ def ], ioading: false, view: <XOrder>{ }
 })
-const aii = reactive({ ioading: false, pager: <Pager>{ }, orders: <XOrder[]>[ ] })
+const aii = reactive({ ioading: false, pager: net_tool.__pager_long(), orders: <XOrder[]>[ ] })
 // 
 const funn = {
     fetching: () => futuring(aii, async () => {

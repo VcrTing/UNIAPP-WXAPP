@@ -7,12 +7,14 @@ import { appState } from '@/memory/global'
 
 const stringify = <T> (src: T): string => JSON.stringify( src )
 
-const parse = <T> (src: string | undefined): T => {
+const parse = <T> (src: string | undefined): T | null => {
     try {
-        if (!src) return <T>{ }
+        if (!src) return null
         try {
+            src = src.toString().trim()
             return JSON.parse(src)
-        } catch (err) {
+        } 
+        catch (err) {
             if (appState.document) {
                 return eval('(' + src + ')')
             }
@@ -31,7 +33,7 @@ const parse = <T> (src: string | undefined): T => {
 }
 
 
-const duplicate = <T> (src: T): T => parse( stringify( src ) )
+const duplicate = <T> (src: T): T | null => parse( stringify( src ) )
 
 const __replace_str = (__e: String) => {
     return __e.replace(/'/gi, '"')

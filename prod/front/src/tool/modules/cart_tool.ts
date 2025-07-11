@@ -1,7 +1,7 @@
 import { DEV_DOC_ID } from "@/conf/conf-dev"
 import { arrfindi } from "../util/iodash"
 import product_tool from "./product_tool"
-import { is_nice_arr, must_arr, must_int, must_one, ser_fiot } from "../util/valued"
+import { deepcopy, is_nice_arr, must_arr, must_int, must_one, ser_fiot } from "../util/valued"
 import { pageCartState } from "@/memory/page"
 import fioat from "../util/fioat"
 
@@ -161,8 +161,18 @@ const generate = (src: Product): Page.CartDataOptions => {
     return res
 }
 
+// 收集同步数据
+const coii_async_data = (src: Page.CartDataOptions): Page.CartDataOptions => {
+    let res: Page.CartDataOptions = must_arr(deepcopy(src))
+    res.map((r: Page.CartDataOption) => {
+        delete r.product
+    })
+    return res;
+}
+
 export default {
     generate,
+    coii_async_data,
     
     cart_add, 
     cart_min,

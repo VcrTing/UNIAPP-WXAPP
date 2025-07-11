@@ -7,7 +7,7 @@
         <view class="fx-c">
             <view class="ta-c">
                 <CkAvatar :not_mainpage="true" :id="user.id"
-                    :src="user.avatarUrl || info.userDefAvatarUrl" clazz="w-6em h-6em"
+                    :src="user.avatarUrl || info.userDefAvatarUrl" clazz="w-6em h-6em h7"
                     />
                 <view class="pt-x1">
                     <view class="h5 c-fff fw-800 ls">
@@ -18,10 +18,10 @@
                         </view>
                     </view>
                 </view>
-                <view class="pt-x1" v-if="user.socialAccount">
+                <view class="pt-x1" v-if="user.introduction">
                     <view class="fs-w c-fff op-80">
-                        <text>社交账号:&nbsp;</text>
-                        <text>{{ user.socialAccount || '' }}</text>
+                        <text>个人简介:&nbsp;</text>
+                        <text>{{ user.introduction || '' }}</text>
                     </view>
                 </view>
             </view>

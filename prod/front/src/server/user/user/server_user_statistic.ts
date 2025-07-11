@@ -1,6 +1,7 @@
 import { authGetters, authState, soState } from "@/memory/global"
 import { app } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
+import product_build_tool from "@/tool/modules/func/product_build_tool"
 import srp_p from "@/tool/strapi/srp_p"
 import { netip } from "@/tool/uni/uni-global"
 import { is_str } from "@/tool/util/typed"
@@ -80,9 +81,9 @@ const __num_who = async (func: Function): Promise<UserStatistic> => {
     if (mp.documentId) { return await func(mp) } return mp;
 }
 // 她人访问量
-const num_she_visited = async (isadd: boolean = true): Promise<UserStatistic> => {
+const num_she_visited = async (): Promise<UserStatistic> => {
     return await __num_who(async (mp: UserStatistic) => {
-        return await __edit({ nuwVisited: cpu_int_1(mp.nuwVisited, isadd) }, mp.documentId)
+        return await __edit(product_build_tool.form_add_she_visited_num(mp), mp.documentId)
     })
 }
 

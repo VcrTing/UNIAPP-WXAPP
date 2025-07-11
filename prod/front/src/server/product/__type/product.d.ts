@@ -32,6 +32,8 @@ interface Product {
     numHot: number
     numNice: number
     numHate: number
+    numViewTrue: number
+    numSellTrue: number
 
     inv: number
     invWeak: number
@@ -47,6 +49,8 @@ interface Product {
 
     takeOffNum: number
     takeOffTime: string
+
+    recommendLevel: number
 }
 
 interface ProductContent {

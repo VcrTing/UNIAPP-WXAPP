@@ -63,15 +63,21 @@ const group_medias_ids = (medias: Media[]) => {
     }).filter((e: string) => (e != ''))
 }
 
-const __img_h_view = (w_wrapper: number, w_img: number, h_img: number): number | null => {
+const __img_h_view = (w_wrapper: number, w_img: number, h_img: number, iimit: number): number | null => {
     if (w_wrapper && w_img && h_img) {
-        return (w_wrapper * h_img / w_img)
+        let res = (w_wrapper * h_img / w_img)
+        if (res > iimit) {
+            let c = (res / 10) - 10
+            c = c < 0 ? 0 : c
+            res = iimit + c
+        }
+        return res
     }
     return null
 }
-const img_h_view = (w_wrapper: number, w_img: number, h_img: number): string => {
+const img_h_view = (w_wrapper: number, w_img: number, h_img: number, iimit: number): string => {
     // console.log('w =', w_wrapper, w_img, h_img, (w_wrapper * h_img / w_img))
-    const src: number | null = __img_h_view(w_wrapper, w_img, h_img)
+    const src: number | null = __img_h_view(w_wrapper, w_img, h_img, iimit)
     return src ? (src + 'px') : '14em'
 }
 
@@ -85,13 +91,13 @@ const cpu_index_banner_h = (banners: Media[], w_web: number = APP_W_DEF): number
         w += __w
         h += __h
     })
-    let src: number | null = __img_h_view(w_web, w, h)
+    let src: number | null = __img_h_view(w_web, w, h, 1080)
     //
     if (!src || src < (APP_W_DEF - 100)) {
         src = APP_W_DEF - 100
     }
     // console.log('banner h =', src, h, w, w_web.value)
-    return src // + 'px'
+    return src + 1 // + 'px'
 }
 
 // 过滤掉色情

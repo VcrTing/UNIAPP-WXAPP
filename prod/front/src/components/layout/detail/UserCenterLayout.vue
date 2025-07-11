@@ -21,7 +21,7 @@
 					height: conh
 				}"
 			>
-				<view class="br-it br-rt h-100" :class="clazz_con">
+				<view class="h-100" :class="clazz_con">
                     <slot name="con"></slot>
 				</view>
 			</view>

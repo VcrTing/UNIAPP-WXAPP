@@ -1,7 +1,7 @@
 <template>
 	<page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
 	<PageLayout>
-		<UserCenterLayout :h="72.8" :clazz_con="'bg-con'">
+		<UserCenterLayout :h="72.8" :clazz_con="''">
 			<template #bg>
 				<CoImg :src="user.background || info.userDefBackground" clazz="h-100"/>
 			</template>

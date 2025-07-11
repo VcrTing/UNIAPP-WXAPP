@@ -1,6 +1,6 @@
 <template>
     <Ov clazz="ta-c py-s w-100 br-t btn "
-        :clazz2="(clazz_iive ? clazz_iive : 'btn-def')"
+        :clazz2="(iive ? clazz_iive : 'btn-def')"
         >
         <text class="fs-w">
             <slot></slot>

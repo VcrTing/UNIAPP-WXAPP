@@ -25,6 +25,10 @@ export const DEV_PAGER = {
     SIZE_DEF: 10,
     SIZE_MAX: 999,
     SIZE_LONG: 100,
+    K: {
+        PAGE: 'page',
+        SIZE: 'pageSize'
+    }
 }
 
 // 标签设置
@@ -94,7 +98,9 @@ export const DEV_MEDIA_VIEW = {
     // 所展示的 banner 媒体高度，超越了 100vh 时
     BANNER_MORE_THAN_VH: (src: number, h_app: number): number => {
         return src
-    }
+    },
+    // 限高
+    ITEM_COVER_H_LIMIT: 270
 }
 
 // 性别设定

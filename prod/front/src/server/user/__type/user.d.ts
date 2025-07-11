@@ -2,6 +2,7 @@
 interface User {
     id: number
     documentId: string
+    
     background: string
     avatarUrl: string
     nickName: string
@@ -26,4 +27,13 @@ interface UserLove {
     love: User 
     dataStatus: number
     __love: boolean
+}
+
+interface UserCart {
+    id: number
+    documentId: string
+
+    content: string
+    userId: string
+    carts: Page.CartDataOptions
 }

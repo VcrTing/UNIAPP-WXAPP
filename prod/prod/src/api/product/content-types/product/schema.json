@@ -120,6 +120,15 @@
     },
     "indexLevel": {
       "type": "integer"
+    },
+    "recommendLevel": {
+      "type": "integer"
+    },
+    "numViewTrue": {
+      "type": "integer"
+    },
+    "numSellTrue": {
+      "type": "integer"
     }
   }
 }

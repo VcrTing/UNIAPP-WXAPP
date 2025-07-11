@@ -1,6 +1,6 @@
 <template>
     
-    <view class="br bg-def-s fx-s">
+    <view class="br bg-def fx-s">
         <view class="ps-r zi-t" v-for="(v, i) in tabs" :key="i">
             <CoMoUserOptionBtn :i="v.i" :tit="v.name"  @tap="v.doing"/>
             <view class="abs-r t-0 pr-s pt" v-if="v.len() > 0">
@@ -25,7 +25,7 @@ const len = computed((): number => must_arr(joins.value).length)
  
 const tabs = [
     {
-        name: '我的消息', i: 'msg', 
+        name: '浏览历史', i: 'msg', 
         doing: () => { funn.working() }, len: () => { return len.value || 0 }
     },
     {
@@ -43,7 +43,10 @@ const tabs = [
 ]
 
 const funn = {
-    
+    view_history: () => {
+
+    },
+
     aiijoin: () => {
         appRouter.order_my_join()
     },

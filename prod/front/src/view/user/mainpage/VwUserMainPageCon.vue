@@ -1,6 +1,6 @@
 <template>
     <view>
-        <view class="pt-s bg-con">
+        <view class="bg-con">
             <view class="fx-i zi-s">
                 <CoHeaderTabItem class="w-333" 
                     @tap="aii.iive = i" :iive="aii.iive == i" :tit="v.tit"
@@ -9,7 +9,7 @@
             </view>
             <view class="zi-t bd-b w-100 bd-c-s"></view>
         </view>
-        <view>
+        <view class="bg-con">
             <view>
                 <view v-if="aii.iive == 0" class="pb-row">
                     <VwUmpPubGallery :medias="data.medias"/>

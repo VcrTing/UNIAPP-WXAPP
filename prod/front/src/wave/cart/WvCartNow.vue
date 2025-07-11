@@ -13,7 +13,8 @@
                         <OCheckBox :clazz="'fs-s'" :iive="func.has(v)" :clazz_die="'btn-def'"/>
                     </view>
                     <view class="fx-1">
-                        <CoMoCartProductItem :v="v" @add="func.add" @min="func.min" />
+                        <CoMoCartProductItem :v="v" @view=""
+                            @add="func.add" @min="func.min" />
                     </view>
                 </view>
             </view>
@@ -64,6 +65,7 @@ import CoMoCartProductItem from './__component/CoMoCartProductItem.vue';
 import { tipwarn } from '@/tool/uni/uni-global';
 import appRouter from '@/tool/uni/app-router';
 import OCheckBox from '@/cake/input/check/OCheckBox.vue';
+import open_of_product from '@/server/__func/open_of_product';
 //
 const prp = defineProps<{
     carts: Page.CartDataOptions,
@@ -87,6 +89,10 @@ const func = {
 }
 
 const funn = {
+    view: (v: Product) => {
+        open_of_product.view(v)
+    },
+
     choise: (v: Page.CartDataOption) => futuring(me, async () => {
         const docid: string = v[ DEV_DOC_ID ]
         const i: number = prp.choises.indexOf(docid)

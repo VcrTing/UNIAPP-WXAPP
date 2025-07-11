@@ -6,6 +6,8 @@ import srp_p from "@/tool/strapi/srp_p"
 import { netip } from "@/tool/uni/uni-global"
 import { is_arr, is_str } from "@/tool/util/typed"
 import { cpu_int_1, must_arr, must_one } from "@/tool/util/valued"
+import server_pubplus from "../publish/server_pubplus"
+import product_build_tool from "@/tool/modules/func/product_build_tool"
 
 const relations_of_items = <string[]>[ 'medias' ]
 const relations_of_details = <string[]>[ 'medias', 'tags', 'honours', 'user' ]
@@ -75,13 +77,9 @@ const mine_history = async (): Promise<Product[]> => {
 }
 
 // 加以阅读量
-/*
 const view1 = async (one: Product): Promise<Product> => {
-    return await server_pubplus.edit({
-        viewCount: cpu_int_1(one.numView)
-    }, one)
+    return await server_pubplus.edit(product_build_tool.form_add_view_num(one), one)
 }
-*/
 
 export default {
     mine_history,
@@ -89,5 +87,7 @@ export default {
     byid,
     byids,
     index,
-    index_recommond
+    index_recommond,
+
+    view1
 }

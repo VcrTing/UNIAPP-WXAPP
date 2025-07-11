@@ -64,7 +64,7 @@ const _s: Store<ProductStore> = createStore({
             return __prefers(state)
         },
         // 新增一个产品
-        add_view: async ({ state, commit }, tags: Tag[] = [ ]) => {
+        add_prefer_view: async ({ state, commit }, tags: Tag[] = [ ]) => {
             const pool = await __prefers(state); // must_arr(state.prefers)
             //
             for (let j= 0; j< tags.length; j++ ) {

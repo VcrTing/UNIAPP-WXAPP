@@ -26,6 +26,14 @@
         background: $btn-wht-s
     &:active, &:focus, &:focus-visible
         background: $btn-wht-s
+        
+.fx-aii-btn-wht-t
+    @extend .fx-hv-shd-wht
+    @extend .fx-fcs-shd-wht
+    &:hover
+        background: $btn-wht-t-hv
+    &:active, &:focus, &:focus-visible
+        background: $btn-wht-t-hv
 
 .btn-wht
     border-color: $btn-wht
@@ -42,7 +50,14 @@
 .btn-wht-t
     background: $btn-wht-t
     backdrop-filter: blur(1px)
-    @extend .fx-aii-btn-wht
+    @extend .fx-aii-btn-wht-t
+    
+.bg-wht-0
+    background: transparent
+.btn-wht-0
+    background: transparent
+    backdrop-filter: blur(1px)
+    @extend .fx-aii-btn-wht-t
 
 
         

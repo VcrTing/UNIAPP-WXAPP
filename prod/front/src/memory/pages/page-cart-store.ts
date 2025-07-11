@@ -3,8 +3,10 @@ import { Store, createStore } from 'vuex';
 import memory_tool from '../__func/memory_tool';
 import { arrcoii, arrfind, arrfindi } from '@/tool/util/iodash';
 import { DEV_DOC_ID } from '@/conf/conf-dev';
-import { is_nice_arr } from '@/tool/util/valued';
+import { is_nice_arr, is_nice_one, must_arr } from '@/tool/util/valued';
 import cart_tool from '@/tool/modules/cart_tool';
+import server_user_cart from '@/server/user/cart/server_user_cart';
+import jsoner from '@/tool/util/jsoner';
 
 const _s: Store<Page.CartPageStore> = createStore({
     
@@ -12,7 +14,8 @@ const _s: Store<Page.CartPageStore> = createStore({
         num: 0,
         __ioading: false,
         carts: <Page.CartDataOptions>[ ],
-        carts_of_order: <Page.CartDataOptions>[ ]
+        carts_of_order: <Page.CartDataOptions>[ ],
+        data: <UserCart>{ }
     },
     getters: {
         
@@ -35,6 +38,8 @@ const _s: Store<Page.CartPageStore> = createStore({
                 const carts: Page.CartDataOptions = cart_tool.cart_add(state.carts, v)
                 state.carts = carts
                 console.log('加入购物车 =', state.carts)
+                // 同步数据库
+                state.data = await server_user_cart.plus_or_edit(carts, state.data)
             })
         },
         // 减去购物车
@@ -43,6 +48,8 @@ const _s: Store<Page.CartPageStore> = createStore({
                 const carts: Page.CartDataOptions = cart_tool.cart_min(state.carts, v)
                 state.carts = carts
                 console.log('减去购物车 =', state.carts)
+                // 同步数据库
+                state.data = await server_user_cart.plus_or_edit(carts, state.data)
             })
         },
 
@@ -54,9 +61,23 @@ const _s: Store<Page.CartPageStore> = createStore({
                     const carts: Page.CartDataOptions = cart_tool.carts_clean(state.carts, choise)
                     state.carts = carts
                     console.log('清空已买的购物车 =', state.carts)
+                    // 同步数据库
+                    state.data = await server_user_cart.plus_or_edit(carts, state.data)
                 }
             })
         },
+
+        // 刷新 购物车数据
+        refresh_cart: async ({state, commit}) => {
+            return await memory_tool.locking(state, commit, state.data, async () => {
+                const src: UserCart = await server_user_cart.mine()
+                console.log('搜索我的购物车 =', src)
+                if (is_nice_one(src)) {
+                    const carts = must_arr(jsoner.parse(src.content))
+                    state.carts = carts
+                }
+            })
+        }
     }
 })
 

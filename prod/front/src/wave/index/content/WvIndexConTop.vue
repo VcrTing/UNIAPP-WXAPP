@@ -1,7 +1,7 @@
 <template>
     <view>
-        <view class="softer bg-con">
-            <OScrollX>
+        <view class="softer ">
+            <OScrollX clazz="bf-wht-s">
                 <view class="pi-row pb-s pt-s">
                     <view class="d-ib pr softer" v-for="(v, i) in menus" :key="i"
                         @click="funn.chose(v)"
@@ -15,10 +15,10 @@
                     </view>
                 </view>
             </OScrollX>
-            <view class="fx-s fx-b">
+            <view class="fx-s fx-b bf-wht-t">
                 <view class="">
                     <view class="pb pt-s pi-row d-ib softer">
-                        <OButtonTag @tap="func.openChange" color="def-s" clazz="px-row br-rnd py-t tid softer fx-c">
+                        <OButtonTag @tap="func.openChange" color="wht-s" clazz="px-row br-rnd py-t tid softer fx-c">
                             <text class="fs-n pr-s">{{ change.tab.name }}</text>
                             <CkIoading v-if="ioading"/>
                             <UiI i="change" v-else clazz="d-ib tiw"/>
@@ -27,7 +27,7 @@
                 </view>
                 <view>
                     <view class="pb pt-s px-row softer" @tap="func.openTags">
-                        <view class="btn-def-s px-col br-t fx-aii-btn-def c-p"><UiI clazz="tiw" i="b"/> </view>
+                        <view class="btn-wht-s px-col br-t fx-aii-btn-def c-p"><UiI clazz="tiw" i="b"/> </view>
                     </view>
                 </view>
             </view>
@@ -118,7 +118,7 @@ const menus = computed((): Tag[] => {
     const ms = [ deftag, hottag, ...aii.choses, ...must_arr(indextags.value) ]
     return ms.map((e: Tag) => {
         e['__clazz_die'] = 'px-n tid fx-aii-btn-wht'
-        e['__clazz_iive'] = 'px-x1 btn-pri-iht'
+        e['__clazz_iive'] = 'px-x1 btn-pri'
         return e
     })
 })

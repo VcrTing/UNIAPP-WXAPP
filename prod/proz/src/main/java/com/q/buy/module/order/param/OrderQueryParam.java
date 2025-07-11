@@ -18,9 +18,9 @@ public class OrderQueryParam {
     String documentId;
     String userPhone;
 
-    Integer makeStatus;
+    Integer aliveStatus;
     Integer payStatus;
-    Integer sendStatus;
+    Integer hasLock;
     Integer refundStatus;
 
     Integer page;
@@ -51,11 +51,11 @@ public class OrderQueryParam {
             wrapper.eq(XOrder::getPayStatus, payStatus);
         }
         //
-        if (QVUtil.serInt(makeStatus, -1) != -1) {
-            wrapper.eq(XOrder::getMakeStatus, makeStatus);
+        if (QVUtil.serInt(aliveStatus, -1) != -1) {
+            wrapper.eq(XOrder::getAliveStatus, aliveStatus);
         }
-        if (QVUtil.serInt(sendStatus, -1) != -1) {
-            wrapper.eq(XOrder::getSendStatus, sendStatus);
+        if (QVUtil.serInt(hasLock, -1) != -1) {
+            wrapper.eq(XOrder::getHasLock, hasLock);
         }
         if (QVUtil.serInt(refundStatus, -1) != -1) {
             wrapper.eq(XOrder::getRefundStatus, refundStatus);

@@ -121,3 +121,9 @@ export const imit = (src: number, less: number = 0, imit: number = 0): number =>
     __v = __v < less ? less : __v
     return __v > imit ? imit : __v
 }
+
+export const random = (iimit: number) => {
+    iimit = iimit ? iimit : 1
+    iimit = iimit === 0 ? 1 : iimit
+    return Math.floor(Math.random() * (iimit)) + 1
+}

@@ -1,13 +1,13 @@
 <template>
     <page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
     <PageLayout>
-        <UserDetailLayout :user="user" :info="info" :h="68" :clazz_con="'br-tr br-ti bg-con'">
+        <UserDetailLayout :user="user" :info="info" :h="68" :clazz_con="'br-tr br-ti'">
             <template #top>
                 <CoAppTopBackBar :mat="true" @back="uniRouter.back" :clazz_i="'c-fff'"></CoAppTopBackBar>
                 <VwUserMainPageTop v-if="user" :user="user"/>
             </template>
             <template #con>
-                <VwUmpNumberMsg class="bg-con br-it br-rt" :data="usermainpage"/>
+                <VwUmpNumberMsg class="br-it br-rt" :data="usermainpage"/>
                 <VwUserMainPageCon v-if="user" :user="user" :data="usermainpage"/>
             </template>
             <template #bom>
@@ -22,8 +22,7 @@ import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
 import UserDetailLayout from '@/components/layout/detail/UserDetailLayout.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
-import CoImg from '@/components/media/img/CoImg.vue';
-import { appState, authDispatch, authState, soDispatch, soState, uiState } from '@/memory/global';
+import { appState, soDispatch, soState, uiState } from '@/memory/global';
 import appRouter from '@/tool/uni/app-router';
 import uniRouter from '@/tool/uni/uni-router';
 import { promise } from '@/tool/util/future';
@@ -31,7 +30,7 @@ import { must_arr, must_one } from '@/tool/util/valued';
 import VwUmpNumberMsg from '@/view/user/mainpage/cont/VwUmpNumberMsg.vue';
 import VwUserMainPageCon from '@/view/user/mainpage/VwUserMainPageCon.vue';
 import VwUserMainPageTop from '@/view/user/mainpage/VwUserMainPageTop.vue';
-import { computed, nextTick, reactive } from 'vue';
+import { computed, nextTick } from 'vue';
 
 const user = computed((): User => {
     const ump: UserMainPage = usermainpage.value

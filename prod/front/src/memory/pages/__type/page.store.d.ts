@@ -22,5 +22,7 @@ namespace Page {
         __ioading: boolean
         carts: Page.CartDataOptions
         carts_of_order: Page.CartDataOptions
+
+        data: UserCart
     }
 }

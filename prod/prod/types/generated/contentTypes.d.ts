@@ -560,12 +560,15 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     numHot: Schema.Attribute.Integer;
     numNice: Schema.Attribute.Integer;
     numSell: Schema.Attribute.Integer;
+    numSellTrue: Schema.Attribute.Integer;
     numView: Schema.Attribute.Integer;
+    numViewTrue: Schema.Attribute.Integer;
     price: Schema.Attribute.Decimal;
     priceFirst: Schema.Attribute.Decimal;
     priceInv: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
     publishStatus: Schema.Attribute.Integer;
+    recommendLevel: Schema.Attribute.Integer;
     recommendStatus: Schema.Attribute.Integer;
     reviewComment: Schema.Attribute.Text;
     reviewStatus: Schema.Attribute.Integer;
@@ -649,6 +652,35 @@ export interface ApiTagTag extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiUserCartUserCart extends Struct.CollectionTypeSchema {
+  collectionName: 'user_carts';
+  info: {
+    displayName: 'UserCart';
+    pluralName: 'user-carts';
+    singularName: 'user-cart';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-cart.user-cart'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    userId: Schema.Attribute.String;
   };
 }
 
@@ -1260,6 +1292,7 @@ declare module '@strapi/strapi' {
       'api::product.product': ApiProductProduct;
       'api::tag-visual.tag-visual': ApiTagVisualTagVisual;
       'api::tag.tag': ApiTagTag;
+      'api::user-cart.user-cart': ApiUserCartUserCart;
       'api::user-love.user-love': ApiUserLoveUserLove;
       'api::user-statistic.user-statistic': ApiUserStatisticUserStatistic;
       'plugin::content-releases.release': PluginContentReleasesRelease;

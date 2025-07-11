@@ -5,7 +5,6 @@
                 <view class="o-h" v-if="gallerylen"
                     :style="{
                         'height': product_tool.getcover_h(gallery, w),
-                        'max-height': '14em'
                     }">
                     <CoImg 
                         :clazz="'br-tr br-ti o-h h-100 ani-scaie-aii'" :src="gallery[0].url"/>

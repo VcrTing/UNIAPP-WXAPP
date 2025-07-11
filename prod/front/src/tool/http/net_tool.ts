@@ -1,7 +1,7 @@
 import { is_strapi_mode } from "@/conf/conf"
 import srp_p from "../strapi/srp_p"
 import { authGetters } from "@/memory/global"
-import { is_nice_arr, is_nice_one, must_arr, must_one } from "../util/valued"
+import { deepcopy, is_nice_arr, is_nice_one, must_arr, must_one } from "../util/valued"
 import { DEV_PAGER } from "@/conf/conf-dev"
 
 // 生成返回结果
@@ -13,23 +13,26 @@ const generate_http_result = (data: any, code: number, message: string) => {
 
 // 生成分页
 const __pager = (pageSize: number = DEV_PAGER.SIZE_DEF): Pager => {
-    return <Pager>{
+    return <Pager>deepcopy({
         page: 1, pageSize, total: 999
-    }
+    })
 }
 const __pager_long = (pageSize: number = DEV_PAGER.SIZE_LONG): Pager => {
-    return <Pager>{
+    return <Pager>deepcopy({
         page: 1, pageSize, total: 999
-    }
+    })
 }
 
 // 构建参数
-const build_param = (param: ONE, pager: Pager, relations: string[]): ONE => {
-    if (is_strapi_mode()) {
+const build_param = (param: ONE, pager: Pager, relations: string[], strapi: boolean = true): ONE => {
+    if (strapi) {
         return srp_p.build_param(param, pager, relations)
     }
     else {
-        return { }
+        param[ DEV_PAGER.K.PAGE ] = pager.page
+        param[ DEV_PAGER.K.SIZE ] = pager.pageSize
+        console.log('param =', param, " pager =", pager)
+        return param
     }
 }
 

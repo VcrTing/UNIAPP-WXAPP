@@ -5,37 +5,37 @@
             <CoBomBackBtn :clazz="'btn-wht-s'"/>
         </view>
         <view v-else class="">
-            <view class="w-100 bg-con softer abs-b i-0 ps-f-imp">
+            <view class="w-100 softer abs-b i-0 ps-f-imp bf-wht-bar">
                 <view class="fx-s mxw-pc">
                     <view class="fx-1 fx-i">
-                        <Ov clazz="ta-c pt-s pb-s" @tap="uniRouter.back">
+                        <OButtonTag color="wht-0" clazz="ta-c pt-s pb-s" @tap="uniRouter.back">
                             <view class="px-x2 h-1em h8">
                                 <UiI i="i" clazz=""/>
                             </view>
-                            <view class="tis pt-s"><text class="fs-s">返回</text></view>
-                        </Ov>
-                        <Ov clazz="ta-c pt-s pb-s" @tap="funn.share">
+                            <view class="tid pt-s"><text class="fs-s">返回</text></view>
+                        </OButtonTag>
+                        <OButtonTag color="wht-0" clazz="ta-c pt-s pb-s" @tap="funn.share">
                             <view class="px-x2 h-1em h8">
                                 <UiI i="share" clazz=""/>
                             </view>
-                            <view class="tis pt-s"><text class="fs-s">分享</text></view>
-                        </Ov>
+                            <view class="tid pt-s"><text class="fs-s">分享</text></view>
+                        </OButtonTag>
                     </view>
                     <view class="px-row w-618">
                         <OButton v-if="sts.is_join" clazz="btn-app"
-                            color="def" @tap="uniRouter.back"
+                            color="wht-t" @tap="uniRouter.back"
                         >
                             <text class="">您已拥有。</text>
                         </OButton>
                         <view v-else class="softer">
                             <OButton v-if="price == 0" clazz="btn-app"
-                                color="def" @tap="uniRouter.back"
+                                color="wht-t" @tap="uniRouter.back"
                             >
                                 <text class="">免费</text>
                             </OButton>
                             <view v-else>
                                 <view class="fx-r">
-                                    <OButton
+                                    <OButton color="wht-t"
                                         :ioading="aii.ioading" :weak="true"
                                         clazz="mh-btn-x1 br-ti br-bi pr pi-x1 mw-6em" @tap="funn.car">
                                         <view class="fx-c" v-if="sts.is_in_cart">
@@ -47,7 +47,7 @@
                                             <text class="pi-s">加购</text>
                                         </view>
                                     </OButton>
-                                    <OButton color="sec"
+                                    <OButton color="pri"
                                         :ioading="aii.ioading" :weak="true"
                                         clazz="mh-btn-x1 br-tr br-br pi pr-x1 mw-6em" @tap="funn.buy">
                                         <view class="">
@@ -69,6 +69,7 @@
 
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
+import OButtonTag from '@/cake/button/OButtonTag.vue';
 import Ov from '@/cake/button/touch/Ov.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';

@@ -1,14 +1,16 @@
 <template>
     <view>
         <view class="softer">
-            <VwUcpNumberMsg/>
-            <view class="py-row"></view>
-            <!-- -->
-            <view class="px-row pt-x1 softer mxw-pc"><CoMoUcpGoBtns/></view>
-            <!-- -->
-            <view class="pt-x2 softer">
-                <view class="py"></view>
-                <CoMoUserAdvSwipper :info="info"/>
+            <VwUcpBasicUserMsg/>
+            <view class="bg-con">
+                <view class="py-row"></view>
+                <!-- -->
+                <view class="px-row pt-x1 softer mxw-pc"><CoMoUcpGoBtns/></view>
+                <!-- -->
+                <view class="pt-x2 softer">
+                    <view class="py"></view>
+                    <CoMoUserAdvSwipper :info="info"/>
+                </view>
             </view>
         </view>
     </view>
@@ -16,7 +18,7 @@
 
 <script setup lang="ts">
 import { computed, reactive } from 'vue';
-import VwUcpNumberMsg from './center/VwUcpNumberMsg.vue';
+import VwUcpBasicUserMsg from './center/VwUcpBasicUserMsg.vue';
 import CoMoUcpGoBtns from './component/CoMoUcpGoBtns.vue';
 import CoMoUserAdvSwipper from '@/components/modules/user/CoMoUserAdvSwipper.vue';
 import { appState } from '@/memory/global';
