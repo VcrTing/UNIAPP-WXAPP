@@ -8,23 +8,26 @@ import { is_arr, is_str } from "@/tool/util/typed"
 
 // http://localhost:1337/api/activities?populate[publisher][fields]=*&filters[activity_tags][name][$eq]=原味
 
-const relations = [ 'activity_medias', 'publisher', 'activity_tags', 'activity_registrations' ]
+const relations_of_items = <string[]>[ 'medias' ]
 
-const fetching = async (param: ONE, pager: Pager): Promise<Activity[]> => {
-    const __pm: ONE = net_tool.build_param(param, pager, relations)
-    const src: NET_RES = await app.get('activity', null, __pm)
+const fetching = async (param: ONE, pager: Pager): Promise<Product[]> => {
+    const __pm: ONE = net_tool.build_param(param, pager, relations_of_items)
+    const src: NET_RES = await app.get('product', null, __pm)
     if (is_str(src)) return netip(src, [ ]);
     const res: ONE | MANY = (src as HttpResult).data
-    return net_tool.many<Activity>(res)
+    return net_tool.many<Product>(res)
 }
 
 // 搜索活动
-const search = async (search: string, param: ONE = { }, pager: Pager = net_tool.__pager()): Promise<Activity[]> => {
+const search = async (search: string, param: ONE = { }, pager: Pager = net_tool.__pager()): Promise<Product[]> => {
     srp_p.__like(param, 'search', search)
+    srp_p.__sort(param)
+    /*
     // 处理私密
     if (!DEV_ACTIVITY.ALLOW_SEARCH_SM) {
         srp_p.__eq(param, 'typed', DATA_ACTIVITY_TYPED_GK.v)
     }
+    */
     return await fetching(param, pager)
 }
 

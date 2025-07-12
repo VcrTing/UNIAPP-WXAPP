@@ -1,31 +1,28 @@
 <template>
     <view class="px-row">
         <view :class="isphone ? '' : 'row'">
-            <view class="pt-x1" v-for="(v, i) in activities" :key="i"
+            <view class="pt-x1" v-for="(v, i) in items" :key="i"
                 :class="w_clazz">
-                <CoMoIndexActivitySearchItem :v="v" :joins="joins" @view="funn.view"/>
+                <CoMoIndexProductSearchItem :v="v"  @view="funn.view"/>
             </view>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
-import CoMoIndexActivitySearchItem from '@/components/modules/index/CoMoIndexActivitySearchItem.vue';
-import CoMoOrderWorkingItem from '@/components/modules/order/CoMoOrderWorkingItem.vue';
-import { acyReFresh, authState, orderState, uiGetters } from '@/memory/global';
-import open_of_activity from '@/server/__func/open_of_activity';
+import CoMoIndexProductSearchItem from '@/components/modules/product/item/CoMoIndexProductSearchItem.vue';
+import { uiGetters } from '@/memory/global';
+import open_of_product from '@/server/__func/open_of_product';
 import { future } from '@/tool/util/future';
 import { computed } from 'vue';
 
 const prp = defineProps<{
-    activities: Activity[]
+    items: Product[]
 }>()
 
-const joins = computed((): ActivityJoin[] => orderState.join_of_mine)
-
 const funn = {
-    view: (v: Activity) => future(async () => {
-        open_of_activity.view(v)
+    view: (v: Product) => future(async () => {
+        await open_of_product.view(v)
     })
 }
 

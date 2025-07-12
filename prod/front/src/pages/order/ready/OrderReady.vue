@@ -20,13 +20,18 @@
                     </OButton>
                 </view>
             </view>
+            <CoBomBackBtn :clazz="'btn-wht-s'" @tap="uniRouter.back">
+                <CkSpace :h="2"/>
+            </CoBomBackBtn>
         </view>
     </PageLayout>
 </template>
 
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
+import CkSpace from '@/cake/content/CkSpace.vue';
 import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
+import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { DATA_PAYMENT_WAY_DEF } from '@/conf/conf-datas';
 import { authState, orderDispatch, orderState, uiState } from '@/memory/global';
@@ -73,7 +78,8 @@ const func = {
     first: () => futuring(aii, async () => {
         const data: XOrder = order_tool.group_order_data({
             num: num.value, price: price.value
-        }, authState.user, carts_of_order.value);
+        }, 
+        authState.user, carts_of_order.value);
         // 先新增一个订单
         const src: XOrder = await server_checkout.plus( data )
         if (src && src.documentId) {

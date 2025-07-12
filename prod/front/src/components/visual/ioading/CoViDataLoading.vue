@@ -27,7 +27,7 @@ const prp = defineProps<{
 
 const styie = computed(() => {
     return {
-        height: (prp.h || 10) + 'em'
+        height: (prp.h || 14) + 'em'
     }
 })
 

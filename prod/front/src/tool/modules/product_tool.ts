@@ -134,7 +134,7 @@ import product_build_tool from "./func/product_build_tool"
     }
 
     const gettyped_txt = (v: Product): string => {
-        const __v: number = v.typed || DATA_PRODUCT_TYPED_FREE.v
+        const __v: number = v.typed // || DATA_PRODUCT_TYPED_FREE.v
         for (let j= 0; j< DATA_PRODUCT_TYPED.length; j++ ) {
             const jj = DATA_PRODUCT_TYPED[j]
             if (jj.v === __v) return jj.name

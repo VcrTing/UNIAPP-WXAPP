@@ -1,6 +1,6 @@
 <template>
-    <view class="ps-r zi-n">
-        <view class="pt-s">
+    <view class="">
+        <view class="pt-s ps-r zi-n">
             <WvIndexConTop :ioading="aii.ioading" :change="change" 
                 @refresh="funn.initing"
                 @changetag="funn.switchTag"/>
@@ -8,11 +8,14 @@
         <view class="">
             <OScrollYFresh id="index_scroll"
                 :options="scrolloptions"
-                :styie="{ 'height': 'calc( 100vh - 16rem - ' + (h || '0px') + ' )' }"
+                :styie="{ 
+                    'position': 'relative', 'z-index': '99',
+                    'height': 'calc( 100vh - 11.3rem - ' + (h || '0px') + ' )' }"
                 @downrefresh="funn.next"
                 @uprefresh="funn.initing"
                 >
-                <view class="pt-row"></view>
+                <view class="pt-row">
+                </view>
                 <CoViDataLoading :ioading="index.ioading" :items="aii.items">
                     <WvIndexConList :items="aii.items"/>
                 </CoViDataLoading>
@@ -23,6 +26,7 @@
                     </view>
                 </view>
                 <CkSpace :h="1"/>
+                <view class="mh-app-bottom-bar"></view>
             </OScrollYFresh>
             <view class="abs-b i-0 w-100" v-if="index.ioading">
                 <view class="ani-fade-b">

@@ -8,7 +8,7 @@
             <view class="w-100 softer abs-b i-0 ps-f-imp bf-wht-bar">
                 <view class="fx-s mxw-pc">
                     <view class="fx-1 fx-i">
-                        <OButtonTag color="wht-0" clazz="ta-c pt-s pb-s" @tap="uniRouter.back">
+                        <OButtonTag color="wht-0" clazz="ta-c pt-s pb-s" @tap="emt('back')">
                             <view class="px-x2 h-1em h8">
                                 <UiI i="i" clazz=""/>
                             </view>
@@ -80,6 +80,7 @@ import product_tool from '@/tool/modules/product_tool';
 import appRouter from '@/tool/uni/app-router';
 import { tipwarn } from '@/tool/uni/uni-global';
 import uniRouter from '@/tool/uni/uni-router';
+import app_pag_tool from '@/tool/view/app_pag_tool';
 import UiI from '@/ui/element/i/UiI.vue';
 import { computed, reactive } from 'vue';
 
@@ -87,7 +88,7 @@ const prp = defineProps<{
     v: Product, user: User, sts: ONE,
     is_publisher: boolean
 }>()
-
+const emt = defineEmits( [ 'back' ] )
 const aii = reactive({ ioading: false })
 
 const modback = computed((): boolean => {
@@ -138,7 +139,8 @@ const funn = {
     }),
     //
     share: () => {
-        console.log('SHARE')
+        // console.log('SHARE')
+        app_pag_tool.product(prp.v)
     }
 }
 

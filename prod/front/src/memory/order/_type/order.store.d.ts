@@ -13,6 +13,8 @@ interface OrderStore {
     order_of_succ: Order
 
     join_of_mine: ActivityJoin[ ]
+
+    num: number
 }
 
 type ORDER_STORE_FIELD = 

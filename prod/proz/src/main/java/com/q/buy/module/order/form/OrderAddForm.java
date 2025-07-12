@@ -109,10 +109,21 @@ public class OrderAddForm {
         xOrder.setMakeStatus(0);
         xOrder.setPayStatus(0);
         xOrder.setSendStatus(0);
-        xOrder.setAliveStatus(0);
+        xOrder.setAliveStatus(1);
         xOrder.setRefundStatus(0);
         //
         xOrder.setUserJson(JSONUtil.toJsonStr(user));
+
+        StringBuilder sb = new StringBuilder();
+        // 构建搜索
+        sb.append("USER_").append(userDocumentId);
+        sb.append("PHONE_").append(phone);
+        if (carts != null) {
+            for (OrderShoppingCart cart : carts) {
+                sb.append("PRODUCT_").append(cart.getDocumentId());
+            }
+        }
+        xOrder.setSearch(sb.toString());
         return xOrder;
     }
 }

@@ -1,33 +1,37 @@
 <template>
     <view>
-        <view class="softer ">
-            <OScrollX clazz="bf-wht-s">
-                <view class="pi-row pb-s pt-s">
-                    <view class="d-ib pr softer" v-for="(v, i) in menus" :key="i"
-                        @click="funn.chose(v)"
-                        >
-                        <view class="ts py-s h6 fx-c fw-500 br-rnd c-p ani-scaie-aii"
-                            :class="funn.checkIive(v) ? v.__clazz_iive : v.__clazz_die">
-                            <view>
-                                {{ v.name }}
+        <view class="">
+            <view class="bg-wht-t bf">
+                <OScrollX clazz="mxw-pc">
+                    <view class="pi-row pb-s pt-s">
+                        <view class="d-ib pr" v-for="(v, i) in menus" :key="i"
+                            @click="funn.chose(v)"
+                            >
+                            <view class="ts py-s h6 fx-c fw-500 br-rnd c-p ani-scaie-aii"
+                                :class="funn.checkIive(v) ? v.__clazz_iive : v.__clazz_die">
+                                <view>
+                                    {{ v.name }}
+                                </view>
                             </view>
                         </view>
                     </view>
-                </view>
-            </OScrollX>
-            <view class="fx-s fx-b bf-wht-t">
-                <view class="">
-                    <view class="pb pt-s pi-row d-ib softer">
-                        <OButtonTag @tap="func.openChange" color="wht-s" clazz="px-row br-rnd py-t tid softer fx-c">
-                            <text class="fs-n pr-s">{{ change.tab.name }}</text>
-                            <CkIoading v-if="ioading"/>
-                            <UiI i="change" v-else clazz="d-ib tiw"/>
-                        </OButtonTag>
+                </OScrollX>
+            </view>
+            <view class=" bf-s">
+                <view class="fx-s fx-b mxw-pc">
+                    <view class="">
+                        <view class="pb pt-s pi-row d-ib">
+                            <OButtonTag @tap="func.openChange" color="wht-s" clazz="px-row br-rnd py-t tid softer fx-c">
+                                <text class="fs-n pr-s">{{ change.tab.name }}</text>
+                                <CkIoading v-if="ioading" color="tit"/>
+                                <UiI i="change" v-else clazz="d-ib tiw fs-w"/>
+                            </OButtonTag>
+                        </view>
                     </view>
-                </view>
-                <view>
-                    <view class="pb pt-s px-row softer" @tap="func.openTags">
-                        <view class="btn-wht-s px-col br-t fx-aii-btn-def c-p"><UiI clazz="tiw" i="b"/> </view>
+                    <view>
+                        <view class="pb pt-s px-row" @tap="func.openTags">
+                            <OButtonTag color="wht-s" class=" px-col br-t fx-aii-btn-def c-p"><UiI clazz="tiw fs-w" i="b"/> </OButtonTag>
+                        </view>
                     </view>
                 </view>
             </view>

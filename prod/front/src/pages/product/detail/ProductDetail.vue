@@ -23,7 +23,7 @@
                 </view>
                 <WvPdGallery :v="view"/>
 
-                <WvPdBom v-if="aii.init" 
+                <WvPdBom v-if="aii.init" @back="funn.back"
                     :v="view" :user="user" :sts="sts"
                     :is_publisher="is_publisher"
                     />
@@ -40,12 +40,11 @@ import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { acyState, appState, authGetters, authState, orderState, uiState } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';
 import { computed, nextTick, onMounted, reactive, watch } from 'vue';
-import appRouter from '@/tool/uni/app-router';
 import { future, futuring, promise, timeout } from '@/tool/util/future';
 import server_joining from '@/server/activity/server_joining';
 import media_tool from '@/tool/modules/common/media_tool';
-import { must_arr, must_one } from '@/tool/util/valued';
-import { prodState } from '@/memory/moduies';
+import { must_arr, must_int, must_one } from '@/tool/util/valued';
+import { prodReFresh, prodState } from '@/memory/moduies';
 import WvPdBanner from '@/wave/product_detail/media/WvPdBanner.vue';
 import product_tool from '@/tool/modules/product_tool';
 import WvPdTitle from '@/wave/product_detail/top/WvPdTitle.vue';
@@ -59,14 +58,17 @@ import WvPdBom from '@/wave/product_detail/WvPdBom.vue';
 import order_tool from '@/tool/modules/order_tool';
 import WvPdPublisherS from '@/wave/product_detail/member/WvPdPublisherS.vue';
 import WvPdVisual from '@/wave/product_detail/visual/WvPdVisual.vue';
+import appRouter from '@/tool/uni/app-router';
+import open_of_product from '@/server/__func/open_of_product';
 
 const view = computed((): Product => prodState.view)
 const user = computed(() => authState.user)
 
-const aii = reactive({ init: false, ioading: false, joiners: <ActivityJoin[]>[ ] })
+const aii = reactive({ init: false, ioading: false, back: '' })
 const sts = reactive({ is_in_cart: false, is_buyed: false })
 
 const funn = {
+    /*
     ioad_joiners: () => futuring(aii, async () => {
         const actid: string = view.value.documentId || ''
         if (actid) {
@@ -74,18 +76,44 @@ const funn = {
             aii.joiners = joiners
         }
     }),
+    */
     check: (src: Product) => {
         sts.is_in_cart = cart_tool.is_in_cart(src)
         sts.is_buyed = order_tool.isbuyed(src)
     },
-    back: () => { uniRouter.back() },
+    back: () => { 
+        console.log('back =', aii.back)
+        if (aii.back) { uniRouter.redpg(aii.back) }
+        else { uniRouter.back() }
+    },
+
+    // 若是直接进入
+    redin: async (src: Product) => {
+        if (!src.documentId) {
+            const { product, back, redin } = uniRouter.param()
+            aii.back = back || ''
+            // console.log('直接进入了。pp =', product, back, redin)
+            if (redin === '1') {
+                if (product) {
+                    const p: Product = await open_of_product.__v( product );
+                    await prodReFresh('view', p)
+                    // console.log('优先加载 p =', view.value)
+                }
+            }
+            else {
+                appRouter.index()
+            }
+            // console.log('直接进入了。pp =', uniRouter.param())
+        }
+    },
+ 
+    //
+    // http://localhost:5174/#/pages/product/detail/ProductDetail?product=dql9od9sneonuprk3kcyja28&redin=1&back=index
     init: () => future(async () => {
         try {
             const src: Product = view.value || { }
+            await funn.redin(src)
             if (!src) {
-                appRouter.index()
-            }
-            if (!src.documentId) {
                 appRouter.index()
             }
             funn.check(src)
@@ -97,7 +125,7 @@ const funn = {
 }
 
 nextTick(funn.init)
-watch(() => view.value, (n, o) => { uniRouter.navigatorpg('index') })
+// watch(() => view.value, (n, o) => { uniRouter.navigatorpg('index') })
 
 const banners = computed((): Media[] => product_tool.getbanner(must_one<Product>(view.value)))
 const h_banner = computed((): number => media_tool.cpu_index_banner_h(banners.value, uiState.w))

@@ -65,3 +65,7 @@ export const arrsort = <T>(src: T, k: string, ahead_small: boolean = false) => {
 export const arrcoii = (src: MANY, k: string = DEV_DOC_ID) => {
     return src.map((e: ONE) => (e[ k ]))
 }
+
+export const arrlen_same = (src: MANY, tar: MANY): boolean => {
+    return must_arr(src).length === must_arr(tar).length
+}

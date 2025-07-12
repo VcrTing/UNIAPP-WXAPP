@@ -34,7 +34,9 @@ export const tipiong = (title: string = '您好') => {
 }
 
 export const netip = <T>(src: NET_RES, def: T): T => {
-  tiperr(src + '')
+  if (src) {
+    tiperr(src + '')
+  }
   return def
 }
 

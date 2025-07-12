@@ -1,4 +1,4 @@
-import { PAGES } from "@/conf/conf-page"
+import { PAGE_NAVIGATION, PAGES } from "@/conf/conf-page"
 
 
 class Router {
@@ -29,7 +29,12 @@ class Router {
     }
 
     gopg (name: string) {
-        this.go( PAGES[ name ] )
+        if (PAGE_NAVIGATION.indexOf(name) > -1) {
+            this.navigator(name)
+        }
+        else {
+            this.go( PAGES[ name ] )
+        }
     }
 
     // 重定向到 其他页面
@@ -42,7 +47,12 @@ class Router {
         catch(err: any) { this._err(err) }
     }
     redpg (name: string) {
-        this.red( PAGES[ name ] )
+        if (PAGE_NAVIGATION.indexOf(name) > -1) {
+            this.navigatorpg(name)
+        }
+        else {
+            this.red( PAGES[ name ] )
+        }
     }
 
     // 重定向到 其他页面，但是关闭所有页面
@@ -76,6 +86,12 @@ class Router {
         const routes = getCurrentPages()
         const route = routes[ routes.length - 1 ]
         return route ? route : { }
+    }
+
+    param (): ONE {
+        const pp: ONE = this.info() || { }
+        const ops: ONE = pp.options || { }
+        return ops
     }
 
     goui() {

@@ -4,7 +4,7 @@
             height: 'calc(8vh + 1vw)'
         }"></view>
         <view v-else class="mh-app-top-bar"></view>
-        <view class="fx-i px-row softer">
+        <view class="fx-i px-row softer mxw-pc">
             <view class="fx-i">
                 <view class="w-7em h-7em bd-x2 bd-c-wht-s br-cir o-h">
                     <CkAvatar @tap="funn.ck_avatar" :not_mainpage="true" :id="user.id"

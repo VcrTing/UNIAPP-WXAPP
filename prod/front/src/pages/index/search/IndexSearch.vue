@@ -1,8 +1,6 @@
 <template>
     <page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
     <PageLayout>
-        
-        
         <OAppTopBar :mat="true" :not_in_safearea="true">
             <view class="ps-r zi-t o-h">
                 <view class="abs-b i-0 w-100 h-100">
@@ -15,19 +13,13 @@
                             <view class="btn-wht-s px-row w-2em h-2em br-cir fx-c c-p"><UiI i="i"/> </view>
                         </view>
                     </view>
-                    <view class="w-70 pi-x3 pb">
+                    <view class="pi-x3 pb" :class="ismall ? 'w-70' : 'w-100'">
                         <view class="fx-i pi w-100">
                             <input @blur="funn.submit" class="fx-1 px mh-btn br-s btn-wht-s" v-model="aii.search" placeholder="请输入您的喜好"/>
                             <view class="px" @tap="funn.submit">
-                                
                                 <OButton :weak="true" color="wht" clazz="w-2em h-2em br-cir">
                                     <OFI i="search"/>
                                 </OButton>
-                                <!--
-                                <OButton :weak="true" color="wht" clazz="px-col py-col br-s">
-                                    
-                                </OButton>
-                                -->
                             </view>
                         </view>
                     </view>
@@ -35,14 +27,13 @@
                 </view>
             </view>
         </OAppTopBar>
-
         <view class="py-row">
             <OScrollY :styie="{
-                height: 'calc(100vh - 8em)'
+                height: 'calc(100vh - 6rem)'
             }">
                 <view>
-                    <CoViDataLoading :ioading="aii.ioading" :items="result.activities">
-                        <VwIndexSearchPag :activities="result.activities"/>
+                    <CoViDataLoading :ioading="aii.ioading" :items="result.items">
+                        <VwIndexSearchPag :items="result.items"/>
                     </CoViDataLoading> 
                     <CkSpace :h="8"/>
                 </view>
@@ -66,8 +57,9 @@ import { uiGetters, uiState } from '@/memory/global';
 import server_search from '@/server/common/server_search';
 import net_tool from '@/tool/http/net_tool';
 import uniRouter from '@/tool/uni/uni-router';
-import { futuring } from '@/tool/util/future';
+import { futuring, promise } from '@/tool/util/future';
 import { is_nice_arr } from '@/tool/util/valued';
+import { storage } from '@/tool/web/storage';
 import UiI from '@/ui/element/i/UiI.vue';
 import VwIndexSearchPag from '@/view/index/search/VwIndexSearchPag.vue';
 import WvIndexBanner from '@/wave/index/WvIndexBanner.vue';
@@ -77,17 +69,17 @@ const aii = reactive({
     prev: '', search: '', ioading: false, pager: net_tool.__pager()
 })
 const result = reactive({
-    activities: <Activity[]> [ ],
-    previes: <Activity[]> [ ]
+    items: <Product[]> [ ],
+    previes: <Product[]> [ ]
 })
 
 const funn = {
     fetching: () => futuring(aii, async () => {
         aii.prev = aii.search
-        const ats: Activity[] = await server_search.search(aii.search, { }, aii.pager)
+        const ats: Product[] = await server_search.search(aii.search, { }, aii.pager)
         console.log('搜索到的结果 =', ats)
         if (is_nice_arr(ats)) {
-            result.activities = ats
+            result.items = ats
         }
     }),
     submit: () => {
@@ -95,6 +87,7 @@ const funn = {
             aii.search = aii.search.trim()
             if (aii.search !== aii.prev) {
                 funn.fetching()
+                storage.set<string>('SEARCH_KEY', aii.search)
             }
             else {
                 console.log('搜索文字，没变化')
@@ -109,7 +102,13 @@ const funn = {
             }
         }
         // uniRouter.navigatorpg('publish')
-    }
+    },
+    init: () => promise(() => {
+        const k = storage.get<string>('SEARCH_KEY') || ''
+        if (k) {
+            aii.search = k
+        }
+    })
 }
 
 const isphone = computed((): boolean => uiGetters.isphone)
@@ -118,6 +117,8 @@ const h = computed((): number => {
 	if (ispc.value) return 52; return isphone.value ? 0 : 120
 })
 const h_v = computed((): string => { return h.value + 'px' })
+
+const ismall = computed((): boolean => uiGetters.ismall)
 </script>
 
 <style lang="sass">

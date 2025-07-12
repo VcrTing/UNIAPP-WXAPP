@@ -1,39 +1,39 @@
 <template>
     <view>
         <OScrollX>
-            <view class=" py ">
-                <view class="d-ib pr softer" v-for="(v, i) in menus" :key="i"
-                    @click="funn.chose(v)"
-                    >
-                    <view class="ts py-s fx-c fw-500 br-rnd c-p ani-scaie-aii"
-                        :class="funn.checkIive(v) ? v.__clazz_iive : v.__clazz_die">
-                        <text>{{ v.name }}</text>
-                    </view>
+            <view class=" py fx-i softer mxw-pc">
+                <view class="btn-def py px-row ts c-p softer" v-for="(v, i) in menus" :key="i"
+                    @tap="funn.chose(v)"
+                >
+                    <text :class="(tab.inner === v.v) ? '' : 'sus'">{{ v.name }}</text>
                 </view>
             </view>
         </OScrollX>
         <!-- -->
         <CoViDataLoading :ioading="aii.ioading" :items="aii.orders" @refresh="funn.fetching">
-            <view>
-                <view>
-
-                </view>
+            <view class="mxw-pc">
                 <view v-for="(v, i) in aii.orders" class="pb-row">
-                    <view class="bg-con pt-s">
+                    <view class="bg-con pt-s" :class="isphone ? '' : 'br'">
                         <view>
                             <view v-for="(n, m) in order_tool.getcarts(v)" :k="m"
-                                class="py-s fx-aii-btn-def fx-s fx-t"
+                                :class="w_clazz"
                             >
-                                <view class="pi-row pr-s sus">
-                                    <view class="mw-1em">{{ m + 1 }}</view>
-                                </view>
-                                <view class="fx-1">
-                                    <CoMoOrderProductItem :v="n" @view="func.view" />
+                                <view
+                                    :class="isphone ? 'br-1' : 'br-s'"
+                                    class="py-s fx-aii-btn-def fx-s fx-t"
+                                >
+                                    <view class="pi-row pr-s sus">
+                                        <view class="mw-1em">{{ m + 1 }}</view>
+                                    </view>
+                                    <view class="fx-1">
+                                        <CoMoOrderProductItem :v="n" @view="func.view" />
+                                    </view>
                                 </view>
                             </view>
+                            
                         </view>
                         <view class="">
-                            <view class="fx-r px-row py-s fx-fcs-bg-def" @tap="func.ordermsg(v)">
+                            <view class="fx-r px-row py-s fx-fcs-bg-def br-br br-bi c-p" @tap="func.ordermsg(v)">
                                 <view class="pi-s">
                                     <CkSimpleTag :clazz="'btn-def fx-c px-s'">
                                         <text class="fs-t tis">{{ times.fmts(v.createdAt) }}</text>
@@ -47,7 +47,7 @@
                                     </view>
                                     <view v-else>
                                         <CkSimpleTag :clazz="'btn-err fx-c px-s'">
-                                            <text class="fs-t ">未支付</text>
+                                            <text class="fs-t ">未支付，点击查看订单号</text>
                                         </CkSimpleTag>
                                     </view>
                                 </view>
@@ -78,33 +78,44 @@ import { pageCartState } from '@/memory/page';
 import WvOrderMsgPan from './pan/WvOrderMsgPan.vue';
 import pan_tooi from '@/tool/app/pan_tooi';
 import net_tool from '@/tool/http/net_tool';
+import { authGetters, orderState, uiGetters } from '@/memory/global';
+
+const prp = defineProps<{
+    tab: ONE
+}>()
 //
-const num = computed((): number => pageCartState.num)
-watch(num, () => { funn.fetching() })
+const num = computed((): number => orderState.num)
+watch(num, () => { funn.__fetching() })
+
 // 
 const def = <ONE>{ name: '全部', v: 0 }
 const house = reactive({
-    iive: def, tabs: [ def ], ioading: false, view: <XOrder>{ }
+    tabs: [ def, { name: '已购商品', v: 1 } ], ioading: false, view: <XOrder>{ }
 })
 const aii = reactive({ ioading: false, pager: net_tool.__pager_long(), orders: <XOrder[]>[ ] })
 // 
 const funn = {
-    fetching: () => futuring(aii, async () => {
-        const items: XOrder[] = await server_order.mine({ }, aii.pager)
-        if (items && items.length) {
-            aii.orders = items
+    __fetching: async () => {
+        if (authGetters.is_login) {
+            const items: XOrder[] = await server_order.mine({ }, aii.pager)
+            if (items && items.length) {
+                aii.orders = items
+            }
         }
+    },
+    fetching: () => futuring(aii, async () => {
+        await funn.__fetching()
     }),
     init: () => promise(() => {
         funn.fetching()
     }),
     chose: (one: ONE) => { 
-        if (house.iive === one) {
+        if (prp.tab.inner === one.v) {
             funn.init()
         }
-        house.iive = one; 
+        prp.tab.inner = one.v; 
     },
-    checkIive: (one: ONE) => { const v = one.v; return house.iive.v === v; },
+    checkIive: (one: ONE) => { const v = one.v; return prp.tab.inner === v; },
 }
 nextTick(funn.init)
 // 
@@ -126,4 +137,12 @@ const func = {
 }
 
 const pan_msg = { idx: 22, hui: <ElePanHui>{ opacity: 0.4 } }
+
+const isphone = computed((): boolean => uiGetters.isphone)
+const ispc = computed((): boolean => uiGetters.ispc)
+const w_clazz = computed((): string => {
+    if (isphone.value) return 'w-100'
+    if (ispc.value) return 'w-50 px-s d-ib'
+    return 'w-50 px-s d-ib'
+})
 </script>

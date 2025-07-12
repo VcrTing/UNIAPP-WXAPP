@@ -17,19 +17,19 @@
                                             <text v-else>-</text>
                                             -->
                                             <text>-&nbsp;</text>
-                                            <text>{{v.feeAmount}}</text>
+                                            <text>{{v.price}}</text>
                                         </text>
                                     </view>
                                     <view class="fx-aii-btn-def pt-s pb px-x2">
                                         <view class="tiw">
-                                            您参加了《{{ v.activity.title }}》活动，购票数 {{ v.num }} 张，每张 {{ v.price || 0 }} 元。
+                                            您在订单{{ v.documentId }}中，成功支付了{{ v.price }}元。感谢您对本站的支持。
                                         </view>
                                     </view>
                                     <view class="">
                                         <view class="bg-hr h-1"></view>
                                     </view>
                                     <view class="fx-aii-btn-def py-s px-x2 fx-r fs-n">
-                                        <text class="sus">{{ times.fmts(v.registrationTime) }}</text>
+                                        <text class="sus">{{ times.fmts(v.payTime || v.createdAt) }}</text>
                                     </view>
                                 </view>
                             </view>
@@ -43,14 +43,12 @@
 </template>
 
 <script setup lang="ts">
-import OButton from '@/cake/button/OButton.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
 import { uiGetters } from '@/memory/global';
-import server_joining from '@/server/activity/server_joining';
-import mock_msg from '@/server/mock/msg/mock_msg';
+import server_order from '@/server/order/server_order';
+import net_tool from '@/tool/http/net_tool';
 import { futuring, promise } from '@/tool/util/future';
 import times from '@/tool/web/times';
-import UiI from '@/ui/element/i/UiI.vue';
 import { computed, nextTick, reactive } from 'vue';
 
 // const prp = defineProps<{}>()
@@ -65,12 +63,13 @@ const w_clazz = computed((): string => {
 
 const aii = reactive({
     i: 0, ioading: false,
-    records: <ActivityJoin[]> [ ]
+    records: <XOrder[]> [ ],
+    param: { }, pager: net_tool.__pager_long()
 })
 
 const funn = {
     fetching: () => futuring(aii, async () => {
-        const us: ActivityJoin[] = await server_joining.join_for_money()
+        const us: XOrder[] = await server_order.payed(aii.param, aii.pager)
         if (us && us.length) {
             aii.records = us
         }

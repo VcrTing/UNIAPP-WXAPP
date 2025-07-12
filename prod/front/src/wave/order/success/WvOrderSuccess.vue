@@ -15,7 +15,7 @@
                 <view >
                     <view class="fx-c py px-row fx-aii-btn-def h7">
                         <view>订单号：</view>
-                        <view><text class="us-a fw-550">{{ xorder.documentId }}</text></view>
+                        <view><text class="us-a fw-550 ani-scaie-ai">{{ xorder.documentId }}</text></view>
                     </view> 
                 </view>
                 <view class="fs-s tid py px-row fx-aii-btn-def">
@@ -68,6 +68,7 @@ import CoMoOrderContact from '../__component/contact/CoMoOrderContact.vue';
 import { DEV_ORDER } from '@/conf/conf-dev';
 import { promise } from '@/tool/util/future';
 import { pageIndexDispatch } from '@/memory/page';
+import { for_user_buyed } from '@/conf/__for_index/for_user_loging';
 
 const xorder = computed((): XOrder => orderState.order_of_succ)
 const contacts = computed((): User[] => {
@@ -86,6 +87,9 @@ const funn = {
         if (!i) {
             appRouter.index()
             pageIndexDispatch('refresh')
+        }
+        else {
+            for_user_buyed()
         }
     })
 }

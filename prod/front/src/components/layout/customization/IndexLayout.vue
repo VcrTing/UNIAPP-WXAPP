@@ -1,5 +1,6 @@
 <template>
-    <view class="h-100 w-100">
+    <view class="h-100 w-100 ps-f-imp">
+        <!---->
         <slot name="top"></slot>
 		<view class="">
             <view class="abs-t w-100 zi-t ps-f-imp">
@@ -7,29 +8,26 @@
             </view>
 			<OSafeAreaTop/>
 			<view class="mh-app-top-bar"></view>
-            <view class="softer">
-                <view :style="{
-                    height: h
-                }"></view>
-                <slot></slot>
-            </view>
         </view>
         
-		<CoAppBottomBar/>
+        <slot></slot>
+		<CoAppBottomBar :clazz="bar_clazz"/>
     </view>
 </template>
 
 <script setup lang="ts">
 import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
 import CoAppBottomBar from '@/components/app/bar/CoAppBottomBar.vue';
-import { for_user_joing } from '@/conf/__for_index/for_user_loging';
+// import { for_user_joing } from '@/conf/__for_index/for_user_loging';
 import { timeout } from '@/tool/util/future';
 import { nextTick } from 'vue';
 
-defineProps<{ clazz?: string, h?: string }>()
+defineProps<{ clazz?: string, h?: string, bar_clazz?: string }>()
 
 const funn = {
-	init: () => timeout(() => { for_user_joing() }, 600)
+	init: () => timeout(() => { 
+        // for_user_joing() 
+    }, 600)
 }
 nextTick(funn.init)
 </script>

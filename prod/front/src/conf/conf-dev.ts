@@ -100,7 +100,7 @@ export const DEV_MEDIA_VIEW = {
         return src
     },
     // 限高
-    ITEM_COVER_H_LIMIT: 270
+    ITEM_COVER_H_LIMIT: 230
 }
 
 // 性别设定

@@ -47,7 +47,7 @@ export const PAGE_WHITE_LIST = [
 
 // UNIAPP NAVI BAR 页面
 export const PAGE_NAVIGATION: string[] = [
-    
+    'index', 'user', 'order', 'cart', 'publish'
 ]
 
 // 

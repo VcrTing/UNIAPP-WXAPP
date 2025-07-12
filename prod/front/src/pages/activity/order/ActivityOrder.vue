@@ -46,7 +46,7 @@ import CoAppTopBackBar from '@/components/app/bar/top/CoAppTopBackBar.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoMoOrderPayingItem from '@/components/modules/activity/order/CoMoOrderPayingItem.vue';
 import CoMoSecurityAgreeLine from '@/components/modules/security/CoMoSecurityAgreeLine.vue';
-import { for_user_joing } from '@/conf/__for_index/for_user_loging';
+// import { for_user_joing } from '@/conf/__for_index/for_user_loging';
 import { orderState, uiState } from '@/memory/global';
 import server_joining from '@/server/activity/server_joining';
 import server_user_statistic from '@/server/user/user/server_user_statistic';
@@ -81,9 +81,11 @@ const funn = {
     succ: () => {
         try {
             tipsucc('加入该活动成功。');
-            appRouter.order_succ()
+            // appRouter.order_succ()
         }
-        finally { for_user_joing() }
+        finally { 
+            // for_user_joing() 
+        }
     },
     submit: () => futuring(aii, async () => {
         const o: OrderItem = order_of_place.value

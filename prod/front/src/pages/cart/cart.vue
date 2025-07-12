@@ -8,7 +8,7 @@
                         :clazz="'ts py px-row'">
                         <text class="fw-550">{{ v.name }}</text>
                     </OButton>
-                    <view @tap="aii.iive = v.v" class="ts py px-row fx-aii-btn-pri-iht tid" v-else>{{ v.name }}</view>
+                    <view @tap="aii.iive = v.v" class="ts py px-row fx-aii-btn-pri-iht tid c-p" v-else>{{ v.name }}</view>
                 </view>
             </view>
         </CoAppTopBar>
@@ -18,7 +18,7 @@
             }">
                 <view class="pt-s"></view>
                 <view v-if="aii.iive == 0">
-                    <CoViDataLoading :ioading="aii.ioading" :items="carts">
+                    <CoViDataLoading :ioading="aii.ioading" :items="carts" @refresh="funn.init">
                         <WvCartNow :carts="carts" :choises="aii.choises"/>
                     </CoViDataLoading>
                 </view>
@@ -28,7 +28,7 @@
                 <CkSpace :h="2"/>
             </OScrollY>
         </view>
-		<CoAppBottomBar :mat="false"/>
+		<CoAppBottomBar :mat="false" clazz="bg-con"/>
     </PageLayout>
 </template>
 
@@ -82,7 +82,8 @@ const funn = {
         const pss: Product[] = await server_product.byids(ids)
         if (is_nice_arr(pss)) {
             aii.products = pss || [ ];
-            cart_tool.fiii_products(carts.value, aii.products)
+            const nc = cart_tool.fiii_products(carts.value, aii.products)
+            pageCartDispatch('need_async', nc)
         }
     },
     load: async () => {

@@ -1,17 +1,42 @@
 <template>
-    <view class="pr-s fx-s fx-t">
-        <view class="w-50 d-ib">
-            <view v-for="(v, i) in first" :key="i" class="br pb-s pi-s softer"
-            >
-                <CoMoIndexProductItem :w="w_item"
-                    :v="v" :joins="joins" @detail="funn.detail"/>
+    <view class="mxw-pc">
+        <view v-if="isphone" class="pr-s fx-s fx-t">
+            <view class="w-50 d-ib">
+                <view v-for="(v, i) in ps1" :key="i" class="br pb-s pi-s softer">
+                    <CoMoIndexProductItem :w="w_item" :v="v" :joins="joins" @detail="funn.detail"/>
+                </view>
+            </view>
+            <view class="w-50 d-ib">
+                <view v-for="(v, i) in ps2" :key="i" class="br pb-n pi-s softer">
+                    <CoMoIndexProductItem :w="w_item" :v="v" :joins="joins" @detail="funn.detail"/>
+                </view>
             </view>
         </view>
-        <view class="w-50 d-ib">
-            <view v-for="(v, i) in last" :key="i" class="br pb-n pi-s softer"
-            >
-                <CoMoIndexProductItem :w="w_item"
-                    :v="v" :joins="joins" @detail="funn.detail"/>
+        <view v-if="!isphone" class="pr-s fx-s fx-t">
+            <view class="w-20 d-ib">
+                <view v-for="(v, i) in ps1" :key="i" class="br pb-s pi-s softer">
+                    <CoMoIndexProductItem :w="w_item" :v="v" :joins="joins" @detail="funn.detail"/>
+                </view>
+            </view>
+            <view class="w-20 d-ib">
+                <view v-for="(v, i) in ps2" :key="i" class="br pb-n pi-s softer">
+                    <CoMoIndexProductItem :w="w_item" :v="v" :joins="joins" @detail="funn.detail"/>
+                </view>
+            </view>
+            <view class="w-20 d-ib">
+                <view v-for="(v, i) in ps3" :key="i" class="br pb-n pi-s softer">
+                    <CoMoIndexProductItem :w="w_item" :v="v" :joins="joins" @detail="funn.detail"/>
+                </view>
+            </view>
+            <view class="w-20 d-ib">
+                <view v-for="(v, i) in ps4" :key="i" class="br pb-n pi-s softer">
+                    <CoMoIndexProductItem :w="w_item" :v="v" :joins="joins" @detail="funn.detail"/>
+                </view>
+            </view>
+            <view class="w-20 d-ib">
+                <view v-for="(v, i) in ps5" :key="i" class="br pb-n pi-s softer">
+                    <CoMoIndexProductItem :w="w_item" :v="v" :joins="joins" @detail="funn.detail"/>
+                </view>
             </view>
         </view>
     </view>
@@ -26,14 +51,15 @@ import { computed, reactive } from 'vue';
 
 const prp = defineProps<{ items: Product[] }>()
 
-const first = computed((): Product[] => {
-    return funn.feed(prp.items, 1, aii.wpnum)
-})
-const last = computed((): Product[] => {
-    return funn.feed(prp.items, 2, aii.wpnum)
-})
+const isphone = computed((): boolean => uiGetters.isphone)
 
-const aii = reactive({ ioading: false, wpnum: 2 })
+const ps1 = computed((): Product[] => { return funn.feed(prp.items, 1, aii.wpnum) })
+const ps2 = computed((): Product[] => { return funn.feed(prp.items, 2, aii.wpnum) })
+const ps3 = computed((): Product[] => { return funn.feed(prp.items, 3, aii.wpnum) })
+const ps4 = computed((): Product[] => { return funn.feed(prp.items, 4, aii.wpnum) })
+const ps5 = computed((): Product[] => { return funn.feed(prp.items, 5, aii.wpnum) })
+
+const aii = reactive({ ioading: false, wpnum: isphone.value ? 2 : 5 })
 const joins = computed((): ActivityJoin[] => {
     return orderState.join_of_mine || [ ]
 })
@@ -59,7 +85,6 @@ const funn = {
     }
 }
 
-const isphone = computed((): boolean => uiGetters.isphone)
 const ispc = computed((): boolean => uiGetters.ispc)
 const w_xs = computed((): number => {
     return 1 / (aii.wpnum || 1)

@@ -6,8 +6,10 @@
                     <text class="fs-w">下单列表&nbsp;</text>
                     <text>({{ num }})</text>
                 </view>
-                <view v-for="(v, i) in carts" :key="i" class="py">
-                    <CoMoOrderProductItem v-if="getp(v)" :v="getp(v)" :cart="v"/>
+                <view class="py">
+                    <view v-for="(v, i) in carts" :key="i">
+                        <CoMoOrderProductItem v-if="getp(v)" :v="getp(v)" :cart="v"/>
+                    </view>
                 </view>
             </view>
             <view class="py-s"></view>

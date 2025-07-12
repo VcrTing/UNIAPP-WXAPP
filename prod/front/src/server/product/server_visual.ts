@@ -20,6 +20,7 @@ const __fetching = async (param: ONE, pager: Pager): Promise<ProductVisual[]> =>
 const fetching = async (param: ONE, pager: Pager): Promise<ProductVisual[]> => {
     srp_p.__eq(param, 'userId', authGetters.userid)
     //
+    srp_p.__sort(param, 'num')
     return __fetching(param, pager)
 }
 

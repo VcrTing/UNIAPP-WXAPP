@@ -63,11 +63,19 @@ const group_medias_ids = (medias: Media[]) => {
     }).filter((e: string) => (e != ''))
 }
 
+const is_1x1 = (w: number, h: number) => {
+    const __c = w - h
+    const res = __c < 10 && __c > -10
+    return res
+}
+
 const __img_h_view = (w_wrapper: number, w_img: number, h_img: number, iimit: number): number | null => {
     if (w_wrapper && w_img && h_img) {
+        if (is_1x1(w_img, h_img)) return w_wrapper - 9;
+
         let res = (w_wrapper * h_img / w_img)
         if (res > iimit) {
-            let c = (res / 10) - 10
+            let c = (res / 8) - 10
             c = c < 0 ? 0 : c
             res = iimit + c
         }

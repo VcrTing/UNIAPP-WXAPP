@@ -80,7 +80,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, XOrder> {
         xOrder.setUpdatedAt(new Date());
         xOrder.setUpdatedBy("SYSTEM");
         if (!this.updateById(xOrder)) {
-            throw new QException("加入锁。");
+            throw new QException("加入锁失败。");
         }
         return xOrder;
     }

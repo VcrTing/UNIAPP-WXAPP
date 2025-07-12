@@ -86,4 +86,6 @@ public class XOrder {
     String userJson;
     // 购买产品的详情
     String cartsJson;
+
+    String search;
 }

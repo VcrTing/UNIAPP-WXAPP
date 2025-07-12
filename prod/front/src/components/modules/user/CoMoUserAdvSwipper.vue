@@ -2,6 +2,7 @@
     <view>
         <view v-for="(v, i) in banners" :key="i">
             <image
+                :class="clazz"
                 :src="v.url || def"
                 mode="aspectFill" 
                 class="w-100 h-18vh ani-scaie-s-aii"/>
@@ -14,7 +15,8 @@ import { must_arr } from '@/tool/util/valued';
 import { computed } from 'vue';
 
 const prp = defineProps<{
-    info: AppInfo
+    info: AppInfo,
+    clazz?: string
 }>()
 
 const banners = computed((): Media[] => {

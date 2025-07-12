@@ -3,7 +3,7 @@ import { must_arr, must_int } from "../util/valued"
 import { STS_ORDER } from "@/conf/conf-status"
 import { DEV_DOC_ID } from "@/conf/conf-dev"
 import { prodState } from "@/memory/moduies"
-import { authState } from "@/memory/global"
+import { appState, authState } from "@/memory/global"
 
 const group_order_data = (form: ONE, xuser: User, carts: Page.CartDataOptions): XOrder => {
     return <XOrder>{
@@ -43,9 +43,17 @@ const isbuyed = (v: Product): boolean => {
 
 }
 
+// 获取客服
+const get_contacts = (v: XOrder): User[] => {
+    const info = appState.info || { }
+    const user: User[] = must_arr(info.contacts)
+    return user
+}
+
 export default {
     group_order_data,
     getcarts,
     ispayed,
-    isbuyed
+    isbuyed,
+    get_contacts
 }

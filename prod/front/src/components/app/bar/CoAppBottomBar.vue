@@ -1,9 +1,8 @@
 <template>
-    <OAppBottomBar :mat="mat">
-        <view class="fx-c px-row px-x2 w-100 ta-c jc-sa">
-
+    <OAppBottomBar :mat="mat" :clazz="clazz">
+        <view class="fx-c px-row w-100 ta-c jc-sa">
             <view 
-                class="d-ib app-bottom-bar-item fx-c br-br br-bi c-p"
+                class="d-ib app-bottom-bar-item fx-c br c-p"
                 v-for="(v, i) in bars" :key="i"
                 :class="(code == v.respond_standard_code) ? 'app-bottom-bar-item-iive ' + v.clazz_iive : v.clazz_die"
                 @tap="v.func()"
@@ -17,7 +16,6 @@
                     </view>
                 </view>
             </view>
-
         </view>
     </OAppBottomBar>
 </template>
@@ -28,11 +26,12 @@ import { APP_BAR_JOINER } from '@/conf/conf-app';
 import uniRouter from '@/tool/uni/uni-router';
 import UiI from '@/ui/element/i/UiI.vue';
 import { onLaunch } from '@dcloudio/uni-app';
-import { computed, reactive } from 'vue';
+import { computed, nextTick, reactive } from 'vue';
 
 onLaunch(() => { uni.hideTabBar({ success: () => { } }) });
 defineProps<{
-    mat?: boolean
+    mat?: boolean,
+    clazz?: string
 }>()
 
 const rt = computed((): string => {
@@ -53,5 +52,5 @@ const code = computed((): string => {
 const bars = computed(() => {
     return APP_BAR_JOINER
 })
-
+nextTick(() => { uni.hideTabBar({ success: () => { } }) })
 </script>

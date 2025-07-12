@@ -22,7 +22,7 @@ const _s: Store<Page.PublishPageStore> = createStore({
         }
     },
     mutations: {
-        _num: (s: ONE) => {
+        __num: (s: ONE) => {
             s.num = s.num + 1;
             // console.log('num 变化')
         },
@@ -34,9 +34,7 @@ const _s: Store<Page.PublishPageStore> = createStore({
         change: (c: ONE, vs: ANYS) => (c.state[ vs[0] ] = vs[1]),
 
         // 开启刷新
-        refresh: (c: ONE) => {
-            c.commit('_num')
-        }
+        refresh: (c: ONE) => { c.commit('__num') }
     }
 })
 

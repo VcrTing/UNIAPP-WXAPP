@@ -34,12 +34,15 @@ const ser_me_code = (src: ONE, tag: string) => {
             if (code === __HTTP_CODE_FBD) {
                 // console.log('-------------- 处理 403 --------------')
                 for_net_when_403(tag)
+                return true
             }
             else if (code === __HTTP_CODE_TOKEN_FAIL) {
                 for_net_when_401(tag)
+                return true
             }
         } 
     }
+    return false
 }
 
 
@@ -73,7 +76,7 @@ export const netser_succ = (src: ONE, tag: string): NET_RES => {
                     }
                     // 错误
                     else {
-                        ser_me_code(__dt, tag)
+                        if (ser_me_code(__dt, tag)) return ''
                         return '[500][SUCC_CONNECT] ' + __msg.substring(0, 255)
                     }
                 }
@@ -87,7 +90,7 @@ export const netser_succ = (src: ONE, tag: string): NET_RES => {
     } 
     // 非安全返回
     else {
-        ser_me_code(src, tag)
+        if (ser_me_code(src, tag)) return ''
         // console.log('接口请求 出错 = ', data)
         if (data instanceof Object) {
             const _dt: ONE = data as ONE
@@ -111,11 +114,12 @@ export const netser_err = (err: ONE, tag: string): string => {
     // 未处理
     return '[500][ERR_CALLBACK] 返回未处理 / 捕捉到网络请求的，未知类型错误！！！'
 }
-
+/*
 const has_err = (src: ONE): boolean => {
     console.log('has_err =', src, src && src.errMsg)
     return src && src.errMsg
 }
+*/
 
 // 处理 promise
 export const netser = async (

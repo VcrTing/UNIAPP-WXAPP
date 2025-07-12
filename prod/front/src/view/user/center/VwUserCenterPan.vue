@@ -2,41 +2,38 @@
     <view>
         <view class="softer">
             <VwUcpBasicUserMsg/>
-            <view class="bg-con">
+            <view v-if="aii.init" class="" :class="isphone ? 'bg-con' : ''">
                 <view class="py-row"></view>
                 <!-- -->
-                <view class="px-row pt-x1 softer mxw-pc"><CoMoUcpGoBtns/></view>
+                <view class="px-row pt-x1 softer mxw-pc"><CoMoUcpGoBtns :isphone="isphone"/></view>
                 <!-- -->
-                <view class="pt-x2 softer">
-                    <view class="py"></view>
-                    <CoMoUserAdvSwipper :info="info"/>
+                <view class="softer o-h mxw-pc" 
+                    
+                >
+                    <view class="pt-x2 pb"></view>
+                    <CoMoUserAdvSwipper v-if="isphone" :info="info" :clazz="isphone ? '' : 'br'"/>
                 </view>
             </view>
+            
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
-import { computed, reactive } from 'vue';
+import { computed, nextTick, reactive } from 'vue';
 import VwUcpBasicUserMsg from './center/VwUcpBasicUserMsg.vue';
 import CoMoUcpGoBtns from './component/CoMoUcpGoBtns.vue';
 import CoMoUserAdvSwipper from '@/components/modules/user/CoMoUserAdvSwipper.vue';
-import { appState } from '@/memory/global';
+import { appState, uiGetters } from '@/memory/global';
+import { timeout } from '@/tool/util/future';
 
 const aii = reactive({
-    iive: 0,
+    iive: 0, init: false
 })
 
-const tabs = computed((): MANY => {
-    return [
-        { tit: '我的参与', v: 0 },
-        { tit: '个人相册', v: 1 },
-    ]
-})
+nextTick(() => timeout(() => aii.init = true, 200))
 
-const funn = {
-    
-}
+const isphone = computed((): boolean => uiGetters.isphone)
 
 const info = computed((): AppInfo => appState.info) 
 </script>

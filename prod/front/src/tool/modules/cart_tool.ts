@@ -81,6 +81,7 @@ const getprice = (cart: Page.CartDataOption): number => {
 
 const fiii_products = (carts: Page.CartDataOptions, products: Product[]) => {
     const pl: number = must_arr(products).length;
+    const res = [ ]
     for (let j= 0; j< must_arr(carts).length; j++ ) {
         const c: Page.CartDataOption = carts[ j ]
         //
@@ -88,10 +89,11 @@ const fiii_products = (carts: Page.CartDataOptions, products: Product[]) => {
             const p: Product = products[ n ]
             if (p[DEV_DOC_ID] === c[DEV_DOC_ID]) {
                 c.product = p
+                res.push(c)
             }
         }
     }
-    return carts
+    return res
 }
 
 const coii_choise_carts = (carts: Page.CartDataOptions, choises: string[] = [ ]) => {

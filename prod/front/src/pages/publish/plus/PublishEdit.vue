@@ -71,6 +71,7 @@ import { STS_PRODUCT } from '@/conf/conf-status';
 import { uiState } from '@/memory/global';
 import { pagePublishState } from '@/memory/page';
 import server_pubplus from '@/server/publish/server_pubplus';
+import server_user_statistic from '@/server/user/user/server_user_statistic';
 import media_tool from '@/tool/modules/common/media_tool';
 import product_tool from '@/tool/modules/product_tool';
 import appRouter from '@/tool/uni/app-router';
@@ -166,7 +167,7 @@ const func = {
             // 新增、修改 content
             // await server_content.plus_or_edit(edit.value, aii.contents[0], '', src['introduction'])
             // 加一个 publish 值
-            // await server_user_statistic.num_publish()
+            await server_user_statistic.num_publish()
         }
         finally {
             appRouter.publish_waiting()

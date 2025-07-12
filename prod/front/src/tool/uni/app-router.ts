@@ -31,16 +31,24 @@ export default {
     // 订单 - 我的加入
     order_my_join: () => {
         storage.set('PAGE_ORDER_KEY', 0)
+        orderDispatch('refresh')
         uniRouter.navigatorpg('order')
     },
     // 订单 - 正在参与中
     order_my_working: () => {
         storage.set('PAGE_ORDER_KEY', 0)
+        orderDispatch('refresh')
         uniRouter.navigatorpg('order')
     },
     // 订单 - 全部参与的
     order_my_history: () => {
         storage.set('PAGE_ORDER_KEY', 0)
+        orderDispatch('refresh')
+        uniRouter.navigatorpg('order')
+    },
+    order_visual: () => {
+        storage.set('PAGE_ORDER_KEY', 1)
+        orderDispatch('refresh')
         uniRouter.navigatorpg('order')
     },
 

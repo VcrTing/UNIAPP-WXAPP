@@ -1,13 +1,15 @@
 <template>
-    <view class="">
-        <view class="fx-s bf-wht-t bf pr-row">
-            <CoMoUcpNumbers />
-            <OButton color="wht-t" @click="funn.edit" :weak="true" :clazz="'py px br-s'">
-                <view class="tid">编辑个人资料</view>
-            </OButton>
+    <view class=" bf-s">
+        <view class="pr-row">
+            <view class="fx-s mxw-pc">
+                <CoMoUcpNumbers />
+                <OButton color="wht-t" @click="funn.edit" :weak="true" :clazz="'py px br-s'">
+                    <view class="tid">编辑个人资料</view>
+                </OButton>
+            </view>
         </view>
-        <view class="pt bf-wht-t">
-            <view class="pt">
+        <view class="pt">
+            <view class="pt mxw-pc">
                 <view class="pi-row py fx-i">
                     <OButton color="wht-s" :weak="true" clazz="br-t ani-scaie-aii tid">
                         <CkSex :sex="user.gender" />
@@ -19,7 +21,9 @@
                         <text class="fs-n pi-s">岁</text>
                     </OButton>
                 </view>
-                <view class="tid fs-n px-row py bf btn-wht-s">
+            </view>
+            <view class="">
+                <view class="tid fs-n px-row py mxw-pc">
                     <view class="d-ib">
                         <text>社交账号:&nbsp;&nbsp;</text>
                         <text v-if="user.socialAccount">{{ user.socialAccount }}</text>

@@ -6,6 +6,7 @@ import server_order_product from '@/server/order/server_order_product';
 import { arrfind, arrfindi } from '@/tool/util/iodash';
 import { DEV_DOC_ID } from '@/conf/conf-dev';
 import server_prefer from '@/server/common/server_prefer';
+import { authGetters } from '../global';
 
 const __prefers = async (s: ONE) => {
     if (s.prefers_inited) {
@@ -43,10 +44,13 @@ const _s: Store<ProductStore> = createStore({
         // 刷新我的购买
         refresh_buys: async ({ state, commit }) => {
             return await memory_tool.locking(state, commit, state.buys, async () => {
-                const ids: string[] = await server_order_product.mine({ })
-                if (is_nice_arr(ids)) {
-                    state.buys = must_arr(ids)
-                    console.log('我购买了 =', ids)
+                // console.log('authGetters.is_login =', authGetters.is_login)
+                if (authGetters.is_login) {
+                    const ids: string[] = await server_order_product.mine({ })
+                    if (is_nice_arr(ids)) {
+                        state.buys = must_arr(ids)
+                        console.log('我购买了 =', ids)
+                    }
                 }
             })
         },

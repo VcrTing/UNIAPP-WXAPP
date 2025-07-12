@@ -1,7 +1,7 @@
 <template>
 	<page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
 	<PageLayout>
-		<IndexLayout :h="h_v">
+		<IndexLayout :h="h_v" :bar_clazz="'index-bottom-bar'">
 			<template #top>
 				<CoAppTopBar :clazz="''">
 					<view class="ps-r zi-t">
@@ -32,6 +32,7 @@ const isphone = computed((): boolean => uiGetters.isphone)
 const ispc = computed((): boolean => uiGetters.ispc)
 
 const h = computed((): number => {
+	// return 0
 	if (ispc.value) return 52
 	return isphone.value ? 0 : 120
 })
@@ -43,7 +44,8 @@ const h_v = computed((): string => {
 </script>
 
 <style lang="sass">
-@use '../../ui/sass/theme/primary/__conf' as *
+@use '../../ui/sass/theme/__aii_conf' as *
 page, uni-page-body
 	background: $pri-pag-bg
+
 </style>

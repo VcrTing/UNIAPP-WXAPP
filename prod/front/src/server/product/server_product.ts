@@ -78,6 +78,9 @@ const mine_history = async (): Promise<Product[]> => {
 
 // 加以阅读量
 const view1 = async (one: Product): Promise<Product> => {
+    if (!one || !one.documentId) {
+        return <Product>{ }
+    }
     return await server_pubplus.edit(product_build_tool.form_add_view_num(one), one)
 }
 

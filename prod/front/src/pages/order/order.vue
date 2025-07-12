@@ -8,32 +8,34 @@
                 </view>
                 <OSafeAreaTop/>
                 <!-- -->
-                <view class="fx-i ps-r zi-n py-s ts px-s">
-                    <view v-for="(v, i) in aii.tabs" :key="i" class="ts">
-                        <OButton :color="(aii.iive == v.v) ? 'wht-s' : 'wht-s'" :weak="true" v-if="aii.iive == v.v" 
-                            :clazz="'ts py-s px-row br-s mx-s'">
-                            <text class="fw-550">{{ v.name }}</text>
-                        </OButton>
-                        <view @tap="funn.choise(v)" class="ts py-s px-row fx-aii-btn-wht-s" v-else>
-                            <text class="tid fs-w">{{ v.name }}</text>
+                <view class="mxw-pc" :class="isphone ? 'px-s' : ''">
+                    <view class="fx-i ps-r zi-n py-s ts">
+                        <view v-for="(v, i) in aii.tabs" :key="i" class="ts">
+                            <OButton :color="(tab.main == v.v) ? 'wht-s' : 'wht-s'" :weak="true" v-if="tab.main == v.v" 
+                                :clazz="'ts py-s px-row br-s'">
+                                <text class="fw-550">{{ v.name }}</text>
+                            </OButton>
+                            <view @tap="funn.choise(v)" class="ts py-s px-row fx-aii-btn-wht-s mx-s br-s c-p" v-else>
+                                <text class="tid fs-w">{{ v.name }}</text>
+                            </view>
                         </view>
                     </view>
                 </view>
             </view>
         </OAppTopBar>
         <view class="">
-            <OScrollY :styie="{ 'height': 'calc(100vh - 8em)' }">
+            <OScrollY :styie="{ 'height': 'calc(100vh - 4.58rem)' }">
                 <view class="pt-s"></view>
-                <view v-if="aii.iive == 0">
-                    <WvOrderNow/>
+                <view v-if="tab.main == 0">
+                    <WvOrderNow :tab="tab"/>
                 </view>
-                <view v-if="aii.iive == 1">
-                    <WvProductVisual :is_index_mode="false"/>
+                <view v-if="tab.main == 1">
+                    <WvProductVisual :is_index_mode="true" :is_open_filter="true"/>
                 </view>
                 <CkSpace :h="2"/>
             </OScrollY>
         </view>
-		<CoAppBottomBar :mat="false"/>
+		<CoAppBottomBar :mat="false" :clazz="'index-bottom-bar'"/>
     </PageLayout>
 </template>
 
@@ -45,7 +47,9 @@ import CkSpace from '@/cake/content/CkSpace.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import CoAppBottomBar from '@/components/app/bar/CoAppBottomBar.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
-import { orderState, uiGetters, uiState } from '@/memory/global';
+import { orderDispatch, orderState, uiGetters, uiState } from '@/memory/global';
+import { prodDispatch } from '@/memory/moduies';
+import pag_tooi from '@/tool/app/pag_tooi';
 import { futuring, promise, timeout } from '@/tool/util/future';
 import { storage } from '@/tool/web/storage';
 import WvIndexBanner from '@/wave/index/WvIndexBanner.vue';
@@ -53,10 +57,16 @@ import WvOrderNow from '@/wave/order/WvOrderNow.vue';
 import WvProductVisual from '@/wave/visual/WvProductVisual.vue';
 import { computed, nextTick, reactive, watch } from 'vue';
 //
-const code = computed(() => { return storage.get('PAGE_ORDER_KEY') || 0 })
+
+const num = computed((): number => orderState.num)
+watch(num, () => { funn.init() })
 // 
+
+const tab = reactive({
+    main: 0, inner: 0, routes: [0, 0],
+})
 const aii = reactive(<ONE>{
-    ioading: false, iive: 0, init: false,
+    ioading: false, init: false, 
     tabs: [
         { name: '已购', v: 0 },
         { name: '浏览记录', v: 1 },
@@ -65,10 +75,17 @@ const aii = reactive(<ONE>{
 // 
 const funn = {
     choise: (v: ONE) => {
-        aii.iive = v.v;
+        tab.main = v.v;
         storage.set('PAGE_ORDER_KEY', 0)
     },
-    init: () => promise(() => { aii.iive = code.value; })
+    init: () => promise(() => { 
+        aii.routes = pag_tooi.spi_code('PAGE_ORDER_KEY')
+        tab.main = aii.routes[0]
+        tab.inner = aii.routes[1];
+        timeout(() => {
+            prodDispatch('refresh_buys')
+        }, 800)
+    })
 }
 nextTick(funn.init)
 //

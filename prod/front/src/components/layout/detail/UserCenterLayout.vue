@@ -1,7 +1,9 @@
 <template>
         
 		<view class="h-100 mxh-100 ps-r zi-t">
-			<view class="h-62vh zi-s abs-i t-0 r-0 bg-def-s">
+			<view class="ps-f-imp zi-s abs-i t-0 r-0 bg-def-s"
+				:class="isphone ? 'h-62vh' : 'h-100vh'"
+			>
                 <slot name="bg"></slot>
 			</view>
 
@@ -31,11 +33,12 @@
 
 <script setup lang="ts">
 import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
+import { uiGetters } from '@/memory/global';
 import { computed } from 'vue';
 
 const prp = defineProps<{
 	h?: number,
-	clazz_con?: string
+	clazz_con?: string,
 }>()
 
 const __def = 61.8;
@@ -57,4 +60,6 @@ const conh = computed(() => {
 	}
 	return res + __unit
 })
+
+const isphone = computed((): boolean => uiGetters.isphone)
 </script>

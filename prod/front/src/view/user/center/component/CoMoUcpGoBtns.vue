@@ -1,8 +1,10 @@
 <template>
     
-    <view class="br bg-def fx-s">
+    <view class="br  fx-s" :class="isphone ? 'bg-def' : 'bf'">
         <view class="ps-r zi-t" v-for="(v, i) in tabs" :key="i">
-            <CoMoUserOptionBtn :i="v.i" :tit="v.name"  @tap="v.doing"/>
+            <CoMoUserOptionBtn :i="v.i" :tit="v.name"  @tap="v.doing"
+                :clazz="isphone ? 'fx-aii-btn-def' : 'fx-aii-btn-wht'"
+            />
             <view class="abs-r t-0 pr-s pt" v-if="v.len() > 0">
                 <view class="dot-err softer">
                     <text class="fs-s w-1em h-1em fx-c">{{ v.len() }}</text>
@@ -20,21 +22,25 @@ import appRouter from '@/tool/uni/app-router';
 import { must_arr } from '@/tool/util/valued';
 import { computed } from 'vue';
 
+const prp = defineProps<{
+    isphone?: boolean
+}>()
+
 const joins = computed((): ActivityJoin[] => orderState.join_of_mine)
 const len = computed((): number => must_arr(joins.value).length)
  
 const tabs = [
     {
         name: '浏览历史', i: 'msg', 
-        doing: () => { funn.working() }, len: () => { return len.value || 0 }
+        doing: () => { funn.visual() }, len: () => { return len.value || 0 }
     },
     {
         name: '历史订单', i: 'grid', 
-        doing: () => { funn.history() }, len: () => { return 0 }
+        doing: () => { funn.working() }, len: () => { return 0 }
     },
     {
-        name: '我的关注', i: 'love', 
-        doing: () => { funn.love() }, len: () => { return 0 }
+        name: '收藏本站', i: 'love', 
+        doing: () => { funn.collection() }, len: () => { return 0 }
     },
     {
         name: '交易记录', i: 'bank-card', 
@@ -43,8 +49,11 @@ const tabs = [
 ]
 
 const funn = {
-    view_history: () => {
-
+    collection: () => {
+        console.log('收藏本站。')
+    },
+    visual: () => {
+        appRouter.order_visual()
     },
 
     aiijoin: () => {

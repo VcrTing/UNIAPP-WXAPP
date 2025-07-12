@@ -4,6 +4,7 @@
 </template>
 
 <script setup lang="ts">
+import { authGetters } from '@/memory/global';
 import { prodDispatch } from '@/memory/moduies';
 import server_product from '@/server/product/server_product';
 import server_visual from '@/server/product/server_visual';
@@ -45,8 +46,10 @@ const funn = {
     // 
     init: () => timeout(() => futuring(me, async () => {
         funn.productView()
-        await funn.visual()
-        await funn.preferView()
+        if (authGetters.is_login) {
+            await funn.visual()
+            await funn.preferView()
+        }
     }), DELAY)
 }
 

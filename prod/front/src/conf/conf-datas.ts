@@ -99,10 +99,12 @@ export const DATA_PAYMENT_WAY_DEF = {
 }
 export const DATA_PAYMENT_WAY = [
     DATA_PAYMENT_WAY_DEF,
+    /*
     {
         name: '支付宝', code: 'zfb',
         cover: 'https://p0.ifengimg.com/pmop/2018/0824/6D51911AF96E82026DCFE72F765414257D2A2E20_size15_w640_h477.jpeg'
     }
+    */
 ]
 
 // 排行

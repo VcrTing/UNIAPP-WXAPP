@@ -1,8 +1,9 @@
 <template>
-    <view class="abs-i b-0 ps-f-imp px-row pb-x3 zi-x2" @tap="uniRouter.back">
+    <view class="abs-r b-0 ps-f-imp px-row pb-x3 zi-x2" @tap="uniRouter.back">
         <OButton color="wht" :weak="true" :clazz="'br-cir ' + clazz">
             <OFI :clazz="isphone ? 'w-2em h-2em h6' : 'w-3em h-3em h5'" :i="'i'"/>
         </OButton>
+        <slot></slot>
     </view>
 </template>
 

@@ -1,7 +1,7 @@
 
 import { Store, createStore } from 'vuex';
 import memory_tool from '../__func/memory_tool';
-import { arrcoii, arrfind, arrfindi } from '@/tool/util/iodash';
+import { arrcoii, arrfind, arrfindi, arrlen_same } from '@/tool/util/iodash';
 import { DEV_DOC_ID } from '@/conf/conf-dev';
 import { is_nice_arr, is_nice_one, must_arr } from '@/tool/util/valued';
 import cart_tool from '@/tool/modules/cart_tool';
@@ -77,7 +77,20 @@ const _s: Store<Page.CartPageStore> = createStore({
                     state.carts = carts
                 }
             })
-        }
+        },
+
+        // 是否需要同步
+        need_async: async ({state, commit}, cs: Page.CartDataOptions) => {
+            
+            if (arrlen_same(cs, state.carts)) {
+
+            }
+            // 同步
+            else {
+                state.carts = cs
+                state.data = await server_user_cart.plus_or_edit(cs, state.data)
+            }
+        },
     }
 })
 

@@ -37,7 +37,16 @@ const mine = async (param: ONE, pager: Pager): Promise<XOrder[]> => {
     return await fetching(param, pager)
 }
 
+// 金额记录
+const payed = async (param: ONE, pager: Pager): Promise<XOrder[]> => {
+    param['userDocumentId'] = authGetters.user_doc_id
+    param[STS_ORDER.PAY.K] = STS_ORDER.PAY.YES
+    // srp_p.__eq(param, 'userDocumentId', authGetters.user_doc_id)
+    // srp_p.__sorts(param, DEV_ORDER.SORT.DEF)
+    return await fetching(param, pager)
+}
 export default {
     all,
-    mine
+    mine,
+    payed
 }

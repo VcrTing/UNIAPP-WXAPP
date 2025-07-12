@@ -1,7 +1,7 @@
 <template>
     <view>
         <view class="o-app-bottom-bar">
-            <view class="bg-app-bottom-bar mh-app-bottom-bar" :class="clazz">
+            <view class="mh-app-bottom-bar" :class="clazz">
                 <slot></slot>
                 <OSafeAreaBottom/>
             </view>

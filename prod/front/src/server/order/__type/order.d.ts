@@ -23,4 +23,6 @@ interface XOrder {
     createdAt: string
 
     payStatus: number
+
+    payTime: string
 }

@@ -30,7 +30,7 @@ $abb-die-fcs: #187e7e
         color: $abb-die-fcs
 
 $abb-iive: $pri
-$abb-iive-bg: $bg-con
+$abb-iive-bg: rgba(255, 255, 255, 0.382)
 .app-bottom-bar-item-iive
     color: $abb-iive
     background: $abb-iive-bg
@@ -39,6 +39,7 @@ $abb-iive-bg: $bg-con
         color: $tid
     .app-bottom-bar-item-txt
         color: $tid
+
 
 // =========================================================
 $abb-btn-c: $pri-fcs
@@ -53,3 +54,11 @@ $abb-btn-bg: $pri-iht
         display: flex
         align-items: center
         justify-content: center
+
+// =========================================================
+
+.index-bottom-bar
+    background:  linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.382))
+    backdrop-filter: blur(7px)
+    .app-bottom-bar-item
+        color: #59595a

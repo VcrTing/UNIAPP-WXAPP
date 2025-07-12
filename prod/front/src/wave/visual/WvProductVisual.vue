@@ -1,10 +1,12 @@
 <template>
     <view class="pb-x1">
-        <view class="pt-row pb-s" v-if="!is_index_mode">
+        <view class="pt-row pb-s mxw-pc" v-if="is_open_filter">
             <view class="fx-i softer">
                 <view class="btn-def py px-row ts c-p softer" v-for="(v, i) in tabs" :key="i"
                     @tap="func.switchTab(v)"
-                ><text :class="(me.i == v.v) ? '' : 'sus'">{{ v.name }}</text></view>
+                >
+                    <text :class="(me.i == v.v) ? '' : 'sus'">{{ v.name }}</text>
+                </view>
             </view>
         </view>
         <view v-else class="pt-row"></view>
@@ -17,35 +19,37 @@
 
 <script setup lang="ts">
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
-import { DEV_DOC_ID, DEV_PRODUCT } from '@/conf/conf-dev';
+import { DEV_DOC_ID } from '@/conf/conf-dev';
 import server_product from '@/server/product/server_product';
 import server_visual from '@/server/product/server_visual';
 import net_tool from '@/tool/http/net_tool';
 import { futuring, promise } from '@/tool/util/future';
 import { arrcoii } from '@/tool/util/iodash';
 import { is_nice_arr, must_arr } from '@/tool/util/valued';
-import { computed, nextTick, reactive } from 'vue';
+import { computed, nextTick, reactive, watch } from 'vue';
 import WvIndexConList from '../index/content/WvIndexConList.vue';
 import WvPvConList from './content/WvPvConList.vue';
-import { DATA_PRODUCT_TYPED, DATA_PRODUCT_TYPED_SM, DATA_TAB_ALL } from '@/conf/conf-datas';
+import { DATA_PRODUCT_TYPED, DATA_TAB_ALL } from '@/conf/conf-datas';
 import product_tool from '@/tool/modules/product_tool';
+import { orderState } from '@/memory/global';
 
 const prp = defineProps<{
-    is_index_mode: boolean
+    is_index_mode: boolean,
+    is_open_filter?: boolean
 }>()
 
 const aii = reactive({
     ioading: false, visuals: <ProductVisual[]> [ ],
     pager: <Pager> net_tool.__pager(), 
 })
-const me = reactive({ ioading: false, i: DATA_PRODUCT_TYPED_SM.v,
+const me = reactive({ ioading: false, i: DATA_TAB_ALL.v,
     param: <ONE>{ }
 })
 
 const products = computed((): Product[] => {
     const src: Product[] = arrcoii(aii.visuals, 'product')
     if (prp.is_index_mode) {
-        return product_tool.fiiter_by_typed(src, DEV_PRODUCT.TYPED.SM)
+        // return product_tool.fiiter_by_typed(src, DEV_PRODUCT.TYPED.SM)
     }
     if (me.i === -1) {
         return src
@@ -55,7 +59,8 @@ const products = computed((): Product[] => {
 
 const func = {
     switchTab: (v: ONE) => futuring(me, async () => {
-        me.i = v.v; await funn.fetching()
+        me.i = v.v; 
+        if (aii.visuals.length <= 1) await funn.fetching()
     }),
 }
 
@@ -96,4 +101,11 @@ const funn = {
 nextTick(funn.init)
 
 const tabs = [ DATA_TAB_ALL , ...DATA_PRODUCT_TYPED]
+
+const num = computed((): number => orderState.num)
+watch(num, () => {
+    if (aii.visuals.length <= 1) {
+        funn.init()
+    }
+})
 </script>

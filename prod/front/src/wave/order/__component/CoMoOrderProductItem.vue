@@ -1,10 +1,10 @@
 <template>
     <view class="fx-i" @tap="emt('view', v)">
         <view class="w-22 h-9vh br-1 o-h">
-            <CoImg clazz="h-100" :src="product_tool.getcover(v.product).urlSmall"/>
+            <CoImg clazz="h-100 c-p" :src="product_tool.getcover(v.product).urlSmall"/>
         </view>
         <view class="fx-1">
-            <view class="fx-s mh-1em pb-s px">
+            <view class="fx-s mh-1em pb-s px c-p">
                 <view class="fx-1">
                     <view class="fs-w">{{ product_tool.gettitle(v.product) }}</view>
                 </view>
