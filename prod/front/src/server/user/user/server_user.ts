@@ -6,6 +6,7 @@ import net_tool from "@/tool/http/net_tool"
 import srp_p from "@/tool/strapi/srp_p"
 import server_user_statistic from "./server_user_statistic"
 import { must_arr, must_one } from "@/tool/util/valued"
+import user_tool from "@/tool/modules/user_tool"
 
 const relations = <string[]>[  ]
 
@@ -40,8 +41,9 @@ const byids = async (ids: string[]): Promise<User[]> => {
 
 const __main_page = async (user: User): Promise<UserMainPage> => {
     console.log("搜索用户的主页 =", user)
-    const medias: Media[] = await server_medias.mainpage(user.id + '');
+    const medias: Media[] = await server_medias.mainpage(user.id);
     const statistic: UserStatistic = await server_user_statistic.byuser(user.id)
+    /*
     const src = <UserMainPage | ONE>{
         ...statistic, statistic,
         user, tags: pageIndexState.indextags,
@@ -49,6 +51,9 @@ const __main_page = async (user: User): Promise<UserMainPage> => {
     }
     src['id'] = user.id
     src['documentId'] = user.documentId
+    src['documentIdStatistic'] = statistic.documentId
+    */
+   const src: UserMainPage = user_tool.group_main_page(statistic, user, medias);
     return src as UserMainPage;
 }
 
@@ -61,8 +66,8 @@ const mymainpage = async (): Promise<UserMainPage> => {
     return <UserMainPage>{ }
 }
 
-const mainpage = async (userid: string): Promise<UserMainPage> => {
-    const users: User[] = await byids([ userid ])
+const mainpage = async (userid: number): Promise<UserMainPage> => {
+    const users: User[] = await byids([ userid + '' ])
     if (users.length > 0) {
         return await __main_page(users[0])
     }

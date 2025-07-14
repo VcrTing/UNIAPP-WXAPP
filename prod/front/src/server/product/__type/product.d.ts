@@ -51,6 +51,8 @@ interface Product {
     takeOffTime: string
 
     recommendLevel: number
+
+    __is_in_order: number
 }
 
 interface ProductContent {

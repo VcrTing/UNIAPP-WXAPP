@@ -13,7 +13,9 @@ import com.q.buy.module.order.model.entity.XOrderLock;
 import com.q.buy.util.q.QListUtil;
 import com.q.buy.util.q.QVUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -83,5 +85,30 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, XOrder> {
             throw new QException("加入锁失败。");
         }
         return xOrder;
+    }
+
+    // 搜寻过期时间
+    public List<XOrder> searchForExpire() {
+        LambdaQueryWrapper<XOrder> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(XOrder::getExpireStatus, 0);
+        wrapper.lt(XOrder::getExpireTime, new Date());
+        wrapper.orderByAsc(XOrder::getCreatedAt);
+        wrapper.eq(XOrder::getPayStatus, 0);
+        IPage<XOrder> page = new Page<>(1, 10);
+        page = this.page(page, wrapper);
+        return page.getRecords();
+    }
+
+    // 取消订单
+    @Transactional(rollbackFor = Exception.class)
+    public boolean cancelOrder(XOrder xOrder) {
+        //
+        xOrder.setExpireStatus(1);
+        xOrder.setFinishTime(new Date());
+        //
+        // 改状态
+        if (!this.updateById(xOrder)) { throw new QException("数据库波动"); }
+        // 返回 正常 状态
+        return true;
     }
 }

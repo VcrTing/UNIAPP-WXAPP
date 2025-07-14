@@ -82,9 +82,12 @@ const funn = {
         const pss: Product[] = await server_product.byids(ids)
         if (is_nice_arr(pss)) {
             aii.products = pss || [ ];
-            const nc = cart_tool.fiii_products(carts.value, aii.products)
-            pageCartDispatch('need_async', nc)
         }
+        else {
+            aii.products = [ ];
+        }
+        const nc = cart_tool.fiii_products(carts.value, aii.products)
+        pageCartDispatch('need_async', nc)
     },
     load: async () => {
         await pageCartDispatch('refresh_cart')

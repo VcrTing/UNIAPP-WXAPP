@@ -6,8 +6,9 @@
         </view>
         <view class="fx-c">
             <view class="ta-c">
+                
                 <CkAvatar :not_mainpage="true" :id="user.id"
-                    :src="user.avatarUrl || info.userDefAvatarUrl" clazz="w-6em h-6em h7"
+                    :src="user.avatarUrl || info.userDefAvatarUrl" clazz="w-6em h-6em h7 bd-x2 bd-c-wht-s br-cir o-h"
                     />
                 <view class="pt-x1">
                     <view class="h5 c-fff fw-800 ls">

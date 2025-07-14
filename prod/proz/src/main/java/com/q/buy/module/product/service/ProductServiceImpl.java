@@ -56,24 +56,12 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> {
     // 额外动作
     @Transactional(rollbackFor = Exception.class)
     public Product costInvAnotherAction(Product product) {
-        Integer invTyped = product.getInvTyped();
         // 新库存数量
         Integer invWeak = product.getInvWeak();
-
         // 加热度
         product.setNumHot(QVUtil.serInt(product.getNumHot(), 0) + 1);
         product.setNumSell(QVUtil.serInt(product.getNumSell(), 0) + 1);
-
-        // 一件库存
-        if (invTyped == 2) {
-        }
-        // 多数库存
-        else if (invTyped == 1) {
-        }
-        // 无限库存
-        else {
-
-        }
+        product.setNumSellTrue(QVUtil.serInt(product.getNumSellTrue(), 0) + 1);
         if (invWeak <= 0) {
             // 下架产品
             product.setDataStatus(4);
@@ -94,10 +82,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> {
                     Integer invWeak = p.getInvWeak();
                     p.setInvWeak(invWeak - 1);
                     p.setInv(p.getInv() - 1);
-
                     // 额外操作
                     p = costInvAnotherAction(p);
-
                     if (!this.updateById(p)) {
                         throw new QException("修改产品库存时，数据库波动，请重试。");
                     }
@@ -109,6 +95,57 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> {
             }
         }
         catch (Exception e) { throw new QException(e.getMessage()); }
+        finally {
+            KeyLock.unLock(k);
+        }
+    }
+
+    // 增加一个库存，并且重新上架
+    @Transactional(rollbackFor = Exception.class)
+    public boolean returnInvWhenOrder(List<String> productIdList, String k) {
+        try {
+            if (KeyLock.lock(k)) {
+                List<Product> productList = getByIdsForOrder(productIdList);
+                if (QListUtil.isBadList(productList)) { return false; }
+                for (Product p : productList) {
+                    Integer invTyped = p.getInv();
+                    Integer invWeak = p.getInvWeak();
+                    // 额外操作
+                    Integer ds = p.getDataStatus();
+                    if (ds == 4) {
+                        // 重新上架
+                        p.setDataStatus(2);
+                        // 扣除库存
+                        if (invWeak <= 0) {
+                            if (invTyped == 2) {
+                                p.setInvWeak(1);
+                                p.setInv(1);
+                            }
+                            else {
+                                p.setInvWeak(invWeak + 1);
+                                p.setInv(p.getInv() + 1);
+                            }
+                        }
+                        p.setNumSellTrue(QVUtil.costInt(QVUtil.serInt(p.getNumSellTrue(), 0), 1));
+
+                        //
+                        if (!this.updateById(p)) {
+                            // return false;
+                            throw new QException("回返产品库存时，数据库波动，请重试。");
+                        }
+                    }
+                }
+                return true;
+            }
+            else {
+                return false;
+                // throw new QException("订单已在锁状态。");
+            }
+        }
+        catch (Exception e) {
+            // return false;
+            throw new QException(e.getMessage());
+        }
         finally {
             KeyLock.unLock(k);
         }

@@ -87,7 +87,7 @@ import CoMoOrderProductItem from './__component/CoMoOrderProductItem.vue';
 import CkSimpleTag from '@/cake/visual/tag/CkSimpleTag.vue';
 import times from '@/tool/web/times';
 import open_of_product from '@/server/__func/open_of_product';
-import { orderState, uiGetters } from '@/memory/global';
+import { orderDispatch, orderState, uiGetters } from '@/memory/global';
 import OButtonTag from '@/cake/button/OButtonTag.vue';
 import net_tool from '@/tool/http/net_tool';
 import server_checkout from '@/server/order/server_checkout';
@@ -155,7 +155,8 @@ const func = {
             const res: XOrder = await server_checkout.checkout(od)
             if (res && res.documentId) {
                 pan_tooi.close_pan(cfm.idx)
-                last_func.value ? last_func.value() : undefined
+                // last_func.value ? last_func.value() : undefined
+                orderDispatch('refresh')
             }
         }
     })

@@ -36,6 +36,8 @@ public class CheckOutTool {
     public XOrder addOrder(OrderAddForm form) {
         synchronized (addLock) {
             XOrder order = form.toXOrder();
+            order = form.insertOrderExpired(order);
+            //
             Long orderId = snow.nextId();
             order.setId(orderId);
             order.setDocumentId(QVUtil.serStr(orderId));
@@ -67,7 +69,7 @@ public class CheckOutTool {
         XOrder xOrder = null;
         synchronized (checkoutLock) {
             xOrder = orderService.getByDocumentId(form.getDocumentId());
-            System.out.println(xOrder);
+            // System.out.println(xOrder);
             // 状态检查
             if (xOrder == null) {
                 throw new QException("订单不见了。");
@@ -97,8 +99,8 @@ public class CheckOutTool {
             if (xOrderLock == null) {
                 throw new QException("未找到该用户的任何订单锁。");
             }
-            System.out.println(xOrderLock.getOrderDocumentId());
-            System.out.println(xOrder.getDocumentId());
+            // System.out.println(xOrderLock.getOrderDocumentId());
+            // System.out.println(xOrder.getDocumentId());
             if (!xOrderLock.getOrderDocumentId().equals(xOrder.getDocumentId())) {
                 throw new QException("该订单未找到属于它的支付锁。");
             }

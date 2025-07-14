@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.q.buy.framework.constant.DevConstant;
 import com.q.buy.framework.exception.QException;
+import com.q.buy.module.order.form.cart.OrderShoppingCart;
 import com.q.buy.module.order.mappers.OrderMapper;
 import com.q.buy.module.order.model.entity.XOrder;
 import com.q.buy.module.order.model.entity.XOrderLock;
@@ -37,9 +38,11 @@ public class OrderProductServiceImpl extends ServiceImpl<OrderMapper, XOrder> {
         List<XOrder> orderList = getByUserDocumentId(userDocumentId);
         // 组合出产品 ID
         for (XOrder order : orderList) {
-            List<Map<String, Object>> carts = VoXOrder.getCarts(order);
-            for (Map<String, Object> map : carts) {
-                list.add(QVUtil.serStr(map.get(DevConstant.K_DOC_ID)));
+            List<OrderShoppingCart> carts = VoXOrder.getCarts(order);
+            if (QListUtil.isNiceList(carts)) {
+                for (OrderShoppingCart map : carts) {
+                    list.add(QVUtil.serStr(map.getDocumentId()));
+                }
             }
         }
         //

@@ -78,5 +78,6 @@ export const STS_PRODUCT = {
 export const STS_ORDER = {
     LOCK: <Conf.YESNO_K>{ ...__YES_NO, K: 'hasLock' },
     PAY: <Conf.YESNO_K>{ ...__YES_NO, K: 'payStatus' },
+    EXPIRE: <Conf.YESNO_K>{ ...__YES_NO, K: 'expireStatus' },
     STATUS: <Conf.YESNO_K>{ ...__YES_NO, K: 'aliveStatus' },
 }

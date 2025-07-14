@@ -1,5 +1,6 @@
 import { DEV_PRODUCT } from "@/conf/conf-dev"
 import { STS_PRODUCT } from "@/conf/conf-status"
+import { authGetters } from "@/memory/global"
 import { app, master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
 import srp_p from "@/tool/strapi/srp_p"
@@ -52,6 +53,7 @@ const mineAii = async (param: ONE): Promise<Product[]> => {
     // 状态筛选
     srp_p.build_filter_in(param, STS_PRODUCT.STATUS.K, [ STS_PRODUCT.STATUS.OFF, STS_PRODUCT.STATUS.NICE, STS_PRODUCT.STATUS.PASS ])
     //
+    srp_p.__eq(param, 'user', authGetters.userid)
     return await fetching(param, net_tool.__pager_long())
 }
 

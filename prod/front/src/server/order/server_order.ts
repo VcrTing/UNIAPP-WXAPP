@@ -21,6 +21,8 @@ const fetching = async (param: ONE = { }, pager: Pager): Promise<XOrder[]> => {
     param[ STS_ORDER.STATUS.K ] = STS_ORDER.STATUS.YES
     // 有锁的
     param[ STS_ORDER.LOCK.K ] = STS_ORDER.LOCK.YES
+    // 未过期
+    param[ STS_ORDER.EXPIRE.K ] = STS_ORDER.EXPIRE.NO
     return await __fetching(param, pager)
 }
 

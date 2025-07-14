@@ -29,5 +29,5 @@ public class Product {
 
     Integer numSell;
     Integer numHot;
-
+    Integer numSellTrue;
 }

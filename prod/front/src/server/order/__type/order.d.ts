@@ -25,4 +25,7 @@ interface XOrder {
     payStatus: number
 
     payTime: string
+
+    expireStatus: number
+    expireTime: string
 }

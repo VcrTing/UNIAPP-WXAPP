@@ -7,14 +7,11 @@
                 <!-- -->
                 <view class="px-row pt-x1 softer mxw-pc"><CoMoUcpGoBtns :isphone="isphone"/></view>
                 <!-- -->
-                <view class="softer o-h mxw-pc" 
-                    
-                >
+                <view class="softer o-h mxw-pc">
                     <view class="pt-x2 pb"></view>
                     <CoMoUserAdvSwipper v-if="isphone" :info="info" :clazz="isphone ? '' : 'br'"/>
                 </view>
             </view>
-            
         </view>
     </view>
 </template>
@@ -26,15 +23,11 @@ import CoMoUcpGoBtns from './component/CoMoUcpGoBtns.vue';
 import CoMoUserAdvSwipper from '@/components/modules/user/CoMoUserAdvSwipper.vue';
 import { appState, uiGetters } from '@/memory/global';
 import { timeout } from '@/tool/util/future';
-
-const aii = reactive({
-    iive: 0, init: false
-})
-
+//
+const aii = reactive({ iive: 0, init: false })
 nextTick(() => timeout(() => aii.init = true, 200))
-
+//
 const isphone = computed((): boolean => uiGetters.isphone)
-
 const info = computed((): AppInfo => appState.info) 
 </script>
 

@@ -33,12 +33,12 @@ defineProps<{
     mat?: boolean,
     clazz?: string
 }>()
-
+//
 const rt = computed((): string => {
     const info: Page.PageInstance = uniRouter.info()
     return info.route ? info.route : ''
 })
-
+//
 const code = computed((): string => {
     const n: string = rt.value
     const src: CoAppBottomBarItem[] = bars.value
@@ -48,9 +48,7 @@ const code = computed((): string => {
     }
     return ''
 })
-
-const bars = computed(() => {
-    return APP_BAR_JOINER
-})
+//
+const bars = computed(() => { return APP_BAR_JOINER })
 nextTick(() => { uni.hideTabBar({ success: () => { } }) })
 </script>

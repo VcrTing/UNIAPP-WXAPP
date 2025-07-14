@@ -12,6 +12,7 @@ interface UserMainPage {
 
     id: number
     documentId: string
+    documentIdStatistic: string
 
     statistic: UserStatistic
 

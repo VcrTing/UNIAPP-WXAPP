@@ -2,7 +2,7 @@ import { appState, eleDispatch, eleState, uiState } from "@/memory/global"
 import { future, promise, timeout } from "../util/future"
 import { is_nice_one, must_one } from "../util/valued"
 
-const UI_PAN_Z_INDEX = 300
+const UI_PAN_Z_INDEX = 500
 const UI_PAN_HUI_OPACITY = 0.4
 const UI_PAN_HUI_CAN_CLOSE = true
 

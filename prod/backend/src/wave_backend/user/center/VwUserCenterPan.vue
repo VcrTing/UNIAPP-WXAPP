@@ -12,6 +12,21 @@
                 <CoMoUserAdvSwipper/>
             </view>
             -->
+            <view>
+                <CkSpace :h="3"/>
+                <view class="">
+                    <view class="fx-s">
+                        <view @tap="funn.front" class="fx-i btn-wht-s py px-row w-50">
+                            <UiI i="i"/>
+                            <view class="px-s">进入主站</view>
+                        </view>
+                        <view @tap="funn.strapi" class="fx-r btn-wht-s py px-row w-50">
+                            <view class="px-s">进入后台</view>
+                            <UiI i="r"/>
+                        </view>
+                    </view>
+                </view>
+            </view>
         </view>
     </view>
 </template>
@@ -21,6 +36,10 @@ import { computed, reactive } from 'vue';
 import VwUcpNumberMsg from './center/VwUcpNumberMsg.vue';
 import CoMoUcpGoBtns from './component/CoMoUcpGoBtns.vue';
 import CoMoUserAdvSwipper from '@/components/modules/user/CoMoUserAdvSwipper.vue';
+import CkSpace from '@/cake/content/CkSpace.vue';
+import { uiGetters, uiState } from '@/memory/global';
+import { WEB_FRONT, WEB_STRAPI } from '@/conf/conf';
+import UiI from '@/ui/element/i/UiI.vue';
 
 const aii = reactive({
     iive: 0,
@@ -33,8 +52,25 @@ const tabs = computed((): MANY => {
     ]
 })
 
+const ismall = computed((): boolean => uiGetters.ismall)
+
 const funn = {
-    
+    front: () => {
+        if (ismall.value) {
+
+        }
+        else {
+            window.location.href = WEB_FRONT
+        }
+    },
+    strapi: () => {
+        if (ismall.value) {
+
+        }
+        else {
+            window.location.href = WEB_STRAPI
+        }
+    }
 }
 </script>
 

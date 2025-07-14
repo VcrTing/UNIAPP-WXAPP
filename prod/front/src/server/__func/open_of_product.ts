@@ -15,11 +15,12 @@ const view = async (one: Product) => {
         uniRouter.gopg('product_detail');
     }
 }
-const view_buy = async (one: Product) => {
+const view_buy = async (one: Product, ispayed: number) => {
     const docid: string = one.documentId || ''
     if (docid) {
         const src: Product = await server_product.mine_buy_byid(docid)
         // console.log('访问 商品 =', src, ' one =', one)
+        src.__is_in_order = 1
         await prodReFresh('view', src)
         uniRouter.gopg('product_detail');
     }

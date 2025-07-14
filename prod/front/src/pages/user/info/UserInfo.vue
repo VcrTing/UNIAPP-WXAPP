@@ -1,7 +1,7 @@
 <template>
     <page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
     <PageLayout>
-        <CoAppTopBackBar :clazz="'btn-wht-s'" @back="uniRouter.back" :mat="false">
+        <CoAppTopBackBar :clazz="'bf-wht-t bf '" @back="uniRouter.back" :mat="false">
             返回
             <template #tit><view class="header ta-c">修改个人资料</view></template>
         </CoAppTopBackBar>

@@ -1,6 +1,6 @@
 import { authDispatch, orderDispatch, soDispatch } from "@/memory/global";
 import { prodDispatch } from "@/memory/moduies";
-import { pageCartDispatch } from "@/memory/page";
+import { pageCartDispatch, pagePublishDispatch } from "@/memory/page";
 import { future, promise } from "@/tool/util/future";
 
 // 用户登录成功后执行
@@ -17,6 +17,9 @@ export const for_user_loging = () => future(async () => {
     // 驱动页面刷新
     pageCartDispatch('refresh')
     orderDispatch('refresh')
+    pagePublishDispatch('refresh')
+
+    console.log('---------------- 切换登录？-------------------')
 })
 
 // 用户参加成功一个活动后
@@ -28,6 +31,12 @@ export const for_user_joing = () => promise(() => {
     prodDispatch('refresh_buys')
 })
 */
+export const for_switch_login = () => promise(() => {
+    pageCartDispatch('refresh')
+    orderDispatch('refresh')
+    pagePublishDispatch('refresh')
+    // prodDispatch('refresh')
+})
 
 export const for_user_buyed = () => promise(() => {
     //

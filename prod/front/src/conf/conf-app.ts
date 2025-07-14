@@ -1,3 +1,4 @@
+import { orderDispatch } from "@/memory/global"
 import pan_tooi from "@/tool/app/pan_tooi"
 import appRouter from "@/tool/uni/app-router"
 import uniRouter from "@/tool/uni/uni-router"
@@ -75,6 +76,7 @@ export const APP_BAR_JOINER = <CoAppBottomBarItem[]> [
         clazz_iive: 'app-bottom-bar-item-iive',
         func: () => {
             uniRouter.navigatorpg('order')
+            orderDispatch('refresh')
         }
     },
     /*

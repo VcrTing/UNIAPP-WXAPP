@@ -25,23 +25,26 @@
         <!---->
         <OPan :idx="pan.idx">
             <OPanInnerY :idx="pan.idx" :orientation="'b'">
-                <view class="py-x2">
+                <view class="pt-x2 pb">
                     <view class="fx-c"><text class="header-s ls">再次上架?</text></view>
                 </view>
-                <!-- v-if="product_tool.show_inv_many(choise)"
-                 -->
+                <view class="fx-aii-btn-def">
+                    <view class="py px-row tiw ta-c">
+                        <text class="fs-s">再次上架，库存量会恢复。</text>
+                    </view>
+                </view>
+                <view class="py-s"></view>
                 <view class="pb-x1" v-if="product_tool.show_inv_many(choise)">
                     <view class="px-row py fx-aii-btn-def"><view class="px-inp">库存类型是{{ DATA_PRODUCT_TYPED_INV_MANY.name }}，需要输入库存。</view></view>
                     <view class="py-s px-row"><input class="inp-app btn-def br-rnd" v-model="aii.inv" placeholder="请重新输入库存量"/></view>
                     <CkSpace :h="8"/>
                 </view>
-
                 <view class="px-row">
                     <view><OButton @tap="pan_tooi.close_pan(pan.idx)" color="def" clazz="btn-app">取消</OButton> </view>
                     <view class="py-s"></view>
                     <view><OButton @tap="func.submit" :ioading="aii.ioading" color="pri" clazz="btn-app">立即上架</OButton> </view>
                 </view>
-                <CkSpace :h="1"/>
+                <CkSpace :h="3"/>
             </OPanInnerY>
         </OPan>
         

@@ -1,7 +1,6 @@
 <template>
     <OPan :idx="loginhouse.pan_idx">
         <OPanInnerY :h="'100vh'" :idx="loginhouse.pan_idx" :orientation="'r'">
-            
             <LoginLayout @back="pan_tooi.close_pan(loginhouse.pan_idx)">
                 <template #bg>
                     <view class="w-100 h-100">
@@ -42,9 +41,9 @@ import CkSpace from '@/cake/content/CkSpace.vue';
 import pan_tooi from '@/tool/app/pan_tooi';
 import { storage } from '@/tool/web/storage';
 import { is_nice_sn } from '@/tool/util/valued';
+import { for_user_loging } from '@/conf/__for_index/for_user_loging';
 
 const aii = reactive({ phone: '', ioading: false, ff: DEV_GENERATE_SPECIAL })
-
 const info = computed((): AppInfo => appState.info) 
 
 const funn = {
@@ -61,12 +60,12 @@ const funn = {
 	submit: () => futuring(aii, async () => {
 		const src: ONE = funn.collect()
         if (!src.phone) return false 
-
+        //
         if (!vid_phone(src.phone)) {
             tipwarn('手机号码格式不正确。')
             return false
         }
-
+        //
         const pd: AppPhoneWX = src.phonedata
 		if (pd) {
             storage.set('AUTH_LOGIN_SEEK', pd.phoneNumber)
@@ -79,9 +78,11 @@ const funn = {
     success: async (src: AuthResult, phonedata: AppPhoneWX) => {
         try {
             pan_tooi.close_pan(loginhouse.value.pan_idx)
-            // await authDispatch('change', [ '__unreal', phonedata ])
+            // 
             src.phonedata = phonedata
             await authDispatch('login', src)
+            //
+            for_user_loging()
         }
         finally {
             pan_tooi.close_pan(loginhouse.value.pan_idx)

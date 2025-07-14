@@ -3,6 +3,7 @@ package com.q.buy.module.order.model.vo;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.q.buy.module.order.form.cart.OrderShoppingCart;
 import com.q.buy.module.order.model.entity.XOrder;
 import com.q.buy.util.q.QBeanUtil;
 import com.q.buy.util.q.QVUtil;
@@ -63,7 +64,8 @@ public class VoXOrder {
     Date sendEndTime;
 
     // 购买产品的详情
-    List<Map<String, Object>> carts;
+    // List<Map<String, Object>> carts;
+    List<OrderShoppingCart> carts;
 
     Map<String, Object> user;
 
@@ -82,13 +84,16 @@ public class VoXOrder {
 
     // 存货
     Integer aliveStatus;
-
     String sendFinishedRemark;
 
-    public static List<Map<String, Object>> getCarts(XOrder order) {
+    // 过期时间
+    Date expireTime;
+    // 是否过期
+    Integer expireStatus;
+
+    public static List<OrderShoppingCart> getCarts(XOrder order) {
         if (StringUtils.hasLength(order.getCartsJson())) {
-            List<Map> carts = JSONUtil.toList(order.getCartsJson(), Map.class);
-            return QVUtil.objToListMap(carts);
+            return JSONUtil.toList(order.getCartsJson(), OrderShoppingCart.class);
         }
         return null;
     }

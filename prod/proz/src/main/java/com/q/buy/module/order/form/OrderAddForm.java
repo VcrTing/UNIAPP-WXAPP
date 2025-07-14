@@ -3,6 +3,7 @@ package com.q.buy.module.order.form;
 import cn.hutool.json.JSONUtil;
 import com.q.buy.module.order.form.cart.OrderShoppingCart;
 import com.q.buy.module.order.model.entity.XOrder;
+import com.q.buy.util.q.QDateUtil;
 import com.q.buy.util.q.QListUtil;
 import com.q.buy.util.q.QVUtil;
 import lombok.AllArgsConstructor;
@@ -124,6 +125,12 @@ public class OrderAddForm {
             }
         }
         xOrder.setSearch(sb.toString());
+        return xOrder;
+    }
+
+    public XOrder insertOrderExpired(XOrder xOrder) {
+        xOrder.setExpireStatus(0);
+        xOrder.setExpireTime(QDateUtil.nowAddMinute(XOrder.ORDER_EXPIRE_MINUTE));
         return xOrder;
     }
 }

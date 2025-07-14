@@ -15,7 +15,7 @@ const fetching = async (param: ONE, pager: Pager): Promise<Media[]> => {
     return net_tool.many<Media>(res as ONE)
 }
 
-const mainpage = async (userid: string): Promise<Media[]> => {
+const mainpage = async (userid: number): Promise<Media[]> => {
     const pm: ONE = { user: userid }
     srp_p.__sort(pm)
     return await fetching(pm, net_tool.__pager(24))

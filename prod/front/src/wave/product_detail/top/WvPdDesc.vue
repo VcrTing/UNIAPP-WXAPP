@@ -11,7 +11,7 @@
         <view class="">
             <!--  -->
             <view class="pt pb mh-4em px-row fx-aii-btn-def-s" v-for="(v, i) in cons" :key="i">
-                <view class="px-col">
+                <view class="px-col us-a">
                     {{ v }}
                 </view>
             </view>

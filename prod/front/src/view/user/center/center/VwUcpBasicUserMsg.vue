@@ -22,8 +22,10 @@
                     </OButton>
                 </view>
             </view>
-            <view class="">
-                <view class="tid fs-n px-row py mxw-pc">
+            <view class="pt">
+                <view class="tid fs-n px-row py-row mxw-pc"
+                    :class="isphone ? 'bf-wht-t bf' : ''"
+                >
                     <view class="d-ib">
                         <text>社交账号:&nbsp;&nbsp;</text>
                         <text v-if="user.socialAccount">{{ user.socialAccount }}</text>
@@ -51,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { authDispatch, authGetters, authState } from '@/memory/global';
+import { authState, uiGetters } from '@/memory/global';
 import { computed, reactive } from 'vue';
 import uniRouter from '@/tool/uni/uni-router';
 import CoMoUcpNumbers from '../component/CoMoUcpNumbers.vue';
@@ -62,6 +64,8 @@ import user_tool from '@/tool/modules/user_tool';
 import OButton from '@/cake/button/OButton.vue';
 
 const user = computed((): User => authState.user)
+
+const isphone = computed((): boolean => uiGetters.isphone)
 
 const aii = reactive({
     ioading: false

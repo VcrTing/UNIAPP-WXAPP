@@ -39,7 +39,6 @@ const funn = {
         if (product_tool.is_inv_many(v)) {
             pm['inv'] = 3
         }
-        console.log('PARAM =', pm)
         //
         const src: Product = await server_pubplus.takeon(v, pm['inv'])
         if (src && src.documentId) {

@@ -1,13 +1,13 @@
 <template>
     <view>
         <view class="fx-i">
-            <CoMoUserNumberShow :num="must_int(mainpage.numPublish)" @tap="uniRouter.gopg('ui')"  clazz="px-row py-row br-br" :class="clazz">
+            <CoMoUserNumberShow :num="must_int(mainpage.numPublish)"  clazz="px-row py-row br fx-aii-btn-wht-s">
                 发布数
             </CoMoUserNumberShow>
-            <CoMoUserNumberShow :num="must_int(mainpage.newVisited)"  clazz="px-row py-row br-bi br-br" :class="clazz">
+            <CoMoUserNumberShow :num="must_int(mainpage.numVisited)"  clazz="px-row py-row br fx-aii-btn-wht-s">
                 访问量
             </CoMoUserNumberShow>
-            <CoMoUserNumberShow :num="must_int(mainpage.numFansTotal)"  clazz="px-row py-row br-bi br-br" :class="clazz">
+            <CoMoUserNumberShow :num="must_int(mainpage.numFansTotal)"  clazz="px-row py-row br fx-aii-btn-wht-s">
                 粉丝数
             </CoMoUserNumberShow>
         </view>

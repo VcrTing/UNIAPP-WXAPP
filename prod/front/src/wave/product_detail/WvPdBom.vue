@@ -2,6 +2,7 @@
     <view class="w-100 softer">
 
         <view class="softer" v-if="modback">
+            <CoShareBtn :clazz="'btn-wht-s'" @tap="app_pag_tool.share(v)"/>
             <CoBomBackBtn :clazz="'btn-wht-s'"/>
         </view>
         <view v-else class="">
@@ -34,7 +35,12 @@
                                 <text class="">免费</text>
                             </OButton>
                             <view v-else>
-                                <view class="fx-r">
+                                <OButton v-if="sts.is_empty" clazz="btn-app"
+                                    color="wht-t" @tap="uniRouter.back"
+                                >
+                                    <text class="">售罄</text>
+                                </OButton>
+                                <view v-else class="fx-r">
                                     <OButton color="wht-t"
                                         :ioading="aii.ioading" :weak="true"
                                         clazz="mh-btn-x1 br-ti br-bi pr pi-x1 mw-6em" @tap="funn.car">
@@ -70,9 +76,9 @@
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
 import OButtonTag from '@/cake/button/OButtonTag.vue';
-import Ov from '@/cake/button/touch/Ov.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import CoBomBackBtn from '@/components/element/button/CoBomBackBtn.vue';
+import CoShareBtn from '@/components/element/button/CoShareBtn.vue';
 import { pageCartDispatch } from '@/memory/page';
 import cart_tool from '@/tool/modules/cart_tool';
 import auth_tool from '@/tool/modules/common/auth_tool';
@@ -140,7 +146,7 @@ const funn = {
     //
     share: () => {
         // console.log('SHARE')
-        app_pag_tool.product(prp.v)
+        app_pag_tool.share(prp.v)
     }
 }
 

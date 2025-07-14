@@ -7,10 +7,10 @@
                 <view v-else class="w-100 h-100 btn-def br-t"></view>
             </view>
             <view class="fx-1 px">
-                <view class="fx-1">
-                    <view><text class="h9">{{ product_tool.gettitle(v) }}</text></view>
+                <view class="fx-1 mh-2em">
+                    <view><text class="fs-w">{{ product_tool.gettitle(v) }}</text></view>
                 </view>
-                <view class="pt-s">
+                <view class="">
                     <view class="tiw">
                         <text class="fs-s">￥</text>
                         <text>{{ cart_tool.getprice(cart) }}</text>

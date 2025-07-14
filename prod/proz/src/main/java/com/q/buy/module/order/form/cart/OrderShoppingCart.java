@@ -32,6 +32,7 @@ public class OrderShoppingCart {
     }
 
     public static List<String> getProductIdList(List<OrderShoppingCart> carts) {
+        if (QListUtil.isBadList(carts)) { return null; }
         List<String> productIdList = new ArrayList<>();
         for (OrderShoppingCart cart : carts) {
             productIdList.add(cart.getDocumentId());

@@ -8,14 +8,14 @@
                 </view>
                 <OSafeAreaTop/>
                 <!-- -->
-                <view class="mxw-pc" :class="isphone ? 'px-s' : ''">
+                <view class="mxw-pc" :class="isphone ? 'px-row' : ''">
                     <view class="fx-i ps-r zi-n py-s ts">
                         <view v-for="(v, i) in aii.tabs" :key="i" class="ts">
                             <OButton :color="(tab.main == v.v) ? 'wht-s' : 'wht-s'" :weak="true" v-if="tab.main == v.v" 
                                 :clazz="'ts py-s px-row br-s'">
                                 <text class="fw-550">{{ v.name }}</text>
                             </OButton>
-                            <view @tap="funn.choise(v)" class="ts py-s px-row fx-aii-btn-wht-s mx-s br-s c-p" v-else>
+                            <view @tap="funn.choise(v)" class="ts py-s px-row fx-aii-btn-wht-s br-s c-p" v-else>
                                 <text class="tid fs-w">{{ v.name }}</text>
                             </view>
                         </view>
@@ -24,17 +24,19 @@
             </view>
         </OAppTopBar>
         <view class="">
-            <OScrollY :styie="{ 'height': 'calc(100vh - 4.58rem)' }">
-                <view class="pt-s"></view>
                 <view v-if="tab.main == 0">
                     <WvOrderNow :tab="tab"/>
+                    <!--<OScrollY :styie="{ 'height': 'calc(100vh - 4.58rem)' }">
+                        
+                    </OScrollY>-->
                 </view>
                 <view v-if="tab.main == 1">
                     <WvProductVisual :is_index_mode="true" :is_open_filter="true"/>
                 </view>
                 <CkSpace :h="2"/>
-            </OScrollY>
         </view>
+        <!--
+        -->
 		<CoAppBottomBar :mat="false" :clazz="'index-bottom-bar'"/>
     </PageLayout>
 </template>
@@ -44,7 +46,6 @@ import OAppTopBar from '@/cake/app/bar/OAppTopBar.vue';
 import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
 import OButton from '@/cake/button/OButton.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
-import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import CoAppBottomBar from '@/components/app/bar/CoAppBottomBar.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { orderDispatch, orderState, uiGetters, uiState } from '@/memory/global';
@@ -57,14 +58,10 @@ import WvOrderNow from '@/wave/order/WvOrderNow.vue';
 import WvProductVisual from '@/wave/visual/WvProductVisual.vue';
 import { computed, nextTick, reactive, watch } from 'vue';
 //
-
 const num = computed((): number => orderState.num)
 watch(num, () => { funn.init() })
 // 
-
-const tab = reactive({
-    main: 0, inner: 0, routes: [0, 0],
-})
+const tab = reactive({ main: 0, inner: 0, routes: [0, 0] })
 const aii = reactive(<ONE>{
     ioading: false, init: false, 
     tabs: [
@@ -76,7 +73,7 @@ const aii = reactive(<ONE>{
 const funn = {
     choise: (v: ONE) => {
         tab.main = v.v;
-        storage.set('PAGE_ORDER_KEY', 0)
+        storage.set('PAGE_ORDER_KEY', pag_tooi.gen_code(tab.main, tab.inner))
     },
     init: () => promise(() => { 
         aii.routes = pag_tooi.spi_code('PAGE_ORDER_KEY')

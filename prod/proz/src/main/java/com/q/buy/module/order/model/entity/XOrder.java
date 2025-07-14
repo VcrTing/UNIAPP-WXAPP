@@ -16,6 +16,9 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class XOrder {
+
+    public static final Integer ORDER_EXPIRE_MINUTE = 15;
+
     @TableId(type = IdType.AUTO) // (type = IdType.INPUT)
     Long id;
     String documentId;
@@ -38,7 +41,6 @@ public class XOrder {
 
     //
     String remark;
-
     // 订单价格
     BigDecimal price;
     // 配送费
@@ -79,13 +81,15 @@ public class XOrder {
     Long orderLockId;
 
     String sendFinishedRemark;
-
     String orderCode;
-
     // 用户 JSON
     String userJson;
     // 购买产品的详情
     String cartsJson;
-
     String search;
+
+    // 过期时间
+    Date expireTime;
+    // 是否过期
+    Integer expireStatus;
 }

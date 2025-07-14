@@ -26,7 +26,7 @@
                         <OButtonTag color="pri" clazz="br-1 px-s fs-s fx-c py-t">已支付</OButtonTag>
                     </view>
                     <view v-if="!order_tool.ispayed(v)">
-                        <OButtonTag color="err" clazz="br-1 px-s fs-s fx-c py-t">未付款</OButtonTag>
+                        <OButtonTag color="err" clazz="br-1 px-s fs-s fx-c py-t">未付款，快些联络客服，以解锁订单</OButtonTag>
                     </view>
                 </CoMoOrderMsgLine>
                 <CoMoOrderMsgLine :tit="'下单数量'">

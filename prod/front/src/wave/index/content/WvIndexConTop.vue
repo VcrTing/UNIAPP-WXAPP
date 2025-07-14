@@ -1,6 +1,6 @@
 <template>
     <view>
-        <view class="">
+        <view class=" ps-r zi-n">
             <view class="bg-wht-t bf">
                 <OScrollX clazz="mxw-pc">
                     <view class="pi-row pb-s pt-s">

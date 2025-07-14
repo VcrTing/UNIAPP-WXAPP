@@ -33,7 +33,7 @@ const _s: Store<OrderStore> = createStore({
     },
     actions: {
         change: (c: ONE, v: ANYS) => c.state[ v[0] ] = v[1],
-        refresh: (c: ONE) => { c.commit('__num'); console.log('刷新订单页面') },
+        refresh: (c: ONE) => { c.commit('__num'); },
 
         place_an_order: ({ commit }, order: OrderItem) => {
             commit('__place_order', order)

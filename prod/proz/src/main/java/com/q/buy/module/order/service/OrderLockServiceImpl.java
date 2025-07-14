@@ -1,6 +1,7 @@
 package com.q.buy.module.order.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.q.buy.framework.exception.QException;
 import com.q.buy.module.order.mappers.OrderLockMapper;
@@ -9,6 +10,7 @@ import com.q.buy.module.order.model.entity.XOrderLock;
 import com.q.buy.util.q.QListUtil;
 import com.q.buy.util.q.QVUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -45,6 +47,7 @@ public class OrderLockServiceImpl extends ServiceImpl<OrderLockMapper, XOrderLoc
         return QListUtil.first(list);
     }
     // finished
+    @Transactional
     public XOrderLock finished(XOrderLock orderLock) {
         orderLock.setFinishedStatus(STS_FINISHED_YES);
         if (!this.updateById(orderLock)) {
@@ -53,4 +56,18 @@ public class OrderLockServiceImpl extends ServiceImpl<OrderLockMapper, XOrderLoc
         return orderLock;
     }
 
+    @Transactional
+    public XOrder finished(XOrder order) {
+        LambdaUpdateWrapper<XOrderLock> wrapper = new LambdaUpdateWrapper<>();
+        wrapper.eq(XOrderLock::getUserDocumentId, order.getUserDocumentId());
+        wrapper.eq(XOrderLock::getOrderDocumentId, order.getDocumentId());
+
+        wrapper.set(XOrderLock::getFinishedStatus, STS_FINISHED_YES);
+        if (!this.update(wrapper)) {
+            throw new QException("修改锁时，数据库波动。这订单可能废了。");
+        }
+        return order;
+    }
+
+    //
 }

@@ -1,10 +1,39 @@
 
 import server_user from '@/server/user/user/server_user';
-import { arrfindi } from '@/tool/util/iodash';
+import { arrfind, arrfindi } from '@/tool/util/iodash';
 import { formfii, is_nice_one, must_one } from '@/tool/util/valued';
 import { Store, createStore } from 'vuex';
 import memory_tool from '../__func/memory_tool';
+import server_user_statistic from '@/server/user/user/server_user_statistic';
+import user_tool from '@/tool/modules/user_tool';
 
+
+const getyour_mainpage = async (state: ONE, commit: Function, userid: number): Promise<UserMainPage> => {
+    const srcs: UserMainPage[] = state.mainpages || []
+    const iii: number = arrfindi(srcs, userid, 'id')
+    let res: UserMainPage = <UserMainPage>{ };
+    if (iii < 0) {
+        const u: UserMainPage = await server_user.mainpage(userid)
+        console.log('获取某人主页 =', u)
+        srcs.push(u); commit('__change', [ 'mainpages', srcs ]);
+        res = u
+    }
+    else {
+        res = srcs[ iii ]
+    }
+    return res
+}
+
+const async_to_house = (state: ONE, commit: Function, us_new: UserStatistic) => {
+    const srcs: UserMainPage[] = state.mainpages || []
+    const i: number = arrfindi<UserMainPage>(srcs, us_new.documentId, 'documentIdStatistic')
+    const tar: UserMainPage = srcs[i]
+    if (tar && tar.documentIdStatistic) {
+        const us: UserMainPage = user_tool.group_main_page(us_new, tar.user, tar.medias)
+        srcs[i] = us;
+        commit('__change', [ 'mainpages', srcs ]);
+    }
+}
 
 const _s: Store<SomoneStore> = createStore({
     
@@ -56,24 +85,21 @@ const _s: Store<SomoneStore> = createStore({
         },
         // 获取某人的主页信息
         fetch_someone_mainpag: async ({ state, commit }, { userid }): Promise<UserMainPage> => {
-            const srcs: UserMainPage[] = state.mainpages || []
-            console.log('userid =', userid, ' srcs =', srcs)
-            const iii: number = arrfindi(srcs, userid, 'id')
-            if (iii < 0) {
-                
-                const u: UserMainPage = await server_user.mainpage(userid)
-                console.log('获取某人主页 =', u)
-                srcs.push(u);
-                commit('__change', [ 'mainpages', srcs ]);
-                commit('__change', [ 'mainpage_of_view', u ]);
-                return u;
-            }
-            else {
-                commit('__change', [ 'mainpage_of_view', srcs[ iii ] ]);
-                return srcs[ iii ]
-            }
-            // return <UserMainPage>{ }
+            let res: UserMainPage = await getyour_mainpage(state, commit, userid);
+            commit('__change', [ 'mainpage_of_view', res ]);
+            return res
         },
+        // 增加某人的访问量
+        visited_you_product: async ({ state, commit }, publisher: User): Promise<UserMainPage> => {
+            const uid: number = publisher.id
+            let res: UserMainPage = await getyour_mainpage(state, commit, uid);
+            // 新增一条访问量
+            const nus: UserStatistic = await server_user_statistic.num_she_visited(res.statistic, uid);
+            // 同步到库存里
+            async_to_house(state, commit, nus)
+            // commit('__change', [ 'mainpage_of_view', res ]);
+            return res
+        }
     }
 }) 
 

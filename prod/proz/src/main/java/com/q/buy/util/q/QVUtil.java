@@ -37,6 +37,14 @@ public final class QVUtil {
         catch (Exception e) { }
         return def;
     }
+    public static Integer costInt(Integer src, Integer def) {
+        if (src == null) return 0;
+        if (def != null) {
+            src = src - def;
+            return src < 0 ? 0 : src;
+        }
+        return 0;
+    }
     public static Integer serInt(Object src, Integer def) {
         if (src == null) return def;
         if (src instanceof String) {

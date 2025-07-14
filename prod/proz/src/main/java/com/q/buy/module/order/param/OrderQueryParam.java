@@ -22,6 +22,7 @@ public class OrderQueryParam {
     Integer payStatus;
     Integer hasLock;
     Integer refundStatus;
+    Integer expireStatus;
 
     Integer page;
     Integer pageSize;
@@ -59,6 +60,9 @@ public class OrderQueryParam {
         }
         if (QVUtil.serInt(refundStatus, -1) != -1) {
             wrapper.eq(XOrder::getRefundStatus, refundStatus);
+        }
+        if (QVUtil.serInt(expireStatus, -1) != -1) {
+            wrapper.eq(XOrder::getExpireStatus, expireStatus);
         }
 
         //

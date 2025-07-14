@@ -26,7 +26,7 @@ import { must_arr } from '@/tool/util/valued';
 import { computed, nextTick, reactive } from 'vue';
 
 const prp = defineProps<{
-    medias: Media[]
+    medias: Media[] | undefined
 }>()
 /*
 const gallery = computed(() => {
@@ -49,7 +49,7 @@ const img_last = computed((): Media[] => {
 const funn = {
     init: () => {
         timeout(() => { aii.init = true }, 200)
-        timeout(() => { aii.init_last = true }, 2500)
+        timeout(() => { aii.init_last = true }, 800)
     }
 }
 

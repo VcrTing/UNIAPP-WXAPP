@@ -7,6 +7,7 @@
         <view class="pt-s">
             <WvOrPag :aii="aii" :carts="carts_of_order" :num="num" :price="price"/>
             
+            <CkSpace :h="14"/>
             <view class="abs-b i-0 w-100 ps-f-imp bg-con py-s">
                 <view class="w-100 fx-c px-row">
                     <OButton color="sec" clazz="mh-btn-x1 mw-8em br-imp fx-1"

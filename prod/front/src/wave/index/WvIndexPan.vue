@@ -1,21 +1,19 @@
 <template>
     <view class="">
-        <view class="pt-s ps-r zi-n">
+        <view class="pt-s">
             <WvIndexConTop :ioading="aii.ioading" :change="change" 
                 @refresh="funn.initing"
                 @changetag="funn.switchTag"/>
         </view>
-        <view class="">
+        <view class="pt-s">
             <OScrollYFresh id="index_scroll"
                 :options="scrolloptions"
                 :styie="{ 
                     'position': 'relative', 'z-index': '99',
-                    'height': 'calc( 100vh - 11.3rem - ' + (h || '0px') + ' )' }"
+                    'height': 'calc( 100vh - 11.79rem - ' + (h || '0px') + ' )' }"
                 @downrefresh="funn.next"
                 @uprefresh="funn.initing"
                 >
-                <view class="pt-row">
-                </view>
                 <CoViDataLoading :ioading="index.ioading" :items="aii.items">
                     <WvIndexConList :items="aii.items"/>
                 </CoViDataLoading>
@@ -89,7 +87,7 @@ const got = {
             }
         }
         // 构建排序方式
-        console.log('CHANGE TAB =', change.tab.sorted)
+        // console.log('CHANGE TAB =', change.tab.sorted)
         res = change.tab.sorted(res)
         return res;
     }

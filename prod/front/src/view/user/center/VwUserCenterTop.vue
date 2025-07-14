@@ -26,15 +26,14 @@
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import { appState, authDispatch, authState, uiGetters } from '@/memory/global';
 import auth_tool from '@/tool/modules/common/auth_tool';
+import uniRouter from '@/tool/uni/uni-router';
 import { computed } from 'vue';
-
-// const prp = defineProps<{}>()
 
 const user = computed((): User => authState.user)
 
 const funn = {
     ck_avatar: () => auth_tool.doac(async () => {
-        authDispatch('mod_login')
+        uniRouter.gopg('user_info')
     }),
     ck_name: () => auth_tool.doac(async () => {
         // authDispatch('mod_login')

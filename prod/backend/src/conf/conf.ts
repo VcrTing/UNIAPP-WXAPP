@@ -8,6 +8,9 @@ export const IS_DEBUG_LOG = true
 // 是否 开启 测试 模式
 export const IS_TEST_MODE = true
 
+export const WEB_STRAPI = 'http://localhost:1338/admin'
+export const WEB_FRONT = 'http://localhost:5174/'
+
 // 网络有关的 配置，请查看 net.ts
 export const TEST_LOGIN_USER: ONE = {
     'ADMIN': <ONE>{
@@ -18,23 +21,6 @@ export const TEST_LOGIN_USER: ONE = {
         username: 'qiong2',
         password: 'ZT123zlt'
     },
-    /*
-    SMALL: <ONE> {
-        phone: '13576639986',
-        countryCode: 86,
-        code: '1234567',
-        info: {
-            avatarUrl: "https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132",
-            city: "",
-            country: "",
-            gender: 0,
-            is_demote: true,
-            language: "",
-            nickName: "微信用户",
-            province: "",
-        }
-    }
-        */
 }
 
 export const K_STRAPI = 'strapi'

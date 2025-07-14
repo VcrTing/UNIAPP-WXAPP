@@ -10,10 +10,13 @@
             </view>
         </view>
         <view v-else class="pt-row"></view>
-        <CoViDataLoading :ioading="aii.ioading" :items="aii.visuals" @refresh="funn.init">
-            <WvIndexConList v-if="is_index_mode" :items="products"/>
-            <WvPvConList v-else :items="products"/>
-        </CoViDataLoading>
+        <OScrollY :styie="{ 'height': 'calc(100vh - 8.58rem)' }">
+            <CoViDataLoading :ioading="aii.ioading" :items="aii.visuals" @refresh="funn.init">
+                <WvIndexConList v-if="is_index_mode" :items="products"/>
+                <WvPvConList v-else :items="products"/>
+            </CoViDataLoading>
+            <view :style="styie"></view>
+        </OScrollY>
     </view>
 </template>
 
@@ -25,18 +28,36 @@ import server_visual from '@/server/product/server_visual';
 import net_tool from '@/tool/http/net_tool';
 import { futuring, promise } from '@/tool/util/future';
 import { arrcoii } from '@/tool/util/iodash';
-import { is_nice_arr, must_arr } from '@/tool/util/valued';
+import { is_nice_arr, must_arr, must_int } from '@/tool/util/valued';
 import { computed, nextTick, reactive, watch } from 'vue';
 import WvIndexConList from '../index/content/WvIndexConList.vue';
 import WvPvConList from './content/WvPvConList.vue';
 import { DATA_PRODUCT_TYPED, DATA_TAB_ALL } from '@/conf/conf-datas';
 import product_tool from '@/tool/modules/product_tool';
 import { orderState } from '@/memory/global';
+import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 
 const prp = defineProps<{
     is_index_mode: boolean,
     is_open_filter?: boolean
 }>()
+
+const styie = computed((): ONE => {
+    const pi: number = must_int(must_arr(products.value).length)
+    if (pi < 2) {
+        return {
+            'height': '57vh'
+        }
+    }
+    if (pi < 6) {
+        return {
+            'height': '20vh'
+        }
+    }
+    return {
+        'height': '2rem'
+    }
+})
 
 const aii = reactive({
     ioading: false, visuals: <ProductVisual[]> [ ],

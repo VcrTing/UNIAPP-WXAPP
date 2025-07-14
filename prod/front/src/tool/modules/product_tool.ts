@@ -153,7 +153,13 @@ import product_build_tool from "./func/product_build_tool"
         })
     }
 
+    const getinv = (src: Product): number => {
+        return src.invWeak || 0
+    }
+
 export default {
+    getinv,
+
     is_sm,
 
     fiiter_by_typed,
@@ -174,7 +180,10 @@ export default {
 
     getbanner: (v: Product): Media[] => {
         const mds: Media[ ] = __medias(v)
-        const res: Media[ ] = mds.filter(e => !e.isGallery)
+        const res: Media[ ] = must_arr(mds.filter(e => !e.isGallery))
+        if (res.length == 0) {
+            return arrimit(mds, 1)
+        }
         return must_arr(res)
     },
     getcover: (v = <Product>{ }): Media => {

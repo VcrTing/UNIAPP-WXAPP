@@ -12,10 +12,11 @@
         </view>
         <view class="fx-aii-btn-def">
             <view class="fx-c py-s px-row">
-                <OButtonTag clazz="fx-c br px-s py-t h9" color="def">
+                <OButtonTag clazz="fx-c br px-s py-s h9" color="def">
+                    <!--
                     <CoImg clazz="w-1em h-1em br-cir" :src="DATA_WX_COVER.url"/>
+                    -->
                     <view>
-                        <text class="px-s">微信号:</text>
                         <text class="us-a">{{ v.socialAccount }}</text>
                     </view>
                 </OButtonTag>

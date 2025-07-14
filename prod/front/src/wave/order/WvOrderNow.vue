@@ -1,7 +1,7 @@
 <template>
     <view>
         <OScrollX>
-            <view class=" py fx-i softer mxw-pc">
+            <view class=" pt fx-i softer mxw-pc">
                 <view class="btn-def py px-row ts c-p softer" v-for="(v, i) in menus" :key="i"
                     @tap="funn.chose(v)"
                 >
@@ -10,53 +10,56 @@
             </view>
         </OScrollX>
         <!-- -->
-        <CoViDataLoading :ioading="aii.ioading" :items="aii.orders" @refresh="funn.fetching">
-            <view class="mxw-pc">
-                <view v-for="(v, i) in aii.orders" class="pb-row">
-                    <view class="bg-con pt-s" :class="isphone ? '' : 'br'">
-                        <view>
-                            <view v-for="(n, m) in order_tool.getcarts(v)" :k="m"
-                                :class="w_clazz"
-                            >
-                                <view
-                                    :class="isphone ? 'br-1' : 'br-s'"
-                                    class="py-s fx-aii-btn-def fx-s fx-t"
+        <OScrollY :styie="{ 'height': 'calc(100vh - 8.58rem)' }">
+            <CoViDataLoading :ioading="aii.ioading" :items="aii.orders" @refresh="funn.fetching">
+                <view class="mxw-pc">
+                    <view v-for="(v, i) in aii.orders" class="pb-row">
+                        <view class="bg-con pt-s" :class="isphone ? '' : 'br'">
+                            <view>
+                                <view v-for="(n, m) in order_tool.getcarts(v)" :k="m"
+                                    :class="w_clazz"
                                 >
-                                    <view class="pi-row pr-s sus">
-                                        <view class="mw-1em">{{ m + 1 }}</view>
-                                    </view>
-                                    <view class="fx-1">
-                                        <CoMoOrderProductItem :v="n" @view="func.view" />
+                                    <view
+                                        :class="isphone ? 'br-1' : 'br-s'"
+                                        class="py-s fx-aii-btn-def fx-s fx-t"
+                                    >
+                                        <view class="pi-row pr-s sus">
+                                            <view class="mw-1em">{{ m + 1 }}</view>
+                                        </view>
+                                        <view class="fx-1">
+                                            <CoMoOrderProductItem :v="n" @view="(a) => func.view(a, v)" />
+                                        </view>
                                     </view>
                                 </view>
+                                
                             </view>
-                            
-                        </view>
-                        <view class="">
-                            <view class="fx-r px-row py-s fx-fcs-bg-def br-br br-bi c-p" @tap="func.ordermsg(v)">
-                                <view class="pi-s">
-                                    <CkSimpleTag :clazz="'btn-def fx-c px-s'">
-                                        <text class="fs-t tis">{{ times.fmts(v.createdAt) }}</text>
-                                    </CkSimpleTag>
-                                </view>
-                                <view class="pi-s">
-                                    <view v-if="order_tool.ispayed(v)">
+                            <view class="">
+                                <view class="fx-r px-row py-s fx-fcs-bg-def br-br br-bi c-p" @tap="func.ordermsg(v)">
+                                    <view class="pi-s">
                                         <CkSimpleTag :clazz="'btn-def fx-c px-s'">
-                                            <text class="fs-t cos">已支付</text>
+                                            <text class="fs-t tis">{{ times.fmts(v.createdAt) }}</text>
                                         </CkSimpleTag>
                                     </view>
-                                    <view v-else>
-                                        <CkSimpleTag :clazz="'btn-err fx-c px-s'">
-                                            <text class="fs-t ">未支付，点击查看订单号</text>
-                                        </CkSimpleTag>
+                                    <view class="pi-s">
+                                        <view v-if="order_tool.ispayed(v)">
+                                            <CkSimpleTag :clazz="'btn-def fx-c px-s'">
+                                                <text class="fs-t cos">已支付</text>
+                                            </CkSimpleTag>
+                                        </view>
+                                        <view v-else>
+                                            <CkSimpleTag :clazz="'btn-err fx-c px-s'">
+                                                <text class="fs-t ">未支付，点击查看订单号</text>
+                                            </CkSimpleTag>
+                                        </view>
                                     </view>
                                 </view>
                             </view>
                         </view>
                     </view>
                 </view>
-            </view>
-        </CoViDataLoading>
+            </CoViDataLoading>
+            <CkSpace :h="16"/>
+        </OScrollY>
 
         <WvOrderMsgPan :idx="pan_msg.idx" :v="house.view"/>
     </view>
@@ -67,18 +70,19 @@ import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
 import server_order from '@/server/order/server_order';
 import { futuring, promise } from '@/tool/util/future';
-import { must_arr, must_one } from '@/tool/util/valued';
+import { must_arr, must_int, must_one } from '@/tool/util/valued';
 import { computed, nextTick, reactive, watch } from 'vue';
 import order_tool from '@/tool/modules/order_tool';
 import CoMoOrderProductItem from './__component/CoMoOrderProductItem.vue';
 import CkSimpleTag from '@/cake/visual/tag/CkSimpleTag.vue';
 import times from '@/tool/web/times';
 import open_of_product from '@/server/__func/open_of_product';
-import { pageCartState } from '@/memory/page';
 import WvOrderMsgPan from './pan/WvOrderMsgPan.vue';
 import pan_tooi from '@/tool/app/pan_tooi';
 import net_tool from '@/tool/http/net_tool';
 import { authGetters, orderState, uiGetters } from '@/memory/global';
+import CkSpace from '@/cake/content/CkSpace.vue';
+import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 
 const prp = defineProps<{
     tab: ONE
@@ -131,8 +135,9 @@ const func = {
     ordermsg: (v: XOrder) => futuring(aii, async () => {
         house.view = v; pan_tooi.open_def_t(pan_msg.idx, pan_msg.hui)
     }),
-    view: (v: Page.CartDataOption) => futuring(house, async () => {
-        await open_of_product.view_buy(must_one(v.product))
+    view: (v: Page.CartDataOption, order: XOrder) => futuring(house, async () => {
+        const ps: number = must_int(order.payStatus)
+        await open_of_product.view_buy(must_one(v.product), ps)
     })
 }
 

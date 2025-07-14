@@ -65,7 +65,7 @@ const view = computed((): Product => prodState.view)
 const user = computed(() => authState.user)
 
 const aii = reactive({ init: false, ioading: false, back: '' })
-const sts = reactive({ is_in_cart: false, is_buyed: false })
+const sts = reactive({ is_in_cart: false, is_buyed: false, is_empty: false })
 
 const funn = {
     /*
@@ -80,6 +80,7 @@ const funn = {
     check: (src: Product) => {
         sts.is_in_cart = cart_tool.is_in_cart(src)
         sts.is_buyed = order_tool.isbuyed(src)
+        sts.is_empty = product_tool.getinv(src) === 0
     },
     back: () => { 
         console.log('back =', aii.back)

@@ -6,7 +6,7 @@
                     <CkAvatar v-if="publisher" :clazz="'w-2em h-2em'" :not_mainpage="true" :id="publisher.id" 
                         :src="publisher.avatarUrl || info.userDefAvatarUrl"/>
                 </view>
-                <view class="fx-1 pi-s">
+                <view class="fx-1 pi-s" @tap="funn.__to(publisher.id)">
                     <view class="fs-n">
                         <view class="fx-aii-btn-def py d-ib px-s">{{ publisher.nickName }}</view>
                         <view class="d-ib">
@@ -68,16 +68,12 @@
 <script setup lang="ts">
 import OFI from '@/cake/button/i/OFI.vue';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
-import CkAgeSex from '@/cake/visual/ider/CkAgeSex.vue';
 import { authDispatch, soDispatch } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';
 import { must_arr, must_one } from '@/tool/util/valued';
-import UiI from '@/ui/element/i/UiI.vue';
 import { computed } from 'vue';
-import CoMoPdHeader from '../__component/CoMoPdHeader.vue';
 import { PUBLISHER_DEF } from '@/conf/conf-role';
 import CkSex from '@/cake/visual/ider/CkSex.vue';
-import CkDefTag from '@/cake/visual/tag/CkDefTag.vue';
 import CkSimpleTag from '@/cake/visual/tag/CkSimpleTag.vue';
 import OButtonTag from '@/cake/button/OButtonTag.vue';
 
@@ -93,7 +89,6 @@ const funn = {
     __to: async (userid: any) => {
         if (userid) {
             const u: UserMainPage = await soDispatch('fetch_someone_mainpag', { userid })
-            // console.log('点击到的用户主页 =', u)
             uniRouter.gopg('user_mainpage')
         }
     },

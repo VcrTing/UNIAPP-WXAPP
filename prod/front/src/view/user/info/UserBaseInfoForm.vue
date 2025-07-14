@@ -1,6 +1,6 @@
 <template>
     <view>
-        <view class="zi-t ps-r zi-t user-info-backimg">
+        <view class="zi-t abs-b i-0 w-100 h-100 ps-f-imp user-info-backimg">
             <image class="w-100 h-100 ani-scaie-aii" mode="aspectFill" :src="form.background || info.userDefBackground"/>
             <view class="abs-r t-0 zi-s">
                 <view class="pt"></view>
@@ -13,11 +13,12 @@
                 </view>
             </view>
         </view>
-        <view class="px-row user-info-form ps-r zi-t">
+        <view class="px-row user-info-form zi-s abs-b i-0 w-100 h-100 ps-f-imp">
+            <view><CkSpace :h="13"/> </view>
             <view class="py-row user-info-avatar">
                 <view class="fx-c">
                     <view class="w-8em h-8em ps-r zi-t" @tap="funn.change_avatar">
-                        <CoImg clazz="w-100 h-100 bg-con bd-x2 br-cir ani-scaie-aii" :src="form.avatarUrl || info.userDefAvatarUrl" />
+                        <CoImg clazz="w-100 h-100 bg-con bd-x2 bd-c-wht-s br-cir ani-scaie-aii" :src="form.avatarUrl || info.userDefAvatarUrl" />
                         <!--
                         <view class="abs-b r-0 zi-s">
                             <OButtonWht>
@@ -28,9 +29,9 @@
                     </view>
                 </view>
             </view>
-            <view class="user-info-card pt-x2 pb-x1 br">
-                <view class="pt-x2">
-                    <CkInpItem clazz="pt pb-s c-uic-item" :tit="'个人昵称'">
+            <view class="user-info-card pt-x2 pb-x1 br bf">
+                <view class="pt-x2 br o-h">
+                    <CkInpItem clazz="pt pb-s c-uic-item br-tr br-ti" :tit="'个人昵称'">
                         <input class="inp-app h7" v-model="form.nickName" @blur="emt('submit')" placeholder="请输入昵称" />
                     </CkInpItem>
                     <view class="pt fx-s fx-t  c-uic-item">
@@ -46,7 +47,7 @@
                     </CkInpItem>
                     <CkInpItem :tit="'社交账号'" clazz=" c-uic-item">
                         <input class="inp-app" v-model="form.socialAccount" @blur="emt('submit')"
-                            placeholder="请输入微信号、QQ号" />
+                            placeholder="请输入如：微信号135xxx、或者其他社交账号。" />
                     </CkInpItem>
                 </view>
             </view>
@@ -58,6 +59,7 @@
 import OSafeArea from '@/cake/app/safearea/OSafeArea.vue';
 import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
 import OButton from '@/cake/button/OButton.vue';
+import CkSpace from '@/cake/content/CkSpace.vue';
 import CkInpItem from '@/cake/input/wrapper/CkInpItem.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
 import { appState, authDispatch } from '@/memory/global';
@@ -133,7 +135,7 @@ const funn = {
     margin-top: -82vh
 .user-info-card
     margin-top: -3em
-    background: rgba(255, 255, 255, 0.4)
+    // background: rgba(255, 255, 255, 0.4)
 .c-uic-item
     background: rgba(255, 255, 255, 0.6)
     backdrop-filter: blur(2px)
