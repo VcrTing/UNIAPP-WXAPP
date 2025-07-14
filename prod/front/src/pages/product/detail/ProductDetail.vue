@@ -40,10 +40,9 @@ import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { acyState, appState, authGetters, authState, orderState, uiState } from '@/memory/global';
 import uniRouter from '@/tool/uni/uni-router';
 import { computed, nextTick, onMounted, reactive, watch } from 'vue';
-import { future, futuring, promise, timeout } from '@/tool/util/future';
-import server_joining from '@/server/activity/server_joining';
+import { future, timeout } from '@/tool/util/future';
 import media_tool from '@/tool/modules/common/media_tool';
-import { must_arr, must_int, must_one } from '@/tool/util/valued';
+import { must_one } from '@/tool/util/valued';
 import { prodReFresh, prodState } from '@/memory/moduies';
 import WvPdBanner from '@/wave/product_detail/media/WvPdBanner.vue';
 import product_tool from '@/tool/modules/product_tool';
@@ -68,15 +67,6 @@ const aii = reactive({ init: false, ioading: false, back: '' })
 const sts = reactive({ is_in_cart: false, is_buyed: false, is_empty: false })
 
 const funn = {
-    /*
-    ioad_joiners: () => futuring(aii, async () => {
-        const actid: string = view.value.documentId || ''
-        if (actid) {
-            const joiners: ActivityJoin[] = await server_joining.join_of_activity(actid)
-            aii.joiners = joiners
-        }
-    }),
-    */
     check: (src: Product) => {
         sts.is_in_cart = cart_tool.is_in_cart(src)
         sts.is_buyed = order_tool.isbuyed(src)
@@ -137,4 +127,13 @@ const is_publisher = computed((): boolean => {
 })
 const info = computed((): AppInfo => appState.info) 
 
+    /*
+    ioad_joiners: () => futuring(aii, async () => {
+        const actid: string = view.value.documentId || ''
+        if (actid) {
+            const joiners: ActivityJoin[] = await server_joining.join_of_activity(actid)
+            aii.joiners = joiners
+        }
+    }),
+    */
 </script>

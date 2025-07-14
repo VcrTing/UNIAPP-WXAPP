@@ -43,48 +43,29 @@ const __edit = async (form: ONE, staticDocId: string, uid: number): Promise<User
     const __pm: ONE = net_tool.build_data(form)
     let src: NET_RES = await app.put('statistic', staticDocId, __pm)
     if (is_str(src)) {
-        console.log('================== 修改一个用户统计数据，出错了。')
+        // console.log('================== 修改一个用户统计数据，出错了。')
         src = await __plus(form, uid)
     };
     const res: ONE | MANY = (src as HttpResult).data
     return net_tool.one<UserStatistic>(res)
 } 
-
+/*
 const __num = async (func: Function): Promise<UserStatistic> => {
     const mp: UserMainPage = soState.mainpage || { }
     const us: UserStatistic = must_one(mp.statistic)
-    console.log('__num statistic =', us)
+    // console.log('__num statistic =', us)
     const uid: number = must_int(mp.id)
     if (us.documentId) { return await func(us, uid == 0 ? authGetters.userid : uid) } return us;
 }
+*/
 
 // 一个发布
 const num_publish = async (isadd: boolean = true): Promise<UserStatistic> => {
-    return await __num(async (mp: UserStatistic, uid: number) => {
-        return await __edit({ numPublish: cpu_int_1(mp.numPublish, isadd) }, mp.documentId, uid)
-    })
+    const us: UserStatistic = must_one((soState.mainpage || { }).statistic)
+    const pm: ONE = { numPublish: cpu_int_1(us.numPublish, isadd) }
+    return await __edit(pm, us.documentId, authGetters.userid)
 }
 
-// 一个加入
-const num_join = async (isadd: boolean = true): Promise<UserStatistic> => {
-    return await __num(async (mp: UserStatistic, uid: number) => {
-        return await __edit({ numJoin: cpu_int_1(mp.numJoin, isadd) }, mp.documentId, uid)
-    })
-}
-// 新增 支付金额
-const num_join_pay = async (num: number): Promise<UserStatistic> => {
-    return await __num(async (mp: UserStatistic, uid: number) => {
-        return await __edit({ numJoinPay: cpu_fioat(mp.numJoinPay, num) }, mp.documentId, uid)
-    })
-}
-
-/*
-const __num_who = async (func: Function): Promise<UserStatistic> => {
-    const mp: UserStatistic = must_one(soState.mainpage_of_view)
-    console.log('B =', mp.documentId)
-    if (mp.documentId) { return await func(mp) } return mp;
-}
-*/
 // 她人访问量
 const num_she_visited = async (us: UserStatistic, userid: number): Promise<UserStatistic> => {
     try {
@@ -98,8 +79,30 @@ export default {
     mine,
     byuser,
     num_publish,
+    num_she_visited
+}
+// 一个加入
+/*
+
     num_join,
     num_join_pay,
 
-    num_she_visited
+const num_join = async (isadd: boolean = true): Promise<UserStatistic> => {
+    return await __num(async (mp: UserStatistic, uid: number) => {
+        return await __edit({ numJoin: cpu_int_1(mp.numJoin, isadd) }, mp.documentId, uid)
+    })
 }
+// 新增 支付金额
+const num_join_pay = async (num: number): Promise<UserStatistic> => {
+    return await __num(async (mp: UserStatistic, uid: number) => {
+        return await __edit({ numJoinPay: cpu_fioat(mp.numJoinPay, num) }, mp.documentId, uid)
+    })
+}
+*/
+/*
+const __num_who = async (func: Function): Promise<UserStatistic> => {
+    const mp: UserStatistic = must_one(soState.mainpage_of_view)
+    console.log('B =', mp.documentId)
+    if (mp.documentId) { return await func(mp) } return mp;
+}
+*/

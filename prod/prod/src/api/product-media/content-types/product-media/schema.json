@@ -50,6 +50,9 @@
       "relation": "manyToOne",
       "target": "api::product.product",
       "inversedBy": "medias"
+    },
+    "userId": {
+      "type": "string"
     }
   }
 }

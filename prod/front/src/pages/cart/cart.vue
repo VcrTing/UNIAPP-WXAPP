@@ -13,20 +13,19 @@
             </view>
         </CoAppTopBar>
         <view class="">
-            <OScrollY :styie="{
-                'height': 'calc(100vh - 8em)'
-            }">
+            <view v-if="aii.iive == 0">
                 <view class="pt-s"></view>
-                <view v-if="aii.iive == 0">
-                    <CoViDataLoading :ioading="aii.ioading" :items="carts" @refresh="funn.init">
-                        <WvCartNow :carts="carts" :choises="aii.choises"/>
-                    </CoViDataLoading>
-                </view>
-                <view v-else>
-                    <WvProductVisual :is_index_mode="true"/>
-                </view>
-                <CkSpace :h="2"/>
-            </OScrollY>
+                <OScrollY :styie="{
+                    'height': 'calc(100vh - 8em)'
+                }">
+                        <CoViDataLoading :ioading="aii.ioading" :items="carts" @refresh="funn.init">
+                            <WvCartNow :carts="carts" :choises="aii.choises"/>
+                        </CoViDataLoading>
+                </OScrollY>
+            </view>
+            <view v-else>
+                <WvProductVisual :is_index_mode="true"/>
+            </view>
         </view>
 		<CoAppBottomBar :mat="false" clazz="bg-con"/>
     </PageLayout>

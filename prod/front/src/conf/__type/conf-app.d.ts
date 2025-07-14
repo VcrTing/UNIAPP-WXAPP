@@ -13,7 +13,9 @@ namespace Conf {
         name: string
         v: number,
         cover?: string,
-        clazz?: string
+        clazz?: string,
+        desc?: string,
+        sub?: string
     }
 
     type Tabs = Tab[]

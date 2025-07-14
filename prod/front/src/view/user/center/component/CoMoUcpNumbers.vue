@@ -17,7 +17,6 @@
 <script setup lang="ts">
 import CoMoUserNumberShow from '@/components/modules/user/CoMoUserNumberShow.vue';
 import { authState, soState } from '@/memory/global';
-import uniRouter from '@/tool/uni/uni-router';
 import { must_int } from '@/tool/util/valued';
 import { computed } from 'vue';
 

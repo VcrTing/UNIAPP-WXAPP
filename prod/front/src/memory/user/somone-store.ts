@@ -6,6 +6,7 @@ import { Store, createStore } from 'vuex';
 import memory_tool from '../__func/memory_tool';
 import server_user_statistic from '@/server/user/user/server_user_statistic';
 import user_tool from '@/tool/modules/user_tool';
+import { authGetters } from '../global';
 
 
 const getyour_mainpage = async (state: ONE, commit: Function, userid: number): Promise<UserMainPage> => {
@@ -24,15 +25,19 @@ const getyour_mainpage = async (state: ONE, commit: Function, userid: number): P
     return res
 }
 
-const async_to_house = (state: ONE, commit: Function, us_new: UserStatistic) => {
+const async_to_house = (state: ONE, commit: Function,res: UserMainPage , us_new: UserStatistic) => {
     const srcs: UserMainPage[] = state.mainpages || []
     const i: number = arrfindi<UserMainPage>(srcs, us_new.documentId, 'documentIdStatistic')
     const tar: UserMainPage = srcs[i]
+    const us: UserMainPage = user_tool.group_main_page(us_new, res.user, res.medias)
+    // 
     if (tar && tar.documentIdStatistic) {
-        const us: UserMainPage = user_tool.group_main_page(us_new, tar.user, tar.medias)
         srcs[i] = us;
-        commit('__change', [ 'mainpages', srcs ]);
     }
+    else {
+        srcs.push(us);
+    }
+    commit('__change', [ 'mainpages', srcs ]);
 }
 
 const _s: Store<SomoneStore> = createStore({
@@ -65,7 +70,7 @@ const _s: Store<SomoneStore> = createStore({
                 if (origin.documentId && origin.user && origin.user.documentId) {
                     return origin
                 }
-                if (getters.is_login) {
+                if (authGetters.is_login) {
                     const u: UserMainPage = await server_user.mymainpage()
                     console.log('========= 刷新我的主页数据 =', u)
                     if (u && u.documentId) {
@@ -91,12 +96,16 @@ const _s: Store<SomoneStore> = createStore({
         },
         // 增加某人的访问量
         visited_you_product: async ({ state, commit }, publisher: User): Promise<UserMainPage> => {
-            const uid: number = publisher.id
+            const uid: number = publisher.id;
+            console.log('uid =', uid)
+            console.log('publisher =', publisher)
             let res: UserMainPage = await getyour_mainpage(state, commit, uid);
+            console.log('UserMainPage =', res)
             // 新增一条访问量
             const nus: UserStatistic = await server_user_statistic.num_she_visited(res.statistic, uid);
+            console.log('UserStatistic =', nus)
             // 同步到库存里
-            async_to_house(state, commit, nus)
+            async_to_house(state, commit, res, nus)
             // commit('__change', [ 'mainpage_of_view', res ]);
             return res
         }

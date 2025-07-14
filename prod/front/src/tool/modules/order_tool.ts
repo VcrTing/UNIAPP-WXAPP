@@ -6,6 +6,16 @@ import { prodState } from "@/memory/moduies"
 import { appState, authState } from "@/memory/global"
 
 const group_order_data = (form: ONE, xuser: User, carts: Page.CartDataOptions): XOrder => {
+    //
+    const cs: Page.CartDataOptions = [ ]
+    if (carts.length > 0) {
+        carts.map(e => {
+            cs.push({
+                documentId: e.documentId,
+                prices: e.prices
+            } as Page.CartDataOption)
+        })
+    }
     return <XOrder>{
         num: form.num,
         price: form.price,
@@ -17,7 +27,7 @@ const group_order_data = (form: ONE, xuser: User, carts: Page.CartDataOptions): 
         userPhone: xuser.phone,
         userDocumentId: xuser.documentId,
 
-        carts,
+        carts: cs,
         user: authState.user,
 
         name: xuser.nickName,

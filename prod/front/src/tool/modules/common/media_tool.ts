@@ -45,7 +45,8 @@ const build_plus_data = (origin: Media, belongId: string | number): Media => {
         isSex: STS_MEDIA.SEX.NO,
 
         product: belongId,
-        user: authGetters.userid
+        user: authGetters.userid,
+        userId: authGetters.userid + ''
     }
 }
 

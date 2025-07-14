@@ -486,6 +486,7 @@ export interface ApiProductMediaProductMedia
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    userId: Schema.Attribute.String;
     w: Schema.Attribute.Decimal;
   };
 }

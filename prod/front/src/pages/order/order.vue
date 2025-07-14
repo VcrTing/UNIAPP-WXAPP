@@ -33,7 +33,6 @@
                 <view v-if="tab.main == 1">
                     <WvProductVisual :is_index_mode="true" :is_open_filter="true"/>
                 </view>
-                <CkSpace :h="2"/>
         </view>
         <!--
         -->

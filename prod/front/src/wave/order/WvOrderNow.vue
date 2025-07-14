@@ -3,8 +3,7 @@
         <OScrollX>
             <view class=" pt fx-i softer mxw-pc">
                 <view class="btn-def py px-row ts c-p softer" v-for="(v, i) in menus" :key="i"
-                    @tap="funn.chose(v)"
-                >
+                    @tap="funn.chose(v)" >
                     <text :class="(tab.inner === v.v) ? '' : 'sus'">{{ v.name }}</text>
                 </view>
             </view>
@@ -15,52 +14,28 @@
                 <view class="mxw-pc">
                     <view v-for="(v, i) in aii.orders" class="pb-row">
                         <view class="bg-con pt-s" :class="isphone ? '' : 'br'">
-                            <view>
-                                <view v-for="(n, m) in order_tool.getcarts(v)" :k="m"
-                                    :class="w_clazz"
+                            <view v-for="(n, m) in order_tool.getcarts(v)" :k="m"
+                                :class="w_clazz"
+                            >
+                                <view
+                                    :class="isphone ? 'br-1' : 'br-s'"
+                                    class="py-s fx-aii-btn-def fx-s fx-t"
                                 >
-                                    <view
-                                        :class="isphone ? 'br-1' : 'br-s'"
-                                        class="py-s fx-aii-btn-def fx-s fx-t"
-                                    >
-                                        <view class="pi-row pr-s sus">
-                                            <view class="mw-1em">{{ m + 1 }}</view>
-                                        </view>
-                                        <view class="fx-1">
-                                            <CoMoOrderProductItem :v="n" @view="(a) => func.view(a, v)" />
-                                        </view>
+                                    <view class="pi-row pr-s sus">
+                                        <view class="mw-1em">{{ m + 1 }}</view>
                                     </view>
-                                </view>
-                                
-                            </view>
-                            <view class="">
-                                <view class="fx-r px-row py-s fx-fcs-bg-def br-br br-bi c-p" @tap="func.ordermsg(v)">
-                                    <view class="pi-s">
-                                        <CkSimpleTag :clazz="'btn-def fx-c px-s'">
-                                            <text class="fs-t tis">{{ times.fmts(v.createdAt) }}</text>
-                                        </CkSimpleTag>
-                                    </view>
-                                    <view class="pi-s">
-                                        <view v-if="order_tool.ispayed(v)">
-                                            <CkSimpleTag :clazz="'btn-def fx-c px-s'">
-                                                <text class="fs-t cos">已支付</text>
-                                            </CkSimpleTag>
-                                        </view>
-                                        <view v-else>
-                                            <CkSimpleTag :clazz="'btn-err fx-c px-s'">
-                                                <text class="fs-t ">未支付，点击查看订单号</text>
-                                            </CkSimpleTag>
-                                        </view>
+                                    <view class="fx-1">
+                                        <CoMoOrderProductItem :v="n" @view="(a) => func.view(a, v)" />
                                     </view>
                                 </view>
                             </view>
+                            <CoMoOrderLowMsgItem :v="v" @msg="func.ordermsg"/>
                         </view>
                     </view>
                 </view>
             </CoViDataLoading>
             <CkSpace :h="16"/>
         </OScrollY>
-
         <WvOrderMsgPan :idx="pan_msg.idx" :v="house.view"/>
     </view>
 </template>
@@ -74,8 +49,6 @@ import { must_arr, must_int, must_one } from '@/tool/util/valued';
 import { computed, nextTick, reactive, watch } from 'vue';
 import order_tool from '@/tool/modules/order_tool';
 import CoMoOrderProductItem from './__component/CoMoOrderProductItem.vue';
-import CkSimpleTag from '@/cake/visual/tag/CkSimpleTag.vue';
-import times from '@/tool/web/times';
 import open_of_product from '@/server/__func/open_of_product';
 import WvOrderMsgPan from './pan/WvOrderMsgPan.vue';
 import pan_tooi from '@/tool/app/pan_tooi';
@@ -83,6 +56,7 @@ import net_tool from '@/tool/http/net_tool';
 import { authGetters, orderState, uiGetters } from '@/memory/global';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
+import CoMoOrderLowMsgItem from './__component/CoMoOrderLowMsgItem.vue';
 
 const prp = defineProps<{
     tab: ONE
@@ -90,15 +64,17 @@ const prp = defineProps<{
 //
 const num = computed((): number => orderState.num)
 watch(num, () => { funn.__fetching() })
-
 // 
 const def = <ONE>{ name: '全部', v: 0 }
 const house = reactive({
     tabs: [ def, { name: '已购商品', v: 1 } ], ioading: false, view: <XOrder>{ }
 })
-const aii = reactive({ ioading: false, pager: net_tool.__pager_long(), orders: <XOrder[]>[ ] })
+const aii = reactive({ ioading: false, pager: net_tool.__pager(), orders: <XOrder[]>[ ] })
 // 
 const funn = {
+    next: async () => {
+        
+    },
     __fetching: async () => {
         if (authGetters.is_login) {
             const items: XOrder[] = await server_order.mine({ }, aii.pager)
@@ -132,7 +108,7 @@ const menus = computed((): ONE[] => {
 })
 //
 const func = {
-    ordermsg: (v: XOrder) => futuring(aii, async () => {
+    ordermsg: (v: XOrder) => futuring(house, async () => {
         house.view = v; pan_tooi.open_def_t(pan_msg.idx, pan_msg.hui)
     }),
     view: (v: Page.CartDataOption, order: XOrder) => futuring(house, async () => {
@@ -140,9 +116,9 @@ const func = {
         await open_of_product.view_buy(must_one(v.product), ps)
     })
 }
-
+// 
 const pan_msg = { idx: 22, hui: <ElePanHui>{ opacity: 0.4 } }
-
+//
 const isphone = computed((): boolean => uiGetters.isphone)
 const ispc = computed((): boolean => uiGetters.ispc)
 const w_clazz = computed((): string => {

@@ -4,8 +4,6 @@ import net_tool from "@/tool/http/net_tool";
 import { netser } from "@/tool/http/netser";
 import { netip } from "@/tool/uni/uni-global";
 import { is_str } from "@/tool/util/typed";
-import { is_nice_arr } from "@/tool/util/valued";
-
 
 const plus = async (param: ONE): Promise<XOrder> => {
     const src: NET_RES = await netser(business.pos('checkout', 'add', param), BUSINESS)

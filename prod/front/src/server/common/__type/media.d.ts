@@ -15,4 +15,6 @@ interface Media {
     
     product: string | number
     user: string | number
+
+    userId: string
 }

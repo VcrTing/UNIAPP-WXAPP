@@ -1,6 +1,6 @@
 <template>
     <view class="pb-x1">
-        <view class="pt-row pb-s mxw-pc" v-if="is_open_filter">
+        <view class="pt-row pb-s mxw-pc">
             <view class="fx-i softer">
                 <view class="btn-def py px-row ts c-p softer" v-for="(v, i) in tabs" :key="i"
                     @tap="func.switchTab(v)"
@@ -9,8 +9,7 @@
                 </view>
             </view>
         </view>
-        <view v-else class="pt-row"></view>
-        <OScrollY :styie="{ 'height': 'calc(100vh - 8.58rem)' }">
+        <OScrollY :styie="{ 'height': 'calc(100vh - 9.58rem)' }">
             <CoViDataLoading :ioading="aii.ioading" :items="aii.visuals" @refresh="funn.init">
                 <WvIndexConList v-if="is_index_mode" :items="products"/>
                 <WvPvConList v-else :items="products"/>
@@ -39,7 +38,7 @@ import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 
 const prp = defineProps<{
     is_index_mode: boolean,
-    is_open_filter?: boolean
+    // is_open_filter?: boolean
 }>()
 
 const styie = computed((): ONE => {
@@ -55,7 +54,7 @@ const styie = computed((): ONE => {
         }
     }
     return {
-        'height': '2rem'
+        'height': '8rem'
     }
 })
 
