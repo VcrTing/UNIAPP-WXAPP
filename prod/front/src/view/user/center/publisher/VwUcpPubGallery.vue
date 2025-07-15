@@ -9,8 +9,9 @@
 </template>
 
 <script setup lang="ts">
-import ODiv from '@/cake/button/div/ODiv.vue';
+import { DEV_GALLERY_MOD } from '@/conf/conf-dev';
 import mock_user from '@/server/mock/user/mock_user';
+import pan_tooi from '@/tool/app/pan_tooi';
 import { computed } from 'vue';
 
 // const prp = defineProps<{}>()
@@ -21,7 +22,7 @@ const gallery = computed(() => {
 const funn = {
     view: (v: ONE) => {
         const many = gallery.value
-        
+        pan_tooi.open_def_b(DEV_GALLERY_MOD.PAN.idx, DEV_GALLERY_MOD.PAN.hui)
     }
 }
 </script>

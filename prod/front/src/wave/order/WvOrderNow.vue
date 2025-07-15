@@ -12,7 +12,7 @@
         <OScrollY :styie="{ 'height': 'calc(100vh - 8.58rem)' }">
             <CoViDataLoading :ioading="aii.ioading" :items="aii.orders" @refresh="funn.fetching">
                 <view class="mxw-pc">
-                    <view v-for="(v, i) in aii.orders" class="pb-row">
+                    <view v-for="(v, i) in aii.orders" class="pb-row softer">
                         <view class="bg-con pt-s" :class="isphone ? '' : 'br'">
                             <view v-for="(n, m) in order_tool.getcarts(v)" :k="m"
                                 :class="w_clazz"
@@ -36,7 +36,7 @@
             </CoViDataLoading>
             <CkSpace :h="16"/>
         </OScrollY>
-        <WvOrderMsgPan :idx="pan_msg.idx" :v="house.view"/>
+        <WvOrderMsgPan v-if="aii.init" :idx="pan_msg.idx" :v="house.view"/>
     </view>
 </template>
 
@@ -44,7 +44,7 @@
 import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
 import server_order from '@/server/order/server_order';
-import { futuring, promise } from '@/tool/util/future';
+import { futuring, promise, timeout } from '@/tool/util/future';
 import { must_arr, must_int, must_one } from '@/tool/util/valued';
 import { computed, nextTick, reactive, watch } from 'vue';
 import order_tool from '@/tool/modules/order_tool';
@@ -69,7 +69,9 @@ const def = <ONE>{ name: '全部', v: 0 }
 const house = reactive({
     tabs: [ def, { name: '已购商品', v: 1 } ], ioading: false, view: <XOrder>{ }
 })
-const aii = reactive({ ioading: false, pager: net_tool.__pager(), orders: <XOrder[]>[ ] })
+const aii = reactive({ 
+    init: false,
+    ioading: false, pager: net_tool.__pager(), orders: <XOrder[]>[ ] })
 // 
 const funn = {
     next: async () => {
@@ -78,7 +80,7 @@ const funn = {
     __fetching: async () => {
         if (authGetters.is_login) {
             const items: XOrder[] = await server_order.mine({ }, aii.pager)
-            if (items && items.length) {
+            if (items) {
                 aii.orders = items
             }
         }
@@ -88,6 +90,7 @@ const funn = {
     }),
     init: () => promise(() => {
         funn.fetching()
+        timeout(() => aii.init = false, 200)
     }),
     chose: (one: ONE) => { 
         if (prp.tab.inner === one.v) {

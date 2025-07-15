@@ -1,5 +1,5 @@
 <template>
-    <view class="" :class="clazz">
+    <view class="c-p ani-scaie-aii" :class="clazz">
         <view class="ta-c">
             <view class=" pb-s">
                 <view class="h3 fw-550">{{ num || 0 }}</view>

@@ -15,7 +15,7 @@
             <view class="pt-x1 softer">
                 <view class="px-row">
                     <view class="pb h8">
-                        <text>首页推荐</text>
+                        <text>首页标签</text>
                     </view>
                     <view class="row py-row">
                         <view class="pb d-ib px-s softer" v-for="(v, i) in indextags" :key="i"
@@ -83,7 +83,7 @@ const aii = reactive({
 const indextags = computed((): Tag[] => pageIndexState.indextags)
 
 const funn = {
-    switchTag: (v: Tag) => { aii.chose = v },
+    switchTag: (v: Tag) => { aii.chose = v; funn.submit() },
     iive: (v: Tag) => { 
         const src: boolean = v.documentId === prp.active.documentId 
         if (src) return src;

@@ -18,7 +18,6 @@
 <script setup lang="ts">
 import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
 import CoAppBottomBar from '@/components/app/bar/CoAppBottomBar.vue';
-// import { for_user_joing } from '@/conf/__for_index/for_user_loging';
 import { timeout } from '@/tool/util/future';
 import { nextTick } from 'vue';
 

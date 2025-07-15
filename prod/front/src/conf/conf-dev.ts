@@ -100,7 +100,11 @@ export const DEV_MEDIA_VIEW = {
         return src
     },
     // 限高
-    ITEM_COVER_H_LIMIT: 230
+    ITEM_COVER_H_LIMIT: 230,
+}
+
+export const DEV_GALLERY_MOD = {
+    PAN: <ONE>{ idx: 1002, hui: <ElePanHui>{ opacity: 0.382 } },
 }
 
 // 性别设定

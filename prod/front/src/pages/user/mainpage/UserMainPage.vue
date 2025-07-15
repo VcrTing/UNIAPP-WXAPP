@@ -58,6 +58,12 @@ const funn = {
 nextTick(funn.init)
 </script>
 
+<style lang="sass">
+@use '../../../ui/sass/theme/primary/__conf' as *
+page, uni-page-body
+	background: $pri-pag-bg
+</style>
+
                 <!--
                 <CoBomCenterBtn @go="funn.love" :clazz="'mh-btn btn-wht-s'">
                     <view class="fx-c">

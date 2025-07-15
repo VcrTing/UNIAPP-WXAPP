@@ -8,22 +8,22 @@
                         :clazz="'ts py px-row'">
                         <text class="fw-550">{{ v.name }}</text>
                     </OButton>
-                    <view @tap="aii.iive = v.v" class="ts py px-row fx-aii-btn-pri-iht tid c-p" v-else>{{ v.name }}</view>
+                    <view @tap="aii.iive = v.v" class="ts py px-row fx-aii-btn-def tid c-p" v-else>{{ v.name }}</view>
                 </view>
             </view>
         </CoAppTopBar>
-        <view class="">
-            <view v-if="aii.iive == 0">
+        <view>
+            <view v-if="aii.iive == 0" class="softer">
                 <view class="pt-s"></view>
                 <OScrollY :styie="{
                     'height': 'calc(100vh - 8em)'
                 }">
-                        <CoViDataLoading :ioading="aii.ioading" :items="carts" @refresh="funn.init">
-                            <WvCartNow :carts="carts" :choises="aii.choises"/>
-                        </CoViDataLoading>
+                    <CoViDataLoading :ioading="aii.ioading" :items="carts" @refresh="funn.init">
+                        <WvCartNow :carts="carts" :choises="aii.choises"/>
+                    </CoViDataLoading>
                 </OScrollY>
             </view>
-            <view v-else>
+            <view v-else class="softer">
                 <WvProductVisual :is_index_mode="true"/>
             </view>
         </view>
@@ -33,7 +33,6 @@
 
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
-import CkSpace from '@/cake/content/CkSpace.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import CoAppBottomBar from '@/components/app/bar/CoAppBottomBar.vue';
 import CoAppTopBar from '@/components/app/bar/CoAppTopBar.vue';

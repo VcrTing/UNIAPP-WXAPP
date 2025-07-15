@@ -7,67 +7,69 @@
             </view>
         </Ov>
         <view class="mxw-pc">
-            <view v-for="(v, i) in carts" :key="i" class="pb-row" 
+            <view v-for="(v, i) in carts" :key="i" class="pb-row softer" 
             :class="w_clazz">
                 <view class="fx-s bg-con py"  :class="isphone ? '' : 'br'">
                     <view class="px-row py-x1" @tap="funn.choise(v)">
                         <OCheckBox :clazz="'fs-s'" :iive="func.has(v)" :clazz_die="'btn-def'"/>
                     </view>
                     <view class="fx-1">
-                        <CoMoCartProductItem :v="v" @view="func.view" :isphone="isphone"
+                        <CoMoCartProductItem :v="v" @view="func.view" 
+                            :isphone="isphone" :ispad="ispad" :ispc="ispc"
                             @add="func.add" @min="func.min" />
                     </view>
                 </view>
             </view>
         </view>
         <!-- -->
-        <CkSpace :h="3"/>
-        <view class="pt"></view>
-        <view class="mh-app-bottom-bar"></view>
-        <view class="abs-b i-0 w-100 ps-f-imp bg-con py-s softer">
-            <view class="w-100 fx-s mxw-pc">
-                <view class="fx-i px-row softer c-p py-n" @tap="funn.choise_aii">
-                    <view class="softer" v-if="me.ioading"><CkIoading/></view>
-                    <OCheckBox v-else :clazz="'fs-s softer'" :iive="me.aii_choise" :clazz_die="'btn-def'"/>
-                    <view class="pi pr-x2"><text class="tiw">全选</text></view>
-                </view>
-                <view class="fx-r">
-                    <view class="">
-                        <text class="fs-n">合计:</text>
-                        <text class="money">
-                            <text class="fs-n">￥</text>
-                            <text class="h5 fw-550">{{ cart_tool.cpu_prices(cartchoise) }}</text>
-                        </text>
-                    </view>
-                    <view class="px-row">
-                        <OButton color="pri" clazz="mh-btn-x1 mw-8em br-imp"
-                            :ioading="me.ioading" @tap="funn.submit()"
-                        >
-                            <text class="softer">结算</text>
-                            <text v-if="is_nice_arr(choises)" class="pi-t softer">({{ choises.length }})</text>
-                        </OButton>
-                    </view>
-                </view>
-            </view>
+        <view v-if="me.init_long">
+            <CkSpace :h="3"/>
             <view class="pt"></view>
             <view class="mh-app-bottom-bar"></view>
+            
+            <view class="abs-b i-0 w-100 ps-f-imp bg-con py-s softer">
+                <view class="w-100 fx-s mxw-pc">
+                    <view class="fx-i px-row softer c-p py-n" @tap="funn.choise_aii">
+                        <view class="softer" v-if="me.ioading"><CkIoading/></view>
+                        <OCheckBox v-else :clazz="'fs-s softer'" :iive="me.aii_choise" :clazz_die="'btn-def'"/>
+                        <view class="pi pr-x2"><text class="tiw">全选</text></view>
+                    </view>
+                    <view class="fx-r">
+                        <view class="">
+                            <text class="fs-n">合计:</text>
+                            <text class="money">
+                                <text class="fs-n">￥</text>
+                                <text class="h5 fw-550">{{ cart_tool.cpu_prices(cartchoise) }}</text>
+                            </text>
+                        </view>
+                        <view class="px-row">
+                            <OButton color="pri" clazz="mh-btn-x1 mw-8em br-imp"
+                                :ioading="me.ioading" @tap="funn.submit()"
+                            >
+                                <text class="softer">结算</text>
+                                <text v-if="is_nice_arr(choises)" class="pi-t softer">({{ choises.length }})</text>
+                            </OButton>
+                        </view>
+                    </view>
+                </view>
+                <view class="pt"></view>
+                <view class="mh-app-bottom-bar"></view>
+            </view>
         </view>
 
-        <CoCoConfirm :idx="pan_cof.idx" :ioading="me.ioading" @submit="func.min"/>
+        <CoCoConfirm v-if="me.init_long" :idx="pan_cof.idx" :ioading="me.ioading" @submit="func.min"/>
     </view>
 </template>
 
 <script setup lang="ts">
 import OButton from '@/cake/button/OButton.vue';
-import OButtonTag from '@/cake/button/OButtonTag.vue';
 import Ov from '@/cake/button/touch/Ov.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import { DEV_DOC_ID } from '@/conf/conf-dev';
 import { pageCartDispatch } from '@/memory/page';
 import cart_tool from '@/tool/modules/cart_tool';
-import { future, futuring, promise } from '@/tool/util/future';
+import { future, futuring, promise, timeout } from '@/tool/util/future';
 import { is_nice_arr, must_arr, must_one } from '@/tool/util/valued';
-import UiI from '@/ui/element/i/UiI.vue';
 import { computed, nextTick, reactive } from 'vue';
 import CoMoCartProductItem from './__component/CoMoCartProductItem.vue';
 import { tipwarn } from '@/tool/uni/uni-global';
@@ -84,7 +86,8 @@ const prp = defineProps<{
     choises: string[]
 }>()
 
-const me = reactive({ ioading: false, edit: <Page.CartDataOption>{ }, aii_choise: false })
+const me = reactive({ ioading: false, init: false, init_long: false,
+    edit: <Page.CartDataOption>{ }, aii_choise: false })
 const cartchoise = computed((): Page.CartDataOptions => { return cart_tool.coii_choise_carts(prp.carts, prp.choises) })
 
 const func = {
@@ -159,6 +162,8 @@ const funn = {
     }),
     init: () => futuring(me, async () => {
         funn.is_choise_aii()
+        timeout(() => me.init = true, 200)
+        timeout(() => me.init_long = true, 400)
     })
 }
 
@@ -166,6 +171,7 @@ nextTick(funn.init)
 const pan_cof = { idx: 44, hui: <ElePanHui>{ opacity: 0.4 } }
 
 const isphone = computed((): boolean => uiGetters.isphone)
+const ispad = computed((): boolean => uiGetters.ispad)
 const ispc = computed((): boolean => uiGetters.ispc)
 const w_clazz = computed((): string => {
     if (isphone.value) return 'w-100'

@@ -76,6 +76,14 @@ const mine_history = async (): Promise<Product[]> => {
     return us
 }
 
+// 某人的
+const she_working = async (userid: number): Promise<Product[]> => {
+    const param: ONE = { }
+    srp_p.__eq(param, 'user', userid)
+    const us: Product[] = await fetching(param, net_tool.__pager(), relations_of_items)
+    return us
+}
+
 // 加以阅读量
 const view1 = async (one: Product): Promise<Product> => {
     if (!one || !one.documentId) {
@@ -92,5 +100,7 @@ export default {
     index,
     index_recommond,
 
-    view1
+    view1,
+
+    she_working
 }

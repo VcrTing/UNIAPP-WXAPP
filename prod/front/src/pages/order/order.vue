@@ -8,7 +8,7 @@
                 </view>
                 <OSafeAreaTop/>
                 <!-- -->
-                <view class="mxw-pc" :class="isphone ? 'px-row' : ''">
+                <view class="mxw-pc softer" :class="ispc ? '' : 'px-row'">
                     <view class="fx-i ps-r zi-n py-s ts">
                         <view v-for="(v, i) in aii.tabs" :key="i" class="ts">
                             <OButton :color="(tab.main == v.v) ? 'wht-s' : 'wht-s'" :weak="true" v-if="tab.main == v.v" 
@@ -23,16 +23,13 @@
                 </view>
             </view>
         </OAppTopBar>
-        <view class="">
-                <view v-if="tab.main == 0">
-                    <WvOrderNow :tab="tab"/>
-                    <!--<OScrollY :styie="{ 'height': 'calc(100vh - 4.58rem)' }">
-                        
-                    </OScrollY>-->
-                </view>
-                <view v-if="tab.main == 1">
-                    <WvProductVisual :is_index_mode="true" :is_open_filter="true"/>
-                </view>
+        <view class="softer">
+            <view v-if="tab.main == 0">
+                <WvOrderNow :tab="tab"/>
+            </view>
+            <view v-if="tab.main == 1">
+                <WvProductVisual :is_index_mode="true" :is_open_filter="true"/>
+            </view>
         </view>
         <!--
         -->
@@ -44,7 +41,6 @@
 import OAppTopBar from '@/cake/app/bar/OAppTopBar.vue';
 import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
 import OButton from '@/cake/button/OButton.vue';
-import CkSpace from '@/cake/content/CkSpace.vue';
 import CoAppBottomBar from '@/components/app/bar/CoAppBottomBar.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
 import { orderDispatch, orderState, uiGetters, uiState } from '@/memory/global';
@@ -97,11 +93,15 @@ page, uni-page-body
 	background: $pri-pag-bg
 </style>
 
-                <!--
-                <view>
-                    <OButtonDef>
-                        <text class="fs-n pr-t">深圳</text>
-                        <UiI clazz="fs-s d-ib" :i="'b'"/>
-                    </OButtonDef>
-                </view>
-                -->
+    <!--<OScrollY :styie="{ 'height': 'calc(100vh - 4.58rem)' }">
+        
+    </OScrollY>-->
+    
+    <!--
+    <view>
+        <OButtonDef>
+            <text class="fs-n pr-t">深圳</text>
+            <UiI clazz="fs-s d-ib" :i="'b'"/>
+        </OButtonDef>
+    </view>
+    -->

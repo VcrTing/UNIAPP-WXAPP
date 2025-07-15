@@ -1,7 +1,7 @@
 <template>
     <view class="px-row">
         <view :class="isphone ? '' : 'row'">
-            <view class="pt-x1" v-for="(v, i) in items" :key="i"
+            <view class="pt-s" v-for="(v, i) in items" :key="i"
                 :class="w_clazz">
                 <CoMoIndexProductSearchItem :v="v"  @view="funn.view"/>
             </view>

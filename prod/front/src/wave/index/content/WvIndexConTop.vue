@@ -1,7 +1,7 @@
 <template>
     <view>
         <view class=" ps-r zi-n">
-            <view class="bg-wht-t bf">
+            <view class="bf-x1">
                 <OScrollX clazz="mxw-pc">
                     <view class="pi-row pb-s pt-s">
                         <view class="d-ib pr" v-for="(v, i) in menus" :key="i"
@@ -21,7 +21,7 @@
                 <view class="fx-s fx-b mxw-pc">
                     <view class="">
                         <view class="pb pt-s pi-row d-ib">
-                            <OButtonTag @tap="func.openChange" color="wht-s" clazz="px-row br-rnd py-t tid softer fx-c">
+                            <OButtonTag @tap="func.openChange" color="wht-t" clazz="px-row br-rnd py-t tid softer fx-c">
                                 <text class="fs-n pr-s">{{ change.tab.name }}</text>
                                 <CkIoading v-if="ioading" color="tit"/>
                                 <UiI i="change" v-else clazz="d-ib tiw fs-w"/>
@@ -30,7 +30,7 @@
                     </view>
                     <view>
                         <view class="pb pt-s px-row" @tap="func.openTags">
-                            <OButtonTag color="wht-s" class=" px-col br-t fx-aii-btn-def c-p"><UiI clazz="tiw fs-w" i="b"/> </OButtonTag>
+                            <OButtonTag color="wht-t" class=" px-col br-t fx-aii-btn-def c-p"><UiI clazz="tiw fs-w" i="b"/> </OButtonTag>
                         </view>
                     </view>
                 </view>
@@ -64,7 +64,7 @@ const prp = defineProps<{
     change: ONE, ioading: boolean
 }>()
 const deftag: Tag = def_tag.index
-const hottag: Tag = def_tag.hot
+const sectag: Tag = def_tag.free
 
 const aii = reactive({
     choses: <Tag[]> [ ], init: false,
@@ -119,7 +119,7 @@ const funn = {
 
 const indextags = computed((): Tag[] => pageIndexState.indextags)
 const menus = computed((): Tag[] => {
-    const ms = [ deftag, hottag, ...aii.choses, ...must_arr(indextags.value) ]
+    const ms = [ deftag, sectag, ...aii.choses, ...must_arr(indextags.value) ]
     return ms.map((e: Tag) => {
         e['__clazz_die'] = 'px-n tid fx-aii-btn-wht'
         e['__clazz_iive'] = 'px-x1 btn-pri'

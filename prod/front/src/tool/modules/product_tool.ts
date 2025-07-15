@@ -1,4 +1,4 @@
-import { DATA_ACTIVITY_STATUS, DATA_ACTIVITY_TYPED_SM, DATA_PRODUCT_TYPED, DATA_PRODUCT_TYPED_FREE, DATA_PRODUCT_TYPED_INV_ALONE, DATA_PRODUCT_TYPED_INV_INFINI, DATA_PRODUCT_TYPED_INV_MANY, DATA_PRODUCT_TYPED_SM, DATA_PUBLISH_LIMIT } from "@/conf/conf-datas"
+import { DATA_ACTIVITY_STATUS, DATA_ACTIVITY_TYPED_SM, DATA_PRODUCT_TYPED, DATA_PRODUCT_TYPED_FREE, DATA_PRODUCT_TYPED_INV, DATA_PRODUCT_TYPED_INV_ALONE, DATA_PRODUCT_TYPED_INV_INFINI, DATA_PRODUCT_TYPED_INV_MANY, DATA_PRODUCT_TYPED_SM, DATA_PUBLISH_LIMIT } from "@/conf/conf-datas"
 import { arrfind, arrgotv, arrhas, arrimit, arrsort } from "../util/iodash"
 import { deepcopy, formfiimit, group_search_txt, must_arr, must_int, must_one, positive } from "../util/valued"
 import { authGetters } from "@/memory/global"
@@ -120,12 +120,6 @@ import product_build_tool from "./func/product_build_tool"
         const it: number = must_int(v.invTyped)
         return (it === DEV_PRODUCT.INV_TYPED.INFINI)
     }
-    const getinv_typed_txt = (v: Product): string => {
-        const it: number = must_int(v.invTyped)
-        if (it === DEV_PRODUCT.INV_TYPED.INFINI) return DATA_PRODUCT_TYPED_INV_INFINI.name
-        if (it === DEV_PRODUCT.INV_TYPED.MANY) return DATA_PRODUCT_TYPED_INV_MANY.name
-        return DATA_PRODUCT_TYPED_INV_ALONE.name
-    }
     const show_inv_many = (v: Product): boolean => {
         if (is_sm(v)) {
             return is_inv_many(v)
@@ -140,6 +134,22 @@ import product_build_tool from "./func/product_build_tool"
             if (jj.v === __v) return jj.name
         }
         return DATA_PRODUCT_TYPED_FREE.name
+    }
+    const getinv_typed_sub = (v: Product): string => {
+        const __v: number = must_int(v.invTyped) // || DATA_PRODUCT_TYPED_FREE.v
+        for (let j= 0; j< DATA_PRODUCT_TYPED_INV.length; j++ ) {
+            const jj = DATA_PRODUCT_TYPED_INV[j]
+            if (jj.v === __v) return jj.sub + ''
+        }
+        return DATA_PRODUCT_TYPED_INV_INFINI.sub + ''
+    }
+    const getinv_typed_txt = (v: Product): string => {
+        const __v: number = must_int(v.invTyped) // || DATA_PRODUCT_TYPED_FREE.v
+        for (let j= 0; j< DATA_PRODUCT_TYPED_INV.length; j++ ) {
+            const jj = DATA_PRODUCT_TYPED_INV[j]
+            if (jj.v === __v) return jj.name + ''
+        }
+        return DATA_PRODUCT_TYPED_INV_INFINI.name + ''
     }
 
     const is_review_no = (v: Product): boolean => {
@@ -166,7 +176,9 @@ export default {
     
     init_inv,
     is_review_no,
+
     getinv_typed_txt,
+    getinv_typed_sub,
     
     is_inv_many,
     is_inv_alone,

@@ -1,7 +1,7 @@
 <template>
     <view>
         <view v-if="ispad" :style="{
-            height: 'calc(2vh)'
+            height: 'calc(8vh)'
         }">
         </view>
         <view class="fx-c">

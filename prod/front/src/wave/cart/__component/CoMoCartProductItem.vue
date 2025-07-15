@@ -1,6 +1,6 @@
 <template>
     <view class="fx-i">
-        <view class="w-22 o-h" :class="isphone ? 'h-9vh br-1' : 'h-11vh br-t'" @tap="emt('view', v.product)">
+        <view class="o-h" :class="ispc ? 'w-22 h-11vh br-1' : 'w-22 h-9vh br-t'" @tap="emt('view', v.product)">
             <CoImg clazz="h-100" :src="product_tool.getcover(v.product).urlSmall"/>
         </view>
         <view class="fx-1">
@@ -58,6 +58,8 @@ import product_tool from '@/tool/modules/product_tool';
 
 const prp = defineProps<{
     v: Page.CartDataOption,
+    ispc: boolean,
+    ispad: boolean,
     isphone: boolean
 }>()
 

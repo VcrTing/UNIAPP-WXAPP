@@ -41,7 +41,7 @@ const byids = async (ids: string[]): Promise<User[]> => {
 
 const __main_page = async (user: User): Promise<UserMainPage> => {
     console.log("搜索用户的主页 =", user)
-    const medias: Media[] = await server_medias.mainpage(user.id);
+    // const medias: Media[] = await server_medias.mainpage(user.id);
     const statistic: UserStatistic = await server_user_statistic.byuser(user.id)
     /*
     const src = <UserMainPage | ONE>{
@@ -53,7 +53,7 @@ const __main_page = async (user: User): Promise<UserMainPage> => {
     src['documentId'] = user.documentId
     src['documentIdStatistic'] = statistic.documentId
     */
-   const src: UserMainPage = user_tool.group_main_page(statistic, user, medias);
+   const src: UserMainPage = user_tool.group_main_page(statistic, user, [ ]);
     return src as UserMainPage;
 }
 

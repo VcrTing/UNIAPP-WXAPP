@@ -3,7 +3,8 @@
 	<PageLayout>
 		<UserCenterLayout :h="72.8" :clazz_con="''">
 			<template #bg>
-				<CoImg :src="user.background || info.userDefBackground" clazz="h-100"/>
+				<CoImg :src="user.background || info.userDefBackground" 
+					:clazz="isphone ? 'h-62vh' : 'h-100vh'"/>
 			</template>
 			<template #top>
 				<VwUserCenterTop/>

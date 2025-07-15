@@ -1,7 +1,7 @@
 
 import server_user from '@/server/user/user/server_user';
 import { arrfind, arrfindi } from '@/tool/util/iodash';
-import { formfii, is_nice_one, must_one } from '@/tool/util/valued';
+import { formfii, is_nice_one, must_arr, must_one } from '@/tool/util/valued';
 import { Store, createStore } from 'vuex';
 import memory_tool from '../__func/memory_tool';
 import server_user_statistic from '@/server/user/user/server_user_statistic';
@@ -46,7 +46,9 @@ const _s: Store<SomoneStore> = createStore({
         num: 0,
         mainpage: <UserMainPage>{ },
         mainpages: <UserMainPage[]>[ ],
-        mainpage_of_view: <UserMainPage>{ }
+        mainpage_of_view: <UserMainPage>{ },
+
+        gallery: <Media[]>[ ]
     },
     getters: {
 
@@ -110,6 +112,11 @@ const _s: Store<SomoneStore> = createStore({
             async_to_house(state, commit, res, nus)
             // commit('__change', [ 'mainpage_of_view', res ]);
             return res
+        },
+
+        // 图册
+        addgallery: async ({ state, commit }, gallery: Media[]) => {
+            state.gallery = must_arr(gallery)
         }
     }
 }) 

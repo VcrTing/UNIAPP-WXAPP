@@ -29,8 +29,8 @@
                     </view>
                 </view>
             </view>
-            <view class="user-info-card pt-x2 pb-x1 br bf">
-                <view class="pt-x2 br o-h">
+            <view class="user-info-card pt-x2 pb-x1 br bf mxw-pc" v-if="aii.init">
+                <view class="pt-x2 br o-h softer">
                     <CkInpItem clazz="pt pb-s c-uic-item br-tr br-ti" :tit="'个人昵称'">
                         <input class="inp-app h7" v-model="form.nickName" @blur="emt('submit')" placeholder="请输入昵称" />
                     </CkInpItem>
@@ -56,21 +56,18 @@
 </template>
 
 <script setup lang="ts">
-import OSafeArea from '@/cake/app/safearea/OSafeArea.vue';
-import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
 import OButton from '@/cake/button/OButton.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import CkInpItem from '@/cake/input/wrapper/CkInpItem.vue';
 import CoImg from '@/components/media/img/CoImg.vue';
 import { appState, authDispatch } from '@/memory/global';
 import server_upload_media from '@/server/media/server_upload_media';
-import server_me from '@/server/user/server_me';
 import auth_tool from '@/tool/modules/common/auth_tool';
 import { open_choise_img_async } from '@/tool/uni/uni-app';
 import { tiperr, tipsucc } from '@/tool/uni/uni-global';
-import { future, futuring } from '@/tool/util/future';
+import { future, futuring, timeout } from '@/tool/util/future';
 import UiI from '@/ui/element/i/UiI.vue';
-import { computed, reactive } from 'vue';
+import { computed, nextTick, reactive } from 'vue';
 
 const prp = defineProps<{
     form: ONE
@@ -78,19 +75,17 @@ const prp = defineProps<{
 
 const info = computed((): AppInfo => appState.info) 
 
-const aii = reactive({
-    ioading: false
-})
-const me = reactive({
-    ioading: false
-})
+const aii = reactive({ ioading: false, init: false })
+const me = reactive({ ioading: false })
 const emt = defineEmits([ 'submit' ])
 
+const func = {
+    init: () => {
+        timeout(() => aii.init = true, 200)
+    }
+}
+nextTick(func.init)
 const funn = {
-    change: () => futuring(me, async () => {
-
-        emt('submit')
-    }),
 
     __change: (
         succFunc: Function

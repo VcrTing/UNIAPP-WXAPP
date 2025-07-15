@@ -37,8 +37,7 @@ import { orderState } from '@/memory/global';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 
 const prp = defineProps<{
-    is_index_mode: boolean,
-    // is_open_filter?: boolean
+    is_index_mode: boolean
 }>()
 
 const styie = computed((): ONE => {
@@ -124,8 +123,6 @@ const tabs = [ DATA_TAB_ALL , ...DATA_PRODUCT_TYPED]
 
 const num = computed((): number => orderState.num)
 watch(num, () => {
-    if (aii.visuals.length <= 1) {
-        funn.init()
-    }
+    if (aii.visuals.length <= 1) { funn.init() }
 })
 </script>

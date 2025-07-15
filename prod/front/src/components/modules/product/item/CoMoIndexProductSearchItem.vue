@@ -1,32 +1,31 @@
 <template>
     <view class="">
         <view class="br o-h">
-            
             <view class="ps-r zi-t">
                 <view class="fx-aii-btn-def" @tap="emt('view', v)">
                     <view class="fx-i br" v-if="product_tool.getindex_banner(v, 3).length >= 3">
-                        <view class="w-333 h-17vh d-ib o-h" v-for="(m, n) in product_tool.getindex_banner(v, 3)" :key="n">
-                            <CoImg clazz="h-100 ani-scaie-aii ts" :src="m.url"/>
+                        <view class="w-333 h-18vh d-ib o-h" v-for="(m, n) in product_tool.getindex_banner(v, 3)" :key="n">
+                            <CoImg clazz="h-100 ani-scaie-aii ts c-p" :src="m.url"/>
                         </view>
                     </view>
                     <view class="fx-i br" v-if="product_tool.getindex_banner(v, 3).length <= 2">
-                        <view class="w-50 h-17vh d-ib o-h" v-for="(m, n) in product_tool.getindex_banner(v, 3)" :key="n">
-                            <CoImg clazz="h-100 ani-scaie-aii ts" :src="m.url"/>
+                        <view class="w-50 h-18vh d-ib o-h" v-for="(m, n) in product_tool.getindex_banner(v, 3)" :key="n">
+                            <CoImg clazz="h-100 ani-scaie-aii ts c-p" :src="m.url"/>
                         </view>
                     </view>
                     <view class="fx-i br" v-if="product_tool.getindex_banner(v, 3).length <= 0">
-                        <view class="w-52 h-17vh d-ib o-h">
-                            <view clazz="h-100 ani-scaie-aii ts"></view>
+                        <view class="w-52 h-18vh d-ib o-h">
+                            <view clazz="h-100 ani-scaie-aii ts c-p"></view>
                         </view>
                     </view>
                 </view>
-                <view class="abs-b i-0 w-100 zi-s">
+                <view class="abs-b i-0 w-100 zi-s softer">
                     <view class="bf-wht-s bf fx-s" @tap="emt('view', v)">
                         <view class="pi-x1 ls-x2 py-s">
-                            <text class="fs-s">{{ v.title }}</text>
+                            <text class="fs-s c-p">{{ v.title }}</text>
                         </view>
                         <view class="px-row">
-                            <view class="btn-wht-s br-t px-t fx-c" 
+                            <view class="btn-wht-s br-t px-t fx-c c-p" 
                                 v-if="product_tool.is_sm(v)"
                                 >
                                 <text class="fs-t">￥</text>

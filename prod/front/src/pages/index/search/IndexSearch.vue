@@ -27,11 +27,11 @@
                 </view>
             </view>
         </OAppTopBar>
-        <view class="py-row">
+        <view class="py-row" v-if="aii.init">
             <OScrollY :styie="{
                 height: 'calc(100vh - 6rem)'
             }">
-                <view>
+                <view class="py-s">
                     <CoViDataLoading :ioading="aii.ioading" :items="result.items">
                         <VwIndexSearchPag :items="result.items"/>
                     </CoViDataLoading> 
@@ -57,15 +57,16 @@ import { uiGetters, uiState } from '@/memory/global';
 import server_search from '@/server/common/server_search';
 import net_tool from '@/tool/http/net_tool';
 import uniRouter from '@/tool/uni/uni-router';
-import { futuring, promise } from '@/tool/util/future';
+import { futuring, promise, timeout } from '@/tool/util/future';
 import { is_nice_arr } from '@/tool/util/valued';
 import { storage } from '@/tool/web/storage';
 import UiI from '@/ui/element/i/UiI.vue';
 import VwIndexSearchPag from '@/view/index/search/VwIndexSearchPag.vue';
 import WvIndexBanner from '@/wave/index/WvIndexBanner.vue';
-import { computed, reactive, ref } from 'vue';
+import { computed, nextTick, reactive, ref } from 'vue';
 
 const aii = reactive({
+    init: false,
     prev: '', search: '', ioading: false, pager: net_tool.__pager()
 })
 const result = reactive({
@@ -108,8 +109,10 @@ const funn = {
         if (k) {
             aii.search = k
         }
+        timeout(() => aii.init = true, 300)
     })
 }
+nextTick(funn.init)
 
 const isphone = computed((): boolean => uiGetters.isphone)
 const ispc = computed((): boolean => uiGetters.ispc)
@@ -117,7 +120,6 @@ const h = computed((): number => {
 	if (ispc.value) return 52; return isphone.value ? 0 : 120
 })
 const h_v = computed((): string => { return h.value + 'px' })
-
 const ismall = computed((): boolean => uiGetters.ismall)
 </script>
 

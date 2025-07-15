@@ -35,7 +35,6 @@ import uniRouter from '@/tool/uni/uni-router';
 import { must_arr } from '@/tool/util/valued';
 import { computed, reactive } from 'vue';
 
-
 const prp = defineProps<{
     items: Product[], ioading: boolean
 }>()

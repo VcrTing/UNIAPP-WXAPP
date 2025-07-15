@@ -14,6 +14,7 @@
                 @downrefresh="funn.next"
                 @uprefresh="funn.initing"
                 >
+                <CkSpace v-if="!isphone" :h="1"/>
                 <CoViDataLoading :ioading="index.ioading" :items="aii.items">
                     <WvIndexConList :items="aii.items"/>
                 </CoViDataLoading>
@@ -49,13 +50,15 @@ import server_product from '@/server/product/server_product';
 import WvIndexConTop from './content/WvIndexConTop.vue';
 import def_tag from '@/server/__def/def_tag';
 import { DATA_FILTER_TAB_DEF, DATA_FILTER_TABS } from '@/conf/conf-datas';
+import { DEV_PRODUCT } from '@/conf/conf-dev';
+import { uiGetters } from '@/memory/global';
 
 const prp = defineProps<{
     h: string
 }>()
 
 const deftag: Tag = def_tag.index
-const sectag: Tag = def_tag.smp
+const sectag: Tag = def_tag.free
 
 const aii = reactive({
     ioading: false, tag: deftag,
@@ -83,7 +86,8 @@ const got = {
                 // console.log('开启默认查询模式')
             }
             else if (id === sectag.id) {
-                console.log('开始售卖品查询模式')
+                console.log('开始公开查询模式')
+                srp_p.__eq(res, 'typed', DEV_PRODUCT.TYPED.FREE)
             }
         }
         // 构建排序方式
@@ -150,10 +154,11 @@ nextTick(func.init)
 const scrolloptions = computed((): OScrollOptions => {
     return {
         domid: 'index_scroll',
-        iimit: 10,
+        iimit: 20,
         trigger: index.trigger,
         ioading: index.ioading
     }
 })
 
+const isphone = computed((): boolean => uiGetters.isphone)
 </script>

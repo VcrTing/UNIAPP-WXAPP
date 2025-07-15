@@ -12,7 +12,29 @@
                 </view>
             </view>
         </view>
-        <view v-if="!isphone" class="pr-s fx-s fx-t">
+        <view v-else-if="ispad" class="pr-s fx-s fx-t">
+            <view class="w-25 d-ib">
+                <view v-for="(v, i) in ps1" :key="i" class="br pb-s pi-s softer">
+                    <CoMoIndexProductItem :w="w_item" :v="v" :joins="joins" @detail="funn.detail"/>
+                </view>
+            </view>
+            <view class="w-25 d-ib">
+                <view v-for="(v, i) in ps2" :key="i" class="br pb-n pi-s softer">
+                    <CoMoIndexProductItem :w="w_item" :v="v" :joins="joins" @detail="funn.detail"/>
+                </view>
+            </view>
+            <view class="w-25 d-ib">
+                <view v-for="(v, i) in ps3" :key="i" class="br pb-n pi-s softer">
+                    <CoMoIndexProductItem :w="w_item" :v="v" :joins="joins" @detail="funn.detail"/>
+                </view>
+            </view>
+            <view class="w-25 d-ib">
+                <view v-for="(v, i) in ps4" :key="i" class="br pb-n pi-s softer">
+                    <CoMoIndexProductItem :w="w_item" :v="v" :joins="joins" @detail="funn.detail"/>
+                </view>
+            </view>
+        </view>
+        <view v-else class="pr-s fx-s fx-t">
             <view class="w-20 d-ib">
                 <view v-for="(v, i) in ps1" :key="i" class="br pb-s pi-s softer">
                     <CoMoIndexProductItem :w="w_item" :v="v" :joins="joins" @detail="funn.detail"/>
@@ -52,14 +74,23 @@ import { computed, reactive } from 'vue';
 const prp = defineProps<{ items: Product[] }>()
 
 const isphone = computed((): boolean => uiGetters.isphone)
+const ispad = computed((): boolean => uiGetters.ispad)
+const ispc = computed((): boolean => uiGetters.ispc)
 
-const ps1 = computed((): Product[] => { return funn.feed(prp.items, 1, aii.wpnum) })
-const ps2 = computed((): Product[] => { return funn.feed(prp.items, 2, aii.wpnum) })
-const ps3 = computed((): Product[] => { return funn.feed(prp.items, 3, aii.wpnum) })
-const ps4 = computed((): Product[] => { return funn.feed(prp.items, 4, aii.wpnum) })
-const ps5 = computed((): Product[] => { return funn.feed(prp.items, 5, aii.wpnum) })
+const wpnum = computed((): number => {
+    if (isphone.value) return 2;
+    if (ispad.value) return 4;
+    return 5
+})
 
-const aii = reactive({ ioading: false, wpnum: isphone.value ? 2 : 5 })
+const ps1 = computed((): Product[] => { return funn.feed(prp.items, 1, wpnum.value) })
+const ps2 = computed((): Product[] => { return funn.feed(prp.items, 2, wpnum.value) })
+const ps3 = computed((): Product[] => { return funn.feed(prp.items, 3, wpnum.value) })
+const ps4 = computed((): Product[] => { return funn.feed(prp.items, 4, wpnum.value) })
+const ps5 = computed((): Product[] => { return funn.feed(prp.items, 5, wpnum.value) })
+
+
+const aii = reactive({ ioading: false })
 const joins = computed((): ActivityJoin[] => {
     return orderState.join_of_mine || [ ]
 })
@@ -85,9 +116,8 @@ const funn = {
     }
 }
 
-const ispc = computed((): boolean => uiGetters.ispc)
 const w_xs = computed((): number => {
-    return 1 / (aii.wpnum || 1)
+    return 1 / (wpnum.value || 1)
 })
 const w_item = computed((): number => {
     return w_xs.value * uiState.w;

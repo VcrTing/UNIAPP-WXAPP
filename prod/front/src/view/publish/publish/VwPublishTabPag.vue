@@ -21,7 +21,7 @@
             </view>
             <view class="zi-t bd-b w-100 bd-c-s "></view>
         </view>
-        <view>
+        <view class="softer">
             <view v-if="aii.iive == 0" class="py-row">
                 <VwPptPagWorking :items="working" :ioading="aii.ioading"/>
             </view>
@@ -29,14 +29,14 @@
                 <VwPptPagWarehouse :items="waiting" :ioading="aii.ioading"/>
             </view>
             <view v-if="aii.iive == 2" class="py-row">
-                <VwPptPagTakeOff :items="takeoff" :ioading="aii.ioading"/>
+                <VwPptPagTakeOff :items="takeoff" :ioading="aii.ioading" @refresh="funn.freshTakeoff()"/>
             </view>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref, watch } from 'vue';
+import { nextTick, reactive, ref } from 'vue';
 import VwPptPagWorking from './pag/VwPptPagWorking.vue';
 import VwPptPagWarehouse from './pag/VwPptPagWarehouse.vue';
 import { future, timeout } from '@/tool/util/future';
@@ -112,5 +112,5 @@ const func = {
     })
 }
 
-onMounted(func.init)
+nextTick(func.init)
 </script>

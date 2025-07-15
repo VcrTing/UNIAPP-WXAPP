@@ -1,6 +1,6 @@
 <template>
     <view class=" bf-s">
-        <view class="pr-row">
+        <view class="">
             <view class="fx-s mxw-pc">
                 <CoMoUcpNumbers />
                 <OButton color="wht-t" @click="funn.edit" :weak="true" :clazz="'py px br-s'">

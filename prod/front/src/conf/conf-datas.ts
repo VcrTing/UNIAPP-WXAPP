@@ -28,9 +28,11 @@ export const DATA_PRODUCT_TYPED = <Conf.Tabs>[
 ]
 // 产品库存类型
 export const DATA_PRODUCT_TYPED_INV_ALONE = <Conf.Tab>{ name: '仅一件库存', v: 2, 
+    sub: '单卖品',
     desc: '仅一件库存，一次上架时，只允许一位用户购买，但是可重复上架。' }
-export const DATA_PRODUCT_TYPED_INV_MANY = <Conf.Tab>{ name: '多数量库存', v: 1, sub: '' }
+export const DATA_PRODUCT_TYPED_INV_MANY = <Conf.Tab>{ name: '多数量库存', v: 1, sub: '抢购' }
 export const DATA_PRODUCT_TYPED_INV_INFINI = <Conf.Tab>{ name: '无限制', v: 0, 
+    sub: '常驻品',
     desc: '无限制库存，一次上架时，可允许N个用户购买它。'    
 }
 export const DATA_PRODUCT_TYPED_INV = <Conf.Tabs>[
