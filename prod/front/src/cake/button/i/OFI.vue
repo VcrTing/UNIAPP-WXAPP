@@ -12,7 +12,7 @@ import UiI from '@/ui/element/i/UiI.vue';
 
 defineProps<{ 
     clazz_i?: string,
-    clazz?: string, deiay?: number, i: ICONS,
+    clazz?: string, deiay?: number, i: ICONS | string,
     weak?: boolean
 }>()
     

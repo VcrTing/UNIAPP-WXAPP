@@ -1,5 +1,10 @@
 <template>
     <view>
+        <view class="abs-r t-0 zi">
+            <view @tap="funn.relogin" class="px-row py-row fx-aii-btn-wht-s br-cir fx-c">
+                <OFI clazz="c-fff" i="r"/>
+            </view>
+        </view>
         <view v-if="ispad" :style="{
             height: 'calc(8vh + 1vw)'
         }"></view>
@@ -23,6 +28,8 @@
 </template>
 
 <script setup lang="ts">
+import OFI from '@/cake/button/i/OFI.vue';
+import OButtonTag from '@/cake/button/OButtonTag.vue';
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import { appState, authDispatch, authState, uiGetters } from '@/memory/global';
 import auth_tool from '@/tool/modules/common/auth_tool';
@@ -37,7 +44,8 @@ const funn = {
     }),
     ck_name: () => auth_tool.doac(async () => {
         // authDispatch('mod_login')
-    })
+    }),
+    relogin: () => authDispatch('mod_login')
 }
 
 const info = computed((): AppInfo => appState.info) 

@@ -1,21 +1,35 @@
 import { arrfindi, arrimit } from "@/tool/util/iodash"
-import { must_arr, must_int } from "../util/valued"
+import { must_arr, must_int, must_one } from "../util/valued"
 import { STS_ORDER } from "@/conf/conf-status"
 import { DEV_DOC_ID } from "@/conf/conf-dev"
 import { prodState } from "@/memory/moduies"
 import { appState, authState } from "@/memory/global"
 
-const group_order_data = (form: ONE, xuser: User, carts: Page.CartDataOptions): XOrder => {
-    //
+const rebuild_order_carts = (carts: Page.CartDataOptions): Page.CartDataOptions => {
+
     const cs: Page.CartDataOptions = [ ]
     if (carts.length > 0) {
         carts.map(e => {
-            cs.push({
+            const ps: Product = must_one(e.product)
+            const product: Product | ONE = {
+                documentId: ps.documentId, id: ps.id, typed: ps.typed,
+                medias: ps.medias, tags: ps.tags, title: ps.title,
+                dataStatus: ps.dataStatus, invTyped: ps.invTyped,
+            }
+            const __e: Page.CartDataOption = {
                 documentId: e.documentId,
-                prices: e.prices
-            } as Page.CartDataOption)
+                prices: e.prices, product: product as Product,
+            }
+            cs.push(__e)
         })
     }
+    return cs
+}
+
+const group_order_data = (form: ONE, xuser: User, carts: Page.CartDataOptions): XOrder => {
+    //
+    /*
+    */
     return <XOrder>{
         num: form.num,
         price: form.price,
@@ -27,7 +41,7 @@ const group_order_data = (form: ONE, xuser: User, carts: Page.CartDataOptions): 
         userPhone: xuser.phone,
         userDocumentId: xuser.documentId,
 
-        carts: cs,
+        carts: rebuild_order_carts(carts),
         user: authState.user,
 
         name: xuser.nickName,

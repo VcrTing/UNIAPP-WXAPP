@@ -5,14 +5,18 @@ import { future, promise } from "@/tool/util/future";
 
 // 用户登录成功后执行
 export const for_user_loging = () => future(async () => {
-    // 刷新用户主页
-    soDispatch('refresh_mainpage')
+    // 先清空自己主页
+    await soDispatch('clean_me')
     // orderDispatch('refresh_my_join')
     // 刷新用户购买了什么
     await prodDispatch('refresh_buys')
-    
+    // 刷新用户主页
+    soDispatch('refresh_mainpage')
     // 刷新用户喜爱的标签
     await prodDispatch('refresh_prefer')
+
+    // 清空用户购物车
+    pageCartDispatch('clean')
 
     // 驱动页面刷新
     pageCartDispatch('refresh')

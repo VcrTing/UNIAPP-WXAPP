@@ -91,6 +91,13 @@ const _s: Store<Page.CartPageStore> = createStore({
                 state.data = await server_user_cart.plus_or_edit(cs, state.data)
             }
         },
+
+        // 删除购物车信息
+        clean: async ({state, commit}) => {
+            state.carts = [ ]
+            state.data = { }
+            state.carts_of_order = [ ]
+        }
     }
 })
 

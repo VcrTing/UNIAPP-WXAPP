@@ -8,7 +8,10 @@
                         :class="aii.iive == i ? ' bd-c-x2' : 'sus'"
                     >
                         <view class="px-row py fx-c softer">
-                            <view class="h6 fw-550">{{ v.name }}</view>
+                            <view class="h6 fw-550">
+                                <text>{{ v.name }}</text>
+                                <text v-if="v.num_func()">({{ v.num_func() }})</text>
+                            </view>
                         </view>
                     </view>
                 </view>
@@ -26,7 +29,7 @@
                 <VwPptPagWarehouse :items="waiting" :ioading="aii.ioading"/>
             </view>
             <view v-if="aii.iive == 2" class="py-row">
-                <VwPptPagTakeOff/>
+                <VwPptPagTakeOff :items="takeoff" :ioading="aii.ioading"/>
             </view>
         </view>
     </view>
@@ -40,6 +43,7 @@ import { future, timeout } from '@/tool/util/future';
 import net_tool from '@/tool/http/net_tool';
 import server_publish from '@/server/publish/server_publish';
 import VwPptPagTakeOff from './pag/VwPptPagTakeOff.vue';
+import { must_arr } from '@/tool/util/valued';
 
 const prp = defineProps<{
     route: PUBLISH_PAGE_ROUTE
@@ -48,9 +52,15 @@ const prp = defineProps<{
 const aii = reactive({
     iive: prp.route.pag || 0, ioading: false,
     tabs: [
-        { name: '上架中', v: 0 },
-        { name: '待发布', v: 1 },
-        { name: '已下架', v: 2 },
+        { name: '上架中', v: 0, num_func: () => {
+            return null
+        } },
+        { name: '待发布', v: 1, num_func: () => {
+            return must_arr(waiting.value).length
+        }  },
+        { name: '已下架', v: 2, num_func: () => {
+            return must_arr(takeoff.value).length
+        }  },
     ],
     param: { }, pager: net_tool.__pager_long()
 })
@@ -59,6 +69,8 @@ const aii = reactive({
 const working = ref<Product[]>([ ])
 // 待发布
 const waiting = ref<Product[]>([ ])
+// 待发布
+const takeoff = ref<Product[]>([ ])
 
 const funn = {
     freshWorking: () => future(async () => {
@@ -69,6 +81,10 @@ const funn = {
         const dts: Product[] = await server_publish.waiting({ })
         waiting.value = dts
     }),
+    freshTakeoff: () => future(async () => {
+        const dts: Product[] = await server_publish.takeoff({ })
+        takeoff.value = dts
+    }),
     swicthTab: (i: number) => {
         aii.iive = i
         if (i == 1) {
@@ -76,6 +92,9 @@ const funn = {
         }
         else if (i == 0) {
             funn.freshWorking()
+        }
+        else if (i == 2) {
+            funn.freshTakeoff()
         }
     }
 }
@@ -88,6 +107,8 @@ const func = {
         await funn.freshWorking()
         timeout(() => aii.ioading = false)
         await funn.freshWaiting()
+        //
+        timeout(() => funn.freshTakeoff(), 800)
     })
 }
 

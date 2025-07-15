@@ -16,7 +16,7 @@ namespace Page {
 
     interface CartDataOption {
         documentId: string // product doc id
-        timed: Date // 加购时间
+        timed?: Date // 加购时间
         prices: CartDataProductPrice[ ] // 价格代表数量
 
         product?: Product

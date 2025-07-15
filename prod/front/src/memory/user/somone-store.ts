@@ -64,15 +64,15 @@ const _s: Store<SomoneStore> = createStore({
         change: (c: ONE, vs: ANYS) => (c.state[ vs[0] ] = vs[1]),
 
         // 获取我的主页信息
-        refresh_mainpage: async ({ state, commit, getters }): Promise<UserMainPage> => {
+        refresh_mainpage: async ({ state, commit }): Promise<UserMainPage> => {
             return await memory_tool.locking(state, commit, state.mainpage, async () => {
                 const origin: UserMainPage = must_one(state.mainpage)
+                console.log('========= 刷新我的主页数据 origin =', origin)
                 if (origin.documentId && origin.user && origin.user.documentId) {
                     return origin
                 }
                 if (authGetters.is_login) {
                     const u: UserMainPage = await server_user.mymainpage()
-                    console.log('========= 刷新我的主页数据 =', u)
                     if (u && u.documentId) {
                         commit('__change', [ 'mainpage', u ])
                         return u;
@@ -84,7 +84,9 @@ const _s: Store<SomoneStore> = createStore({
                 return null
             })
         },
-
+        clean_me: ({ state, commit }) => {
+            commit('__change', [ 'mainpage', <UserMainPage>{ } ]);
+        },
         clean_someone_mainpag: ({ state, commit }) => {
             commit('__change', [ 'mainpage_of_view', { } ]);
         },

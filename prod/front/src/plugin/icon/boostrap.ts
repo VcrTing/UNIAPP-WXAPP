@@ -131,5 +131,6 @@ export const booticon = <ONE> {
     'cart': 'bi bi-cart2',
     
     'eye': 'bi bi-eye',
-    'change': 'bi bi-shuffle'
+    'change': 'bi bi-shuffle',
+    'logout': 'bi box-arrow-right'
 }

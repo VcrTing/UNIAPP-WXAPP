@@ -8,8 +8,8 @@
             </view>
         </view>
         <view class="px-row py-s">
-            <CoViDataLoading :ioading="aii.ioading" :items="aii.items">
-                <view class="pb-row softer" v-for="(v, i) in aii.items" :key="i">
+            <CoViDataLoading :ioading="ioading" :items="items">
+                <view class="pb-row softer" v-for="(v, i) in items" :key="i">
                  
                     <CoMoPublishTakeOffItem :v="v">
                         <view class="fx-r tis fs-s btn-err px-t" @tap="funn.redo(v)">
@@ -58,7 +58,6 @@ import OPan from '@/cake/pan/OPan.vue';
 import OPanInnerY from '@/cake/pan/OPanInnerY.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
 import { DATA_PRODUCT_TYPED, DATA_PRODUCT_TYPED_INV_MANY, DATA_PRODUCT_TYPED_SM } from '@/conf/conf-datas';
-import server_publish from '@/server/publish/server_publish';
 import server_pubplus from '@/server/publish/server_pubplus';
 import pan_tooi from '@/tool/app/pan_tooi';
 import product_tool from '@/tool/modules/product_tool';
@@ -66,12 +65,15 @@ import { future, futuring, timeout } from '@/tool/util/future';
 import CoMoPublishTakeOffItem from '@/wave/publish/component/CoMoPublishTakeOffItem.vue';
 import { computed, nextTick, reactive, ref } from 'vue';
 
+const prp = defineProps<{
+    items: Product[], ioading: boolean
+}>()
+
 const pan = { idx: 20, hui: <ElePanHui>{ opacity: 0 } }
 const tabs = DATA_PRODUCT_TYPED
 
-// const prp = defineProps<{}>()
 const aii = reactive({
-    items: <Product[]>[ ], ioading: false,
+    ioading: false,
     i: DATA_PRODUCT_TYPED_SM.v,
     param: { }, inv: 0
 })
@@ -90,16 +92,18 @@ const func = {
         const v: Product = await server_pubplus.takeon(choise.value, aii.inv)
         if (v && v.documentId) {
             pan_tooi.close_pan(pan.idx)
-            await func.fetching()
+            // await func.fetching()
         }
     }),
+    /*
     fetching: async () => {
         const dts: Product[] = await server_publish.takeoff(aii.param)
         aii.items = dts || [ ]
     },
+    */
     init: () => futuring(aii, async () => {
         pan_tooi.close_pan(pan.idx)
-        await func.fetching()
+        // await func.fetching()
     })
 }
 

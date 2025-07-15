@@ -6,6 +6,7 @@ import { formfii, is_nice_one, must_one } from '@/tool/util/valued';
 import { storage } from '@/tool/web/storage';
 import { Store, createStore } from 'vuex';
 import server_me from '@/server/user/server_me';
+import { soDispatch } from '../global';
 
 const __K_OF_USER_AUTH = "USER_AUTH"
 

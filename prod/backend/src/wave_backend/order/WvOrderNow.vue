@@ -157,10 +157,14 @@ const func = {
                 pan_tooi.close_pan(cfm.idx)
                 // last_func.value ? last_func.value() : undefined
                 orderDispatch('refresh')
+                // emt('refresh')
+                await func.fetching()
             }
         }
     })
 }
+const emt = defineEmits([ 'refresh' ])
+
 const num = computed((): number => orderState.num)
 watch(num, async () => { await func.fetching() })
 
