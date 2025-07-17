@@ -48,7 +48,7 @@ const funn = {
     buildform: () => {
         return {
             nickName: form.nickName, introduction: form.introduction,
-            socialAccount: form.socialAccount, age: form.age
+            socialAccount: form.socialAccount, age: form.age, city: form.city
         }
     },
     submit: () => futuring(aii, async () => {

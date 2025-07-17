@@ -79,6 +79,9 @@ const funn = {
         // res['startTime'] = times.build_of_form(src.__start)
         // res['endTime'] = times.build_of_form(src.__end)
         res['search'] = product_tool.group_search_field(res, src.tags)
+        // 发布日期更新
+        res['publishTime'] = times.fmts(new Date()) 
+        //
         return res
     },
     backwaiting: () => {

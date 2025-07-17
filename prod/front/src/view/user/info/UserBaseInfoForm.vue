@@ -39,7 +39,7 @@
                             placeholder="请输入年龄" />
                     </CkInpItem>
                     <CkInpItem :tit="'所在城市'" clazz=" c-uic-item">
-                        <input class="inp-app" type="number" v-model="form.city" @blur="emt('submit')"
+                        <input class="inp-app" v-model="form.city" @blur="emt('submit')"
                             placeholder="请输入您所在的城市，如：深圳、重庆、广州" />
                     </CkInpItem>
                     <CkInpItem :tit="'社交账号'" clazz=" c-uic-item">

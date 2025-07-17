@@ -27,7 +27,16 @@
                     </view>
                 </view>
                 <view class="row">
-                    <view class="cos fx-r">
+                    <view class="fx-r">
+                        <OButtonTag color="def" clazz="fx-c px-t br-1 mr">
+                            <text class="fs-s">{{ v.numView }}</text>
+                            <text class="fs-t pi-s">浏览</text>
+                        </OButtonTag>
+                        <OButtonTag color="def" clazz="fx-c px-t br-1">
+                            <text class="fs-t pr-t">已售</text>
+                            <text class="fs-s">{{ product_build_tool.view_num_sell(v.numSell) }}</text>
+                        </OButtonTag>
+                        <!--
                         <CkSimpleTag>
                             <text class="fs-w">{{ product_tool.getnum_view(v) }}</text>
                             <text class="fs-n">浏览</text>
@@ -37,6 +46,7 @@
                                 <text class="fs-w">{{ product_tool.getnum_sell_txt(v) }}</text>
                             </CkSimpleTag>
                         </view>
+                        -->
                     </view>
                     <text></text>
                 </view>
@@ -46,11 +56,12 @@
 </template>
 
 <script setup lang="ts">
+import OButtonTag from '@/cake/button/OButtonTag.vue';
 import CkSimpleTag from '@/cake/visual/tag/CkSimpleTag.vue';
 import { DATA_PRODUCT_TYPED_INV_ALONE, DATA_PRODUCT_TYPED_INV_INFINI } from '@/conf/conf-datas';
+import product_build_tool from '@/tool/modules/func/product_build_tool';
 import product_tool from '@/tool/modules/product_tool';
 import { computed } from 'vue';
-
 const prp = defineProps<{
     v: Product, sts: ONE, is_publisher: boolean
 }>()

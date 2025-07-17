@@ -3,7 +3,7 @@
 
         <view class="softer" v-if="modback">
             <CoShareBtn :clazz="'btn-wht-s'" @tap="app_pag_tool.share(v)"/>
-            <CoBomBackBtn :clazz="'btn-wht-s'"/>
+            <CoBomBackBtn :clazz="'btn-wht-s'" :isemt="true" @tap="emt('back')"/>
         </view>
         <view v-else class="">
             <view class="w-100 softer abs-b i-0 ps-f-imp bf-wht-bar">

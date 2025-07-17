@@ -129,6 +129,9 @@
     },
     "numSellTrue": {
       "type": "integer"
+    },
+    "publishTime": {
+      "type": "datetime"
     }
   }
 }

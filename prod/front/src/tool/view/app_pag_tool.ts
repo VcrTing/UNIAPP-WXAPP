@@ -1,7 +1,7 @@
 import { tipsucc } from "../uni/uni-global"
 import { promise } from "../util/future"
 import { must_one } from "../util/valued"
-import { has_document } from "../web/doc"
+import { copy_txt, has_document } from "../web/doc"
 
 const share = (v: Product) => promise(() => {
     let uri = ''
@@ -11,6 +11,7 @@ const share = (v: Product) => promise(() => {
             uri = window.location.href
             uri += (`?product=${v.documentId}&redin=1&back=index`)
 
+            copy_txt(uri)
             tipsucc('分享链接，复制成功。')
         }
         else {

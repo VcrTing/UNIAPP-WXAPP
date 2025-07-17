@@ -20,6 +20,7 @@ const plus = async (form: ONE): Promise<Product> => {
 
 const edit = async (form: ONE, origin: ONE): Promise<Product> => {
     const id: string = is_strapi_mode() ? origin[DEV_DOC_ID] : (origin[DEV_ID] + '')
+
     const __pm: ONE = net_tool.build_data(form)
     const src: NET_RES = await master.put('product', id, __pm)
     if (is_str(src)) return netip(src, <Product>{ });

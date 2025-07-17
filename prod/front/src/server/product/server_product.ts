@@ -1,4 +1,4 @@
-import { DEV_DOC_ID, DEV_PRODUCT } from "@/conf/conf-dev"
+import { DEV_DOC_ID, DEV_INDEX, DEV_PRODUCT } from "@/conf/conf-dev"
 import { STS_PRODUCT } from "@/conf/conf-status"
 import { app } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
@@ -24,7 +24,7 @@ const index = async (param: ONE, pager: Pager): Promise<Product[]> => {
     // 审核通过的
     srp_p.__eq(param, STS_PRODUCT.REVIEW.K, STS_PRODUCT.REVIEW.YES)
     // 顺序问题
-    // srp_p.__sorts(param, DEV_PRODUCT.SORT.INDEX)
+    srp_p.__sorts(param, DEV_PRODUCT.SORT.INDEX)
     return await fetching(param, pager, relations_of_items)
 }
 
@@ -32,6 +32,17 @@ const index_recommond = async (param: ONE, pager: Pager): Promise<Product[]> => 
     // 状态正常
     srp_p.build_filter_in(param, STS_PRODUCT.STATUS.K, [ STS_PRODUCT.STATUS.PASS ])
     return await index(param, pager)
+}
+
+// 搜索顶部
+const index_top = async (): Promise<Product[]> => {
+    const pm: ONE = { }
+    // 状态正常
+    srp_p.build_filter_in(pm, STS_PRODUCT.STATUS.K, [ STS_PRODUCT.STATUS.PASS ])
+    // 首页分数
+    srp_p.__gt(pm, DEV_INDEX.TOP.K, DEV_INDEX.TOP.INDEX_LEVEL)
+    //
+    return await index_recommond(pm, net_tool.__pager(DEV_INDEX.TOP.VIEW_NUM))
 }
 
 // 根据ids
@@ -97,7 +108,9 @@ export default {
     mine_buy_byid,
     byid,
     byids,
+
     index,
+    index_top,
     index_recommond,
 
     view1,

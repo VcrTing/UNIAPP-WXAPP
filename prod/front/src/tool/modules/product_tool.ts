@@ -64,6 +64,11 @@ import product_build_tool from "./func/product_build_tool"
         res['numView'] = product_build_tool.gen_init_num_view()
         res['numHot'] = res['numView']
 
+        // 重组搜索
+        res['search'] = group_search_field(res, src.tags)
+        // 发布日期更新
+        res['publishTime'] = times.fmts(new Date())
+        //
         return res
     }
 

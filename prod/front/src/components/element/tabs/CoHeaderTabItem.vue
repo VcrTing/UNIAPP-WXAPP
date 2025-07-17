@@ -1,9 +1,11 @@
 <template>
-    <view class="py-s fx-aii-btn-def c-p"
-        :class="iive ? 'bd-b-x2 bd-c-x2 ' + clazz : 'sus ' + clazz"
+    <view class="py-s c-p fx-c"
+        :class="iive ? '' + clazz : 'tiw ' + clazz"
     >
-        <view class="px py fx-c">
-            <view class="h6 fw-550">{{ tit }}</view>
+        <view class="px py br-rnd" 
+            :class="iive ? 'btn-wht-t fw-550 tils' : ''"
+        >
+            <view class="h6 ">{{ tit }}</view>
         </view>
     </view>
 </template>

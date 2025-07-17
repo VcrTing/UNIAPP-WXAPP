@@ -31,6 +31,16 @@ export const DEV_PAGER = {
     }
 }
 
+// 首页
+export const DEV_INDEX = {
+    // 置顶
+    TOP: {
+        K: 'indexLevel',
+        INDEX_LEVEL: 1000,
+        VIEW_NUM: 1
+    }
+}
+
 // 标签设置
 export const DEV_TAG = {
     // 首页 indexLevel 值超过 多少，则加入首页展示列
@@ -66,7 +76,7 @@ export const DEV_PRODUCT = {
     SORT: {
         // 首页数据的排序状况
         INDEX: [
-            { K: 'createdAt', DESC: true }
+            { K: 'publishTime', DESC: true }
         ]
     }
 }
@@ -84,6 +94,17 @@ export const DEV_ORDER = {
     // 支付窗口时间
     PAY: {
         WAITING_MINUTE: 15
+    }
+}
+
+// 浏览的开发设置
+export const DEV_VISIBLE = {
+    //
+    SORT: {
+        // 排序状况
+        DEF: [
+            { K: 'num', DESC: true }
+        ]
     }
 }
 

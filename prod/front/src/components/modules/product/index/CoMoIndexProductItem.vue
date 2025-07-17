@@ -11,8 +11,8 @@
                 </view>
             </view>
             <!-- -->
-            <view class="py-col pi-col pr-t fx-aii-btn-def" @tap="emt('detail', v)">
-                <view class="fw-550 hih fs-n d-ib c-p">
+            <view class="pi-col pr-t fx-aii-btn-def" @tap="emt('detail', v)">
+                <view class="fw-550 hih fs-n d-ib c-p pb-s pt-t">
                     <text class="ani-scaie-aii">{{ v.title }}</text>
                 </view>
             </view>
@@ -50,8 +50,8 @@
                                 <OButtonTag color="def" clazz="fx-c px-t br-1"><text class="fs-t">{{ product_tool.getinv_typed_sub(v) }}</text></OButtonTag>
                                 -->
                                 <OButtonTag color="def" clazz="fx-c px-t br-1">
-                                    <text class="fs-t">新品，浏览</text>
-                                    <text class="fs-s">{{ product_build_tool.view_num_sell(v.numSell) }}</text>
+                                    <text class="fs-t">浏览</text>
+                                    <text class="fs-s pi-t">{{ product_build_tool.view_num_sell(v.numView) }}</text>
                                 </OButtonTag>
                             </view>
                             <view v-else-if="product_build_tool.which_sub_tip(v) === product_build_tool.__VIEW_MODE_TIP_SELL">
@@ -76,9 +76,16 @@
                         <view>
 
                         </view>
-                        <view class="fs-s tis">
+                        <view class="">
+                            <!--
                             <text>{{ product_tool.getnum_view(v) }}</text>
                             <text class="fs-t">浏览</text>
+                            -->
+                            
+                            <OButtonTag color="def" clazz="fx-c px-t br-1">
+                                <text class="fs-t">浏览</text>
+                                <text class="fs-s">{{ product_build_tool.view_num_sell(v.numView) }}</text>
+                            </OButtonTag>
                         </view>
                     </view>
                 </view>

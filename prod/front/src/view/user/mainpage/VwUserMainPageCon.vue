@@ -1,19 +1,21 @@
 <template>
     <view>
-        <view class="bg-con">
+        <view class="bf-s bf-wht-t">
             <view class="fx-i zi-s">
                 <CoHeaderTabItem clazz="w-333"
                     @tap="aii.iive = i" :iive="aii.iive == i" :tit="v.tit"
                     v-for="(v, i) in tabs" :key="i">
                 </CoHeaderTabItem>
             </view>
+            <!--
             <view class="zi-t bd-b w-100 bd-c-s"></view>
+            -->
         </view>
         <view class="" :class="aii.iive == 0 ? 'bg-pag-pri' : 'bg-con'">
             <view v-if="aii.iive == 0" class="pb-row softer">
                 <VwUmpPubProducts :data="data"/>
             </view>
-            <view v-if="aii.iive == 1" class="softer">
+            <view v-if="aii.iive == 1" class="softer pt-s">
                 <VwUmpPubGallery :data="data"/>
             </view>
             <view v-if="aii.iive == 2" class="py-row softer">

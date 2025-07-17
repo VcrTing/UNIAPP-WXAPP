@@ -1,5 +1,5 @@
 import { DATA_ACTIVITY_TYPED_GK, DATA_PRODUCT_TYPED_SM } from "@/conf/conf-datas"
-import { DEV_PRODUCT } from "@/conf/conf-dev"
+import { DEV_PRODUCT, DEV_VISIBLE } from "@/conf/conf-dev"
 import { authGetters } from "@/memory/global"
 import { app, master } from "@/tool/http/http"
 import net_tool from "@/tool/http/net_tool"
@@ -20,7 +20,7 @@ const __fetching = async (param: ONE, pager: Pager): Promise<ProductVisual[]> =>
 const fetching = async (param: ONE, pager: Pager): Promise<ProductVisual[]> => {
     srp_p.__eq(param, 'userId', authGetters.userid)
     //
-    srp_p.__sort(param, 'num')
+    srp_p.__sorts(param, DEV_VISIBLE.SORT.DEF)
     return __fetching(param, pager)
 }
 

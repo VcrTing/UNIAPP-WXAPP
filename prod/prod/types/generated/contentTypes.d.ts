@@ -569,6 +569,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     priceInv: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
     publishStatus: Schema.Attribute.Integer;
+    publishTime: Schema.Attribute.DateTime;
     recommendLevel: Schema.Attribute.Integer;
     recommendStatus: Schema.Attribute.Integer;
     reviewComment: Schema.Attribute.Text;

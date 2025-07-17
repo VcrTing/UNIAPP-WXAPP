@@ -19,3 +19,12 @@ export const has_document = (): boolean => {
     }
     catch(err) { } return false
 }
+
+export const copy_txt = async (text: string) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    console.log('已复制: ', text);
+  } catch (err) {
+    console.error('复制失败:', err);
+  }
+}

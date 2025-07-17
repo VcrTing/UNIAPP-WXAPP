@@ -11,15 +11,26 @@
         <view class="pt">
             <view class="pt mxw-pc">
                 <view class="pi-row py fx-i">
-                    <OButton color="wht-s" :weak="true" clazz="br-t ani-scaie-aii tid">
+                    <view v-if="user.city" class="d-ib">
+                        <OButton color="wht" :weak="true" clazz="br-t ani-scaie-aii tid">
+                            <UiI clazz="fs-s" i="addr"/>
+                            <text>&nbsp;</text>
+                            <text class="fs-s pr-t">{{ user.city || '未知城市' }}</text>
+                        </OButton>
+                    </view>
+                    <view v-if="user.city" class="d-ib px-n"></view>
+                    <OButton color="wht-s" :weak="true" clazz="br-t ani-scaie-aii tid px-t">
                         <CkSex :sex="user.gender" />
-                        <text class="fs-n pi-s">{{ user_tool.getgender(user) }}</text>
+                        <text>&nbsp;</text>
+                        <text class="fs-n">{{ user_tool.getgender(user) }}</text>
                     </OButton>
                     <view class="d-ib px-n"></view>
-                    <OButton color="wht-s" :weak="true" clazz="br-t ani-scaie-aii tid">
+                    <OButton color="wht-s" :weak="true" clazz="br-t ani-scaie-aii tid px-t">
                         <text>{{ user.age || 18 }}</text>
-                        <text class="fs-n pi-s">岁</text>
+                        <text>&nbsp;</text>
+                        <text class="fs-n">岁</text>
                     </OButton>
+                    <view class="d-ib px-n"></view>
                 </view>
             </view>
             <view class="pt">
@@ -62,6 +73,8 @@ import { future, futuring, promise } from '@/tool/util/future';
 import CkSex from '@/cake/visual/ider/CkSex.vue';
 import user_tool from '@/tool/modules/user_tool';
 import OButton from '@/cake/button/OButton.vue';
+import UiI from '@/ui/element/i/UiI.vue';
+import auth_tool from '@/tool/modules/common/auth_tool';
 
 const user = computed((): User => authState.user)
 
@@ -75,7 +88,7 @@ const funn = {
     managerTags: () => {
         appRouter.manager_tags()
     },
-    edit: () => futuring(aii, async () => {
+    edit: () => auth_tool.doacing(aii, async () => {
         // await authDispatch('refresh_info')
         uniRouter.gopg('user_info')
     })

@@ -40,6 +40,5 @@ const funn = {
 nextTick(funn.init)
 
 const info = computed((): AppInfo => appState.info) 
-
 const isphone = computed((): boolean => uiGetters.isphone)
 </script>

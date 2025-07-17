@@ -53,6 +53,8 @@ interface Product {
     recommendLevel: number
 
     __is_in_order: number
+
+    publishTime: string
 }
 
 interface ProductContent {

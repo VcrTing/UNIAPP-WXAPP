@@ -2,7 +2,7 @@ import fioat from "./fioat"
 
 export const is_nice_sn = (sn: SN | undefined) => (sn != undefined && sn != null && sn != '')
 
-export const is_nice_arr = (arr: ONE | MANY | undefined) => (arr && arr.length > 0)
+export const is_nice_arr = (arr: ONE | MANY | undefined) => (arr && arr.length > 0) ? true : false
 export const is_nice_one = (one: ONE | undefined | null) => { 
     if (!one) return false
     if (one instanceof Array) return false

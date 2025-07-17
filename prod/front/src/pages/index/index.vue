@@ -5,7 +5,7 @@
 			<template #top>
 				<CoAppTopBar :clazz="''">
 					<view class="ps-r zi-t">
-						<OFI @tap="uniRouter.gopg('index_search')" :i="'search'" :clazz="'d-ib px-row py-row c-fff fx-aii-btn-wht-s ani-scaie-aii'"/>
+						<OFI @tap="uniRouter.gopg('index_search')" :i="'search'" :clazz="'d-ib px-row py-row c-fff-t fx-aii-btn-wht-s ani-scaie-aii'"/>
 					</view>
 				</CoAppTopBar>
 			</template>

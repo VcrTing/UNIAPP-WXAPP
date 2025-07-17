@@ -2,26 +2,7 @@
 	<page-meta :root-font-size="uiState.root_font_size_coefficient + 'px'" style="display: block;"/>
     <PageLayout>
         <OAppTopBar :mat="true" :not_in_safearea="true">
-            <view class="ps-r zi-t o-h">
-                <view class="abs-b i-0 w-100 h-100 zi-s">
-                    <WvIndexBanner :h="h_v"/>
-                </view>
-                <OSafeAreaTop/>
-                <!-- -->
-                <view class="mxw-pc softer" :class="ispc ? '' : 'px-row'">
-                    <view class="fx-i ps-r zi-n py-s ts">
-                        <view v-for="(v, i) in aii.tabs" :key="i" class="ts  mr">
-                            <OButton :color="(tab.main == v.v) ? 'wht-s' : 'wht-s'" :weak="true" v-if="tab.main == v.v" 
-                                :clazz="'ts py-s px-row br-s'">
-                                <text class="fw-550">{{ v.name }}</text>
-                            </OButton>
-                            <view @tap="funn.choise(v)" class="ts py-s px-row fx-aii-btn-wht-s br-s c-p" v-else>
-                                <text class="tid fs-w">{{ v.name }}</text>
-                            </view>
-                        </view>
-                    </view>
-                </view>
-            </view>
+            <CoPagOrderTop :tabs="aii.tabs" :tab="tab" @choise="funn.choise"/>
         </OAppTopBar>
         <view class="softer">
             <view v-if="tab.main == 0">
@@ -39,16 +20,14 @@
 
 <script setup lang="ts">
 import OAppTopBar from '@/cake/app/bar/OAppTopBar.vue';
-import OSafeAreaTop from '@/cake/app/safearea/OSafeAreaTop.vue';
-import OButton from '@/cake/button/OButton.vue';
 import CoAppBottomBar from '@/components/app/bar/CoAppBottomBar.vue';
 import PageLayout from '@/components/layout/page/PageLayout.vue';
-import { orderDispatch, orderState, uiGetters, uiState } from '@/memory/global';
+import CoPagOrderTop from '@/components/pages/top/CoPagOrderTop.vue';
+import { orderState, uiState } from '@/memory/global';
 import { prodDispatch } from '@/memory/moduies';
 import pag_tooi from '@/tool/app/pag_tooi';
 import { futuring, promise, timeout } from '@/tool/util/future';
 import { storage } from '@/tool/web/storage';
-import WvIndexBanner from '@/wave/index/WvIndexBanner.vue';
 import WvOrderNow from '@/wave/order/WvOrderNow.vue';
 import WvProductVisual from '@/wave/visual/WvProductVisual.vue';
 import { computed, nextTick, reactive, watch } from 'vue';
@@ -81,10 +60,6 @@ const funn = {
 }
 nextTick(funn.init)
 //
-const isphone = computed((): boolean => uiGetters.isphone)
-const ispc = computed((): boolean => uiGetters.ispc)
-const h_v = computed((): string => { return h.value + 'px' })
-const h = computed((): number => { if (ispc.value) return 52; return isphone.value ? 0 : 120 })
 </script>
 
 <style lang="sass">

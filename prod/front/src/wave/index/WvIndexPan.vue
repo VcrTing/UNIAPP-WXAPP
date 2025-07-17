@@ -3,7 +3,7 @@
         <view class="pt-s">
             <WvIndexConTop :ioading="aii.ioading" :change="change" 
                 @refresh="funn.initing"
-                @changetag="funn.switchTag"/>
+                @changetag="func.switchTag"/>
         </view>
         <view class="pt-s">
             <OScrollYFresh id="index_scroll"
@@ -18,14 +18,7 @@
                 <CoViDataLoading :ioading="index.ioading" :items="aii.items">
                     <WvIndexConList :items="aii.items"/>
                 </CoViDataLoading>
-                <CkSpace :h="3"/>
-                <view class=" w-100" v-if="index.end">
-                    <view class="py-row px-row fx-aii-btn-def fx-c">
-                        <view class="fs-n cos">到底了，暂无更多数据。</view>
-                    </view>
-                </view>
-                <CkSpace :h="1"/>
-                <view class="mh-app-bottom-bar"></view>
+                <WvIndexLowEmpty :index="index"/>
             </OScrollYFresh>
             <view class="abs-b i-0 w-100" v-if="index.ioading">
                 <view class="ani-fade-b">
@@ -37,7 +30,7 @@
 </template>
  
 <script setup lang="ts">
-import { computed, nextTick, reactive } from 'vue';
+import { computed, nextTick, reactive, ref } from 'vue';
 import { future, futuring } from '@/tool/util/future';
 import CkDataIoading from '@/cake/content/ioading/CkDataIoading.vue';
 import OScrollYFresh from '@/cake/ux/scroll/OScrollYFresh.vue';
@@ -52,6 +45,8 @@ import def_tag from '@/server/__def/def_tag';
 import { DATA_FILTER_TAB_DEF, DATA_FILTER_TABS } from '@/conf/conf-datas';
 import { DEV_PRODUCT } from '@/conf/conf-dev';
 import { uiGetters } from '@/memory/global';
+import { must_arr } from '@/tool/util/valued';
+import WvIndexLowEmpty from './__component/WvIndexLowEmpty.vue';
 
 const prp = defineProps<{
     h: string
@@ -130,23 +125,32 @@ const funn = {
         aii.items = src
     }),
 
-    switchTag: (tag: Tag) => {
-        aii.tag = tag;
-        console.log('-================= aii.tag =', aii.tag)
-        funn.fetching();
-    },
+    // 搜索顶部
+    loadtop: async () => {
+        const src: Product[] = await server_product.index_top()
+        top.value = must_arr(src)
+        aii.items.push(...top.value)
+    }
 }
+
+const top = ref<Product[]>([ ])
 
 const index = reactive({
     ioading: false, end: false, trigger: false
 })
 
 const func = {
+    switchTag: (tag: Tag) => {
+        aii.tag = tag;
+        // console.log('-================= aii.tag =', aii.tag)
+        funn.fetching();
+    },
     reset: () => {
         index.end = false; aii.pager.page = 1;
         funn.initing()
     },
     init: () => futuring(aii, async () => {
+        funn.loadtop()
         func.reset()
     })
 }

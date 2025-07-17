@@ -73,7 +73,7 @@ const funn = {
         sts.is_empty = product_tool.getinv(src) === 0
     },
     back: () => { 
-        console.log('back =', aii.back)
+        // console.log('back =', aii.back)
         if (aii.back) { uniRouter.redpg(aii.back) }
         else { uniRouter.back() }
     },
