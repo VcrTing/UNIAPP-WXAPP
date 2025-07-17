@@ -1,14 +1,13 @@
 <template>
     <view class="pt-row">
         <view class="fx-c bf-s">
-            
-            <CoMoUserNumberShow :num="must_int(data.numPublish)"  clazz="px-row py-row br-br px-x1">
+            <CoMoUserNumberShow :num="must_int(data.numPublish)"  clazz="px-row py-row br px-x2">
                 发布数
             </CoMoUserNumberShow>
-            <CoMoUserNumberShow :num="must_int(data.numVisited)"  clazz="px-row py-row br-bi br-br px-x1">
+            <CoMoUserNumberShow :num="must_int(data.numVisited)"  clazz="px-row py-row br px-x2">
                 访问量
             </CoMoUserNumberShow>
-            <CoMoUserNumberShow :num="must_int(data.numFansTotal)"  clazz="px-row py-row br-bi br-br px-x1">
+            <CoMoUserNumberShow :num="must_int(data.numFansTotal)"  clazz="px-row py-row br px-x2">
                 粉丝数
             </CoMoUserNumberShow>
         </view>
@@ -17,8 +16,8 @@
                 <view class="fx-c pt-col">
                     <view class="d-ib">
                         <text>社交账号:&nbsp;&nbsp;</text>
-                        <text v-if="u.socialAccount">{{ u.socialAccount }}</text>
-                        <text v-else>这个用户还没有社交账号。</text>
+                        <text class="us-a" v-if="u.socialAccount">{{ u.socialAccount }}</text>
+                        <text class="us-a" v-else>这个用户还没有社交账号。</text>
                     </view>
                 </view>
             </OScrollX>

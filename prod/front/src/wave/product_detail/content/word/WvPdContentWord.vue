@@ -1,6 +1,6 @@
 <template>
     <view>
-        <view class="px-row" v-for="(n, m) in func.content(content)" :key="m">
+        <view class="px-row us-a" v-for="(n, m) in func.content(content)" :key="m">
             <view class="px-col py">{{ n }}</view>
         </view>
     </view>

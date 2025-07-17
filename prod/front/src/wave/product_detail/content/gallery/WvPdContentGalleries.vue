@@ -1,24 +1,29 @@
 <template>
-    <view>
+    <view v-if="isphone">
         <view v-for="(v, i) in first" :key="i"
             :style="{
-                    'height': media_tool.img_h_view(w_screen, v.w, v.h)
+                    'height': media_tool.img_h_view(w_screen, v.w, v.h, 2999)
                 }">
             <image class="w-100 h-100" :src="v.url" mode="aspectFill"/>
         </view>
         <view v-if="init">
             <view v-for="(v, i) in last" :key="i"
                 :style="{
-                        'height': media_tool.img_h_view(w_screen, v.w, v.h)
+                        'height': media_tool.img_h_view(w_screen, v.w, v.h, 2999)
                     }">
                 <image class="w-100 h-100" :src="v.url" mode="aspectFill"/>
             </view>
         </view>
     </view>
+    <view v-else class="px-row">
+        <view v-for="(v, i) in gallery" :key="i" class="w-333 d-ib br-t o-h">
+            <image class="w-100 h-27vh ani-scaie-aii c-p" :src="v.url" mode="aspectFill"/>
+        </view>
+    </view>
 </template>
 
 <script setup lang="ts">
-import { uiState } from '@/memory/global';
+import { uiGetters, uiState } from '@/memory/global';
 import media_tool from '@/tool/modules/common/media_tool';
 import { timeout } from '@/tool/util/future';
 import { must_arr } from '@/tool/util/valued';
@@ -49,4 +54,6 @@ const funn = {
     init: () => { timeout(() => (init.value = true), 200) }
 }
 nextTick(funn.init)
+
+const isphone = computed((): boolean => uiGetters.isphone)
 </script>

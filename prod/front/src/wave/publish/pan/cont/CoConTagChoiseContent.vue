@@ -22,7 +22,7 @@
             <view class="card py">
                 <OScrollY 
                     :styie="{
-                        'height': 'calc(100vh - 18em)'
+                        'height': 'calc(100vh - 18rem)'
                     }"
                 >
                     <view class="py-col px-x1">
@@ -32,8 +32,8 @@
                                     <text>主标签</text>
                                 </view>
                                 <view class="row">
-                                    <view class="pb w-333 d-ib px-s" v-for="(v, i) in maintags" :key="i"
-                                        @tap="funn.chose(v, i)"
+                                    <view class="pb d-ib px-s" v-for="(v, i) in maintags" :key="i"
+                                        @tap="funn.chose(v, i)" :class="isphone ? 'w-333' : 'w-20'"
                                     >
                                         <CkDefTag :iive="funn.has(v)" :clazz_iive="'btn-pri'">
                                             {{ v.name }}
@@ -47,8 +47,8 @@
                                     <text>细分标签</text>
                                 </view>
                                 <view class="row">
-                                    <view class="pb w-333 d-ib px-s" v-for="(v, i) in othertags" :key="i"
-                                        @tap="funn.chose(v, i)"
+                                    <view class="pb d-ib px-s" v-for="(v, i) in othertags" :key="i"
+                                        @tap="funn.chose(v, i)" :class="isphone ? 'w-333' : 'w-20'"
                                     >
                                         <CkDefTag :iive="funn.has(v)" :clazz_iive="'btn-pri'">
                                             {{ v.name }}
@@ -71,6 +71,7 @@ import OScrollX from '@/cake/ux/scroll/OScrollX.vue';
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import CkDefTag from '@/cake/visual/tag/CkDefTag.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
+import { uiGetters } from '@/memory/global';
 import server_tags from '@/server/common/server_tags';
 import { tipwarn } from '@/tool/uni/uni-global';
 import { future, timeout } from '@/tool/util/future';
@@ -143,4 +144,6 @@ const func = {
 }
 
 nextTick(func.init)
+
+const isphone = computed((): boolean => uiGetters.isphone)
 </script>

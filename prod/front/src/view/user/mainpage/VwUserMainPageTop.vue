@@ -1,14 +1,15 @@
 <template>
     <view>
         <view v-if="ispad" :style="{
-            height: 'calc(8vh)'
+            height: 'calc(11.6vh)'
         }">
         </view>
         <view class="fx-c">
             <view class="ta-c">
                 
                 <CkAvatar :not_mainpage="true" :id="user.id"
-                    :src="user.avatarUrl || info.userDefAvatarUrl" clazz="w-6em h-6em h7 bd-x2 bd-c-wht-s br-cir o-h"
+                    :src="user.avatarUrl || info.userDefAvatarUrl" 
+                    :clazz="(ispad ? 'w-8em h-8em ' : 'w-6em h-6em ') + ' h7 bd-x2 bd-c-wht-s br-cir o-h'"
                     />
                 <view class="pt-x1">
                     <view class="h5 c-fff fw-800 ls">

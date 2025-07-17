@@ -21,7 +21,6 @@ import OButton from '@/cake/button/OButton.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import OPan from '@/cake/pan/OPan.vue';
 import OPanInnerY from '@/cake/pan/OPanInnerY.vue';
-import pan_tooi from '@/tool/app/pan_tooi';
 
 const prp = defineProps<{
     idx: number,

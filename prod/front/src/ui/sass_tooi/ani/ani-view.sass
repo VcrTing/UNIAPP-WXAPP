@@ -1,11 +1,28 @@
 @use './__conf' as *
-    
+.softer-x2
+    animation: ani_softer 0.242s ease-in
+
+@keyframes ani_softer
+    0%
+        opacity: 0
+    100%
+        opacity: 1
+
+.softer-x1
+    animation: ani_softer 0.122s ease-in
+
+@keyframes ani_softer
+    0%
+        opacity: 0
+    100%
+        opacity: 1
+
 .softer
     animation: ani_softer 0.062s ease-in
 
 @keyframes ani_softer
     0%
-        opacity: 0.4
+        opacity: 0
     100%
         opacity: 1
         

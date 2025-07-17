@@ -60,10 +60,12 @@ const prp = defineProps<{
 const deftag: Tag = def_tag.index
 const sectag: Tag = def_tag.free
 
+const isphone = computed((): boolean => uiGetters.isphone)
+
 const aii = reactive({
     ioading: false, tag: deftag,
     items: <Product[]>[ ],
-    pager: net_tool.__pager()
+    pager: net_tool.__pager(isphone.value ? 12 : 24)
 })
 
 const change = reactive({
@@ -154,11 +156,10 @@ nextTick(func.init)
 const scrolloptions = computed((): OScrollOptions => {
     return {
         domid: 'index_scroll',
-        iimit: 20,
+        iimit: 10,
         trigger: index.trigger,
         ioading: index.ioading
     }
 })
 
-const isphone = computed((): boolean => uiGetters.isphone)
 </script>

@@ -3,7 +3,7 @@
         <CoAppTopBackBar @back="emt('back')">
             {{ tit ? tit : '返回' }}
         </CoAppTopBackBar>
-        <view>
+        <view class="mxw-pc">
             <OScrollY :styie="{
                 height: '100vh'
             }">
@@ -15,8 +15,10 @@
             </OScrollY>
         </view>
         <view class="abs-b zi i-0 w-100">
-            <slot name="bom"></slot>
-            <OSafeAreaBottom/>
+            <view class="mxw-pc">
+                <slot name="bom"></slot>
+                <OSafeAreaBottom/>
+            </view>
         </view>
     </view>
 </template>

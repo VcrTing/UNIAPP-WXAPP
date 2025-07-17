@@ -1,18 +1,19 @@
 <template>
-    <view class="softer" v-if="product_tool.has_content(v)">
-        <view v-if="sts.is_buyed" class="pt-s">
+    <view class="softer">
+        <view v-if="sts.is_buyed || is_publisher" class="pt-s">
             <view><view class="h-1 bg-hr"></view></view>
             <!--<CoMoPdHeader>内容</CoMoPdHeader>-->
             <CoViDataLoading :ioading="me.ioading" :items="me.contents">
                 <view class="">
+                    <CoMoPdHeader>付费内容</CoMoPdHeader>
                     <view v-for="(n, m) in me.contents" :key="m">
-                        <view v-if="content_tool.is_gallery(n)">
-                            <WvPdContentGalleries :content="n" :v="v"/>
-                        </view>
-                        <view v-else>
+                        <view class="fx-aii-btn-def">
                             <WvPdContentWord :content="n" :v="v"/>
                         </view>
-                        <view class="px-row py">
+                        <view class="pt-col">
+                            <WvPdContentGalleries :content="n" :v="v"/>
+                        </view>
+                        <view class="px-row py fx-aii-btn-def">
                             <view class="px-col fs-s tiw fx-r row">
                                 <view>
                                     <CkSimpleTag>发布于</CkSimpleTag>
@@ -44,7 +45,7 @@ import WvPdContentGalleries from './gallery/WvPdContentGalleries.vue';
 import WvPdContentWord from './word/WvPdContentWord.vue';
 
 const prp = defineProps<{
-    v: Product, sts: ONE
+    v: Product, sts: ONE, is_publisher: boolean
 }>()
 
 const me = reactive({
@@ -60,7 +61,7 @@ const funn = {
         }
     }),
     init: () => promise(() => {
-        if (prp.sts.is_buyed) {
+        if (prp.sts.is_buyed || prp.is_publisher) {
             funn.fetching()
         }
         else {

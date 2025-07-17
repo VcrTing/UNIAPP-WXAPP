@@ -10,7 +10,7 @@
                 <!-- -->
                 <view class="mxw-pc softer" :class="ispc ? '' : 'px-row'">
                     <view class="fx-i ps-r zi-n py-s ts">
-                        <view v-for="(v, i) in aii.tabs" :key="i" class="ts">
+                        <view v-for="(v, i) in aii.tabs" :key="i" class="ts  mr">
                             <OButton :color="(tab.main == v.v) ? 'wht-s' : 'wht-s'" :weak="true" v-if="tab.main == v.v" 
                                 :clazz="'ts py-s px-row br-s'">
                                 <text class="fw-550">{{ v.name }}</text>

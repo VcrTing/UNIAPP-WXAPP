@@ -8,7 +8,7 @@
                 </view>
                 <view class="fx-1 pi-s" @tap="funn.__to(publisher.id)">
                     <view class="fs-n">
-                        <view class="fx-aii-btn-def py d-ib px-s">{{ publisher.nickName }}</view>
+                        <view class="fx-aii-btn-def py d-ib px-s c-p">{{ publisher.nickName }}</view>
                         <view class="d-ib">
                             <CkSimpleTag>
                                 <CkSex :sex="publisher.gender"/>
@@ -19,21 +19,6 @@
                             </CkSimpleTag>
                         </view>
                     </view>
-                    <!--
-                    <view class="pt-s fx-i">
-                        <view class="d-ib fs-s">
-                            <view class="sus">
-                                <view class=" mr d-ib">
-                                    <text>#</text>
-                                    <text class="pi-s">平台认证</text>
-                                </view>
-                                <view class=" mr d-ib">
-                                    <text>#</text>
-                                    <text class="pi-s">十单十成</text>
-                                </view>
-                            </view>
-                        </view>
-                    </view>-->
                 </view>
                 <view class="pr-s"  @tap="funn.__to(publisher.id)">
                     <view class="fx-r sus" v-if="is_publisher">
@@ -54,13 +39,6 @@
                 <!--
                 -->
             </view>
-            <!--
-            <view class="btn-pri px-row ani-scaie-aii" v-if="is_publisher">
-                <view class="px-col py-s fs-w fx-c">
-                    <text>您是改活动的发布者，可以更改公告等内容。</text>
-                </view>
-            </view>
-            -->
         </view>
     </view>
 </template>

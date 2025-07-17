@@ -1,5 +1,5 @@
 <template>
-    <view class="bg-con">
+    <view class="bg-con" :class="ispc ? 'br' : ''">
         <view class="pi-inp">
             <view class="fx-s">
                 <view class="fx-i">
@@ -30,11 +30,12 @@ import OButton from '@/cake/button/OButton.vue';
 import CkIoading from '@/cake/content/ioading/CkIoading.vue';
 import CoAppConfirm from '@/components/app/confirm/CoAppConfirm.vue';
 import { app_confirm } from '@/conf/conf-app';
+import { uiGetters } from '@/memory/global';
 import server_pubplus from '@/server/publish/server_pubplus';
 import appRouter from '@/tool/uni/app-router';
 import { futuring, promise } from '@/tool/util/future';
 import UiI from '@/ui/element/i/UiI.vue';
-import { reactive } from 'vue';
+import { computed, reactive } from 'vue';
 
 const prp = defineProps<{
     aii: ONE, canedit: boolean, documentId: string
@@ -53,6 +54,8 @@ const funn = {
         }
     })
 }
+
+const ispc = computed((): boolean => uiGetters.ispc)
 </script>
 
         <!--

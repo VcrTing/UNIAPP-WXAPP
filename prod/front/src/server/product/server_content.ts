@@ -86,11 +86,21 @@ const edit = async (form: ONE, origin: ONE): Promise<ProductContent> => {
 const deleted = async (src: ProductContent): Promise<ProductContent> => {
     const __pm: ONE = { }
     __pm[ STS.K ] = STS.NO
-    return await edit(__pm, { documentId: src.documentId })
+    return await edit(__pm, src)
 }
+
+// 修改图片
+const update_galleries = async (imgs: MANY, src: ProductContent): Promise<ProductContent> => {
+    const __pm: ONE = { }
+    __pm[ 'galleries' ] = imgs
+    return await edit(__pm, src)
+}
+
+// 删除图片
 
 export default {
     deleted,
     by_product,
-    plus_or_edit
+    plus_or_edit,
+    update_galleries
 }

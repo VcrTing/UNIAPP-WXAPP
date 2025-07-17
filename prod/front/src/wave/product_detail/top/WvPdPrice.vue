@@ -1,6 +1,6 @@
 <template>
     <view v-if="!sts.is_buyed">
-        <view class="pt pb px-row fx-aii-btn-def" v-if="p">
+        <view class="pt pb px-row fx-aii-btn-def softer" v-if="p">
             <view class="fx-s px-col fx-b">
                 <view class="fx-i fx-b row">
                     <view class="money">

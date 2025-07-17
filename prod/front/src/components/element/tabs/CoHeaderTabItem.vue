@@ -1,6 +1,6 @@
 <template>
-    <view class="py-s fx-aii-btn-def"
-        :class="iive ? 'bd-b-x2 bd-c-x2' : 'sus'"
+    <view class="py-s fx-aii-btn-def c-p"
+        :class="iive ? 'bd-b-x2 bd-c-x2 ' + clazz : 'sus ' + clazz"
     >
         <view class="px py fx-c">
             <view class="h6 fw-550">{{ tit }}</view>
@@ -11,7 +11,8 @@
 <script setup lang="ts">
 const prp = defineProps<{
     iive: boolean,
-    tit: string
+    tit: string,
+    clazz?: string
 }>()
 
 </script>

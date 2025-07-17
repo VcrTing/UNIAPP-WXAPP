@@ -11,7 +11,7 @@
                     <view class="py-s softer" v-for="(v, i) in tabs" :key="i"
                         @tap="emt('result', v)"
                     >
-                        <view class="py px ta-c fx-aii-btn-def br-1"
+                        <view class="py px ta-c fx-aii-btn-def br-1 c-p"
                             :class="v.v == active.v ? 'bg-def' : ''"
                         >{{ v.name }}</view>
                     </view>

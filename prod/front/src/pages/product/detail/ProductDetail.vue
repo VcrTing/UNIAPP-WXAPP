@@ -15,7 +15,7 @@
                 <WvPdPrice :v="view" :sts="sts" :is_publisher="is_publisher"/>
 
                 <WvPdDesc :v="view" :sts="sts"/>
-                <WvPdContent :v="view" :sts="sts"/>
+                <WvPdContent :v="view" :sts="sts" :is_publisher="is_publisher"/>
                 
                 <view v-if="sts.is_buyed">
                     <view class="pt-s bg-hui"></view>

@@ -39,7 +39,7 @@ import { computed, nextTick, reactive, ref } from 'vue';
 const form = reactive({
     nickName: '', introduction: '', socialAccount: '', age: 18,
     avatarUrl: '', __avatarUrl: { },
-    background: '', __background: { },
+    background: '', __background: { }, city: ''
 })
 const aii = reactive({ iaoding: false })
 const user = computed((): User => authState.user)

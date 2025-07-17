@@ -1,7 +1,7 @@
 <template>
     <view>
-        <view class="py btn-def px" :class="clazz" @tap="funn.kck">
-            <view class="fx-i fx-t">
+        <view class="btn-def" :class="clazz" @tap="funn.kck">
+            <view class="fx-i fx-t px py mxw-pc c-p">
                 <view class="px">
                     <view v-if="checked" class="w-1em h-1em">
                         <UiI clazz="pri" i="check"/>

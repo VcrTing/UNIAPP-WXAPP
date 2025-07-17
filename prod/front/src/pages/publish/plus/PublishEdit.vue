@@ -9,51 +9,57 @@
         </CoAppTopBackBar>
         <view class="">
             <VwPubEditTopMsg />
-            <view class="pt-row"  v-if="documentId">
-                <WvPubEditTopForm ref="top" :documentId="documentId" :form="form" :canedit="canedit" />
-            </view>
-            <view class="py-s"></view>
-            <view>
-                <WvPubEditDetailForm ref="detail" :form="form" :canedit="canedit"/>
-            </view>
-
-            <view v-if="aii.init && form.typed === DATA_PRODUCT_TYPED_SM.v" class="softer">
-                <WvPubEditContent :v="edit" :canedit="canedit"/>
-            </view>
-
-            <view v-if="aii.init" class="softer">
-                <view v-if="documentId">
-                    <view class="py-s"></view>
-                    <view><WvPubEditDescForm  ref="gallery" :documentId="documentId" :form="form" :canedit="canedit"/></view>
-                    <view class="py-s"></view>
-                    <view><WvPubEditStatus :aii="aii" :form="form" :canedit="canedit"  :documentId="documentId"/></view>
+            <view class="mxw-pc">
+                <view class="pt-row"  v-if="documentId">
+                    <WvPubEditTopForm ref="top" :documentId="documentId" :form="form" :canedit="canedit" />
                 </view>
-                <view class="py-row">
-                    <CoMoSecurityAgreeLine ref="agree" :canedit="canedit"/>
+                <view class="py-s"></view>
+                <view>
+                    <WvPubEditDetailForm ref="detail" :form="form" :canedit="canedit"/>
                 </view>
-                <CkSpace :h="12"/>
-                <CoAppBomFuncBar :clazz="'bg-pag-pri softer'">
-                    <view class="py px-row">
-                        <view class="fx-s" v-if="canedit">
-                            <view class="w-25 pr-row">
-                                <OButton color="def" :weak="true" clazz="btn-app" @tap="uniRouter.back">
-                                    返回
-                                </OButton>
-                            </view>
-                            <view class="w-333 pr-row">
-                                <OButton color="pri" :weak="true" clazz="btn-app" @tap="func.submit(false)">
-                                    保存数据
-                                </OButton>
-                            </view>
-                            <view class="fx-1">
-                                <OButton color="sec" :ioading="aii.ioading" clazz="mh-btn" @tap="func.submit(true)">
-                                    提交审核
-                                </OButton>
-                            </view>
-                        </view>
-                        <OButton v-else color="def" @tap="appRouter.publish_waiting()"><view class="py-t tis">返回</view></OButton>
+
+                <view v-if="aii.init && form.typed === DATA_PRODUCT_TYPED_SM.v" class="softer-x1">
+                    <WvPubEditContent :v="edit" :canedit="canedit"/>
+                </view>
+
+                <view v-if="aii.init" class="softer-x1">
+                    <view v-if="documentId">
+                        <view class="py-s"></view>
+                        <view class="softer-x2"><WvPubEditDescForm  ref="gallery" :documentId="documentId" :form="form" :canedit="canedit"/></view>
+                        <view class="py-s"></view>
+                        <view class="softer-x2"><WvPubEditStatus :aii="aii" :form="form" :canedit="canedit"  :documentId="documentId"/></view>
                     </view>
-                </CoAppBomFuncBar>
+                </view>
+            </view>
+            <view class="py-row softer-x2" v-if="aii.init_long">
+                <CoMoSecurityAgreeLine ref="agree" :canedit="canedit"/>
+            </view>
+            <view class="mxw-pc">
+                <view v-if="aii.init" class="softer-x1">
+                    <CkSpace :h="12"/>
+                    <CoAppBomFuncBar :clazz="'bg-pag-pri softer-x2'" v-if="aii.init_long">
+                        <view class="py mxw-pc" :class="ispc ? '' : 'px-row'">
+                            <view class="fx-s" v-if="canedit">
+                                <view class="w-25 pr-row">
+                                    <OButton color="def" :weak="true" clazz="btn-app" @tap="uniRouter.back">
+                                        返回
+                                    </OButton>
+                                </view>
+                                <view class="w-333 pr-row">
+                                    <OButton color="pri" :weak="true" clazz="btn-app" @tap="func.submit(false)">
+                                        保存数据
+                                    </OButton>
+                                </view>
+                                <view class="fx-1">
+                                    <OButton color="sec" :ioading="aii.ioading" clazz="mh-btn" @tap="func.submit(true)">
+                                        提交审核
+                                    </OButton>
+                                </view>
+                            </view>
+                            <OButton v-else color="def" @tap="appRouter.publish_waiting()"><view class="py-t tis">返回</view></OButton>
+                        </view>
+                    </CoAppBomFuncBar>
+                </view>
             </view>
         </view>
     </PageLayout>
@@ -68,7 +74,7 @@ import PageLayout from '@/components/layout/page/PageLayout.vue';
 import CoMoSecurityAgreeLine from '@/components/modules/security/CoMoSecurityAgreeLine.vue';
 import { DATA_PUBLISH_MEDIA, DATA_PUBLISH_LIMIT, DATA_PRODUCT_TYPED_SM, DATA_PRODUCT_TYPED_INV_INFINI } from '@/conf/conf-datas';
 import { STS_PRODUCT } from '@/conf/conf-status';
-import { uiState } from '@/memory/global';
+import { authGetters, uiGetters, uiState } from '@/memory/global';
 import { pagePublishState } from '@/memory/page';
 import server_pubplus from '@/server/publish/server_pubplus';
 import server_user_statistic from '@/server/user/user/server_user_statistic';
@@ -93,7 +99,8 @@ const gallery = ref()
 
 const agree = ref()
 
-const aii = reactive({ ioading: false, contents: <ProductContent[]>[], init: false,
+const aii = reactive({ ioading: false, contents: <ProductContent[]>[], 
+    init: false, init_long: false,
     imit_banner: DATA_PUBLISH_MEDIA.BANNER_LESS, imit_gallery: DATA_PUBLISH_MEDIA.GALLERY_LESS })
 
 const funn = {
@@ -212,7 +219,8 @@ const func = {
         if (v.documentId) {
             funn.reset(v)
             await func.ioad_contents()
-            timeout(() => (aii.init = true))
+            timeout(() => (aii.init = true), 200)
+            timeout(() => aii.init_long = true, 800)
         }
         else {
             appRouter.publish_waiting()
@@ -243,6 +251,8 @@ const canedit = computed((): boolean => {
 })
 
 nextTick(func.init)
+const isphone = computed((): boolean => uiGetters.isphone)
+const ispc = computed((): boolean => uiGetters.ispc)
 </script>
 
 <style lang="sass">

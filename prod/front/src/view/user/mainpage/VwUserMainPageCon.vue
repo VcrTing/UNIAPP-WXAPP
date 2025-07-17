@@ -2,7 +2,7 @@
     <view>
         <view class="bg-con">
             <view class="fx-i zi-s">
-                <CoHeaderTabItem class="w-333" 
+                <CoHeaderTabItem clazz="w-333"
                     @tap="aii.iive = i" :iive="aii.iive == i" :tit="v.tit"
                     v-for="(v, i) in tabs" :key="i">
                 </CoHeaderTabItem>
@@ -44,6 +44,7 @@ const tabs = computed((): MANY => {
         // { tit: '历史活动', v: 2 },
     ]
 })
+
 </script>
 
 

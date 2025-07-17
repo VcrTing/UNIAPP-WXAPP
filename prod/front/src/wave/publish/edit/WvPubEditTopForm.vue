@@ -1,35 +1,37 @@
 <template>
     <view class="">
 
-        <view class="pt bg-con">
-                <OScrollX>
-                    <view class="py">
-                        <view class="d-ib pi-inp"></view>
-                        <view class="w-28 d-ib mr ps-r zi-t" v-for="(v, i) in view" :key="i"
-                        >
-                            <view class="w-100 fx-c abs-b i-0" 
-                                :class="ispc ? 'h-16vh ' : 'h-12vh'"
-                                >
-                                <CoImg clazz="h-100 w-100 br" :src="v.path"/>
-                                <view class="abs-b r-0 zi-n" v-if="canedit">
-                                    <view @tap="funn.trashImg(v)" class="px-s py-s bg-028 br-ti br-br">
-                                        <UiI i='trash' clazz="c-fff op-618"/>
-                                    </view>
+        <view class="pt bg-con" :class="ispc ? 'br' : ''">
+            <OScrollX>
+                <view class="py softer">
+                    <view class="d-ib pi-inp"></view>
+                    <view class="w-28 d-ib mr ps-r zi-t" v-for="(v, i) in view" :key="i"
+                    :class="ispc ? 'h-20vh ' : ' h-12vh'"
+                    >
+                        <view class="w-100 fx-c abs-b i-0" 
+                            :class="ispc ? 'h-20vh ' : ' h-12vh'"
+                            >
+                            <CoImg clazz="h-100 w-100 br" :src="v.path"/>
+                            <view class="abs-b r-0 zi-n" v-if="canedit">
+                                <view @tap="funn.trashImg(v)" class="px-s py-s bg-028 br-ti br-br">
+                                    <UiI i='trash' clazz="c-fff op-618"/>
                                 </view>
                             </view>
                         </view>
-                        <view v-if="canedit"
-                            class="w-28 h-12vh br-s d-ib ps-r zi-t">
-                            <OButton color="def" clazz="h-100 fx-c abs-b i-0 w-100 br" :weak="true" @tap="funn.choseImg">
-                                <view class="fs-n tiw">
-                                    <UiI :clazz="'d-ib'" :i="'+'"/>
-                                    <text class="px-s">添加优质</text>
-                                    <view>封面更吸引人</view>
-                                </view>
-                            </OButton>
-                        </view>
                     </view>
-                </OScrollX>
+                    <view v-if="canedit"
+                        class="w-28 h-12vh br-s d-ib ps-r zi-t"
+                            :class="ispc ? 'h-20vh ' : ' h-12vh'">
+                        <OButton color="def" clazz="h-100 fx-c abs-b i-0 w-100 br" :weak="true" @tap="funn.choseImg">
+                            <view class="fs-n tiw">
+                                <UiI :clazz="'d-ib'" :i="'+'"/>
+                                <text class="px-s">添加优质</text>
+                                <view>封面更吸引人</view>
+                            </view>
+                        </OButton>
+                    </view>
+                </view>
+            </OScrollX>
 
             <CkInpItem class="pt pb-x1" :tit="''">
                 <input v-if="canedit" class="inp-app h6" v-model="form.title" placeholder="请输入吸引人的标题"/>
@@ -42,7 +44,7 @@
                 </view>
                 <view class="pb pt-s" :class="taglen ? 'pi-inp' : ''">
                     <OScrollX>
-                        <view class="" >
+                        <view class="softer" >
                             <view class="d-ib pr" v-for="(v, i) in form.tags" :key="i">
                                 <OButton color="def" :weak="true" clazz="tid pi br-s h-2em">
                                     <view class="fs-n fx-c">

@@ -17,4 +17,5 @@ interface Media {
     user: string | number
 
     userId: string
+    belongId: string
 }

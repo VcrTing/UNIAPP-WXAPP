@@ -7,7 +7,7 @@
                 ><text :class="(aii.i == v.v) ? '' : 'sus'">{{ v.name }}</text></view>
             </view>
         </view>
-        <view class="px-row py-s">
+        <view class="px-row py-s mxw-pc">
             <!-- 待完善 -->
             <view v-if="aii.i == DATA_PRODUCT_REVIEW_DEF.v">
                 <CoViDataLoading :ioading="ioading" :items="data">

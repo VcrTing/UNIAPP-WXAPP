@@ -1217,6 +1217,7 @@ export interface PluginUsersPermissionsUser
     avatarUrl: Schema.Attribute.Text;
     background: Schema.Attribute.Text;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    city: Schema.Attribute.String;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     countryCode: Schema.Attribute.Integer;

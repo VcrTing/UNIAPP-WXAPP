@@ -14,6 +14,8 @@ interface User {
 
     reviewAvatarUrl: string
     reviewBackground: string
+
+    city: string
 }
 
 type UserMedia = Media

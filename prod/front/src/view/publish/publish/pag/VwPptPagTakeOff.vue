@@ -7,7 +7,7 @@
                 ><text :class="(aii.i == v.v) ? '' : 'sus'">{{ v.name }}</text></view>
             </view>
         </view>
-        <view class="px-row py-s">
+        <view class="px-row py-s mxw-pc">
             <CoViDataLoading :ioading="ioading" :items="items">
                 <view :class="isphone ? '' : 'row'">
                     <view class="pb-row softer" v-for="(v, i) in items" :key="i"

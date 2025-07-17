@@ -1,6 +1,6 @@
 <template>
-    <view class="">
-        <view class="bg-con pt-x1">
+    <view class="bg-con" :class="ispc ? 'br' : ''">
+        <view class=" pt-x1">
             <view class="px-inp pb-s"><text>描述</text></view>
             <view class="pb"></view>
             <CkInpItem :tit="''">
@@ -21,13 +21,14 @@
                 </view>
             </view>
         </view>
-        <view class="bg-con px-inp py-col">
+        <view class=" px-inp py-col">
             <view class="py">详情图片</view>
             <view class="pt-s"></view>
             <view class="row">
-                <view class="w-333 d-ib ps-r zi-t mb-s" v-for="(v, i) in view" :key="i">
+                <view class="w-333 d-ib ps-r zi-t mb-s" v-for="(v, i) in view" :key="i"
+                :class="ispc ? 'h-20vh ' : 'h-12vh'">
                     <view class="w-100 px-s fx-c abs-b i-0"
-                                :class="ispc ? 'h-16vh ' : 'h-12vh'"
+                                :class="ispc ? 'h-20vh ' : 'h-12vh'"
                                 >
                         <CoImg clazz="h-100 w-100 br" :src="v.path"/>
                         <view class="abs-b r-0 zi-n pr-s" v-if="canedit">
@@ -39,7 +40,7 @@
                 </view>
                 <view class="w-333 d-ib px-s bs-bb mb-s" v-if="canedit">
                     <view class="w-100 h-100 ps-r zi-t"
-                                :class="ispc ? 'h-16vh ' : 'h-12vh'">
+                                :class="ispc ? 'h-20vh ' : 'h-12vh'">
                         <OButton color="def" @tap="funn.choseImg" clazz="w-100 h-100 abs-b i-0 br fx-c" :weak="true">
                             <view class="fs-n tiw">
                                 <UiI :clazz="'d-ib'" :i="'+'"/>

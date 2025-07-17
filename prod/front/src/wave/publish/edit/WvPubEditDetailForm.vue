@@ -1,7 +1,7 @@
 <template>
     <view class="">
-        <view class="bg-con pt-col">
-            <view class="">
+        <view class="bg-con pt-col" :class="ispc ? 'br' : ''">
+            <view class="softer">
                 <CkInpItem :tit="'商品类型'">
                     <view class="fx-r mh-inp pr-inp row">
                         <view v-for="(v, i) in typed" :key="i" @tap="form.typed = v.v">
@@ -21,7 +21,7 @@
                     <view>您可以发布优质的公开品，以增加人气，来吸引用户浏览您的售卖品。</view>
                 </view>
             </view>
-            <view class="" v-if="form.typed == DATA_PRODUCT_TYPED_SM.v">
+            <view class="softer" v-if="form.typed == DATA_PRODUCT_TYPED_SM.v">
 
                 <CkInpItem :tit="'商品价格'" :clazz_tit="'tid'">
                     <input class="inp-app ta-r"
@@ -59,6 +59,7 @@ import { computed, reactive } from 'vue';
 import CkInpItem from '@/cake/input/wrapper/CkInpItem.vue';
 import OButton from '@/cake/button/OButton.vue';
 import { DATA_PRODUCT_TYPED, DATA_PRODUCT_TYPED_SM, DATA_PRODUCT_TYPED_FREE, DATA_PRODUCT_TYPED_INV, DATA_PRODUCT_TYPED_INV_INFINI, DATA_PRODUCT_TYPED_INV_MANY } from '@/conf/conf-datas';
+import { uiGetters } from '@/memory/global';
 
 const prp = defineProps<{
     form: ONE, canedit: boolean
@@ -66,5 +67,6 @@ const prp = defineProps<{
 
 const typed = DATA_PRODUCT_TYPED // computed(() => DATA_PRODUCT_TYPED)
 const inv_typed = DATA_PRODUCT_TYPED_INV
+const ispc = computed((): boolean => uiGetters.ispc)
 </script>
 

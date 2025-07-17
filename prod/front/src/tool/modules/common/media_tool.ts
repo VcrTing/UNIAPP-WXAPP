@@ -25,12 +25,22 @@ const convert_upload_imgs = (srcs: Media[]): Form.UploadImages => {
     if (is_nice_arr(srcs)) {
         return srcs.map((e: Media) => {
             return <Form.UploadImage>{
-                path: e.urlSmall, link: e.url, data: e,
+                path: e.url, link: e.url, data: e,
                 __iive: true, file: null
             }
         })
     }
     return [ ]
+}
+
+const build_content_data = (origin: Media): Media | ONE => {
+    return <Media | ONE> {
+        url: origin.url,
+        w: origin.w, 
+        h: origin.h,
+        isSex: STS_MEDIA.SEX.NO,
+        belongId: authGetters.userid + ''
+    }
 }
 
 const build_plus_data = (origin: Media, belongId: string | number): Media => {
@@ -171,6 +181,6 @@ export default {
     group_medias_ids,
     group_publish_medias,
     build_plus_data,
-    
+    build_content_data,
     cpu_index_banner_h
 }

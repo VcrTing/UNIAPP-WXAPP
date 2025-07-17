@@ -34,21 +34,25 @@
                     <CkInpItem clazz="pt pb-s c-uic-item br-tr br-ti" :tit="'个人昵称'">
                         <input class="inp-app h7" v-model="form.nickName" @blur="emt('submit')" placeholder="请输入昵称" />
                     </CkInpItem>
-                    <view class="pt fx-s fx-t  c-uic-item">
+                    <CkInpItem :tit="'真实年龄'" clazz=" c-uic-item">
+                        <input class="inp-app" type="number" v-model="form.age" @blur="emt('submit')"
+                            placeholder="请输入年龄" />
+                    </CkInpItem>
+                    <CkInpItem :tit="'所在城市'" clazz=" c-uic-item">
+                        <input class="inp-app" type="number" v-model="form.city" @blur="emt('submit')"
+                            placeholder="请输入您所在的城市，如：深圳、重庆、广州" />
+                    </CkInpItem>
+                    <CkInpItem :tit="'社交账号'" clazz=" c-uic-item">
+                        <input class="inp-app" v-model="form.socialAccount" @blur="emt('submit')"
+                            placeholder="请输入如：微信号135xxx、或者其他社交账号。" />
+                    </CkInpItem>
+                    <view class="pt pb-s fx-s fx-t  c-uic-item">
                         <view class="pi-inp mw-6em py-s tiw">
                             <text class="">个人简介</text>
                         </view>
                         <textarea auto-height maxlength="200" @blur="emt('submit')" class="inp-app py-s mxh-5em pr-s" v-model="form.introduction"
                             placeholder="请输入个人简介"></textarea>
                     </view>
-                    <CkInpItem :tit="'真实年龄'" clazz=" c-uic-item">
-                        <input class="inp-app" type="number" v-model="form.age" @blur="emt('submit')"
-                            placeholder="请输入年龄" />
-                    </CkInpItem>
-                    <CkInpItem :tit="'社交账号'" clazz=" c-uic-item">
-                        <input class="inp-app" v-model="form.socialAccount" @blur="emt('submit')"
-                            placeholder="请输入如：微信号135xxx、或者其他社交账号。" />
-                    </CkInpItem>
                 </view>
             </view>
         </view>
