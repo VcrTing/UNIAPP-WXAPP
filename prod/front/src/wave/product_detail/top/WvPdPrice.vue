@@ -34,7 +34,7 @@
                         </OButtonTag>
                         <OButtonTag color="def" clazz="fx-c px-t br-1">
                             <text class="fs-t pr-t">已售</text>
-                            <text class="fs-s">{{ product_build_tool.view_num_sell(v.numSell) }}</text>
+                            <text class="fs-s">{{ v.numSell || 2 }}</text>
                         </OButtonTag>
                         <!--
                         <CkSimpleTag>

@@ -8,15 +8,23 @@
         </Ov>
         <view class="mxw-pc">
             <view v-for="(v, i) in carts" :key="i" class="pb-row softer" 
-            :class="w_clazz">
-                <view class="fx-s bg-con py"  :class="isphone ? '' : 'br'">
-                    <view class="px-row py-x1" @tap="funn.choise(v)">
-                        <OCheckBox :clazz="'fs-s'" :iive="func.has(v)" :clazz_die="'btn-def'"/>
+                :class="w_clazz">
+                <view class="bg-con">
+                    <!--
+                    <view class="abs-b i-0 w-100 h-100 zi-s" v-if="product_tool.getcover(v.product)">
+                        <view class="abs-b i-0 w-100 h-100 zi-t bf-wht"></view>
+                        <CoImg clazz="h-100" :src="product_tool.getcover(v.product).urlSmall"/>
                     </view>
-                    <view class="fx-1">
-                        <CoMoCartProductItem :v="v" @view="func.view" 
-                            :isphone="isphone" :ispad="ispad" :ispc="ispc"
-                            @add="func.add" @min="func.min" />
+                    -->
+                    <view class="fx-s py bf"  :class="isphone ? '' : 'br'">
+                        <view class="px-row py-x1" @tap="funn.choise(v)">
+                            <OCheckBox :clazz="'fs-s'" :iive="func.has(v)" :clazz_die="'btn-def'"/>
+                        </view>
+                        <view class="fx-1">
+                            <CoMoCartProductItem :v="v" @view="func.view" 
+                                :isphone="isphone" :ispad="ispad" :ispc="ispc"
+                                @add="func.add" @min="func.min" />
+                        </view>
                     </view>
                 </view>
             </view>
@@ -27,7 +35,7 @@
             <view class="pt"></view>
             <view class="mh-app-bottom-bar"></view>
             
-            <view class="abs-b i-0 w-100 ps-f-imp bg-con py-s softer">
+            <view class="abs-b i-0 w-100 ps-f-imp bf py-s softer">
                 <view class="w-100 fx-s mxw-pc">
                     <view class="fx-i px-row softer c-p py-n" @tap="funn.choise_aii">
                         <view class="softer" v-if="me.ioading"><CkIoading/></view>
@@ -80,6 +88,8 @@ import CoCoConfirm from '@/components/common/CoCoConfirm.vue';
 import pan_tooi from '@/tool/app/pan_tooi';
 import CkIoading from '@/cake/content/ioading/CkIoading.vue';
 import { uiGetters, uiState } from '@/memory/global';
+import CoImg from '@/components/media/img/CoImg.vue';
+import product_tool from '@/tool/modules/product_tool';
 //
 const prp = defineProps<{
     carts: Page.CartDataOptions,

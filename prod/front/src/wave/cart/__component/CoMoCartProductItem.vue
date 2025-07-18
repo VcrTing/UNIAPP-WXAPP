@@ -4,7 +4,7 @@
             <CoImg clazz="h-100" :src="product_tool.getcover(v.product).urlSmall"/>
         </view>
         <view class="fx-1">
-            <view class="fx-s mh-1em pb-s px fx-aii-btn-def py-s" @tap="emt('view', v.product)">
+            <view class="fx-s pb-s px fx-aii-btn-def py-s" @tap="emt('view', v.product)">
                 <view class="fx-1">
                     <view  :class="isphone ? 'fs-w' : ''">{{ product_tool.gettitle(v.product) }}</view>
                 </view>

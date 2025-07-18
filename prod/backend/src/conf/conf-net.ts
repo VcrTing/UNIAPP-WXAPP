@@ -1,5 +1,5 @@
 import { appGetters, authGetters } from "@/memory/global"
-import { IS_NET_LOG, is_strapi_mode } from "./conf"
+import { HOST, IS_NET_LOG, is_strapi_mode, IS_TEST_MODE_NET } from "./conf"
 import { NET_ENDPOINT_FILE, NET_ENDPOINTS_APP, NET_ENDPOINTS_BUSINESS, NET_ENDPOINTS_MASTER } from "./conf-endpoints"
 
 // 1. 用户 role 要设置对，
@@ -26,8 +26,8 @@ const IS_DEV_MODE = true
 const __API_NAME_STRAPI = 'api'
 const __API_NAME_BACKEND = 'backend'
 
-const __LINK_STRAPI = IS_DEV_MODE ? 'http://localhost:1338' : ''
-const __LINK_BACKEND = IS_DEV_MODE ? 'http://localhost:8889' : ''
+const __LINK_STRAPI = 'http://' + HOST + ':1338'
+const __LINK_BACKEND = 'http://' + HOST + ':8889'
 
 // 全局配置
 export const NET = {

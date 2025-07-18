@@ -10,6 +10,10 @@ export const IS_TEST_MODE = true
 
 export const IS_TEST_DEV = false
 
+export const IS_TEST_MODE_NET = false
+
+export const HOST = IS_TEST_MODE_NET ? 'localhost' : '119.91.64.45'
+
 // 网络有关的 配置，请查看 net.ts
 export const TEST_LOGIN_USER: ONE = {
     'ADMIN': <ONE>{
